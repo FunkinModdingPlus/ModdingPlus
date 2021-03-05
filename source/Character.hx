@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -40,9 +41,9 @@ class Character extends FlxSprite
 	public var isPixel:Bool = false;
 	public function new(x:Float, y:Float, ?character:String = "bf", ?isPlayer:Bool = false)
 	{
-		animOffsets = new Map<String, Array<Dynamic>>();
 		super(x, y);
 
+		animOffsets = new Map<String, Array<Dynamic>>();
 		curCharacter = character;
 		this.isPlayer = isPlayer;
 
@@ -53,7 +54,7 @@ class Character extends FlxSprite
 		{
 			case 'gf':
 				// GIRLFRIEND CODE
-				tex = FlxAtlasFrames.fromSparrow('assets/images/GF_assets.png', 'assets/images/GF_assets.xml');
+				tex = Paths.getSparrowAtlas('GF_assets');
 				frames = tex;
 				animation.addByPrefix('cheer', 'GF Cheer', 24, false);
 				animation.addByPrefix('singLEFT', 'GF left note', 24, false);
@@ -84,7 +85,7 @@ class Character extends FlxSprite
 				playAnim('danceRight');
 				like = "gf";
 			case 'gf-christmas':
-				tex = FlxAtlasFrames.fromSparrow('assets/images/christmas/gfChristmas.png', 'assets/images/christmas/gfChristmas.xml');
+				tex = Paths.getSparrowAtlas('christmas/gfChristmas');
 				frames = tex;
 				animation.addByPrefix('cheer', 'GF Cheer', 24, false);
 				animation.addByPrefix('singLEFT', 'GF left note', 24, false);
@@ -115,7 +116,7 @@ class Character extends FlxSprite
 				playAnim('danceRight');
 				like ="gf";
 			case 'gf-car':
-				tex = FlxAtlasFrames.fromSparrow('assets/images/gfCar.png', 'assets/images/gfCar.xml');
+				tex = Paths.getSparrowAtlas('gfCar');
 				frames = tex;
 				animation.addByIndices('singUP', 'GF Dancing Beat Hair blowing CAR', [0], "", 24, false);
 				animation.addByIndices('danceLeft', 'GF Dancing Beat Hair blowing CAR', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
@@ -129,7 +130,7 @@ class Character extends FlxSprite
 				like = "gf-car";
 
 			case 'gf-pixel':
-				tex = FlxAtlasFrames.fromSparrow('assets/images/weeb/gfPixel.png', 'assets/images/weeb/gfPixel.xml');
+				tex = Paths.getSparrowAtlas('weeb/gfPixel');
 				frames = tex;
 				animation.addByIndices('singUP', 'GF IDLE', [2], "", 24, false);
 				animation.addByIndices('danceLeft', 'GF IDLE', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
@@ -147,7 +148,7 @@ class Character extends FlxSprite
 				like = "gf-pixel";
 			case 'dad':
 				// DAD ANIMATION LOADING CODE
-				tex = FlxAtlasFrames.fromSparrow('assets/images/DADDY_DEAREST.png', 'assets/images/DADDY_DEAREST.xml');
+				tex = Paths.getSparrowAtlas('DADDY_DEAREST');
 				frames = tex;
 				animation.addByPrefix('idle', 'Dad idle dance', 24);
 				animation.addByPrefix('singUP', 'Dad Sing Note UP', 24);
@@ -164,7 +165,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 				like = "dad";
 			case 'spooky':
-				tex = FlxAtlasFrames.fromSparrow('assets/images/spooky_kids_assets.png', 'assets/images/spooky_kids_assets.xml');
+				tex = Paths.getSparrowAtlas('spooky_kids_assets');
 				frames = tex;
 				animation.addByPrefix('singUP', 'spooky UP NOTE', 24, false);
 				animation.addByPrefix('singDOWN', 'spooky DOWN note', 24, false);
@@ -184,7 +185,7 @@ class Character extends FlxSprite
 				playAnim('danceRight');
 				like = "spooky";
 			case 'mom':
-				tex = FlxAtlasFrames.fromSparrow('assets/images/Mom_Assets.png', 'assets/images/Mom_Assets.xml');
+				tex = Paths.getSparrowAtlas('Mom_Assets');
 				frames = tex;
 
 				animation.addByPrefix('idle', "Mom Idle", 24, false);
@@ -204,7 +205,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 				like = "mom";
 			case 'mom-car':
-				tex = FlxAtlasFrames.fromSparrow('assets/images/momCar.png', 'assets/images/momCar.xml');
+				tex = Paths.getSparrowAtlas('momCar');
 				frames = tex;
 
 				animation.addByPrefix('idle', "Mom Idle", 24, false);
@@ -224,7 +225,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 				like = "mom";
 			case 'monster':
-				tex = FlxAtlasFrames.fromSparrow('assets/images/Monster_Assets.png', 'assets/images/Monster_Assets.xml');
+				tex = Paths.getSparrowAtlas('Monster_Assets');
 				frames = tex;
 				animation.addByPrefix('idle', 'monster idle', 24, false);
 				animation.addByPrefix('singUP', 'monster up note', 24, false);
@@ -241,7 +242,7 @@ class Character extends FlxSprite
 				// like new monster due to new assets
 				like = "newmonster";
 			case 'monster-christmas':
-				tex = FlxAtlasFrames.fromSparrow('assets/images/christmas/monsterChristmas.png', 'assets/images/christmas/monsterChristmas.xml');
+				tex = Paths.getSparrowAtlas('christmas/monsterChristmas');
 				frames = tex;
 				animation.addByPrefix('idle', 'monster idle', 24, false);
 				animation.addByPrefix('singUP', 'monster up note', 24, false);
@@ -257,7 +258,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 				like = "newmonster";
 			case 'pico':
-				tex = FlxAtlasFrames.fromSparrow('assets/images/Pico_FNF_assetss.png', 'assets/images/Pico_FNF_assetss.xml');
+				tex = Paths.getSparrowAtlas('Pico_FNF_assetss');
 				frames = tex;
 				animation.addByPrefix('idle', "Pico Idle Dance", 24);
 				animation.addByPrefix('singUP', 'pico Up note0', 24, false);
@@ -296,7 +297,7 @@ class Character extends FlxSprite
 				flipX = true;
 				like = "pico";
 			case 'bf':
-				var tex = FlxAtlasFrames.fromSparrow('assets/images/BOYFRIEND.png', 'assets/images/BOYFRIEND.xml');
+				var tex = Paths.getSparrowAtlas('BOYFRIEND');
 				frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
 				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
@@ -335,7 +336,7 @@ class Character extends FlxSprite
 				flipX = true;
 				like = "bf";
 			case 'bf-christmas':
-				var tex = FlxAtlasFrames.fromSparrow('assets/images/christmas/bfChristmas.png', 'assets/images/christmas/bfChristmas.xml');
+				var tex = Paths.getSparrowAtlas('christmas/bfChristmas');
 				frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
 				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
@@ -364,7 +365,7 @@ class Character extends FlxSprite
 				flipX = true;
 				like = "bf";
 			case 'bf-car':
-				var tex = FlxAtlasFrames.fromSparrow('assets/images/bfCar.png', 'assets/images/bfCar.xml');
+				var tex = Paths.getSparrowAtlas('bfCar');
 				frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
 				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
@@ -390,7 +391,7 @@ class Character extends FlxSprite
 				flipX = true;
 				like = "bf";
 			case 'bf-pixel':
-				frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/bfPixel.png', 'assets/images/weeb/bfPixel.xml');
+				frames = Paths.getSparrowAtlas('weeb/bfPixel');
 				animation.addByPrefix('idle', 'BF IDLE', 24, false);
 				animation.addByPrefix('singUP', 'BF UP NOTE', 24, false);
 				animation.addByPrefix('singLEFT', 'BF LEFT NOTE', 24, false);
@@ -424,7 +425,7 @@ class Character extends FlxSprite
 				flipX = true;
 				like = "bf-pixel";
 			case 'bf-pixel-dead':
-				frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/bfPixelsDEAD.png', 'assets/images/weeb/bfPixelsDEAD.xml');
+				frames = Paths.getSparrowAtlas('weeb/bfPixelsDEAD');
 				animation.addByPrefix('singUP', "BF Dies pixel", 24, false);
 				animation.addByPrefix('firstDeath', "BF Dies pixel", 24, false);
 				animation.addByPrefix('deathLoop', "Retry Loop", 24, true);
@@ -443,7 +444,7 @@ class Character extends FlxSprite
 				isPixel = true;
 				like = "bf-pixel";
 			case 'senpai':
-				frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/senpai.png', 'assets/images/weeb/senpai.xml');
+				frames = Paths.getSparrowAtlas('weeb/senpai');
 				animation.addByPrefix('idle', 'Senpai Idle', 24, false);
 				animation.addByPrefix('singUP', 'SENPAI UP NOTE', 24, false);
 				animation.addByPrefix('singLEFT', 'SENPAI LEFT NOTE', 24, false);
@@ -465,7 +466,7 @@ class Character extends FlxSprite
 				isPixel = true;
 				like = "senpai";
 			case 'senpai-angry':
-				frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/senpai.png', 'assets/images/weeb/senpai.xml');
+				frames = Paths.getSparrowAtlas('weeb/senpai');
 				animation.addByPrefix('idle', 'Angry Senpai Idle', 24, false);
 				animation.addByPrefix('singUP', 'Angry Senpai UP NOTE', 24, false);
 				animation.addByPrefix('singLEFT', 'Angry Senpai LEFT NOTE', 24, false);
@@ -485,7 +486,7 @@ class Character extends FlxSprite
 				antialiasing = false;
 				like = "senpai";
 			case 'spirit':
-				frames = FlxAtlasFrames.fromSpriteSheetPacker('assets/images/weeb/spirit.png', 'assets/images/weeb/spirit.txt');
+				frames = Paths.getPackerAtlas('weeb/spirit');
 				animation.addByPrefix('idle', "idle spirit_", 24, false);
 				animation.addByPrefix('singUP', "up_", 24, false);
 				animation.addByPrefix('singRIGHT', "right_", 24, false);
@@ -506,8 +507,7 @@ class Character extends FlxSprite
 				antialiasing = false;
 				like = "spirit";
 			case 'parents-christmas':
-				frames = FlxAtlasFrames.fromSparrow('assets/images/christmas/mom_dad_christmas_assets.png',
-					'assets/images/christmas/mom_dad_christmas_assets.xml');
+				frames = Paths.getSparrowAtlas('christmas/mom_dad_christmas_assets');
 				animation.addByPrefix('idle', 'Parent Christmas Idle', 24, false);
 				animation.addByPrefix('singUP', 'Parent Up Note Dad', 24, false);
 				animation.addByPrefix('singDOWN', 'Parent Down Note Dad', 24, false);

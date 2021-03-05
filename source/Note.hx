@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
+#if polymod
 import polymod.format.ParseRules.TargetSignatureElement;
 import lime.system.System;
 import flash.display.BitmapData;
@@ -68,7 +69,7 @@ class Note extends FlxSprite
 
 				if (isSustainNote)
 				{
-					loadGraphic('assets/images/weeb/pixelUI/arrowEnds.png', true, 7, 6);
+					loadGraphic(Paths.image('weeb/pixelUI/arrowEnds'), true, 7, 6);
 
 					animation.add('purpleholdend', [4]);
 					animation.add('greenholdend', [6]);
@@ -227,18 +228,18 @@ class Note extends FlxSprite
 			{
 				switch (prevNote.noteData)
 				{
+					case 0:
+						prevNote.animation.play('purplehold');
+					case 1:
+						prevNote.animation.play('bluehold');
 					case 2:
 						prevNote.animation.play('greenhold');
 					case 3:
 						prevNote.animation.play('redhold');
-					case 1:
-						prevNote.animation.play('bluehold');
-					case 0:
-						prevNote.animation.play('purplehold');
 				}
 
-				prevNote.offset.y = -19;
-				prevNote.scale.y *= (2.25 * FlxMath.roundDecimal(PlayState.SONG.speed, 1));
+				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.5 * PlayState.SONG.speed;
+				prevNote.updateHitbox();
 				// prevNote.setGraphicSize();
 			}
 		}
@@ -250,16 +251,14 @@ class Note extends FlxSprite
 
 		if (mustPress)
 		{
-			// The * 0.5 us so that its easier to hit them too late, instead of too early
+			// The * 0.5 is so that it's easier to hit them too late, instead of too early
 			if (strumTime > Conductor.songPosition - Conductor.safeZoneOffset
 				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.5))
-			{
 				canBeHit = true;
-			}
 			else
 				canBeHit = false;
 
-			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset)
+			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit)
 				tooLate = true;
 		}
 		else
@@ -267,9 +266,7 @@ class Note extends FlxSprite
 			canBeHit = false;
 
 			if (strumTime <= Conductor.songPosition)
-			{
 				wasGoodHit = true;
-			}
 		}
 
 		if (tooLate)
