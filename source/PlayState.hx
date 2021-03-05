@@ -165,6 +165,7 @@ class PlayState extends MusicBeatState
 	var alcholNumber:Float = 0;
 	var inALoop:Bool = false;
 	var useVictoryScreen:Bool = true;
+	var totalBeats:Int = 0;
 	override public function create()
 	{
 
@@ -725,7 +726,7 @@ class PlayState extends MusicBeatState
 					phillyTrain = new FlxSprite(2000, 360).loadGraphic(trainPic);
 					add(phillyTrain);
 
-					trainSound = new FlxSound().loadEmbedded('assets/sounds/train_passes' + TitleState.soundExt);
+					trainSound = new FlxSound().loadEmbedded(Paths.sound('train_passes'));
 					FlxG.sound.list.add(trainSound);
 
 
@@ -1422,7 +1423,7 @@ class PlayState extends MusicBeatState
 				case 'senpai':
 					schoolIntro(doof);
 				case 'angry-senpai':
-					FlxG.sound.play('assets/sounds/ANGRY' + TitleState.soundExt);
+					FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
 				case 'spirit':
 					schoolIntro(doof);
@@ -1738,7 +1739,7 @@ class PlayState extends MusicBeatState
 
 		if (!paused)
 			#if sys
-			FlxG.sound.playMusic(Sound.fromFile("assets/music/"+SONG.song+"_Inst"+TitleState.soundExt), 1, false);
+			FlxG.sound.playMusic(Sound.fromFile(Paths.inst(SONG.song)), 1, false);
 			#else
 			FlxG.sound.playMusic("assets/music/" + SONG.song + "_Inst" + TitleState.soundExt, 1, false);
 			#end
@@ -1759,7 +1760,7 @@ class PlayState extends MusicBeatState
 
 		if (SONG.needsVoices) {
 			#if sys
-			var vocalSound = Sound.fromFile("assets/music/"+SONG.song+"_Voices"+TitleState.soundExt);
+			var vocalSound = Sound.fromFile("assets/music/"+SONG.song+"_Voices.ogg");
 			vocals = new FlxSound().loadEmbedded(vocalSound);
 			#else
 			vocals = new FlxSound().loadEmbedded("assets/music/" + curSong + "_Voices" + TitleState.soundExt);
@@ -1930,16 +1931,6 @@ class PlayState extends MusicBeatState
 
 					switch (Math.abs(i))
 					{
-						case 0:
-							babyArrow.x += Note.swagWidth * 0;
-							babyArrow.animation.add('static', [0]);
-							babyArrow.animation.add('pressed', [4, 8], 12, false);
-							babyArrow.animation.add('confirm', [12, 16], 24, false);
-						case 1:
-							babyArrow.x += Note.swagWidth * 1;
-							babyArrow.animation.add('static', [1]);
-							babyArrow.animation.add('pressed', [5, 9], 12, false);
-							babyArrow.animation.add('confirm', [13, 17], 24, false);
 						case 2:
 							babyArrow.x += Note.swagWidth * 2;
 							babyArrow.animation.add('static', [2]);
@@ -1999,16 +1990,6 @@ class PlayState extends MusicBeatState
 
 					switch (Math.abs(i))
 					{
-						case 0:
-							babyArrow.x += Note.swagWidth * 0;
-							babyArrow.animation.addByPrefix('static', 'arrowLEFT');
-							babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
-						case 1:
-							babyArrow.x += Note.swagWidth * 1;
-							babyArrow.animation.addByPrefix('static', 'arrowDOWN');
-							babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
 						case 2:
 							babyArrow.x += Note.swagWidth * 2;
 							babyArrow.animation.addByPrefix('static', 'arrowUP');
@@ -3197,7 +3178,7 @@ class PlayState extends MusicBeatState
 
 			}
 			trueScore -= 10;
-			FlxG.sound.play('assets/sounds/missnote' + FlxG.random.int(1, 3) + TitleState.soundExt, FlxG.random.float(0.1, 0.2));
+			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play('assets/sounds/missnote1' + TitleState.soundExt, 1, false);
 			// FlxG.log.add('played imss note');
 

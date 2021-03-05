@@ -138,7 +138,6 @@ class ChartingState extends MusicBeatState
 				player2: 'dad',
 				stage: 'stage',
 				gf: 'gf',
-				sectionLengths: [],
 				speed: 1,
 				isSpooky: false,
 				isMoody: false,
@@ -401,14 +400,14 @@ class ChartingState extends MusicBeatState
 			// vocals.stop();
 		}
 		#if sys
-		FlxG.sound.playMusic(Sound.fromFile("assets/music/"+daSong+"_Inst"+TitleState.soundExt), 0.6);
+		FlxG.sound.playMusic(Paths.inst(daSong), 0.6);
 		#else
 		FlxG.sound.playMusic('assets/music/' + daSong + "_Inst" + TitleState.soundExt, 0.6);
 		#end
 		// WONT WORK FOR TUTORIAL OR TEST SONG!!! REDO LATER
 		if (_song.needsVoices) {
 			#if sys
-			var vocalSound = Sound.fromFile("assets/music/"+daSong+"_Voices"+TitleState.soundExt);
+			var vocalSound = Sound.fromFile(Paths.voices(daSong));
 			vocals = new FlxSound().loadEmbedded(vocalSound);
 			#else
 			vocals = new FlxSound().loadEmbedded("assets/music/" + daSong + "_Voices" + TitleState.soundExt);

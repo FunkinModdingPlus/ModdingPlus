@@ -51,24 +51,26 @@ class DialogueBox extends FlxSpriteGroup
 	var textColor:FlxColor = 0xFF3F2021;
 	var dropColor:FlxColor = 0xFFD89494;
 	var senpaiVisible = true;
+	var hasDialog:Bool;
 	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
 	{
 		super();
-
+		if (dialogueList != null)
+			hasDialog = true;
 		switch (PlayState.SONG.cutsceneType)
 		{
 			case 'senpai':
 				FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'spirit':
-				FlxG.sound.playMusic('assets/music/LunchboxScary' + TitleState.soundExt, 0);
+				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'angry-senpai':
 				// do nothing
 			default:
 				// see if the song has one
 				if (FileSystem.exists('assets/data/'+PlayState.SONG.song.toLowerCase()+'/Lunchbox.ogg')) {
-					var lunchboxSound = Sound.fromFile('assets/data/'+PlayState.SONG.song.toLowerCase()+'/Lunchbox.ogg');
+					var lunchboxSound = Sound.fromFile(Paths.file(''));
 					FlxG.sound.playMusic(lunchboxSound, 0);
 					FlxG.sound.music.fadeIn(1,0,0.8);
 				// otherwise see if there is an ogg file in the dialog
@@ -92,17 +94,17 @@ class DialogueBox extends FlxSpriteGroup
 		}, 5);
 
 		portraitLeft = new FlxSprite(-20, 40);
-		if (FileSystem.exists('assets/images/custom_chars/'+PlayState.SONG.player2+'/portrait.png')) {
+		if (FileSystem.exists(Paths.file('characters/'+PlayState.SONG.player2+'/portrait.png', 'custom'))) {
 			// if a  custom character portrait exists, use that
 			var coolP2Json = Character.getAnimJson(PlayState.SONG.player2);
 			// do false because it be kinda weird like that tho
 			isPixel[1] = if (Reflect.hasField(coolP2Json, "isPixel")) coolP2Json.isPixel else false;
-			var rawPic = BitmapData.fromFile('assets/images/custom_chars/'+PlayState.SONG.player2+"/portrait.png");
-			var rawXml = File.getContent('assets/images/custom_chars/'+PlayState.SONG.player2+"/portrait.xml");
+			var rawPic = BitmapData.fromFile(Paths.file('characters/' + PlayState.SONG.player2 + '/portrait.png', 'custom'));
+			var rawXml = File.getContent(Paths.file('characters/' + PlayState.SONG.player2 + '/portrait.png', "custom"));
 			portraitLeft.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 		} else {
 			// otherwise, use senpai
-			portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/senpaiPortrait.png', 'assets/images/weeb/senpaiPortrait.xml');
+			portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait', 'week6');
 
 		}
 		portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
@@ -119,14 +121,14 @@ class DialogueBox extends FlxSpriteGroup
 		portraitLeft.visible = false;
 
 		portraitRight = new FlxSprite(0, 40);
-		if (FileSystem.exists('assets/images/custom_chars/'+PlayState.SONG.player1+'/portrait.png')) {
+		if (FileSystem.exists(Paths.file('characters/'+PlayState.SONG.player1+'/portrait.png','custom'))) {
 			var coolP1Json = Character.getAnimJson(PlayState.SONG.player1);
 			isPixel[0] = if (Reflect.hasField(coolP1Json, "isPixel")) coolP1Json.isPixel else false;
-			var rawPic = BitmapData.fromFile('assets/images/custom_chars/'+PlayState.SONG.player1+"/portrait.png");
-			var rawXml = File.getContent('assets/images/custom_chars/'+PlayState.SONG.player1+"/portrait.xml");
+			var rawPic = BitmapData.fromFile(Paths.file('characters/'+PlayState.SONG.player1+'/portrait.png','custom'));
+			var rawXml = File.getContent(Paths.file('characters/' + PlayState.SONG.player1 + '/portrait.png', 'custom'));
 			portraitRight.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 		} else {
-			portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/bfPortrait.png', 'assets/images/weeb/bfPortrait.xml');
+			portraitRight.frames = Paths.getSparrowAtlas('');
 		}
 
 		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
@@ -153,7 +155,7 @@ class DialogueBox extends FlxSpriteGroup
 				box.animation.addByIndices('normal', 'Text Box Appear', [4], "", 24);
 				like = "senpai";
 			case 'angry-senpai':
-				FlxG.sound.play('assets/sounds/ANGRY_TEXT_BOX' + TitleState.soundExt);
+				FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX'));
 
 				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-senpaiMad');
 				box.animation.addByPrefix('normalOpen', 'SENPAI ANGRY IMPACT SPEECH', 24, false);
@@ -197,7 +199,7 @@ class DialogueBox extends FlxSpriteGroup
 							var coolSound:Sound = Sound.fromFile('assets/images/custom_ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/angry.ogg');
 							FlxG.sound.play(coolSound);
 						} else {
-							FlxG.sound.play('assets/sounds/ANGRY_TEXT_BOX' + TitleState.soundExt);
+							FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX'));
 						}
 						
 						box.animation.addByPrefix('normalOpen', 'SENPAI ANGRY IMPACT SPEECH', 24, false);

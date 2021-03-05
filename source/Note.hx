@@ -6,6 +6,7 @@ import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 #if polymod
 import polymod.format.ParseRules.TargetSignatureElement;
+#end
 import lime.system.System;
 import flash.display.BitmapData;
 #if sys

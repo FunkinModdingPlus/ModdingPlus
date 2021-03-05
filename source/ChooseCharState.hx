@@ -135,7 +135,7 @@ class ChooseCharState extends MusicBeatState
     function changeSelection(change:Int = 0)
     {
 
-        FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+        FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
         curSelected += change;
         curChar = characters[curSelected].toString();
@@ -187,7 +187,7 @@ class ChooseCharState extends MusicBeatState
     }
     // well yeah it lags you are creating a new character
     function swapMenus() { //this lags somewhat on my end so please try to optimize it
-        FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+        FlxG.sound.play(Paths.sound("scrollMenu"), 0.4);
         dadMenu = !dadMenu;
         remove(char);
         if (!dadMenu){ //cleaned this too

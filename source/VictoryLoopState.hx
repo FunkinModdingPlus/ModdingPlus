@@ -135,13 +135,13 @@ class VictoryLoopState extends MusicBeatSubstate
 		// make files seperate to allow modding
 		if (accuracy >= 0.65) {
 			Conductor.changeBPM(150);
-			FlxG.sound.playMusic('assets/music/goodScore' + TitleState.soundExt);
+			FlxG.sound.playMusic(Paths.music('goodScore'));
 		} else if (accuracy >= 0.5) {
 			Conductor.changeBPM(100);
-			FlxG.sound.playMusic('assets/music/mehScore' + TitleState.soundExt);
+			FlxG.sound.playMusic(Paths.music('mehScore'));
 		} else {
 			Conductor.changeBPM(100);
-			FlxG.sound.playMusic('assets/music/badScore' + TitleState.soundExt);
+			FlxG.sound.playMusic(Paths.music('badScore'));
 		}
 
 		// FlxG.camera.followLerp = 1;
@@ -249,7 +249,7 @@ class VictoryLoopState extends MusicBeatSubstate
 		{
 			isEnding = true;
 			FlxG.sound.music.stop();
-			FlxG.sound.play('assets/music/gameOverEnd' + stageSuffix + TitleState.soundExt);
+			FlxG.sound.play(Paths.sound('gameOverEnd'+stageSuffix, "shared"));
 			if (PlayState.isStoryMode) {
 				// most variables should already be set?
 				PlayState.storyPlaylist = StoryMenuState.storySongPlaylist;

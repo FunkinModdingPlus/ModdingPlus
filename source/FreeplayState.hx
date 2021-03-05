@@ -26,7 +26,7 @@ using StringTools;
 
 class FreeplayState extends MusicBeatState
 {
-	public static var currentSongList:Array<String> = [];
+	public static var currentSongList:Array<SongMetadata> = [];
 	public static var soundTest:Bool = false;
 	var vocals:FlxSound;
 	var songs:Array<SongMetadata> = [];
@@ -222,10 +222,10 @@ class FreeplayState extends MusicBeatState
 				FlxG.sound.music.stop();
 				if (vocals != null && vocals.playing)
 					vocals.stop();
-				var gamingSong:Song.SwagSong = Song.loadFromJson(songs[curSelected].toLowerCase(), songs[curSelected].toLowerCase());
+				var gamingSong:Song.SwagSong = Song.loadFromJson(songs[curSelected].songName.toLowerCase(), songs[curSelected].songName.toLowerCase());
 				if (gamingSong.needsVoices)
 				{
-					var vocalSound = Sound.fromFile("assets/music/" + gamingSong.song + "_Voices" + TitleState.soundExt);
+					var vocalSound = Sound.fromFile(Paths.voices(gamingSong.song));
 					vocals = new FlxSound().loadEmbedded(vocalSound);
 					FlxG.sound.list.add(vocals);
 					vocals.play();
@@ -235,23 +235,23 @@ class FreeplayState extends MusicBeatState
 					Conductor.songPosition = FlxG.sound.music.time;
 					vocals.time = Conductor.songPosition;
 				}
-				FlxG.sound.playMusic(Sound.fromFile("assets/music/" + gamingSong.song + "_Inst" + TitleState.soundExt));
+				FlxG.sound.playMusic(Sound.fromFile(Paths.inst(gamingSong.song)));
 				if (gamingSong.needsVoices)
 					vocals.play();
 				
 			} else {
-				var poop:String = songs[curSelected].toLowerCase() + DifficultyIcons.getEndingFP(curDifficulty);
+				var poop:String = songs[curSelected].songName.toLowerCase() + DifficultyIcons.getEndingFP(curDifficulty);
 				trace(poop);
-				if (!FileSystem.exists('assets/data/' + songs[curSelected].toLowerCase() + '/' + poop.toLowerCase() + '.json'))
+				if (!FileSystem.exists('assets/data/' + songs[curSelected].songName.toLowerCase() + '/' + poop.toLowerCase() + '.json'))
 				{
 					// assume we pecked up the difficulty, return to default difficulty
 					trace("UH OH SONG IN SPECIFIED DIFFICULTY DOESN'T EXIST\nUSING DEFAULT DIFFICULTY");
-					poop = songs[curSelected];
+					poop = songs[curSelected].songName;
 					curDifficulty = DifficultyIcons.getDefaultDiffFP();
 				}
 				trace(poop);
 
-				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].toLowerCase());
+				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
 				PlayState.isStoryMode = false;
 				ModifierState.isStoryMode = false;
 				PlayState.storyDifficulty = curDifficulty;
@@ -305,7 +305,7 @@ class FreeplayState extends MusicBeatState
 		#end
 		if (!soundTest)
 		#if sys
-			FlxG.sound.playMusic(Sound.fromFile("assets/music/"+songs[curSelected].songName+"_Inst"+TitleState.soundExt), 0);
+			FlxG.sound.playMusic(Sound.fromFile(Paths.inst(songs[curSelected].songName)), 0);
 		#else
 			FlxG.sound.playMusic('assets/music/' + songs[curSelected] + "_Inst" + TitleState.soundExt, 0);
 		#end

@@ -141,7 +141,7 @@ class SaveDataState extends MusicBeatState
 						FlxG.save.data.preferredSave = curSelected;
 						FlxG.save.close();
 						FlxG.save.bind(saveName, "bulbyVR");
-						FlxG.sound.play('assets/sounds/confirmMenu.ogg');
+						FlxG.sound.play(Paths.sound('confirmMenu'));
 						if (FlxG.save.data.songScores == null) {
 							FlxG.save.data.songScores = ["tutorial" => 0];
 						}
@@ -158,7 +158,7 @@ class SaveDataState extends MusicBeatState
 					FlxG.save.erase();
 					saves.members[curSelected].askToConfirm(false);
 					// sounds like someone farted into the mic. perfect for a delete sfx
-					FlxG.sound.play('assets/sounds/freshIntro.ogg');
+					FlxG.sound.play(Paths.sound('freshIntro'));
 					FlxG.save.data.songScores = ["tutorial" => 0];
 					FlxG.save.bind(oldSave, "bulbyVR");
 					Highscore.load();
@@ -237,7 +237,7 @@ class SaveDataState extends MusicBeatState
 	function changeSelection(change:Int = 0)
 	{
 		if (!inOptionsMenu) {
-			FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 			curSelected += change;
 
@@ -264,7 +264,7 @@ class SaveDataState extends MusicBeatState
 				}
 			}
 		} else {
-			FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 			optionsSelected += change;
 

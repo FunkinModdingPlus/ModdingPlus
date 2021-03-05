@@ -1,5 +1,6 @@
 package;
 
+import FreeplayState.SongMetadata;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -27,7 +28,7 @@ class CategoryState extends MusicBeatState
 {
 	var categories:Array<String> = [];
 	public static var choosingFor:String = "freeplay";
-	var categorySongs:Array<Array<String>> =[];
+	var categorySongs:Array<Array<SongMetadata>> =[];
 	var selector:FlxText;
 	var curSelected:Int = 0;
 
@@ -37,16 +38,29 @@ class CategoryState extends MusicBeatState
 	override function create()
 	{
 		// it's a js file to make syntax highlighting acceptable
-		var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+		var epicCategoryJs:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
 		if (epicCategoryJs.length > 1 || choosingFor != "freeplay") {
 			for (category in epicCategoryJs) {
 				categories.push(category.name);
-				categorySongs.push(category.songs);
+				var coolSongList = [];
+				for (song in category.songs) {
+					// whats this? hahahhahahhah vtyrtdtgvubjhmkljuhygtfrgyhj
+					var coolSong:SongMetadata = new SongMetadata(song, 0, "dad");
+					coolSongList.push(coolSong);
+				}
+				categorySongs.push(coolSongList);
 			}
 		} else {
 			// just set freeplay states songs to the only category
 			trace(epicCategoryJs[0].songs);
-			FreeplayState.currentSongList = epicCategoryJs[0].songs;
+			var coolSongList = [];
+			for (song in epicCategoryJs[0].songs)
+			{
+				// whats this? hahahhahahhah vtyrtdtgvubjhmkljuhygtfrgyhj
+				var coolSong:SongMetadata = new SongMetadata(song, 0, "dad");
+				coolSongList.push(coolSong);
+			}
+			FreeplayState.currentSongList = coolSongList;
 			FlxG.switchState(new FreeplayState());
 		}
 
@@ -151,7 +165,11 @@ class CategoryState extends MusicBeatState
 			FlxG.switchState(new FreeplayState());
 
 		} else if (accepted && categorySongs[curSelected].length > 0) {
-			SortState.stuffToSort = categorySongs[curSelected];
+			var coolNameList = [];
+			for (songdata in categorySongs[curSelected]) {
+				coolNameList.push(songdata.songName);
+			}
+			SortState.stuffToSort = coolNameList;
 			SortState.category = categories[curSelected];
 			FlxG.switchState(new SortState());
 		} 
@@ -161,7 +179,7 @@ class CategoryState extends MusicBeatState
 	function changeSelection(change:Int = 0)
 	{
 
-		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 		curSelected += change;
 
