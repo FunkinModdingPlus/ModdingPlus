@@ -20,7 +20,7 @@ class BackgroundGirls extends FlxSprite
 		if (gorlsPic != null && gorlsXml != null) {
 			frames = FlxAtlasFrames.fromSparrow(gorlsPic, gorlsXml);
 		} else {
-			frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/bgFreaks.png', 'assets/images/weeb/bgFreaks.xml');
+			frames = Paths.getSparrowAtlas('weeb/bgFreaks', 'week6');
 		}
 
 		animation.addByIndices('danceLeft', 'BG girls group', CoolUtil.numberArray(14), "", 24, false);

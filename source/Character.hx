@@ -545,10 +545,10 @@ class Character extends FlxSprite
 				var charJson:Dynamic = null;
 				var isError:Bool = false;
 				try {
-					charJson = CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
+					charJson = CoolUtil.parseJson(Assets.getText(Paths.json('custom_chars', 'default')));
 				} catch (exception) {
 					// uh oh someone messed up their json
-					Application.current.window.alert("Hey! You messed up your custom_chars.jsonc. Your game won't crash but it will load bf. "+exception, "Alert");
+					Application.current.window.alert("Hey! You messed up your custom_chars.json. Your game won't crash but it will load bf. "+exception, "Alert");
 					isError = true;
 				}
 				if (!isError) {

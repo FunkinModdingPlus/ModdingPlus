@@ -128,7 +128,7 @@ class DialogueBox extends FlxSpriteGroup
 			var rawXml = File.getContent(Paths.file('characters/' + PlayState.SONG.player1 + '/portrait.png', 'custom'));
 			portraitRight.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 		} else {
-			portraitRight.frames = Paths.getSparrowAtlas('');
+			portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait', 'week6');
 		}
 
 		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
@@ -163,13 +163,13 @@ class DialogueBox extends FlxSpriteGroup
 				senpaiVisible = false;
 				like = "angry-senpai";
 			case 'spirit':
-				box.frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/pixelUI/dialogueBox-evil.png', 'assets/images/weeb/pixelUI/dialogueBox-evil.xml');
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil');
 				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
 				textColor = FlxColor.WHITE;
 				dropColor = FlxColor.BLACK;
 				senpaiColor = FlxColor.BLACK;
-				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic('assets/images/weeb/spiritFaceForward.png');
+				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
 				like = "spirit";
@@ -178,12 +178,12 @@ class DialogueBox extends FlxSpriteGroup
 			case 'monster':
 				// do nothing
 			default:
-				if (FileSystem.exists('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/box.png')) {
-					var rawPic = BitmapData.fromFile('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/box.png');
-					var rawXml = File.getContent('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/box.xml');
+				if (FileSystem.exists(Paths.file('ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/box.png', 'custom'))) {
+					var rawPic = BitmapData.fromFile(Paths.file('ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/box.png', 'custom'));
+					var rawXml = File.getContent(Paths.file('ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/box.xml', 'custom'));
 					box.frames = FlxAtlasFrames.fromSparrow(rawPic,rawXml);
-					var coolJsonFile:Dynamic = CoolUtil.parseJson(Assets.getText('assets/images/custom_ui/dialog_boxes/dialog_boxes.json'));
-					var coolAnimFile = CoolUtil.parseJson(File.getContent('assets/images/custom_ui/dialog_boxes/'+Reflect.field(coolJsonFile,PlayState.SONG.cutsceneType).like+'.json'));
+					var coolJsonFile:Dynamic = CoolUtil.parseJson(Assets.getText(Paths.json('dialog_boxes', 'preload')));
+					var coolAnimFile = CoolUtil.parseJson(File.getContent(Paths.file('ui/dialog_boxes/'+Reflect.field(coolJsonFile,PlayState.SONG.cutsceneType).like+'.json', 'custom')));
 					isPixel[2] = coolAnimFile.isPixel;
 					senpaiVisible = coolAnimFile.senpaiVisible;
 					senpaiColor = FlxColor.fromString(coolAnimFile.senpaiColor);
@@ -195,8 +195,8 @@ class DialogueBox extends FlxSpriteGroup
 						like = "senpai";
 					} else if (coolAnimFile.like == "senpai-angry") {
 						// should i keep this?
-						if (FileSystem.exists('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/angry.ogg')) {
-							var coolSound:Sound = Sound.fromFile('assets/images/custom_ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/angry.ogg');
+						if (FileSystem.exists(Paths.file('ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/angry.ogg', 'custom'))) {
+							var coolSound:Sound = Sound.fromFile(Paths.file('ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/angry.ogg', 'custom'));
 							FlxG.sound.play(coolSound);
 						} else {
 							FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX'));
@@ -228,23 +228,6 @@ class DialogueBox extends FlxSpriteGroup
 		if (!hasDialog)
 			return;
 		
-		portraitLeft = new FlxSprite(-20, 40);
-		portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
-		portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-		portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
-		portraitLeft.updateHitbox();
-		portraitLeft.scrollFactor.set();
-		add(portraitLeft);
-		portraitLeft.visible = false;
-
-		portraitRight = new FlxSprite(0, 40);
-		portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
-		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-		portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
-		portraitRight.updateHitbox();
-		portraitRight.scrollFactor.set();
-		add(portraitRight);
-		portraitRight.visible = false;
 		
 		box.animation.play('normalOpen');
 		if (isPixel[2]) {

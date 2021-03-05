@@ -1,0 +1,7 @@
+{
+  // this is a string represantion of the color of the backgrounds
+
+  "mainMenu": "#fde871",
+  "mainMenuFlash": "0xFFfd719b",
+  "freeplayMenu": "#9271fd"
+}

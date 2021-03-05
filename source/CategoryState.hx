@@ -38,7 +38,7 @@ class CategoryState extends MusicBeatState
 	override function create()
 	{
 		// it's a js file to make syntax highlighting acceptable
-		var epicCategoryJs:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+		var epicCategoryJs:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(Assets.getText(Paths.json('freeplaySongJson', 'default')));
 		if (epicCategoryJs.length > 1 || choosingFor != "freeplay") {
 			for (category in epicCategoryJs) {
 				categories.push(category.name);
@@ -77,7 +77,7 @@ class CategoryState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue', 'default'));
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
