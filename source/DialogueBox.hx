@@ -69,13 +69,13 @@ class DialogueBox extends FlxSpriteGroup
 				// do nothing
 			default:
 				// see if the song has one
-				if (FileSystem.exists('assets/data/'+PlayState.SONG.song.toLowerCase()+'/Lunchbox.ogg')) {
-					var lunchboxSound = Sound.fromFile(Paths.file(''));
+				if (FileSystem.exists(Paths.file(PlayState.SONG.song.toLowerCase() + '/Lunchbox.ogg', 'songs'))) {
+					var lunchboxSound = Sound.fromFile(Paths.file(PlayState.SONG.song.toLowerCase()+'/Lunchbox.ogg', 'songs'));
 					FlxG.sound.playMusic(lunchboxSound, 0);
 					FlxG.sound.music.fadeIn(1,0,0.8);
 				// otherwise see if there is an ogg file in the dialog
-			} else if (FileSystem.exists('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/Lunchbox.ogg')) {
-					var lunchboxSound = Sound.fromFile('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/Lunchbox.ogg');
+			} else if (FileSystem.exists(Paths.file('ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/Lunchbox.ogg', 'custom'))) {
+					var lunchboxSound = Sound.fromFile(Paths.file('ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/Lunchbox.ogg', 'custom'));
 					FlxG.sound.playMusic(lunchboxSound, 0);
 					FlxG.sound.music.fadeIn(1,0,0.8);
 				}
@@ -208,8 +208,8 @@ class DialogueBox extends FlxSpriteGroup
 					} else if (coolAnimFile.like == "spirit") {
 						box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 						box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
-						if (FileSystem.exists('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/face.png')) {
-							var facePic = BitmapData.fromFile('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/face.png');
+						if (FileSystem.exists(Paths.file('ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/face.png', 'custom'))) {
+							var facePic = BitmapData.fromFile(Paths.file('ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/face.png', 'custom'));
 							var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(facePic);
 							if (isPixel[2]) {
 								face.setGraphicSize(Std.int(face.width * 6));
