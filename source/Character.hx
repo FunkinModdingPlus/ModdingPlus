@@ -6,6 +6,7 @@ import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flash.display.BitmapData;
 import lime.utils.Assets;
+import openfl.utils.Assets as OpenFLAssets;
 import lime.system.System;
 import lime.app.Application;
 #if sys
@@ -545,7 +546,7 @@ class Character extends FlxSprite
 				var charJson:Dynamic = null;
 				var isError:Bool = false;
 				try {
-					charJson = CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
+					charJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_chars/custom_chars.json', 'custom')));
 				} catch (exception) {
 					// uh oh someone messed up their json
 					Application.current.window.alert("Hey! You messed up your custom_chars.jsonc. Your game won't crash but it will load bf. "+exception, "Alert");
@@ -553,8 +554,8 @@ class Character extends FlxSprite
 				}
 				if (!isError) {
 					// use assets, as it is less laggy
-					var animJson = File.getContent("assets/images/custom_chars/"+Reflect.field(charJson,curCharacter).like+".json");
-					var parsedAnimJson:Dynamic = CoolUtil.parseJson(animJson);
+				
+					var parsedAnimJson:Dynamic = CoolUtil.parseJson(OpenFLAssets.getText(Paths.file('custom_chars/'+Reflect.field(charJson,curCharacter).like+'.json', 'custom')));
 
 
 					var playerSuffix = 'char';

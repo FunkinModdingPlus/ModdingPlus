@@ -59,13 +59,6 @@ class CategoryState extends MusicBeatState
 			FlxG.switchState(new FreeplayState());
 		}
 
-		/*
-			if (FlxG.sound.music != null)
-			{
-				if (!FlxG.sound.music.playing)
-					FlxG.sound.playMusic('assets/music/freakyMenu' + TitleState.soundExt);
-			}
-		 */
 
 
 		// LOAD MUSIC
@@ -94,7 +87,6 @@ class CategoryState extends MusicBeatState
 
 
 		changeSelection();
-		// FlxG.sound.playMusic('assets/music/title' + TitleState.soundExt, 0);
 		// FlxG.sound.music.fadeIn(2, 0, 0.8);
 		selector = new FlxText();
 

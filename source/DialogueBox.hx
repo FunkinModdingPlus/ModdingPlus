@@ -328,9 +328,9 @@ class DialogueBox extends FlxSpriteGroup
 						like = "senpai";
 					} else if (coolAnimFile.like == "senpai-angry") {
 						// should i keep this?
-						if (FileSystem.exists(Paths.sound('dialog_boxes/' + PlayState.SONG.cutsceneType + '/angry', 'custom'))) {
+						if (FileSystem.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/angry.ogg', 'custom'))) {
 							// maybe it's just vsc but apparently interpolation isn't all powerful
-							FlxG.sound.play(Paths.sound('dialog_boxes/'+PlayState.SONG.cutsceneType+'/angry', 'custom'));
+							FlxG.sound.play(Paths.file('dialog_boxes/'+PlayState.SONG.cutsceneType+'/angry.ogg', 'custom'));
 						} else {
 							FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX', 'shared'));
 						}
