@@ -8,7 +8,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
+import openfl.utils.Assets as OpenFLAssets;
 import DifficultyIcons;
 import lime.system.System;
 #if sys
@@ -27,7 +27,7 @@ class CategoryState extends MusicBeatState
 {
 	var categories:Array<String> = [];
 	public static var choosingFor:String = "freeplay";
-	var categorySongs:Array<Array<String>> =[];
+	var categorySongs:Array<Array<FreeplayState.SongMetadata>> =[];
 	var selector:FlxText;
 	var curSelected:Int = 0;
 
@@ -37,16 +37,25 @@ class CategoryState extends MusicBeatState
 	override function create()
 	{
 		// it's a js file to make syntax highlighting acceptable
-		var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+		var epicCategoryJs:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(OpenFLAssets.getText(Paths.json('freeplaySongJson')));
 		if (epicCategoryJs.length > 1 || choosingFor != "freeplay") {
 			for (category in epicCategoryJs) {
 				categories.push(category.name);
-				categorySongs.push(category.songs);
+				var funnySongsData:Array<FreeplayState.SongMetadata> = [];
+				for (song in category.songs) {
+					funnySongsData.push(new FreeplayState.SongMetadata(song, 69, "bf"));
+				}
+				categorySongs.push(funnySongsData);
 			}
 		} else {
 			// just set freeplay states songs to the only category
 			trace(epicCategoryJs[0].songs);
-			FreeplayState.currentSongList = epicCategoryJs[0].songs;
+			var funnySongsData:Array<FreeplayState.SongMetadata> = [];
+			for (song in epicCategoryJs[0].songs)
+			{
+				funnySongsData.push(new FreeplayState.SongMetadata(song, 69, "bf"));
+			}
+			FreeplayState.currentSongList = funnySongsData;
 			FlxG.switchState(new FreeplayState());
 		}
 
@@ -63,7 +72,7 @@ class CategoryState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue', 'preload'));
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -151,7 +160,8 @@ class CategoryState extends MusicBeatState
 			FlxG.switchState(new FreeplayState());
 
 		} else if (accepted && categorySongs[curSelected].length > 0) {
-			SortState.stuffToSort = categorySongs[curSelected];
+			// return the song names
+			SortState.stuffToSort = [for (i in categorySongs[curSelected]) i.songName];
 			SortState.category = categories[curSelected];
 			FlxG.switchState(new SortState());
 		} 
@@ -161,7 +171,7 @@ class CategoryState extends MusicBeatState
 	function changeSelection(change:Int = 0)
 	{
 
-		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+		FlxG.sound.play(Paths.sound('scrollMenu', 'preload'), 0.4);
 
 		curSelected += change;
 

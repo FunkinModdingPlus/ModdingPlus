@@ -3,7 +3,7 @@ package;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flash.display.BitmapData;
-import lime.utils.Assets;
+import openfl.utils.Assets as OpenFLAssets;
 import lime.system.System;
 #if sys
 import sys.io.File;
@@ -19,23 +19,14 @@ class BackgroundDancer extends FlxSprite
 	{
 		super(x, y);
 		if (type == "normal") {
-			frames = FlxAtlasFrames.fromSparrow("assets/images/limo/limoDancer.png", "assets/images/limo/limoDancer.xml");
+			frames = Paths.getSparrowAtlas("limo/limoDancer", "week4");
 		} else {
-			var rawPic:BitmapData;
-			var rawXml:String;
-			if (FileSystem.exists('assets/images/custom_stages/'+type+"/limoDancer.png")) {
-				rawPic = BitmapData.fromFile('assets/images/custom_stages/'+type+"/limoDancer.png");
-			} else {
-				// fall back on base game file to avoid crashes
-				rawPic = BitmapData.fromImage(Assets.getImage("assets/images/limo/limoDancer.png"));
-			}
-			if (FileSystem.exists('assets/images/custom_stages/'+type+"/limoDancer.xml")) {
-			   rawXml = File.getContent('assets/images/custom_stages/'+type+"/limoDancer.xml");
-			} else {
-			   // fall back on base game file to avoid crashes
-				 rawXml = Assets.getText("assets/images/limo/limoDancer.xml");
-			}
-			frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
+			// openfl is funny, it doesn't care about lime assets so i don't have to fuck with this shit
+			// checked flixel source code and it uses openfl
+			if (OpenFLAssets.exists(Paths.xml('custom_stages/$type/limo/limoDancer', "custom")))
+				frames = Paths.getSparrowAtlas('custom_stages/$type/limo/limoDancer', "custom" );
+			else 
+				frames = Paths.getSparrowAtlas("limo/limoDancer", "week4");
 		}
 
 		animation.addByIndices('danceLeft', 'bg dancer sketch PINK', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);

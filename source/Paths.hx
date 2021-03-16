@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
+import lime.utils.Assets as LimeAssets;
 import openfl.utils.Assets as OpenFlAssets;
 
 class Paths
@@ -34,7 +35,6 @@ class Paths
 
 		return getPreloadPath(file);
 	}
-
 	static public function getLibraryPath(file:String, library = "preload")
 	{
 		return if (library == "preload" || library == "default") getPreloadPath(file); else getLibraryPathForce(file, library);

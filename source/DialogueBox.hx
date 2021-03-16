@@ -69,7 +69,7 @@ class DialogueBox extends FlxSpriteGroup
 				FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'spirit':
-				FlxG.sound.playMusic('assets/music/LunchboxScary' + TitleState.soundExt, 0);
+				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'angry-senpai':
 				// do nothing
@@ -270,27 +270,27 @@ class DialogueBox extends FlxSpriteGroup
 		switch (PlayState.SONG.cutsceneType)
 		{
 			case 'senpai':
-				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-pixel');
+				// taking no chances on the current week
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-pixel', 'week6');
 				box.animation.addByPrefix('normalOpen', 'Text Box Appear', 24, false);
 				box.animation.addByIndices('normal', 'Text Box Appear', [4], "", 24);
 				like = "senpai";
 			case 'angry-senpai':
-				FlxG.sound.play('assets/sounds/ANGRY_TEXT_BOX' + TitleState.soundExt);
+				FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX', 'shared'));
 
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-senpaiMad');
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-senpaiMad', 'week6');
 				box.animation.addByPrefix('normalOpen', 'SENPAI ANGRY IMPACT SPEECH', 24, false);
 				box.animation.addByIndices('normal', 'SENPAI ANGRY IMPACT SPEECH', [4], "", 24);
 				senpaiVisible = false;
 				like = "angry-senpai";
 			case 'spirit':
-				box.frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/pixelUI/dialogueBox-evil.png', 'assets/images/weeb/pixelUI/dialogueBox-evil.xml');
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil', 'week6');
 				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
 				textColor = FlxColor.WHITE;
 				dropColor = FlxColor.BLACK;
 				senpaiColor = FlxColor.BLACK;
-				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic('assets/images/weeb/spiritFaceForward.png');
+				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward', 'week6'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
 				like = "spirit";
@@ -328,11 +328,11 @@ class DialogueBox extends FlxSpriteGroup
 						like = "senpai";
 					} else if (coolAnimFile.like == "senpai-angry") {
 						// should i keep this?
-						if (FileSystem.exists('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/angry.ogg')) {
-							var coolSound:Sound = Sound.fromFile('assets/images/custom_ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/angry.ogg');
-							FlxG.sound.play(coolSound);
+						if (FileSystem.exists(Paths.sound('dialog_boxes/' + PlayState.SONG.cutsceneType + '/angry', 'custom'))) {
+							// maybe it's just vsc but apparently interpolation isn't all powerful
+							FlxG.sound.play(Paths.sound('dialog_boxes/'+PlayState.SONG.cutsceneType+'/angry', 'custom'));
 						} else {
-							FlxG.sound.play('assets/sounds/ANGRY_TEXT_BOX' + TitleState.soundExt);
+							FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX', 'shared'));
 						}
 						
 						box.animation.addByPrefix('normalOpen', 'SENPAI ANGRY IMPACT SPEECH', 24, false);
@@ -357,9 +357,6 @@ class DialogueBox extends FlxSpriteGroup
 		}
 
 		this.dialogueList = dialogueList;
-		
-		if (!hasDialog)
-			return;
 		
 		portraitLeft = new FlxSprite(-20, 40);
 		portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');

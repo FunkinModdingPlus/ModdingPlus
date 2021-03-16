@@ -752,7 +752,7 @@ class PlayState extends MusicBeatState
 					phillyTrain = new FlxSprite(2000, 360).loadGraphic(trainPic);
 					add(phillyTrain);
 
-					trainSound = new FlxSound().loadEmbedded('assets/sounds/train_passes' + TitleState.soundExt);
+					trainSound = new FlxSound().loadEmbedded(Paths.sound('train_passes', 'shared'));
 					FlxG.sound.list.add(trainSound);
 
 
@@ -1779,8 +1779,7 @@ class PlayState extends MusicBeatState
 
 		if (SONG.needsVoices) {
 			#if sys
-			var vocalSound = Sound.fromFile("assets/music/"+SONG.song+"_Voices"+TitleState.soundExt);
-			vocals = new FlxSound().loadEmbedded(vocalSound);
+			vocals = new FlxSound().loadEmbedded(Paths.voices(SONG.song));
 			#else
 			vocals = new FlxSound().loadEmbedded("assets/music/" + curSong + "_Voices" + TitleState.soundExt);
 			#end
@@ -3209,7 +3208,7 @@ class PlayState extends MusicBeatState
 
 			}
 			trueScore -= 10;
-			FlxG.sound.play('assets/sounds/missnote' + FlxG.random.int(1, 3) + TitleState.soundExt, FlxG.random.float(0.1, 0.2));
+			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3, 'shared'), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play('assets/sounds/missnote1' + TitleState.soundExt, 1, false);
 			// FlxG.log.add('played imss note');
 
