@@ -26,19 +26,8 @@ class MenuItem extends FlxSpriteGroup
 	public function new(x:Float, y:Float, weekNum:Int = 0)
 	{
 		super(x, y);
-		var parsedWeekJson:Array<Array<String>> = CoolUtil.parseJson(File.getContent("assets/data/storySongList.json")).songs;
-		var rawPic = BitmapData.fromFile('assets/images/campaign-ui-week/week'+weekNum+".png");
-		var rawXml = File.getContent('assets/images/campaign-ui-week/week'+weekNum+".xml");
-		var tex = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 
-		week = new FlxSprite();
-		week.frames = tex;
-		// TUTORIAL IS WEEK 0
-		trace(parsedWeekJson[weekNum][0]);
-		week.animation.addByPrefix("default", parsedWeekJson[weekNum][0], 24);
-		add(week);
-		week.animation.play('default');
-		week.animation.pause();
+		week = new FlxSprite().loadGraphic(Paths.file('custom_weeks/week$weekNum.png'));
 		week.updateHitbox();
 	}
 

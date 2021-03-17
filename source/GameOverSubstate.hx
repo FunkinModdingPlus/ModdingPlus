@@ -35,11 +35,11 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (p1 == "bf-pixel") {
 			stageSuffix = '-pixel';
 		}
-		var characterList = Assets.getText('assets/data/characterList.txt');
+		var characterList = Assets.getText(Paths.txt('characterList', 'preload'));
 		if (!StringTools.contains(characterList, p1)) {
-			var parsedCharJson:Dynamic = CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
+			var parsedCharJson:Dynamic = CoolUtil.parseJson(Assets.getText(Paths.file('custom_chars/custom_chars.json', 'custom')));
 			//another CTRL+C CTRL+V ritual
-			var unparsedAnimJson = File.getContent("assets/images/custom_chars/"+Reflect.field(parsedCharJson,p1).like+".json"); //it might keep throwing an error if i dont do this
+			var unparsedAnimJson = File.getContent(Paths.file("custom_chars/"+Reflect.field(parsedCharJson,p1).like+".json", 'custom')); //it might keep throwing an error if i dont do this
 			var parsedAnimJson = CoolUtil.parseJson(unparsedAnimJson);
 			switch (parsedAnimJson.like) {
 				case "bf":

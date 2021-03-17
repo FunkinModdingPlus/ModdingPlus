@@ -74,7 +74,7 @@ class FreeplayState extends MusicBeatState
 			// disable auto pause. I NEED MUSIC
 			FlxG.autoPause = false;
 		}
-		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue', 'preload'));
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -214,7 +214,7 @@ class FreeplayState extends MusicBeatState
 			if (soundTest)
 				FlxG.switchState(new SaveDataState());
 			else {
-				var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+				var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(Assets.getText(Paths.json('freeplaySongJson', 'preload')));
 				if (epicCategoryJs.length > 1)
 				{
 					FlxG.switchState(new CategoryState());
@@ -336,9 +336,9 @@ class FreeplayState extends MusicBeatState
 		#end
 		if (!soundTest)
 		#if sys
-			FlxG.sound.playMusic(Paths.inst("assets/music/"+songs[curSelected].songName), 0);
+			FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
 		#else
-			FlxG.sound.playMusic('assets/music/' + songs[curSelected] + "_Inst" + TitleState.soundExt, 0);
+			throw('lol you\'re using web?');
 		#end
 		var bullShit:Int = 0;
 

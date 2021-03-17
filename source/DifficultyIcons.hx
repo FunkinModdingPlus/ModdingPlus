@@ -28,24 +28,24 @@ class DifficultyIcons {
     group = new FlxTypedGroup<FlxSprite>();
     difficulties = diff;
     defaultDiff = defaultDifficulty;
-    var diffJson = CoolUtil.parseJson(Assets.getText("assets/images/custom_difficulties/difficulties.json"));
+		var diffJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
     trace(diff.length);
     for( level in 0...difficulties.length ) {
       var sprDiff = new FlxSprite(x,y);
       sprDiff.offset.x = diffJson.difficulties[level].offset;
       var diffPic:BitmapData;
       var diffXml:String;
-      if (FileSystem.exists('assets/images/custom_difficulties/'+diffJson.difficulties[level].name+".png")) {
-         diffPic = BitmapData.fromFile('assets/images/custom_difficulties/'+diffJson.difficulties[level].name+".png");
+			if (FileSystem.exists(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.png', 'custom'))) {
+				diffPic = BitmapData.fromFile(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.png', 'custom'));
       } else {
          // fall back on base game file to avoid crashes
-         diffPic = BitmapData.fromImage(Assets.getImage("assets/images/campaign_menu_UI_assets.png"));
+				diffPic = BitmapData.fromImage(Assets.getImage(Paths.image("campaign_menu_UI_assets", 'preload')));
       }
-      if (FileSystem.exists('assets/images/custom_difficulties/'+diffJson.difficulties[level].name+".xml")) {
-         diffXml = File.getContent('assets/images/custom_difficulties/'+diffJson.difficulties[level].name+".xml");
+			if (FileSystem.exists(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.xml', 'custom'))) {
+				diffXml = File.getContent(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.xml', 'custom'));
       } else {
          // fall back on base game file to avoid crashes
-         diffXml = Assets.getText("assets/images/campaign_menu_UI_assets.xml");
+         diffXml = Assets.getText(Paths.file("images/campaign_menu_UI_assets.png", 'preload'));
       }
       sprDiff.frames = FlxAtlasFrames.fromSparrow(diffPic,diffXml);
       sprDiff.animation.addByPrefix('diff', diffJson.difficulties[level].anim);
@@ -78,7 +78,7 @@ class DifficultyIcons {
   }
   public static function changeDifficultyFreeplay(difficultyFP:Int, ?change:Int = 0):Dynamic {
     trace("line 73");
-    var diffJson = CoolUtil.parseJson(Assets.getText("assets/images/custom_difficulties/difficulties.json"));
+		var diffJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
     var difficultiesFP:Array<Dynamic> = diffJson.difficulties;
     var freeplayDiff = difficultyFP;
     freeplayDiff += change;
@@ -105,7 +105,7 @@ class DifficultyIcons {
     return ending;
   }
   public static function getEndingFP(fpDiff:Int):String {
-    var diffJson = CoolUtil.parseJson(Assets.getText("assets/images/custom_difficulties/difficulties.json"));
+		var diffJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
     var difficultiesFP:Array<Dynamic> = diffJson.difficulties;
     var ending = "";
     if (fpDiff != diffJson.defaultDiff) {
@@ -115,7 +115,7 @@ class DifficultyIcons {
     return ending;
   }
   public static function getDefaultDiffFP():Int {
-    var diffJson = CoolUtil.parseJson(Assets.getText("assets/images/custom_difficulties/difficulties.json"));
+		var diffJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
     return diffJson.defaultDiff;
   }
 }

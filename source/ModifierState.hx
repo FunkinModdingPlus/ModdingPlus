@@ -32,7 +32,7 @@ class ModifierState extends MusicBeatState
 	public static var scoreMultiplier:Float = 1;
 	override function create()
 	{
-		var menuBG:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuDesat.png');
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat', 'preload'));
 		menuBG.color = 0xFFea71fd;
 		grpAlphabet = new FlxTypedGroup<Alphabet>();
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
@@ -40,7 +40,7 @@ class ModifierState extends MusicBeatState
 		menuBG.screenCenter();
 		menuBG.antialiasing = true;
 		multiTxt = new FlxText(800, 60, 0, "", 200);
-		multiTxt.setFormat("assets/fonts/vcr.ttf", 40, FlxColor.WHITE, RIGHT);
+		multiTxt.setFormat(Paths.font('vcr.tff'), 40, FlxColor.WHITE, RIGHT);
 		multiTxt.text = "Multiplier: 1";
 		multiTxt.scrollFactor.set();
 		// save between files
@@ -76,7 +76,7 @@ class ModifierState extends MusicBeatState
 			var swagModifier = new Alphabet(0, 10, "   "+modifiers[modifier].name, true, false, false);
 			swagModifier.isMenuItem = true;
 			swagModifier.targetY = modifier;
-			var coolCheckmark:FlxSprite = new FlxSprite().loadGraphic('assets/images/checkmark.png');
+			var coolCheckmark:FlxSprite = new FlxSprite().loadGraphic(Paths.image('checkmark', 'preload'));
 			coolCheckmark.visible = modifiers[modifier].value;
 			checkmarks.push(coolCheckmark);
 			swagModifier.add(coolCheckmark);
@@ -112,7 +112,7 @@ class ModifierState extends MusicBeatState
 	function changeSelection(change:Int = 0)
 	{
 
-		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+		FlxG.sound.play(Paths.sound('scrollMenu', 'preload'), 0.4);
 
 		curSelected += change;
 

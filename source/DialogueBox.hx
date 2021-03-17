@@ -1,5 +1,6 @@
 package;
 
+import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -171,40 +172,40 @@ class DialogueBox extends FlxSpriteGroup
 				isPixel[0] = false;
 			case 'bf-christmas':
 				portraitLeft.frames = Paths.getSparrowAtlas('bfPortraitXmas', 'shared');
-				isPixel[1] = false;
+				isPixel[0] = false;
 			case 'pico':
 				portraitLeft.frames = Paths.getSparrowAtlas('picoPortrait', 'shared');
-				isPixel[1] = false;
+				isPixel[0] = false;
 			case 'spooky':
 				portraitLeft.frames = Paths.getSparrowAtlas('spookyPortrait', 'shared');
-				isPixel[1] = false;
+				isPixel[0] = false;
 			case 'gf':
 				// cursed
 				portraitLeft.frames = Paths.getSparrowAtlas('gfPortrait', 'shared');
-				isPixel[1] = false;
+				isPixel[0] = false;
 			case 'dad':
 				portraitLeft.frames = Paths.getSparrowAtlas('dadPortrait', 'shared');
-				isPixel[1] = false;
+				isPixel[0] = false;
 			case 'mom' | 'mom-car':
 				portraitLeft.frames = Paths.getSparrowAtlas('momPortrait', 'shared');
-				isPixel[1] = false;
+				isPixel[0] = false;
 			case 'parents-christmas':
 				portraitLeft.frames = Paths.getSparrowAtlas('parentsPortrait', 'shared');
-				isPixel[1] = false;
+				isPixel[0] = false;
 			case 'monster-christmas':
 				// haha santa hat
 				portraitLeft.frames = Paths.getSparrowAtlas('monsterXmasPortrait', 'shared');
-				isPixel[1] = false;
+				isPixel[0] = false;
 			case 'monster':
 				portraitLeft.frames = Paths.getSparrowAtlas('monsterPortrait', 'shared');
-				isPixel[1] = false;
+				isPixel[0] = false;
 			default:
-				if (FileSystem.exists(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.png', 'custom')))
+				if (FileSystem.exists(Paths.file('custom_chars/' + PlayState.SONG.player1 + '/portrait.png', 'custom')))
 				{
-					var coolP2Json = Character.getAnimJson(PlayState.SONG.player2);
-					isPixel[1] = if (Reflect.hasField(coolP2Json, "isPixel")) coolP2Json.isPixel else false;
-					var rawPic = BitmapData.fromFile(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.png', 'custom'));
-					var rawXml = File.getContent(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.xml', 'custom'));
+					var coolP1Json = Character.getAnimJson(PlayState.SONG.player1);
+					isPixel[0] = if (Reflect.hasField(coolP1Json, "isPixel")) coolP1Json.isPixel else false;
+					var rawPic = BitmapData.fromFile(Paths.file('custom_chars/' + PlayState.SONG.player1 + '/portrait.png', 'custom'));
+					var rawXml = File.getContent(Paths.file('custom_chars/' + PlayState.SONG.player1 + '/portrait.xml', 'custom'));
 					portraitLeft.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 				}
 				else
@@ -298,12 +299,10 @@ class DialogueBox extends FlxSpriteGroup
 			case 'monster':
 				// do nothing
 			default:
-				if (FileSystem.exists('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/box.png')) {
-					var rawPic = BitmapData.fromFile('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/box.png');
-					var rawXml = File.getContent('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/box.xml');
-					box.frames = FlxAtlasFrames.fromSparrow(rawPic,rawXml);
-					var coolJsonFile:Dynamic = CoolUtil.parseJson(Assets.getText('assets/images/custom_ui/dialog_boxes/dialog_boxes.json'));
-					var coolAnimFile = CoolUtil.parseJson(File.getContent('assets/images/custom_ui/dialog_boxes/'+Reflect.field(coolJsonFile,PlayState.SONG.cutsceneType).like+'.json'));
+				if (FileSystem.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/box.xml', 'custom'))) {
+					box.frames = FlxAtlasFrames.fromSparrow(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/box.png', 'custom'), Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/box.xml', 'custom'));
+					var coolJsonFile:Dynamic = CoolUtil.parseJson(Assets.getText(Paths.file('dialog_boxes/dialog_boxes.json', 'custom')));
+					var coolAnimFile = CoolUtil.parseJson(File.getContent(Paths.file('dialog_boxes/'+Reflect.field(coolJsonFile,PlayState.SONG.cutsceneType).like+'.json', 'custom')));
 					isPixel[2] = coolAnimFile.isPixel;
 					senpaiVisible = coolAnimFile.senpaiVisible;
 					sided = if (Reflect.hasField(coolAnimFile, 'sided')) coolAnimFile.sided else false;
@@ -317,10 +316,10 @@ class DialogueBox extends FlxSpriteGroup
 						portraitRight.x += coolAnimFile.portraitOffset[0];
 						portraitRight.y += coolAnimFile.portraitOffset[1];
 					}
-					if (FileSystem.exists('assets/images/custom_ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/text.ogg'))
-						clickSounds[2] = Sound.fromFile('assets/images/custom_ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/text.ogg');
-					if (FileSystem.exists('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/accept.ogg'))
-						acceptSound = Sound.fromFile('assets/images/custom_ui/dialog_boxes/' + PlayState.SONG.cutsceneType + '/accept.ogg');
+					if (FileSystem.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/text.ogg', 'custom')))
+						clickSounds[2] = Sound.fromFile(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/text.ogg', 'custom'));
+					if (FileSystem.exists(Paths.file('dialog_boxes/'+PlayState.SONG.cutsceneType+'/accept.ogg', 'custom')))
+						acceptSound = Sound.fromFile(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/accept.ogg', 'custom'));
 					if (coolAnimFile.like == "senpai") {
 						box.animation.addByPrefix('normalOpen', 'Text Box Appear', 24, false);
 						box.animation.addByIndices('normal', 'Text Box Appear', [4], "", 24);
@@ -340,9 +339,8 @@ class DialogueBox extends FlxSpriteGroup
 					} else if (coolAnimFile.like == "spirit") {
 						box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 						box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
-						if (FileSystem.exists('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/face.png')) {
-							var facePic = BitmapData.fromFile('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/face.png');
-							var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(facePic);
+						if (FileSystem.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/face.png', 'custom'))) {
+							var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.file('dialog_boxes/'+PlayState.SONG.cutsceneType+'/face.png', 'custom'));
 							if (isPixel[2]) {
 								face.setGraphicSize(Std.int(face.width * 6));
 							}
@@ -374,7 +372,10 @@ class DialogueBox extends FlxSpriteGroup
 		portraitRight.scrollFactor.set();
 		add(portraitRight);
 		portraitRight.visible = false;
-		
+		// do nothing with it, so we can recycle later
+		portraitCustom = new FlxSprite(0, 40);
+		portraitCustom.visible = false;
+		portraitRight.scrollFactor.set();
 		box.animation.play('normalOpen');
 		if (dialogueList[0].startsWith(':dad:') && sided) {
 			box.flipX = true;
@@ -404,13 +405,13 @@ class DialogueBox extends FlxSpriteGroup
 		}
 
 		dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
-		dropText.setFormat('assets/fonts/' + font, 32, dropColor);
+		dropText.setFormat(Paths.font(font), 32, dropColor);
 		if (dropColor.alphaFloat != 1) 
 			dropText.alpha = dropColor.alphaFloat;
 		add(dropText);
 
 		swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
-		swagDialogue.setFormat('assets/fonts/'+font, 32, textColor);
+		swagDialogue.setFormat(Paths.font(font), 32, textColor);
 		if (textColor.alphaFloat != 1)
 			swagDialogue.alpha = textColor.alphaFloat;
 		swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
@@ -517,15 +518,20 @@ class DialogueBox extends FlxSpriteGroup
 	}
 
 	var isEnding:Bool = false;
-
+	var oldChar:String = "dad";
 	function startDialogue():Void
 	{
 		cleanDialog();
 		// do it before the text starts
-		if (portraitCustom != null) {
-			remove(portraitCustom);
-		}
 		var customHanded:Bool = false;
+		var customPixel:Bool = false;
+		// make it D R Y (don't repeat yourself)
+		if (curCharacter != 'dad' && curCharacter != 'bf') {
+			portraitCustom.scale = new FlxPoint(1, 1);
+			portraitCustom.setPosition(0, 40);
+			swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
+			portraitCustom.flipX = false;
+		}
 		switch (curCharacter) {
 			case 'dad':
 				swagDialogue.sounds = [FlxG.sound.load(clickSounds[1], 0.6)];
@@ -533,153 +539,88 @@ class DialogueBox extends FlxSpriteGroup
 				swagDialogue.sounds = [FlxG.sound.load(clickSounds[0], 0.6)];
 			case 'char-bf':
 				// we have to change the custom portrait
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/bfPortrait.png', 'assets/images/bfPortrait.xml');
-				portraitCustom.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('bfPortrait', 'shared');
+				customHanded = true;
 			case 'char-dad':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/dadPortrait.png', 'assets/images/dadPortrait.xml');
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				portraitCustom.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames =Paths.getSparrowAtlas('dadPortrait', 'shared');
 			case 'char-gf':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/gfPortrait.png', 'assets/images/gfPortrait.xml');
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				flipX = true;
-				portraitCustom.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('gfPortrait', 'shared');
+				portraitCustom.flipX = true;
+				customHanded = true;
 			// TODO: Split into skid and pump
 			case 'char-spooky':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/spookyPortrait.png', 'assets/images/spookyPortrait.xml');
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				portraitCustom.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('spookyPortrait', 'shared');
 			case 'char-pico':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/picoPortrait.png', 'assets/images/picoPortrait.xml');
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
+				portraitCustom.frames = Paths.getSparrowAtlas('picoPortrait', 'shared');
 				portraitCustom.flipX = true;
-				portraitCustom.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				customHanded = true;
 			case 'char-mom':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/momPortrait.png', 'assets/images/momPortrait.xml');
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				portraitCustom.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('momPortrait', 'shared');
 			// TODO: Graphics
 			case 'char-mom-xmas':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/momPortrait.png', 'assets/images/momPortrait.xml');
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				portraitCustom.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('momPortrait', 'shared');
 			// TODO: Graphics
 			case 'char-dad-xmas':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/dadPortrait.png', 'assets/images/dadPortrait.xml');
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				portraitCustom.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('dadPortrait', 'shared');
 			case 'char-monster':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/monsterPortrait.png', 'assets/images/monsterPortrait.xml');
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				portraitCustom.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('monsterPortrait', 'shared');
 			case 'char-monster-xmas':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/christmas/monsterXmasPortrait.png', 'assets/images/christmas/monsterXmasPortrait.xml');
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				portraitCustom.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('monsterXmasPortrait', 'shared');
 			case 'char-gf-xmas':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/christmas/gfPortraitXmas.png', 'assets/images/christmas/gfPortrait.xml');
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				flipX = true;
-				portraitCustom.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('gfPortraitXmas', 'shared');
+				portraitCustom.flipX = true;
+				customHanded = true;
 			case 'char-bf-xmas':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/christmas/bfPortraitXmas.png', 'assets/images/christmas/bfPortraitXmas.xml');
-				portraitCustom.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('bfPortraitXmas', 'shared');
+				customHanded = true;
 			case 'char-bf-pixel':
-				portraitCustom = new FlxSprite(0, 40);
-				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9 * PlayState.daPixelZoom));
-				portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/bfPortrait.png', 'assets/images/weeb/bfPortrait.xml');
-				portraitCustom.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-				swagDialogue.sounds = [FlxG.sound.load(clickSounds[2], 0.6)];
-				portraitCustom.visible = false;
+				portraitCustom.frames = Paths.getSparrowAtlas('weeb/bfPortrait', 'shared');
+				customPixel = true;
+				customHanded = true;
 			default:
 				var realChar = curCharacter.substr(5);
 				portraitCustom = new FlxSprite(0, 40);
-				var customPixel = false;
-				if (FileSystem.exists('assets/images/custom_chars/'+realChar+'/portrait.png')) {
+				if (FileSystem.exists(Paths.file('custom_chars/$realChar/portrait.png', 'custom'))) {
 					var coolCustomJson = Character.getAnimJson(realChar);
 					customPixel = if (Reflect.hasField(coolCustomJson, "isPixel"))
 						coolCustomJson.isPixel
 					else
 						false;
-					var rawPic = BitmapData.fromFile('assets/images/custom_chars/' + realChar + "/portrait.png");
-					var rawXml = File.getContent('assets/images/custom_chars/' + realChar + "/portrait.xml");
+					var rawPic = BitmapData.fromFile(Paths.file('custom_chars/$realChar/portrait.png', 'custom'));
+					var rawXml = File.getContent(Paths.file('custom_chars/$realChar/portrait.xml', 'custom'));
 					portraitCustom.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 				} else {
-					portraitCustom.frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/bfPortrait.png', 'assets/images/weeb/bfPortrait.xml');
+					portraitCustom.frames = Paths.getSparrowAtlas('weeb/bfPortrait', 'shared');
 					customPixel = true;
 				}
-				var customFrameings:Array<FlxFrame> = [];
 				for (frame in portraitCustom.frames.frames)
 				{
 					if (frame.name != null && StringTools.startsWith(frame.name, 'Boyfriend portrait enter'))
 					{
-						customFrameings.push(frame);
+						customHanded = true;
+						break;
 					}
 				}
-				if (FileSystem.exists('assets/images/custom_chars/' +realChar + '/text.ogg'))
+				if (FileSystem.exists(Paths.file('custom_chars/$realChar/text.ogg', 'custom')))
 				{
-					swagDialogue.sounds = [FlxG.sound.load(Sound.fromFile('assets/images/custom_chars/' + realChar + '/text.ogg'))];
-				} else {
-					swagDialogue.sounds = [FlxG.sound.load(clickSounds[2])];
+					swagDialogue.sounds = [FlxG.sound.load(Sound.fromFile(Paths.file('custom_chars/$realChar/text.ogg', 'custom')))];
 				}
-				if (customFrameings.length > 0) {
-					portraitCustom.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-					customHanded = true;
-				} else {
-					portraitCustom.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-				}
-				if (customPixel)
-					portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9 * PlayState.daPixelZoom));
-				else 
-					portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
-				portraitCustom.visible = false;
+				
 		}
 		// swagDialogue.text = ;
-		if (portraitCustom != null) {
+		if (curCharacter != 'dad' && curCharacter != 'bf') {
+			if (curCharacter != oldChar)
+				portraitCustom.visible = false;
+			if (customHanded)
+				portraitCustom.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
+			else
+				portraitCustom.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
+			if (customPixel)
+				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9 * PlayState.daPixelZoom));
+			else
+				portraitCustom.setGraphicSize(Std.int(portraitCustom.width * 0.9));
 			portraitCustom.updateHitbox();
-			portraitCustom.scrollFactor.set();
-			portraitCustom.x = portraitLeft.x;
-			portraitCustom.y = portraitLeft.y;
-			// note to self you must add it for it to work
-			add(portraitCustom);
+			
 		}
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
@@ -729,6 +670,7 @@ class DialogueBox extends FlxSpriteGroup
 					portraitCustom.animation.play('enter');
 				}
 		}
+		oldChar = curCharacter;
 	}
 
 	function cleanDialog():Void

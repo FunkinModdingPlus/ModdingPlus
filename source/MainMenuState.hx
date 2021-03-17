@@ -196,7 +196,7 @@ class MainMenuState extends MusicBeatState
 										trace("Story Menu Selected");
 									case 'freeplay':
 										CategoryState.choosingFor = "freeplay";
-										var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+										var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(Assets.getText(Paths.json('freeplaySongJson', 'custom')));
 										FreeplayState.soundTest = false;
 										if (epicCategoryJs.length > 1)
 										{
