@@ -407,14 +407,14 @@ class ChartingState extends MusicBeatState
 		#if sys
 		FlxG.sound.playMusic(Paths.inst(daSong), 0.6);
 		#else
-		FlxG.sound.playMusic('assets/music/' + daSong + "_Inst" + TitleState.soundExt, 0.6);
+		throw('lol you have no file system?');
 		#end
 		// WONT WORK FOR TUTORIAL OR TEST SONG!!! REDO LATER
 		if (_song.needsVoices) {
 			#if sys
 			vocals = new FlxSound().loadEmbedded(Paths.voices(daSong));
 			#else
-			vocals = new FlxSound().loadEmbedded("assets/music/" + daSong + "_Voices" + TitleState.soundExt);
+			throw('lol you have no file system?');
 			#end
 			FlxG.sound.list.add(vocals);
 

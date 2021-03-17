@@ -545,6 +545,8 @@ class Character extends FlxSprite
 				trace(curCharacter);
 				var charJson:Dynamic = null;
 				var isError:Bool = false;
+				/*
+				// old shit lol
 				try {
 					charJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_chars/custom_chars.json', 'custom')));
 				} catch (exception) {
@@ -552,10 +554,12 @@ class Character extends FlxSprite
 					Application.current.window.alert("Hey! You messed up your custom_chars.jsonc. Your game won't crash but it will load bf. "+exception, "Alert");
 					isError = true;
 				}
+				*/
+
 				if (!isError) {
 					// use assets, as it is less laggy
-				
-					var parsedAnimJson:Dynamic = CoolUtil.parseJson(OpenFLAssets.getText(Paths.file('custom_chars/'+Reflect.field(charJson,curCharacter).like+'.json', 'custom')));
+					// just use the static method we have
+					var parsedAnimJson:Dynamic = Character.getAnimJson(curCharacter);
 
 
 					var playerSuffix = 'char';
@@ -565,15 +569,15 @@ class Character extends FlxSprite
 						parsedAnimJson.animation = parsedAnimJson.deadAnimation;
 						parsedAnimJson.offset = parsedAnimJson.deadOffset;
 					}
-					var rawPic = BitmapData.fromFile('assets/images/custom_chars/'+curCharacter+"/"+playerSuffix+".png");
+					var rawPic = Paths.file('custom_chars/$curCharacter/$playerSuffix.png', 'custom');
 					var tex:FlxAtlasFrames;
 					var rawXml:String;
-					// GOD IS DEAD WHY DOES THIS NOT WORK
-					if (FileSystem.exists('assets/images/custom_chars/'+curCharacter+"/"+playerSuffix+".txt")){
-						rawXml = File.getContent('assets/images/custom_chars/'+curCharacter+"/"+playerSuffix+".txt");
+					// die <3
+					if (FileSystem.exists(Paths.file('custom_chars/$curCharacter/$playerSuffix.txt', 'custom'))){
+						rawXml = Paths.file('custom_chars/$curCharacter/$playerSuffix.txt', 'custom');
 						tex = FlxAtlasFrames.fromSpriteSheetPacker(rawPic,rawXml);
 					} else {
-						rawXml = File.getContent('assets/images/custom_chars/'+curCharacter+"/"+playerSuffix+".xml");
+						rawXml = Paths.file('custom_chars/$curCharacter/$playerSuffix.xml', 'custom');
 						tex = FlxAtlasFrames.fromSparrow(rawPic,rawXml);
 					}
 					frames = tex;
@@ -637,7 +641,7 @@ class Character extends FlxSprite
 				} else {
 					// uh oh we got an error
 					// pretend its boyfriend to prevent crashes
-					var tex = FlxAtlasFrames.fromSparrow('assets/images/BOYFRIEND.png', 'assets/images/BOYFRIEND.xml');
+					var tex = Paths.getSparrowAtlas('BOYFRIEND', 'shared');
 					frames = tex;
 					animation.addByPrefix('idle', 'BF idle dance', 24, false);
 					animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
@@ -677,44 +681,8 @@ class Character extends FlxSprite
 				}
 
 				#else
-				// pretend its boyfriend, screw html5
-				var tex = FlxAtlasFrames.fromSparrow('assets/images/BOYFRIEND.png', 'assets/images/BOYFRIEND.xml');
-				frames = tex;
-				animation.addByPrefix('idle', 'BF idle dance', 24, false);
-				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
-				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
-				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
-				animation.addByPrefix('hey', 'BF HEY', 24, false);
-
-				animation.addByPrefix('firstDeath', "BF dies", 24, false);
-				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
-				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
-
-				animation.addByPrefix('scared', 'BF idle shaking', 24);
-
-				addOffset('idle', -5);
-				addOffset("singUP", -29, 27);
-				addOffset("singRIGHT", -38, -7);
-				addOffset("singLEFT", 12, -6);
-				addOffset("singDOWN", -10, -50);
-				addOffset("singUPmiss", -29, 27);
-				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", 12, 24);
-				addOffset("singDOWNmiss", -11, -19);
-				addOffset("hey", 7, 4);
-				addOffset('firstDeath', 37, 11);
-				addOffset('deathLoop', 37, 5);
-				addOffset('deathConfirm', 37, 69);
-				addOffset('scared', -4);
-
-				flipX = true;
-				like = "bf";
-				playAnim('idle');
+				// lol
+				throw('lol you\'re using html5?');
 				#end
 		}
 
@@ -748,8 +716,7 @@ class Character extends FlxSprite
 	{
 
 		//curCharacter = curCharacter.trim();
-		//var charJson:Dynamic = Json.parse(Assets.getText('assets/images/custom_chars/custom_chars.json'));
-		//var animJson = File.getContent("assets/images/custom_chars/"+Reflect.field(charJson,curCharacter).like+".json");
+		
 
 		//if (!StringTools.contains(animJson, "firstDeath") && like != "bf-pixel") //supposed to fix note anim shit for bfs with unique jsons, currently broken
 		if (like != "bf" && like != "bf-pixel")
@@ -903,9 +870,12 @@ class Character extends FlxSprite
 	{
 		animOffsets[name] = [x, y];
 	}
+	// wait one fucking minute this exists?
+	// goddamn
 	public static function getAnimJson(char:String) {
-		var charJson = CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
-		var animJson = CoolUtil.parseJson(File.getContent('assets/images/custom_chars/'+Reflect.field(charJson,char).like + '.json'));
+		var charJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_chars/custom_chars.json', 'custom')));
+		// open fl doesn't care if file was there upon build
+		var animJson = CoolUtil.parseJson(OpenFLAssets.getText(Paths.file('custom_chars/'+Reflect.field(charJson, char).like +'.json', 'custom')));
 		return animJson;
 	}
 }

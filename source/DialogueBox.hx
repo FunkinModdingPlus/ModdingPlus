@@ -62,7 +62,7 @@ class DialogueBox extends FlxSpriteGroup
 	{
 		super();
 		trace('hey guys');
-		clickSounds[2] = 'assets/sounds/pixelText.ogg';
+		clickSounds[2] = Paths.sound('pixelText', 'shared');
 		switch (PlayState.SONG.cutsceneType)
 		{
 			case 'senpai':
@@ -75,13 +75,13 @@ class DialogueBox extends FlxSpriteGroup
 				// do nothing
 			default:
 				// see if the song has one
-				if (FileSystem.exists('assets/data/'+PlayState.SONG.song.toLowerCase()+'/Lunchbox.ogg')) {
-					var lunchboxSound = Sound.fromFile('assets/data/'+PlayState.SONG.song.toLowerCase()+'/Lunchbox.ogg');
+				if (FileSystem.exists(Paths.file(PlayState.SONG.song.toLowerCase()+'/Lunchbox.ogg', 'songs'))) {
+					var lunchboxSound = Sound.fromFile(Paths.file(PlayState.SONG.song.toLowerCase() + '/Lunchbox.ogg', 'songs'));
 					FlxG.sound.playMusic(lunchboxSound, 0);
 					FlxG.sound.music.fadeIn(1,0,0.8);
 				// otherwise see if there is an ogg file in the dialog
-			} else if (FileSystem.exists('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/Lunchbox.ogg')) {
-					var lunchboxSound = Sound.fromFile('assets/images/custom_ui/dialog_boxes/'+PlayState.SONG.cutsceneType+'/Lunchbox.ogg');
+			} else if (FileSystem.exists(Paths.file('dialog_boxes/'+PlayState.SONG.cutsceneType+'/Lunchbox.ogg', 'custom'))) {
+					var lunchboxSound = Sound.fromFile(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/Lunchbox.ogg', 'custom'));
 					FlxG.sound.playMusic(lunchboxSound, 0);
 					FlxG.sound.music.fadeIn(1,0,0.8);
 				}
@@ -91,7 +91,7 @@ class DialogueBox extends FlxSpriteGroup
 		bgFade.scrollFactor.set();
 		bgFade.alpha = 0;
 		add(bgFade);
-		acceptSound = 'assets/sound/clickText.ogg';
+		acceptSound = Paths.sound('clickText', 'shared');
 		new FlxTimer().start(0.83, function(tmr:FlxTimer)
 		{
 			bgFade.alpha += (1 / 5) * 0.7;
@@ -103,55 +103,53 @@ class DialogueBox extends FlxSpriteGroup
 		switch (PlayState.SONG.player2)
 		{
 			case 'bf' | 'bf-car':
-				portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/bfPortrait.png', 'assets/images/bfPortrait.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('bfPortrait', 'shared');
 				isPixel[1] = false;
 			case 'bf-christmas':
-				portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/christmas/bfPortraitXmas.png', 'assets/images/christmas/bfPortraitXmas.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('bfPortraitXmas', 'shared');
 				isPixel[1] = false;
 			case 'pico':
-				portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/picoPortrait.png', 'assets/images/picoPortrait.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('picoPortrait', 'shared');
 				isPixel[1] = false;
 			case 'spooky':
-				portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/spookyPortrait.png', 'assets/images/spookyPortrait.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('spookyPortrait', 'shared');
 				isPixel[1] = false;
 			case 'gf':
 				// cursed
-				portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/gfPortrait.png', 'assets/images/gfPortrait.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('gfPortrait', 'shared');
 				isPixel[1] = false;
 			case 'dad':
-				portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/dadPortrait.png', 'assets/images/dadPortrait.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('dadPortrait', 'shared');
 				isPixel[1] = false;
 			case 'mom' | 'mom-car':
-				portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/momPortrait.png', 'assets/images/momPortrait.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('momPortrait', 'shared');
 				isPixel[1] = false;
 			case 'parents-christmas':
-				portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/christmas/parentsPortrait.png',
-					'assets/images/christmas/parentsPortrait.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('parentsPortrait', 'shared');
 				isPixel[1] = false;
 			case 'monster-christmas':
 				// haha santa hat
-				portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/christmas/monsterXmasPortrait.png',
-					'assets/images/christmas/monsterXmasPortrait.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('monsterXmasPortrait', 'shared');
 				isPixel[1] = false;
 			case 'monster':
-				portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/monsterPortrait.png', 'assets/images/monsterPortrait.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('monsterPortrait', 'shared');
 				isPixel[1] = false;
 			default:
-				if (FileSystem.exists('assets/images/custom_chars/' + PlayState.SONG.player2 + '/portrait.png'))
+				if (FileSystem.exists(Paths.file('custom_chars/'+PlayState.SONG.player2+'/portrait.png', 'custom')))
 				{
 					var coolP2Json = Character.getAnimJson(PlayState.SONG.player2);
 					isPixel[1] = if (Reflect.hasField(coolP2Json, "isPixel")) coolP2Json.isPixel else false;
-					var rawPic = BitmapData.fromFile('assets/images/custom_chars/' + PlayState.SONG.player2 + "/portrait.png");
-					var rawXml = File.getContent('assets/images/custom_chars/' + PlayState.SONG.player2 + "/portrait.xml");
+					var rawPic = BitmapData.fromFile(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.png', 'custom'));
+					var rawXml = File.getContent(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.xml', 'custom'));
 					portraitLeft.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 				}
 				else
 				{
-					portraitLeft.frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/senpaiPortrait.png', 'assets/images/weeb/senpaiPortrait.xml');
+					portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait.png', 'week6');
 				}
-				if (FileSystem.exists('assets/images/custom_chars/' + PlayState.SONG.player2 + '/text.ogg'))
+				if (FileSystem.exists(Paths.file('custom_chars/'+PlayState.SONG.player2+'/text.ogg', 'custom')))
 				{
-					clickSounds[1] = Sound.fromFile('assets/images/custom_chars/' + PlayState.SONG.player2 + '/text.ogg');
+					clickSounds[1] = Sound.fromFile(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/text.ogg', 'custom'));
 				}
 		}
 		if (isPixel[1]) {
@@ -166,55 +164,56 @@ class DialogueBox extends FlxSpriteGroup
 		portraitLeft.visible = false;
 
 		portraitRight = new FlxSprite(0, 40);
-		switch (PlayState.SONG.player1) {
+		switch (PlayState.SONG.player1)
+		{
 			case 'bf' | 'bf-car':
-				portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/bfPortrait.png', 'assets/images/bfPortrait.xml');
+				portraitLeft.frames = Paths.getSparrowAtlas('bfPortrait', 'shared');
 				isPixel[0] = false;
 			case 'bf-christmas':
-				portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/christmas/bfPortraitXmas.png','assets/images/christmas/bfPortraitXmas.xml');
-				isPixel[0] = false;
-			case 'pico': 
-				portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/picoPortrait.png','assets/images/picoPortrait.xml');
-				isPixel[0] = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('bfPortraitXmas', 'shared');
+				isPixel[1] = false;
+			case 'pico':
+				portraitLeft.frames = Paths.getSparrowAtlas('picoPortrait', 'shared');
+				isPixel[1] = false;
 			case 'spooky':
-				portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/spookyPortrait.png', 'assets/images/spookyPortrait.xml');
-				isPixel[0] = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('spookyPortrait', 'shared');
+				isPixel[1] = false;
 			case 'gf':
-				// is this even possible? lmao weeeeee
-				portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/gfPortrait.png', 'assets/images/gfPortrait.xml');
-				isPixel[0] = false;
+				// cursed
+				portraitLeft.frames = Paths.getSparrowAtlas('gfPortrait', 'shared');
+				isPixel[1] = false;
 			case 'dad':
-				portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/dadPortrait.png', 'assets/images/dadPortrait.xml');
-				isPixel[0] = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('dadPortrait', 'shared');
+				isPixel[1] = false;
 			case 'mom' | 'mom-car':
-				portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/momPortrait.png', 'assets/images/momPortrait.xml');
-				isPixel[0] = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('momPortrait', 'shared');
+				isPixel[1] = false;
 			case 'parents-christmas':
-				portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/christmas/parentsPortrait.png', 'assets/images/christmas/parentsPortrait.xml');
-				isPixel[0] = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('parentsPortrait', 'shared');
+				isPixel[1] = false;
 			case 'monster-christmas':
-				// haha santa hat 
-				portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/christmas/monsterXmasPortrait.png', 'assets/images/christmas/monsterXmasPortrait.xml');
-				isPixel[0] = false;
+				// haha santa hat
+				portraitLeft.frames = Paths.getSparrowAtlas('monsterXmasPortrait', 'shared');
+				isPixel[1] = false;
 			case 'monster':
-				portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/monsterPortrait.png',
-					'assets/images/monsterPortrait.xml');
-				isPixel[0] = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('monsterPortrait', 'shared');
+				isPixel[1] = false;
 			default:
-				if (FileSystem.exists('assets/images/custom_chars/' + PlayState.SONG.player1 + '/portrait.png'))
+				if (FileSystem.exists(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.png', 'custom')))
 				{
-					var coolP1Json = Character.getAnimJson(PlayState.SONG.player1);
-					isPixel[0] = if (Reflect.hasField(coolP1Json, "isPixel")) coolP1Json.isPixel else false;
-					var rawPic = BitmapData.fromFile('assets/images/custom_chars/' + PlayState.SONG.player1 + "/portrait.png");
-					var rawXml = File.getContent('assets/images/custom_chars/' + PlayState.SONG.player1 + "/portrait.xml");
-					portraitRight.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
+					var coolP2Json = Character.getAnimJson(PlayState.SONG.player2);
+					isPixel[1] = if (Reflect.hasField(coolP2Json, "isPixel")) coolP2Json.isPixel else false;
+					var rawPic = BitmapData.fromFile(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.png', 'custom'));
+					var rawXml = File.getContent(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.xml', 'custom'));
+					portraitLeft.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 				}
 				else
 				{
-					portraitRight.frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/bfPortrait.png', 'assets/images/weeb/bfPortrait.xml');
+					portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait.png', 'week6');
 				}
-				if (FileSystem.exists('assets/images/custom_chars/'+ PlayState.SONG.player1 + '/text.ogg')) {
-					clickSounds[0] = Sound.fromFile('assets/images/custom_chars/' + PlayState.SONG.player1 + '/text.ogg');
+				if (FileSystem.exists(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/text.ogg', 'custom')))
+				{
+					clickSounds[1] = Sound.fromFile(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/text.ogg', 'custom'));
 				}
 		}
 		var gameingFrames:Array<FlxFrame> = [];

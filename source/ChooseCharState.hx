@@ -61,7 +61,7 @@ class ChooseCharState extends MusicBeatState
 
     override function create()
     {
-        var menuBG:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuDesat.png');
+        var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat', 'preload'));
         menuBG.color = 0xFFea71fd;
         grpAlphabet = new FlxTypedGroup<Alphabet>();
         menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
@@ -78,9 +78,9 @@ class ChooseCharState extends MusicBeatState
         char.flipX = false;
 
 
-        var regCharacters:Array<String> = CoolUtil.coolTextFile('assets/data/characterList.txt');
+        var regCharacters:Array<String> = CoolUtil.coolTextFile(Paths.txt('characterList', 'preload'));
 
-        charJson = CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
+        charJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_chars/custom_chars.json', 'custom')));
 
         if (characters == null) {
             // that is not how arrays work
@@ -135,7 +135,7 @@ class ChooseCharState extends MusicBeatState
     function changeSelection(change:Int = 0)
     {
 
-        FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+        FlxG.sound.play(Paths.sound('scrollMenu', 'preload'), 0.4);
 
         curSelected += change;
         curChar = characters[curSelected].toString();
@@ -187,7 +187,7 @@ class ChooseCharState extends MusicBeatState
     }
     // well yeah it lags you are creating a new character
     function swapMenus() { //this lags somewhat on my end so please try to optimize it
-        FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+        FlxG.sound.play(Paths.sound('scrollMenu', 'preload'), 0.4);
         dadMenu = !dadMenu;
         remove(char);
         if (!dadMenu){ //cleaned this too
