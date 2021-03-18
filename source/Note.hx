@@ -61,7 +61,7 @@ class Note extends FlxSprite
 		switch (PlayState.SONG.uiType)
 		{
 			case 'pixel':
-				loadGraphic('assets/images/weeb/pixelUI/arrows-pixels.png', true, 17, 17);
+				loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels', 'week6'), true, 17, 17);
 				isPixel = true;
 				animation.add('greenScroll', [6]);
 				animation.add('redScroll', [7]);
@@ -70,7 +70,7 @@ class Note extends FlxSprite
 
 				if (isSustainNote)
 				{
-					loadGraphic(Paths.image('weeb/pixelUI/arrowEnds'), true, 7, 6);
+					loadGraphic(Paths.image('weeb/pixelUI/arrowEnds', 'week6'), true, 7, 6);
 
 					animation.add('purpleholdend', [4]);
 					animation.add('greenholdend', [6]);
@@ -86,7 +86,7 @@ class Note extends FlxSprite
 				setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 				updateHitbox();
 			case 'normal':
-				frames = FlxAtlasFrames.fromSparrow('assets/images/NOTE_assets.png', 'assets/images/NOTE_assets.xml');
+				frames = Paths.getSparrowAtlas('NOTE_assets', 'shared');
 
 				animation.addByPrefix('greenScroll', 'green0');
 				animation.addByPrefix('redScroll', 'red0');
@@ -107,7 +107,7 @@ class Note extends FlxSprite
 				updateHitbox();
 				antialiasing = true;
 			default:
-				if (FileSystem.exists('assets/images/custom_ui/ui_packs/'+PlayState.SONG.uiType+"/NOTE_assets.xml") && FileSystem.exists('assets/images/custom_ui/ui_packs/'+PlayState.SONG.uiType+"/NOTE_assets.png")) {
+				if (FileSystem.exists(Paths.file('ui_packs/${PlayState.SONG.uiType}/NOTE_assets.xml', 'custom'))) {
 
 
 					frames = FlxAtlasFrames.fromSparrow(customImage, customXml);
@@ -130,7 +130,7 @@ class Note extends FlxSprite
 	 				updateHitbox();
 	 				antialiasing = true;
 					// when arrowsEnds != arrowEnds :laughing_crying:
-				} else if (FileSystem.exists('assets/images/custom_ui/ui_packs/'+PlayState.SONG.uiType+"/arrows-pixels.png") && FileSystem.exists('assets/images/custom_ui/ui_packs/'+PlayState.SONG.uiType+"/arrowEnds.png")){
+				} else if (FileSystem.exists(Paths.file('ui_packs/${PlayState.SONG.uiType}/arrows-pixels.png', 'custom'))){
 					loadGraphic(customImage, true, 17, 17);
 					animation.add('greenScroll', [6]);
 					animation.add('redScroll', [7]);
@@ -139,7 +139,7 @@ class Note extends FlxSprite
 					isPixel = true;
 					if (isSustainNote)
 					{
-						var noteEndPic = BitmapData.fromFile('assets/images/custom_ui/ui_packs/'+PlayState.SONG.uiType+"/arrowEnds.png");
+						var noteEndPic = BitmapData.fromFile(Paths.file('ui_packs/${PlayState.SONG.uiType}/arrowEnds.png', 'custom'));
 						loadGraphic(noteEndPic, true, 7, 6);
 
 						animation.add('purpleholdend', [4]);
@@ -158,7 +158,7 @@ class Note extends FlxSprite
 				} else {
 					// no crashing today :)
 					trace(PlayState.SONG.uiType);
-					frames = FlxAtlasFrames.fromSparrow('assets/images/NOTE_assets.png', 'assets/images/NOTE_assets.xml');
+					frames = Paths.getSparrowAtlas('NOTE_assets', 'shared');
 
 					animation.addByPrefix('greenScroll', 'green0');
 					animation.addByPrefix('redScroll', 'red0');

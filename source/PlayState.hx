@@ -253,20 +253,22 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('thorns/thornsDialogue'));
 			default:
 				// prefer player 1
-				if (FileSystem.exists('assets/images/custom_chars/'+SONG.player1+'/'+SONG.song.toLowerCase()+'Dialog.txt')) {
-					dialogue = CoolUtil.coolDynamicTextFile('assets/images/custom_chars/'+SONG.player1+'/'+SONG.song.toLowerCase()+'Dialog.txt');
+				if (FileSystem.exists(Paths.file('custom_chars/${SONG.player1}/${SONG.song.toLowerCase()}Dialog.txt', 'custom'))) {
+					dialogue = CoolUtil.coolDynamicTextFile(Paths.file('custom_chars/${SONG.player1}/${SONG.song.toLowerCase()}Dialog.txt', 'custom'));
 				// if no player 1 unique dialog, use player 2
-				} else if (FileSystem.exists('assets/images/custom_chars/'+SONG.player2+'/'+SONG.song.toLowerCase()+'Dialog.txt')) {
-					dialogue = CoolUtil.coolDynamicTextFile('assets/images/custom_chars/'+SONG.player2+'/'+SONG.song.toLowerCase()+'Dialog.txt');
+				}
+				else if (FileSystem.exists(Paths.file('custom_chars/${SONG.player2}/${SONG.song.toLowerCase()}Dialog.txt', 'custom'))) {
+						dialogue = CoolUtil.coolDynamicTextFile(Paths.file('custom_chars/${SONG.player2}/${SONG.song.toLowerCase()}Dialog.txt', 'custom'));
 				// if no player dialog, use default
-				}	else if (FileSystem.exists('assets/data/'+SONG.song.toLowerCase()+'/dialog.txt')) {
-					dialogue = CoolUtil.coolDynamicTextFile('assets/data/'+SONG.song.toLowerCase()+'/dialog.txt');
-				} else if (FileSystem.exists('assets/data/'+SONG.song.toLowerCase()+'/dialogue.txt')){
+				}	else if (FileSystem.exists(Paths.txt('${SONG.song.toLowerCase()}/dialog', 'preload'))) {
+					dialogue = CoolUtil.coolDynamicTextFile(Paths.txt('${SONG.song.toLowerCase()}/dialog', 'preload'));
+				}
+				else if (FileSystem.exists(Paths.txt('${SONG.song.toLowerCase()}/dialogue', 'preload'))){
 					// nerds spell dialogue properly gotta make em happy
-					dialogue = CoolUtil.coolDynamicTextFile('assets/data/' + SONG.song.toLowerCase() + '/dialogue.txt');
+					dialogue = CoolUtil.coolDynamicTextFile(Paths.txt('${SONG.song.toLowerCase()}/dialogue', 'preload'));
 				// otherwise, make the dialog an error message
 				} else {
-					dialogue = [':dad: The game tried to get a dialog file but couldn\'t find it. Please make sure there is a dialog file named "dialog.txt".'];
+					dialogue = [':char-monster: The game tried to get a dialog file but couldn\'t find it. Please make sure there is a dialog file named "dialog.txt".'];
 				}
 			
 		}
@@ -537,25 +539,7 @@ class PlayState extends MusicBeatState
 			bg.scale.set(6, 6);
 			add(bg);
 			trace("schoolEvilComplete");
-			/*
-				var bg:FlxSprite = new FlxSprite(posX, posY).loadGraphic('assets/images/weeb/evilSchoolBG.png');
-				bg.scale.set(6, 6);
-				// bg.setGraphicSize(Std.int(bg.width * 6));
-				// bg.updateHitbox();
-				add(bg);
-
-				var fg:FlxSprite = new FlxSprite(posX, posY).loadGraphic(Paths.image('weeb/evilSchoolFG'));
-				fg.scale.set(6, 6);
-				// fg.setGraphicSize(Std.int(fg.width * 6));
-				// fg.updateHitbox();
-				add(fg);
-
-				wiggleShit.effectType = WiggleEffectType.DREAMY;
-				wiggleShit.waveAmplitude = 0.01;
-				wiggleShit.waveFrequency = 60;
-				wiggleShit.waveSpeed = 0.8;
-			 */
-
+		
 			// bg.shader = wiggleShit.shader;
 			// fg.shader = wiggleShit.shader;
 
@@ -609,7 +593,7 @@ class PlayState extends MusicBeatState
 			add(stageCurtains);
 		} else {
 			// use assets
-			var parsedStageJson = CoolUtil.parseJson(Assets.getText("assets/images/custom_stages/custom_stages.json"));
+			var parsedStageJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_stage/custom_stages.json', 'custom')));
 			switch (Reflect.field(parsedStageJson, SONG.stage)) {
 				case 'stage':
 					defaultCamZoom = 0.9;
@@ -617,7 +601,7 @@ class PlayState extends MusicBeatState
 					curStage = 'stage';
 					// peck it no one is gonna build this for html5 so who cares if it doesn't compile
 					var bgPic:BitmapData;
-					if (FileSystem.exists('assets/images/custom_stages/'+SONG.stage+"/stageback.png")) {
+					if (FileSystem.exists(Paths.file('custom_stages/${SONG.stage}/stageback.png', 'custom'))) {
 						bgPic = BitmapData.fromFile('assets/images/custom_stages/'+SONG.stage+"/stageback.png");
 					} else {
 						// fall back on base game file to avoid crashes

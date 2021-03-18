@@ -70,7 +70,7 @@ class NewWeekState extends MusicBeatState
 			addCharUi = new FlxUI();
 			FlxG.mouse.visible = true;
 			epicFiles = {png: "lol", xml: "lol"};
-			var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
+			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue', 'preload'));
 			add(bg);
 			mainPngButton = new FlxUIButton(10, 10, "Week Png", function():Void
 			{
@@ -79,16 +79,6 @@ class NewWeekState extends MusicBeatState
 				coolDialog.onSelect.add(function(path:String):Void
 				{
 					epicFiles.png = path;
-				});
-			});
-			mainXmlButton = new FlxUIButton(10, 60, "Week Xml", function():Void
-			{
-				var coolDialog = new FileDialog();
-				coolDialog.browse(FileDialogType.OPEN);
-				coolDialog.onSelect.add(function(path:String):Void
-				{
-					epicFiles.xml = path;
-					trace(epicFiles);
 				});
 			});
 			selectSongsButton = new FlxButton(10, 110, "Select Songs", function():Void
@@ -134,7 +124,7 @@ class NewWeekState extends MusicBeatState
 	}
 	function writeCharacters() {
 		#if sys
-		var parsedWeekJson:TWeekJson = CoolUtil.parseJson(File.getContent("assets/data/storySonglist.json"));
+		var parsedWeekJson:TWeekJson = CoolUtil.parseJson(File.getContent(Paths.json('storySonglist', 'preload')));
 		
 		var coolSongArray:Array<String> = [];
 		coolSongArray.push(likeText.text);
@@ -144,14 +134,13 @@ class NewWeekState extends MusicBeatState
 		}
 		trace("Pog");
 		trace(epicFiles.png);
-		File.copy(epicFiles.png, 'assets/images/campaign-ui-week/week' + parsedWeekJson.songs.length + '.png');
+		File.copy(epicFiles.png, Paths.file('custom_weeks/week${parsedWeekJson.songs.length}.png'));
 		trace("ehh");
-		File.copy(epicFiles.xml, 'assets/images/campaign-ui-week/week' + parsedWeekJson.songs.length + '.xml');
 		trace("parsed");
 		parsedWeekJson.songs.push(coolSongArray);
 		parsedWeekJson.weekNames.push(nameText.text);
 		parsedWeekJson.characters.push([dadText.text,bfText.text,gfText.text]);
-		File.saveContent('assets/data/storySonglist.json', CoolUtil.stringifyJson(parsedWeekJson));
+		File.saveContent(Paths.json('storySonglist', 'preload'), CoolUtil.stringifyJson(parsedWeekJson));
 		trace("cool stuff");
 		#end
 	}

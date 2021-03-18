@@ -82,11 +82,11 @@ class NewSongState extends MusicBeatState
 	{
 		addCharUi = new FlxUI();
 		FlxG.mouse.visible = true;
-		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue', 'preload'));
 		add(bg);
 		diffButtons = new FlxTypedSpriteGroup<FlxUIButton>(0,0);
 		trace('booga ooga');
-		var diffJson:TDifficulties = CoolUtil.parseJson(Assets.getText("assets/images/custom_difficulties/difficulties.json"));
+		var diffJson:TDifficulties = CoolUtil.parseJson(Assets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
 		trace("hmb");
 		p1Text = new FlxUIInputText(100, 50, 70,"bf");
 		p2Text = new FlxUIInputText(100,90,70,"dad");
@@ -164,8 +164,8 @@ class NewSongState extends MusicBeatState
 	function writeCharacters() {
 		// check to see if directory exists
 		#if sys
-		if (!FileSystem.exists('assets/data/'+nameText.text.toLowerCase())) {
-			FileSystem.createDirectory('assets/data/'+nameText.text.toLowerCase());
+		if (!FileSystem.exists(Paths.file('data/'+ nameText.text.toLowerCase(), 'preload'))) {
+			FileSystem.createDirectory(Paths.file('data/' + nameText.text.toLowerCase(), 'preload'));
 		}
 		for (i in 0...coolDiffFiles.length) {
 			if (coolDiffFiles[i] != null) {
@@ -182,15 +182,15 @@ class NewSongState extends MusicBeatState
 				coolSongSong.isHey = isHey.checked;
 				coolSong.song = coolSongSong;
 
-				File.saveContent('assets/data/'+nameText.text.toLowerCase()+'/'+nameText.text.toLowerCase()+DifficultyIcons.getEndingFP(i)+'.json',CoolUtil.stringifyJson(coolSong));
+				File.saveContent(Paths.file('data/' + nameText.text.toLowerCase() + '/' + nameText.text.toLowerCase() +DifficultyIcons.getEndingFP(i)),CoolUtil.stringifyJson(coolSong));
 			}
 		}
 		// probably breaks on non oggs haha weeeeeeeeeee
-		File.copy(instPath,'assets/music/'+nameText.text+'_Inst.ogg');
+		File.copy(instPath,Paths.inst(nameText.text));
 		if (voicePath != null) {
-			File.copy(voicePath,'assets/music/'+nameText.text+'_Voices.ogg');
+			File.copy(voicePath,Paths.voices(nameText.text));
 		}
-		var coolSongListFile:Array<Dynamic> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+		var coolSongListFile:Array<Dynamic> = CoolUtil.parseJson(Assets.getText(Paths.json('freeplaySongJson', 'preload')));
 		var foundSomething:Bool = false;
 		for (coolCategory in coolSongListFile) {
 			if (coolCategory.name == categoryText.text) {
@@ -203,7 +203,7 @@ class NewSongState extends MusicBeatState
 			// must be a new category
 			coolSongListFile.push({"name": categoryText.text, "songs": [nameText.text]});
 		}
-		File.saveContent('assets/data/freeplaySongJson.jsonc',CoolUtil.stringifyJson(coolSongListFile));
+		File.saveContent(Paths.json('freeplaySongJson', 'preload'),CoolUtil.stringifyJson(coolSongListFile));
 		#end
 	}
 }

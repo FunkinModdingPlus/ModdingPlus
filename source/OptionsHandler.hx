@@ -13,10 +13,10 @@ class OptionsHandler {
     public static var options(get, set):TOptions;
     static function get_options() {
         // update the file
-        return CoolUtil.parseJson(Assets.getText('assets/data/options.json'));
+        return CoolUtil.parseJson(Assets.getText(Paths.json('options', 'preload')));
     }
     static function set_options(opt:TOptions) {
-        File.saveContent('assets/data/options.json', CoolUtil.stringifyJson(opt));
+		File.saveContent(Paths.json('options', 'preload'), CoolUtil.stringifyJson(opt));
         return opt;
     }
 }
