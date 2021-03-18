@@ -262,6 +262,7 @@ class FreeplayState extends MusicBeatState
 				trace(poop);
 
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
+				PlayState.storyWeek = songs[curSelected].week;
 				PlayState.isStoryMode = false;
 				ModifierState.isStoryMode = false;
 				PlayState.storyDifficulty = curDifficulty;
@@ -271,7 +272,8 @@ class FreeplayState extends MusicBeatState
 				{
 					if (FlxG.sound.music != null)
 						FlxG.sound.music.stop();
-					FlxG.switchState(new PlayState());
+					// loading state prepares the weeks
+					LoadingState.loadAndSwitchState(new PlayState());
 				}
 			}
 			

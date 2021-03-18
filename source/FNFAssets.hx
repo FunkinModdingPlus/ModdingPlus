@@ -7,7 +7,7 @@ import openfl.media.Sound;
 import flash.display.BitmapData;
 import openfl.utils.Assets as OpenFLAssets;
 class FNFAssets {
-    public static function exists(id:String, type:AssetType):Bool {
+    public static function exists(id:String, ?type:AssetType):Bool {
         // if it doesn't exist try using the file system
         if (!OpenFLAssets.exists(id, type)) {
             return FileSystem.exists(id);
