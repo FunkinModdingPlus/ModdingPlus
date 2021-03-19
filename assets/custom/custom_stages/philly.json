@@ -1,0 +1,45 @@
+{
+    "sprites": [
+        {
+            "path": "sky",
+            "position": [-100, 0],
+            "scrollFactor": [0.1, 0.1]
+        },
+        {
+            "path": "city",
+            "position": [-10, 0], 
+            "scrollFactor": [0.3, 0.3],
+            "scale": 0.85
+        },
+        {
+            "special": "cycleGroup",
+            "changeOn": "beat",
+            "position": [-10, 0], 
+            "visible": false,
+            "scale": 0.85,
+            "antialiasing": true,
+            "sprites": [
+                "win0",
+                "win1",
+                "win2",
+                "win3",
+                "win4"
+            ]
+        },
+        {
+            "path": "behindTrain",
+            "position": [-40, 50]
+        },
+        {
+            "path": "train",
+            "position": [2000, 360],
+            "movesBy": [-400, 0],
+            "windy": true,
+            "sound": "train_passes"
+        },
+        {
+            "path": "street",
+            "position": [-40, 50]
+        }
+    ]
+}

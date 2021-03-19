@@ -1,0 +1,27 @@
+{
+    "sprites": [
+        {
+            "path": "stageback",
+            "position": [-600, -200],
+            "antialiasing": true,
+            "scrollFactor": [0.9, 0.9],
+            "active": false
+        },
+        {
+            "path": "stagefront",
+            "position": [-650, 600],
+            "scale": 1.1,
+            "antialiasing": true,
+            "scrollFactor": [0.9, 0.9],
+            "active": false
+        },
+        {
+            "path": "stagecurtains",
+            "scale": 0.9,
+            "position": [-500, -300],
+            "antialiasing": true,
+            "scrollFactor": [1.3, 1.3],
+            "active": false
+        }
+    ]
+}

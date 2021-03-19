@@ -1,0 +1,22 @@
+{
+    "sprites": [
+        {
+            "path": "halloween_bg", 
+            "position": [-200, -100],
+            "animated": true,
+            "playOn": "lightning",
+            "playFirst": "idle",
+            "animation": {
+                "idle": {
+                    "name": "halloweem bg0"
+                },
+                "lightning": {
+                    "name":"halloweem bg lightning strike",
+                    "fps": 24,
+                    "loops": false
+                }
+            }
+        }
+    ],
+    "isHalloween": true
+}
