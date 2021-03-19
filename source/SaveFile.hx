@@ -6,7 +6,6 @@ import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import flash.display.BitmapData;
@@ -29,7 +28,7 @@ class SaveFile extends FlxSpriteGroup
 	public function new(x:Float, y:Float, saveNum:Int = 0)
 	{
 		super(x, y);
-		var tex = FlxAtlasFrames.fromSparrow('assets/images/save-data.png', 'assets/images/save-data.xml');
+		var tex = Paths.getSparrowAtlas('save-data', 'preload');
 		selectingLoad = true;
 		targetY = saveNum;
 		save = new FlxSprite();

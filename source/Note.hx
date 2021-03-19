@@ -10,8 +10,6 @@ import lime.system.System;
 import flash.display.BitmapData;
 #end
 #if sys
-import sys.io.File;
-import sys.FileSystem;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
@@ -61,7 +59,7 @@ class Note extends FlxSprite
 		switch (PlayState.SONG.uiType)
 		{
 			case 'pixel':
-				loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels', 'week6'), true, 17, 17);
+				loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels'), true, 17, 17);
 				isPixel = true;
 				animation.add('greenScroll', [6]);
 				animation.add('redScroll', [7]);
@@ -70,7 +68,7 @@ class Note extends FlxSprite
 
 				if (isSustainNote)
 				{
-					loadGraphic(Paths.image('weeb/pixelUI/arrowEnds', 'week6'), true, 7, 6);
+					loadGraphic(Paths.image('weeb/pixelUI/arrowEnds'), true, 7, 6);
 
 					animation.add('purpleholdend', [4]);
 					animation.add('greenholdend', [6]);
@@ -107,7 +105,7 @@ class Note extends FlxSprite
 				updateHitbox();
 				antialiasing = true;
 			default:
-				if (FileSystem.exists(Paths.file('ui_packs/${PlayState.SONG.uiType}/NOTE_assets.xml', 'custom'))) {
+				if (FNFAssets.exists(Paths.file('ui_packs/${PlayState.SONG.uiType}/NOTE_assets.xml', 'custom'))) {
 
 
 					frames = FlxAtlasFrames.fromSparrow(customImage, customXml);
@@ -130,7 +128,7 @@ class Note extends FlxSprite
 	 				updateHitbox();
 	 				antialiasing = true;
 					// when arrowsEnds != arrowEnds :laughing_crying:
-				} else if (FileSystem.exists(Paths.file('ui_packs/${PlayState.SONG.uiType}/arrows-pixels.png', 'custom'))){
+				} else if (FNFAssets.exists(Paths.file('ui_packs/${PlayState.SONG.uiType}/arrows-pixels.png', 'custom'))){
 					loadGraphic(customImage, true, 17, 17);
 					animation.add('greenScroll', [6]);
 					animation.add('redScroll', [7]);

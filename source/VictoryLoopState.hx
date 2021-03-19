@@ -12,8 +12,6 @@ import flixel.FlxSprite;
 import flixel.FlxCamera;
 import lime.utils.Assets;
 #if sys
-import sys.io.File;
-import sys.FileSystem;
 import haxe.io.Path;
 import Song.SwagSong;
 import openfl.utils.ByteArray;
@@ -98,11 +96,10 @@ class VictoryLoopState extends MusicBeatSubstate
 		}
 		rating.addText();
 		accuracyTxt = new FlxText(10, rating.y + rating.height,0 , "ACCURACY: "+Math.round(accuracy * 100) + "%");
-		accuracyTxt.setFormat("assets/fonts/vcr.ttf", 26, FlxColor.WHITE, RIGHT);
-		var characterList = Assets.getText('assets/data/characterList.txt');
+		accuracyTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, RIGHT);
+		var characterList = Assets.getText(Paths.txt('characterList', 'preload'));
 		if (!StringTools.contains(characterList, p1)) {
-			var parsedCharJson:Dynamic = CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
-			var parsedAnimJson = CoolUtil.parseJson(File.getContent("assets/images/custom_chars/"+Reflect.field(parsedCharJson,p1).like+".json"));
+			var parsedAnimJson = Character.getAnimJson(p1);
 			switch (parsedAnimJson.like) {
 				case "bf-pixel":
 					// gotta deal with this dude
@@ -135,13 +132,13 @@ class VictoryLoopState extends MusicBeatSubstate
 		// make files seperate to allow modding
 		if (accuracy >= 0.65) {
 			Conductor.changeBPM(150);
-			FlxG.sound.playMusic('assets/music/goodScore' + TitleState.soundExt);
+			FlxG.sound.playMusic(Paths.music('goodScore', 'preload'));
 		} else if (accuracy >= 0.5) {
 			Conductor.changeBPM(100);
-			FlxG.sound.playMusic('assets/music/mehScore' + TitleState.soundExt);
+			FlxG.sound.playMusic(Paths.music('mehScore', 'preload'));
 		} else {
 			Conductor.changeBPM(100);
-			FlxG.sound.playMusic('assets/music/badScore' + TitleState.soundExt);
+			FlxG.sound.playMusic(Paths.music('badScore', 'preload'));
 		}
 
 		// FlxG.camera.followLerp = 1;
@@ -249,14 +246,14 @@ class VictoryLoopState extends MusicBeatSubstate
 		{
 			isEnding = true;
 			FlxG.sound.music.stop();
-			FlxG.sound.play('assets/music/gameOverEnd' + stageSuffix + TitleState.soundExt);
+			FlxG.sound.play(Paths.music('gameOverEnd${stageSuffix}', 'preload'));
 			if (PlayState.isStoryMode) {
 				// most variables should already be set?
 				PlayState.storyPlaylist = StoryMenuState.storySongPlaylist;
 				trace(PlayState.storyPlaylist);
 				var diffic = DifficultyIcons.getEndingFP(PlayState.storyDifficulty);
 				for (peckUpAblePath in PlayState.storyPlaylist) {
-					if (!FileSystem.exists('assets/data/'+peckUpAblePath.toLowerCase()+'/'+peckUpAblePath.toLowerCase() + diffic+'.json')) {
+					if (!FNFAssets.exists(Paths.json('${peckUpAblePath.toLowerCase()}/${peckUpAblePath.toLowerCase()}${diffic}', 'preload'))) {
 						// probably messed up difficulty
 						trace("UH OH DIFFICULTY DOESN'T EXIST FOR A SONG");
 						trace("CHANGING TO DEFAULT DIFFICULTY");

@@ -7,7 +7,6 @@ import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import flash.display.BitmapData;
@@ -27,7 +26,7 @@ class MenuItem extends FlxSpriteGroup
 	{
 		super(x, y);
 
-		week = new FlxSprite().loadGraphic(Paths.file('custom_weeks/week$weekNum.png'));
+		week = new FlxSprite().loadGraphic(Paths.file('custom_weeks/week$weekNum.png', 'custom'));
 		week.updateHitbox();
 	}
 

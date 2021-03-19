@@ -1,6 +1,5 @@
 package;
 import lime.utils.Assets;
-import sys.io.File;
 typedef TOptions = {
     var skipVictoryScreen:Bool;
     var skipModifierMenu:Bool;
@@ -16,7 +15,7 @@ class OptionsHandler {
         return CoolUtil.parseJson(Assets.getText(Paths.json('options', 'preload')));
     }
     static function set_options(opt:TOptions) {
-		File.saveContent(Paths.json('options', 'preload'), CoolUtil.stringifyJson(opt));
+		FNFAssets.saveText(Paths.json('options', 'preload'), CoolUtil.stringifyJson(opt));
         return opt;
     }
 }

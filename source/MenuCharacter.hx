@@ -5,7 +5,6 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import lime.system.System;
 import lime.utils.Assets;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import flash.display.BitmapData;
@@ -30,14 +29,14 @@ class MenuCharacter extends FlxSprite
 			frames = tex;
 		} else {
 			var rawPic:BitmapData = BitmapData.fromFile(Paths.file('custom_menu_char/$character.png', 'custom'));
-			var rawXml:String = File.getContent(Paths.file('custom_menu_char/$character.xml', 'custom'));
+			var rawXml:String = FNFAssets.getContent(Paths.file('custom_menu_char/$character.xml', 'custom'));
 			var tex = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 			frames = tex;
 		}
 
 		// don't use assets because you can use custom like folders
 		
-		var animJson = CoolUtil.parseJson(File.getContent(Paths.file('custom_menu_char/'+Reflect.field(parsedCharJson,character).like+'.json', 'custom')));
+		var animJson = CoolUtil.parseJson(FNFAssets.getContent(Paths.file('custom_menu_char/'+Reflect.field(parsedCharJson,character).like+'.json', 'custom')));
 		for (field in Reflect.fields(animJson)) {
 			animation.addByPrefix(field, Reflect.field(animJson, field), 24, (field == "idle"));
 		}

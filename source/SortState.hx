@@ -13,11 +13,9 @@ import lime.utils.Assets;
 import DifficultyIcons;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
-import sys.FileSystem;
 import flash.media.Sound;
 #end
 import haxe.Json;
@@ -52,7 +50,7 @@ class SortState extends MusicBeatState
 
 		// LOAD CHARACTERS
 		songs = stuffToSort;
-		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.file('menuBGBlue', null, 'preload'));
 		add(bg);
 		checkmarks = [];
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -63,7 +61,7 @@ class SortState extends MusicBeatState
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i], true, false);
 			songText.isMenuItem = true;
 			songText.targetY = i;
-			var checkmark = new FlxSprite(0, 0).loadGraphic('assets/images/checkmark.png');
+			var checkmark = new FlxSprite(0, 0).loadGraphic(Paths.image('checkmark', 'preload'));
 			checkmark.visible = false;
 			grpSongs.add(songText);
 			songText.add(checkmark);
@@ -78,12 +76,9 @@ class SortState extends MusicBeatState
 		add(scoreBG);
 
 		diffText = new FlxText(scoreBG.x, 5, 0, "select", 24);
-		diffText.setFormat("assets/fonts/vcr.ttf", 32, FlxColor.WHITE, RIGHT);
+		diffText.setFormat(Paths.font('vcr.tff'), 32, FlxColor.WHITE, RIGHT);
 		add(diffText);
 		changeSelection();
-
-		// FlxG.sound.playMusic('assets/music/title' + TitleState.soundExt, 0);
-		// FlxG.sound.music.fadeIn(2, 0, 0.8);
 
 		super.create();
 	}
@@ -131,7 +126,7 @@ class SortState extends MusicBeatState
 				
 				switch (sorting) {
 					case "songs":
-						var coolCategoryJson:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+						var coolCategoryJson:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(Assets.getText(Paths.json('freeplaySongJson', 'preload')));
 						for (i in referenceArray)
 						{
 							sortedSongs.push(songs[i]);
@@ -144,39 +139,37 @@ class SortState extends MusicBeatState
 							}
 						}
 						trace(sortedSongs);
-						File.saveContent('assets/data/freeplaySongJson.jsonc',CoolUtil.stringifyJson(coolCategoryJson));
+						FNFAssets.saveText(Paths.json('freeplaySongJson', 'preload'),CoolUtil.stringifyJson(coolCategoryJson));
 						FlxG.switchState(new SaveDataState());
 					case "categories": 
-						var coolCategoryJson:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+						var coolCategoryJson:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(Assets.getText(Paths.json('freeplaySongJson', 'preload')));
 						var coolReplacementJson:Array<SelectSongsState.TCategory> = [];
 						for (i in referenceArray) {
 							coolReplacementJson.push(coolCategoryJson[i]);
 						}
-						File.saveContent('assets/data/freeplaySongJson.jsonc', CoolUtil.stringifyJson(coolReplacementJson));
+						FNFAssets.saveText(Paths.json('freeplaySongJson', 'preload'), CoolUtil.stringifyJson(coolReplacementJson));
 						FlxG.switchState(new SaveDataState());
 					case "weeks":
 						// ha ha weeeeeee
 						// this also has to rename files
 						// we don't really need to do much to prepare the numbers, reference array handles it
 						// lets read the files first
-						var coolFiles:Array<{var png:Bytes; var xml:String;}> = [];
-						var coolStoryJson:StoryMenuState.StorySongsJson = CoolUtil.parseJson(Assets.getText('assets/data/storySonglist.json'));
+						var coolFiles:Array<{var png:Bytes;}> = [];
+						var coolStoryJson:StoryMenuState.StorySongsJson = CoolUtil.parseJson(Assets.getText(Paths.json('storySonglist', 'preload')));
 						var replacementJson:StoryMenuState.StorySongsJson = {songs: [], weekNames: [], characters: []};
 						for (i in referenceArray) {
 							// get files
-							var coolPng:Bytes = File.getBytes('assets/images/campaign-ui-week/week'+i+'.png');
-							var coolXml:String = File.getContent('assets/images/campaign-ui-week/week'+i+'.xml');
-							coolFiles.push({png: coolPng, xml:coolXml});
+							var coolPng:Bytes = FNFAssets.getBytes(Paths.file('custom_weeks/week$i.png', 'custom'));
+							coolFiles.push({png: coolPng});
 							replacementJson.songs.push(coolStoryJson.songs[i]);
 							replacementJson.weekNames.push(coolStoryJson.weekNames[i]);
 							replacementJson.characters.push(coolStoryJson.characters[i]);
 						}
 						// save the files to their new positions
 						for (i in 0...coolFiles.length) {
-							File.saveBytes('assets/images/campaign-ui-week/week'+i+'.png',coolFiles[i].png);
-							File.saveContent('assets/images/campaign-ui-week/week'+i+'.xml',coolFiles[i].xml);
+							FNFAssets.saveBytes(Paths.file('custom_weeks/week$i.png', 'custom'),coolFiles[i].png);
 						}
-						File.saveContent('assets/data/storySonglist.json', CoolUtil.stringifyJson(replacementJson));
+						FNFAssets.saveText(Paths.json('storySonglist', 'preload'), CoolUtil.stringifyJson(replacementJson));
 						FlxG.switchState(new SaveDataState());
 				}
 				FlxG.switchState(new SaveDataState());

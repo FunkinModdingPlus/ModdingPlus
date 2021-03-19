@@ -31,9 +31,24 @@
   },
   "flipx": false,
   "like": "senpai",
-  "enemyOffset": [150,360],
-  "camOffset": [370, 300],
-  "followCam": [-100,-430],
+  "enemyOffset": [
+    150,
+    360
+  ],
+  "camOffset": [
+    370,
+    300
+  ],
+  "followCam": [
+    -100,
+    -430
+  ],
   "playAnim": "idle",
-  "isPixel": true
+  "scale": 6,
+  "antialiasing": false,
+  "likeBf": true,
+  "dances": false,
+  "holdLength": 4,
+  "usesChiptune": false,
+  "canSing": true
 }

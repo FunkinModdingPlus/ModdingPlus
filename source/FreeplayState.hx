@@ -9,16 +9,13 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
 import DifficultyIcons;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
 import flixel.system.FlxSound;
-import sys.FileSystem;
 import flash.media.Sound;
 #end
 import haxe.Json;
@@ -50,9 +47,11 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
+		trace('sus');
 		songs = currentSongList;
 
 		curDifficulty = DifficultyIcons.getDefaultDiffFP();
+		trace('sus');
 		/*
 			if (FlxG.sound.music != null)
 			{
@@ -76,7 +75,7 @@ class FreeplayState extends MusicBeatState
 		}
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue', 'preload'));
 		add(bg);
-
+		trace('sus');
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
@@ -87,18 +86,18 @@ class FreeplayState extends MusicBeatState
 			songText.targetY = i;
 			grpSongs.add(songText);
 
-			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
-			icon.sprTracker = songText;
+			//var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
+			//icon.sprTracker = songText;
 
 			// using a FlxGroup is too much fuss!
-			iconArray.push(icon);
-			add(icon);
+			//iconArray.push(icon);
+			//add(icon);
 
 			// songText.x += 40;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			// songText.screenCenter(X);
 		}
-
+		trace('sus');
 		scoreText = new FlxText(FlxG.width * 0.62, 5, 0, "", 32);
 		// scoreText.autoSize = false;
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
@@ -107,7 +106,7 @@ class FreeplayState extends MusicBeatState
 		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.4), 66, 0xFF000000);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
-
+		trace('sus');
 		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
 		diffText.font = scoreText.font;
 		if (!soundTest)
@@ -117,34 +116,18 @@ class FreeplayState extends MusicBeatState
 
 		changeSelection();
 		changeDiff();
-
+		trace('sus');
 		// FlxG.sound.playMusic(Paths.music('title'), 0);
 		// FlxG.sound.music.fadeIn(2, 0, 0.8);
-		selector = new FlxText();
+		//selector = new FlxText();
 
-		selector.size = 40;
-		selector.text = ">";
+		//selector.size = 40;
+		//selector.text = ">";
 		// add(selector);
 
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
-		// JUST DOIN THIS SHIT FOR TESTING!!!
-		/*
-			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
-
-			var texFel:TextField = new TextField();
-			texFel.width = FlxG.width;
-			texFel.height = FlxG.height;
-			// texFel.
-			texFel.htmlText = md;
-
-			FlxG.stage.addChild(texFel);
-
-			// scoreText.textField.htmlText = md;
-
-			trace(md);
-		 */
-
+		trace('sus');
 		super.create();
 	}
 
@@ -214,7 +197,7 @@ class FreeplayState extends MusicBeatState
 			if (soundTest)
 				FlxG.switchState(new SaveDataState());
 			else {
-				var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(Assets.getText(Paths.json('freeplaySongJson', 'preload')));
+				var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(FNFAssets.getText(Paths.json('freeplaySongJson', 'preload')));
 				if (epicCategoryJs.length > 1)
 				{
 					FlxG.switchState(new CategoryState());
@@ -241,7 +224,7 @@ class FreeplayState extends MusicBeatState
 					vocals.pause();
 					vocals.looped = true;
 				}
-				FlxG.sound.playMusic(Paths.music(soundTestSong.song));
+				FlxG.sound.playMusic(Paths.inst(soundTestSong.song));
 				Conductor.mapBPMChanges(soundTestSong);
 				Conductor.changeBPM(soundTestSong.bpm);
 				if (soundTestSong.needsVoices) {
@@ -252,7 +235,7 @@ class FreeplayState extends MusicBeatState
 			} else {
 				var poop:String = songs[curSelected].songName.toLowerCase() + DifficultyIcons.getEndingFP(curDifficulty);
 				trace(poop);
-				if (!FileSystem.exists(Paths.json(songs[curSelected].songName.toLowerCase() + '/' + poop.toLowerCase() + '.json', 'preload')))
+				if (!FNFAssets.exists(Paths.json(songs[curSelected].songName.toLowerCase() + '/' + poop.toLowerCase() + '.json', 'preload')))
 				{
 					// assume we pecked up the difficulty, return to default difficulty
 					trace("UH OH SONG IN SPECIFIED DIFFICULTY DOESN'T EXIST\nUSING DEFAULT DIFFICULTY");
@@ -320,8 +303,8 @@ class FreeplayState extends MusicBeatState
 	{
 
 		// NGio.logEvent('Fresh');
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-
+		FlxG.sound.play(Paths.sound('scrollMenu', 'preload'), 0.4);
+		trace('sussy');
 		curSelected += change;
 
 		if (curSelected < 0)
@@ -332,24 +315,27 @@ class FreeplayState extends MusicBeatState
 		// selector.y = (70 * curSelected) + 30;
 
 		#if !switch
-		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
-		intendedAccuracy = Highscore.getAccuracy(songs[curSelected].songName, curDifficulty);
+		//intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
+		//intendedAccuracy = Highscore.getAccuracy(songs[curSelected].songName, curDifficulty);
 		// lerpScore = 0;
+		trace(Paths.inst(songs[curSelected].songName));
+		trace('suspeck');
+		
 		#end
 		if (!soundTest)
 		#if sys
-			FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
+			FlxG.sound.playMusic(FNFAssets.getSound(Paths.inst(songs[curSelected].songName)), 0);
 		#else
 			throw('lol you\'re using web?');
 		#end
 		var bullShit:Int = 0;
+		trace('ssuss');
+		//for (i in 0...iconArray.length)
+		//{
+		//	iconArray[i].alpha = 0.6;
+		//}
 
-		for (i in 0...iconArray.length)
-		{
-			iconArray[i].alpha = 0.6;
-		}
-
-		iconArray[curSelected].alpha = 1;
+		//iconArray[curSelected].alpha = 1;
 
 		for (item in grpSongs.members)
 		{

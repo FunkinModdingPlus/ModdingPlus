@@ -30,10 +30,16 @@
     "singDOWN": [-210, -138]
   },
   "flipx": false,
-  "like": "senpai",
   "enemyOffset": [-150,0],
   "camOffset": [250, 0],
   "followCam": [450,50],
   "playAnim": "idle",
-  "isPixel": false
+  "isPixel": false,
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": false,
+  "dances": false,
+  "holdLength": 4,
+  "usesChiptune": false,
+  "canSing": true
 }

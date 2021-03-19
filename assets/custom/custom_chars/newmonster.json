@@ -30,6 +30,13 @@
   },
   "flipx": false,
   "enemyOffset": [0,130],
-  "like": "newmonster",
-  "playAnim": "idle"
+  "like": "monster",
+  "playAnim": "idle",
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": true,
+  "dances": false,
+  "holdLength": 4,
+  "usesChiptune": false,
+  "canSing": true
 }

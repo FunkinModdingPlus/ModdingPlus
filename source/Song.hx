@@ -6,7 +6,6 @@ import haxe.format.JsonParser;
 import lime.utils.Assets;
 import tjson.TJSON;
 #if sys
-import sys.io.File;
 import lime.system.System;
 import haxe.io.Path;
 #end
@@ -58,19 +57,8 @@ class Song
 	public static function loadFromJson(jsonInput:String, ?folder:String):SwagSong
 	{
 		var rawJson:String = "";
-		if (jsonInput != folder)
-		{
-			// means this isn't normal difficulty
-			// raw json 
-			// folder is always just the song name
-			rawJson = File.getContent("assets/data/"+folder.toLowerCase()+"/"+folder.toLowerCase()+".json").trim();
-		} else {
-			#if sys
-			rawJson = File.getContent("assets/data/" + folder.toLowerCase() + "/" + jsonInput.toLowerCase() + '.json').trim();
-			#else
-			rawJson = Assets.getText('assets/data/' + folder.toLowerCase() + '/' + jsonInput.toLowerCase() + '.json').trim();
-			#end
-		}
+		rawJson = FNFAssets.getContent(Paths.json('${folder.toLowerCase()}/${folder.toLowerCase()}', 'preload')).trim();
+	
 		
 		while (!rawJson.endsWith("}"))
 		{
@@ -181,7 +169,7 @@ class Song
 		{
 			// means this isn't normal difficulty
 			// lets finally overwrite notes
-			var realJson = parseJSONshit(File.getContent("assets/data/" + folder.toLowerCase() + "/" + jsonInput.toLowerCase() + '.json').trim());
+			var realJson = parseJSONshit(FNFAssets.getContent(Paths.json('${folder.toLowerCase()}/${jsonInput.toLowerCase()}', 'preload')).trim());
 			parsedJson.notes = realJson.notes;
 			parsedJson.bpm = realJson.bpm;
 			parsedJson.needsVoices = realJson.needsVoices;

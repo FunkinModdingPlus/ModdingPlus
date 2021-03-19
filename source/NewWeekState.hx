@@ -23,11 +23,9 @@ import flixel.addons.ui.FlxUIButton;
 import flixel.addons.ui.FlxUITabMenu;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
-import sys.FileSystem;
 import flash.media.Sound;
 
 #end
@@ -124,7 +122,7 @@ class NewWeekState extends MusicBeatState
 	}
 	function writeCharacters() {
 		#if sys
-		var parsedWeekJson:TWeekJson = CoolUtil.parseJson(File.getContent(Paths.json('storySonglist', 'preload')));
+		var parsedWeekJson:TWeekJson = CoolUtil.parseJson(FNFAssets.getContent(Paths.json('storySonglist', 'preload')));
 		
 		var coolSongArray:Array<String> = [];
 		coolSongArray.push(likeText.text);
@@ -134,13 +132,13 @@ class NewWeekState extends MusicBeatState
 		}
 		trace("Pog");
 		trace(epicFiles.png);
-		File.copy(epicFiles.png, Paths.file('custom_weeks/week${parsedWeekJson.songs.length}.png'));
+		FNFAssets.copy(epicFiles.png, Paths.file('custom_weeks/week${parsedWeekJson.songs.length}.png', 'custom'));
 		trace("ehh");
 		trace("parsed");
 		parsedWeekJson.songs.push(coolSongArray);
 		parsedWeekJson.weekNames.push(nameText.text);
 		parsedWeekJson.characters.push([dadText.text,bfText.text,gfText.text]);
-		File.saveContent(Paths.json('storySonglist', 'preload'), CoolUtil.stringifyJson(parsedWeekJson));
+		FNFAssets.saveText(Paths.json('storySonglist', 'preload'), CoolUtil.stringifyJson(parsedWeekJson));
 		trace("cool stuff");
 		#end
 	}

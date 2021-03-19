@@ -8,7 +8,6 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
 import DifficultyIcons;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUI9SliceSprite;
@@ -22,11 +21,9 @@ import flixel.ui.FlxSpriteButton;
 import flixel.addons.ui.FlxUITabMenu;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
-import sys.FileSystem;
 import flash.media.Sound;
 
 #end
@@ -80,7 +77,7 @@ class ChooseCharState extends MusicBeatState
 
         var regCharacters:Array<String> = CoolUtil.coolTextFile(Paths.txt('characterList', 'preload'));
 
-        charJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_chars/custom_chars.json', 'custom')));
+        charJson = CoolUtil.parseJson(FNFAssets.getText(Paths.file('custom_chars/custom_chars.json', 'custom')));
 
         if (characters == null) {
             // that is not how arrays work

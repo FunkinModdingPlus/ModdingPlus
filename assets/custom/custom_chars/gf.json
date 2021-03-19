@@ -64,5 +64,13 @@
   },
   "flipx": false,
   "like": "gf",
-  "playAnim": "danceRight"
+  "playAnim": "danceRight",
+  "over-gf": true,
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": true,
+  "dances": true,
+  "holdLength": 4,
+  "usesChiptune": true,
+  "canSing": true
 }

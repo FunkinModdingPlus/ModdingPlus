@@ -22,5 +22,17 @@
   },
   "flipx": false,
   "like": "gf-car",
-  "playAnim": "danceRight"
+  "playAnim": "danceRight",
+  "over-gf": true,
+  "size": [
+    0,
+    0
+  ],
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": false,
+  "dances": true,
+  "holdLength": 4,
+  "usesChiptune": true,
+  "canSing": true
 }

@@ -1,19 +1,19 @@
 {
-  "template": {
+  "bf": {
     "like": "bf",
-    "icons": [0,1]
+    "icons": [0, 1, 24]
   },
-  "templateBfCar": {
+  "bf-car": {
     "like": "bf-car",
-    "icons": [0,1]
+    "icons": [0, 1, 24]
   },
-  "templateBfChristmas": {
+  "bf-christmas": {
     "like": "bf-christmas",
     "icons": [0,1]
   },
-  "templateBfPixel": {
+  "bf-pixel": {
     "like": "bf-pixel",
-    "icons": [0,1]
+    "icons": [21,21,25]
   },
   "templateDad": {
     "like": "dad",
@@ -27,7 +27,7 @@
     "like": "gf-pixel",
     "icons": [0,1]
   },
-  "templateGf": {
+  "gf": {
     "like": "gf",
     "icons": [0,1]
   },
@@ -35,27 +35,27 @@
     "like": "monster",
     "icons": [0,1]
   },
-  "templateNewMonster": {
+  "monster": {
     "like": "newmonster",
     "icons": [0,1]
   },
-  "templateParents": {
+  "parents-christmas": {
     "like": "parents",
     "icons": [0,1]
   },
-  "templatePico": {
+  "pico": {
     "like": "pico",
     "icons": [0,1]
   },
-  "templateSenpaiAngry": {
+  "senpai-angry": {
     "like": "senpai-angry",
     "icons": [0,1]
   },
-  "templateSenpai": {
+  "senpai": {
     "like": "senpai",
     "icons": [0,1]
   },
-  "templateSpirit": {
+  "spirit": {
     "like": "bf-christmas",
     "icons": [0,1]
   },
@@ -63,7 +63,7 @@
     "like": "spooky",
     "icons": [0,1]
   },
-  "templateMom": {
+  "mom": {
     "like": "mom",
     "icons": [6,7]
   },

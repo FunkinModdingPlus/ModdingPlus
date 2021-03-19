@@ -13,9 +13,6 @@ import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 // visual studio code gets pissy when you don't use conditionals
-#if sys
-import sys.io.File;
-#end
 import haxe.Json;
 import tjson.TJSON;
 
@@ -38,7 +35,7 @@ class SaveDataState extends MusicBeatState
 	var preferredSave:Int = 0;
 	override function create()
 	{
-		var menuBG:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuDesat.png');
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat', 'preload'));
 		optionList = [
 						{name: "Always Show Cutscenes", value: false}, 
 						{name: "Skip Modifier Menu", value: false}, 
@@ -79,7 +76,7 @@ class SaveDataState extends MusicBeatState
 			swagOption.isMenuItem = true;
 			swagOption.targetY = j;
 			trace("l57");
-			var coolCheckmark = new FlxSprite().loadGraphic('assets/images/checkmark.png');
+			var coolCheckmark = new FlxSprite().loadGraphic(Paths.image('checkmark', 'preload'));
 
 			coolCheckmark.visible = optionList[j].value;
 			checkmarks.add(coolCheckmark);
@@ -141,7 +138,7 @@ class SaveDataState extends MusicBeatState
 						FlxG.save.close();
 						preferredSave = curSelected;
 						FlxG.save.bind(saveName, "bulbyVR");
-						FlxG.sound.play('assets/sounds/confirmMenu.ogg');
+						FlxG.sound.play(Paths.sound('confirmMenu','preload' ));
 						if (FlxG.save.data.songScores == null) {
 							FlxG.save.data.songScores = ["tutorial" => 0];
 						}
@@ -158,13 +155,13 @@ class SaveDataState extends MusicBeatState
 					FlxG.save.erase();
 					saves.members[curSelected].askToConfirm(false);
 					// sounds like someone farted into the mic. perfect for a delete sfx
-					FlxG.sound.play('assets/sounds/freshIntro.ogg');
+					FlxG.sound.play(Paths.sound('freshIntro', 'preload'));
 					FlxG.save.data.songScores = ["tutorial" => 0];
 					FlxG.save.bind(oldSave, "bulbyVR");
 					Highscore.load();
 				}
 			} else if (!inOptionsMenu) {
-				FlxG.sound.play('assets/sounds/scrollMenu.ogg');
+				FlxG.sound.play(Paths.sound('scrollMenu', 'preload'));
 				saves.members[curSelected].beSelected(true);
 			} else {
 				switch (optionList[optionsSelected].name) {
@@ -202,7 +199,7 @@ class SaveDataState extends MusicBeatState
 						optionList[optionsSelected].value = checkmarks.members[optionsSelected].visible;
 				}
 
-				FlxG.sound.play('assets/sounds/scrollMenu.ogg');
+				FlxG.sound.play(Paths.sound('scrollMenu', 'preload'));
 			}
 		}
 
@@ -210,7 +207,7 @@ class SaveDataState extends MusicBeatState
 	function changeSelection(change:Int = 0)
 	{
 		if (!inOptionsMenu) {
-			FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+			FlxG.sound.play(Paths.sound('scrollMenu', 'preload'), 0.4);
 
 			curSelected += change;
 
@@ -237,7 +234,7 @@ class SaveDataState extends MusicBeatState
 				}
 			}
 		} else {
-			FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+			FlxG.sound.play(Paths.sound('scrollMenu', 'preload'), 0.4);
 
 			optionsSelected += change;
 

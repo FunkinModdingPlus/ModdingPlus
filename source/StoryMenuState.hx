@@ -17,12 +17,10 @@ import haxe.Json;
 import lime.utils.Assets;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
 import flash.media.Sound;
-import sys.FileSystem;
 import Song.SwagSong;
 #end
 import tjson.TJSON;
@@ -80,9 +78,9 @@ class StoryMenuState extends MusicBeatState
 		if (FlxG.sound.music != null)
 		{
 			if (!FlxG.sound.music.playing)
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				FlxG.sound.playMusic(Paths.music('freakyMenu', 'preload'));
 		}
-		var storySongJson:StorySongsJson = CoolUtil.parseJson(Assets.getText('assets/data/storySonglist.json'));
+		var storySongJson:StorySongsJson = CoolUtil.parseJson(Assets.getText(Paths.json('storySonglist', 'preload')));
 		persistentUpdate = persistentDraw = true;
 		for (storySongList in storySongJson.songs) {
 			var weekSongs = [];
@@ -118,7 +116,7 @@ class StoryMenuState extends MusicBeatState
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);
 
-		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
+		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets', 'preload');
 		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFFF9CF51);
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
@@ -205,7 +203,7 @@ class StoryMenuState extends MusicBeatState
 		add(difficultySelectors);
 
 		trace("Line 124");
-		var diffJson:DifficultysJson = CoolUtil.parseJson(Assets.getText("assets/images/custom_difficulties/difficulties.json"));
+		var diffJson:DifficultysJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
 		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10, grpWeekText.members[0].y + 10);
 		leftArrow.frames = ui_tex;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
@@ -312,7 +310,7 @@ class StoryMenuState extends MusicBeatState
 
 		if (controls.BACK && !movedBack && !selectedWeek)
 		{
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			FlxG.sound.play(Paths.sound('cancelMenu', 'preload'));
 			movedBack = true;
 			FlxG.switchState(new MainMenuState());
 		}
@@ -328,10 +326,10 @@ class StoryMenuState extends MusicBeatState
 	{
 			if (stopspamming == false)
 			{
-				FlxG.sound.play(Paths.sound('confirmMenu'));
+				FlxG.sound.play(Paths.sound('confirmMenu', 'preload'));
 
 				grpWeekText.members[curWeek].startFlashing();
-				weekCharactersArray.members[curWeek].members[1].grpWeekCharacters.members[1].animation.play('bfConfirm');
+				weekCharactersArray.members[curWeek].members[1].animation.play('bfConfirm');
 				stopspamming = true;
 			}
 			StoryMenuState.storySongPlaylist = weekData[curWeek];
@@ -347,7 +345,7 @@ class StoryMenuState extends MusicBeatState
 
 			PlayState.storyDifficulty = curDifficulty;
 			for (peckUpAblePath in PlayState.storyPlaylist) {
-				if (!FileSystem.exists('assets/data/'+peckUpAblePath.toLowerCase()+'/'+peckUpAblePath.toLowerCase() + diffic+'.json')) {
+				if (!FNFAssets.exists(Paths.json('${peckUpAblePath.toLowerCase()}/${peckUpAblePath.toLowerCase()}${diffic}', 'preload'))) {
 					// probably messed up difficulty
 					trace("UH OH DIFFICULTY DOESN'T EXIST FOR A SONG");
 					trace("CHANGING TO DEFAULT DIFFICULTY");
@@ -410,7 +408,7 @@ class StoryMenuState extends MusicBeatState
 			bullShit++;
 		}
 
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		FlxG.sound.play(Paths.sound('scrollMenu', 'preload'));
 
 		updateText();
 	}

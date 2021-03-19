@@ -1,4 +1,5 @@
 {
+  "$ref": "custom_char_schema",
   "animation": {
     "idle": {
       "name": "BF IDLE",
@@ -75,7 +76,13 @@
   "enemyOffset": [0,350],
   "size": [-100,-100],
   "followCam": [-100,-100],
-  "like": "bf-pixel",
-  "isPixel": true,
+  "midpoint": [0, 0],
+  "scale": 6,
+  "antialiasing": false,
+  "likeBf": true,
+  "dances": false,
+  "holdLength": 4,
+  "usesChiptune": true,
+  "canSing": true,
   "playAnim": "idle"
 }

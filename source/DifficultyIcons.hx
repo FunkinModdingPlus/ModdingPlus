@@ -5,13 +5,10 @@ import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flash.display.BitmapData;
-import lime.utils.Assets;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
-import sys.FileSystem;
 #end
 import haxe.Json;
 import tjson.TJSON;
@@ -28,24 +25,24 @@ class DifficultyIcons {
     group = new FlxTypedGroup<FlxSprite>();
     difficulties = diff;
     defaultDiff = defaultDifficulty;
-		var diffJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
+		var diffJson = CoolUtil.parseJson(FNFAssets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
     trace(diff.length);
     for( level in 0...difficulties.length ) {
       var sprDiff = new FlxSprite(x,y);
       sprDiff.offset.x = diffJson.difficulties[level].offset;
       var diffPic:BitmapData;
       var diffXml:String;
-			if (FileSystem.exists(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.png', 'custom'))) {
-				diffPic = BitmapData.fromFile(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.png', 'custom'));
+			if (FNFAssets.exists(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.png', 'custom'))) {
+				diffPic = FNFAssets.getBitmapData(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.png', 'custom'));
       } else {
          // fall back on base game file to avoid crashes
-				diffPic = BitmapData.fromImage(Assets.getImage(Paths.image("campaign_menu_UI_assets", 'preload')));
+				diffPic = FNFAssets.getBitmapData(Paths.image("campaign_menu_UI_assets", 'preload'));
       }
-			if (FileSystem.exists(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.xml', 'custom'))) {
-				diffXml = File.getContent(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.xml', 'custom'));
+			if (FNFAssets.exists(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.xml', 'custom'))) {
+				diffXml = FNFAssets.getText(Paths.file('custom_difficulties/' + diffJson.difficulties[level].name + '/.xml', 'custom'));
       } else {
          // fall back on base game file to avoid crashes
-         diffXml = Assets.getText(Paths.file("images/campaign_menu_UI_assets.png", 'preload'));
+         diffXml = FNFAssets.getText(Paths.file("images/campaign_menu_UI_assets.png", 'preload'));
       }
       sprDiff.frames = FlxAtlasFrames.fromSparrow(diffPic,diffXml);
       sprDiff.animation.addByPrefix('diff', diffJson.difficulties[level].anim);
@@ -78,7 +75,7 @@ class DifficultyIcons {
   }
   public static function changeDifficultyFreeplay(difficultyFP:Int, ?change:Int = 0):Dynamic {
     trace("line 73");
-		var diffJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
+		var diffJson = CoolUtil.parseJson(FNFAssets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
     var difficultiesFP:Array<Dynamic> = diffJson.difficulties;
     var freeplayDiff = difficultyFP;
     freeplayDiff += change;
@@ -105,7 +102,7 @@ class DifficultyIcons {
     return ending;
   }
   public static function getEndingFP(fpDiff:Int):String {
-		var diffJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
+		var diffJson = CoolUtil.parseJson(FNFAssets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
     var difficultiesFP:Array<Dynamic> = diffJson.difficulties;
     var ending = "";
     if (fpDiff != diffJson.defaultDiff) {
@@ -115,7 +112,7 @@ class DifficultyIcons {
     return ending;
   }
   public static function getDefaultDiffFP():Int {
-		var diffJson = CoolUtil.parseJson(Assets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
+		var diffJson = CoolUtil.parseJson(FNFAssets.getText(Paths.file('custom_difficulties/difficulties.json', 'custom')));
     return diffJson.defaultDiff;
   }
 }

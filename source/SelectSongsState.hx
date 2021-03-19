@@ -13,11 +13,9 @@ import lime.utils.Assets;
 import DifficultyIcons;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
-import sys.FileSystem;
 import flash.media.Sound;
 #end
 import haxe.Json;
@@ -44,7 +42,7 @@ class SelectSongsState extends MusicBeatSubstate
 
 	override function create()
 	{
-		var coolCategoryJson:Array<TCategory> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+		var coolCategoryJson:Array<TCategory> = CoolUtil.parseJson(Assets.getText(Paths.json('freeplaySongJson', 'preload')));
 
 
 		for (coolCategory in coolCategoryJson) {
@@ -57,7 +55,7 @@ class SelectSongsState extends MusicBeatSubstate
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue', 'preload'));
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -68,7 +66,7 @@ class SelectSongsState extends MusicBeatSubstate
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i], true, false);
 			songText.isMenuItem = true;
 			songText.targetY = i;
-			var checkmark = new FlxSprite(0, 0).loadGraphic('assets/images/checkmark.png');
+			var checkmark = new FlxSprite(0, 0).loadGraphic(Paths.image('checkmark', 'preload'));
 			checkmark.visible = false;
 			boolSongs[i] = false;
 			grpSongs.add(songText);
@@ -80,7 +78,6 @@ class SelectSongsState extends MusicBeatSubstate
 
 		changeSelection();
 
-		// FlxG.sound.playMusic('assets/music/title' + TitleState.soundExt, 0);
 		// FlxG.sound.music.fadeIn(2, 0, 0.8);
 		selector = new FlxText();
 
@@ -157,7 +154,7 @@ class SelectSongsState extends MusicBeatSubstate
 	function changeSelection(change:Int = 0)
 	{
 
-		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+		FlxG.sound.play(Paths.sound('scrollMenu', 'preload'), 0.4);
 
 		curSelected += change;
 

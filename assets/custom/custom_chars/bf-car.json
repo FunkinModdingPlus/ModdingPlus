@@ -49,8 +49,29 @@
     "singDOWNmiss": [-11, -19]
   },
   "flipx": true,
-  "enemyOffset": [0,350],
-  "followCam": [-100,-100],
-  "like": "bf-car",
+  "enemyOffset": [
+    0,
+    350
+  ],
+  "size": [
+    0,
+    0
+  ],
+  "followCam": [
+    -100,
+    -100
+  ],
+  "midpoint": [
+    0,
+    0
+  ],
+  "scale": 1,
+  "antialiasing": true,
+  "deadCharacter": "bf",
+  "likeBf": true,
+  "dances": false,
+  "holdLength": 4,
+  "usesChiptune": false,
+  "canSing": true,
   "playAnim": "idle"
 }

@@ -30,6 +30,28 @@
   },
   "flipx": false,
   "camOffset": [400,0],
-  "like": "dad",
-  "playAnim": "idle"
+  "playAnim": "idle",
+  "enemyOffset": [
+    0,
+    0
+  ],
+  "size": [
+    0,
+    0
+  ],
+  "followCam": [
+    -100,
+    -100
+  ],
+  "midpoint": [
+    0,
+    0
+  ],
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": false,
+  "dances": false,
+  "holdLength": 6.1,
+  "usesChiptune": false,
+  "canSing": true
 }

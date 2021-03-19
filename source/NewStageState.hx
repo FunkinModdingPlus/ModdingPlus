@@ -22,11 +22,9 @@ import flixel.ui.FlxSpriteButton;
 import flixel.addons.ui.FlxUITabMenu;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
-import sys.FileSystem;
 import flash.media.Sound;
 
 #end
@@ -102,21 +100,21 @@ class NewStageState extends MusicBeatState
 	function writeCharacters() {
 		// check to see if directory exists
 		#if sys
-		if (!FileSystem.exists(Paths.file('custom_stages/${nameText.text}', 'custom'))) {
-			FileSystem.createDirectory(Paths.file('custom_stages/${nameText.text}', 'custom'));
+		if (!FNFAssets.exists(Paths.file('custom_stages/${nameText.text}', 'custom'))) {
+			FNFAssets.createDirectory(Paths.file('custom_stages/${nameText.text}', 'custom'));
 		}
 
 		for (epicFile in epicFiles) {
 			var coolPath:Path = new Path(epicFile);
 			var pathString:String = Paths.file('custom_stages/${nameText.text}', 'custom') + '/' + coolPath.file + '.' + coolPath.ext;
-			File.copy(epicFile,pathString);
+			FNFAssets.copy(epicFile,pathString);
 		}
 
 		var epicStageFile:Dynamic =CoolUtil.parseJson(Assets.getText(Paths.file('custom_stages/custom_stages.json', 'custom')));
 		trace("parsed");
 		Reflect.setField(epicStageFile,nameText.text,likeText.text);
 
-		File.saveContent(Paths.file('custom_stages/custom_stages.json', 'custom'), CoolUtil.stringifyJson(epicStageFile));
+		FNFAssets.saveText(Paths.file('custom_stages/custom_stages.json', 'custom'), CoolUtil.stringifyJson(epicStageFile));
 		trace("cool stuff");
 		#end
 	}

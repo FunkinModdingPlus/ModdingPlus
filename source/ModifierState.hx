@@ -9,7 +9,6 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
-import sys.io.File;
 import haxe.Json;
 using StringTools;
 typedef TModifier = {

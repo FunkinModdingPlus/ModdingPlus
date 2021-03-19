@@ -5,7 +5,6 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import flash.display.BitmapData;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 #end
@@ -19,7 +18,7 @@ class BackgroundGirls extends FlxSprite
 		if (gorlsPic != null && gorlsXml != null) {
 			frames = FlxAtlasFrames.fromSparrow(gorlsPic, gorlsXml);
 		} else {
-			frames = Paths.getSparrowAtlas('weeb/bgFreaks', 'week6');
+			frames = Paths.getSparrowAtlas('weeb/bgFreaks');
 		}
 
 		animation.addByIndices('danceLeft', 'BG girls group', CoolUtil.numberArray(14), "", 24, false);

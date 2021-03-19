@@ -12,13 +12,10 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flash.display.BitmapData;
-import lime.utils.Assets;
 import flixel.graphics.frames.FlxFrame;
 import lime.system.System;
 import flixel.system.FlxAssets.FlxSoundAsset;
 #if sys
-import sys.io.File;
-import sys.FileSystem;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
@@ -76,13 +73,13 @@ class DialogueBox extends FlxSpriteGroup
 				// do nothing
 			default:
 				// see if the song has one
-				if (FileSystem.exists(Paths.file(PlayState.SONG.song.toLowerCase()+'/Lunchbox.ogg', 'songs'))) {
-					var lunchboxSound = Sound.fromFile(Paths.file(PlayState.SONG.song.toLowerCase() + '/Lunchbox.ogg', 'songs'));
+				if (FNFAssets.exists(Paths.file(PlayState.SONG.song.toLowerCase()+'/Lunchbox.ogg', 'songs'))) {
+					var lunchboxSound = FNFAssets.getSound(Paths.file(PlayState.SONG.song.toLowerCase() + '/Lunchbox.ogg', 'songs'));
 					FlxG.sound.playMusic(lunchboxSound, 0);
 					FlxG.sound.music.fadeIn(1,0,0.8);
 				// otherwise see if there is an ogg file in the dialog
-			} else if (FileSystem.exists(Paths.file('dialog_boxes/'+PlayState.SONG.cutsceneType+'/Lunchbox.ogg', 'custom'))) {
-					var lunchboxSound = Sound.fromFile(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/Lunchbox.ogg', 'custom'));
+			} else if (FNFAssets.exists(Paths.file('dialog_boxes/'+PlayState.SONG.cutsceneType+'/Lunchbox.ogg', 'custom'))) {
+					var lunchboxSound = FNFAssets.getSound(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/Lunchbox.ogg', 'custom'));
 					FlxG.sound.playMusic(lunchboxSound, 0);
 					FlxG.sound.music.fadeIn(1,0,0.8);
 				}
@@ -92,7 +89,7 @@ class DialogueBox extends FlxSpriteGroup
 		bgFade.scrollFactor.set();
 		bgFade.alpha = 0;
 		add(bgFade);
-		acceptSound = Paths.sound('clickText', 'shared');
+		acceptSound = Paths.sound('clickText');
 		new FlxTimer().start(0.83, function(tmr:FlxTimer)
 		{
 			bgFade.alpha += (1 / 5) * 0.7;
@@ -136,21 +133,21 @@ class DialogueBox extends FlxSpriteGroup
 				portraitLeft.frames = Paths.getSparrowAtlas('monsterPortrait', 'shared');
 				isPixel[1] = false;
 			default:
-				if (FileSystem.exists(Paths.file('custom_chars/'+PlayState.SONG.player2+'/portrait.png', 'custom')))
+				if (FNFAssets.exists(Paths.file('custom_chars/'+PlayState.SONG.player2+'/portrait.png', 'custom')))
 				{
 					var coolP2Json = Character.getAnimJson(PlayState.SONG.player2);
 					isPixel[1] = if (Reflect.hasField(coolP2Json, "isPixel")) coolP2Json.isPixel else false;
-					var rawPic = BitmapData.fromFile(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.png', 'custom'));
-					var rawXml = File.getContent(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.xml', 'custom'));
+					var rawPic = FNFAssets.getBitmapData(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.png', 'custom'));
+					var rawXml = FNFAssets.getText(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/portrait.xml', 'custom'));
 					portraitLeft.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 				}
 				else
 				{
-					portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait.png', 'week6');
+					portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait.png');
 				}
-				if (FileSystem.exists(Paths.file('custom_chars/'+PlayState.SONG.player2+'/text.ogg', 'custom')))
+				if (FNFAssets.exists(Paths.file('custom_chars/'+PlayState.SONG.player2+'/text.ogg', 'custom')))
 				{
-					clickSounds[1] = Sound.fromFile(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/text.ogg', 'custom'));
+					clickSounds[1] = FNFAssets.getSound(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/text.ogg', 'custom'));
 				}
 		}
 		if (isPixel[1]) {
@@ -200,19 +197,19 @@ class DialogueBox extends FlxSpriteGroup
 				portraitLeft.frames = Paths.getSparrowAtlas('monsterPortrait', 'shared');
 				isPixel[0] = false;
 			default:
-				if (FileSystem.exists(Paths.file('custom_chars/' + PlayState.SONG.player1 + '/portrait.png', 'custom')))
+				if (FNFAssets.exists(Paths.file('custom_chars/' + PlayState.SONG.player1 + '/portrait.png', 'custom')))
 				{
 					var coolP1Json = Character.getAnimJson(PlayState.SONG.player1);
 					isPixel[0] = if (Reflect.hasField(coolP1Json, "isPixel")) coolP1Json.isPixel else false;
-					var rawPic = BitmapData.fromFile(Paths.file('custom_chars/' + PlayState.SONG.player1 + '/portrait.png', 'custom'));
-					var rawXml = File.getContent(Paths.file('custom_chars/' + PlayState.SONG.player1 + '/portrait.xml', 'custom'));
+					var rawPic = FNFAssets.getBitmapData(Paths.file('custom_chars/' + PlayState.SONG.player1 + '/portrait.png', 'custom'));
+					var rawXml = FNFAssets.getText(Paths.file('custom_chars/' + PlayState.SONG.player1 + '/portrait.xml', 'custom'));
 					portraitLeft.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 				}
 				else
 				{
-					portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait.png', 'week6');
+					portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait.png');
 				}
-				if (FileSystem.exists(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/text.ogg', 'custom')))
+				if (FNFAssets.exists(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/text.ogg', 'custom')))
 				{
 					clickSounds[1] = Sound.fromFile(Paths.file('custom_chars/' + PlayState.SONG.player2 + '/text.ogg', 'custom'));
 				}
@@ -271,26 +268,26 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			case 'senpai':
 				// taking no chances on the current week
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-pixel', 'week6');
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-pixel');
 				box.animation.addByPrefix('normalOpen', 'Text Box Appear', 24, false);
 				box.animation.addByIndices('normal', 'Text Box Appear', [4], "", 24);
 				like = "senpai";
 			case 'angry-senpai':
 				FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX', 'shared'));
 
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-senpaiMad', 'week6');
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-senpaiMad');
 				box.animation.addByPrefix('normalOpen', 'SENPAI ANGRY IMPACT SPEECH', 24, false);
 				box.animation.addByIndices('normal', 'SENPAI ANGRY IMPACT SPEECH', [4], "", 24);
 				senpaiVisible = false;
 				like = "angry-senpai";
 			case 'spirit':
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil', 'week6');
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil');
 				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
 				textColor = FlxColor.WHITE;
 				dropColor = FlxColor.BLACK;
 				senpaiColor = FlxColor.BLACK;
-				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward', 'week6'));
+				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
 				like = "spirit";
@@ -299,10 +296,10 @@ class DialogueBox extends FlxSpriteGroup
 			case 'monster':
 				// do nothing
 			default:
-				if (FileSystem.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/box.xml', 'custom'))) {
+				if (FNFAssets.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/box.xml', 'custom'))) {
 					box.frames = FlxAtlasFrames.fromSparrow(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/box.png', 'custom'), Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/box.xml', 'custom'));
-					var coolJsonFile:Dynamic = CoolUtil.parseJson(Assets.getText(Paths.file('dialog_boxes/dialog_boxes.json', 'custom')));
-					var coolAnimFile = CoolUtil.parseJson(File.getContent(Paths.file('dialog_boxes/'+Reflect.field(coolJsonFile,PlayState.SONG.cutsceneType).like+'.json', 'custom')));
+					var coolJsonFile:Dynamic = CoolUtil.parseJson(FNFAssets.getText(Paths.file('dialog_boxes/dialog_boxes.json', 'custom')));
+					var coolAnimFile = CoolUtil.parseJson(FNFAssets.getText(Paths.file('dialog_boxes/'+Reflect.field(coolJsonFile,PlayState.SONG.cutsceneType).like+'.json', 'custom')));
 					isPixel[2] = coolAnimFile.isPixel;
 					senpaiVisible = coolAnimFile.senpaiVisible;
 					sided = if (Reflect.hasField(coolAnimFile, 'sided')) coolAnimFile.sided else false;
@@ -316,9 +313,9 @@ class DialogueBox extends FlxSpriteGroup
 						portraitRight.x += coolAnimFile.portraitOffset[0];
 						portraitRight.y += coolAnimFile.portraitOffset[1];
 					}
-					if (FileSystem.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/text.ogg', 'custom')))
+					if (FNFAssets.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/text.ogg', 'custom')))
 						clickSounds[2] = Sound.fromFile(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/text.ogg', 'custom'));
-					if (FileSystem.exists(Paths.file('dialog_boxes/'+PlayState.SONG.cutsceneType+'/accept.ogg', 'custom')))
+					if (FNFAssets.exists(Paths.file('dialog_boxes/'+PlayState.SONG.cutsceneType+'/accept.ogg', 'custom')))
 						acceptSound = Sound.fromFile(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/accept.ogg', 'custom'));
 					if (coolAnimFile.like == "senpai") {
 						box.animation.addByPrefix('normalOpen', 'Text Box Appear', 24, false);
@@ -326,7 +323,7 @@ class DialogueBox extends FlxSpriteGroup
 						like = "senpai";
 					} else if (coolAnimFile.like == "senpai-angry") {
 						// should i keep this?
-						if (FileSystem.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/angry.ogg', 'custom'))) {
+						if (FNFAssets.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/angry.ogg', 'custom'))) {
 							// maybe it's just vsc but apparently interpolation isn't all powerful
 							FlxG.sound.play(Paths.file('dialog_boxes/'+PlayState.SONG.cutsceneType+'/angry.ogg', 'custom'));
 						} else {
@@ -339,7 +336,7 @@ class DialogueBox extends FlxSpriteGroup
 					} else if (coolAnimFile.like == "spirit") {
 						box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 						box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
-						if (FileSystem.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/face.png', 'custom'))) {
+						if (FNFAssets.exists(Paths.file('dialog_boxes/' + PlayState.SONG.cutsceneType + '/face.png', 'custom'))) {
 							var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.file('dialog_boxes/'+PlayState.SONG.cutsceneType+'/face.png', 'custom'));
 							if (isPixel[2]) {
 								face.setGraphicSize(Std.int(face.width * 6));
@@ -355,23 +352,7 @@ class DialogueBox extends FlxSpriteGroup
 
 		this.dialogueList = dialogueList;
 		
-		portraitLeft = new FlxSprite(-20, 40);
-		portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
-		portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-		portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
-		portraitLeft.updateHitbox();
-		portraitLeft.scrollFactor.set();
-		add(portraitLeft);
-		portraitLeft.visible = false;
 
-		portraitRight = new FlxSprite(0, 40);
-		portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
-		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-		portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
-		portraitRight.updateHitbox();
-		portraitRight.scrollFactor.set();
-		add(portraitRight);
-		portraitRight.visible = false;
 		// do nothing with it, so we can recycle later
 		portraitCustom = new FlxSprite(0, 40);
 		portraitCustom.visible = false;
@@ -479,7 +460,7 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			remove(dialogue);
 				
-			FlxG.sound.play(Paths.sound('clickText'), 0.8);
+			FlxG.sound.play(Paths.sound('clickText' ), 0.8);
 
 			if (dialogueList[1] == null && dialogueList[0] != null)
 			{
@@ -580,14 +561,14 @@ class DialogueBox extends FlxSpriteGroup
 			default:
 				var realChar = curCharacter.substr(5);
 				portraitCustom = new FlxSprite(0, 40);
-				if (FileSystem.exists(Paths.file('custom_chars/$realChar/portrait.png', 'custom'))) {
+				if (FNFAssets.exists(Paths.file('custom_chars/$realChar/portrait.png', 'custom'))) {
 					var coolCustomJson = Character.getAnimJson(realChar);
 					customPixel = if (Reflect.hasField(coolCustomJson, "isPixel"))
 						coolCustomJson.isPixel
 					else
 						false;
-					var rawPic = BitmapData.fromFile(Paths.file('custom_chars/$realChar/portrait.png', 'custom'));
-					var rawXml = File.getContent(Paths.file('custom_chars/$realChar/portrait.xml', 'custom'));
+					var rawPic = FNFAssets.getBitmapData(Paths.file('custom_chars/$realChar/portrait.png', 'custom'));
+					var rawXml = FNFAssets.getText(Paths.file('custom_chars/$realChar/portrait.xml', 'custom'));
 					portraitCustom.frames = FlxAtlasFrames.fromSparrow(rawPic, rawXml);
 				} else {
 					portraitCustom.frames = Paths.getSparrowAtlas('weeb/bfPortrait', 'shared');
@@ -601,7 +582,7 @@ class DialogueBox extends FlxSpriteGroup
 						break;
 					}
 				}
-				if (FileSystem.exists(Paths.file('custom_chars/$realChar/text.ogg', 'custom')))
+				if (FNFAssets.exists(Paths.file('custom_chars/$realChar/text.ogg', 'custom')))
 				{
 					swagDialogue.sounds = [FlxG.sound.load(Sound.fromFile(Paths.file('custom_chars/$realChar/text.ogg', 'custom')))];
 				}

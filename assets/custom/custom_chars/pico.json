@@ -56,5 +56,24 @@
   "camOffset": [600,0],
   "enemyOffset": [0,300],
   "like": "pico",
-  "playAnim": "idle"
+  "playAnim": "idle",
+  "size": [
+    0,
+    0
+  ],
+  "followCam": [
+    -100,
+    -100
+  ],
+  "midpoint": [
+    0,
+    0
+  ],
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": false,
+  "dances": false,
+  "holdLength": 4,
+  "usesChiptune": false,
+  "canSing": true
 }

@@ -54,8 +54,28 @@
     "hey": [7,4]
   },
   "flipx": true,
-  "enemyOffset": [0,350],
-  "followCam": [-100,-100],
-  "like": "bf-car",
-  "playAnim": "idle"
+  "playAnim": "idle",
+  "enemyOffset": [
+    0,
+    350
+  ],
+  "size": [
+    0,
+    0
+  ],
+  "followCam": [
+    -100,
+    -100
+  ],
+  "midpoint": [
+    0,
+    0
+  ],
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": true,
+  "dances": false,
+  "holdLength": 4,
+  "usesChiptune": false,
+  "canSing": true
 }

@@ -20,7 +20,6 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
-import sys.io.File;
 import haxe.Json;
 using StringTools;
 class UIOptions extends MusicBeatState
@@ -35,7 +34,7 @@ class UIOptions extends MusicBeatState
 	var _options:Dynamic;
 	override function create()
 	{
-		var menuBG:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuDesat.png');
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat', 'preload'));
 		var optionUI = new FlxUI();
 		menuBG.color = 0xFFea71fd;
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
@@ -68,7 +67,7 @@ class UIOptions extends MusicBeatState
 		super.update(elapsed);
 		if (controls.BACK) {
 			FlxG.mouse.visible = false;
-			File.saveContent('assets/data/options.json', Json.stringify(_options));
+			FNFAssets.saveText(Paths.json('options', 'preload'), Json.stringify(_options));
 			FlxG.switchState(new MainMenuState());
 		}
 

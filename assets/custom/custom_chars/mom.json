@@ -31,5 +31,12 @@
   "flipx": false,
   "like": "mom",
   "followCam": [150,0],
-  "playAnim": "idle"
+  "playAnim": "idle",
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": false,
+  "dances": false,
+  "holdLength": 4,
+  "usesChiptune": false,
+  "canSing": true
 }

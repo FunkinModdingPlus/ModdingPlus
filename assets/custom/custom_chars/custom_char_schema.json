@@ -125,6 +125,18 @@
         "additionalItems": false,
         "minLength": 2
       },
+      "antialiasing": {
+        "type": "boolean"
+      },
+      "scale": {
+        "type": "number"
+      },
+      "likeBf": {
+        "type": "boolean"
+      },
+      "dances": {
+        "type": "boolean"
+      },
       "midpoint": {
         "type": "array",
         "items": [
@@ -139,10 +151,11 @@
         "additionalItems": false,
         "minLength": 2
       },
-      "like": {"type": "string"},
       "playAnim": {"type": "string"},
-      "isPixel": {"type": "boolean"},
-      "usesSpritesheetPacker": {"type": "boolean"},
+      "holdLength": {"type": "number"},
+      "usesChiptune": {"type": "boolean"},
+      "canSing": {"type": "boolean"},
+      "over-gf": {"type": "boolean"},
       "size": {
         "type": "array",
         "items": [

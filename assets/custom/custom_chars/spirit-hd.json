@@ -31,9 +31,25 @@
   },
   "flipx": false,
   "like": "spirit",
-  "enemyOffset": [-150,70],
-  "camOffset": [300,0],
-  "followCam": [300,0],
+  "enemyOffset": [
+    -150,
+    100
+  ],
+  "camOffset": [
+    300,
+    0
+  ],
+  "followCam": [
+    300,
+    0
+  ],
   "playAnim": "idle",
-  "isPixel": false
+  "isPixel": false,
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": false,
+  "dances": false,
+  "holdLength": 4,
+  "usesChiptune": false,
+  "canSing": true
 }

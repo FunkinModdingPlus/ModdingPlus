@@ -31,5 +31,12 @@
   "flipx": false,
   "enemyOffset": [0,100],
   "like": "monster",
-  "playAnim": "idle"
+  "playAnim": "idle",
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": true,
+  "dances": false,
+  "holdLength": 4,
+  "usesChiptune": false,
+  "canSing": true
 }

@@ -39,6 +39,12 @@
   },
   "flipx": false,
   "enemyOffset": [0,200],
-  "like": "spooky",
-  "playAnim": "danceRight"
+  "playAnim": "danceRight",
+  "scale": 1,
+  "antialiasing": true,
+  "likeBf": true,
+  "dances": true,
+  "holdLength": 4,
+  "usesChiptune": false,
+  "canSing": true
 }

@@ -25,7 +25,6 @@ import flixel.ui.FlxButton;
 import flixel.ui.FlxSpriteButton;
 import flixel.util.FlxColor;
 import haxe.Json;
-import lime.utils.Assets;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.events.IOErrorEvent;
@@ -35,7 +34,6 @@ import openfl.net.FileReference;
 import openfl.utils.ByteArray;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import tjson.TJSON;
 import openfl.utils.ByteArray;

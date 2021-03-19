@@ -8,15 +8,12 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import openfl.utils.Assets as OpenFLAssets;
 import DifficultyIcons;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
-import sys.FileSystem;
 import flash.media.Sound;
 #end
 import haxe.Json;
@@ -37,7 +34,7 @@ class CategoryState extends MusicBeatState
 	override function create()
 	{
 		// it's a js file to make syntax highlighting acceptable
-		var epicCategoryJs:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(OpenFLAssets.getText(Paths.json('freeplaySongJson')));
+		var epicCategoryJs:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(FNFAssets.getText(Paths.json('freeplaySongJson', 'preload')));
 		if (epicCategoryJs.length > 1 || choosingFor != "freeplay") {
 			for (category in epicCategoryJs) {
 				categories.push(category.name);
@@ -96,22 +93,7 @@ class CategoryState extends MusicBeatState
 
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
-		// JUST DOIN THIS SHIT FOR TESTING!!!
-		/*
-			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
-
-			var texFel:TextField = new TextField();
-			texFel.width = FlxG.width;
-			texFel.height = FlxG.height;
-			// texFel.
-			texFel.htmlText = md;
-
-			FlxG.stage.addChild(texFel);
-
-			// scoreText.textField.htmlText = md;
-
-			trace(md);
-		 */
+	
 
 		super.create();
 	}

@@ -13,11 +13,9 @@ import lime.utils.Assets;
 import DifficultyIcons;
 import lime.system.System;
 #if sys
-import sys.io.File;
 import haxe.io.Path;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
-import sys.FileSystem;
 import flash.media.Sound;
 #end
 import haxe.Json;
@@ -50,7 +48,7 @@ class SelectSortState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue', 'preload'));
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -70,25 +68,7 @@ class SelectSortState extends MusicBeatState
 
 		changeSelection();
 
-		// FlxG.sound.playMusic('assets/music/title' + TitleState.soundExt, 0);
-		// FlxG.sound.music.fadeIn(2, 0, 0.8);
 
-		// JUST DOIN THIS SHIT FOR TESTING!!!
-		/*
-			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
-
-			var texFel:TextField = new TextField();
-			texFel.width = FlxG.width;
-			texFel.height = FlxG.height;
-			// texFel.
-			texFel.htmlText = md;
-
-			FlxG.stage.addChild(texFel);
-
-			// scoreText.textField.htmlText = md;
-
-			trace(md);
-		 */
 
 		super.create();
 	}
@@ -129,7 +109,7 @@ class SelectSortState extends MusicBeatState
 					CategoryState.choosingFor = "sorting";
 					FlxG.switchState(new CategoryState());
 				case "categories":
-					var coolCategoryJson:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+					var coolCategoryJson:Array<SelectSongsState.TCategory> = CoolUtil.parseJson(Assets.getText(Paths.json('freeplaySongJson', 'preload')));
 					var coolCategories:Array<String> = [];
 					for (coolCategory in coolCategoryJson)
 					{
@@ -142,7 +122,7 @@ class SelectSortState extends MusicBeatState
 					// gonna be reallllllllll fucky renaming files
 					SortState.sorting = "weeks";
 					// gonna do weeks ourselves?
-					var coolWeekJson:StoryMenuState.StorySongsJson = CoolUtil.parseJson(Assets.getText('assets/data/storySonglist.json'));
+					var coolWeekJson:StoryMenuState.StorySongsJson = CoolUtil.parseJson(Assets.getText(Paths.json('storySonglist', 'preload')));
 					var coolWeeks:Array<String> = [];
 					for (i in 0...coolWeekJson.songs.length) {
 						coolWeeks.push("week"+i);
@@ -157,7 +137,7 @@ class SelectSortState extends MusicBeatState
 	function changeSelection(change:Int = 0)
 	{
 
-		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
+		FlxG.sound.play(Paths.sound('scrollMenu', 'preload'), 0.4);
 
 		curSelected += change;
 
