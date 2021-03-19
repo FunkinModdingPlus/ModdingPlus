@@ -76,7 +76,7 @@ class FNFAssets {
     }
     /// A safe way of saving text. 
     public static function saveText(id:String, content:String):Void {
-		var coolPath = Paths.stripLibrary(id);
+		var coolPath = id;
         if (FileSystem.exists(coolPath)) {
             File.saveContent(coolPath, content);
         }
