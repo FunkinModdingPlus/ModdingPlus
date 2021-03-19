@@ -3,7 +3,10 @@ name: Bug Report
 about: Report a bug or critical performance issue
 title: 'Bug Report: '
 labels: bug
+assignees: ''
+
 ---
+
 #### Please check for duplicates or similar issues, as well performing simple troubleshooting steps (such as clearing cookies, clearing AppData, trying another browser) before submitting an issue.
 
 ### If you are playing a downloaded version of the game, what operating system are you using?

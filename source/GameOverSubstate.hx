@@ -6,19 +6,7 @@ import flixel.FlxSubState;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import lime.system.System;
-import lime.utils.Assets;
-#if sys
-import sys.io.File;
-import sys.FileSystem;
-import haxe.io.Path;
-import openfl.utils.ByteArray;
-import lime.media.AudioBuffer;
-import flash.media.Sound;
-#end
-import haxe.Json;
-import tjson.TJSON;
-using StringTools;
+
 class GameOverSubstate extends MusicBeatSubstate
 {
 	var bf:Boyfriend;
@@ -29,46 +17,19 @@ class GameOverSubstate extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		var daStage = PlayState.curStage;
-		var p1 = PlayState.SONG.player1;
-		var daBf:String = 'bf';
-		trace(p1);
-		if (p1 == "bf-pixel") {
-			stageSuffix = '-pixel';
+		var daBf:String = '';
+		switch (daStage)
+		{
+			case 'school':
+				stageSuffix = '-pixel';
+				daBf = 'bf-pixel-dead';
+			case 'schoolEvil':
+				stageSuffix = '-pixel';
+				daBf = 'bf-pixel-dead';
+			default:
+				daBf = 'bf';
 		}
-		var characterList = Assets.getText('assets/data/characterList.txt');
-		if (!StringTools.contains(characterList, p1)) {
-			var parsedCharJson:Dynamic = CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
-			//another CTRL+C CTRL+V ritual
-			var unparsedAnimJson = File.getContent("assets/images/custom_chars/"+Reflect.field(parsedCharJson,p1).like+".json"); //it might keep throwing an error if i dont do this
-			var parsedAnimJson = CoolUtil.parseJson(unparsedAnimJson);
-			switch (parsedAnimJson.like) {
-				case "bf":
-					// bf has a death animation
-					daBf = p1;
-				case "bf-pixel":
-					// gotta deal with this dude
-					daBf = p1 + '-dead';
-					stageSuffix = '-pixel';
-				default:
-					if (StringTools.contains(unparsedAnimJson, "firstDeath")){ //if i had to build this for any longer i would lose my mind
-						daBf = p1; //this should be less shitty
-						if (parsedAnimJson.isPixel)
-							stageSuffix = '-pixel'; //pixel check!
-					}
-					else
-					// just use bf, avoid pain
-					daBf = 'bf';
-			}
-		} else {
-			switch (PlayState.SONG.player1) {
-				case 'bf':
-					daBf = 'bf';
-				case 'bf-pixel':
-					daBf = 'bf-pixel-dead';
-				default:
-					daBf = 'bf';
-			}
-		}
+
 		super();
 
 		Conductor.songPosition = 0;
@@ -79,7 +40,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);
 		add(camFollow);
 
-		FlxG.sound.play('assets/sounds/fnf_loss_sfx' + stageSuffix + TitleState.soundExt);
+		FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
 		Conductor.changeBPM(100);
 
 		// FlxG.camera.followLerp = 1;
@@ -107,6 +68,7 @@ class GameOverSubstate extends MusicBeatSubstate
 				FlxG.switchState(new StoryMenuState());
 			else
 				FlxG.switchState(new FreeplayState());
+			PlayState.loadRep = false;
 		}
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
@@ -116,7 +78,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
 		{
-			FlxG.sound.playMusic('assets/music/gameOver' + stageSuffix + TitleState.soundExt);
+			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
 		}
 
 		if (FlxG.sound.music.playing)
@@ -141,12 +103,12 @@ class GameOverSubstate extends MusicBeatSubstate
 			isEnding = true;
 			bf.playAnim('deathConfirm', true);
 			FlxG.sound.music.stop();
-			FlxG.sound.play('assets/music/gameOverEnd' + stageSuffix + TitleState.soundExt);
+			FlxG.sound.play(Paths.music('gameOverEnd' + stageSuffix));
 			new FlxTimer().start(0.7, function(tmr:FlxTimer)
 			{
 				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
 				{
-					FlxG.switchState(new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState());
 				});
 			});
 		}
