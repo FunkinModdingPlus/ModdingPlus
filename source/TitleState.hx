@@ -24,6 +24,11 @@ import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
 
+#if desktop
+import Discord.DiscordClient;
+import sys.thread.Thread;
+#end
+
 using StringTools;
 
 class TitleState extends MusicBeatState
@@ -51,26 +56,29 @@ class TitleState extends MusicBeatState
 			sys.FileSystem.createDirectory(Sys.getCwd() + "\\assets\\replays");
 		#end
 
+		
 		PlayerSettings.init();
+
+		#if desktop
+		DiscordClient.initialize();
+		#end
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
 		// DEBUG BULLSHIT
 
 		super.create();
-		if (FlxG.save.data.newInput == null)
-			FlxG.save.data.newInput = true;
 
-		if (FlxG.save.data.downscroll == null)
-			FlxG.save.data.downscroll = false;
+		// NGio.noLogin(APIStuff.API);
 
-		if (FlxG.save.data.dfjk == null)
-			FlxG.save.data.dfjk = false;
-		
-		if (FlxG.save.data.accuracyDisplay == null)
-			FlxG.save.data.accuracyDisplay = true;
-			
+		#if ng
+		var ng:NGio = new NGio(APIStuff.API, APIStuff.EncKey);
+		trace('NEWGROUNDS LOL');
+		#end
+
 		FlxG.save.bind('funkin', 'ninjamuffin99');
+
+		KadeEngineData.initSave();
 
 		Highscore.load();
 
@@ -267,6 +275,13 @@ class TitleState extends MusicBeatState
 
 		if (pressedEnter && !transitioning && skippedIntro)
 		{
+			#if !switch
+			NGio.unlockMedal(60960);
+
+			// If it's Friday according to da clock
+			if (Date.now().getDay() == 5)
+				NGio.unlockMedal(61034);
+			#end
 
 			titleText.animation.play('press');
 

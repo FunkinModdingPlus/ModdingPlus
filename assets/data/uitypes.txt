@@ -1,4 +1,0 @@
-normal
-pixel
-templatePixel
-template
