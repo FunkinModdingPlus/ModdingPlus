@@ -143,7 +143,7 @@ How to use:
     The Ogg files for the intro (intro1, intro2, intro3, introGo)
     (Remember, all of these files are required or the game will crash!)
     Go to assets/data
-    Open uitypes.txt
+    Open assets/data/uitypes.txt
     Add your ui type name on a new line!
     To apply these uis:
     Open a song in normal mode (important!)
