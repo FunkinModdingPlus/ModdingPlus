@@ -6,12 +6,13 @@ How to use:
     (like Life Will Change > life-will-change)
     Add json files to folder
     Rename each file to the folder name + the difficulty ending, if applicable
+    + .json
     Make a temp folder in assets/music
     Add the music to the folder
     Rename them to the name of the song with hyphens ("-") with the suffix
     (like Life Will Change > Life-Will-Change)
     Drag them out to assets/music
-    Go to freeplaySonglist.txt
+    Open assets/data/freeplaySongJson.jsonc
     Add the song name to it, with the same name as the music files
     (like Life Will Change > Life-Will-Change)
     Launch FNF
@@ -24,7 +25,8 @@ How to use:
     (like Life Will Change > Life-Will-Change)
     Hit 'Save'
     Save the file and remember to add the difficulty suffix
-    After finishing this add the saved file to the folder and overwrite.
+    After finishing this add the saved file to the assets/data/(name of the 
+    song) folder and overwrite
   Custom Characters:
     Go to assets/images/custom_chars
     Drag in the mod png and xml (if no xml grab the base game one)
@@ -32,7 +34,7 @@ How to use:
     If there are custom icons:
       Add the iconGrid.png
       Rename to (character name)_icons.png
-    Open custom_chars.json
+    Open assets/images/custom_chars/custom_chars.jsonc
     Add a new property:
       "(character name)": {
         "like": "(character this is based on)",
@@ -48,39 +50,44 @@ How to use:
     rename to '(character name)-dead'
     If it is based on bf: Great! Everything is already done for custom death!
     To apply these characters:
-    Open a song
+    Open a song in normal mode (important!)
     Hit the '7' key
-    go to the song tab
-    Click on one of the top two dropdowns
-    Select your custom character
-    Hit save and save the json. Remember difficulty prefixes!
+    go to the char tab
+    Click on one of the textboxes that states the name of the default character
+    and replace it with the name of your custom character
+    Go to the Song tab
+    Hit save and save the json. (easy and hard modes use the characters from
+    normal mode, so no need to repeat the process for them)
     Custom GF:
-      Follow above instructions but instead of choosing one of the top two
-      dropdowns choose the one that says gf.
-      Choose custom gf
+      Follow above instructions but instead click on the 2nd text box from the
+      left.
+      Enter the name of the custom gf
+      Go to the Song tab
       Hit save and save the json. Remember difficulty prefixes!
   Custom Stages:
     Goto assets/images/custom_stages
     Make a new folder with the name of your stage
     Drag in any custom stage assets
-    Add a new property to custom_stages.json:
+    Add a new property to assets/images/custom_stages/custom_stages.json:
       "(stage name)": "(stage it is like)"
     Don't forget your commas!
     To apply these stages:
-    Open a song
+    Open a song in normal mode (important!)
     Hit the '7' key
-    go to the song tab
-    Click on the drop down that says something like 'stage'.
-    Select your custom stage.
-    Hit save and save the json. Remember difficulty prefixes!
+    go to the Char tab
+    Click on the second text field from the top on the right
+    Enter the name of your custom stage
+    Go to the Song tab
+    Hit save and save the json. (easy and hard modes use the stage from normal
+    mode, so no need to repeat the process for them)
   Custom Weeks:
     If your mod has a custom week icon:
       Add the xml and png to the assets/images/campaign-ui-week folder
       (if no xml then grab one from one of the other weeks)
       rename them to what the week position is (week6, week7, week8)
     Else:
-      Copy one of the weeks png + xml and rename them to the week position
-      (week7,week8,week9)
+      Copy one of the weeks png + xml into the assets/images/campaign-ui-week
+      and rename them to the week position (week7,week8,week9)
     Open assets/data/storySonglist.json
     Add a new week:
       ["(animation name of the week, look at default weeks)", "(trackname)", "(trackname)", ...]
@@ -116,12 +123,14 @@ How to use:
     "
     Also add a Lunchbox.ogg if you want dialog sound
     To apply these cutscenes:
-    Open a song
+    Open a song in normal mode (important!)
     Hit the '7' key
-    go to the song tab
-    Click on the drop down that says something like 'senpai'.
-    Select your custom stage.
-    Hit save and save the json. Remember difficulty prefixes!
+    go to the char tab
+    Click on the third text field from the top on the right
+    Enter the name of your custom cutscene
+    Go to the Song tab
+    Hit save and save the json. (easy and hard modes use the cutscenes from 
+    normal mode, so no need to repeat the process for them)
   Custom UI:
     You can now add custom ui!
     Go to assets/images/custom_ui/ui_packs
@@ -137,17 +146,20 @@ How to use:
     Open uitypes.txt
     Add your ui type name on a new line!
     To apply these uis:
-    Open a song
+    Open a song in normal mode (important!)
     Hit the '7' key
-    go to the song tab
-    Click on the drop down that says something like 'normal'.
-    Select your custom stage.
-    Hit save and save the json. Remember difficulty prefixes!
+    go to the char tab
+    Click on the third text field from the top on the left
+    Enter the name of your custom UI
+    Go to the Song tab
+    Hit save and save the json. (easy and hard modes use the UI from normal
+    mode, so no need to repeat the process for them)
   Custom Difficulties:
     To add custom difficulties:
     go to assets/images/custom_difficulties
     add your difficulty png + xml
-    add a new entry to difficulties.json inside of the array
+    add a new entry to assets/images/custom_difficulties/difficulties.json
+    inside of the array
     {
       "offset": (how far it should be offset from the arrow(?)),
       "anim": "(the animation name)",
