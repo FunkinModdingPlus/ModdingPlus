@@ -19,7 +19,7 @@ class CoolUtil
 {
 	public static function coolTextFile(path:String):Array<String>
 	{
-		var daList:Array<String> = Assets.getText(path).trim().split('\n');
+		var daList:Array<String> = FNFAssets.getText(path).trim().split('\n');
 
 		for (i in 0...daList.length)
 		{
@@ -30,14 +30,7 @@ class CoolUtil
 	}
 	public static function coolDynamicTextFile(path:String):Array<String>
 	{
-		var daList:Array<String> = FNFAssets.getText(path).trim().split('\n');
-
-		for (i in 0...daList.length)
-		{
-			daList[i] = daList[i].trim();
-		}
-
-		return daList;
+		return coolTextFile(path);
 	}
 	public static function numberArray(max:Int, ?min = 0):Array<Int>
 	{
@@ -60,5 +53,10 @@ class CoolUtil
 		// use tjson to prettify it
 		var style:String = if (fancy) 'fancy' else null;
 		return TJSON.encode(json,style);
+	}
+	// capitilize first letter
+	// used for our plugin manager to manage stages
+	public static function capitilize(str:String):String {
+		return str.charAt(0).toUpperCase() + str.substr(1);
 	}
 }

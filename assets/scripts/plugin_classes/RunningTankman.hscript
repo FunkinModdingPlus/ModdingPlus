@@ -1,0 +1,62 @@
+
+import flixel.FlxSprite;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.FlxG;
+import Conductor;
+class RunningTankman extends plugins.FNFSprite {
+    public var tankSpeed = 0.7;
+    public var goingRight = false;
+    public var strumTime = 0;
+    public var hscriptPath = "assets/images/custom_stages";
+    public var endingOffset = FlxG.random.float(0.6, 1);
+    public function new (?x=0, y=0, scriptPath:String) {
+        super(x, y);
+        this.hscriptPath = scriptPath;
+        sprite.frames = FlxAtlasFrames.fromSparrow(hscriptPath + 'tankmanKilled1.png', hscriptPath + 'tankmanKilled1.xml');
+        sprite.antialiasing = true;
+        sprite.animation.addByPrefix("run", "tankman running", 24, true);
+        sprite.animation.addByPrefix("shot", "John Shot " + FlxG.random.int(1,2), 24, false);
+        sprite.animation.play("run");
+        sprite.animation.curAnim.curFrame = FlxG.random.int(0, sprite.animation.curAnim.frames.length - 1);
+        sprite.updateHitbox();
+        sprite.setGraphicSize(Std.int(0.8 * width));
+        sprite.updateHitbox();
+        trace(":hueh:");
+
+    }
+    public function resetShit(x, y, goingRight) {
+        this.x = x;
+        this.y = y;
+        this.goingRight = goingRight;
+        endingOffset =  FlxG.random.float(50, 200);
+        tankSpeed = FlxG.random.float(0.6, 1);
+        if (goingRight) sprite.flipX = true;
+    }
+    public function update(elapsed) {
+
+        if (sprite.x >= 1.2 * FlxG.width || sprite.x <= -0.5 * FlxG.width) {
+            sprite.visible = false;
+        } else {
+            sprite.visible = true;
+        }
+        if (sprite.animation.curAnim.name == "run") {
+            var fuck = 0.74 * FlxG.width + endingOffset;
+            if (goingRight) {
+                fuck = 0.02 * FlxG.width - endingOffset;
+                sprite.x = fuck + (Conductor.songPosition - strumTime) * tankSpeed;
+            } else {
+                sprite.x = fuck - (Conductor.songPosition - strumTime) * tankSpeed;
+            }
+        }
+        if (Conductor.songPosition > strumTime) {
+            sprite.animation.play("shot");
+            if (goingRight) {
+                sprite.offset.y = 200;
+                sprite.offset.x = 300;
+            }
+        }
+        if (sprite.animation.curAnim.name == "shot" && sprite.animation.curAnim.finished) {
+            sprite.kill();
+        }
+    }
+}

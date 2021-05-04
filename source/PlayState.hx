@@ -1,5 +1,6 @@
 package;
 
+import hscript.AbstractScriptClass;
 import flixel.ui.FlxButton.FlxTypedButton;
 import Section.SwagSection;
 import Song.SwagSong;
@@ -1091,6 +1092,7 @@ class PlayState extends MusicBeatState
 	var hscriptStates:Map<String, Interp> = [];
 	var exInterp:InterpEx = new InterpEx();
 	var haxeSprites:Map<String, FlxSprite> = [];
+	var haxeStage:AbstractScriptClass;
 	function callHscript(func_name:String, args:Array<Dynamic>, usehaxe:String) {
 		// if function doesn't exist
 		if (!hscriptStates.get(usehaxe).variables.exists(func_name)) {
@@ -1098,6 +1100,18 @@ class PlayState extends MusicBeatState
 			return;
 		}
 		var method = hscriptStates.get(usehaxe).variables.get(func_name);
+		switch(args.length) {
+			case 0:
+				method();
+			case 1:
+				method(args[0]);
+		}
+	}
+	function callExScript(func_name, args:Array<Dynamic>) {
+		if (!exInterp.variables.exists(func_name)) {
+			return;
+		}
+		var method = exInterp.variables.get(func_name);
 		switch(args.length) {
 			case 0:
 				method();
@@ -1136,48 +1150,47 @@ class PlayState extends MusicBeatState
 		trace("opening a haxe state (because we are cool :))");
 		var parser = new ParserEx();
 		var program = parser.parseString(FNFAssets.getText(path + filename));
-		var interp = new Interp();
 		// set vars
-		interp.variables.set("BEHIND_GF", BEHIND_GF);
-		interp.variables.set("BEHIND_BF", BEHIND_BF);
-		interp.variables.set("BEHIND_DAD", BEHIND_DAD);
-		interp.variables.set("BEHIND_ALL", BEHIND_ALL);
-		interp.variables.set("BEHIND_NONE", 0);
-		interp.variables.set("difficulty", storyDifficulty);
-		interp.variables.set("bpm", Conductor.bpm);
-		interp.variables.set("songData", SONG);
-		interp.variables.set("curSong", SONG.song);
-		interp.variables.set("curStep", 0);
-		interp.variables.set("curBeat", 0);
-		interp.variables.set("Conductor", Conductor);
-		interp.variables.set("camHUD", camHUD);
-		interp.variables.set("showOnlyStrums", false);
-		interp.variables.set("playerStrums", playerStrums);
-		interp.variables.set("enemyStrums", enemyStrums);
-		interp.variables.set("mustHit", false);
-		interp.variables.set("strumLineY", strumLine.y);
-		interp.variables.set("FlxSprite", FlxSprite);
-		interp.variables.set("FlxSound", FlxSound);
-		interp.variables.set("FlxAtlasFrames", FlxAtlasFrames);
-		interp.variables.set("FlxGroup",FlxGroup);
-		interp.variables.set("FlxAngle", FlxAngle);
-		interp.variables.set("FlxMath", FlxMath);
-		interp.variables.set("Type", Type);
-		interp.variables.set("hscriptPath", path);
-		interp.variables.set("makeRangeArray", CoolUtil.numberArray);
-		interp.variables.set("boyfriend", boyfriend);
-		interp.variables.set("gf", gf);
-		interp.variables.set("dad", dad);
+		exInterp.variables.set("BEHIND_GF", BEHIND_GF);
+		exInterp.variables.set("BEHIND_BF", BEHIND_BF);
+		exInterp.variables.set("BEHIND_DAD", BEHIND_DAD);
+		exInterp.variables.set("BEHIND_ALL", BEHIND_ALL);
+		exInterp.variables.set("BEHIND_NONE", 0);
+		exInterp.variables.set("difficulty", storyDifficulty);
+		exInterp.variables.set("bpm", Conductor.bpm);
+		exInterp.variables.set("songData", SONG);
+		exInterp.variables.set("curSong", SONG.song);
+		exInterp.variables.set("curStep", 0);
+		exInterp.variables.set("curBeat", 0);
+		exInterp.variables.set("Conductor", Conductor);
+		exInterp.variables.set("camHUD", camHUD);
+		exInterp.variables.set("showOnlyStrums", false);
+		exInterp.variables.set("playerStrums", playerStrums);
+		exInterp.variables.set("enemyStrums", enemyStrums);
+		exInterp.variables.set("mustHit", false);
+		exInterp.variables.set("strumLineY", strumLine.y);
+		exInterp.variables.set("FlxSprite", FlxSprite);
+		exInterp.variables.set("FlxSound", FlxSound);
+		exInterp.variables.set("FlxAtlasFrames", FlxAtlasFrames);
+		exInterp.variables.set("FlxGroup",FlxGroup);
+		exInterp.variables.set("FlxAngle", FlxAngle);
+		exInterp.variables.set("FlxMath", FlxMath);
+		exInterp.variables.set("Type", Type);
+		exInterp.variables.set("hscriptPath", path);
+		exInterp.variables.set("makeRangeArray", CoolUtil.numberArray);
+		exInterp.variables.set("boyfriend", boyfriend);
+		exInterp.variables.set("gf", gf);
+		exInterp.variables.set("dad", dad);
 		// give them access to save data, everything will be fine ;)
-		interp.variables.set("FlxG", FlxG);
-		interp.variables.set("FlxTimer", FlxTimer);
-		interp.variables.set("FlxTween", FlxTween);
-		interp.variables.set("Std", Std);
-		interp.variables.set("isInCutscene", function () return inCutscene);
+		exInterp.variables.set("FlxG", FlxG);
+		exInterp.variables.set("FlxTimer", FlxTimer);
+		exInterp.variables.set("FlxTween", FlxTween);
+		exInterp.variables.set("Std", Std);
+		exInterp.variables.set("isInCutscene", function () return inCutscene);
 		trace("set vars");
 		// callbacks
 
-		interp.variables.set("addSprite", function (sprite, position) {
+		exInterp.variables.set("addSprite", function (sprite, position) {
 			// sprite is a FlxSprite
 			// position is a Int
 			if (position & BEHIND_GF != 0)
@@ -1194,16 +1207,14 @@ class PlayState extends MusicBeatState
 			if (position & BEHIND_BF != 0)
 				add(boyfriend); 
 		});
-		interp.variables.set("setDefaultZoom", function(zoom) {defaultCamZoom = zoom;});
-		interp.variables.set("removeSprite", function(sprite) {
+		exInterp.variables.set("setDefaultZoom", function(zoom) {defaultCamZoom = zoom;});
+		exInterp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
 		});
-		interp.variables.set("getHaxeActor", getHaxeActor);
-		interp.variables.set("instancePluginClass", instanceExClass);
+		exInterp.variables.set("getHaxeActor", getHaxeActor);
 		trace("set stuff");
-		interp.execute(program);
-		hscriptStates.set(usehaxe,interp);
-		callHscript("start", [SONG.song], usehaxe);
+		exInterp.execute(program);
+		callExScript("start", [PlayState.SONG.song]);
 		trace('executed');
 		
 	}
@@ -1906,21 +1917,11 @@ class PlayState extends MusicBeatState
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 		trace('finish uo');
-		#if sys
-		for (file in FileSystem.readDirectory("assets/scripts/plugin_classes/")) {
-			makeHaxeExState(Path.withoutExtension(file), "assets/scripts/plugin_classes/", Path.withoutDirectory(file));
-		}
-		#end
-		if (FNFAssets.exists("assets/images/custom_stages/" + SONG.stage + "/process.hx")) {
-			makeHaxeState("stages", "assets/images/custom_stages/" + SONG.stage + "/", "process.hx");
-		}
-		#if windows
-		// else if because we don't want both to activate
-		else if (FileSystem.exists("assets/images/custom_stages/" + SONG.stage + "/process.lua")) // dude I hate lua (jkjkjkjk)
-		{
-			makeLuaState("stages", "assets/images/custom_stages/" + SONG.stage + "/", "process.lua");
-		}
-		#end
+		exInterp = TitleState.pluginManager.interp;
+		var stageJson = CoolUtil.parseJson(FNFAssets.getText("assets/images/custom_stages/custom_stages.json"));
+		var like = Reflect.field(stageJson, SONG.stage);
+		haxeStage = TitleState.pluginManager.initStage(like, "assets/images/custom_stages/"+SONG.stage+'/', gf, dad, boyfriend, playerStrums, enemyStrums, camHUD, function(val:Float) defaultCamZoom = val);
+
 	if (alwaysDoCutscenes || isStoryMode )
 		{
 
@@ -2113,16 +2114,11 @@ class PlayState extends MusicBeatState
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
+		#if false
 		if (FNFAssets.exists("assets/data/" + SONG.song.toLowerCase() + "/modchart.hx"))
 		{
 			makeHaxeState("modchart", "assets/data/" + SONG.song.toLowerCase() + "/", "/modchart.hx");
 		}
-		#if windows
-		else if (FileSystem.exists("assets/data/" + SONG.song.toLowerCase() + "/modchart.lua")) // dude I hate lua (jkjkjkjk)
-		{
-			makeLuaState("modchart", "assets/data/" + SONG.song.toLowerCase() + "/", "/modchart.lua");
-		}
-		
 		#end
 		if (duoMode)
 		{
@@ -2895,7 +2891,7 @@ class PlayState extends MusicBeatState
 		#if !debug
 		perfectModeOld = false;
 		#end
-		callAllHScript('update', [elapsed]);
+		haxeStage.update(elapsed);
 		if (hscriptStates.exists("modchart")) {
 			if (getHaxeVar("showOnlyStrums", "modchart"))
 			{
@@ -3095,6 +3091,8 @@ class PlayState extends MusicBeatState
 				// trace(PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
 			}
 			setAllHaxeVar("mustHit", PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
+			haxeStage.mustHit = PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection;
+			exInterp.variables.set("mustHit", PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
 			#if windows
 			
 			setAllVar("mustHit", PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
@@ -3104,6 +3102,8 @@ class PlayState extends MusicBeatState
 				camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 				// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
 				callAllHScript("playerTwoTurn", []);
+				haxeStage.playerTwoTurn();
+				callExScript("playerTwoTurn", []);
 				#if windows
 				callAllLua("playerTwoTurn", [], null);
 				#end
@@ -3130,6 +3130,8 @@ class PlayState extends MusicBeatState
 			{
 				camFollow.setPosition((boyfriend.getMidpoint().x - 100 + boyfriend.followCamX), (boyfriend.getMidpoint().y - 100+boyfriend.followCamY));
 				callAllHScript("playerOneTurn", []);
+				haxeStage.playerOneTurn();
+				callExScript("playerOneTurn", []);
 				#if windows
 				callAllLua("playerOneTurn", [], null);
 				#end
@@ -3310,10 +3312,7 @@ class PlayState extends MusicBeatState
 					if (daNote.altNote) {
 						altAnim = '-alt';
 					}
-					callAllHScript("playerTwoSing", []);
-					#if windows
-					callAllLua("playerTwoSing", [], null);
-					#end
+					haxeStage.playerTwoSing();
 					switch (Math.abs(daNote.noteData))
 					{
 						case 0:
@@ -3343,10 +3342,7 @@ class PlayState extends MusicBeatState
 					notes.remove(daNote, true);
 					daNote.destroy();
 				} else if (daNote.mustPress && daNote.wasGoodHit && (opponentPlayer || demoMode)) {
-					callAllHScript("playerOneSing", []);
-					#if windows
-					callAllLua("playerOneSing", [], null);
-					#end
+					haxeStage.playerOneSing();
 					switch (Math.abs(daNote.noteData))
 					{
 						case 0:
@@ -4057,15 +4053,9 @@ class PlayState extends MusicBeatState
 			}
 
 			if (playerOne) {
-				#if windows
-				callAllLua("playerOneMiss", [], null);
-				#end
-				callAllHScript("playerOneMiss", []);
+				haxeStage.playerOneMiss();
 			} else {
-				#if windows
-				// callAllLua("playerTwoMiss", [], null);
-				#end
-				callAllHScript("playerTwoMiss", []);
+				haxeStage.playerTwoMiss();
 			}
 		}
 	}
@@ -4156,16 +4146,13 @@ class PlayState extends MusicBeatState
 				case 3:
 					actingOn.playAnim('singRIGHT'+altAnim, true);
 			}
-			#if windows
-			if (playerOne)
-				callAllLua("playerOneSing", [], null);
-			else 
-				callAllLua("playerTwoSing", [], null);
-			#end
-			if (playerOne)
-				callAllHScript("playerOneSing", []);
-			else
-				callAllHScript("playerTwoSing", []);
+			if (playerOne) {
+				haxeStage.playerOneSing();
+			}
+			else {
+				haxeStage.playerTwoSing();
+			}
+				
 			var strums = playerOne ? playerStrums : enemyStrums;
 			strums.forEach(function(spr:FlxSprite)
 			{
@@ -4285,13 +4272,8 @@ class PlayState extends MusicBeatState
 				resyncVocals();
 			}
 		}
-
-		setAllHaxeVar("curStep", curStep);
-		callAllHScript("stepHit", [curStep]);
-		#if windows
-		setAllVar("curStep", curStep);
-		callAllLua("stepHit", [curStep], null);
-		#end
+		haxeStage.curStep = curStep;
+		haxeStage.stepHit(curStep);
 
 		if (dad.curCharacter == 'spooky' && curStep % 4 == 2)
 		{
@@ -4425,12 +4407,9 @@ class PlayState extends MusicBeatState
 		{
 			lightningStrikeShit();
 		}
-		setAllHaxeVar('curBeat', curBeat);
-		callAllHScript('beatHit', [curBeat]);
-		#if windows
-		setAllVar('curBeat', curBeat);
-		callAllLua('beatHit', [curBeat],null);
-		#end
+		haxeStage.curBeat = curBeat;
+		haxeStage.beatHit(curBeat);
+
 	}
 
 	var curLight:Int = 0;

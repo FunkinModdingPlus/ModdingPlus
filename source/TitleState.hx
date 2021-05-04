@@ -30,7 +30,7 @@ class TitleState extends MusicBeatState
 {
 	static var initialized:Bool = false;
 	static public var soundExt:String = ".ogg";
-
+	static public var pluginManager:PluginManager;
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
 	var credTextShit:Alphabet;
@@ -46,7 +46,7 @@ class TitleState extends MusicBeatState
 
 
 		PlayerSettings.init();
-
+		pluginManager = new PluginManager();
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
 		// DEBUG BULLSHIT
