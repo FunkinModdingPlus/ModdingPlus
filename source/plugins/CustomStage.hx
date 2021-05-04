@@ -3,8 +3,6 @@ package plugins;
 
 import flixel.FlxBasic;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.FlxSprite;
-import flixel.FlxCamera;
 // A plugin helper
 @:keep
 class CustomStage extends plugins.PlayStatePlugin {
