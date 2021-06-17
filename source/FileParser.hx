@@ -102,6 +102,10 @@ class FileParser {
         var dialogueList = content.split('\n');
         var dialogueFile:AdvancedDialogFile = {defines: {textboxSprite: '', backgroundColorA: 0, backgroundColorB: 0, backgroundColorG: 0, backgroundColorR: 0, acceptSound: '', bfFIL: 0, bgFIT: 0, dialogueBox: '', musicVolume: 0, musicName: '', fadeOutLoop: 0, fadeOutTime: 0, fadeInLoop: 0, fadeInTime: 0, characterScale: 1}, info: []};
 		var useDialog = dialogueList.shift();
+        if (!useDialog.contains("[")) {
+            // :grief:
+            return parseOldDialogAsAdvanced(content);
+        }
 		var splitData = useDialog.split("[");
 		trace(useDialog);
         dialogueFile.defines.backgroundColorA = Std.parseInt(splitData[1]);
@@ -247,5 +251,64 @@ class FileParser {
             dialogueFile.info.push(advancedInfo);
         }
         return dialogueFile;
+    }
+    public static function parseOldDialogAsAdvanced(content:String):AdvancedDialogFile {
+        var dialogList = content.split('\n');
+		var dialogFile:AdvancedDialogFile = {defines: {
+			textboxSprite: 'hand_textbox',
+			backgroundColorA: 178,
+			backgroundColorB: 216,
+			backgroundColorG: 223,
+			backgroundColorR: 179,
+			acceptSound: 'clickText',
+			bfFIL: 4,
+			bgFIT: 0.08,
+            // hehe
+			dialogueBox: 'normal',
+			musicVolume: 1,
+			musicName: 'lunchbox',
+			fadeOutLoop: 5,
+			fadeOutTime: 0.2,
+			fadeInLoop: 5,
+			fadeInTime: 0.83,
+			characterScale: 1
+		}, info: []};
+        for (dialog in dialogList) {
+            var splitData = dialog.split(":");
+            var speaker = "";
+            switch (splitData[1]) {
+                case "dad":
+                    speaker = PlayState.SONG.player2;
+                case "bf":
+                    speaker = PlayState.SONG.player1;
+                case thingie:
+                    speaker = thingie.substr(5);
+            }
+			var info:AdvancedDialogInfo = {
+				dialogue: "",
+				writingSpeed: 0.0,
+				textShadowColor: FlxColor.fromString("#FFD89494"),
+				textColor: FlxColor.fromString("#FF3F2021"),
+				speaker: "",
+				skipAfter: 0,
+				shakeDuration: 0,
+				shakeDelay: 0,
+				shakeAmount: 0.0,
+				portraitColor: FlxColor.WHITE,
+				musicVolume: 100,
+				fontscale: 32,
+				fontname: "Funkin",
+				dialogueSound: "pixelText",
+				dialogueBox: "normal",
+				emotion: "normal",
+				flashDelay: 0,
+				flashDuration: 0,
+				flipSides: false
+			};
+            info.speaker = speaker;
+            info.dialogue = splitData[2];
+            dialogFile.info.push(info);
+        }
+        return dialogFile;
     }
 }
