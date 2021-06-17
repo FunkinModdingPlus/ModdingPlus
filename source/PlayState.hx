@@ -1155,16 +1155,16 @@ class PlayState extends MusicBeatState
 		accuracyTxt.scrollFactor.set();
 		// shitty work around but okay
 		accuracyTxt.visible = false;
-		difficTxt = new FlxText(10, FlxG.height, 0, "", 200);
+		difficTxt = new FlxText(10, FlxG.height, 0, "", 150);
 		
-		difficTxt.setFormat("assets/fonts/vcr.ttf", 20, FlxColor.WHITE, RIGHT, OUTLINE, FlxColor.BLACK);
+		difficTxt.setFormat("assets/fonts/vcr.ttf", 15, FlxColor.WHITE, RIGHT, OUTLINE, FlxColor.BLACK);
 		difficTxt.scrollFactor.set();
 		difficTxt.y -= difficTxt.height;
 		if (downscroll) {
 			difficTxt.y = 0;
 		}
 		// screwy way of getting text
-		difficTxt.text = DifficultyIcons.changeDifficultyFreeplay(storyDifficulty, 0).text;
+		difficTxt.text = DifficultyIcons.changeDifficultyFreeplay(storyDifficulty, 0).text + ' - M+ ${MainMenuState.version}';
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		add(iconP1);

@@ -80,27 +80,27 @@ class Song
 		}
 		var parsedJson = parseJSONshit(rawJson);
 		if (parsedJson.stage == null) {
-			if (parsedJson.song.toLowerCase() == 'spookeez'|| parsedJson.song.toLowerCase() == 'monster' || parsedJson.song.toLowerCase() == 'south') {
-				parsedJson.stage = 'spooky';
-			} else if (parsedJson.song.toLowerCase() == 'pico' || parsedJson.song.toLowerCase() == 'philly' || parsedJson.song.toLowerCase() == 'blammed') {
-				parsedJson.stage = 'philly';
-			} else if (parsedJson.song.toLowerCase() == 'milf' || parsedJson.song.toLowerCase() == 'high' || parsedJson.song.toLowerCase() == 'satin-panties') {
-				parsedJson.stage = 'limo';
-			} else if (parsedJson.song.toLowerCase() == 'cocoa' || parsedJson.song.toLowerCase() == 'eggnog') {
-				parsedJson.stage = 'mall';
-			} else if (parsedJson.song.toLowerCase() == 'winter-horrorland') {
-				parsedJson.stage = 'mallEvil';
-			} else if (parsedJson.song.toLowerCase() == 'senpai' || parsedJson.song.toLowerCase() == 'roses'){
-				parsedJson.stage = 'school';
-			} else if (parsedJson.song.toLowerCase() == 'thorns'){
-				parsedJson.stage = 'schoolEvil';
-			}
-			else if (parsedJson.song.toLowerCase() == "ugh"
-				|| parsedJson.song.toLowerCase() == "stress"
-				|| parsedJson.song.toLowerCase() == "guns") {
-					parsedJson.stage = 'tank';
-			} else {
-				parsedJson.stage = 'stage';
+			// sw-switch case :fuckboy:
+			parsedJson.stage = switch (parsedJson.song.toLowerCase()) {
+				case 'spookeez' | 'monster' | 'south':
+					'spooky';
+				case 'philly' | 'pico' | 'blammed':
+					'philly';
+				case 'milf' | 'high' | 'satin-panties':
+					'limo';
+				case 'cocoa' | 'eggnog':
+					'mall';
+				case 'winter-horrorland':
+					'mallEvil';
+				case 'senpai' | 'roses':
+					'school';
+				case 'thorns':
+					'schoolEvil';
+				case 'ugh' | 'stress' | 'guns':
+					'tank';
+				default:
+					'stage';
+			
 			}
 		}
 		if (parsedJson.isHey == null) {
@@ -201,10 +201,12 @@ class Song
 				parsedJson.convertMineToNuke = false;
 		}
 		if (parsedJson.uiType == null) {
-			if (parsedJson.song.toLowerCase() == 'roses' || parsedJson.song.toLowerCase() == 'senpai' || parsedJson.song.toLowerCase() == 'thorns') {
-				parsedJson.uiType = 'pixel';
-			} else {
-				parsedJson.uiType = 'normal';
+
+			parsedJson.uiType = switch (parsedJson.song.toLowerCase()) {
+				case 'roses' | 'senpai' | 'thorns':
+					'pixel';
+				default:
+					'normal';
 			}
 		}
 		if (parsedJson.player1 == "bf-pixel" && OptionsHandler.options.stressTankmen) {

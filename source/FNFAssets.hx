@@ -26,7 +26,7 @@ class FNFAssets {
             if (path == null)
                 path = id;
 			else
-				Assets.getText(id);
+				return Assets.getText(id);
             return File.getContent(path);
         #else
             // no need to strip it out... 
@@ -43,7 +43,7 @@ class FNFAssets {
 			if (path == null)
 				path = id;
 			else
-				Assets.getBytes(id);
+				return Assets.getBytes(id);
 			return File.getBytes(path);
 		#else
 		// no need to strip it out...
@@ -70,7 +70,7 @@ class FNFAssets {
 			var path = Assets.exists(id) ? Assets.getPath(id) : null;
             if (path == null)
                 path = id;
-			else Assets.getBitmapData(id, useCache);
+			else return Assets.getBitmapData(id, useCache);
             return BitmapData.fromFile(path);
         #else
             return Assets.getBitmapData(id, useCache);

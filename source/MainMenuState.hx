@@ -48,7 +48,7 @@ class MainMenuState extends MusicBeatState
 	var scrollSound:String;
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
-
+	public static var version:String = "";
 	override function create()
 	{
 		#if windows
@@ -117,12 +117,12 @@ class MainMenuState extends MusicBeatState
 		if (infoJson.version != "") {
 			infoJson.version = " - " + infoJson.version; 
 		}
-		#if final
-			infoJson.version = "";
-		#end
 		// ok, if you can't fucking code then don't edit the fucking code
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v"+ Application.current.meta.get("version") + infoJson.version, 12);
+		#if !final
 		versionShit.text += "-" + FNFAssets.getText('VERSION');
+		#end
+		version = versionShit.text;
 		var usingSave:FlxText = new FlxText(5, FlxG.height - 36, 0, FlxG.save.name, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

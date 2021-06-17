@@ -24,7 +24,7 @@ class Record extends FlxTypedSpriteGroup<FlxSprite> {
     var shiney:FlxSprite;
     var doubleShiney:FlxSprite;
     var almostSticker:FlxSprite;
-    var smudge:FlxSprite;
+    // var smudge:FlxSprite;
     public function new(X:Float=0, Y:Float=0, colors:Array<String>, ?character:String="bf", ?week:Int = -1, ?completion:Bool) {
         super();
         reordering = true;
@@ -78,7 +78,7 @@ class Record extends FlxTypedSpriteGroup<FlxSprite> {
         icon.x = recordsprite.width/2 - (icon.width/2);
         icon.y = recordsprite.height/2 - (icon.height/2);
         almostSticker = new FlxSprite().loadGraphic('assets/images/campaign-ui-week/default-almost.png');
-        smudge = new FlxSprite().loadGraphic('assets/images/campaign-ui-week/default-smudge.png');
+        // smudge = new FlxSprite().loadGraphic('assets/images/campaign-ui-week/default-smudge.png');
 		add(recordsprite);
 		add(centerPart);
 		add(icon);
@@ -116,11 +116,11 @@ class Record extends FlxTypedSpriteGroup<FlxSprite> {
                 sussyRecordGraphic = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-gold.png');
             else
                 sussyRecordGraphic = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-record.png');
-            sussyBackup = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-center.png');
+            sussyBackup = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-center.png', false);
             sussyShine = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-shine.png');
             shineXml = FNFAssets.getText('assets/images/campaign-ui-week/default-shine.xml');
             almostPng = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-almost.png');
-            sussySmudge = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-smudge.png');
+            // sussySmudge = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-smudge.png');
         }
         else
         {
@@ -155,11 +155,11 @@ class Record extends FlxTypedSpriteGroup<FlxSprite> {
             }
             if (FNFAssets.exists('assets/images/campaign-ui-week/week$week-center.png'))
             {
-                sussyBackup = FNFAssets.getBitmapData('assets/images/campaign-ui-week/week$week-center.png');
+                sussyBackup = FNFAssets.getBitmapData('assets/images/campaign-ui-week/week$week-center.png', false);
             }
             else
             {
-                sussyBackup = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-center.png');
+                sussyBackup = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-center.png', false);
             }
 			if (FNFAssets.exists('assets/images/campaign-ui-week/week$week-almost.png'))
 			{
@@ -168,14 +168,6 @@ class Record extends FlxTypedSpriteGroup<FlxSprite> {
 			else
 			{
 				almostPng = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-almost.png');
-			}
-			if (FNFAssets.exists('assets/images/campaign-ui-week/week$week-smudge.png'))
-			{
-				sussySmudge = FNFAssets.getBitmapData('assets/images/campaign-ui-week/week$week-smudge.png');
-			}
-			else
-			{
-				sussySmudge = FNFAssets.getBitmapData('assets/images/campaign-ui-week/default-smudge.png');
 			}
         }
         
@@ -192,7 +184,7 @@ class Record extends FlxTypedSpriteGroup<FlxSprite> {
         doubleShiney = shiney.clone();
         doubleShiney.angle = angle + 180;
         almostSticker.loadGraphic(almostPng);
-        smudge.loadGraphic(sussySmudge);
+        // smudge.loadGraphic(sussySmudge);
         add(shiney);
         add(doubleShiney);
         if (rating < Good) {
@@ -200,20 +192,16 @@ class Record extends FlxTypedSpriteGroup<FlxSprite> {
         } else {
             shiney.visible = true;
         }
-        if (rating == Sick) {
-            doubleShiney.visible = true;
-        } else {
-            doubleShiney.visible = false;
-        }
-        smudge.visible = (rating == Shit);
+        doubleShiney.visible = (rating == Sick);
+        // smudge.visible = (rating == Shit);
         almostSticker.visible = (rating == Sdcb);
 		curWeek = week;
-        var sussyGradThing = sussyBackup.clone();
+
 		var sussyGradientMap = FlxGradient.createGradientBitmapData(Std.int(centerPart.width), Std.int(centerPart.height), sussyColors);
         sussyGradientMap.colorTransform(new Rectangle(0, 0, sussyGradientMap.width, sussyGradientMap.height), new ColorTransform(1, 1, 1, 0.8));
-		sussyGradThing.copyPixels(sussyGradientMap, new Rectangle(0, 0, sussyGradientMap.width, sussyGradientMap.height), new Point(0, 0), sussyBackup,
+		sussyBackup.copyPixels(sussyGradientMap, new Rectangle(0, 0, sussyGradientMap.width, sussyGradientMap.height), new Point(0, 0), sussyBackup,
 			new Point(0, 0), true);
-        centerPart.loadGraphic(sussyGradThing);
+		centerPart.loadGraphic(sussyBackup);
         icon.switchAnim(character);
         /*
         var i = 0;

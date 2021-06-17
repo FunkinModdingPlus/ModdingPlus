@@ -92,7 +92,7 @@ class DifficultyManager {
         diff = FlxMath.wrap(diff, 0, Std.int(diffJson.difficulties.length - 1));
         return {difficulty: diff, text: diffJson.difficulties[diff].name.toUpperCase()};
     }
-    // sans : ) meaning without, this omits any 
+    // sans : ) meaning without, this omits any bad difficulties
     public static function changeDifficultySans(diff:Int, ?change:Int=0, ?song:String="tutorial"):DiffInfo {
         var foundSomething = false;
         var giveUpNum = 0;
