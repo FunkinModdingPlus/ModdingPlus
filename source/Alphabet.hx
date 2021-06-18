@@ -91,6 +91,8 @@ class Alphabet extends FlxSpriteGroup
 		clearText();
 		lastSprite = null;
 		lastWasSpace = false;
+		lastWasEscape = false;
+		xPosResetted = false;
 		doSplitWords();
 		var xPos:Float = 0;
 		for (character in splitWords)
@@ -103,6 +105,7 @@ class Alphabet extends FlxSpriteGroup
 			if (dummyCharacter == " " || (dummyCharacter == "-" && !drawHypens))
 			{
 				lastWasSpace = true;
+				continue;
 			}
 			// make grave or whatever? 
 			if ((dummyCharacter == "\\" || dummyCharacter == "`") && !lastWasEscape) {
@@ -126,7 +129,7 @@ class Alphabet extends FlxSpriteGroup
 				}
 				lastWasEscape = false;
 			}
-			if ((AlphaCharacter.alphabet.indexOf(dummyCharacter.toLowerCase()) != -1 || AlphaCharacter.numbers.indexOf(dummyCharacter) != -1 || StringTools.contains(AlphaCharacter.symbols,dummyCharacter)) && (dummyCharacter != "-" || drawHypens))
+			if ((AlphaCharacter.alphabet.indexOf(dummyCharacter.toLowerCase()) != -1 || AlphaCharacter.numbers.indexOf(dummyCharacter) != -1 || StringTools.contains(AlphaCharacter.symbols,dummyCharacter)))
 				// if (AlphaCharacter.alphabet.contains(character.toLowerCase()))
 			{
 				if (lastSprite != null)

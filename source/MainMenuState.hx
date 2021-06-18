@@ -171,14 +171,14 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
-			if (controls.UP_P)
+			if (controls.UP_MENU)
 			{
 				FlxG.sound.play('assets/sounds/custom_menu_sounds/'
 				+ menuSoundJson.customMenuScroll +'/scrollMenu' + TitleState.soundExt);
 				changeItem(-1);
 			}
 
-			if (controls.DOWN_P)
+			if (controls.DOWN_MENU)
 			{
 				FlxG.sound.play('assets/sounds/custom_menu_sounds/'
 				+ menuSoundJson.customMenuScroll +'/scrollMenu' + TitleState.soundExt);

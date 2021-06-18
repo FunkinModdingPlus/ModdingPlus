@@ -9,7 +9,7 @@ typedef TOptions = {
     var skipModifierMenu:Bool;
     var alwaysDoCutscenes:Bool;
     var useCustomInput:Bool;
-    var DJFKKeys:Bool;
+    // var DJFKKeys:Bool;
     var allowEditOptions:Bool;
     var downscroll:Bool;
     var useSaveDataMenu:Bool;

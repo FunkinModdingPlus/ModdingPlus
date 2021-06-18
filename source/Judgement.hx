@@ -8,12 +8,14 @@ class Judgement extends FlxSprite {
         // fnf
         if (FNFAssets.exists('assets/images/judgements/$Display/$Judged.png')) {
             if (isPixel && FNFAssets.exists('assets/images/judgements/$Display/$Judged-pixel.png')) {
-				loadGraphic('assets/images/judgements/$Display/$Judged-pixel.png');
+				var lord = FNFAssets.getBitmapData('assets/images/judgements/$Display/$Judged-pixel.png');
+				loadGraphic(lord);
 				setGraphicSize(Std.int(width * PlayState.daPixelZoom));
                 updateHitbox();
 				antialiasing = false;
             } else {
-				loadGraphic('assets/images/judgements/$Display/$Judged.png');	
+				var lord = FNFAssets.getBitmapData('assets/images/judgements/$Display/$Judged.png');
+				loadGraphic(lord);	
             }
 					
 		}

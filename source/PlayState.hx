@@ -567,10 +567,10 @@ class PlayState extends MusicBeatState
 		}
 		// rebind always, to support djkf
 		if (!opponentPlayer && !duoMode) {
-			controls.setKeyboardScheme(Solo(OptionsHandler.options.DJFKKeys));
+			controls.setKeyboardScheme(Solo(false));
 		}
 		if (opponentPlayer) {
-			controlsPlayerTwo.setKeyboardScheme(Solo(OptionsHandler.options.DJFKKeys));
+			controlsPlayerTwo.setKeyboardScheme(Solo(false));
 		} else {
 			controlsPlayerTwo.setKeyboardScheme(Duo(false));
 		}
@@ -1838,7 +1838,7 @@ class PlayState extends MusicBeatState
 			}
 			if (!opponentPlayer && !duoMode)
 			{
-				controls.setKeyboardScheme(Solo(OptionsHandler.options.DJFKKeys));
+				controls.setKeyboardScheme(Solo(false));
 			}
 			if (duoMode) {
 				controls.setKeyboardScheme(Duo(true));

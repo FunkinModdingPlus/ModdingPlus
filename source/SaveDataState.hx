@@ -67,7 +67,6 @@ class SaveDataState extends MusicBeatState
 						{name: "Use New input", value: false, intName: "useCustomInput", desc: "Whether to allow spamming"},
 						// sorry, always ignore bad timing :penisve:
 						/*{name: "Ignore Bad Timing", value: false, intName:"ignoreShittyTiming", desc: "Even with new input on, if you hit a note really poorly, it counts as a miss. This disables that."},*/
-						{name: "DJFK Keys", value: false, intName: "DJFKKeys", desc: "Whether to use dfjk keys."},
 						{name: "Show Song Position", value: false, intName: "showSongPos", desc: "Whether to show the song bar."},
 						{name: "Style", value: false, intName: "style", desc: "Whether to use fancy style or default to base game."},
 						{
@@ -87,6 +86,7 @@ class SaveDataState extends MusicBeatState
 						{name: "Funny Songs", value: false, intName: "stressTankmen", desc: "funny songs"},
 						{name: "Credits", value: false, intName:'credits', desc: "Show the credits!", ignore: true},
 						{name: "Sound Test...", value: false, intName: 'soundtest', desc: "Listen to the soundtrack", ignore: true},
+						{name: "Controls...", value: false, intName:'controls', desc:"Edit bindings!", ignore: true},
 						#if sys
 						{name:"New Character...", value: false, intName:'newchar', desc: "Make a new character!", ignore: true},
 						{name:"New Stage...", value:false, intName:'newstage', desc: "Make a new stage!", ignore: true},
@@ -204,22 +204,22 @@ class SaveDataState extends MusicBeatState
 			}
 		}
 		if (inOptionsMenu || !saves.members[curSelected].askingToConfirm) {
-			if (controls.UP_P)
+			if (controls.UP_MENU)
 			{
 				if (inOptionsMenu||!saves.members[curSelected].beingSelected)
 					changeSelection(-1);
 			}
-			if (controls.DOWN_P)
+			if (controls.DOWN_MENU)
 			{
 				if (inOptionsMenu||!saves.members[curSelected].beingSelected)
 					changeSelection(1);
 			}
-			if (controls.RIGHT_P || controls.LEFT_P) {
+			if (controls.RIGHT_MENU || controls.LEFT_MENU) {
 				if (saves.members[curSelected].beingSelected)
 					saves.members[curSelected].changeSelection();
 				else if (optionList[optionsSelected].amount != null) {
 
-					changeAmount(controls.RIGHT_P);
+					changeAmount(controls.RIGHT_MENU);
 
 				}	else {
 					if (OptionsHandler.options.allowEditOptions)
@@ -296,6 +296,9 @@ class SaveDataState extends MusicBeatState
 						FreeplayState.soundTest = true;
 						CategoryState.choosingFor = "freeplay";
 						LoadingState.loadAndSwitchState(new CategoryState());
+					case "Controls...": 
+						saveOptions();
+						LoadingState.loadAndSwitchState(new ControlsState());
 					case "Credits": 
 						saveOptions();
 						LoadingState.loadAndSwitchState(new CreditsState());

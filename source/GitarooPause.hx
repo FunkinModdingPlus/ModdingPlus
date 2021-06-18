@@ -52,7 +52,7 @@ class GitarooPause extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (controls.LEFT_P || controls.RIGHT_P)
+		if (controls.LEFT_MENU || controls.RIGHT_MENU)
 			changeThing();
 
 		if (controls.ACCEPT)

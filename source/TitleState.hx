@@ -35,6 +35,7 @@ import sys.FileSystem;
 import Song.SwagSong;
 #end
 import tjson.TJSON;
+import flixel.input.keyboard.FlxKey;
 using StringTools;
 
 class TitleState extends MusicBeatState
@@ -69,7 +70,9 @@ class TitleState extends MusicBeatState
 			DiscordClient.shutdown();
 		});
 		#end
-		PlayerSettings.init();
+		
+		
+		
 		PluginManager.init();
 		DifficultyManager.init();
 		ModifierState.init();
@@ -87,6 +90,7 @@ class TitleState extends MusicBeatState
 
 		FlxG.save.close();
 		FlxG.save.bind("save"+preferredSave, 'bulbyVR');
+		PlayerSettings.init();
 		Highscore.load();
 
 

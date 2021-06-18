@@ -281,8 +281,8 @@ class FreeplayState extends MusicBeatState
 			scoreText.text = "PERSONAL BEST:" + lerpScore + ", " + lerpAccuracy + "%";
 		else
 			scoreText.text = "Sound Test";
-		var upP = controls.UP_P;
-		var downP = controls.DOWN_P;
+		var upP = controls.UP_MENU;
+		var downP = controls.DOWN_MENU;
 		var accepted = controls.ACCEPT;
 		#if debug
 		if (FlxG.keys.justPressed.F5) {
@@ -300,9 +300,9 @@ class FreeplayState extends MusicBeatState
 		{
 			changeSelection(1);
 		}
-		if (controls.LEFT_P)
+		if (controls.LEFT_MENU)
 			changeDiff(-1);
-		if (controls.RIGHT_P)
+		if (controls.RIGHT_MENU)
 			changeDiff(1);
 		
 		if (controls.TERTIARY)

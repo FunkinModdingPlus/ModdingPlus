@@ -157,7 +157,7 @@ class VictoryLoopState extends MusicBeatSubstate
 			}
 		}
 
-		if ((controls.UP_P || controls.DOWN_P)) {
+		if ((controls.UP_MENU || controls.DOWN_MENU)) {
 			selectingRetry = !selectingRetry;
 			if (selectingRetry) {
 				retryTxt.alpha = 1;

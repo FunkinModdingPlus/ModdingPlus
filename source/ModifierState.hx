@@ -391,17 +391,17 @@ class ModifierState extends MusicBeatState
 			else
 				LoadingState.loadAndSwitchState(new FreeplayState());
 		}
-		if (controls.UP_P)
+		if (controls.UP_MENU)
 		{
 			changeSelection(-1);
 		}
-		if (controls.DOWN_P)
+		if (controls.DOWN_MENU)
 		{
 			changeSelection(1);
 		}
-		if (controls.RIGHT_P) {
+		if (controls.RIGHT_MENU) {
 			changeAmount(true);
-		}  else if (controls.LEFT_P) {
+		}  else if (controls.LEFT_MENU) {
 			changeAmount(false);
 		}
 		if (controls.ACCEPT)

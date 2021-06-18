@@ -65,9 +65,9 @@ class OptionsMenu extends MusicBeatState
 		{
 			if (controls.BACK)
 				LoadingState.loadAndSwitchState(new MainMenuState());
-			if (controls.UP_P)
+			if (controls.UP_MENU)
 				changeSelection(-1);
-			if (controls.DOWN_P)
+			if (controls.DOWN_MENU)
 				changeSelection(1);
 		}
 	}

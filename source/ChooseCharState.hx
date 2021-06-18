@@ -101,16 +101,16 @@ class ChooseCharState extends MusicBeatState
         if (controls.BACK) {
 			LoadingState.loadAndSwitchState(new ModifierState());
         }
-        if (controls.UP_P)
+        if (controls.UP_MENU)
         {
             changeSelection(-1);
         }
-        if (controls.DOWN_P)
+        if (controls.DOWN_MENU)
         {
             changeSelection(1);
         }
 
-        if (controls.RIGHT_P || controls.LEFT_P) {
+        if (controls.RIGHT_MENU || controls.LEFT_MENU) {
                 swapMenus();
         }
 

@@ -26,6 +26,14 @@ enum abstract Action(String) to String from String
 	var LEFT_R = "left-release";
 	var RIGHT_R = "right-release";
 	var DOWN_R = "down-release";
+	var UP_MENU = "up-menu";
+	var LEFT_MENU = "left-menu";
+	var RIGHT_MENU = "right-menu";
+	var DOWN_MENU = "down-menu";
+	var UP_MENU_H = "up-menu-hold";
+	var LEFT_MENU_H = "left-menu-hold";
+	var RIGHT_MENU_H = "right-menu-hold";
+	var DOWN_MENU_H = "down-menu-hold";
 	var ACCEPT = "accept";
 	var SECONDARY = "secondary";
 	var TERTIARY = "tertiary";
@@ -82,6 +90,11 @@ enum Control
 	CHEAT;
 	SECONDARY;
 	TERTIARY;
+	LEFT_MENU;
+	RIGHT_MENU;
+	UP_MENU;
+	DOWN_MENU;
+	
 }
 
 enum KeyboardScheme
@@ -110,6 +123,14 @@ class Controls extends FlxActionSet
 	var _leftR = new FlxActionDigital(Action.LEFT_R);
 	var _rightR = new FlxActionDigital(Action.RIGHT_R);
 	var _downR = new FlxActionDigital(Action.DOWN_R);
+	var _menuLeft = new FlxActionDigital(Action.LEFT_MENU);
+	var _menuRight = new FlxActionDigital(Action.RIGHT_MENU);
+	var _menuUp = new FlxActionDigital(Action.UP_MENU);
+	var _menuDown = new FlxActionDigital(Action.DOWN_MENU);
+	var _menuLeftHold = new FlxActionDigital(Action.LEFT_MENU_H);
+	var _menuRightHold = new FlxActionDigital(Action.RIGHT_MENU_H);
+	var _menuUpHold = new FlxActionDigital(Action.UP_MENU_H);
+	var _menuDownHold = new FlxActionDigital(Action.DOWN_MENU_H);
 	var _accept = new FlxActionDigital(Action.ACCEPT);
 	var _back = new FlxActionDigital(Action.BACK);
 	var _pause = new FlxActionDigital(Action.PAUSE);
@@ -125,6 +146,46 @@ class Controls extends FlxActionSet
 
 	public var gamepadsAdded:Array<Int> = [];
 	public var keyboardScheme = KeyboardScheme.None;
+
+	public var UP_MENU(get, never):Bool;
+	
+	inline function get_UP_MENU()
+		return _menuUp.check();
+
+	public var DOWN_MENU(get, never):Bool;
+
+	inline function get_DOWN_MENU()
+		return _menuDown.check();
+
+	public var LEFT_MENU(get, never):Bool;
+
+	inline function get_LEFT_MENU()
+		return _menuLeft.check();
+
+	public var RIGHT_MENU(get, never):Bool;
+
+	inline function get_RIGHT_MENU()
+		return _menuRight.check();
+
+	public var UP_MENU_H(get, never):Bool;
+
+	inline function get_UP_MENU_H()
+		return _menuUpHold.check();
+
+	public var DOWN_MENU_H(get, never):Bool;
+
+	inline function get_DOWN_MENU_H()
+		return _menuDownHold.check();
+
+	public var LEFT_MENU_H(get, never):Bool;
+
+	inline function get_LEFT_MENU_H()
+		return _menuLeftHold.check();
+
+	public var RIGHT_MENU_H(get, never):Bool;
+
+	inline function get_RIGHT_MENU_H()
+		return _menuRightHold.check();
 
 	public var UP(get, never):Bool;
 
@@ -240,6 +301,14 @@ class Controls extends FlxActionSet
 		add(_cheat);
 		add(_secondary);
 		add(_tertiary);
+		add(_menuDown);
+		add(_menuDownHold);
+		add(_menuLeft);
+		add(_menuLeftHold);
+		add(_menuRight);
+		add(_menuRightHold);
+		add(_menuUp);
+		add(_menuUpHold);
 		for (action in digitalActions)
 			byName[action.name] = action;
 
@@ -323,6 +392,10 @@ class Controls extends FlxActionSet
 			case CHEAT: _cheat;
 			case SECONDARY: _secondary;
 			case TERTIARY: _tertiary;
+			case UP_MENU: _menuUp;
+			case DOWN_MENU: _menuDown;
+			case LEFT_MENU: _menuLeft;
+			case RIGHT_MENU: _menuRight;
 		}
 	}
 
@@ -372,6 +445,18 @@ class Controls extends FlxActionSet
 				func(_secondary, JUST_PRESSED);
 			case TERTIARY:
 				func(_tertiary, JUST_PRESSED);
+			case LEFT_MENU:
+				func(_menuLeft, JUST_PRESSED);
+				func(_menuLeftHold, PRESSED);
+			case RIGHT_MENU:
+				func(_menuRight, JUST_PRESSED);
+				func(_menuRightHold, PRESSED);
+			case UP_MENU:
+				func(_menuUp, JUST_PRESSED);
+				func(_menuUpHold, PRESSED);
+			case DOWN_MENU:
+				func(_menuDown, JUST_PRESSED);
+				func(_menuDownHold, PRESSED);
 		}
 	}
 
@@ -510,34 +595,33 @@ class Controls extends FlxActionSet
 			removeKeyboard();
 
 		keyboardScheme = scheme;
-
+		if (!Reflect.hasField(FlxG.save.data, "keys")) {
+			FlxG.save.data.keys = {
+				"left": D,
+				"down": F,
+				"up": J,
+				"right": K
+			};
+		}
 		#if (haxe >= "4.0.0")
 		switch (scheme)
 		{
 			// Keys are always rebinded before playstate starts. Note that this totally fucks up menuing lol.
-			case Solo(false):
-				inline bindKeys(Control.UP, [W, FlxKey.UP, K]);
-				inline bindKeys(Control.DOWN, [S, FlxKey.DOWN, J]);
-				inline bindKeys(Control.LEFT, [A, FlxKey.LEFT, H]);
-				inline bindKeys(Control.RIGHT, [D, FlxKey.RIGHT, L]);
-				
+			case Solo(false) | Solo(true):
+				inline bindKeys(Control.UP, [FlxG.save.data.keys.up]);
+				inline bindKeys(Control.DOWN, [FlxG.save.data.keys.down]);
+				inline bindKeys(Control.LEFT, [FlxG.save.data.keys.left]);
+				inline bindKeys(Control.RIGHT, [FlxG.save.data.keys.right]);
+				inline bindKeys(Control.UP_MENU, [W, FlxKey.UP]);
+				inline bindKeys(Control.DOWN_MENU, [S, FlxKey.DOWN]);
+				inline bindKeys(Control.LEFT_MENU, [A, FlxKey.LEFT]);
+				inline bindKeys(Control.RIGHT_MENU, [D, FlxKey.RIGHT]);
 				inline bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
 				inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 				inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
 				inline bindKeys(Control.RESET, [R]);
 				inline bindKeys(Control.SECONDARY, [E]);
 				inline bindKeys(Control.TERTIARY,[Q]);
-			case Solo(true):
-				inline bindKeys(Control.UP, [FlxKey.UP, J]);
-				inline bindKeys(Control.DOWN, [FlxKey.DOWN, F]);
-				inline bindKeys(Control.LEFT, [FlxKey.LEFT, D]);
-				inline bindKeys(Control.RIGHT, [FlxKey.RIGHT, K]);
-				inline bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
-				inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
-				inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
-				inline bindKeys(Control.RESET, [R]);
-				inline bindKeys(Control.SECONDARY, [E]);
-				inline bindKeys(Control.TERTIARY, [Q]);
 			case Duo(true):
 				inline bindKeys(Control.UP, [W,K]);
 				inline bindKeys(Control.DOWN, [S,J]);
@@ -549,6 +633,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.RESET, [R]);
 				inline bindKeys(Control.SECONDARY, [E]);
 				inline bindKeys(Control.TERTIARY, [T]);
+				inline bindKeys(Control.UP_MENU, [W, FlxKey.UP]);
+				inline bindKeys(Control.DOWN_MENU, [S, FlxKey.DOWN]);
+				inline bindKeys(Control.LEFT_MENU, [A, FlxKey.LEFT]);
+				inline bindKeys(Control.RIGHT_MENU, [D, FlxKey.RIGHT]);
 			case Duo(false):
 				inline bindKeys(Control.UP, [FlxKey.UP,PERIOD]);
 				inline bindKeys(Control.DOWN, [FlxKey.DOWN,C]);
@@ -560,18 +648,26 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.RESET, [BACKSPACE]);
 				inline bindKeys(Control.SECONDARY, [BACKSLASH]);
 				inline bindKeys(Control.TERTIARY, [RBRACKET]);
+				inline bindKeys(Control.UP_MENU, [W, FlxKey.UP]);
+				inline bindKeys(Control.DOWN_MENU, [S, FlxKey.DOWN]);
+				inline bindKeys(Control.LEFT_MENU, [A, FlxKey.LEFT]);
+				inline bindKeys(Control.RIGHT_MENU, [D, FlxKey.RIGHT]);
 			case None: // nothing
 			case Custom:
-				inline bindKeys(Control.UP, [W, FlxKey.UP, J]);
-				inline bindKeys(Control.DOWN, [S, FlxKey.DOWN, F]);
-				inline bindKeys(Control.LEFT, [A, FlxKey.LEFT, D]);
-				inline bindKeys(Control.RIGHT, [FlxKey.RIGHT, K]);
+				inline bindKeys(Control.UP, [FlxG.save.data.keys.up]);
+				inline bindKeys(Control.DOWN, [FlxG.save.data.keys.down]);
+				inline bindKeys(Control.LEFT, [FlxG.save.data.keys.left]);
+				inline bindKeys(Control.RIGHT, [FlxG.save.data.keys.right]);
 				inline bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
 				inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 				inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
 				inline bindKeys(Control.RESET, [R]);
 				inline bindKeys(Control.SECONDARY, [E]);
 				inline bindKeys(Control.TERTIARY,[Q]);
+				inline bindKeys(Control.UP_MENU, [W, FlxKey.UP]);
+				inline bindKeys(Control.DOWN_MENU, [S, FlxKey.DOWN]);
+				inline bindKeys(Control.LEFT_MENU, [A, FlxKey.LEFT]);
+				inline bindKeys(Control.RIGHT_MENU, [D, FlxKey.RIGHT]);
 		}
 		#else
 		switch (scheme)

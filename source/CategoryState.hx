@@ -132,8 +132,8 @@ class CategoryState extends MusicBeatState
 		}
 
 
-		var upP = controls.UP_P;
-		var downP = controls.DOWN_P;
+		var upP = controls.UP_MENU;
+		var downP = controls.DOWN_MENU;
 		var accepted = controls.ACCEPT;
 
 		if (upP)
