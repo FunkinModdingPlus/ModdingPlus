@@ -104,6 +104,23 @@ class FreeplayState extends MusicBeatState
 									break;
 								}
 							}
+							var songReg = ~/song-(.+)/g;
+							if (songReg.match(flag)) {
+								var songie = songReg.matched(1);
+								var diffJson = CoolUtil.parseJson(Assets.getText("assets/images/custom_difficulties/difficulties.json"));
+								var existsSong = false;
+								for (diff in 0...diffJson.difficulties.length) {
+									if (Highscore.getScore(songie, diff) != 0) {
+										existsSong = true;
+										break;
+									}
+								}
+								if (!existsSong) {
+									canUse = false;
+									break;
+								}
+									
+							}
 					}
 				}
 				if (canUse) 

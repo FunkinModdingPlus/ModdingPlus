@@ -264,7 +264,7 @@ class FileParser {
 			bfFIL: 4,
 			bgFIT: 0.08,
             // hehe
-			dialogueBox: 'normal',
+			dialogueBox: 'classic',
 			musicVolume: 1,
 			musicName: 'lunchbox',
 			fadeOutLoop: 5,
@@ -299,7 +299,7 @@ class FileParser {
 				fontscale: 32,
 				fontname: "Funkin",
 				dialogueSound: "pixelText",
-				dialogueBox: "normal",
+				dialogueBox: "classic",
 				emotion: "normal",
 				flashDelay: 0,
 				flashDuration: 0,
