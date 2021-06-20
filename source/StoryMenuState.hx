@@ -43,6 +43,8 @@ typedef WeekInfo = {
 	var ?gf:String;
 	var ?flags:Array<String>;
 	var ?visibleFlags:Array<String>;
+	// any format flxcolor supports this supports? lol
+	var ?color:FlxColor;
 }
 typedef DifficultysJson = {
 	var difficulties:Array<Dynamic>;
@@ -61,6 +63,7 @@ class StoryMenuState extends MusicBeatState
 	var weekCharacters:Array<Dynamic> = [];
 	var weekNums:Array<Int> = [];
 	var lastWeek:Int = 0;
+	var coolors:Array<FlxColor> = [];
 	/*var weekNames:Array<String> = [
 		"",
 		"Daddy Dearest",
@@ -84,6 +87,7 @@ class StoryMenuState extends MusicBeatState
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 	var oldMode:Bool = false;
+	var yellowBG:FlxSprite;
 	override function create()
 	{
 		trace(DifficultyIcons.getDefaultDiffFP());
@@ -108,6 +112,7 @@ class StoryMenuState extends MusicBeatState
 		var titlesParsed:Array<String> = [];
 		var charsParsed:Array<Array<String>> = [];
 		var flagsParsed:Array<Array<String>> = [];
+		var colorsParsed:Array<FlxColor> = [];
 		if (versionJson == 2) {
 			var useWeek = 0;
 			for (weekInfo in storySongJson.weeks)
@@ -165,6 +170,7 @@ class StoryMenuState extends MusicBeatState
 				charArray.push(weekInfo.dad == null ? "dad" : weekInfo.dad);
 				charArray.push(weekInfo.bf == null ? "bf" : weekInfo.bf);
 				charArray.push(weekInfo.gf == null ? "gf" : weekInfo.gf);
+				coolors.push(weekInfo.color == null ?0xFFF9CF51 : weekInfo.color);
 				charsParsed.push(charArray);
 				var flagArray = weekInfo.flags == null ? [] : weekInfo.flags;
 				flagsParsed.push(flagArray);
@@ -177,6 +183,9 @@ class StoryMenuState extends MusicBeatState
 			songsParsed = storySongJson.songs;
 			titlesParsed = storySongJson.weekNames;
 			charsParsed = storySongJson.characters;
+			for (_ in 0...songsParsed.length) {
+				coolors.push(0xFFF9CF51);
+			}
 		}
 		for (storySongList in songsParsed)
 		{
@@ -270,7 +279,7 @@ class StoryMenuState extends MusicBeatState
 		rankText.screenCenter(X);
 
 		var ui_tex = FlxAtlasFrames.fromSparrow('assets/images/campaign_menu_UI_assets.png', 'assets/images/campaign_menu_UI_assets.xml');
-		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFFF9CF51);
+		yellowBG = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, FlxColor.WHITE);
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(grpWeekText);
@@ -607,7 +616,7 @@ class StoryMenuState extends MusicBeatState
 				weekCharactersArray.members[curWeek].members[0].setGraphicSize(Std.int(weekCharactersArray.members[curWeek].members[0].width * 1));
 				// weekCharactersArray.members[curWeek].members[0].updateHitbox();
 		}
-
+		yellowBG.color = coolors[curWeek];
 		var stringThing:Array<String> = weekData[curWeek];
 
 		for (i in stringThing)

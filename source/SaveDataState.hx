@@ -64,7 +64,7 @@ class SaveDataState extends MusicBeatState
 						{name: "Skip Victory Screen", value: false, intName : "skipVictoryScreen", desc: "Skip the victory screen at the end of songs."},
 						{name: "Downscroll", value: false, intName: "downscroll", desc: "Put da arrows on the bottom and have em scroll down"},
 						{name: "Judge", value: false, intName: "judge", desc: "The Judge to use.", amount: cast Judge.Jury.Classic, defAmount: cast Judge.Jury.Classic, max: 10},
-						{name: "Use New input", value: false, intName: "useCustomInput", desc: "Whether to allow spamming"},
+						{name: "Ghost Tapping", value: false, intName: "useCustomInput", desc: "Whether to allow spamming"},
 						// sorry, always ignore bad timing :penisve:
 						/*{name: "Ignore Bad Timing", value: false, intName:"ignoreShittyTiming", desc: "Even with new input on, if you hit a note really poorly, it counts as a miss. This disables that."},*/
 						{name: "Show Song Position", value: false, intName: "showSongPos", desc: "Whether to show the song bar."},

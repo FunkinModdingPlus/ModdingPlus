@@ -252,6 +252,7 @@ class FileParser {
         }
         return dialogueFile;
     }
+    // not as good as advanced and will never be :angry:
     public static function parseOldDialogAsAdvanced(content:String):AdvancedDialogFile {
         var dialogList = content.split('\n');
 		var dialogFile:AdvancedDialogFile = {defines: {

@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.typeLimit.OneOfTwo;
 import FreeplayState.JsonMetadata;
 import flash.text.TextField;
 import flixel.FlxG;
@@ -27,7 +28,7 @@ class CategoryState extends MusicBeatState
 {
 	var categories:Array<String> = [];
 	public static var choosingFor:String = "freeplay";
-	var categorySongs:Array<Array<JsonMetadata>> =[];
+	var categorySongs:Array<Array<OneOfTwo<JsonMetadata, String>>> =[];
 	var categorybgs:Array<Array<String>> =[];
 	var selector:FlxText;
 	var curSelected:Int = 0;
@@ -154,11 +155,33 @@ class CategoryState extends MusicBeatState
 		
 		if (accepted && categorySongs[curSelected].length > 0 && choosingFor == "freeplay")
 		{
-			FreeplayState.currentSongList = categorySongs[curSelected];
+			var songsButData:Array<JsonMetadata> = [];
+			for (song in categorySongs[curSelected])
+			{
+				if ((song is String))
+				{
+					// we have to generate our own metadata
+					songsButData.push({name: song, week: -1, character: "face"});
+				}
+				else
+				{
+					songsButData.push(cast(song : JsonMetadata));
+				}
+			}
+			FreeplayState.currentSongList = songsButData;
 			LoadingState.loadAndSwitchState(new FreeplayState());
 
 		} else if (accepted && categorySongs[curSelected].length > 0) {
-			SortState.stuffToSort = categorySongs[curSelected];
+			var songsButData:Array<JsonMetadata> = [];
+			for (song in categorySongs[curSelected]) {
+				if ((song is String)) {
+					// we have to generate our own metadata
+					songsButData.push({name: song, week: -1, character: "face"});
+				} else {
+					songsButData.push(cast (song : JsonMetadata));
+				}
+			}
+			SortState.stuffToSort = songsButData;
 			SortState.category = categories[curSelected];
 			LoadingState.loadAndSwitchState(new SortState());
 		} 
