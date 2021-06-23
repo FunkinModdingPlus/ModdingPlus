@@ -1,5 +1,6 @@
 package;
 
+import Judgement.TUI;
 import openfl.errors.Error;
 import flixel.util.typeLimit.OneOfTwo;
 import flixel.FlxSprite;
@@ -188,14 +189,13 @@ class Note extends FlxSprite
 			shouldBeSung = false;
 			// dontStrum = true;
 		}
-			
+		var curUiType:TUI = Reflect.field(Judgement.uiJson, PlayState.SONG.uiType);
 		// var daStage:String = PlayState.curStage;
-		if (FNFAssets.exists('assets/images/custom_ui/ui_packs/' + PlayState.SONG.uiType + "/NOTE_assets.xml")
-			&& FNFAssets.exists('assets/images/custom_ui/ui_packs/' + PlayState.SONG.uiType + "/NOTE_assets.png"))
+		if (!curUiType.isPixel)
 		{
 			frames = FlxAtlasFrames.fromSparrow('assets/images/custom_ui/ui_packs/'
-				+ PlayState.SONG.uiType
-				+ "/NOTE_assets.png", 'assets/images/custom_ui/ui_packs/' + PlayState.SONG.uiType + "/NOTE_assets.xml");
+				+ curUiType.uses
+				+ "/NOTE_assets.png", 'assets/images/custom_ui/ui_packs/' + curUiType.uses + "/NOTE_assets.xml");
 			if (animSuffix == null)
 			{
 				animSuffix = '';
@@ -252,11 +252,10 @@ class Note extends FlxSprite
 			antialiasing = true;
 			// when arrowsEnds != arrowEnds :laughing_crying:
 		}
-		else if (FNFAssets.exists('assets/images/custom_ui/ui_packs/' + PlayState.SONG.uiType + "/arrows-pixels.png")
-			&& FNFAssets.exists('assets/images/custom_ui/ui_packs/' + PlayState.SONG.uiType + "/arrowEnds.png"))
+		else
 		{
 			isPixel = true;
-			loadGraphic('assets/images/custom_ui/ui_packs/' + PlayState.SONG.uiType + "/arrows-pixels.png", true, 17, 17);
+			loadGraphic('assets/images/custom_ui/ui_packs/' + curUiType.uses + "/arrows-pixels.png", true, 17, 17);
 			if (animSuffix != null && numSuffix == null)
 			{
 				numSuffix = Std.parseInt(animSuffix);
@@ -270,7 +269,7 @@ class Note extends FlxSprite
 				animation.add('purpleScroll', [intSuffix]);
 				if (isSustainNote)
 				{
-					loadGraphic('assets/images/custom_ui/ui_packs/' + PlayState.SONG.uiType + "/arrowEnds.png", true, 7, 6);
+					loadGraphic('assets/images/custom_ui/ui_packs/' + curUiType.uses + "/arrowEnds.png", true, 7, 6);
 
 					animation.add('purpleholdend', [intSuffix]);
 					animation.add('greenholdend', [intSuffix]);
@@ -292,7 +291,7 @@ class Note extends FlxSprite
 
 				if (isSustainNote)
 				{
-					loadGraphic('assets/images/custom_ui/ui_packs/' + PlayState.SONG.uiType + "/arrowEnds.png", true, 7, 6);
+					loadGraphic('assets/images/custom_ui/ui_packs/' + curUiType.uses + "/arrowEnds.png", true, 7, 6);
 
 					animation.add('purpleholdend', [4]);
 					animation.add('greenholdend', [6]);
@@ -333,11 +332,6 @@ class Note extends FlxSprite
 			}
 			setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 			updateHitbox();
-		}
-		else
-		{
-			// crashing today :)
-			throw new Error("Couldn't find arrow file for current ui type.");
 		}
 		switch (noteData % NOTE_AMOUNT)
 		{

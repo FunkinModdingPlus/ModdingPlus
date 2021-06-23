@@ -1,6 +1,2 @@
 normal
 pixel
-templatePixel
-template
-etternaNormal
-etternaTiming

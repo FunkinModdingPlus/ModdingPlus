@@ -16,6 +16,7 @@ import flash.net.FileReference;
 import flash.events.Event;
 import openfl.events.IOErrorEvent;
 import haxe.io.Bytes;
+import openfl.utils.AssetType;
 class FNFAssets {
     public static var _file:FileReference;
     public static function getText(id:String):String {
@@ -34,6 +35,28 @@ class FNFAssets {
             return Assets.getText(id);
         #end
     }
+	public static function getAssetWithBackup(id:String, backupID:String, type:AssetType):Dynamic {
+		// backup id should always exist
+		if (FNFAssets.exists(id)) {
+			return FNFAssets.getAsset(id, type);
+		}
+		return FNFAssets.getAsset(backupID, type);
+	} 
+	// generic thing to get asset
+	public static function getAsset(id:String, type:AssetType):Dynamic {
+		switch (type) {
+			case TEXT:
+				return FNFAssets.getText(id);
+			case BINARY:
+				return FNFAssets.getBytes(id);
+			case MUSIC | SOUND:
+				return FNFAssets.getSound(id);
+			case IMAGE:
+				return FNFAssets.getBitmapData(id);
+			default:
+				throw "Unsure of how to get type " + type;
+		}
+	}
 	public static function getBytes(id:String):Bytes
 	{
 		#if sys

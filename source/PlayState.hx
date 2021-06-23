@@ -68,6 +68,7 @@ import lime.media.AudioBuffer;
 
 #end
 import tjson.TJSON;
+import Judgement.TUI;
 using StringTools;
 using CoolUtil.FlxTools;
 typedef LuaAnim = {
@@ -424,12 +425,15 @@ class PlayState extends MusicBeatState
 	var daycoreMode:Bool = false;
 	var useSongBar:Bool = true;
 	var songName:FlxText;
+	var uiSmelly:TUI;
 	override public function create()
 	{
 		Note.specialNoteJson = null;
 		if (FNFAssets.exists('assets/data/${SONG.song.toLowerCase()}/noteInfo.json')) {
 			Note.specialNoteJson = CoolUtil.parseJson(FNFAssets.getText('assets/data/${SONG.song.toLowerCase()}/noteInfo.json'));
 		}
+		Judgement.uiJson = CoolUtil.parseJson(FNFAssets.getText('assets/images/custom_ui/ui_packs/ui.json'));
+		uiSmelly = Reflect.field(Judgement.uiJson, SONG.uiType);
 		misses = 0;
 		bads = 0;
 		goods = 0;
@@ -442,8 +446,9 @@ class PlayState extends MusicBeatState
 		preferredJudgement = judgementList[OptionsHandler.options.preferJudgement];
 		if (preferredJudgement == 'none' || SONG.forceJudgements) {
 			preferredJudgement = SONG.uiType;
-			if (preferredJudgement == 'pixel')
-				preferredJudgement = 'normal';
+			// if it is not using its own folder make preferred judgement
+			if (Reflect.hasField(Judgement.uiJson, preferredJudgement) && Reflect.field(Judgement.uiJson, preferredJudgement).uses != preferredJudgement)
+				preferredJudgement = Reflect.field(Judgement.uiJson, preferredJudgement).uses;
 		}
 		#if windows
 		// Making difficulty text for Discord Rich Presence.
@@ -518,7 +523,7 @@ class PlayState extends MusicBeatState
 		downscroll = OptionsHandler.options.downscroll;
 		useSongBar = OptionsHandler.options.showSongPos;
 		Judge.setJudge(cast OptionsHandler.options.judge);
-		pixelUI = FNFAssets.exists('assets/images/custom_ui/ui_packs/' + SONG.uiType + "/arrows-pixels.png");
+		pixelUI = uiSmelly.isPixel;
 		if (!OptionsHandler.options.skipModifierMenu) {
 			fullComboMode = ModifierState.namedModifiers.fc.value;
 			goodCombo = ModifierState.namedModifiers.gfc.value;
@@ -1101,11 +1106,17 @@ class PlayState extends MusicBeatState
 
 			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 
-			for (field in CoolUtil.coolTextFile('assets/data/uitypes.txt')) {
-				if (FNFAssets.exists('assets/images/custom_ui/ui_packs/'+SONG.uiType+"/arrows-pixels.png"))
-					introAssets.set(field, ['custom_ui/ui_packs/'+field+'/ready-pixel.png','custom_ui/ui_packs/'+field+'/set-pixel.png','custom_ui/ui_packs/'+field+'/date-pixel.png']);
+			for (field in Reflect.fields(Judgement.uiJson)) {
+				if (Reflect.field(Judgement.uiJson, field).isPixel)
+					introAssets.set(field, [
+						'custom_ui/ui_packs/' + Reflect.field(Judgement.uiJson, field).uses + '/ready-pixel.png',
+						'custom_ui/ui_packs/' + Reflect.field(Judgement.uiJson, field).uses + '/set-pixel.png',
+						'custom_ui/ui_packs/' + Reflect.field(Judgement.uiJson, field).uses+'/date-pixel.png']);
 				else
-					introAssets.set(field, ['custom_ui/ui_packs/'+field+'/ready.png','custom_ui/ui_packs/'+field+'/set.png','custom_ui/ui_packs/'+field+'/go.png']);
+					introAssets.set(field, [
+						'custom_ui/ui_packs/' + field + '/ready.png',
+						'custom_ui/ui_packs/' + Reflect.field(Judgement.uiJson, field).uses + '/set.png',
+						'custom_ui/ui_packs/' + Reflect.field(Judgement.uiJson, field).uses+'/go.png']);
 			
 			}
 
@@ -1127,13 +1138,13 @@ class PlayState extends MusicBeatState
 			}
 
 			// god is dead for we have killed him
-			if (FNFAssets.exists("assets/images/custom_ui/ui_packs/" + SONG.uiType + '/intro3' + altSuffix + '.ogg')) {
-				intro3Sound = FNFAssets.getSound("assets/images/custom_ui/ui_packs/" + SONG.uiType + '/intro3' + altSuffix + '.ogg');
-				intro2Sound = FNFAssets.getSound("assets/images/custom_ui/ui_packs/" + SONG.uiType + '/intro2' + altSuffix + '.ogg');
-				intro1Sound = FNFAssets.getSound("assets/images/custom_ui/ui_packs/" + SONG.uiType + '/intro1' + altSuffix + '.ogg');
+			if (FNFAssets.exists("assets/images/custom_ui/ui_packs/" + uiSmelly.uses + '/intro3' + altSuffix + '.ogg')) {
+				intro3Sound = FNFAssets.getSound("assets/images/custom_ui/ui_packs/" + uiSmelly.uses + '/intro3' + altSuffix + '.ogg');
+				intro2Sound = FNFAssets.getSound("assets/images/custom_ui/ui_packs/" + uiSmelly.uses + '/intro2' + altSuffix + '.ogg');
+				intro1Sound = FNFAssets.getSound("assets/images/custom_ui/ui_packs/" + uiSmelly.uses + '/intro1' + altSuffix + '.ogg');
 				// apparently this crashes if we do it from audio buffer?
 				// no it just understands 'hey that file doesn't exist better do an error'
-				introGoSound = FNFAssets.getSound("assets/images/custom_ui/ui_packs/" + SONG.uiType + '/introGo' + altSuffix + '.ogg');
+				introGoSound = FNFAssets.getSound("assets/images/custom_ui/ui_packs/" + uiSmelly.uses + '/introGo' + altSuffix + '.ogg');
 			} else {
 				intro3Sound = FNFAssets.getSound('assets/sounds/intro3.ogg');
 				intro2Sound = FNFAssets.getSound('assets/sounds/intro2.ogg');
@@ -1352,11 +1363,11 @@ class PlayState extends MusicBeatState
 		var arrowEndsImage:Null<BitmapData> = null;
 		if (!pixelUI) {
 			trace("has this been reached");
-			customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/'+SONG.uiType+'/NOTE_assets.png');
-			customXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/'+SONG.uiType+'/NOTE_assets.xml');
+			customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/NOTE_assets.png');
+			customXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/NOTE_assets.xml');
 		} else {
-			customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/'+SONG.uiType+'/arrows-pixels.png');
-			arrowEndsImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/'+SONG.uiType+'/arrowEnds.png');
+			customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/arrows-pixels.png');
+			arrowEndsImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/arrowEnds.png');
 		}
 		
 
@@ -1563,11 +1574,10 @@ class PlayState extends MusicBeatState
 		{
 			// FlxG.log.add(i);
 			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
-			if (FNFAssets.exists('assets/images/custom_ui/ui_packs/' + SONG.uiType + "/NOTE_assets.xml")
-				&& FNFAssets.exists('assets/images/custom_ui/ui_packs/' + SONG.uiType + "/NOTE_assets.png"))
+			if (!uiSmelly.isPixel)
 			{
-				var noteXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + SONG.uiType + "/NOTE_assets.xml");
-				var notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + SONG.uiType + "/NOTE_assets.png");
+				var noteXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.xml");
+				var notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.png");
 				babyArrow.frames = FlxAtlasFrames.fromSparrow(notePic, noteXml);
 				babyArrow.animation.addByPrefix('green', 'arrowUP');
 				babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
@@ -1631,9 +1641,9 @@ class PlayState extends MusicBeatState
 						}
 				}
 			}
-			else if (FNFAssets.exists('assets/images/custom_ui/ui_packs/' + SONG.uiType + "/arrows-pixels.png"))
+			else
 			{
-				var notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + SONG.uiType + "/arrows-pixels.png");
+				var notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels.png");
 				babyArrow.loadGraphic(notePic, true, 17, 17);
 				babyArrow.animation.add('green', [6]);
 				babyArrow.animation.add('red', [7]);
@@ -1698,72 +1708,7 @@ class PlayState extends MusicBeatState
 						}
 				}
 			}
-			else
-			{
-				// no crashing today :)
-				babyArrow.frames = FlxAtlasFrames.fromSparrow('assets/images/NOTE_assets.png', 'assets/images/NOTE_assets.xml');
-				babyArrow.animation.addByPrefix('green', 'arrowUP');
-				babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
-				babyArrow.animation.addByPrefix('purple', 'arrowLEFT');
-				babyArrow.animation.addByPrefix('red', 'arrowRIGHT');
-				if (flippedNotes)
-				{
-					babyArrow.animation.addByPrefix('blue', 'arrowUP');
-					babyArrow.animation.addByPrefix('green', 'arrowDOWN');
-					babyArrow.animation.addByPrefix('red', 'arrowLEFT');
-					babyArrow.animation.addByPrefix('purple', 'arrowRIGHT');
-				}
-				babyArrow.antialiasing = true;
-				babyArrow.setGraphicSize(Std.int(babyArrow.width * 0.7));
-
-				switch (Math.abs(i))
-				{
-					case 2:
-						babyArrow.x += Note.swagWidth * 2;
-						babyArrow.animation.addByPrefix('static', 'arrowUP');
-						babyArrow.animation.addByPrefix('pressed', 'up press', 24, false);
-						babyArrow.animation.addByPrefix('confirm', 'up confirm', 24, false);
-						if (flippedNotes)
-						{
-							babyArrow.animation.addByPrefix('static', 'arrowDOWN');
-							babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
-						}
-					case 3:
-						babyArrow.x += Note.swagWidth * 3;
-						babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
-						babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
-						babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
-						if (flippedNotes)
-						{
-							babyArrow.animation.addByPrefix('static', 'arrowLEFT');
-							babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
-						}
-					case 1:
-						babyArrow.x += Note.swagWidth * 1;
-						babyArrow.animation.addByPrefix('static', 'arrowDOWN');
-						babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
-						babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
-						if (flippedNotes)
-						{
-							babyArrow.animation.addByPrefix('static', 'arrowUP');
-							babyArrow.animation.addByPrefix('pressed', 'up press', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'up confirm', 24, false);
-						}
-					case 0:
-						babyArrow.x += Note.swagWidth * 0;
-						babyArrow.animation.addByPrefix('static', 'arrowLEFT');
-						babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
-						babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
-						if (flippedNotes)
-						{
-							babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
-							babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
-						}
-				}
-			}
+			
 
 			babyArrow.updateHitbox();
 			babyArrow.scrollFactor.set();
@@ -3041,14 +2986,11 @@ class PlayState extends MusicBeatState
 		 */
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
-		if (FNFAssets.exists('assets/images/custom_ui/ui_packs/'+SONG.uiType+"/arrows-pixels.png")) {
+		if (uiSmelly.isPixel) {
 			pixelShitPart2 = '-pixel';
 		}
 		var ratingImage:BitmapData;
-		if (FNFAssets.exists('assets/images/custom_ui/ui_packs/' + PlayState.SONG.uiType + '/' + daRating + pixelShitPart2 + ".png"))
-			ratingImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + PlayState.SONG.uiType + '/' + daRating + pixelShitPart2 + ".png");
-		else
-			ratingImage = FNFAssets.getBitmapData('assets/images/' + daRating + '.png');
+		ratingImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + '/' + daRating + pixelShitPart2 + ".png");
 		trace(pixelUI);
 		rating = new Judgement(0, 0, daRating, preferredJudgement,
 			noteDiffSigned < 0, pixelUI);
@@ -3125,8 +3067,8 @@ class PlayState extends MusicBeatState
 		for (i in seperatedScore)
 		{
 			var numImage:BitmapData;
-			if (FNFAssets.exists('assets/images/custom_ui/ui_packs/' + SONG.uiType + '/num' + Std.int(i) + pixelShitPart2 + ".png"))
-				numImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + SONG.uiType + '/num' + Std.int(i) + pixelShitPart2 + ".png");
+			if (FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + '/num' + Std.int(i) + pixelShitPart2 + ".png"))
+				numImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + '/num' + Std.int(i) + pixelShitPart2 + ".png");
 			else
 				numImage = FNFAssets.getBitmapData('assets/images/num' + Std.int(i) + '.png');
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(numImage);
