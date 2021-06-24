@@ -1,159 +1,172 @@
-How to use:
-  Custom Songs:
-    Make a new folder in assets/data
-    Name it what you want the song name to be but lowercase and replace spaces
-    with "-"
-    (like Life Will Change > life-will-change)
-    Add json files to folder
-    Rename each file to the folder name + the difficulty ending, if applicable
-    Make a temp folder in assets/music
-    Add the music to the folder
-    Rename them to the name of the song with hyphens ("-") with the suffix
-    (like Life Will Change > Life-Will-Change)
-    Drag them out to assets/music
-    Go to freeplaySonglist.txt
-    Add the song name to it, with the same name as the music files
-    (like Life Will Change > Life-Will-Change)
-    Launch FNF
-    For each difficulty:
-    Open the song
-    Hit the '7' key
-    Go to the song tab
-    Click on the text box
-    Replace what is in there with the name of the music files
-    (like Life Will Change > Life-Will-Change)
-    Hit 'Save'
-    Save the file and remember to add the difficulty suffix
-    After finishing this add the saved file to the folder and overwrite.
-  Custom Characters:
-    Go to assets/images/custom_chars
-    Drag in the mod png and xml (if no xml grab the base game one)
-    Rename them to the name of the character (should be lowercase)
-    If there are custom icons:
-      Add the iconGrid.png
-      Rename to (character name)_icons.png
-    Open custom_chars.json
-    Add a new property:
-      "(character name)": {
-        "like": "(character this is based on)",
-        "icons": [(alive icon number),(dead icon number)]
-      }
-    Remember your commas!
-    Characters also now support portraits.
-    If your character has a portrait drag it in and rename it to your character
-    name + '-portrait'
-    They also support custom death sprites.
-    If your character is based on pixel bf:
-    drag in the death png + xml
-    rename to '(character name)-dead'
-    If it is based on bf: Great! Everything is already done for custom death!
-    To apply these characters:
-    Open a song
-    Hit the '7' key
-    go to the song tab
-    Click on one of the top two dropdowns
-    Select your custom character
-    Hit save and save the json. Remember difficulty prefixes!
-    Custom GF:
-      Follow above instructions but instead of choosing one of the top two
-      dropdowns choose the one that says gf.
-      Choose custom gf
-      Hit save and save the json. Remember difficulty prefixes!
-  Custom Stages:
-    Goto assets/images/custom_stages
-    Make a new folder with the name of your stage
-    Drag in any custom stage assets
-    Add a new property to custom_stages.json:
-      "(stage name)": "(stage it is like)"
-    Don't forget your commas!
-    To apply these stages:
-    Open a song
-    Hit the '7' key
-    go to the song tab
-    Click on the drop down that says something like 'stage'.
-    Select your custom stage.
-    Hit save and save the json. Remember difficulty prefixes!
-  Custom Weeks:
-    If your mod has a custom week icon:
-      Add the xml and png to the assets/images/campaign-ui-week folder
-      (if no xml then grab one from one of the other weeks)
-      rename them to what the week position is (week6, week7, week8)
-    Else:
-      Copy one of the weeks png + xml and rename them to the week position
-      (week7,week8,week9)
-    Open assets/data/storySonglist.json
-    Add a new week:
-      ["(animation name of the week, look at default weeks)", "(trackname)", "(trackname)", ...]
-    Add a new character Array e.g.:
-      ["parents-christmas", "bf", "gf"]
-    Launch the game, open story menu and see your week!
-    Custom UI Characters
-      Add the mod png and xml to assets/images/campaign-ui-char
-      (if no xml just copy another one)
-      Rename files to "(character name)"
-      Open custom characters json
-      Add new property:
-      "(character name)": "(character it goes over)"
-      Don't forget your commas!
-      To use these just replace the character in the character array with the
-      name of your character
-  Custom Cutscenes:
-    You can now make your own cutscenes!
-    To add them: Go to assets/images/custom_ui/dialog_boxes
-    drag in the dialog box png + xml
-    rename them to what you want the cutscene to be named
-    If there is a senpai crazy png + xml, drag those in and rename them
-    to the cutscene name +  '-crazy'
-    Go to assets/data
-    Open up "cutscenes.txt"
-    add your cutscene name on a newline!
-    Go to the song folder,
-    Add a "dialog.txt" file
-    Do this format
-    "
-    :dad: Senpai speaking
-    :bf: Bf speaking
-    "
-    Also add a Lunchbox.ogg if you want dialog sound
-    To apply these cutscenes:
-    Open a song
-    Hit the '7' key
-    go to the song tab
-    Click on the drop down that says something like 'senpai'.
-    Select your custom stage.
-    Hit save and save the json. Remember difficulty prefixes!
-  Custom UI:
-    You can now add custom ui!
-    Go to assets/images/custom_ui/ui_packs
-    make a new folder with the name of your ui
-    Add the following files:
-    The arrow files
-    The rating files (good, bad, shit, sick)
-    The number files
-    The intro files (ready, set, go)
-    The Ogg files for the intro (intro1, intro2, intro3, introGo)
-    (Remember, all of these files are required or the game will crash!)
-    Go to assets/data
-    Open uitypes.txt
-    Add your ui type name on a new line!
-    To apply these uis:
-    Open a song
-    Hit the '7' key
-    go to the song tab
-    Click on the drop down that says something like 'normal'.
-    Select your custom stage.
-    Hit save and save the json. Remember difficulty prefixes!
-  Custom Difficulties:
-    To add custom difficulties:
-    go to assets/images/custom_difficulties
-    add your difficulty png + xml
-    add a new entry to difficulties.json inside of the array
-    {
-      "offset": (how far it should be offset from the arrow(?)),
-      "anim": "(the animation name)",
-      "name": "(the name used in freeplay mode)"
-    }
-    if you want to change the default difficulty change
-    default to the position in the list - 1
-    For songs you have to make a new json using the chart editor and rename
-    the file with "-(difficulty name)" at the end.
+THIS IS FOR YOU LITTLE CUNTS WHO KEEP SUGGESTING IT IN THE DISCORD
+FUCK YOU
+
+outsiders who haven't seen the chaos in the discord server deserve this more then you, and i'm writing this for 3 reasons
+1. bulby literally won't
+2. to shut the little cunts up
+3. to make it easier for people to actually use this shit
+
+CUSTOM CHARACTERS:
+1. Go to the "custom_chars" folder in the images folder
+2. Create a folder named whatever you want your character named
+3. Put the character's png and xml in the folder, and rename them to "char". Also put in a dead.png and xml for BF_Pixel (you can also throw in icons and portraits)
+4. Open up "custom_chars.jsonc" and put in the new character
+5. Profit
+
+refer to bf for how to do Cool Custom Portraits
+
+FULLY CUSTOM CHARACTERS
+1. Do all the shit above
+2. Make an hscript or json for the character and edit it to your liking (IF YOU AREN'T EXPERIENCED IN HAXE CODING REFER TO ANOTHER HSCRIPT OR JSON!!)
+3. Set the character as that hscript/json
+
+TEMPLATE FOR CUSTOM CHARACTERS:
+
+  "INSERT CHARACTER NAME HERE": {
+    "like": "INSERT WHAT THE CHARACTER IS A RESKIN OF HERE",
+    "icons": [0,1,1],
+    "colors": ["#149DFF"]
+
+The icons part is for character icons (of course)
+Colors is for Freeplay
+
+You could just make your own colors in the Freeplay Menu by searching Color Picker at Google.
+-Alex Director
+
+CUSTOM STAGES:
+1. Go to the "custom_stages" folder in images
+2. Create a folder named whatever you want the stage to be named
+3. Put the stages files in the folder
+4. Open up "custom_stages.json" and put in the new stage
+5. Profit
+
+FULLY CUSTOM STAGES:
+1. Do all the shit above
+2. Make an hscript for the stage
+3. Edit to your liking (REFER TO ANOTHER HSCRIPT IF YOU AREN'T EXPERIENCED IN HAXE!!)
+
+TEMPLATE FOR CUSTOM STAGES:
+"INSERT STAGE NAME HERE": "WHAT STAGE IS RESKIN OF HERE"
+
+
+CUSTOM SONGS:
+1. Go to the data folder and create a folder named whatever you want your song to be named
+2. Put in the jsons for the song
+3. Go to the music folder
+3. Put in the Inst and Voices for the song
+4. Go to "freeplaySongJson.jsonc" and put in the new song
+
+TEMPLATE FOR CUSTOM SONGS IN FREEPLAY:
+
+      "week" : 1
+     ,"name" : "INSERT SONG NAME HERE"
+     ,"character" : "INSERT CHARACTER NAME HERE"
+
+FOR DIALOG:
+1. Create a "dialog.txt" file in the songs data folder
+2. Edit (refer to another dialog file for reference)
+3. Set the cutscene in the debug menu for that song to "normal"
+4. Profit
+
+FOR CUSTOM RECORDS IN FREEPLAY:
+1. Go to "campaign-ui-week" in images
+2. Put in the record files, refer to other records for file names
+3. MAKE SURE IT SAYS "week(insert number here)" AT THE START OF THE FILE NAME
+4. Profit
+
+MODCHARTS ARE SUPPORTED HOWEVER THEY HAVE TO BE AN HSCRIPT!! (no renaming the extension of a lua modchart to hscript will not work)
+
+Look for the HScript Commands for both Modcharts & Stages in the Wiki: https://github.com/TheDrawingCoder-Gamer/Funkin/wiki/HScript-Commands
+-Alex Director
+
+CUSTOM WEEKS:
+1. Go to "storySonglist.json"
+2. Scroll to the bottom and put in your new week
+3. Go to the "campaign-ui-week" folder in images
+4. Put in the week files (Mods that use Kade Engine likely won't have this so you'll have to edit it onto an existing png)
+5. Rename them to the week you are making, so for instance "week8.png" and "week8.xml"
+6. Profit
+
+TEMPLATE FOR CUSTOM WEEKS:
+
+      "songs": ["INSERT", "SONG", "NAMES", "HERE"],
+      "name": "INSERT WEEK TITLE HERE",
+      "animation": "INSERT WEEK ANIMATION NAME HERE",
+      "dad": "INSERT ENEMY HERE"
+      "bf": "INSERT BF HERE"
+      "gf": "INSERT GF HERE"
+      "flags": [OPTIONAL, BUT YOU CAN USE THIS TO LOCK WEEKS. PUT IN THE WEEK NAME"
+
+
+FOR CUSTOM UI CHARACTERS:
+1. Go to the "campaign-ui-char" folder in images
+2. Put in your characters "campaign-ui-char" files
+3. Open up "custom_ui_chars.json"
+4. Put in your character
+5. Profit
+
+FOR FULLY CUSTOM UI CHARACTERS:
+1. Follow the above
+2. Create a json with your character name
+3. Edit
+4. Profit
+
+TEMPLATE FOR UI CHARACTERS:
+
+  "INSERT CHARACTER NAME HERE": {
+    "like": "INSERT WHAT THE CHARACTER IS A RESKIN OF HERE",
+    "defaultGraphics": false
+
+
+FOR CUSTOM CUTSCENES:
+1. Create an hscript with your cutscene name
+2. Edit (refer to another hscript for help)
+3. Open up "cutscenes.json" and put in your cutscene
+4. Profit
+
+TEMPLATE FOR CUSTOM CUTSCENES:
+
+"INSERT CUTSCENE NAME HERE" : "INSERT CUTSCENE HSCRIPT HERE"
+
+If you really wanna make stuff using HScripts, Go learn it yourself.
+-Alex Director
+
+FOR CUSTOM NOTES/UI:
+1. Go to "custom_ui" in the images folder, then "ui_packs"
+2. Create a new folder with your UI name
+3. Put in all the shit
+4. Open up "ui.json" and put in your UI
+5. Profit
+
+TEMPLATE FOR UI:
+   "(UI NAME)": {
+        "isPixel": (TRUE OR FALSE),
+        "builtInJudgement": (TRUE OR FALSE),
+        "uses": "(UI FOLDER)"
+
+
+FOR CUSTOM DIALOG BOXES:
+1. Go to "custom_ui" yet again and then "dialog_boxes"
+2. Create a new folder with your Dialog Box name
+3. Put in the shit
+4. Open "dialog_boxes.json" and put in your dialog box
+5. Profit
+
+TEMPLATE FOR CUSTOM DIALOG:
+
+  "INSERT DIALOG NAME HERE": {
+    "like": "INSERT WHAT DIALOG IS A RESKIN OF HERE"
+
+
+FOR JUDGEMENTS:
+1. Go to the "judgements" folder and create a folder with the name of your judgement
+2. Put in the files (check other judgements for formats)
+3. Go to data and open up "judgements.txt"
+4. Put in your judgement name
+5. Profit
+
+
+IF YOU NEED ANY OTHER HELP JOIN THE FNF M+ DISCORD!!
+
+
+-DaPootisBird
