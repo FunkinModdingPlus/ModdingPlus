@@ -59,7 +59,7 @@ jobs:
           name: linuxBuild
           path: 'export/release/linux/bin' 
       - name: Copy Week 7 Files
-        run: cp -rf ./Week7Assets ./export/release/linux/bin/assets
+        run: cp -rf ./Week7Assets/* ./export/release/linux/bin/assets
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -74,7 +74,7 @@ jobs:
           name: html5Build
           path: export/release/html5/bin
       - name: Copy Week 7 Files
-        run: cp -rf ./Week7Assets ./export/release/html5/bin/assets
+        run: cp -rf ./Week7Assets/* ./export/release/html5/bin/assets
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -122,7 +122,7 @@ jobs:
           name: windowsBuild
           path: export/release/windows/bin
       - name: Copy Week 7 Files
-        run: Copy-Item -Force -Recurse ./Week7Assets -Destination ./export/release/windows/bin/assets
+        run: Copy-Item -Force -Recurse ./Week7Assets/* -Destination ./export/release/windows/bin/assets
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -136,7 +136,7 @@ jobs:
           name: windows32Build
           path: export/32bit/windows/bin
       - name: Copy Week 7 Files
-        run: Copy-Item -Force -Recurse ./Week7Assets -Destination ./export/32bit/windows/bin/assets
+        run: Copy-Item -Force -Recurse ./Week7Assets/* -Destination ./export/32bit/windows/bin/assets
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -183,7 +183,7 @@ jobs:
           name: macBuild
           path: export/release/macos/bin
       - name: Copy Week 7 Files
-        run: cp -rf ./Week7Assets ./export/release/macos/bin/assets
+        run: cp -rf ./Week7Assets/* ./export/release/macos/bin/assets
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
