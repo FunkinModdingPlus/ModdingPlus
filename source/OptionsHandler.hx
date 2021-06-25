@@ -17,12 +17,13 @@ typedef TOptions = {
     var showSongPos:Bool;
     var style:Bool;
     var stressTankmen:Bool;
-    var ignoreShittyTiming:Bool;
+    // var ignoreShittyTiming:Bool;
     var ignoreUnlocks:Bool;
     var judge:Int;
     var preferJudgement:Int;
     var newJudgementPos:Bool;
     var emuOsuLifts:Bool;
+    var skipDebugScreen:Bool;
 }
 class OptionsHandler {
     public static var options(get, set):TOptions;
@@ -39,7 +40,6 @@ class OptionsHandler {
 			lastOptions = CoolUtil.parseJson(Assets.getText('assets/data/options.json'));
             // sawee
             // i think this is for the best, to be a real rhythm game
-            lastOptions.ignoreShittyTiming = false;
             needToRefresh = false;
 			
         }

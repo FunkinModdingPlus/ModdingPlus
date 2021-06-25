@@ -62,6 +62,7 @@ class SaveDataState extends MusicBeatState
 						{name: "Always Show Cutscenes", intName: "alwaysDoCutscenes", value: false, desc: "Force show cutscenes, even in freeplay"}, 
 						{name: "Skip Modifier Menu", value: false, intName: "skipModifierMenu", desc: "Skip the modifier menu"}, 
 						{name: "Skip Victory Screen", value: false, intName : "skipVictoryScreen", desc: "Skip the victory screen at the end of songs."},
+						{name: "Skip Debug Screen", value: false, intName : "skipDebugScreen", desc: "Skip the warning screen that happens when you enter charting mode."},
 						{name: "Downscroll", value: false, intName: "downscroll", desc: "Put da arrows on the bottom and have em scroll down"},
 						{name: "Judge", value: false, intName: "judge", desc: "The Judge to use.", amount: cast Judge.Jury.Classic, defAmount: cast Judge.Jury.Classic, max: 10},
 						{name: "Ghost Tapping", value: false, intName: "useCustomInput", desc: "Whether to allow spamming"},
@@ -419,8 +420,7 @@ class SaveDataState extends MusicBeatState
 		var noneditableoptions:Dynamic = {
 			"allowEditOptions": OptionsHandler.options.allowEditOptions,
 			"preferredSave": preferredSave,
-			"useSaveDataMenu": true,
-			"ignoreShittyTiming": false
+			"useSaveDataMenu": true
 		};
 		for (field in Reflect.fields(mappedOptions)) {
 			Reflect.setField(noneditableoptions, field, Reflect.field(mappedOptions, field).value);
