@@ -3760,11 +3760,11 @@ class PlayState extends MusicBeatState
 			}
 			// else
 			// Conductor.changeBPM(SONG.bpm);
-
+			
 			// Dad doesnt interupt his own notes
-			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && ((!duoMode && !opponentPlayer) || demoMode))
+			if (!dad.animation.curAnim.name.startsWith("sing") && ((!duoMode && !opponentPlayer) || demoMode))
 				dad.dance();
-			if (!SONG.notes[Math.floor(curStep / 16)].mustHitSection && (opponentPlayer || demoMode))
+			if (!boyfriend.animation.curAnim.name.startsWith("sing") && (opponentPlayer || demoMode))
 				boyfriend.dance();
 		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
@@ -3796,11 +3796,11 @@ class PlayState extends MusicBeatState
 			gf.dance();
 		}
 
-		if (!boyfriend.animation.curAnim.name.startsWith("sing") && !opponentPlayer || demoMode)
+		if (!boyfriend.animation.curAnim.name.startsWith("sing") && !opponentPlayer && !demoMode)
 		{
 			boyfriend.dance();
 		}
-		if (dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith("sing") && (duoMode || opponentPlayer) || demoMode) {
+		if (dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith("sing") && (duoMode || opponentPlayer) && !demoMode) {
 			dad.dance();
 		}
 		if (curBeat % 8 == 7 && SONG.isHey)
@@ -3813,53 +3813,12 @@ class PlayState extends MusicBeatState
 		{
 			dad.playAnim('cheer', true);
 		}
-		switch (curStage)
+		// gf should also cheer?
+		if (curBeat % 8 == 7 && SONG.isCheer && gf.gfEpicLevel >= Character.EpicLevel.Level_Sing)
 		{
-			case 'school':
-				bgGirls.dance();
-			#if !windows
-			case 'mall':
-				upperBoppers.animation.play('bop', true);
-				bottomBoppers.animation.play('bop', true);
-				santa.animation.play('idle', true);
-
-			case 'limo':
-				grpLimoDancers.forEach(function(dancer:BackgroundDancer)
-				{
-					dancer.dance();
-				});
-
-				if (FlxG.random.bool(10) && fastCarCanDrive)
-					fastCarDrive();
-			case "philly":
-				if (!trainMoving)
-					trainCooldown += 1;
-
-				if (curBeat % 4 == 0)
-				{
-					phillyCityLights.forEach(function(light:FlxSprite)
-					{
-						light.visible = false;
-					});
-
-					curLight = FlxG.random.int(0, phillyCityLights.length - 1);
-
-					phillyCityLights.members[curLight].visible = true;
-					// phillyCityLights.members[curLight].alpha = 1;
-				}
-
-				if (curBeat % 8 == 4 && FlxG.random.bool(30) && !trainMoving && trainCooldown > 8)
-				{
-					trainCooldown = FlxG.random.int(-4, 0);
-					trainStart();
-				}
-			#end
+			gf.playAnim('cheer', true);
 		}
 
-		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
-		{
-			lightningStrikeShit();
-		}
 		setAllHaxeVar('curBeat', curBeat);
 		callAllHScript('beatHit', [curBeat]);
 	}

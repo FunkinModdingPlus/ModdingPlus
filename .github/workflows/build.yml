@@ -183,7 +183,7 @@ jobs:
           name: macBuild
           path: export/release/macos/bin
       - name: Copy Week 7 Files
-        run: cp -rf ./Week7Assets/* ./export/release/macos/bin/assets
+        run: cp -rf ./Week7Assets ./export/release/macos/bin/assets
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
