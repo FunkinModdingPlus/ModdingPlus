@@ -1,5 +1,6 @@
 package;
 
+import openfl.Lib;
 import flixel.util.typeLimit.OneOfTwo;
 import Character.EpicLevel;
 import FNFAssets.HScriptAssets;
@@ -353,6 +354,7 @@ class PlayState extends MusicBeatState
 		interp.variables.set("iconP2", iconP2);
 		interp.variables.set("currentPlayState", this);
 		interp.variables.set("PlayState", PlayState);
+		interp.variables.set("window", Lib.application.window);
 		// give them access to save data, everything will be fine ;)
 		interp.variables.set("isInCutscene", function () return inCutscene);
 		trace("set vars");

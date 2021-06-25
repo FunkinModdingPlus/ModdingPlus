@@ -14,5 +14,8 @@
     "stressTankmen": false,
     "ignoreUnlocks": false,
     "preferJudgement": 0,
-    "judge": 9
+    "judge": 9,
+    "newJudgementPos": false,
+    "emuOsuLifts": false,
+    "skipDebugScreen": false
 }
