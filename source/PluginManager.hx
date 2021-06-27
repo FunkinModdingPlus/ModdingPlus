@@ -44,6 +44,12 @@ class PluginManager {
         reterp.variables.set("FlxEase", FlxEase);
         reterp.variables.set("Reflect", Reflect);
         reterp.variables.set("Character", Character);
+        reterp.variables.set("OptionsHandler", OptionsHandler);
+        #if debug
+        reterp.variables.set("debug", true);
+        #else
+        reterp.variables.set("debug", false);
+        #end
         return reterp;
     }
 }

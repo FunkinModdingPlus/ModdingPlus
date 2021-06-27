@@ -403,7 +403,6 @@ class FreeplayState extends MusicBeatState
 
 	function changeDiff(change:Int = 0)
 	{
-		trace("line 182 fp");
 		if (!soundTest) {
 			// get valid one : )
 			// also forces
@@ -529,7 +528,7 @@ class FreeplayState extends MusicBeatState
 		//insert(1, curOverlay);
 		
 		changeDiff();
-		trace(Highscore.getComplete(songs[0].songName, curDifficulty));
+		// trace(Highscore.getComplete(songs[0].songName, curDifficulty));
 		
 		var coolors = ["black"];
 		if (Reflect.hasField(charJson, songs[curSelected].songCharacter)) {

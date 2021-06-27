@@ -79,7 +79,7 @@ class TitleState extends MusicBeatState
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 		// DEBUG BULLSHIT
 		super.create();
-
+		FlxG.mouse.visible = false;
 		FlxG.save.bind("preferredSave", "bulbyVR");
 		var preferredSave:Int = 0;
 		if (Reflect.hasField(FlxG.save.data, "preferredSave")) {
@@ -212,7 +212,7 @@ class TitleState extends MusicBeatState
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
-		FlxG.mouse.visible = false;
+		
 
 		if (initialized)
 			skipIntro();

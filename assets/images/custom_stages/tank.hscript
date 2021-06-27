@@ -1,4 +1,4 @@
-trace(" : )");
+
 var steve;
 var johns;
 var tower;
@@ -8,7 +8,6 @@ var goingRightJohn = [];
 var strumTimeJohn = [];
 var endingOffsetJohn = [];
 function start(song) {
-    trace(" : )");
     var bg = new FlxSprite(-400, -400).loadGraphic(hscriptPath + 'tankSky.png');
     bg.scrollFactor.set();
     bg.antialiasing = true;

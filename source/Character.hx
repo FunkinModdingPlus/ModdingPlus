@@ -732,7 +732,6 @@ class Character extends FlxSprite
 		{
 			color = FlxColor.WHITE;
 		}
-		trace(alt);
 		if (alt > 0) {
 			if (alt == 1 && animation.getByName(directName + '-alt') != null) {
 				directName += "-alt";

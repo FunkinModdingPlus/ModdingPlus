@@ -685,7 +685,7 @@ class PlayState extends MusicBeatState
 
 
 		boyfriend = new Character(770, 450, SONG.player1, true);
-		if (!opponentPlayer)
+		if (!opponentPlayer && !demoMode)
 			boyfriend.beingControlled = true;
 		trace("newBF");
 		switch (SONG.player1) // no clue why i didnt think of this before lol
@@ -1276,6 +1276,7 @@ class PlayState extends MusicBeatState
 			// cuck lunchbox
 			FlxG.sound.music.stop();
 		}
+		// : )
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
 		var useSong = "assets/music/" + SONG.song + "_Inst" + TitleState.soundExt;
@@ -2169,17 +2170,11 @@ class PlayState extends MusicBeatState
 				// trace(PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
 			}
 			setAllHaxeVar("mustHit", PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
-			if (camFollow.x != dad.getMidpoint().x + 150 && !PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
+			if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 			{
 				camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 				// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
 				callAllHScript("playerTwoTurn", []);
-				if (dad.like == 'mom')
-					camFollow.y = dad.getMidpoint().y;
-				if (dad.like == 'senpai' || dad.like == 'senpai-angry') {
-					camFollow.y = dad.getMidpoint().y - 430;
-					camFollow.x = dad.getMidpoint().x - 100;
-				}
 				if (dad.isCustom) {
 					camFollow.y = dad.getMidpoint().y + dad.followCamY;
 					camFollow.x = dad.getMidpoint().x + dad.followCamX;
@@ -2224,7 +2219,7 @@ class PlayState extends MusicBeatState
 				health -= poisonMultiplier * (opponentPlayer ? -1 : 1)/ 700000;
 			}
 			playingAsRpc = "Playing as " + (opponentPlayer ? player2Icon : player1Icon) + " | " + currentIconState;
-			if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && camFollow.x != boyfriend.getMidpoint().x - 100)
+			if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 			{
 				camFollow.setPosition((boyfriend.getMidpoint().x - 100 + boyfriend.followCamX), (boyfriend.getMidpoint().y - 100+boyfriend.followCamY));
 				callAllHScript("playerOneTurn", []);
@@ -2539,10 +2534,10 @@ class PlayState extends MusicBeatState
 					camZooming = true;
 					callAllHScript("playerOneSing", []);
 					if (daNote.shouldBeSung) {
-						boyfriend.sing(Std.int(Math.abs(daNote.noteData)));
+						boyfriend.sing(Std.int(Math.abs(daNote.noteData % 4)));
 						playerStrums.forEach(function(spr:FlxSprite)
 						{
-							if (Math.abs(daNote.noteData) == spr.ID)
+							if (Math.abs(daNote.noteData % 4) == spr.ID)
 							{
 								spr.animation.play('confirm');
 								sustain2(spr.ID, spr, daNote);
@@ -2840,7 +2835,7 @@ class PlayState extends MusicBeatState
 		var wife:Float = HelperFunctions.wife3(noteDiff, Conductor.timeScale);
 		// boyfriend.playAnim('hey');
 		vocals.volume = 1;
-
+		camZooming = true;
 		var placement:String = Std.string(combo);
 
 		var coolText:FlxText = new FlxText(0, 0, 0, placement, 32);
@@ -3383,7 +3378,8 @@ class PlayState extends MusicBeatState
 				var coolShouldPress = playerOne ? daNote.mustPress : !daNote.mustPress;
 				var daRating = Ratings.CalculateRating(Math.abs(daNote.strumTime - Conductor.songPosition));
 				// make sustain notes act
-				if (daNote.canBeHit && coolShouldPress && daNote.isSustainNote && ( daRating == 'sick' || daRating == 'good'))
+				// changing it to sick :blush:
+				if (daNote.canBeHit && coolShouldPress && daNote.isSustainNote && ( daRating == 'sick'))
 				{
 					if (holdArray[daNote.noteData])
 						goodNoteHit(daNote, playerOne);

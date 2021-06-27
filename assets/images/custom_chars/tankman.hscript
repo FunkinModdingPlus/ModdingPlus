@@ -1,9 +1,7 @@
 trace(": )");
 // char is a Character
 function init(char) {
-    trace(": )");
     var tex = FlxAtlasFrames.fromSparrow(hscriptPath + 'char.png', hscriptPath + 'char.xml');
-    trace(": )");
     char.frames = tex;
     char.animation.addByPrefix('idle', 'Tankman Idle Dance', 24, false);
     char.animation.addByPrefix('singUP', 'Tankman UP note', 24, false);
@@ -41,7 +39,6 @@ function update(elapsed, char) {
 }
 var danced = false;
 function dance(char) {
-    trace(": )");
     if (char.animation.curAnim.name != "singDOWN-alt")
         char.playAnim('idle');
 }
