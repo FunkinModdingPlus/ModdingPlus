@@ -38,7 +38,7 @@ function start(song) {
     var street = new FlxSprite(-40, 50).loadGraphic(hscriptPath + 'street.png');
     street.antialiasing = true;
     addSprite(street, BEHIND_ALL);
-    setDefaultZoom(0.9);
+    setDefaultZoom(1.05);
 }
 
 var trainCooldown = 0;
