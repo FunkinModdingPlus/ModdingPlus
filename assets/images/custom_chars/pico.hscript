@@ -8,29 +8,48 @@ function init(char) {
     char.animation.addByPrefix('singDOWNmiss', 'Pico Down Note MISS', 24, false);
     char.animation.addByPrefix('singUPmiss', 'pico Up note miss', 24, false);
     if (char.isPlayer) {
-        char.animation.addByPrefix('singLEFT','Pico NOTE LEFT0', 24, false);
-        char.animation.addByPrefix('singRIGHT', 'Pico Note Right0', 24, false);
-        char.animation.addByPrefix('singLEFTmiss', 'Pico NOTE LEFT miss',24, false);
-        char.animation.addByPrefix('singRIGHTmiss', 'Pico Note Right Miss',24,false);
-    } else {
         char.animation.addByPrefix('singRIGHT','Pico NOTE LEFT0', 24, false);
         char.animation.addByPrefix('singLEFT', 'Pico Note Right0', 24, false);
         char.animation.addByPrefix('singRIGHTmiss', 'Pico NOTE LEFT miss',24, false);
         char.animation.addByPrefix('singLEFTmiss', 'Pico Note Right Miss',24,false);
+        
+        char.followCamX = -240;
+        char.followCamY = 50;
+
+        char.y -= 45;
+        char.x += 150;
+
+        char.addOffset('singDOWN', 87, -80);
+        char.addOffset('singDOWNmiss', 87, -29);
+        char.addOffset('singRIGHT', -48, 0);
+        char.addOffset('singRIGHTmiss', -40, 50);
+        char.addOffset('singUP', 19, 27);
+        char.addOffset('singUPmiss', 19, 67);
+        char.addOffset('singLEFT', 75, -9);
+        char.addOffset('singLEFTmiss', 75, 25);
+    } else {
+        char.animation.addByPrefix('singRIGHT','Pico NOTE LEFT0', 24, false);
+        char.animation.addByPrefix('singLEFT', 'Pico Note Right0', 24, false);
+        char.animation.addByPrefix('singLEFTmiss', 'Pico NOTE LEFT miss',24, false);
+        char.animation.addByPrefix('singRIGHTmiss', 'Pico Note Right Miss',24,false);
+
+        char.followCamX = 150;
+        char.followCamY = -50;
+
+        char.addOffset('singDOWN', 200, -70);
+        char.addOffset('singDOWNmiss', 210, -28);
+        char.addOffset('singRIGHT', -68, -7);
+        char.addOffset('singRIGHTmiss', -68, -7);
+        char.addOffset('singUP', -29, 27);
+        char.addOffset('singUPmiss', -19, 67);
+        char.addOffset('singLEFT', 65, 9);
+        char.addOffset('singLEFTmiss', 62, 64);
     }
     
     
 
 
     char.addOffset('idle',0);
-    char.addOffset('singUP', -29, 27);
-    char.addOffset('singRIGHT', -68, -7);
-    char.addOffset('singLEFT', 65, 9);
-    char.addOffset('singDOWN', 200, -70);
-    char.addOffset('singUPmiss', -19, 67);
-    char.addOffset('singRIGHTmiss', -60, 41);
-    char.addOffset('singLEFTmiss', 62, 64);
-    char.addOffset('singDOWNmiss', 210, -28);
 
     char.playAnim('idle');
     
@@ -42,8 +61,6 @@ function init(char) {
     char.enemyOffsetY = 300;
     char.playerOffsetX = 0;
     char.playerOffsetY = 0;
-    char.followCamX = 150;
-    char.followCamY = -50;
     char.camOffsetX = 100;
     char.midpointX = 0;
     char.midpointY = 0;
