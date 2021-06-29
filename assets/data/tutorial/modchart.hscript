@@ -10,7 +10,6 @@ function beatHit(beat)
 
 function update(elapsed)
 {
-    camZooming = false;
 }
 
 function stepHit(step)
@@ -27,7 +26,7 @@ function stepHit(step)
 
 function playerTwoTurn()
 {
-    tweenCamIn();
+   setDefaultZoom(1.4);
 }
 
 function playerTwoMiss()
@@ -40,11 +39,11 @@ function playerTwoSing()
 
 function playerOneTurn()
 {
+   setDefaultZoom(1.0);
 }
 
 function playerOneMiss()
 {
-    dad.playAnim('sad');
 }
 
 function playerOneSing()
