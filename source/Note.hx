@@ -39,10 +39,16 @@ typedef NoteInfo = {
 	var ?ignoreHealthMods:Null<Bool>;
 	var ?dontCountNote:Null<Bool>;
 	var ?dontStrum:Null<Bool>;
+	var ?singInfo:Null<SingInfo>;
 	// A string array that can be assigned to make shit easier to deal with
 	var ?classes:Null<Array<String>>;
 	// same deal as above but only one can be assigned. 
 	var ?id:Null<String>;
+}
+typedef SingInfo = {
+	var direction:Int;
+	var ?alt:Null<Int>;
+	var ?miss:Null<Bool>;
 }
 class Note extends FlxSprite
 {
@@ -98,6 +104,7 @@ class Note extends FlxSprite
 	public var oppntAnim:Null<String> = null;
 	public var classes:Null<Array<String>> = [];
 	public var coolId:Null<String> = null;
+	public var oppntSing:Null<SingInfo>;
 	// altNote can be int or bool. int just determines what alt is played
 	// format: [strumTime:Float, noteDirection:Int, sustainLength:Float, altNote:Union<Bool, Int>, isLiftNote:Bool, healMultiplier:Float, damageMultipler:Float, consistentHealth:Bool, timingMultiplier:Float, shouldBeSung:Bool, ignoreHealthMods:Bool, animSuffix:Union<String, Int>]
 	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?customImage:Null<BitmapData>, ?customXml:Null<String>, ?customEnds:Null<BitmapData>, ?LiftNote:Bool=false, ?animSuffix:String, ?numSuffix:Int)
@@ -176,6 +183,14 @@ class Note extends FlxSprite
 			}
 			if (thingie.id != null) {
 				coolId = thingie.id;
+			}
+			if (thingie.singInfo != null) {
+				oppntSing = thingie.singInfo;
+				if (oppntSing.alt == null) {
+					oppntSing.alt = 0;
+				}
+				if (oppntSing.miss == null)
+					oppntSing.miss = false;
 			}
 			specialNoteInfo = thingie;
 			ignoreHealthMods = cast thingie.ignoreHealthMods;

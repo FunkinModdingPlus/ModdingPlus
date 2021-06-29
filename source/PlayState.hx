@@ -2545,6 +2545,9 @@ class PlayState extends MusicBeatState
 								sustain2(spr.ID, spr, daNote);
 							}
 						});
+						if (daNote.oppntSing != null) {
+							boyfriend.sing(daNote.oppntSing.direction, daNote.oppntSing.miss, daNote.oppntSing.alt);
+						}
 					}
 					dad.holdTimer = 0;
 
@@ -2567,6 +2570,10 @@ class PlayState extends MusicBeatState
 								sustain2(spr.ID, spr, daNote);
 							}
 						});
+						if (daNote.oppntSing != null) {
+							dad.sing(Std.int(Math.abs(daNote.oppntSing.direction % 4)), daNote.oppntSing.miss, daNote.oppntSing.alt);
+							// don't strum it because there isn't actually a note
+						}
 					}
 						
 						
@@ -3440,6 +3447,7 @@ class PlayState extends MusicBeatState
 	function noteMiss(direction:Int = 1, playerOne:Bool, ?note:Null<Note>):Void
 	{
 		var actingOn = playerOne ? boyfriend : dad;
+		var onActing = playerOne ? dad : boyfriend;
 		if (!actingOn.stunned)
 		{
 			misses += 1;
@@ -3473,8 +3481,13 @@ class PlayState extends MusicBeatState
 			{
 				actingOn.stunned = false;
 			});
-			if (note == null || note.shouldBeSung)
+			if (note == null || note.shouldBeSung) {
 				actingOn.sing(direction, true);
+				if (note != null && note.oppntSing != null) {
+					onActing.sing(note.oppntSing.direction, note.oppntSing.miss, note.oppntSing.alt);
+				}
+			}
+				
 			if (playerOne) {
 				callAllHScript("playerOneMiss", []);
 			} else {
@@ -3519,6 +3532,7 @@ class PlayState extends MusicBeatState
 	function goodNoteHit(note:Note, playerOne:Bool):Void
 	{
 		var actingOn = playerOne ? boyfriend : dad;
+		var onActing = playerOne ? dad : boyfriend;
 		if (!note.canBeHit || note.tooLate)
 			return;
 		if (!note.isSustainNote)
@@ -3578,6 +3592,9 @@ class PlayState extends MusicBeatState
 						spr.animation.play('confirm', true);
 					}
 				});
+				if (note.oppntSing != null) {
+					onActing.sing(note.oppntSing.direction, note.oppntSing.miss, note.oppntSing.alt);
+				}
 			}
 			callAllHScript("noteHit", [playerOne, note]);
 			
