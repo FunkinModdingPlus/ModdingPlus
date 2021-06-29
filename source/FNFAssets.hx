@@ -28,7 +28,12 @@ class FNFAssets {
                 path = id;
 			else
 				return Assets.getText(id);
-            return File.getContent(path);
+			try {
+			return File.getContent(path);
+			} catch (e:Any) {
+				throw 'File $path doesn\'t exist or cannot be read.';
+			}
+            
         #else
             // no need to strip it out... 
             // assets handles it
@@ -67,7 +72,12 @@ class FNFAssets {
 				path = id;
 			else
 				return Assets.getBytes(id);
+			try {
 			return File.getBytes(path);
+			} catch (e:Any) {
+			throw 'File $path doesn\'t exist or cannot be read.';
+			}
+			
 		#else
 		// no need to strip it out...
 		// assets handles it
@@ -94,7 +104,12 @@ class FNFAssets {
             if (path == null)
                 path = id;
 			else return Assets.getBitmapData(id, useCache);
-            return BitmapData.fromFile(path);
+			try {
+			return BitmapData.fromFile(path);
+			} catch (e:Any) {
+			throw 'File $path doesn\'t exist or cannot be read.';
+			}
+            
         #else
             return Assets.getBitmapData(id, useCache);
         #end
@@ -108,14 +123,26 @@ class FNFAssets {
 			else
 				// prefer using assets as it uses a cache??
 				return Assets.getSound(id, useCache);
-            return Sound.fromFile(path);
+		try
+		{
+			return Sound.fromFile(path);
+		}
+		catch (e:Any)
+		{
+			throw 'File $path doesn\'t exist or cannot be read.';
+		}
         #else
             return Assets.getSound(id, useCache);
         #end
     }
     public static function saveContent(id:String, data:String) {
         #if sys
-            File.saveContent(id, data);
+			try {
+				File.saveContent(id, data);
+			}	catch(e:Any) {
+				throw "Couldn't save to "+ id +". Is it in use?";
+			}
+           
         #else
             askToSave(id, data);
         #end
@@ -123,7 +150,14 @@ class FNFAssets {
 	public static function saveBytes(id:String, data:Bytes)
 	{
 		#if sys
-		File.saveBytes(id, data);
+		try
+		{
+			File.saveBytes(id, data);
+		}
+		catch (e:Any)
+		{
+			throw "Couldn't save to " + id + ". Is it in use?";
+		}
 		#else
 		askToSave(id, data);
 		#end

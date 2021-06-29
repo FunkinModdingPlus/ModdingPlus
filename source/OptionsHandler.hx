@@ -24,6 +24,7 @@ typedef TOptions = {
     var newJudgementPos:Bool;
     var emuOsuLifts:Bool;
     var skipDebugScreen:Bool;
+    var showComboBreaks:Bool;
 }
 class OptionsHandler {
     public static var options(get, set):TOptions;

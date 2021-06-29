@@ -40,18 +40,19 @@ class ControlsState extends MusicBeatState {
         add(grpBind);
 
         for (i in 0...4) {
-            var coolText = switch (i) {
-                case 0:
-                    'Left: ${cast (FlxG.save.data.keys.left : String)}';
-                case 1: 
-				'Down: ${cast (FlxG.save.data.keys.down : String)}';
-                case 2:
-				'Up: ${cast (FlxG.save.data.keys.up : String)}';
-                case 3:
-				'Right: ${cast (FlxG.save.data.keys.right : String)}';
-                default:
-                    'how did we get here';
-            }
+			var coolText = switch (i)
+			{
+				case 0:
+					'Left: ${FlxKey.toStringMap.get(FlxG.save.data.keys.left)}';
+				case 1:
+					'Down: ${FlxKey.toStringMap.get(FlxG.save.data.keys.down)}';
+				case 2:
+					'Up: ${FlxKey.toStringMap.get(FlxG.save.data.keys.up)}';
+				case 3:
+					'Right: ${FlxKey.toStringMap.get(FlxG.save.data.keys.right)}';
+				default:
+					'how did we get here';
+			}
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, coolText, true, false, false, null, null, null, true);
 			songText.itemType = "Classic";
 			songText.isMenuItem = true;
@@ -143,19 +144,21 @@ class ControlsState extends MusicBeatState {
 				var coolText = switch (awaitingFor)
 				{
 					case 0:
-						'Left: ${cast (FlxG.save.data.keys.left : String)}';
+						'Left: ${FlxKey.toStringMap.get(FlxG.save.data.keys.left)}';
 					case 1:
-						'Down: ${cast (FlxG.save.data.keys.down : String)}';
+						'Down: ${FlxKey.toStringMap.get(FlxG.save.data.keys.down)}';
 					case 2:
-						'Up: ${cast (FlxG.save.data.keys.up : String)}';
+						'Up: ${FlxKey.toStringMap.get(FlxG.save.data.keys.up)}';
 					case 3:
-						'Right: ${cast (FlxG.save.data.keys.right : String)}';
+						'Right: ${FlxKey.toStringMap.get(FlxG.save.data.keys.right)}';
 					default:
 						'how did we get here';
 				}
                 FlxG.save.flush();
-                grpBind.members[awaitingFor].text = coolText;
-                grpBind.members[awaitingFor].addText();
+				grpBind.members[awaitingFor] = new Alphabet(0, (70 * awaitingFor) + 30, coolText, true, false, false, null, null, null, true);
+				grpBind.members[awaitingFor].itemType = "Classic";
+				grpBind.members[awaitingFor].isMenuItem = true;
+				grpBind.members[awaitingFor].targetY = 0;
                 // then reeset everything
                 awaitingFor = -1;
                 askingToBind = false;

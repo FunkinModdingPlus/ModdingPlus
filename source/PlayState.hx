@@ -95,7 +95,6 @@ class PlayState extends MusicBeatState
 	public static var storyDifficulty:Int = 1;
 	public static var defaultPlaylistLength = 0;
 	public static var campaignScoreDef = 0;
-	var halloweenLevel:Bool = false;
 	public static var ss:Bool = true;
 	private var vocals:FlxSound;
 	// use old bf
@@ -134,6 +133,12 @@ class PlayState extends MusicBeatState
 	private var strumLineNotes:FlxTypedGroup<FlxSprite>;
 	private var playerStrums:FlxTypedGroup<FlxSprite>;
 	private var enemyStrums:FlxTypedGroup<FlxSprite>;
+	private var playerComboBreak:FlxTypedGroup<FlxSprite>;
+	private var enemyComboBreak:FlxTypedGroup<FlxSprite>;
+	public var shitBreakColor:FlxColor = 0xFF175DB3;
+	public var wayoffBreakColor:FlxColor = 0xFFAF0000;
+	public var missBreakColor:FlxColor = 0xFFDD0A93;
+	
 	private var camZooming:Bool = false;
 	private var curSong:String = "";
 	private var strumming2:Array<Bool> = [false, false, false, false];
@@ -179,22 +184,7 @@ class PlayState extends MusicBeatState
 	public var doof:DialogueBox;
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 
-	var halloweenBG:FlxSprite;
-	var isHalloween:Bool = false;
 
-	var phillyCityLights:FlxTypedGroup<FlxSprite>;
-	var phillyTrain:FlxSprite;
-	var trainSound:FlxSound;
-
-	var limo:FlxSprite;
-	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
-	var fastCar:FlxSprite;
-
-	var upperBoppers:FlxSprite;
-	var bottomBoppers:FlxSprite;
-	var santa:FlxSprite;
-
-	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 
 	var talking:Bool = true;
@@ -727,8 +717,6 @@ class PlayState extends MusicBeatState
 		}
 		add(gf);
 		// Shitty layering but whatev it works LOL
-		if (curStage == 'limo')
-			add(limo);
 		trace('dad');
 		add(dad);
 		trace('dy UWU');
@@ -748,12 +736,18 @@ class PlayState extends MusicBeatState
 		if (downscroll) {
 			strumLine.y = FlxG.height - 165;
 		}
+		playerComboBreak = new FlxTypedGroup<FlxSprite>();
+		enemyComboBreak = new FlxTypedGroup<FlxSprite>();
+		playerComboBreak.cameras = [camHUD];
+		enemyComboBreak.cameras = [camHUD];
+		add(playerComboBreak);
+		add(enemyComboBreak);
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
 		add(strumLineNotes);
 		add(grpNoteSplashes);
 		playerStrums = new FlxTypedGroup<FlxSprite>();
 		enemyStrums = new FlxTypedGroup<FlxSprite>();
-
+		
 		// startCountdown();
 		trace('before generate');
 		generateSong(SONG.song);
@@ -1735,11 +1729,41 @@ class PlayState extends MusicBeatState
 			babyArrow.animation.play('static');
 			babyArrow.x += 50;
 			babyArrow.x += ((FlxG.width / 2) * player);
-
+			// does not need to be unique because it uses special thingies
+			var comboBreakThing = new FlxSprite(babyArrow.x, 0).makeGraphic(Std.int(babyArrow.width), FlxG.height, FlxColor.WHITE);
+			comboBreakThing.visible = false;
+			comboBreakThing.alpha = 0.6;
 			strumLineNotes.add(babyArrow);
+			if (player == 1) {
+				playerComboBreak.add(comboBreakThing);
+			} else {
+				enemyComboBreak.add(comboBreakThing);
+			}
 		}
 	}
-
+	function comboBreak(dir:Int, playerOne:Bool = true, rating:String = 'miss') {
+	
+		if (!OptionsHandler.options.showComboBreaks)
+			return;
+		var coolor = switch (rating) {
+			case 'miss':
+				missBreakColor;
+			case 'wayoff':
+				wayoffBreakColor;
+			case 'shit':
+				shitBreakColor;
+			default:
+				// just return, as we shouldn't even be here
+				return;
+		}
+		var breakGroup = playerOne ? playerComboBreak : enemyComboBreak;
+		dir = dir % 4;
+		var thingToDisplay = breakGroup.members[dir];
+		thingToDisplay.color = coolor;
+		thingToDisplay.alpha = 1;
+		thingToDisplay.visible = true;
+		FlxTween.tween(thingToDisplay, {alpha: 0}, 1, {onComplete: function(_) {thingToDisplay.visible = false;}});
+	}
 	function tweenCamIn():Void
 	{
 		FlxTween.tween(FlxG.camera, {zoom: 1.3}, (Conductor.stepCrochet * 4 / 1000), {ease: FlxEase.elasticInOut});
@@ -2585,15 +2609,10 @@ class PlayState extends MusicBeatState
 
 						if ((daNote.tooLate || !daNote.wasGoodHit) /* && !daNote.isSustainNote */)
 						{
-							if (!daNote.mustPress) {
-								health -= daNote.getHealth('miss');
-							} else if (!opponentPlayer) {
-								health += daNote.getHealth('miss');
-							}
+							// always show the graphic/
+							popUpScore(Conductor.songPosition, daNote, daNote.mustPress, true);
 							
 							vocals.volume = 0;
-							misses += 1;
-							notesPassing += 1;
 							if (poisonPlus && poisonTimes < 3)
 							{
 								poisonTimes += 1;
@@ -2828,7 +2847,7 @@ class PlayState extends MusicBeatState
 
 	var endingSong:Bool = false;
 	var timeShown:Int = 0;
-	private function popUpScore(strumtime:Float, daNote:Note, playerOne:Bool):Void
+	private function popUpScore(strumtime:Float, daNote:Note, playerOne:Bool, forceMiss:Bool = false):Void
 	{
 		var noteDiff:Float = Math.abs(Conductor.songPosition - daNote.strumTime);
 		var noteDiffSigned:Float = Conductor.songPosition - daNote.strumTime;
@@ -2858,6 +2877,9 @@ class PlayState extends MusicBeatState
 		// you can't really control how you hit sustains so always make em sick
 		if (daNote.isSustainNote) {
 			daRating = 'sick';
+		}
+		if (forceMiss) {
+			daRating = 'miss';
 		}
 		// SHIT IS A COMBO BREAKER IN ETTERNA NERDS
 		// GIT GUD
@@ -2948,6 +2970,7 @@ class PlayState extends MusicBeatState
 					healthBonus = -0.45;
 			}
 		}
+		
 		if (daNote.nukeNote && daRating != 'miss')
 			// die <3
 			healthBonus = -4;
@@ -2973,7 +2996,7 @@ class PlayState extends MusicBeatState
 			songScoreDef += Math.round(ConvertScore.convertScore(noteDiff));
 			trueScore += Math.round(ConvertScore.convertScore(noteDiff));
 		}
-		
+		comboBreak(daNote.noteData % 4, playerOne, daRating);
 		/* if (combo > 60)
 				daRating = 'sick';
 			else if (combo > 12)
@@ -3572,93 +3595,6 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	var fastCarCanDrive:Bool = true;
-
-	function resetFastCar():Void
-	{
-		fastCar.x = -12600;
-		fastCar.y = FlxG.random.int(140, 250);
-		fastCar.velocity.x = 0;
-		fastCarCanDrive = true;
-	}
-
-	function fastCarDrive()
-	{
-		FlxG.sound.play('assets/sounds/carPass' + FlxG.random.int(0, 1) + TitleState.soundExt, 0.7);
-
-		fastCar.velocity.x = (FlxG.random.int(170, 220) / FlxG.elapsed) * 3;
-		fastCarCanDrive = false;
-		new FlxTimer().start(2, function(tmr:FlxTimer)
-		{
-			resetFastCar();
-		});
-	}
-
-	var trainMoving:Bool = false;
-	var trainFrameTiming:Float = 0;
-
-	var trainCars:Int = 8;
-	var trainFinishing:Bool = false;
-	var trainCooldown:Int = 0;
-
-	function trainStart():Void
-	{
-		trainMoving = true;
-		if (!trainSound.playing)
-			trainSound.play(true);
-	}
-
-	var startedMoving:Bool = false;
-
-	function updateTrainPos():Void
-	{
-		if (trainSound.time >= 4700)
-		{
-			startedMoving = true;
-			gf.playAnim('hairBlow');
-		}
-
-		if (startedMoving)
-		{
-			phillyTrain.x -= 400;
-
-			if (phillyTrain.x < -2000 && !trainFinishing)
-			{
-				phillyTrain.x = -1150;
-				trainCars -= 1;
-
-				if (trainCars <= 0)
-					trainFinishing = true;
-			}
-
-			if (phillyTrain.x < -4000 && trainFinishing)
-				trainReset();
-		}
-	}
-
-	function trainReset():Void
-	{
-		gf.playAnim('hairFall');
-		phillyTrain.x = FlxG.width + 200;
-		trainMoving = false;
-		// trainSound.stop();
-		// trainSound.time = 0;
-		trainCars = 8;
-		trainFinishing = false;
-		startedMoving = false;
-	}
-
-	function lightningStrikeShit():Void
-	{
-		FlxG.sound.play('assets/sounds/thunder_' + FlxG.random.int(1, 2) + TitleState.soundExt);
-		halloweenBG.animation.play('lightning');
-
-		lightningStrikeBeat = curBeat;
-		lightningOffset = FlxG.random.int(8, 24);
-
-		boyfriend.playAnim('scared', true);
-		gf.playAnim('scared', true);
-	}
 
 	override function stepHit()
 	{
@@ -3735,8 +3671,6 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
-	var lightningStrikeBeat:Int = 0;
-	var lightningOffset:Int = 8;
 
 	override function beatHit()
 	{
@@ -3765,15 +3699,6 @@ class PlayState extends MusicBeatState
 		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
-
-		// HARDCODING FOR MILF ZOOMS!
-		// now modchart
-		/*
-		if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
-		{
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.03;
-		}*/
 
 		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
 		{

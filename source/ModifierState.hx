@@ -294,15 +294,6 @@ class ModifierState extends MusicBeatState
 			desc: "Let the game play itself!"
 		},
 		{
-			name: "Chart...",
-			internName: "chart",
-			value: false,
-			conflicts: [],
-			multi: 1,
-			times: true,
-			desc: "Open the Debug Menu without Pressing 7"
-		},
-		{
 			name: "Char Select...",
 			internName: "charselect",
 			value: false,

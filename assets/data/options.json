@@ -17,5 +17,6 @@
     "judge": 9,
     "newJudgementPos": false,
     "emuOsuLifts": false,
-    "skipDebugScreen": false
+    "skipDebugScreen": false,
+    "showComboBreaks": true
 }

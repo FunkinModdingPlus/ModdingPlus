@@ -109,6 +109,7 @@ enum KeyboardScheme
  * A list of actions that a player would invoke via some input device.
  * Uses FlxActions to funnel various inputs to a single action.
  */
+ @:allow(PlayState)
 class Controls extends FlxActionSet
 {
 	var _up = new FlxActionDigital(Action.UP);
@@ -767,10 +768,14 @@ class Controls extends FlxActionSet
 		addGamepadLiteral(id, [
 			Control.ACCEPT => [A],
 			Control.BACK => [B],
-			Control.UP => [DPAD_UP, LEFT_STICK_DIGITAL_UP],
-			Control.DOWN => [DPAD_DOWN, LEFT_STICK_DIGITAL_DOWN],
-			Control.LEFT => [DPAD_LEFT, LEFT_STICK_DIGITAL_LEFT],
-			Control.RIGHT => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT],
+			Control.UP => [DPAD_UP, LEFT_STICK_DIGITAL_UP, Y],
+			Control.DOWN => [DPAD_DOWN, LEFT_STICK_DIGITAL_DOWN, A],
+			Control.LEFT => [DPAD_LEFT, LEFT_STICK_DIGITAL_LEFT, X],
+			Control.RIGHT => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT, B],
+			Control.UP_MENU => [DPAD_UP, LEFT_STICK_DIGITAL_UP],
+			Control.DOWN_MENU => [DPAD_DOWN, LEFT_STICK_DIGITAL_DOWN],
+			Control.LEFT_MENU => [DPAD_LEFT, LEFT_STICK_DIGITAL_LEFT],
+			Control.RIGHT_MENU => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT],
 			Control.PAUSE => [START],
 			// Control.RESET => [Y]
 			// gamepads should not need to reset
