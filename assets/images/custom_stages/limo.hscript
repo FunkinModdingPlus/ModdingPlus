@@ -58,7 +58,7 @@ function resetVroomVroom() {
     vroomVroomCanVroom = true;
 }
 function doVroomVroom() {
-    FlxG.sound.play(hscriptPath + 'carPass' + FlxG.random.int(0,1)+'.ogg');
+    FlxG.sound.play(FNFAssets.getSound(hscriptPath + 'carPass' + FlxG.random.int(0,1)+'.ogg'));
     fastcar.velocity.x = FlxG.random.int(170,220) / FlxG.elapsed;
     vroomVroomCanVroom = false;
     new FlxTimer().start(2, function(tmr) {

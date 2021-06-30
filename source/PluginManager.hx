@@ -26,7 +26,7 @@ class PluginManager {
         var reterp = new Interp();
         reterp.variables.set("Conductor", Conductor);
         reterp.variables.set("FlxSprite", DynamicSprite);
-        reterp.variables.set("FlxSound", flixel.system.FlxSound);
+        reterp.variables.set("FlxSound", DynamicSound);
         reterp.variables.set("FlxAtlasFrames", DynamicSprite.DynamicAtlasFrames);
         reterp.variables.set("FlxGroup", flixel.group.FlxGroup);
         reterp.variables.set("FlxAngle", flixel.math.FlxAngle);

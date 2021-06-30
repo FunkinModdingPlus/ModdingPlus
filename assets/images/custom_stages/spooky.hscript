@@ -15,7 +15,7 @@ var lightningOffset = 8;
 function beatHit(beat)
 {
     if (FlxG.random.bool(10) && beat > lightningBeat + lightningOffset) {
-        FlxG.sound.play(hscriptPath + 'lightning.ogg');
+        FlxG.sound.play(FNFAssets.getSound(hscriptPath + 'lightning.ogg'));
         bg.animation.play("lightning");
         lightningBeat = beat;
         lightningOffset = FlxG.random.int(8,24);
