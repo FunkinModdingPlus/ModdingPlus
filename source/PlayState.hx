@@ -384,6 +384,8 @@ class PlayState extends MusicBeatState
 			if (position & BEHIND_BF != 0)
 				add(boyfriend); 
 		});
+		interp.variables.set("add", add);
+		interp.variables.set("remove", remove);
 		interp.variables.set("setDefaultZoom", function(zoom) {defaultCamZoom = zoom;});
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
@@ -917,8 +919,6 @@ class PlayState extends MusicBeatState
 				case 'angry-senpai':
 					
 					schoolIntro(doof);
-				case 'spirit':
-					schoolIntro(doof);
 				case 'none':
 					startCountdown();
 				default:
@@ -950,7 +950,7 @@ class PlayState extends MusicBeatState
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
 		add(black);
-
+		/*
 		var red:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFFff1b31);
 		red.scrollFactor.set();
 		var senpaiSound:Sound;
@@ -987,17 +987,18 @@ class PlayState extends MusicBeatState
 		senpaiEvil.scrollFactor.set();
 		senpaiEvil.updateHitbox();
 		senpaiEvil.screenCenter();
-		/*
-		if (dialogueBox != null && dialogueBox.like != 'senpai')
+		*/
+		if (SONG.cutsceneType == 'angry-senpai')
 		{
 			remove(black);
-
-			if (dialogueBox.like == 'spirit')
+			/*
+			if (SONG.cutsceneType == 'spirit')
 			{
 				add(red);
 			}
+			*/
 		}
-		*/
+		
 		new FlxTimer().start(0.3, function(tmr:FlxTimer)
 		{
 			black.alpha -= 0.15;
@@ -1011,8 +1012,9 @@ class PlayState extends MusicBeatState
 				if (dialogueBox != null)
 				{
 					inCutscene = true;
-
-					if (/*dialogueBox.like == 'spirit'*/ false)
+					// haha weeeee
+					/*
+					if (SONG.cutsceneType == 'spirit')
 					{
 						add(senpaiEvil);
 						senpaiEvil.alpha = 0;
@@ -1044,8 +1046,10 @@ class PlayState extends MusicBeatState
 					}
 					else
 					{
-						add(dialogueBox);
+						
 					}
+					*/
+					add(dialogueBox);
 				}
 				else
 					startCountdown();

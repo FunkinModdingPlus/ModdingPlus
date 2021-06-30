@@ -1,0 +1,59 @@
+function start(song) {
+  var red = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFFff1b31);
+  red.scrollFactor.set();
+  var senpaiSound;
+  if (FNFAssets.exists('assets/images/custom_chars/${PlayState.SONG.player2}/Senpai_Dies.ogg')) {
+    senpaiSound = FNFAssets.getSound('assets/images/custom_chars/${PlayState.SONG.player2}/Senpai_Dies.ogg');
+
+  } else if (FNFAssets.exists('assets/data/${PlayState.SONG.song.toLowerCase()}/Senpai_Dies.ogg')) {
+      senpaiSound = FNFAssets.getSound('assets/data/${PlayState.SONG.song.toLowerCase()}/Senpai_Dies.ogg');
+  } else {
+      senpaiSound = FNFAssets.getSound('assets/sounds/Senpai_Dies.ogg');
+  }
+
+  var senpaiEvil = new FlxSprite();
+
+  if (FNFAssets.exists('assets/images/custom_chars/${PlayState.SONG.player2}/crazy.png')) {
+      var evilImage = FNFAssets.getBitmapData('assets/images/custom_chars/${PlayState.SONG.player2}/crazy.png');
+      var evilXml = FNFAssets.getText('assets/images/custom_chars/${PlayState.SONG.player2}/crazy.xml');
+      senpaiEvil.frames = FlxAtlasFrames.fromSparrow(evilImage, evilXml);
+  } else if (FNFAssets.exists(hscriptPath + '/crazy.png')) {
+      var evilImage = FNFAssets.getBitmapData('${hscriptPath}/crazy.png');
+      var evilXml = FNFAssets.getText('${hscriptPath}/crazy.xml');
+      senpaiEvil.frames = FlxAtlasFrames.fromSparrow(evilImage, evilXml);
+  } else {
+      senpaiEvil.frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/senpaiCrazy.png', 'assets/images/weeb/senpaiCrazy.xml');
+  }
+  senpaiEvil.animation.addByPrefix('idle', 'Senpai Pre Explosion', 24, false);
+    if (dad.isPixel) {
+        senpaiEvil.setGraphicSize(Std.int(senpaiEvil.width * 6));
+    }
+    senpaiEvil.scrollFactor.set();
+    senpaiEvil.updateHitbox();
+    senpaiEvil.screenCenter();
+    add(red);
+    add(senpaiEvil);
+    senpaiEvil.alpha = 0;
+    if (currentPlayState.doof != null) {
+        new FlxTimer().start(0.3, function(timer) {
+        senpaiEvil.alpha += 0.15;
+        if (senpaiEvil.alpha < 1) {
+            timer.reset();
+        } else {
+            senpaiEvil.animation.play('idle');
+            FlxG.sound.play(senpaiSound, 1, false, null, true, function() {
+                remove(senpaiEvil);
+                remove(red);
+                // having a camera fade breaks shit so no camera fade : )
+                add(currentPlayState.doof);
+            });
+            new FlxTimer().start(3.2, function(_) {
+                FlxG.camera.fade(FlxColor.WHITE, 1.6, false);
+            });
+        }
+    });
+    } else {
+        startCountdown();
+    }
+    
+}
