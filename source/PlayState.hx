@@ -386,6 +386,7 @@ class PlayState extends MusicBeatState
 		});
 		interp.variables.set("add", add);
 		interp.variables.set("remove", remove);
+		interp.variables.set("insert", insert);
 		interp.variables.set("setDefaultZoom", function(zoom) {defaultCamZoom = zoom;});
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);

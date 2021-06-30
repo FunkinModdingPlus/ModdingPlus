@@ -105,7 +105,7 @@ class DialogueBox extends FlxSpriteGroup
 
 		setUp();
 		
-		FlxG.sound.playMusic('assets/images/custom_dialogs/dialogMusic/' + curMusic+'.ogg', 0);
+		FlxG.sound.playMusic(FNFAssets.getSound('assets/images/custom_dialogs/dialogMusic/' + curMusic+'.ogg'), 0);
 
 		FlxG.sound.music.fadeIn(1, 0, 0.8 * curVolume / 100);
 
@@ -125,14 +125,14 @@ class DialogueBox extends FlxSpriteGroup
 		switch (PlayState.SONG.song.toLowerCase())
 		{
 			case 'thorns':
-				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic('assets/images/weeb/spiritFaceForward.png');
+				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(FNFAssets.getBitmapData('assets/images/weeb/spiritFaceForward.png'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
 		}
 
 		portrait = new FlxSprite(-20, 40);
-		portrait.frames = FlxAtlasFrames.fromSparrow('assets/images/custom_chars/$curCharacter/portrait.png',
-			'assets/images/custom_chars/$curCharacter/portrait.xml');
+		portrait.frames = FlxAtlasFrames.fromSparrow(FNFAssets.getBitmapData('assets/images/custom_chars/$curCharacter/portrait.png'),
+			FNFAssets.getText('assets/images/custom_chars/$curCharacter/portrait.xml'));
 		portrait.animation.addByPrefix('neutral', 'neutral', 24, false);
 		portrait.setGraphicSize(Std.int(portrait.width * 0.9));
 		portrait.updateHitbox();
@@ -143,8 +143,8 @@ class DialogueBox extends FlxSpriteGroup
 		portrait.visible = false;
 
 		box = new FlxSprite(-20, 45);
-		box.frames = FlxAtlasFrames.fromSparrow('assets/images/custom_dialogs/dialogBoxes/$curBox.png',
-			'assets/images/custom_dialogs/dialogBoxes/$curBox.xml');
+		box.frames = FlxAtlasFrames.fromSparrow(FNFAssets.getBitmapData('assets/images/custom_dialogs/dialogBoxes/$curBox.png'),
+			FNFAssets.getText('assets/images/custom_dialogs/dialogBoxes/$curBox.xml'));
 		box.animation.addByPrefix('open', 'open', 24, false);
 		box.animation.addByPrefix('normal', 'normal', 24, true);
 		box.animation.play('open');
@@ -168,7 +168,7 @@ class DialogueBox extends FlxSpriteGroup
 
 		portrait.screenCenter(Y);
 
-		handSelect = new FlxSprite(1240, 680).loadGraphic('assets/images/custom_dialogs/dialogHands/$handSprite.png');
+		handSelect = new FlxSprite(1240, 680).loadGraphic(FNFAssets.getBitmapData('assets/images/custom_dialogs/dialogHands/$handSprite.png'));
 		handSelect.setGraphicSize(Std.int(100));
 		handSelect.updateHitbox();
 		handSelect.x -= handSelect.width;
@@ -183,7 +183,7 @@ class DialogueBox extends FlxSpriteGroup
 		swagDialogue = new FlxTypeText(240, 480, Std.int(FlxG.width * 0.6), "", curFontScale);
 		swagDialogue.font = curFont;
 		swagDialogue.color = dialogueColor;
-		swagDialogue.sounds = [FlxG.sound.load('assets/images/custom_dialogs/$curSound.ogg', 0.6)];
+		swagDialogue.sounds = [FlxG.sound.load(FNFAssets.getSound('assets/images/custom_dialogs/$curSound.ogg'), 0.6)];
 		add(swagDialogue);
 
 		dialogue = new Alphabet(0, 80, "", false, true);
@@ -251,7 +251,7 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			remove(dialogue);
 
-			FlxG.sound.play('assets/images/custom_dialogs/dialogClicks/$clickSound.ogg', 0.8);
+			FlxG.sound.play(FNFAssets.getSound('assets/images/custom_dialogs/dialogClicks/$clickSound.ogg'), 0.8);
 
 			if (dialogueFile.info[1] == null && dialogueFile.info[0] != null)
 			{
@@ -319,8 +319,8 @@ class DialogueBox extends FlxSpriteGroup
 		});
 		remove(portrait);
 		portrait = new FlxSprite(-20, 40);
-		portrait.frames = FlxAtlasFrames.fromSparrow('assets/images/custom_chars/$curCharacter/portrait.png',
-			'assets/images/custom_chars/$curCharacter/portrait.xml');
+		portrait.frames = FlxAtlasFrames.fromSparrow(FNFAssets.getBitmapData('assets/images/custom_chars/$curCharacter/portrait.png'),
+			FNFAssets.getText('assets/images/custom_chars/$curCharacter/portrait.xml'));
 		portrait.animation.addByPrefix(curEmotion, curEmotion, 24, false);
 		portrait.setGraphicSize(Std.int(portrait.width * 0.9));
 		portrait.updateHitbox();
