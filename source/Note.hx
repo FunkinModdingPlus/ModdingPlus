@@ -25,29 +25,97 @@ enum abstract Direction(Int) from Int to Int {
 	var right;
 
 }
+/**
+ * What NoteiNfo jsons are like. 
+ */
 typedef NoteInfo = {
+	/**
+	 * The animation names of the notes. 1-4
+	 * left, down, up, right
+	 */
 	var animNames:Array<String>;
+	/**
+	 * Pixel animation thingies. same order as names.
+	 */
 	var animInt:Array<Int>;
+	/**
+	 * Amount to heal
+	 */
 	var ?healAmount:Null<Float>;
+	/**
+	 * Amount to damange. Is added so should be negative to hurt people!
+	 */
 	var ?damageAmount:Null<Float>;
+	/**
+	 * Whether it should be sung. 
+	 */
 	var ?shouldSing:Null<Bool>;
+	/**
+	 * Overwritten by healAmount. How much the healing should be multiplied.
+	 */
 	var ?healMultiplier:Null<Float>;
+	/**
+	 * Overwritten by damage amount. How much damage should be multiplied by.
+	 */
 	var ?damageMultiplier:Null<Float>;
+	/**
+	 * Whether to heal the same amount or hurt the same amount.
+	 */
 	var ?consistentHealth:Null<Bool>;
+	/**
+	 * When to stop healing and start hurting. can be
+	 * sick
+	 * good
+	 * bad
+	 * shit
+	 * wayoff
+	 * miss
+	 */
 	var ?healCutoff:Null<String>;
+	/**
+	 * How easy it is to hit note. Higher numbers are easier. 0 is literally impossible.
+	 */
 	var ?timingMultiplier:Null<Float>;
+	/**
+	 * Whether to ignore health modifiers and use straight numbers. 
+	 */
 	var ?ignoreHealthMods:Null<Bool>;
+	/**
+	 * Whether missing the note should add to the combo break counter
+	 */
 	var ?dontCountNote:Null<Bool>;
+	/**
+	 * Unused. 
+	 */
 	var ?dontStrum:Null<Bool>;
+	/**
+	 * Info about how the opponent sings the note. The opponent _always_ sings this note even if it isn't hit. 
+	 */
 	var ?singInfo:Null<SingInfo>;
-	// A string array that can be assigned to make shit easier to deal with
+	/**
+	 * An array of string that can be checked for.
+	 */
 	var ?classes:Null<Array<String>>;
-	// same deal as above but only one can be assigned. 
+	/**
+	 * A unique string that can be checked for. 
+	 */
 	var ?id:Null<String>;
 }
+/**
+ * Used to make opponent sing.
+ */
 typedef SingInfo = {
+	/**
+	 * Direction of singing. 0-3 left, down, up, right
+	 */
 	var direction:Int;
+	/**
+	 * Alt note. 0 is no alt. 
+	 */
 	var ?alt:Null<Int>;
+	/**
+	 * Whether to miss or not. 
+	 */
 	var ?miss:Null<Bool>;
 }
 class Note extends FlxSprite

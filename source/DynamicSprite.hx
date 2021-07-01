@@ -3,7 +3,10 @@ package;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxSprite;
-
+/**
+ * A sprite that automatically handles loading files dynamically. This is used in hscripts by default.
+ * Only overwrites "loadGraphic."
+ */
 class DynamicSprite extends FlxSprite {
     override public function loadGraphic(Graphic:FlxGraphicAsset, Animated:Bool = false, Width:Int = 0, Height:Int = 0, Unique:Bool = false, ?Key:String) {
         if ((Graphic is String)) {
@@ -14,7 +17,11 @@ class DynamicSprite extends FlxSprite {
         return super.loadGraphic(Graphic, Animated, Width, Height, Unique, Key);
     }
 }
-
+/**
+ * A replacement for FlxAtlasFrames that dynamically handles loading assets.
+ * Passed to hscripts by default.
+ * Because of how this works only "fromSparrow" and "fromSpriteSheetPAcker is supported."
+ */
 class DynamicAtlasFrames {
     public static function fromSparrow(png:FlxGraphicAsset, xml:String) {
         if (FNFAssets.exists(xml)) {

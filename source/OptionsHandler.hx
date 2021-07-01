@@ -4,6 +4,9 @@ import lime.utils.Assets;
 import sys.io.File;
 #end
 import flixel.FlxG;
+/**
+ * Avaliable options. 
+ */
 typedef TOptions = {
     var skipVictoryScreen:Bool;
     var skipModifierMenu:Bool;
@@ -26,7 +29,13 @@ typedef TOptions = {
     var skipDebugScreen:Bool;
     var showComboBreaks:Bool;
 }
+/**
+ * OptionsHandler Handles options : )
+ */
 class OptionsHandler {
+    /**
+     *  The options. On desktop it's read from file then cached. 
+     */
     public static var options(get, set):TOptions;
     // Preformance!
     // We only read the file once...
