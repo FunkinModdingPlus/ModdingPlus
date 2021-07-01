@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.media.SoundMixer</title><meta name="description" content="The SoundMixer class contains static properties and methods for global
+sound control in the application. The SoundMixer class controls embedded
+and streaming sounds in the application. it does not control dynamically
+created sounds (that is, sounds generated in response to a Sound object
+dispatching a &lt;code&gt;sampleData&lt;/code&gt; event)."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> SoundMixer</h1><h4><small>package <a href="../../openfl/media/index.html">openfl.media</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.media.SoundChannel)</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>The SoundMixer class contains static properties and methods for global
+sound control in the application. The SoundMixer class controls embedded
+and streaming sounds in the application. it does not control dynamically
+created sounds (that is, sounds generated in response to a Sound object
+dispatching a <code>sampleData</code> event).</p></div><h3 class="section">Static variables</h3><div class="fields"><div class="field "><a name="bufferTime"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#bufferTime"><span class="identifier">bufferTime</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The number of seconds to preload an embedded streaming sound into a
+buffer before it starts to stream. The data in a loaded sound,
+including its buffer time, cannot be accessed by a SWF file that is in
+a different domain unless you implement a cross-domain policy file.
+For more information about security and sound, see the Sound class
+description. The data in a loaded sound, including its buffer time,
+cannot be accessed by code in a file that is in a different domain
+unless you implement a cross-domain policy file. However, in the
+application sandbox in an AIR application, code can access data in
+sound files from any source. For more information about security and
+sound, see the Sound class description.
+The <code><a href="../../openfl/media/SoundMixer.html#bufferTime">SoundMixer.bufferTime</a></code> property only affects the buffer time for
+embedded streaming sounds in a SWF and is independent of dynamically
+created Sound objects (that is, Sound objects created in
+ActionScript). The value of <code><a href="../../openfl/media/SoundMixer.html#bufferTime">SoundMixer.bufferTime</a></code> cannot override or
+set the default of the buffer time specified in the SoundLoaderContext
+object that is passed to the <code><a href="../../openfl/media/Sound.html#load">Sound.load</a>()</code> method.</p></div></div><div class="field "><a name="soundTransform"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#soundTransform"><span class="identifier">soundTransform</span></a>:<a class="type" title="openfl.media.SoundTransform - The SoundTransform class contains properties for volume and panning." href="../../openfl/media/SoundTransform.html">SoundTransform</a></code></h3><div class="doc"><p>The SoundTransform object that controls global sound properties. A
+SoundTransform object includes properties for setting volume, panning,
+left speaker assignment, and right speaker assignment. The
+SoundTransform object used in this property provides final sound
+settings that are applied to all sounds after any individual sound
+settings are applied.</p></div></div></div><h3 class="section">Static methods</h3><div class="fields"><div class="field "><a name="areSoundsInaccessible"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#areSoundsInaccessible"><span class="identifier">areSoundsInaccessible</span></a>():<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Determines whether any sounds are not accessible due to security
+restrictions. For example, a sound loaded from a domain other than
+that of the content calling this method is not accessible if the
+server for the sound has no URL policy file that grants access to the
+domain of that domain. The sound can still be loaded and played, but
+low-level operations, such as getting ID3 metadata for the sound,
+cannot be performed on inaccessible sounds.
+For AIR application content in the application security sandbox,
+calling this method always returns <code><a href="../../Bool.html">false</a></code>. All sounds, including
+those loaded from other domains, are accessible to content in the
+application security sandbox.</p><p class="javadoc">Returns:</p><div class="indent inline-content"><p>The string representation of the boolean.</p></div></div></div><div class="field "><a name="stopAll"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#stopAll"><span class="identifier">stopAll</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Stops all sounds currently playing.</p>
+<blockquote>
+<p>In Flash Professional, this method does not stop the playhead. Sounds</p></blockquote>
+<p>set to stream will resume playing as the playhead moves over the
+frames in which they are located.</p>
+<p>When using this property, consider the following security model:</p><ul><li>By default, calling the <code><a href="../../openfl/media/SoundMixer.html#stopAll">SoundMixer.stopAll</a>()</code> method stops only
+sounds in the same security sandbox as the object that is calling the
+method. Any sounds whose playback was not started from the same
+sandbox as the calling object are not stopped.</li><li>When you load the sound, using the <code>load()</code> method of the Sound
+class, you can specify a <code>context</code> parameter, which is a
+SoundLoaderContext object. If you set the <code>checkPolicyFile</code> property
+of the SoundLoaderContext object to <code><a href="../../Bool.html">true</a></code>, Flash Player or Adobe AIR
+checks for a cross-domain policy file on the server from which the
+sound is loaded. If the server has a cross-domain policy file, and the
+file permits the domain of the calling content, then the file can stop
+the loaded sound by using the <code><a href="../../openfl/media/SoundMixer.html#stopAll">SoundMixer.stopAll</a>()</code> method; otherwise
+it cannot.</li></ul>
+<p>However, in Adobe AIR, content in the <code>application</code> security sandbox
+(content installed with the AIR application) are not restricted by
+these security limitations.</p>
+<p>For more information related to security, see the Flash Player
+Developer Center Topic: &lt;a
+href="<a href="http://www.adobe.com/go/devnet_security_en">http://www.adobe.com/go/devnet_security_en</a>"
+scope="external">Security</a>.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

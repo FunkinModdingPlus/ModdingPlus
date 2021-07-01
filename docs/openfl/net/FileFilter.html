@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.net.FileFilter</title><meta name="description" content="The FileFilter class is used to indicate what files on the user&#039;s system
+are shown in the file-browsing dialog box that is displayed when the
+&lt;code&gt;&lt;a href=&quot;../../openfl/net/FileReference.html#browse&quot;&gt;FileReference.browse&lt;/a&gt;()&lt;/code&gt; method, the &lt;code&gt;FileReferenceList.browse()&lt;/code&gt; method
+is called or a browse method of a File, FileReference, or
+FileReferenceList object is called. FileFilter instances are passed as a
+value for the optional &lt;code&gt;typeFilter&lt;/code&gt; parameter to the method. If you use a
+FileFilter instance, extensions and file types that aren&#039;t specified in
+the FileFilter instance are filtered out; that is, they are not available
+to the user for selection. If no FileFilter object is passed to the
+method, all files are shown in the dialog box.
+You can use FileFilter instances in one of two ways:"/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> FileFilter</h1><h4><small>package <a href="../../openfl/net/index.html">openfl.net</a></small></h4>    <span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>The FileFilter class is used to indicate what files on the user's system
+are shown in the file-browsing dialog box that is displayed when the
+<code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code> method, the <code>FileReferenceList.browse()</code> method
+is called or a browse method of a File, FileReference, or
+FileReferenceList object is called. FileFilter instances are passed as a
+value for the optional <code>typeFilter</code> parameter to the method. If you use a
+FileFilter instance, extensions and file types that aren't specified in
+the FileFilter instance are filtered out; that is, they are not available
+to the user for selection. If no FileFilter object is passed to the
+method, all files are shown in the dialog box.
+You can use FileFilter instances in one of two ways:</p><ul><li>A description with file extensions only</li><li>A description with file extensions and Macintosh file types</li></ul>
+<p>The two formats are not interchangeable within a single call to the browse
+method. You must use one or the other.</p>
+<p>You can pass one or more FileFilter instances to the browse method, as
+shown in the following:</p>
+<pre><code class="prettyprint haxe">var imagesFilter = new FileFilter("Images", "*.jpg;*.gif;*.png");
+var docFilter = new FileFilter("Documents", "*.pdf;*.doc;*.txt");
+var myFileReference = new FileReference();
+myFileReference.browse([imagesFilter, docFilter]);</code></pre>
+<p>Or in an AIR application:</p>
+<pre><code class="prettyprint haxe">var imagesFilter = new FileFilter("Images", "*.jpg;*.gif;*.png");
+var docFilter = new FileFilter("Documents", "*.pdf;*.doc;*.txt");
+var myFile = new File();
+myFile.browseForOpen("Open", [imagesFilter, docFilter]);</code></pre>
+<p>The list of extensions in the <code><a href="../../openfl/net/FileFilter.html#extension">FileFilter.extension</a></code> property is used to
+filter the files shown in the file browsing dialog. The list is not
+actually displayed in the dialog box; to display the file types for users,
+you must list the file types in the description string as well as in the
+extension list. The description string is displayed in the dialog box in
+Windows and Linux. (It is not used on the Macintosh<sup>?/sup>.) On the
+Macintosh, if you supply a list of Macintosh file types, that list is used
+to filter the files. If not, the list of file extensions is used.</p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ macType : null })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">description:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">extension:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">?macType:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>)</code></h3><div class="doc"><p>Creates a new FileFilter instance.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>description</code></th><td><p>The description string that is visible to users
+when they select files for uploading.</p></td></tr><tr><th style="width:25%;"><code>extension</code></th><td><p>A list of file extensions that indicate which file
+formats are visible to users when they select files
+for uploading.</p></td></tr><tr><th style="width:25%;"><code>macType</code></th><td><p>A list of Macintosh file types that indicate which
+file types are visible to users when they select
+files for uploading. If no value is passed, this
+parameter is set to <code>null</code>.</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="description"></a><h3 class="anchor"><code><a href="#description"><span class="identifier">description</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The description string for the filter. The description is visible to
+the user in the dialog box that opens when <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code> or
+<code>FileReferenceList.browse()</code> is called. The description string
+contains a string, such as <code>"Images (*.gif, *.jpg, *.png)"</code>, that
+can help instruct the user on what file types can be uploaded or
+downloaded. Note that the actual file types that are supported by this
+FileReference object are stored in the <code>extension</code> property.</p></div></div><div class="field "><a name="extension"></a><h3 class="anchor"><code><a href="#extension"><span class="identifier">extension</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>A list of file extensions. This list indicates the types of files that
+you want to show in the file-browsing dialog box. (The list is not
+visible to the user; the user sees only the value of the <code>description</code>
+property.) The <code>extension</code> property contains a semicolon-delimited
+list of file extensions, with a wildcard (*) preceding each
+extension, as shown in the following string: <code>"*.jpg;*.gif;*.png"</code>.</p></div></div><div class="field "><a name="macType"></a><h3 class="anchor"><code><a href="#macType"><span class="identifier">macType</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>A list of Macintosh file types. This list indicates the types of files
+that you want to show in the file-browsing dialog box. (This list
+itself is not visible to the user; the user sees only the value of the
+<code>description</code> property.) The <code>macType</code> property contains a
+semicolon-delimited list of Macintosh file types, as shown in the
+following string: <code>"<a href="../../lime/_internal/format/JPEG.html#JPEG">JPEG</a>;jp2_;GIFF"</code>.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

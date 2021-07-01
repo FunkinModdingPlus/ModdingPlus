@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.filters.ShaderFilter</title><meta name="description" content="The ShaderFilter class applies a filter by executing a shader on the
+object being filtered. The filtered object is used as an input to the
+shader, and the shader output becomes the filter result.
+To create a new filter, use the constructor &lt;code&gt;new &lt;a href=&quot;../../openfl/filters/ShaderFilter.html#ShaderFilter&quot;&gt;ShaderFilter&lt;/a&gt;()&lt;/code&gt;. The use
+of filters depends on the object to which you apply the filter:"/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> ShaderFilter</h1><h4><small>package <a href="../../openfl/filters/index.html">openfl.filters</a></small></h4><h4><small>extends <a class="type" title="openfl.filters.BitmapFilter - The BitmapFilter class is the base class for all image filter effects." href="../../openfl/filters/BitmapFilter.html">BitmapFilter</a></small></h4>    <span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>The ShaderFilter class applies a filter by executing a shader on the
+object being filtered. The filtered object is used as an input to the
+shader, and the shader output becomes the filter result.
+To create a new filter, use the constructor <code>new <a href="../../openfl/filters/ShaderFilter.html#ShaderFilter">ShaderFilter</a>()</code>. The use
+of filters depends on the object to which you apply the filter:</p><ul><li>To apply filters to movie clips, text fields, buttons, and video, use
+the <code>filters</code> property (inherited from DisplayObject). Setting the
+<code>filters</code> property of an object does not modify the object, and you can
+remove the filter by clearing the <code>filters</code> property.</li><li>To apply filters to BitmapData objects, use the
+<code><a href="../../openfl/display/BitmapData.html#applyFilter">BitmapData.applyFilter</a>()</code> method. Calling <code>applyFilter()</code> on a BitmapData
+object takes the source BitmapData object and the filter object and
+generates a filtered image as a result.</li></ul>
+<p>If you apply a filter to a display object, the value of the
+<code>cacheAsBitmap</code> property of the object is set to true. If you remove all
+filters, the original value of <code>cacheAsBitmap</code> is restored.</p>
+<p>This filter supports stage scaling. However, it does not support general
+scaling, rotation, and skewing. If the object itself is scaled (if the
+<code>scaleX</code> and <code>scaleY</code> properties are not set to 100%), the filter is not
+scaled. It is scaled only when the user zooms in on the stage.</p>
+<p>A filter is not applied if the resulting image exceeds the maximum
+dimensions. In AIR 1.5 and Flash Player 10, the maximum is 8,191 pixels in
+width or height, and the total number of pixels cannot exceed 16,777,215
+pixels. (So, if an image is 8,191 pixels wide, it can only be 2,048 pixels
+high.) In Flash Player 9 and earlier and AIR 1.1 and earlier, the
+limitation is 2,880 pixels in height and 2,880 pixels in width. If, for
+example, you zoom in on a large movie clip with a filter applied, the
+filter is turned off if the resulting image exceeds the maximum
+dimensions.</p>
+<p>To specify the Shader instance to use with the filter, pass the Shader
+instance as an argument to the <code><a href="../../openfl/filters/ShaderFilter.html#ShaderFilter">ShaderFilter</a>()</code> constructor, or set it as
+the value of the <code>shader</code> property.</p>
+<p>To allow the shader output to extend beyond the bounds of the filtered
+object, use the <code>leftExtension</code>, <code>rightExtension</code>, <code>topExtension</code>, and
+<code>bottomExtension</code> properties.</p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">shader:<a class="type" title="openfl.display.Shader - // TODO: Document GLSL Shaders A Shader instance represents a Pixel Bender shader kernel in ActionScript." href="../../openfl/display/Shader.html">Shader</a></span>)</code></h3><div class="doc"><p>Creates a new shader filter.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>shader</code></th><td><p>The Shader to use for this filter. For details and
+limitations that the shader must conform to, see the
+description for the <code>shader</code> property.</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="bottomExtension"></a><h3 class="anchor"><code><a href="#bottomExtension"><span class="identifier">bottomExtension</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The growth in pixels on the bottom side of the target object.
+The growth is the area beyond the bounds of the target object that is
+passed to the shader during execution. At execution time Flash Player
+or AIR computes the normal bounds of a movie clip and extends the
+bounds based on the <code>leftExtension</code>, <code>rightExtension</code>, <code>topExtension</code>,
+and <code>bottomExtension</code> values.</p></div></div><div class="field "><a name="leftExtension"></a><h3 class="anchor"><code><a href="#leftExtension"><span class="identifier">leftExtension</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The growth in pixels on the left side of the target object.
+The growth is the area beyond the bounds of the target object that is
+passed to the shader during execution. At execution time Flash Player
+or AIR computes the normal bounds of a movie clip and extends the
+bounds based on the <code>leftExtension</code>, <code>rightExtension</code>, <code>topExtension</code>,
+and <code>bottomExtension</code> values.</p></div></div><div class="field "><a name="rightExtension"></a><h3 class="anchor"><code><a href="#rightExtension"><span class="identifier">rightExtension</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The growth in pixels on the right side of the target object.
+The growth is the area beyond the bounds of the target object that is
+passed to the shader during execution. At execution time Flash Player
+or AIR computes the normal bounds of a movie clip and extends the
+bounds based on the <code>leftExtension</code>, <code>rightExtension</code>, <code>topExtension</code>,
+and <code>bottomExtension</code> values.</p></div></div><div class="field "><a name="shader"></a><h3 class="anchor"><code><a href="#shader"><span class="identifier">shader</span></a>:<a class="type" title="openfl.display.Shader - // TODO: Document GLSL Shaders A Shader instance represents a Pixel Bender shader kernel in ActionScript." href="../../openfl/display/Shader.html">Shader</a></code></h3><div class="doc"><p>The shader to use for this filter.
+The Shader assigned to the <code>shader</code> property must specify at least one
+<code>image4</code> input. The input <strong>does not</strong> need to be specified in code
+using the associated ShaderInput object's <code>input</code> property. Instead,
+the object to which the filter is applied is automatically used as the
+first input (the input with <code>index</code> 0). A shader used as a filter can
+specify more than one input, in which case any additional input must
+be specified by setting its ShaderInput instance's <code>input</code> property.</p>
+<p>When you assign a Shader instance to this property the shader is
+copied internally and the filter operation uses that internal copy,
+not a reference to the original shader. Any changes made to the
+shader, such as changing a parameter value, input, or bytecode, are
+not applied to the copied shader that's used for the filter. To make
+it so that shader changes are taken into account in the filter output,
+you must reassign the Shader instance to the <code>shader</code> property. As
+with all filters, you must also reassign the ShaderFilter instance to
+the display object's <code>filters</code> property in order to apply filter
+changes.</p></div></div><div class="field "><a name="topExtension"></a><h3 class="anchor"><code><a href="#topExtension"><span class="identifier">topExtension</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The growth in pixels on the top side of the target object.
+The growth is the area beyond the bounds of the target object that is
+passed to the shader during execution. At execution time Flash Player
+or AIR computes the normal bounds of a movie clip and extends the
+bounds based on the <code>leftExtension</code>, <code>rightExtension</code>, <code>topExtension</code>,
+and <code>bottomExtension</code> values.</p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="invalidate"></a><h3 class="anchor"><code><a href="#invalidate"><span class="identifier">invalidate</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p></p></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><div style="display:none"></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.events.UncaughtErrorEvent</title><meta name="description" content="An UncaughtErrorEvent object is dispatched by an instance of the
+UncaughtErrorEvents class when an uncaught error occurs. An uncaught error
+happens when an error is thrown outside of any &lt;code&gt;try..catch&lt;/code&gt; blocks or when
+an ErrorEvent object is dispatched with no registered listeners. The
+uncaught error event functionality is often described as a &quot;global error
+handler.&quot;
+The UncaughtErrorEvents object that dispatches the event is associated
+with either a LoaderInfo object or a Loader object. Use the following
+properties to access an UncaughtErrorEvents instance:"/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> UncaughtErrorEvent</h1><h4><small>package <a href="../../openfl/events/index.html">openfl.events</a></small></h4><h4><small>extends <a class="type" title="openfl.events.ErrorEvent - An object dispatches an ErrorEvent object when an error causes an asynchronous operation to fail." href="../../openfl/events/ErrorEvent.html">ErrorEvent</a> &rsaquo; <a class="type" title="openfl.events.TextEvent - An object dispatches a TextEvent object when a user enters text in a text field or clicks a hyperlink in an HTML-enabled text field." href="../../openfl/events/TextEvent.html">TextEvent</a> &rsaquo; <a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>An UncaughtErrorEvent object is dispatched by an instance of the
+UncaughtErrorEvents class when an uncaught error occurs. An uncaught error
+happens when an error is thrown outside of any <code>try..catch</code> blocks or when
+an ErrorEvent object is dispatched with no registered listeners. The
+uncaught error event functionality is often described as a "global error
+handler."
+The UncaughtErrorEvents object that dispatches the event is associated
+with either a LoaderInfo object or a Loader object. Use the following
+properties to access an UncaughtErrorEvents instance:</p><ul><li><code><a href="../../openfl/display/LoaderInfo.html#uncaughtErrorEvents">LoaderInfo.uncaughtErrorEvents</a></code>: to detect uncaught errors in code
+defined in the same SWF.</li><li><code><a href="../../openfl/display/Loader.html#uncaughtErrorEvents">Loader.uncaughtErrorEvents</a></code>: to detect uncaught errors in code defined
+in the SWF loaded by a Loader object.</li></ul>
+<p>When an <code>uncaughtError</code> event happens, even if the event is handled,
+execution does not continue in the call stack that caused the error. If
+the error is a synchronous error, any code remaining in the function where
+the error happened is not executed. Consequently, it is likely that when
+an uncaught error event happens, your application is in an unstable state.
+Since there can be many causes for an uncaught error, it is impossible to
+predict what functionality is available. For example, your application may
+be able to execute network operations or file operations. However, those
+operations aren't necessarily available.</p>
+<p>When one SWF loads another, <code>uncaughtError</code> events bubble down and up
+again through the LoaderInfo heirarchy. For example, suppose A.swf loads
+B.swf using a Loader instance. If an uncaught error occurs in B.swf, an
+<code>uncaughtError</code> event is dispatched to LoaderInfo and Loader objects in
+the following sequence:</p><ol><li>(Capture phase) A.swf's LoaderInfo</li><li>(Capture phase) Loader in A.swf</li><li>(Target phase) B.swf's LoaderInfo</li><li>(Bubble phase) Loader in A.swf</li><li>(Bubble phase) A.swf's LoaderInfo</li></ol>
+<p>A Loader object's <code>uncaughtErrorEvents</code> property never dispatches an
+<code>uncaughtErrorEvent</code> in the target phase. It only dispatches the event in
+the capture and bubbling phases.</p>
+<p>As with other event bubbling, calling <code>stopPropagation()</code> or
+<code>stopImmediatePropagation()</code> stops the event from being dispatched to any
+other listeners, with one important difference. A Loader object's
+UncaughtErrorEvents object is treated as a pair with the loaded SWF's
+<code><a href="../../openfl/display/LoaderInfo.html#uncaughtErrorEvents">LoaderInfo.uncaughtErrorEvents</a></code> object for event propagation purposes. If
+a listener registered with one of those objects calls the
+<code>stopPropagation()</code> method, events are still dispatched to other listeners
+registered with that UncaughtErrorEvents object <em>and</em> to listeners
+registered with its partner UncaughtErrorEvents object before event
+propagation ends. The <code>stopImmediatePropagation()</code> method still prevents
+events from being dispatched to all additional listeners.</p>
+<p>When content is running in a debugger version of the runtime, such as the
+debugger version of Flash Player or the AIR Debug Launcher (ADL), an
+uncaught error dialog appears when an uncaught error happens. For those
+runtime versions, the error dialog appears even when a listener is
+registered for the <code>uncaughtError</code> event. To prevent the dialog from
+appearing in that situation, call the UncaughtErrorEvent object's
+<code>preventDefault()</code> method.</p>
+<p>If the content loaded by a Loader object is an AVM1 (ActionScript 2) SWF
+file, uncaught errors in the AVM1 SWF file do not result in an
+<code>uncaughtError</code> event. In addition, JavaScript errors in HTML content
+loaded in an HTMLLoader object (including a Flex HTML control) do not
+result in an <code>uncaughtError</code> event.</p></div><h3 class="section">Static variables</h3><div class="fields"><div class="field "><a name="UNCAUGHT_ERROR"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(&quot;uncaughtError&quot;)</span><span class="label label-static">static</span><span class="label label-inline">inline</span><span class="label">read only</span><a href="#UNCAUGHT_ERROR"><span class="identifier">UNCAUGHT_ERROR</span></a>:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<a class="type" title="openfl.events.UncaughtErrorEvent - An UncaughtErrorEvent object is dispatched by an instance of the UncaughtErrorEvents class when an uncaught error occurs." href="../../openfl/events/UncaughtErrorEvent.html">UncaughtErrorEvent</a>&gt;<span> = &quot;uncaughtError&quot;</span></code></h3><div class="doc"><p>Defines the value of the <code>type</code> property of an <code>uncaughtError</code> event
+object.
+This event has the following properties:</p><table><thead><th>Property</th><th>Value</th></thead><tbody><tr><td><code>bubbles</code></td><td><code><a href="../../Bool.html">true</a></code></td></tr><tr><td><code>cancelable</code></td><td><code><a href="../../Bool.html">true</a></code>; cancelling the event prevents the uncaught error dialog from appearing in debugger runtime versions</td></tr><tr><td><code>currentTarget</code></td><td>The object that is actively processing the Event object with an event listener.</td></tr><tr><td><code>error</code></td><td>The uncaught error.</td></tr><tr><td><code>target</code></td><td>The LoaderInfo object associated with the SWF where the error happened.</td></tr><tr><td><code>text</code></td><td>Text error message.</td></tr></tbody></table></div></div></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ error : null, cancelable : true, bubbles : true })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">bubbles:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = true,</span> <span style="white-space:nowrap">cancelable:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = true,</span> <span style="white-space:nowrap">?error:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a></span>)</code></h3><div class="doc"><p>Creates an UncaughtErrorEvent object that contains information about
+an <code>uncaughtError</code> event.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of the event.</p></td></tr><tr><th style="width:25%;"><code>bubbles</code></th><td><p>Determines whether the Event object participates in
+the bubbling stage of the event flow. Event
+listeners can access this information through the
+inherited <code>bubbles</code> property.</p></td></tr><tr><th style="width:25%;"><code>cancelable</code></th><td><p>Determines whether the Event object can be canceled.
+Event listeners can access this information through
+the inherited <code>cancelable</code> property.</p></td></tr><tr><th style="width:25%;"><code>error_in</code></th><td><p>The object associated with the error that was not
+caught or handled (an Error or ErrorEvent object
+under normal circumstances).</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="error"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#error"><span class="identifier">error</span></a>:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>The error object associated with the uncaught error. Typically, this
+object's data type is one of the following:
+<em> An Error instance (or one of its subclasses), if the uncaught error
+is a synchronous error created by a <code>throw</code> statement, such as an
+error that could have been caught using a <code>try..catch</code> block
+</em> An ErrorEvent instance (or one of its subclasses), if the uncaught
+error is an asynchronous error that dispatches an error event when the
+error happens</p>
+<p>However, the <code>error</code> property can potentially be an object of any data
+type. ActionScript does not require a <code>throw</code> statement to be used
+only with Error objects. For example, the following code is legal both
+at compile time and run time:</p>
+<pre><code class="prettyprint haxe">throw new Sprite();</code></pre>
+<p>If that <code>throw</code> statement is not caught by a <code>try..catch</code> block, the
+<code>throw</code> statement triggers an <code>uncaughtError</code> event. In that case, the
+<code>error</code> property of the UncaughtErrorEvent object that's dispatched is
+the Sprite object that's constructed in the <code>throw</code> statement.</p>
+<p>Consequently, in your <code>uncaughtError</code> listener, you should check the
+data type of the <code>error</code> property. The following example demonstrates
+this check:</p>
+<pre><code class="prettyprint haxe">function uncaughtErrorHandler(event:UncaughtErrorEvent):Void {
+	var message:String;
+	if (Std.is(event.error, Error)) {
+		message = cast(event.error, Error).message;
+	} else if (Std.is(event.error, ErrorEvent)) {
+		message = cast(event.error, ErrorEvent).text;
+	} else {
+		message = Std.string(event.error);
+	}
+}</code></pre>
+<p>If the <code>error</code> property contains an Error instance (or Error
+subclass), the available error information varies depending on the
+version of the runtime in which the content is running. The following
+functionality is only available when content is running in a debugger
+version of the runtime, such as the debugger version of Flash Player
+or the AIR Debug Launcher (ADL):</p><ul><li><code><a href="../../openfl/errors/Error.html#getStackTrace">Error.getStackTrace</a>()</code> to get the call stack that led to the error.
+In non-debugger runtime versions, this method returns <code>null</code>. Note
+that call stack information is never available when the <code>error</code>
+property is an ErrorEvent instance.</li><li>Complete <code><a href="../../openfl/errors/Error.html#message">Error.message</a></code> text. In non-debugger runtime versions,
+this property contains a short version of the error message, which is
+often a combination of the <code><a href="../../openfl/errors/Error.html#errorID">Error.errorID</a></code> and <code><a href="../../openfl/errors/Error.html#name">Error.name</a></code>
+properties.</li></ul>
+<p>All other properties and methods of the Error class are available in
+all runtime versions.</p></div></div></div><h3 class="section">Methods</h3><div class="fields"></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.ErrorEvent - An object dispatches an ErrorEvent object when an error causes an asynchronous operation to fail." href="../../openfl/events/ErrorEvent.html">ErrorEvent</a></h4><div style="display:none"><div class="field "><a name="errorID"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#errorID"><span class="identifier">errorID</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Contains the reference number associated with the specific error. For a
+custom ErrorEvent object, this number is the value from the
+<code>id</code> parameter supplied in the constructor.</p></div></div></div><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.TextEvent - An object dispatches a TextEvent object when a user enters text in a text field or clicks a hyperlink in an HTML-enabled text field." href="../../openfl/events/TextEvent.html">TextEvent</a></h4><div style="display:none"><div class="field "><a name="text"></a><h3 class="anchor"><code><a href="#text"><span class="identifier">text</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>For a <code>textInput</code> event, the character or sequence of
+characters entered by the user. For a <code>link</code> event, the text of
+the <code>event</code> attribute of the <code>href</code> attribute of the
+<code>&lt;a&gt;</code> tag.</p></div></div></div><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></h4><div style="display:none"><div class="field "><a name="bubbles"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#bubbles"><span class="identifier">bubbles</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Indicates whether an event is a bubbling event. If the event can bubble,
+this value is <code><a href="../../Bool.html">true</a></code>; otherwise it is <code><a href="../../Bool.html">false</a></code>.</p>
+<p>When an event occurs, it moves through the three phases of the event
+flow: the capture phase, which flows from the top of the display list
+hierarchy to the node just before the target node; the target phase, which
+comprises the target node; and the bubbling phase, which flows from the
+node subsequent to the target node back up the display list hierarchy.</p>
+<p>Some events, such as the <code>activate</code> and <code>unload</code>
+events, do not have a bubbling phase. The <code>bubbles</code> property
+has a value of <code><a href="../../Bool.html">false</a></code> for events that do not have a bubbling
+phase.</p></div></div><div class="field "><a name="cancelable"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#cancelable"><span class="identifier">cancelable</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Indicates whether the behavior associated with the event can be prevented.
+If the behavior can be canceled, this value is <code><a href="../../Bool.html">true</a></code>;
+otherwise it is <code><a href="../../Bool.html">false</a></code>.</p></div></div><div class="field "><a name="currentTarget"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#currentTarget"><span class="identifier">currentTarget</span></a>:<a class="type" title="Any - Any is a type that is compatible with any other in both ways." href="../../Any.html">Any</a></code></h3><div class="doc"><p>The object that is actively processing the Event object with an event
+listener. For example, if a user clicks an OK button, the current target
+could be the node containing that button or one of its ancestors that has
+registered an event listener for that event.</p></div></div><div class="field "><a name="eventPhase"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#eventPhase"><span class="identifier">eventPhase</span></a>:<a class="type" title="openfl.events.EventPhase - The EventPhase class provides values for the eventPhase property of the Event class." href="../../openfl/events/EventPhase.html">EventPhase</a></code></h3><div class="doc"><p>The current phase in the event flow. This property can contain the
+following numeric values:</p><ul><li>The capture phase(<code><a href="../../openfl/events/EventPhase.html#CAPTURING_PHASE">EventPhase.CAPTURING_PHASE</a></code>).</li><li>The target phase(<code><a href="../../openfl/events/EventPhase.html#AT_TARGET">EventPhase.AT_TARGET</a></code>).</li><li>The bubbling phase(<code><a href="../../openfl/events/EventPhase.html#BUBBLING_PHASE">EventPhase.BUBBLING_PHASE</a></code>).</li></ul></div></div><div class="field "><a name="target"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#target"><span class="identifier">target</span></a>:<a class="type" title="Any - Any is a type that is compatible with any other in both ways." href="../../Any.html">Any</a></code></h3><div class="doc"><p>The event target. This property contains the target node. For example, if
+a user clicks an OK button, the target node is the display list node
+containing that button.</p></div></div><div class="field "><a name="type"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#type"><span class="identifier">type</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The type of event. The type is case-sensitive.</p></div></div></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><div style="display:none"></div><div style="display:none"></div><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></h4><div style="display:none"><div class="field "><a name="formatToString"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ p5 : null, p4 : null, p3 : null, p2 : null, p1 : null })</span><a href="#formatToString"><span class="identifier">formatToString</span></a>(<span style="white-space:nowrap">className:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">?p1:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">?p2:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">?p3:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">?p4:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">?p5:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>A utility function for implementing the <code>toString()</code> method in custom
+ActionScript 3.0 Event classes. Overriding the <code>toString()</code> method is
+recommended, but not required.</p>
+<pre><code class="prettyprint haxe">class PingEvent extends Event {
+	var URL:String;
+
+	public function new() {
+		super();
+	}
+
+	public override function toString():String {
+		return formatToString("PingEvent", "type", "bubbles", "cancelable", "eventPhase", "URL");
+	}
+}</code></pre><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>className</code></th><td><p>The name of your custom Event class. In the previous
+example, the <code>className</code> parameter is <code>PingEvent</code>.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>The name of your custom Event class and the String value of
+your <code>...arguments</code> parameter.</p></div></div></div><div class="field "><a name="isDefaultPrevented"></a><h3 class="anchor"><code><a href="#isDefaultPrevented"><span class="identifier">isDefaultPrevented</span></a>():<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the <code>preventDefault()</code> method has been called on
+the event. If the <code>preventDefault()</code> method has been called,
+returns <code><a href="../../Bool.html">true</a></code>; otherwise, returns <code><a href="../../Bool.html">false</a></code>.</p><p class="javadoc">Returns:</p><div class="indent inline-content"><p>If <code>preventDefault()</code> has been called, returns
+<code><a href="../../Bool.html">true</a></code>; otherwise, returns <code><a href="../../Bool.html">false</a></code>.</p></div></div></div><div class="field "><a name="preventDefault"></a><h3 class="anchor"><code><a href="#preventDefault"><span class="identifier">preventDefault</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Cancels an event's default behavior if that behavior can be canceled.
+Many events have associated behaviors that are carried out by default. For example, if a user types a character into a text field, the default behavior is that the character is displayed in the text field. Because the <code><a href="../../openfl/events/TextEvent.html#TEXT_INPUT">TextEvent.TEXT_INPUT</a></code> event's default behavior can be canceled, you can use the <code>preventDefault()</code> method to prevent the character from appearing.
+An example of a behavior that is not cancelable is the default behavior associated with the Event.REMOVED event, which is generated whenever Flash Player is about to remove a display object from the display list. The default behavior (removing the element) cannot be canceled, so the <code>preventDefault()</code> method has no effect on this default behavior.
+You can use the <code><a href="../../openfl/events/Event.html#cancelable">Event.cancelable</a></code> property to check whether you can prevent the default behavior associated with a particular event. If the value of <code><a href="../../openfl/events/Event.html#cancelable">Event.cancelable</a></code> is true, then <code>preventDefault()</code> can be used to cancel the event; otherwise, <code>preventDefault()</code> has no effect.</p></div></div><div class="field "><a name="stopImmediatePropagation"></a><h3 class="anchor"><code><a href="#stopImmediatePropagation"><span class="identifier">stopImmediatePropagation</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Prevents processing of any event listeners in the current node and any
+subsequent nodes in the event flow. This method takes effect immediately,
+and it affects event listeners in the current node. In contrast, the
+<code>stopPropagation()</code> method doesn't take effect until all the
+event listeners in the current node finish processing.</p>
+<p><strong>Note: </strong> This method does not cancel the behavior associated with
+this event; see <code>preventDefault()</code> for that functionality.</p></div></div><div class="field "><a name="stopPropagation"></a><h3 class="anchor"><code><a href="#stopPropagation"><span class="identifier">stopPropagation</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Prevents processing of any event listeners in nodes subsequent to the
+current node in the event flow. This method does not affect any event
+listeners in the current node(<code>currentTarget</code>). In contrast,
+the <code>stopImmediatePropagation()</code> method prevents processing of
+event listeners in both the current node and subsequent nodes. Additional
+calls to this method have no effect. This method can be called in any
+phase of the event flow.</p>
+<p><strong>Note: </strong> This method does not cancel the behavior associated with
+this event; see <code>preventDefault()</code> for that functionality.</p></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

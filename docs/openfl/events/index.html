@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.events</title></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><h1>openfl.events </h1>  <table class="table table-condensed"><tbody><tr><th style="width:200px;"><i class="fa fa-folder-o"></i><a href="../../openfl/index.html" title="openfl">..</a></th><td></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/ActivityEvent.html" title="openfl.events.ActivityEvent">ActivityEvent</a></td><td><p>A Camera or Microphone object dispatches an ActivityEvent object whenever
+a camera or microphone reports that it has become active or inactive.
+There is only one type of activity event: <code><a href="../../openfl/events/ActivityEvent.html#ACTIVITY">ActivityEvent.ACTIVITY</a></code>.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/ErrorEvent.html" title="openfl.events.ErrorEvent">ErrorEvent</a></td><td><p>An object dispatches an ErrorEvent object when an error causes an
+asynchronous operation to fail.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/Event.html" title="openfl.events.Event">Event</a></td><td><p>The Event class is used as the base class for the creation of Event
+objects, which are passed as parameters to event listeners when an event
+occurs.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/EventDispatcher.html" title="openfl.events.EventDispatcher">EventDispatcher</a></td><td><p>The EventDispatcher class is the base class for all classes that dispatch
+events. The EventDispatcher class implements the IEventDispatcher interface
+and is the base class for the DisplayObject class. The EventDispatcher
+class allows any object on the display list to be an event target and as
+such, to use the methods of the IEventDispatcher interface.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/events/EventPhase.html" title="openfl.events.EventPhase">EventPhase</a></td><td><p>The EventPhase class provides values for the <code>eventPhase</code>
+property of the Event class.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/events/EventType.html" title="openfl.events.EventType">EventType</a></td><td><p>The EventType abstract type provides type safety when
+matching dispatch events with the correct type of listener</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/FocusEvent.html" title="openfl.events.FocusEvent">FocusEvent</a></td><td><p>An object dispatches a FocusEvent object when the user changes the focus
+from one object in the display list to another. There are four types of
+focus events:</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/FullScreenEvent.html" title="openfl.events.FullScreenEvent">FullScreenEvent</a></td><td><p>The Stage object dispatches a FullScreenEvent object whenever the Stage
+enters or leaves full-screen display mode. There is only one type of
+<code>fullScreen</code> event: <code><a href="../../openfl/events/FullScreenEvent.html#FULL_SCREEN">FullScreenEvent.FULL_SCREEN</a></code>.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/GameInputEvent.html" title="openfl.events.GameInputEvent">GameInputEvent</a></td><td><p>The GameInputEvent class represents an event that is dispatched when a game input device has either been added or removed from the application platform. A game input device also dispatches events when it is turned on or off.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/HTTPStatusEvent.html" title="openfl.events.HTTPStatusEvent">HTTPStatusEvent</a></td><td><p>The application dispatches HTTPStatusEvent objects when a network request
+returns an HTTP status code.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/IEventDispatcher.html" title="openfl.events.IEventDispatcher">IEventDispatcher</a></td><td><p>The IEventDispatcher interface defines methods for adding or removing event listeners,
+checks whether specific types of event listeners are registered, and dispatches events.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/IOErrorEvent.html" title="openfl.events.IOErrorEvent">IOErrorEvent</a></td><td><p>An IOErrorEvent object is dispatched when an error causes input or output
+operations to fail.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/KeyboardEvent.html" title="openfl.events.KeyboardEvent">KeyboardEvent</a></td><td><p>A KeyboardEvent object id dispatched in response to user input through a
+keyboard. There are two types of keyboard events:
+<code><a href="../../openfl/events/KeyboardEvent.html#KEY_DOWN">KeyboardEvent.KEY_DOWN</a></code> and <code><a href="../../openfl/events/KeyboardEvent.html#KEY_UP">KeyboardEvent.KEY_UP</a></code></p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/MouseEvent.html" title="openfl.events.MouseEvent">MouseEvent</a></td><td><p>A MouseEvent object is dispatched into the event flow whenever mouse events
+occur. A mouse event is usually generated by a user input device, such as a
+mouse or a trackball, that uses a pointer.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/NetStatusEvent.html" title="openfl.events.NetStatusEvent">NetStatusEvent</a></td><td><p>A NetConnection, NetStream, or SharedObject object dispatches
+NetStatusEvent objects when a it reports its status. There is only one
+type of status event: <code><a href="../../openfl/events/NetStatusEvent.html#NET_STATUS">NetStatusEvent.NET_STATUS</a></code>.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/ProgressEvent.html" title="openfl.events.ProgressEvent">ProgressEvent</a></td><td><p>A ProgressEvent object is dispatched when a load operation has begun or a
+socket has received data. These events are usually generated when SWF
+files, images or data are loaded into an application. There are two types
+of progress events: <code><a href="../../openfl/events/ProgressEvent.html#PROGRESS">ProgressEvent.PROGRESS</a></code> and
+<code><a href="../../openfl/events/ProgressEvent.html#SOCKET_DATA">ProgressEvent.SOCKET_DATA</a></code>. Additionally, in AIR ProgressEvent
+objects are dispatched when a data is sent to or from a child process using
+the NativeProcess class.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/RenderEvent.html" title="openfl.events.RenderEvent">RenderEvent</a></td><td><p>BETA**</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/SecurityErrorEvent.html" title="openfl.events.SecurityErrorEvent">SecurityErrorEvent</a></td><td><p>An object dispatches a SecurityErrorEvent object to report the occurrence
+of a security error. Security errors reported through this class are
+generally from asynchronous operations, such as loading data, in which
+security violations may not manifest immediately. Your event listener can
+access the object's <code>text</code> property to determine what operation
+was attempted and any URLs that were involved. If there are no event
+listeners, the debugger version of Flash Player or the AIR Debug Launcher
+(ADL) application automatically displays an error message that contains the
+contents of the <code>text</code> property. There is one type of security
+error event: <code><a href="../../openfl/events/SecurityErrorEvent.html#SECURITY_ERROR">SecurityErrorEvent.SECURITY_ERROR</a></code>.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/TextEvent.html" title="openfl.events.TextEvent">TextEvent</a></td><td><p>An object dispatches a TextEvent object when a user enters text in a text
+field or clicks a hyperlink in an HTML-enabled text field. There are two
+types of text events: <code><a href="../../openfl/events/TextEvent.html#LINK">TextEvent.LINK</a></code> and
+<code><a href="../../openfl/events/TextEvent.html#TEXT_INPUT">TextEvent.TEXT_INPUT</a></code>.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/TouchEvent.html" title="openfl.events.TouchEvent">TouchEvent</a></td><td><p>The TouchEvent class lets you handle events on devices that detect user
+contact with the device(such as a finger on a touch screen). When a user
+interacts with a device such as a mobile phone or tablet with a touch
+screen, the user typically touches the screen with his or her fingers or a
+pointing device. You can develop applications that respond to basic touch
+events(such as a single finger tap) with the TouchEvent class. Create
+event listeners using the event types defined in this class. For user
+interaction with multiple points of contact(such as several fingers moving
+across a touch screen at the same time) use the related GestureEvent,
+PressAndTapGestureEvent, and TransformGestureEvent classes. And, use the
+properties and methods of these classes to construct event handlers that
+respond to the user touching the device.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/UncaughtErrorEvent.html" title="openfl.events.UncaughtErrorEvent">UncaughtErrorEvent</a></td><td><p>An UncaughtErrorEvent object is dispatched by an instance of the
+UncaughtErrorEvents class when an uncaught error occurs. An uncaught error
+happens when an error is thrown outside of any <code>try..catch</code> blocks or when
+an ErrorEvent object is dispatched with no registered listeners. The
+uncaught error event functionality is often described as a "global error
+handler."
+The UncaughtErrorEvents object that dispatches the event is associated
+with either a LoaderInfo object or a Loader object. Use the following
+properties to access an UncaughtErrorEvents instance:</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/events/UncaughtErrorEvents.html" title="openfl.events.UncaughtErrorEvents">UncaughtErrorEvents</a></td><td><p>The UncaughtErrorEvents class provides a way to receive uncaught error
+events. An instance of this class dispatches an <code>uncaughtError</code> event when
+a runtime error occurs and the error isn't detected and handled in your
+code.
+Use the following properties to access an UncaughtErrorEvents instance:</p></td></tr></tbody></table></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

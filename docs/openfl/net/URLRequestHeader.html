@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.net.URLRequestHeader</title><meta name="description" content="A URLRequestHeader object encapsulates a single HTTP request header and
+consists of a name/value pair. URLRequestHeader objects are used in the
+&lt;code&gt;requestHeaders&lt;/code&gt; property of the URLRequest class."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> URLRequestHeader</h1><h4><small>package <a href="../../openfl/net/index.html">openfl.net</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>A URLRequestHeader object encapsulates a single HTTP request header and
+consists of a name/value pair. URLRequestHeader objects are used in the
+<code>requestHeaders</code> property of the URLRequest class.</p>
+<p>In Adobe<sup>®</sup> AIR<sup>®</sup>, content in the application
+security sandbox(such as content installed with the AIR application) can
+use any request headers, without error. However, for content running in
+Adobe AIR that is in a different security sandbox, or for content running
+in Flash<sup>®</sup> Player, using following request headers cause a
+runtime error to be thrown, and the restricted terms are not case-sensitive
+(for example, <code>Get</code>, <code>get</code>, and <code>GET</code> are
+each not allowed):</p>
+<p>In Flash Player and in Adobe AIR content outside of the application
+security sandbox, the following request headers cannot be used, and the
+restricted terms are not case-sensitive(for example, <code>Get</code>,
+<code>get</code>, and <code>GET</code> are all not allowed). Also,
+hyphenated terms apply if an underscore character is used(for example,
+both <code>Content-Length</code> and <code>Content_Length</code> are not
+allowed):</p>
+<p><code>Accept-Charset</code>, <code>Accept-<a href="../../haxe/io/Encoding.html#Encoding">Encoding</a></code>,
+<code>Accept-Ranges</code>, <code>Age</code>, <code>Allow</code>,
+<code>Allowed</code>, <code>Authorization</code>, <code>Charge-To</code>,
+<code>Connect</code>, <code>Connection</code>, <code>Content-Length</code>,
+<code>Content-<a href="../../haxe/display/Location.html#Location">Location</a></code>, <code>Content-<a href="../../haxe/display/Range.html#Range">Range</a></code>,
+<code>Cookie</code>, <code><a href="../../Date.html">Date</a></code>, <code>Delete</code>,
+<code>ETag</code>, <code>Expect</code>, <code>Get</code>,
+<code>Head</code>, <code>Host</code>, <code>If-Modified-Since</code>,
+<code>Keep-Alive</code>, <code>Last-Modified</code>, <code><a href="../../haxe/display/Location.html#Location">Location</a></code>,
+<code>Max-Forwards</code>, <code>Options</code>, <code>Origin</code>,
+<code>Post</code>, <code>Proxy-Authenticate</code>,
+<code>Proxy-Authorization</code>, <code>Proxy-Connection</code>,
+<code>Public</code>, <code>Put</code>, <code><a href="../../haxe/display/Range.html#Range">Range</a></code>,
+<code>Referer</code>, <code>Request-<a href="../../haxe/display/Range.html#Range">Range</a></code>, <code>Retry-After</code>,
+<code>Server</code>, <code>TE</code>, <code>Trace</code>,
+<code>Trailer</code>, <code>Transfer-<a href="../../haxe/io/Encoding.html#Encoding">Encoding</a></code>, <code>Upgrade</code>,
+<code>URI</code>, <code>User-Agent</code>, <code>Vary</code>,
+<code>Via</code>, <code>Warning</code>, <code>WWW-Authenticate</code>,
+<code>x-flash-version</code>.</p>
+<p>URLRequestHeader objects are restricted in length. If the cumulative
+length of a URLRequestHeader object(the length of the <code>name</code>
+property plus the <code>value</code> property) or an array of
+URLRequestHeader objects used in the <code><a href="../../openfl/net/URLRequest.html#requestHeaders">URLRequest.requestHeaders</a></code>
+property exceeds the acceptable length, an exception is thrown.</p>
+<p>Content running in Adobe AIR sets the <code>ACCEPT</code> header to the
+following, unless you specify a setting for the <code>ACCEPT</code> header
+in the <code>requestHeaders</code> property of the URLRequest class:</p>
+<pre><code>text/xml, application/xml, application/xhtml+xml, text/html;q=0.9, text/plain;q=0.8, image/png, application/x-shockwave-flash, video/mp4;q=0.9, flv-application/octet-stream;q=0.8, video/x-flv;q=0.7, audio/mp4, * /*;q=0.5</code></pre>
+<p>Not all methods that accept URLRequest parameters support the
+<code>requestHeaders</code> property, consult the documentation for the
+method you are calling. For example, the
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> and
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> methods do not support the
+<code><a href="../../openfl/net/URLRequest.html#requestHeaders">URLRequest.requestHeaders</a></code> property.</p>
+<p>Due to browser limitations, custom HTTP request headers are only
+supported for <code>POST</code> requests, not for <code>GET</code>
+requests.</p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ value : &quot;&quot;, name : &quot;&quot; })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">name:<a class="type" title="String - The basic String class." href="../../String.html">String</a> = &quot;&quot;,</span> <span style="white-space:nowrap">value:<a class="type" title="String - The basic String class." href="../../String.html">String</a> = &quot;&quot;</span>)</code></h3><div class="doc"><p>Creates a new URLRequestHeader object that encapsulates a single HTTP
+request header. URLRequestHeader objects are used in the
+<code>requestHeaders</code> property of the URLRequest class.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>name</code></th><td><p>An HTTP request header name(such as
+<code>Content-<a href="../../Type.html">Type</a></code> or <code>SOAPAction</code>).</p></td></tr><tr><th style="width:25%;"><code>value</code></th><td><p>The value associated with the <code>name</code> property
+(such as <code>text/plain</code>).</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="name"></a><h3 class="anchor"><code><a href="#name"><span class="identifier">name</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>An HTTP request header name(such as <code>Content-<a href="../../Type.html">Type</a></code> or
+<code>SOAPAction</code>).</p></div></div><div class="field "><a name="value"></a><h3 class="anchor"><code><a href="#value"><span class="identifier">value</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The value associated with the <code>name</code> property(such as
+<code>text/plain</code>).</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

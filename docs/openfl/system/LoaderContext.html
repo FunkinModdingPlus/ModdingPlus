@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.system.LoaderContext</title><meta name="description" content="The LoaderContext class provides options for loading SWF files and other
+media by using the Loader class. The LoaderContext class is used as the
+&lt;code&gt;context&lt;/code&gt; parameter in the &lt;code&gt;load()&lt;/code&gt; and &lt;code&gt;loadBytes()&lt;/code&gt; methods of the
+Loader class.
+When loading SWF files with the &lt;code&gt;&lt;a href=&quot;../../openfl/display/Loader.html#load&quot;&gt;Loader.load&lt;/a&gt;()&lt;/code&gt; method, you have two
+decisions to make: into which security domain the loaded SWF file should
+be placed, and into which application domain within that security domain?
+For more details on these choices, see the &lt;code&gt;applicationDomain&lt;/code&gt; and
+&lt;code&gt;securityDomain&lt;/code&gt; properties."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> LoaderContext</h1><h4><small>package <a href="../../openfl/system/index.html">openfl.system</a></small></h4>    <span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>The LoaderContext class provides options for loading SWF files and other
+media by using the Loader class. The LoaderContext class is used as the
+<code>context</code> parameter in the <code>load()</code> and <code>loadBytes()</code> methods of the
+Loader class.
+When loading SWF files with the <code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code> method, you have two
+decisions to make: into which security domain the loaded SWF file should
+be placed, and into which application domain within that security domain?
+For more details on these choices, see the <code>applicationDomain</code> and
+<code>securityDomain</code> properties.</p>
+<p>When loading a SWF file with the <code><a href="../../openfl/display/Loader.html#loadBytes">Loader.loadBytes</a>()</code> method, you have the
+same application domain choice to make as for <code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code>, but it's
+not necessary to specify a security domain, because <code><a href="../../openfl/display/Loader.html#loadBytes">Loader.loadBytes</a>()</code>
+always places its loaded SWF file into the security domain of the loading
+SWF file.</p>
+<p>When loading images (JPEG, GIF, or PNG) instead of SWF files, there is no
+need to specify a SecurityDomain or an application domain, because those
+concepts are meaningful only for SWF files. Instead, you have only one
+decision to make: do you need programmatic access to the pixels of the
+loaded image? If so, see the <code>checkPolicyFile</code> property. If you want to
+apply deblocking when loading an image, use the JPEGLoaderContext class
+instead of the LoaderContext class.</p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ securityDomain : null, applicationDomain : null, checkPolicyFile : false })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">checkPolicyFile:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">?applicationDomain:<a class="type" title="openfl.system.ApplicationDomain - The ApplicationDomain class is a container for discrete groups of class definitions." href="../../openfl/system/ApplicationDomain.html">ApplicationDomain</a>,</span> <span style="white-space:nowrap">?securityDomain:<a class="type" title="openfl.system.SecurityDomain - The SecurityDomain class represents the current security &quot;sandbox,&quot; also known as a security domain." href="../../openfl/system/SecurityDomain.html">SecurityDomain</a></span>)</code></h3><div class="doc"><p>Creates a new LoaderContext object, with the specified settings. For
+complete details on these settings, see the descriptions of the
+properties of this class.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>checkPolicyFile</code></th><td><p>Specifies whether a check should be made for
+the existence of a URL policy file before
+loading the object.</p></td></tr><tr><th style="width:25%;"><code>applicationDomain</code></th><td><p>Specifies the ApplicationDomain object to use
+for a Loader object.</p></td></tr><tr><th style="width:25%;"><code>securityDomain</code></th><td><p>Specifies the SecurityDomain object to use
+for a Loader object.
+<em>Note:</em> Content in the air application
+security sandbox cannot load content from
+other sandboxes into its SecurityDomain.</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="allowCodeImport"></a><h3 class="anchor"><code><a href="#allowCodeImport"><span class="identifier">allowCodeImport</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Specifies whether you can use a <code><a href="../../openfl/display/Loader.html#Loader">Loader</a></code> object to import content with
+executable code, such as a SWF file, into the caller's security
+sandbox. There are two affected importing operations: the
+<code><a href="../../openfl/display/Loader.html#loadBytes">Loader.loadBytes</a>()</code> method, and the <code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code> method with
+<code><a href="../../openfl/system/LoaderContext.html#securityDomain">LoaderContext.securityDomain</a> = <a href="../../openfl/system/SecurityDomain.html#currentDomain">SecurityDomain.currentDomain</a></code>. (The
+latter operation is not supported in the AIR application sandbox.)
+With the <code>allowCodeImport</code> property set to <code><a href="../../Bool.html">false</a></code>, these importing
+operations are restricted to safe operations, such as loading images.
+Normal, non-importing SWF file loading with the <code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code> method
+is not affected by the value of this property.
+This property is useful when you want to import image content into
+your sandbox - for example, when you want to replicate or process an
+image from a different domain - but you don't want to take the
+security risk of receiving a SWF file when you expected only an image
+file. Since SWF files may contain ActionScript code, importing a SWF
+file is a much riskier operation than importing an image file.</p>
+<p>In AIR content in the application sandbox, the default value is
+<code><a href="../../Bool.html">false</a></code>. In non-application content (which includes all content in
+Flash Player), the default value is <code><a href="../../Bool.html">true</a></code>.</p>
+<p>The <code>allowCodeImport</code> property was added in Flash Player 10.1 and AIR
+2.0. However, this property is made available to SWF files and AIR
+applications of all versions when the Flash Runtime supports it.</p></div></div><div class="field "><a name="allowLoadBytesCodeExecution"></a><h3 class="anchor"><code><a href="#allowLoadBytesCodeExecution"><span class="identifier">allowLoadBytesCodeExecution</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Legacy property, replaced by <code>allowCodeImport</code>, but still supported
+for compatibility. Previously, the only operation affected by
+<code>allowLoadBytesCodeExecution</code> was the <code><a href="../../openfl/display/Loader.html#loadBytes">Loader.loadBytes</a>()</code> method, but
+as of Flash Player 10.1 and AIR 2.0, the import-loading operation of
+<code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code> with <code><a href="../../openfl/system/LoaderContext.html#securityDomain">LoaderContext.securityDomain</a> =
+<a href="../../openfl/system/SecurityDomain.html#currentDomain">SecurityDomain.currentDomain</a></code> is affected as well. (The latter
+operation is not supported in the AIR application sandbox.) This dual
+effect made the property name <code>allowLoadBytesCodeExecution</code> overly
+specific, so now <code>allowCodeImport</code> is the preferred property name.
+Setting either of <code>allowCodeImport</code> or <code>allowLoadBytesCodeExecution</code>
+will affect the value of both.
+Specifies whether you can use a <code><a href="../../openfl/display/Loader.html#Loader">Loader</a></code> object to import content with
+executable code, such as a SWF file, into the caller's security
+sandbox. With this property set to <code><a href="../../Bool.html">false</a></code>, these importing operations
+are restricted to safe operations, such as loading images.</p>
+<p>In AIR content in the application sandbox, the default value is
+<code><a href="../../Bool.html">false</a></code>. In non-application content, the default value is <code><a href="../../Bool.html">true</a></code>.</p></div></div><div class="field "><a name="applicationDomain"></a><h3 class="anchor"><code><a href="#applicationDomain"><span class="identifier">applicationDomain</span></a>:<a class="type" title="openfl.system.ApplicationDomain - The ApplicationDomain class is a container for discrete groups of class definitions." href="../../openfl/system/ApplicationDomain.html">ApplicationDomain</a></code></h3><div class="doc"><p>Specifies the application domain to use for the <code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code> or
+<code><a href="../../openfl/display/Loader.html#loadBytes">Loader.loadBytes</a>()</code> method. Use this property only when loading a SWF
+file written in ActionScript 3.0 (not an image or a SWF file written
+in ActionScript 1.0 or ActionScript 2.0).
+Every security domain is divided into one or more application domains,
+represented by ApplicationDomain objects. Application domains are not
+for security purposes; they are for managing cooperating units of
+ActionScript code. If you are loading a SWF file from another domain,
+and allowing it to be placed in a separate security domain, then you
+cannot control the choice of application domain into which the loaded
+SWF file is placed; and if you have specified a choice of application
+domain, it will be ignored. However, if you are loading a SWF file
+into your own security domain � either because the SWF file comes
+from your own domain, or because you are importing it into your
+security domain � then you can control the choice of application
+domain for the loaded SWF file.</p>
+<p>You can pass an application domain only from your own security domain
+in <code><a href="../../openfl/system/LoaderContext.html#applicationDomain">LoaderContext.applicationDomain</a></code>. Attempting to pass an
+application domain from any other security domain results in a
+<code>SecurityError</code> exception.</p>
+<p>You have four choices for what kind of <code><a href="../../openfl/system/ApplicationDomain.html#ApplicationDomain">ApplicationDomain</a></code> property to
+use:</p><ul><li><strong>Child of loader's ApplicationDomain.</strong> The default. You can
+explicitly represent this choice with the syntax <code>new
+<a href="../../openfl/system/ApplicationDomain.html#ApplicationDomain">ApplicationDomain</a>(<a href="../../openfl/system/ApplicationDomain.html#currentDomain">ApplicationDomain.currentDomain</a>)</code>. This allows the
+loaded SWF file to use the parent's classes directly, for example by
+writing <code>new MyClassDefinedInParent()</code>. The parent, however, cannot
+use this syntax; if the parent wishes to use the child's classes, it
+must call <code><a href="../../openfl/system/ApplicationDomain.html#getDefinition">ApplicationDomain.getDefinition</a>()</code> to retrieve them. The
+advantage of this choice is that, if the child defines a class with
+the same name as a class already defined by the parent, no error
+results; the child simply inherits the parent's definition of that
+class, and the child's conflicting definition goes unused unless
+either child or parent calls the <code><a href="../../openfl/system/ApplicationDomain.html#getDefinition">ApplicationDomain.getDefinition</a>()</code>
+method to retrieve it.</li><li><strong>Loader's own ApplicationDomain.</strong> You use this application domain
+when using <code><a href="../../openfl/system/ApplicationDomain.html#currentDomain">ApplicationDomain.currentDomain</a></code>. When the load is
+complete, parent and child can use each other's classes directly. If
+the child attempts to define a class with the same name as a class
+already defined by the parent, the parent class is used and the child
+class is ignored.</li><li><strong>Child of the system ApplicationDomain.</strong> You use this application
+domain when using <code>new <a href="../../openfl/system/ApplicationDomain.html#ApplicationDomain">ApplicationDomain</a>(null)</code>. This separates loader
+and loadee entirely, allowing them to define separate versions of
+classes with the same name without conflict or overshadowing. The only
+way either side sees the other's classes is by calling the
+<code><a href="../../openfl/system/ApplicationDomain.html#getDefinition">ApplicationDomain.getDefinition</a>()</code> method.</li><li><strong>Child of some other ApplicationDomain.</strong> Occasionally you may have
+a more complex ApplicationDomain hierarchy. You can load a SWF file
+into any ApplicationDomain from your own SecurityDomain. For example,
+<code>new
+<a href="../../openfl/system/ApplicationDomain.html#ApplicationDomain">ApplicationDomain</a>(ApplicationDomain.currentDomain.parentDomain.parentDomain)</code>
+loads a SWF file into a new child of the current domain's parent's
+parent.</li></ul>
+<p>When a load is complete, either side (loading or loaded) may need to
+find its own ApplicationDomain, or the other side's ApplicationDomain,
+for the purpose of calling <code><a href="../../openfl/system/ApplicationDomain.html#getDefinition">ApplicationDomain.getDefinition</a>()</code>. Either
+side can retrieve a reference to its own application domain by using
+<code><a href="../../openfl/system/ApplicationDomain.html#currentDomain">ApplicationDomain.currentDomain</a></code>. The loading SWF file can retrieve a
+reference to the loaded SWF file's ApplicationDomain via
+<code><a href="../../openfl/display/Loader.html#applicationDomain">Loader.contentLoaderInfo.applicationDomain</a></code>. If the loaded SWF file
+knows how it was loaded, it can find its way to the loading SWF file's
+ApplicationDomain object. For example, if the child was loaded in the
+default way, it can find the loading SWF file's application domain by
+using <code><a href="../../openfl/system/ApplicationDomain.html#parentDomain">ApplicationDomain.currentDomain.parentDomain</a></code>.</p>
+<p>For more information, see the "ApplicationDomain class" section of the
+"Client System Environment" chapter of the <em>ActionScript 3.0
+Developer's Guide</em>.</p></div></div><div class="field "><a name="checkPolicyFile"></a><h3 class="anchor"><code><a href="#checkPolicyFile"><span class="identifier">checkPolicyFile</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Specifies whether the application should attempt to download a URL
+policy file from the loaded object's server before beginning to load
+the object itself. This flag is applicable to the <code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code>
+method, but not to the <code><a href="../../openfl/display/Loader.html#loadBytes">Loader.loadBytes</a>()</code> method.
+Set this flag to <code><a href="../../Bool.html">true</a></code> when you are loading an image (JPEG, GIF, or
+PNG) from outside the calling SWF file's own domain, and you expect to
+need access to the content of that image from ActionScript. Examples
+of accessing image content include referencing the <code><a href="../../openfl/display/Loader.html#content">Loader.content</a></code>
+property to obtain a Bitmap object, and calling the
+<code><a href="../../openfl/display/BitmapData.html#draw">BitmapData.draw</a>()</code> method to obtain a copy of the loaded image's
+pixels. If you attempt one of these operations without having
+specified <code>checkPolicyFile</code> at loading time, you may get a
+<code>SecurityError</code> exception because the needed policy file has not been
+downloaded yet.</p>
+<p>When you call the <code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code> method with
+<code><a href="../../openfl/system/LoaderContext.html#checkPolicyFile">LoaderContext.checkPolicyFile</a></code> set to <code><a href="../../Bool.html">true</a></code>, the application does
+not begin downloading the specified object in <code><a href="../../openfl/net/URLRequest.html#url">URLRequest.url</a></code> until
+it has either successfully downloaded a relevant URL policy file or
+discovered that no such policy file exists. Flash Player or AIR first
+considers policy files that have already been downloaded, then
+attempts to download any pending policy files specified in calls to
+the <code>Security.loadPolicyFile()</code> method, then attempts to download a
+policy file from the default location that corresponds to
+<code><a href="../../openfl/net/URLRequest.html#url">URLRequest.url</a></code>, which is <code>/crossdomain.xml</code> on the same server as
+<code><a href="../../openfl/net/URLRequest.html#url">URLRequest.url</a></code>. In all cases, the given policy file is required to
+exist at <code><a href="../../openfl/net/URLRequest.html#url">URLRequest.url</a></code> by virtue of the policy file's location, and
+the file must permit access by virtue of one or more
+<code>&lt;allow-access-from&gt;</code> tags.</p>
+<p>If you set <code>checkPolicyFile</code> to <code><a href="../../Bool.html">true</a></code>, the main download that
+specified in the <code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code> method does not load until the policy
+file has been completely processed. Therefore, as long as the policy
+file that you need exists, as soon as you have received any
+<code><a href="../../openfl/events/ProgressEvent.html#PROGRESS">ProgressEvent.PROGRESS</a></code> or <code><a href="../../lime/app/Event.html#COMPLETE">Event.COMPLETE</a></code> events from the
+<code>contentLoaderInfo</code> property of your Loader object, the policy file
+download is complete, and you can safely begin performing operations
+that require the policy file.</p>
+<p>If you set <code>checkPolicyFile</code> to <code><a href="../../Bool.html">true</a></code>, and no relevant policy file is
+found, you will not receive any error indication until you attempt an
+operation that throws a <code>SecurityError</code> exception. However, once the
+LoaderInfo object dispatches a <code><a href="../../openfl/events/ProgressEvent.html#PROGRESS">ProgressEvent.PROGRESS</a></code> or
+<code><a href="../../lime/app/Event.html#COMPLETE">Event.COMPLETE</a></code> event, you can test whether a relevant policy file
+was found by checking the value of the <code><a href="../../openfl/display/LoaderInfo.html#childAllowsParent">LoaderInfo.childAllowsParent</a></code>
+property.</p>
+<p>If you will not need pixel-level access to the image that you are
+loading, you should not set the <code>checkPolicyFile</code> property to <code><a href="../../Bool.html">true</a></code>.
+Checking for a policy file in this case is wasteful, because it may
+delay the start of your download, and it may consume network bandwidth
+unnecessarily.</p>
+<p>Also try to avoid setting <code>checkPolicyFile</code> to <code><a href="../../Bool.html">true</a></code> if you are using
+the <code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code> method to download a SWF file. This is because
+SWF-to-SWF permissions are not controlled by policy files, but rather
+by the <code>Security.allowDomain()</code> method, and thus <code>checkPolicyFile</code> has
+no effect when you load a SWF file. Checking for a policy file in this
+case is wasteful, because it may delay the download of the SWF file,
+and it may consume network bandwidth unnecessarily. (Flash Player or
+AIR cannot tell whether your main download will be a SWF file or an
+image, because the policy file download occurs before the main
+download.)</p>
+<p>Be careful with <code>checkPolicyFile</code> if you are downloading an object
+from a URL that may use server-side HTTP redirects. Policy files are
+always retrieved from the corresponding initial URL that you specify
+in <code><a href="../../openfl/net/URLRequest.html#url">URLRequest.url</a></code>. If the final object comes from a different URL
+because of HTTP redirects, then the initially downloaded policy files
+might not be applicable to the object's final URL, which is the URL
+that matters in security decisions. If you find yourself in this
+situation, you can examine the value of <code><a href="../../openfl/display/LoaderInfo.html#url">LoaderInfo.url</a></code> after you
+have received a <code><a href="../../openfl/events/ProgressEvent.html#PROGRESS">ProgressEvent.PROGRESS</a></code> or <code><a href="../../lime/app/Event.html#COMPLETE">Event.COMPLETE</a></code> event,
+which tells you the object's final URL. Then call the
+<code>Security.loadPolicyFile()</code> method with a policy file URL based on the
+object's final URL. Then poll the value of
+<code><a href="../../openfl/display/LoaderInfo.html#childAllowsParent">LoaderInfo.childAllowsParent</a></code> until it becomes <code><a href="../../Bool.html">true</a></code>.</p>
+<p>You do not need to set this property for AIR content running in the
+application sandbox. Content in the AIR application sandbox can call
+the <code><a href="../../openfl/display/BitmapData.html#draw">BitmapData.draw</a>()</code> method using any loaded image content as the
+source.</p></div></div><div class="field "><a name="securityDomain"></a><h3 class="anchor"><code><a href="#securityDomain"><span class="identifier">securityDomain</span></a>:<a class="type" title="openfl.system.SecurityDomain - The SecurityDomain class represents the current security &quot;sandbox,&quot; also known as a security domain." href="../../openfl/system/SecurityDomain.html">SecurityDomain</a></code></h3><div class="doc"><p>Specifies the security domain to use for a <code><a href="../../openfl/display/Loader.html#load">Loader.load</a>()</code> operation.
+Use this property only when loading a SWF file (not an image).
+The choice of security domain is meaningful only if you are loading a
+SWF file that might come from a different domain (a different server)
+than the loading SWF file. When you load a SWF file from your own
+domain, it is always placed into your security domain. But when you
+load a SWF file from a different domain, you have two options. You can
+allow the loaded SWF file to be placed in its "natural" security
+domain, which is different from that of the loading SWF file; this is
+the default. The other option is to specify that you want to place the
+loaded SWF file placed into the same security domain as the loading
+SWF file, by setting <code>myLoaderContext.securityDomain</code> to be equal to
+<code><a href="../../openfl/system/SecurityDomain.html#currentDomain">SecurityDomain.currentDomain</a></code>. This is called <em>import loading</em>, and
+it is equivalent, for security purposes, to copying the loaded SWF
+file to your own server and loading it from there. In order for import
+loading to succeed, the loaded SWF file's server must have a policy
+file trusting the domain of the loading SWF file.</p>
+<p>You can pass your own security domain only in
+<code><a href="../../openfl/system/LoaderContext.html#securityDomain">LoaderContext.securityDomain</a></code>. Attempting to pass any other security
+domain results in a <code>SecurityError</code> exception.</p>
+<p>Content in the AIR application security sandbox cannot load content
+from other sandboxes into its SecurityDomain.</p>
+<p>For more information, see the "Security" chapter in the <em>ActionScript
+3.0 Developer's Guide</em>.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

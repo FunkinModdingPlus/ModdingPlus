@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.display.ShaderParameter</title><meta name="description" content="TODO: Document GLSL Shaders"/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> ShaderParameter&lt;<span class="type">T</span>&gt;</h1><h4><small>package <a href="../../openfl/display/index.html">openfl.display</a></small></h4>    <span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.Context3D)</span><span class="label label-meta label-meta-generic" title="Marks a class or class field as generic so each type parameter combination generates its own type/field.">@:generic</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>TODO: Document GLSL Shaders</p>
+<p>A ShaderParameter instance represents a single input parameter of a shader
+kernel. A kernel can be defined to accept zero, one, or more parameters
+that are used in the kernel execution. A ShaderParameter provides
+information about the parameter, such as the type of data it expects. It
+also provides a mechanism for setting the parameter value that is used
+when the shader executes. To specify a value or values for the shader
+parameter, create an Array containing the value or values and assign it to
+the <code>value</code> property.</p>
+<p>A ShaderParameter instance representing a parameter for a Shader instance
+is accessed as a property of the Shader instance's <code>data</code> property. The
+ShaderParameter property has the same name as the parameter's name in the
+shader code. For example, if a shader defines a parameter named <code>radius</code>,
+the ShaderParameter instance representing the <code>radius</code> parameter is
+available as the <code>radius</code> property, as shown here:</p>
+<pre><code class="prettyprint haxe">var radiusParam:ShaderParameter = myShader.data.radius;</code></pre>
+<p>In addition to the defined properties of the ShaderParameter class, each
+ShaderParameter instance has additional properties corresponding to any
+metadata defined for the parameter. These properties are added to the
+ShaderParameter object when it is created. The properties' names match the
+metadata names specified in the shader's source code. The data type of
+each property varies according to the data type of the corresponding
+metadata. A text metadata value such as "description" is a String
+instance. A metadata property with a non-string value (such as <code>minValue</code>
+or <code>defaultValue</code>) is represented as an Array instance. The number of
+elements and element data types correspond to the metadata values.</p>
+<p>For example, suppose a shader includes the following two parameter
+declarations:</p>
+<pre><code class="prettyprint as3">parameter float2 size
+&lt;
+	description: "The size of the image to which the kernel is applied";
+	minValue: float2(0.0, 0.0);
+	maxValue: float2(100.0, 100.0);
+	defaultValue: float2(50.0, 50.0);
+&gt;;
+
+parameter float radius
+&lt;
+	description: "The radius of the effect";
+	minValue: 0.0;
+	maxValue: 50.0;
+	defaultValue: 25.0;
+&gt;;</code></pre>
+<p>The ShaderParameter instance corresponding to the <code>size</code> parameter has the
+following metadata properties in addition to its built-in properties:</p><table><thead><th>Property name</th><th>Data type</th><th>Value</th></thead><tbody><tr><td><code>name</code></td><td>String</td><td><code>"size"</code></td></tr><tr><td><code>description</code></td><td>String</td><td><code>"The size of the image to which the kernel is applied"</code></td></tr><tr><td><code>minValue</code></td><td>Array</td><td><code>[0, 0]</code></td></tr><tr><td><code>maxValue</code></td><td>Array</td><td><code>[100, 100]</code></td></tr><tr><td><code>defaultValue</code></td><td>Array</td><td><code>[50, 50]</code></td></tr></tbody></table>
+<p>The ShaderParameter corresponding to the <code>radius</code> parameter has the
+following additional properties:</p><table><thead><th>Property name</th><th>Data type</th><th>Value</th></thead><tbody><tr><td><code>name</code></td><td>String</td><td><code>"radius"</code></td></tr><tr><td><code>description</code></td><td>String</td><td><code>"The radius of the effect"</code></td></tr><tr><td><code>minValue</code></td><td>Array</td><td><code>[0]</code></td></tr><tr><td><code>maxValue</code></td><td>Array</td><td><code>[50]</code></td></tr><tr><td><code>defaultValue</code></td><td>Array</td><td><code>[25]</code></td></tr></tbody></table>
+<p>Generally, developer code does not create a ShaderParameter instance
+directly. A ShaderParameter instance is created for each of a shader's
+parameters when the Shader instance is created.</p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><a href="#new"><span class="identifier">new</span></a>()</code></h3><div class="doc"><p></p></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="index"></a><h3 class="anchor"><code><span class="label label-meta label-meta-uppressWarnings" title="">@SuppressWarnings(&quot;checkstyle:Dynamic&quot;)</span><span class="label">read only</span><a href="#index"><span class="identifier">index</span></a>:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>The zero-based index of the parameter.</p></div></div><div class="field "><a name="type"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#type"><span class="identifier">type</span></a>:<a class="type" title="openfl.display.ShaderParameterType - This class defines the constants that represent the possible values for the ShaderParameter class&#039;s type property." href="../../openfl/display/ShaderParameterType.html">ShaderParameterType</a></code></h3><div class="doc"><p>The data type of the parameter as defined in the shader. The set of
+possible values for the <code>type</code> property is defined by the constants in
+the ShaderParameterType class.</p></div></div><div class="field "><a name="value"></a><h3 class="anchor"><code><a href="#value"><span class="identifier">value</span></a>:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<span class="type">T</span>&gt;</code></h3><div class="doc"><p>The value or values that are passed in as the parameter value to the
+shader. The <code>value</code> property is an indexed Array. The number and type
+of the elements of the Array correspond to the data type of the
+parameter, which can be determined using the <code>type</code> property.
+The following table indicates the parameter type and corresponding
+number and data type of the <code>value</code> Array's elements:</p><table><thead><th>Parameter type</th><th># Elements</th><th>Element data type</th></thead><tbody><tr><td>float (<code><a href="../../openfl/display/ShaderParameterType.html#FLOAT">ShaderParameterType.FLOAT</a></code>)</td><td>1</td><td>Number</td></tr><tr><td>float2 (<code><a href="../../openfl/display/ShaderParameterType.html#FLOAT2">ShaderParameterType.FLOAT2</a></code>)</td><td>2</td><td>Number</td></tr><tr><td>float3 (<code><a href="../../openfl/display/ShaderParameterType.html#FLOAT3">ShaderParameterType.FLOAT3</a></code>)</td><td>3</td><td>Number</td></tr><tr><td>float4 (<code><a href="../../openfl/display/ShaderParameterType.html#FLOAT4">ShaderParameterType.FLOAT4</a></code>)</td><td>4</td><td>Number</td></tr><tr><td>int (<code><a href="../../openfl/display/ShaderParameterType.html#INT">ShaderParameterType.INT</a></code>)</td><td>1</td><td>int or uint</td></tr><tr><td>int2 (<code><a href="../../openfl/display/ShaderParameterType.html#INT2">ShaderParameterType.INT2</a></code>)</td><td>2</td><td>int or uint</td></tr><tr><td>int3 (<code><a href="../../openfl/display/ShaderParameterType.html#INT3">ShaderParameterType.INT3</a></code>)</td><td>3</td><td>int or uint</td></tr><tr><td>int4 (<code><a href="../../openfl/display/ShaderParameterType.html#INT4">ShaderParameterType.INT4</a></code>)</td><td>4</td><td>int or uint</td></tr><tr><td>bool (<code><a href="../../openfl/display/ShaderParameterType.html#BOOL">ShaderParameterType.BOOL</a></code>)</td><td>1</td><td>Boolean</td></tr><tr><td>bool2    (<code><a href="../../openfl/display/ShaderParameterType.html#BOOL2">ShaderParameterType.BOOL2</a></code>)</td><td>2</td><td>Boolean</td></tr><tr><td>bool3 (<code><a href="../../openfl/display/ShaderParameterType.html#BOOL3">ShaderParameterType.BOOL3</a></code>)</td><td>3</td><td>Boolean</td></tr><tr><td>bool4 (<code><a href="../../openfl/display/ShaderParameterType.html#BOOL4">ShaderParameterType.BOOL4</a></code>)</td><td>4</td><td>Boolean</td></tr><tr><td>float2x2 (<code><a href="../../openfl/display/ShaderParameterType.html#MATRIX2X2">ShaderParameterType.MATRIX2X2</a></code>)</td><td>4</td><td>Number</td></tr><tr><td>float3x3 (<code><a href="../../openfl/display/ShaderParameterType.html#MATRIX3X3">ShaderParameterType.MATRIX3X3</a></code>)</td><td>9</td><td>Number</td></tr><tr><td>float4x4 (<code><a href="../../openfl/display/ShaderParameterType.html#MATRIX4X4">ShaderParameterType.MATRIX4X4</a></code>)</td><td>16</td><td>Number</td></tr></tbody></table>
+<p>For the matrix parameter types, the array elements fill the rows of
+the matrix, then the columns. For example, suppose the following line
+of ActionScript is used to fill a <code>float2x2</code> parameter named
+<code>myMatrix</code>:</p>
+<pre><code class="prettyprint haxe">myShader.data.myMatrix.value = [.1, .2, .3, .4];</code></pre>
+<p>Within the shader, the matrix elements have the following values:</p><ul><li><code>myMatrix[0][0]</code>: .1</li><li><code>myMatrix[0][1]</code>: .2</li><li><code>myMatrix[1][0]</code>: .3</li><li><code>myMatrix[1][1]</code>: .4</li></ul></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

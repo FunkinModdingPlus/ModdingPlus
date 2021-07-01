@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.ui.GameInputControl</title></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> GameInputControl</h1><h4><small>package <a href="../../openfl/ui/index.html">openfl.ui</a></small></h4><h4><small>extends <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p></p></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="device"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#device"><span class="identifier">device</span></a>:<a class="type" title="openfl.ui.GameInputDevice" href="../../openfl/ui/GameInputDevice.html">GameInputDevice</a></code></h3><div class="doc"><p>Returns the GameInputDevice object that contains this control.</p></div></div><div class="field "><a name="id"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#id"><span class="identifier">id</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>Returns the id of this control.</p></div></div><div class="field "><a name="maxValue"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#maxValue"><span class="identifier">maxValue</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Returns the maximum value for this control.</p></div></div><div class="field "><a name="minValue"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#minValue"><span class="identifier">minValue</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Returns the minimum value for this control.</p></div></div><div class="field "><a name="value"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#value"><span class="identifier">value</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Returns the value for this control.</p></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></h4><div style="display:none"><div class="field "><a name="addEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useWeakReference : false, priority : 0, useCapture : false })</span><a href="#addEventListener"><span class="identifier">addEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">priority:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">useWeakReference:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Registers an event listener object with an EventDispatcher object so that
+the listener receives notification of an event. You can register event
+listeners on all nodes in the display list for a specific type of event,
+phase, and priority.</p>
+<p>After you successfully register an event listener, you cannot change
+its priority through additional calls to <code>addEventListener()</code>.
+To change a listener's priority, you must first call
+<code>removeListener()</code>. Then you can register the listener again
+with the new priority level.</p>
+<p>Keep in mind that after the listener is registered, subsequent calls to
+<code>addEventListener()</code> with a different <code>type</code> or
+<code>useCapture</code> value result in the creation of a separate
+listener registration. For example, if you first register a listener with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>, it listens only during
+the capture phase. If you call <code>addEventListener()</code> again using
+the same listener object, but with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>, you have two separate listeners: one that listens
+during the capture phase and another that listens during the target and
+bubbling phases.</p>
+<p>You cannot register an event listener for only the target phase or the
+bubbling phase. Those phases are coupled during registration because
+bubbling applies only to the ancestors of the target node.</p>
+<p>If you no longer need an event listener, remove it by calling
+<code>removeEventListener()</code>, or memory problems could result. Event
+listeners are not automatically removed from memory because the garbage
+collector does not remove the listener as long as the dispatching object
+exists(unless the <code>useWeakReference</code> parameter is set to
+<code><a href="../../Bool.html">true</a></code>).</p>
+<p>Copying an EventDispatcher instance does not copy the event listeners
+attached to it.(If your newly created node needs an event listener, you
+must attach the listener after creating the node.) However, if you move an
+EventDispatcher instance, the event listeners attached to it move along
+with it.</p>
+<p>If the event listener is being registered on a node while an event is
+being processed on this node, the event listener is not triggered during
+the current phase but can be triggered during a later phase in the event
+flow, such as the bubbling phase.</p>
+<p>If an event listener is removed from a node while an event is being
+processed on the node, it is still triggered by the current actions. After
+it is removed, the event listener is never invoked again(unless
+registered again for future processing).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Determines whether the listener works in the
+capture phase or the target and bubbling phases.
+If <code>useCapture</code> is set to
+<code><a href="../../Bool.html">true</a></code>, the listener processes the
+event only during the capture phase and not in the
+target or bubbling phase. If
+<code>useCapture</code> is <code><a href="../../Bool.html">false</a></code>, the
+listener processes the event only during the
+target or bubbling phase. To listen for the event
+in all three phases, call
+<code>addEventListener</code> twice, once with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>,
+then again with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>.</p></td></tr><tr><th style="width:25%;"><code>priority</code></th><td><p>The priority level of the event listener. The
+priority is designated by a signed 32-bit integer.
+The higher the number, the higher the priority.
+All listeners with priority <em>n</em> are processed
+before listeners of priority <em>n</em>-1. If two or
+more listeners share the same priority, they are
+processed in the order in which they were added.
+The default priority is 0.</p></td></tr><tr><th style="width:25%;"><code>useWeakReference</code></th><td><p>Determines whether the reference to the listener
+is strong or weak. A strong reference(the
+default) prevents your listener from being
+garbage-collected. A weak reference does not.</p>
+<p>Class-level member functions are not subject to
+garbage collection, so you can set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for class-level member functions without
+subjecting them to garbage collection. If you set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for a listener that is a nested inner function,
+the function will be garbage-collected and no
+longer persistent. If you create references to the
+inner function(save it in another variable) then
+it is not garbage-collected and stays
+persistent.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The <code>listener</code> specified is not a
+function.</p></td></tr></table></div></div><div class="field "><a name="dispatchEvent"></a><h3 class="anchor"><code><a href="#dispatchEvent"><span class="identifier">dispatchEvent</span></a>(<span style="white-space:nowrap">event:<a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Dispatches an event into the event flow. The event target is the
+EventDispatcher object upon which the <code>dispatchEvent()</code> method
+is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>event</code></th><td><p>The Event object that is dispatched into the event flow. If
+the event is being redispatched, a clone of the event is
+created automatically. After an event is dispatched, its
+<code>target</code> property cannot be changed, so you must
+create a new copy of the event for redispatching to work.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if the event was successfully
+dispatched. A value of <code><a href="../../Bool.html">false</a></code> indicates failure or
+that <code>preventDefault()</code> was called on the event.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The event dispatch recursion limit has been reached.</p></td></tr></table></div></div><div class="field "><a name="hasEventListener"></a><h3 class="anchor"><code><a href="#hasEventListener"><span class="identifier">hasEventListener</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the EventDispatcher object has any listeners registered for
+a specific type of event. This allows you to determine where an
+EventDispatcher object has altered handling of an event type in the event
+flow hierarchy. To determine whether a specific event type actually
+triggers an event listener, use <code>willTrigger()</code>.</p>
+<p>The difference between <code>hasEventListener()</code> and
+<code>willTrigger()</code> is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas
+<code>willTrigger()</code> examines the entire event flow for the event
+specified by the <code>type</code> parameter.</p>
+<p>When <code>hasEventListener()</code> is called from a LoaderInfo
+object, only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+is registered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="removeEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useCapture : false })</span><a href="#removeEventListener"><span class="identifier">removeEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Removes a listener from the EventDispatcher object. If there is no
+matching listener registered with the EventDispatcher object, a call to
+this method has no effect.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Specifies whether the listener was registered for the
+capture phase or the target and bubbling phases. If the
+listener was registered for both the capture phase and
+the target and bubbling phases, two calls to
+<code>removeEventListener()</code> are required to
+remove both, one call with <code>useCapture()</code> set
+to <code><a href="../../Bool.html">true</a></code>, and another call with
+<code>useCapture()</code> set to <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table></div></div><div class="field "><a name="toString"></a><h3 class="anchor"><code><a href="#toString"><span class="identifier">toString</span></a>():<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="willTrigger"></a><h3 class="anchor"><code><a href="#willTrigger"><span class="identifier">willTrigger</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether an event listener is registered with this EventDispatcher
+object or any of its ancestors for the specified event type. This method
+returns <code><a href="../../Bool.html">true</a></code> if an event listener is triggered during any
+phase of the event flow when an event of the specified type is dispatched
+to this EventDispatcher object or any of its descendants.</p>
+<p>The difference between the <code>hasEventListener()</code> and the
+<code>willTrigger()</code> methods is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas the
+<code>willTrigger()</code> method examines the entire event flow for the
+event specified by the <code>type</code> parameter.</p>
+<p>When <code>willTrigger()</code> is called from a LoaderInfo object,
+only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+will be triggered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

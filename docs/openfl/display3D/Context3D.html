@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.display3D.Context3D</title><meta name="description" content="The Context3D class provides a context for rendering geometrically defined graphics.
+A rendering context includes a drawing surface and its associated resources and
+state. When possible, the rendering context uses the hardware graphics processing
+unit (GPU). Otherwise, the rendering context uses software. (If rendering through
+Context3D is not supported on a platform, the stage3Ds property of the Stage object
+contains an empty list.)"/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> Context3D</h1><h4><small>package <a href="../../openfl/display3D/index.html">openfl.display3D</a></small></h4><h4><small>extends <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D._internal.Context3DState)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.textures.CubeTexture)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.textures.RectangleTexture)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.textures.TextureBase)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.textures.Texture)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.textures.VideoTexture)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.IndexBuffer3D)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.Program3D)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.VertexBuffer3D)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.BitmapData)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.Bitmap)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.DisplayObjectRenderer)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.Shader)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.Stage)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.Stage3D)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.geom.Point)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.geom.Rectangle)</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>The Context3D class provides a context for rendering geometrically defined graphics.
+A rendering context includes a drawing surface and its associated resources and
+state. When possible, the rendering context uses the hardware graphics processing
+unit (GPU). Otherwise, the rendering context uses software. (If rendering through
+Context3D is not supported on a platform, the stage3Ds property of the Stage object
+contains an empty list.)</p>
+<p>The Context3D rendering context is a programmable pipeline that is very similar to
+OpenGL ES 2, but is abstracted so that it is compatible with a range of hardware and
+GPU interfaces. Although designed for 3D graphics, the rendering pipeline does not
+mandate that the rendering is three dimensional. Thus, you can create a 2D renderer
+by supplying the appropriate vertex and pixel fragment programs. In both the 3D and
+2D cases, the only geometric primitive supported is the triangle.</p>
+<p>Get an instance of the Context3D class by calling the requestContext3D() method of a
+Stage3D object. A limited number of Context3D objects can exist per stage; one for
+each Stage3D in the Stage.stage3Ds list. When the context is created, the Stage3D
+object dispatches a context3DCreate event. A rendering context can be destroyed and
+recreated at any time, such as when another application that uses the GPU gains
+focus. Your code should anticipate receiving multiple context3DCreate events.
+Position the rendering area on the stage using the x and y properties of the
+associated Stage3D instance.</p>
+<p>To render and display a scene (after getting a Context3D object), the following steps
+are typical:</p><ol><li>Configure the main display buffer attributes by calling <code>configureBackBuffer()</code>.</li><li>Create and initialize your rendering resources, including:</li><li>Vertex and index buffers defining the scene geometry</li><li>Vertex and pixel programs (shaders) for rendering the scene</li><li>Textures</li><li>Render a frame:</li><li>Set the render state as appropriate for an object or collection of objects in
+the scene.</li><li>Call the <code>drawTriangles()</code> method to render a set of triangles.</li><li>Change the rendering state for the next group of objects.</li><li>Call <code>drawTriangles()</code> to draw the triangles defining the objects.</li><li>Repeat until the scene is entirely rendered.</li><li>Call the <code>present()</code> method to display the rendered scene on the stage.</li></ol>
+<p>The following limits apply to rendering:</p>
+<p>Resource limits:</p><table><thead><th>Resource</th><th>Number allowed</th><th>Total memory</th></thead><tbody><tr><td>Vertex buffers</td><td>4096</td><td>256 MB</td></tr><tr><td>Index buffers</td><td>4096</td><td>128 MB</td></tr><tr><td>Programs</td><td>4096</td><td>16 MB</td></tr><tr><td>Textures</td><td>4096</td><td>128 MB</td></tr><tr><td>Cube textures</td><td>4096</td><td>256 MB</td></tr></tbody></table>
+<p>AGAL limits: 200 opcodes per program.</p>
+<p>Draw call limits: 32,768 <code>drawTriangles()</code> calls for each <code>present()</code> call.</p>
+<p>The following limits apply to textures:</p>
+<p>Texture limits for AIR 32 bit:</p><table><thead><th>Texture</th><th>Maximum size</th><th>Total GPU memory</th></thead><tbody><tr><td>Normal Texture (below Baseline extended)</td><td>2048x2048</td><td>512 MB</td></tr><tr><td>Normal Texture (Baseline extended and above)</td><td>4096x4096</td><td>512 MB</td></tr><tr><td>Rectangular Texture (below Baseline extended)</td><td>2048x2048</td><td>512 MB</td></tr><tr><td>Rectangular Texture (Baseline extended and above)</td><td>4096x4096</td><td>512 MB</td></tr><tr><td>Cube Texture</td><td>1024x1024</td><td>256 MB</td></tr></tbody></table>
+<p>Texture limits for AIR 64 bit (Desktop):</p><table><thead><th>Texture</th><th>Maximum size</th><th>Total GPU memory</th></thead><tbody><tr><td>Normal Texture (below Baseline extended)</td><td>2048x2048</td><td>512 MB</td></tr><tr><td>Normal Texture (Baseline extended to Standard)</td><td>4096x4096</td><td>512 MB</td></tr><tr><td>Normal Texture (Standard extended and above)</td><td>4096x4096</td><td>2048 MB</td></tr><tr><td>Rectangular Texture (below Baseline extended)</td><td>2048x2048</td><td>512 MB</td></tr><tr><td>Rectangular Texture (Baseline extended to Standard)</td><td>4096x4096</td><td>512 MB</td></tr><tr><td>Rectangular Texture (Standard extended and above)</td><td>4096x4096</td><td>2048 MB</td></tr><tr><td>Cube Texture</td><td>1024x1024</td><td>256 MB</td></tr></tbody></table>
+<p>512 MB is the absolute limit for textures, including the texture memory required
+for mipmaps. However, for Cube Textures, the memory limit is 256 MB.</p>
+<p>You cannot create Context3D objects with the Context3D constructor. It is
+constructed and available as a property of a Stage3D instance. The Context3D class
+can be used on both desktop and mobile platforms, both when running in Flash Player
+and AIR.</p></div><h3 class="section">Static variables</h3><div class="fields"><div class="field "><a name="supportsVideoTexture"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(false)</span><span class="label label-static">static</span><span class="label">read only</span><a href="#supportsVideoTexture"><span class="identifier">supportsVideoTexture</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a><span> = false</span></code></h3><div class="doc"><p>Indicates if Context3D supports video texture.</p></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="backBufferHeight"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(0)</span><span class="label">read only</span><a href="#backBufferHeight"><span class="identifier">backBufferHeight</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a><span> = 0</span></code></h3><div class="doc"><p>Specifies the height of the back buffer, which can be changed by a successful
+call to the <code>configureBackBuffer()</code> method. The height may be modified when the
+browser zoom factor changes if the <code>wantsBestResolutionOnBrowserZoom</code> parameter
+is set to <code><a href="../../Bool.html">true</a></code> in the last successful call to the <code>configureBackBuffer()</code>
+method. The change in height can be detected by registering an event listener
+for the browser zoom change event.</p></div></div><div class="field "><a name="backBufferWidth"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(0)</span><span class="label">read only</span><a href="#backBufferWidth"><span class="identifier">backBufferWidth</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a><span> = 0</span></code></h3><div class="doc"><p>Specifies the width of the back buffer, which can be changed by a successful
+call to the <code>configureBackBuffer()</code> method. The width may be modified when the
+browser zoom factor changes if the <code>wantsBestResolutionOnBrowserZoom</code> parameter
+is set to <code><a href="../../Bool.html">true</a></code> in the last successful call to the <code>configureBackBuffer()</code>
+method. The change in width can be detected by registering an event listener
+for the browser zoom change event.</p></div></div><div class="field "><a name="driverInfo"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(&quot;OpenGL (Direct blitting)&quot;)</span><span class="label">read only</span><a href="#driverInfo"><span class="identifier">driverInfo</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a><span> = &quot;OpenGL (Direct blitting)&quot;</span></code></h3><div class="doc"><p>The type of graphics library driver used by this rendering context. Indicates
+whether the rendering is using software, a DirectX driver, or an OpenGL driver.
+Also indicates whether hardware rendering failed. If hardware rendering fails,
+Flash Player uses software rendering for Stage3D and <code>driverInfo</code> contains one
+of the following values:</p><ul><li>"Software Hw_disabled=userDisabled" - The Enable hardware acceleration
+checkbox in the Adobe Flash Player Settings UI is not selected.</li><li>"Software Hw_disabled=oldDriver" - There are known problems with the
+hardware graphics driver. Updating the graphics driver may fix this problem.</li><li>"Software Hw_disabled=unavailable" - Known problems with the hardware
+graphics driver or hardware graphics initialization failure.</li><li>"Software Hw_disabled=explicit" - The content explicitly requested software
+rendering through requestContext3D.</li><li>"Software Hw_disabled=domainMemory" - The content uses domainMemory, which
+requires a license when used with Stage3D hardware rendering. Visit
+adobe.com/go/fpl.</li></ul></div></div><div class="field "><a name="enableErrorChecking"></a><h3 class="anchor"><code><a href="#enableErrorChecking"><span class="identifier">enableErrorChecking</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Specifies whether errors encountered by the renderer are reported to the
+application.</p>
+<p>When <code>enableErrorChecking</code> is <code><a href="../../Bool.html">true</a></code>, the <code>clear()</code>, and <code>drawTriangles()</code>
+methods are synchronous and can throw errors. When <code>enableErrorChecking</code>
+is <code><a href="../../Bool.html">false</a></code>, the default, the <code>clear()</code>, and <code>drawTriangles()</code> methods are
+asynchronous and errors are not reported. Enabling error checking reduces
+rendering performance. You should only enable error checking when debugging.</p></div></div><div class="field "><a name="maxBackBufferHeight"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#maxBackBufferHeight"><span class="identifier">maxBackBufferHeight</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Specifies the maximum height of the back buffer. The inital value is the system
+limit in the platform. The property can be set to a value smaller than or equal
+to, but not greater than, the system limit. The property can be set to a value
+greater than or equal to, but not smaller than, the minimum limit. The minimum
+limit is a constant value, 32, when the back buffer is not configured. The
+minimum limit will be the value of the <code>height</code> parameter in the last successful
+call to the <code>configureBackBuffer()</code> method after the back buffer is configured.</p></div></div><div class="field "><a name="maxBackBufferWidth"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#maxBackBufferWidth"><span class="identifier">maxBackBufferWidth</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Specifies the maximum width of the back buffer. The inital value is the system
+limit in the platform. The property can be set to a value smaller than or equal
+to, but not greater than, the system limit. The property can be set to a value
+greater than or equal to, but not smaller than, the minimum limit. The minimum
+limit is a constant value, 32, when the back buffer is not configured. The
+minimum limit will be the value of the width parameter in the last successful
+call to the <code>configureBackBuffer()</code> method after the back buffer is configured.</p></div></div><div class="field "><a name="profile"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(STANDARD)</span><span class="label">read only</span><a href="#profile"><span class="identifier">profile</span></a>:<a class="type" title="openfl.display3D.Context3DProfile - Defines the values to use for specifying the Context3D profile." href="../../openfl/display3D/Context3DProfile.html">Context3DProfile</a><span> = STANDARD</span></code></h3><div class="doc"><p>The feature-support profile in use by this Context3D object.</p></div></div><div class="field "><a name="totalGPUMemory"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#totalGPUMemory"><span class="identifier">totalGPUMemory</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Returns the total GPU memory allocated by Stage3D data structures of an
+application.</p>
+<p>Whenever a GPU resource object is created, memory utilized is stored in
+Context3D. This memory includes index buffers, vertex buffers,
+textures (excluding video texture), and programs that were created through this
+Context3D.</p>
+<p>API totalGPUMemory returns the total memory consumed by the above resources to
+the user. Default value returned is 0. The total GPU memory returned is in bytes.
+The information is only provided in Direct mode on mobile, and in Direct and
+GPU modes on desktop. (On desktop, using <code>&lt;renderMode&gt;gpu&lt;/renderMode&gt;</code> will
+fall back to <code>&lt;renderMode&gt;direct&lt;/renderMode&gt;</code>)</p>
+<p>This API can be used when the SWF version is 32 or later.</p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="clear"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ mask : Context3DClearMask.ALL, stencil : 0, depth : 1, alpha : 1, blue : 0, green : 0, red : 0 })</span><a href="#clear"><span class="identifier">clear</span></a>(<span style="white-space:nowrap">red:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 0,</span> <span style="white-space:nowrap">green:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 0,</span> <span style="white-space:nowrap">blue:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 0,</span> <span style="white-space:nowrap">alpha:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 1,</span> <span style="white-space:nowrap">depth:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 1,</span> <span style="white-space:nowrap">stencil:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a> = 0,</span> <span style="white-space:nowrap">mask:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a> = Context3DClearMask.ALL</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Clears the color, depth, and stencil buffers associated with this Context3D
+object and fills them with the specified values.</p>
+<p>Set the <code>mask</code> parameter to specify which buffers to clear. Use the constants
+defined in the Context3DClearMask class to set the <code>mask</code> parameter. Use the
+bitwise OR operator, "|", to add multiple buffers to the mask (or use
+Context3DClearMask.ALL). When rendering to the back buffer, the
+<code>configureBackBuffer()</code> method must be called before any <code>clear()</code> calls.</p>
+<p><strong>Note:</strong> If you specify a parameter value outside the allowed range, Numeric
+parameter values are silently clamped to the range zero to one. Likewise, if
+stencil is greater than 0xff it is set to 0xff.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>red</code></th><td><p>the red component of the color with which to clear the color buffer,
+in the range zero to one.</p></td></tr><tr><th style="width:25%;"><code>green</code></th><td><p>the green component of the color with which to clear the color
+buffer, in the range zero to one.</p></td></tr><tr><th style="width:25%;"><code>blue</code></th><td><p>the blue component of the color with which to clear the color
+buffer, in the range zero to one.</p></td></tr><tr><th style="width:25%;"><code>alpha</code></th><td><p>the alpha component of the color with which to clear the color
+buffer, in the range zero to one. The alpha component is not used for blending.
+It is written to the buffer alpha directly.</p></td></tr><tr><th style="width:25%;"><code>depth</code></th><td><p>the value with which to clear the depth buffer, in the range
+zero to one.</p></td></tr><tr><th style="width:25%;"><code>stencil</code></th><td><p>the 8-bit value with which to clear the stencil buffer, in a
+range of 0x00 to 0xff.</p></td></tr><tr><th style="width:25%;"><code>mask</code></th><td><p>specifies which buffers to clear.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: If this Context3D object has been disposed by a calling
+dispose() or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>3768: The Stage3D API may not be used during background execution.</p></td></tr></table></div></div><div class="field "><a name="configureBackBuffer"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ wantsBestResolutionOnBrowserZoom : false, wantsBestResolution : false, enableDepthAndStencil : true })</span><a href="#configureBackBuffer"><span class="identifier">configureBackBuffer</span></a>(<span style="white-space:nowrap">width:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">height:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">antiAlias:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">enableDepthAndStencil:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = true,</span> <span style="white-space:nowrap">wantsBestResolution:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">wantsBestResolutionOnBrowserZoom:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets the viewport dimensions and other attributes of the rendering buffer.</p>
+<p>Rendering is double-buffered. The back buffer is swapped with the visible,
+front buffer when the <code>present()</code> method is called. The minimum size of the
+buffer is 32x32 pixels. The maximum size of the back buffer is limited by the
+device capabilities and can also be set by the user through the properties
+<code>maxBackBufferWidth</code> and <code>maxBackBufferHeight</code>. Configuring the buffer is a
+slow operation. Avoid changing the buffer size or attributes during normal
+rendering operations.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>width</code></th><td><p>width in pixels of the buffer.</p></td></tr><tr><th style="width:25%;"><code>height</code></th><td><p>height in pixels of the buffer.</p></td></tr><tr><th style="width:25%;"><code>antiAlias</code></th><td><p>an integer value specifying the requested antialiasing
+quality. The value correlates to the number of subsamples used when
+antialiasing. Using more subsamples requires more calculations to be performed,
+although the relative performance impact depends on the specific rendering
+hardware. The type of antialiasing and whether antialiasing is performed at all is
+dependent on the device and rendering mode. Antialiasing is not supported at all by
+the software rendering context.
+| --- | --- |
+| 0 | No antialiasing |
+| 2 | Minimal antialiasing |
+| 4 | High-quality antialiasing |
+| 16 | Very high-quality antialiasing |</p></td></tr><tr><th style="width:25%;"><code>enableDepthAndStencil</code></th><td><p><code><a href="../../Bool.html">false</a></code> indicates no depth or stencil buffer is
+created, <code><a href="../../Bool.html">true</a></code> creates a depth and a stencil buffer. For an AIR 3.2 or later
+application compiled with SWF version 15 or higher, if the <code>renderMode</code> element in
+the application descriptor file is <code>direct</code>, then the <code>depthAndStencil</code> element in
+the application descriptor file must have the same value as this argument. By
+default, the value of the <code>depthAndStencil</code> element is <code><a href="../../Bool.html">false</a></code>.</p></td></tr><tr><th style="width:25%;"><code>wantsBestResolution</code></th><td><p><code><a href="../../Bool.html">true</a></code> indicates that if the device supports HiDPI
+screens it will attempt to allocate a larger back buffer than indicated with the
+<code>width</code> and <code>height</code> parameters. Since this add more pixels and potentially changes
+the result of shader operations this is turned off by default. Use
+<code><a href="../../openfl/display/Stage.html#contentsScaleFactor">Stage.contentsScaleFactor</a></code> to determine by how much the native back buffer was
+scaled up.</p></td></tr><tr><th style="width:25%;"><code>wantsBestResolutionOnBrowserZoom</code></th><td><p><code><a href="../../Bool.html">true</a></code> indicates that the size of the
+back buffer should increase in proportion to the increase in the browser zoom
+factor. The setting of this value is persistent across multiple browser zooms.
+The default value of the parameter is <code><a href="../../Bool.html">false</a></code>. Set <code>maxBackBufferWidth</code> and
+<code>maxBackBufferHeight</code> properties to limit the back buffer size increase. Use
+<code>backBufferWidth</code> and <code>backBufferHeight</code> to determine the current size of the
+back buffer.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: if this Context3D object has been disposed by a
+calling <code>dispose()</code> or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Bad Input Size: The <code>width</code> or <code>height</code> parameter is either less
+than the minimum back buffer allowed size or greater than the maximum back buffer
+size allowed.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>3709: The <code>depthAndStencil</code> flag in the application descriptor
+must match the <code>enableDepthAndStencil</code> Boolean passed to <code>configureBackBuffer()</code>
+on the Context3D object.</p></td></tr></table></div></div><div class="field "><a name="createCubeTexture"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ streamingLevels : 0 })</span><a href="#createCubeTexture"><span class="identifier">createCubeTexture</span></a>(<span style="white-space:nowrap">size:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">format:<a class="type" title="openfl.display3D.Context3DTextureFormat - Defines the values to use for specifying a texture format." href="../../openfl/display3D/Context3DTextureFormat.html">Context3DTextureFormat</a>,</span> <span style="white-space:nowrap">optimizeForRenderToTexture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a>,</span> <span style="white-space:nowrap">streamingLevels:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0</span>):<a class="type" title="openfl.display3D.textures.CubeTexture - The CubeTexture class represents a cube texture uploaded to a rendering context." href="../../openfl/display3D/textures/CubeTexture.html">CubeTexture</a></code></h3><div class="doc"><p>Creates a CubeTexture object.</p>
+<p>Use a CubeTexture object to upload cube texture bitmaps to the rendering context
+and to reference a cube texture during rendering. A cube texture consists of six
+equal-sized, square textures arranged in a cubic topology and are useful for
+describing environment maps.</p>
+<p>You cannot create CubeTexture objects with a CubeTexture constructor; use this
+method instead. After creating a CubeTexture object, upload the texture bitmap
+data using the CubeTexture <code>uploadFromBitmapData()</code>, <code>uploadFromByteArray()</code>, or
+<code>uploadCompressedTextureFromByteArray()</code> methods.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>size</code></th><td><p>The texture edge length in texels.</p></td></tr><tr><th style="width:25%;"><code>format</code></th><td><p>The texel format, of the Context3DTextureFormat enumerated list.
+Texture compression lets you store texture images in compressed format directly on
+the GPU, which saves GPU memory and memory bandwidth. Typically, compressed
+textures are compressed offline and uploaded to the GPU in compressed form
+using the <code><a href="../../openfl/display3D/textures/Texture.html#uploadCompressedTextureFromByteArray">Texture.uploadCompressedTextureFromByteArray</a></code> method. Flash Player 11.4
+and AIR 3.4 on desktop platforms added support for runtime texture compression,
+which may be useful in certain situations, such as when rendering dynamic
+textures from vector art. Note that this feature is not currently available on
+mobile platforms and an ArgumentError (Texture Format Mismatch) will be thrown
+instead. To use runtime texture compression, perform the following steps:
+1. Create the texture object by calling the <code><a href="../../openfl/display3D/Context3D.html#createCubeTexture">Context3D.createCubeTexture</a>()</code>
+method, passing either <code><a href="../../openfl/display3D/Context3DTextureFormat.html#COMPRESSED">openfl.display3D.Context3DTextureFormat.COMPRESSED</a></code> or
+<code><a href="../../openfl/display3D/Context3DTextureFormat.html#COMPRESSED_ALPHA">openfl.display3D.Context3DTextureFormat.COMPRESSED_ALPHA</a></code> as the format
+parameter.
+2. Using the openfl.display3D.textures.Texture instance returned by
+<code>createCubeTexture()</code>, call either
+<code><a href="../../openfl/display3D/textures/CubeTexture.html#uploadFromBitmapData">openfl.display3D.textures.CubeTexture.uploadFromBitmapData</a>()</code> or
+<code><a href="../../openfl/display3D/textures/CubeTexture.html#uploadFromByteArray">openfl.display3D.textures.CubeTexture.uploadFromByteArray</a>()</code> to upload and
+compress the texture in one step.</p></td></tr><tr><th style="width:25%;"><code>optimizeForRenderToTexture</code></th><td><p>Set to true if the texture is likely to be
+used as a render target.</p></td></tr><tr><th style="width:25%;"><code>streamingLevels</code></th><td><p>The MIP map level that must be loaded before the image
+is rendered. Texture streaming offers the ability to load and display the
+smallest mip levels first, progressively displaying higher quality images as the
+textures are loaded. End users can view lower-quality images in an application
+while the higher quality images load.
+By default, streamingLevels is 0, meaning that the highest quality image in the
+MIP map must be loaded before the image is rendered. This parameter was added in
+Flash Player 11.3 and AIR 3.3. Using the default value maintains the behavior of
+the previous versions of Flash Player and AIR.
+Set streamingLevels to a value between 1 and the number of images in the MIP map
+to enable texture streaming. For example, you have a MIP map that includes at the
+highest quality a main image at 64x64 pixels. Lower quality images in the MIP map
+are 32x32, 16x16, 8x8, 4x4, 2x2, and 1x1 pixels, for 7 images in total, or 7
+levels. Level 0 is the highest quality image. The maximum value of this property
+is log2(min(width,height)). Therefore, for a main image that is 64x64 pixels, the
+maximum value of streamingLevels is 7. Set this property to 3 to render the image
+after the 8x8 pixel image loads.
+<strong>Note:</strong> Setting this property to a value > 0 can impact memory usage and
+performance.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new CubeTexture object</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: if this Context3D object has been disposed by a
+calling <code>dispose()</code> or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Resource Limit Exceeded: if too many Texture objects are created
+or the amount of memory allocated to textures is exceeded.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Depth Texture Not Implemented: if you attempt to create
+a depth texture.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Texture Size Is Zero: if the size parameter is not greater
+than zero.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Texture Not Power Of Two: if the size parameter is not a
+power of two.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Texture Too Big: if the size parameter is greater than
+1024.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Texture Creation Failed: if the CubeTexture object could not be
+created by the rendering context (but information about the reason is not
+available).</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Invalid streaming level: if streamingLevels is greater or
+equal to <code>log2(size)</code>.</p></td></tr></table></div></div><div class="field "><a name="createIndexBuffer"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ bufferUsage : STATIC_DRAW })</span><a href="#createIndexBuffer"><span class="identifier">createIndexBuffer</span></a>(<span style="white-space:nowrap">numIndices:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">bufferUsage:<a class="type" title="openfl.display3D.Context3DBufferUsage - Defines the values to use for specifying the buffer usage type." href="../../openfl/display3D/Context3DBufferUsage.html">Context3DBufferUsage</a> = STATIC_DRAW</span>):<a class="type" title="openfl.display3D.IndexBuffer3D - IndexBuffer3D is used to represent lists of vertex indices comprising graphic elements retained by the graphics subsystem." href="../../openfl/display3D/IndexBuffer3D.html">IndexBuffer3D</a></code></h3><div class="doc"><p>Creates an IndexBuffer3D object.</p>
+<p>Use an IndexBuffer3D object to upload a set of triangle indices to the rendering
+context and to reference that set of indices for rendering. Each index in the
+index buffer references a corresponding vertex in a vertex buffer. Each set of
+three indices identifies a triangle. Pass the IndexBuffer3D object to the
+<code>drawTriangles()</code> method to render one or more triangles defined in the index
+buffer.</p>
+<p>You cannot create IndexBuffer3D objects with the IndexBuffer3D class constructor;
+use this method instead. After creating a IndexBuffer3D object, upload the
+indices using the IndexBuffer3D <code>uploadFromVector()</code> or <code>uploadFromByteArray()</code>
+methods.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>numIndices</code></th><td><p>the number of vertices to be stored in the buffer.</p></td></tr><tr><th style="width:25%;"><code>bufferUsage</code></th><td><p>the expected buffer usage. Use one of the constants defined
+in Context3DBufferUsage. The hardware driver can do appropriate optimization
+when you set it correctly. This parameter is only available after Flash 12/AIR 4.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new IndexBuffer3D object</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: if this Context3D object has been disposed by a
+calling <code>dispose()</code> or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Resource Limit Exceeded: if too many index buffers are created
+or the amount of memory allocated to index buffers is exceeded.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>3768: The Stage3D API may not be used during background execution.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Buffer Too Big: when <code>numIndices</code> is greater than or equal
+to 0xf0000.</p></td></tr></table></div></div><div class="field "><a name="createProgram"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ format : AGAL })</span><a href="#createProgram"><span class="identifier">createProgram</span></a>(<span style="white-space:nowrap">format:<a class="type" title="openfl.display3D.Context3DProgramFormat - Defines the values to use for specifying a Program3D source format." href="../../openfl/display3D/Context3DProgramFormat.html">Context3DProgramFormat</a> = AGAL</span>):<a class="type" title="openfl.display3D.Program3D - The Program3D class represents a pair of rendering programs (also called &quot;shaders&quot;) uploaded to the rendering context." href="../../openfl/display3D/Program3D.html">Program3D</a></code></h3><div class="doc"><p>Creates a Program3D object.</p>
+<p>Use a Program3D object to upload shader programs to the rendering context and
+to reference uploaded programs during rendering. A Program3D object stores
+two programs, a vertex program and a fragment program (also known as a pixel
+program). The programs are written in a binary shader assembly language.</p>
+<p>You cannot create Program3D objects with a Program3D constructor; use this method
+instead. After creating a Program3D object, upload the programs using the
+Program3D <code>upload()</code> method.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>format</code></th><td><p>(Experimental) Set the format of this Program3D instance to AGAL
+(default) or to GLSL for use on GL-based renderers</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new Program3D object</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: if this Context3D object has been disposed by a
+calling <code>dispose()</code> or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The number of programs exceeds 4096 or the total memory size
+exceeds 16MB (use dispose to free Program3D resources).</p></td></tr></table></div></div><div class="field "><a name="createRectangleTexture"></a><h3 class="anchor"><code><a href="#createRectangleTexture"><span class="identifier">createRectangleTexture</span></a>(<span style="white-space:nowrap">width:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">height:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">format:<a class="type" title="openfl.display3D.Context3DTextureFormat - Defines the values to use for specifying a texture format." href="../../openfl/display3D/Context3DTextureFormat.html">Context3DTextureFormat</a>,</span> <span style="white-space:nowrap">optimizeForRenderToTexture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></span>):<a class="type" title="openfl.display3D.textures.RectangleTexture - The Rectangle Texture class represents a 2-dimensional texture uploaded to a rendering context." href="../../openfl/display3D/textures/RectangleTexture.html">RectangleTexture</a></code></h3><div class="doc"><p>Creates a Rectangle Texture object.</p>
+<p>Use a RectangleTexture object to upload texture bitmaps to the rendering context
+and to reference a texture during rendering.</p>
+<p>You cannot create RectangleTexture objects with a RectangleTexture constructor;
+use this method instead. After creating a RectangleTexture object, upload the
+texture bitmaps using the Texture <code>uploadFromBitmapData()</code> or
+<code>uploadFromByteArray()</code> methods.</p>
+<p>Note that 32-bit integer textures are stored in a packed BGRA format to match
+the OpenFL BitmapData format. Floating point textures use a conventional RGBA
+format.</p>
+<p>Rectangle textures are different from regular 2D textures in that their width and
+height do not have to be powers of two. Also, they do not contain mip maps.
+They are most useful for use in render to texture cases. If a rectangle texture
+is used with a sampler that uses mip map filtering or repeat wrapping the
+drawTriangles call will fail. Rectangle texture also do not allow streaming. The
+only texture formats supported by Rectangle textures are BGRA, BGR_PACKED,
+BGRA_PACKED. The compressed texture formats are not supported by Rectangle
+Textures.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>width</code></th><td><p>The texture width in texels.</p></td></tr><tr><th style="width:25%;"><code>height</code></th><td><p>The texture height in texels.</p></td></tr><tr><th style="width:25%;"><code>format</code></th><td><p>The texel format, of the Context3DTextureFormat enumerated list.</p></td></tr><tr><th style="width:25%;"><code>optimizeForRenderToTexture</code></th><td><p>Set to true if the texture is likely to be
+used as a render target.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new RectangleTexture object</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: if this Context3D object has been disposed by a
+calling dispose() or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Resource Limit Exceeded: if too many Texture objects are created
+or the amount of memory allocated to textures is exceeded.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Texture Size Is Zero: if both the width or height
+parameters are not greater than zero.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Texture Too Big: if either the width or the height
+parameter is greater than 2048.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Texture Creation Failed: if the Texture object could not be
+created by the rendering context (but information about the reason is not
+available).</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Requires Baseline Profile Or Above: if rectangular texture is
+created with baseline constrained profile.</p></td></tr></table></div></div><div class="field "><a name="createTexture"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ streamingLevels : 0 })</span><a href="#createTexture"><span class="identifier">createTexture</span></a>(<span style="white-space:nowrap">width:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">height:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">format:<a class="type" title="openfl.display3D.Context3DTextureFormat - Defines the values to use for specifying a texture format." href="../../openfl/display3D/Context3DTextureFormat.html">Context3DTextureFormat</a>,</span> <span style="white-space:nowrap">optimizeForRenderToTexture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a>,</span> <span style="white-space:nowrap">streamingLevels:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0</span>):<a class="type" title="openfl.display3D.textures.Texture - The Texture class represents a 2-dimensional texture uploaded to a rendering context." href="../../openfl/display3D/textures/Texture.html">Texture</a></code></h3><div class="doc"><p>Creates a Texture object.</p>
+<p>Use a Texture object to upload texture bitmaps to the rendering context and to
+reference a texture during rendering.</p>
+<p>You cannot create Texture objects with a Texture constructor; use this method
+instead. After creating a Texture object, upload the texture bitmaps using the
+Texture <code>uploadFromBitmapData()</code>, <code>uploadFromByteArray()</code>, or
+<code>uploadCompressedTextureFromByteArray()</code> methods.</p>
+<p>Note that 32-bit integer textures are stored in a packed BGRA format to match
+the OpenFL BitmapData format. Floating point textures use a conventional RGBA
+format.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>width</code></th><td><p>The texture width in texels.</p></td></tr><tr><th style="width:25%;"><code>height</code></th><td><p>The texture height in texels.</p></td></tr><tr><th style="width:25%;"><code>format</code></th><td><p>The texel format, of the Context3DTextureFormat enumerated list.
+Texture compression lets you store texture images in compressed format directly
+on the GPU, which saves GPU memory and memory bandwidth. Typically, compressed
+textures are compressed offline and uploaded to the GPU in compressed form using
+the Texture.uploadCompressedTextureFromByteArray method. Flash Player 11.4 and
+AIR 3.4 on desktop platforms added support for runtime texture compression, which
+may be useful in certain situations, such as when rendering dynamic textures from
+vector art. Note that this feature is not currently available on mobile platforms
+and an ArgumentError (Texture Format Mismatch) will be thrown instead. To use
+runtime texture compression, perform the following steps:
+1. Create the texture object by calling the <code><a href="../../openfl/display3D/Context3D.html#createTexture">Context3D.createTexture</a>()</code> method,
+passing either <code><a href="../../openfl/display3D/Context3DTextureFormat.html#COMPRESSED">openfl.display3D.Context3DTextureFormat.COMPRESSED</a></code> or
+<code><a href="../../openfl/display3D/Context3DTextureFormat.html#COMPRESSED_ALPHA">openfl.display3D.Context3DTextureFormat.COMPRESSED_ALPHA</a></code> as the format
+parameter.
+2. Using the openfl.display3D.textures.Texture instance returned by
+<code>createTexture()</code>, call either
+<code><a href="../../openfl/display3D/textures/Texture.html#uploadFromBitmapData">openfl.display3D.textures.Texture.uploadFromBitmapData</a>()</code> or
+<code><a href="../../openfl/display3D/textures/Texture.html#uploadFromByteArray">openfl.display3D.textures.Texture.uploadFromByteArray</a>()</code> to upload and compress
+the texture in one step.</p></td></tr><tr><th style="width:25%;"><code>optimizeForRenderToTexture</code></th><td><p>Set to true if the texture is likely to be
+used as a render target.</p></td></tr><tr><th style="width:25%;"><code>streamingLevels</code></th><td><p>The MIP map level that must be loaded before the image is
+rendered. Texture streaming offers the ability to load and display the smallest
+mip levels first, progressively displaying higher quality images as the textures
+are loaded. End users can view lower-quality images in an application while the
+higher quality images load.
+By default, streamingLevels is 0, meaning that the highest quality image in the
+MIP map must be loaded before the image is rendered. This parameter was added in
+Flash Player 11.3 and AIR 3.3. Using the default value maintains the behavior of
+the previous versions of Flash Player and AIR.
+Set <code>streamingLevels</code> to a value between 1 and the number of images in the MIP map
+to enable texture streaming. For example, you have a MIP map that includes at
+the highest quality a main image at 64x64 pixels. Lower quality images in the
+MIP map are 32x32, 16x16, 8x8, 4x4, 2x2, and 1x1 pixels, for 7 images in total,
+or 7 levels. Level 0 is the highest quality image. The maximum value of this
+property is log2(min(width,height)). Therefore, for a main image that is
+64x64 pixels, the maximum value of streamingLevels is 7. Set this property to
+3 to render the image after the 8x8 pixel image loads.
+<strong>Note:</strong> Setting this property to a value > 0 can impact memory usage and
+performance.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new Texture object</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: if this Context3D object has been disposed by a calling dispose() or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Resource Limit Exceeded: if too many Texture objects are created or the amount of memory allocated to textures is exceeded.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Depth Texture Not Implemented: if you attempt to create a depth texture.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Texture Size Is Zero: if both the width or height parameters are not greater than zero.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Texture Not Power Of Two: if both the width and height parameters are not a power of two.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Texture Too Big: if either the width or the height parameter is greater than 2048 for baseline and baseline constrained profile or if either the width or the height parameter is greater than 4096 for profile baseline extended and above.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Texture Creation Failed: if the Texture object could not be created by the rendering context (but information about the reason is not available).</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Invalid streaming level: if streamingLevels is greater or equal to log2(min(width,height)).</p></td></tr></table></div></div><div class="field "><a name="createVertexBuffer"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ bufferUsage : STATIC_DRAW })</span><a href="#createVertexBuffer"><span class="identifier">createVertexBuffer</span></a>(<span style="white-space:nowrap">numVertices:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">data32PerVertex:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">bufferUsage:<a class="type" title="openfl.display3D.Context3DBufferUsage - Defines the values to use for specifying the buffer usage type." href="../../openfl/display3D/Context3DBufferUsage.html">Context3DBufferUsage</a> = STATIC_DRAW</span>):<a class="type" title="openfl.display3D.VertexBuffer3D - The VertexBuffer3D class represents a set of vertex data uploaded to a rendering context." href="../../openfl/display3D/VertexBuffer3D.html">VertexBuffer3D</a></code></h3><div class="doc"><p>Creates a VertexBuffer3D object.</p>
+<p>Use a VertexBuffer3D object to upload a set of vertex data to the rendering
+context. A vertex buffer contains the data needed to render each point in the
+scene geometry. The data attributes associated with each vertex typically
+includes position, color, and texture coordinates and serve as the input to
+the vertex shader program. Identify the data values that correspond to one of
+the inputs of the vertex program using the <code>setVertexBufferAt()</code> method. You can
+specify up to sixty-four 32-bit values for each vertex.</p>
+<p>You cannot create VertexBuffer3D objects with a VertexBuffer3D constructor; use
+this method instead. After creating a VertexBuffer3D object, upload the vertex
+data using the VertexBuffer3D <code>uploadFromVector()</code> or <code>uploadFromByteArray()</code>
+methods.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>numVertices</code></th><td><p>the number of vertices to be stored in the buffer. The
+maximum number of vertices in a single buffer is 65535.</p></td></tr><tr><th style="width:25%;"><code>data32PerVertex</code></th><td><p>the number of 32-bit(4-byte) data values associated
+with each vertex. The maximum number of 32-bit data elements per vertex is 64
+(or 256 bytes). Note that only eight attribute registers are accessible by a
+vertex shader program at any given time. Use <code>setVertextBufferAt()</code> to select
+attributes from within a vertex buffer.</p></td></tr><tr><th style="width:25%;"><code>bufferUsage</code></th><td><p>the expected buffer usage. Use one of the constants defined
+in Context3DBufferUsage. The hardware driver can do appropriate optimization when
+you set it correctly. This parameter is only available after Flash 12/AIR 4</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new VertexBuffer3D object</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: if this Context3D object has been disposed by a
+calling <code>dispose()</code> or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Resource Limit Exceeded: if too many vertex buffer objects are
+created or the amount of memory alloted to vertex buffers is exceeded.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Buffer Too Big: when <code>numVertices</code> is greater than 0x10000
+or <code>data32PerVertex</code> is greater than 64.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Buffer Has Zero Size: when <code>numVertices</code> is zero or
+<code>data32PerVertex</code> is zero.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Buffer Creation Failed: if the VertexBuffer3D object
+could not be created by the rendering context (but additional information about
+the reason is not available).</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>3768: The Stage3D API may not be used during background execution.</p></td></tr></table></div></div><div class="field "><a name="createVideoTexture"></a><h3 class="anchor"><code><a href="#createVideoTexture"><span class="identifier">createVideoTexture</span></a>():<a class="type" title="openfl.display3D.textures.VideoTexture - Prior to Flash Player 21, the use of video in Stage3D required the use of the Video object (which is not hardware accelerated), copying of video frame to a BitmapData object, and loading of the data onto the GPU which is CPU intensive." href="../../openfl/display3D/textures/VideoTexture.html">VideoTexture</a></code></h3><div class="doc"><p>Creates a VideoTexture object.</p>
+<p>Use a VideoTexture object to obtain video frames as texture from NetStream object
+or Camera object and to upload the video frames to the rendering context.</p>
+<p>The VideoTexture object cannot be created with the VideoTexture constructor; use
+this method instead. After creating a VideoTexture object, attach NetStream
+object or Camera Object to get the video frames with the VideoTexture
+<code>attachNetStream()</code> or <code>attachCamera()</code> methods.</p>
+<p>Note that this method returns null if the system doesn't support this feature.</p>
+<p>VideoTexture does not contain mipmaps. If VideoTexture is used with a sampler
+that uses mip map filtering or repeat wrapping, the drawTriangles call will fail.
+VideoTexture can be treated as BGRA texture by the shaders. The attempt to
+instantiate the VideoTexture Object will fail if the Context3D was requested
+with sotfware rendering mode.</p>
+<p>A maximum of 4 VideoTexture objects are available per Context3D instance. On
+mobile the actual number of supported VideoTexture objects may be less than 4
+due to platform limitations.</p><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new VideoTexture object</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: if this Context3D object has been disposed by a
+calling <code>dispose()</code> or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Resource Limit Exceeded: if too many Texture objects are created
+or the amount of memory allocated to textures is exceeded.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Texture Creation Failed: if the Texture object could not be
+created by the rendering context (but information about the reason is not
+available).</p></td></tr></table></div></div><div class="field "><a name="dispose"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ recreate : true })</span><a href="#dispose"><span class="identifier">dispose</span></a>(<span style="white-space:nowrap">recreate:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = true</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Frees all resources and internal storage associated with this Context3D.</p>
+<p>All index buffers, vertex buffers, textures, and programs that were created
+through this Context3D are disposed just as if calling <code>dispose()</code> on each of
+them individually. In addition, the Context3D itself is disposed freeing all
+temporary buffers and the back buffer. If you call <code>configureBackBuffer()</code>,
+<code>clear()</code>, <code>drawTriangles()</code>, <code>createCubeTexture()</code>, <code>createTexture()</code>,
+<code>createProgram()</code>, <code>createIndexBuffer()</code>, <code>createVertexBuffer()</code>, or
+<code>drawToBitmapData()</code> after calling <code>dispose()</code>, the runtime throws an exception.</p>
+<p>Warning: calling <code>dispose()</code> on a Context3D while there is still a event
+listener for <code>Events.CONTEXT3D_CREATE</code> set on the asociated Stage3D object the
+<code>dispose()</code> call will simulate a device loss. It will create a new Context3D on
+the Stage3D and issue the <code>Events.CONTEXT3D_CREATE</code> event again. If this is not
+desired remove the event listener from the Stage3D object before calling
+<code>dispose()</code> or set the <code>recreate</code> parameter to <code><a href="../../Bool.html">false</a></code>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>recreate</code></th><td><p>Whether to allow this Stage3D object to create itself again</p></td></tr></table></div></div><div class="field "><a name="drawToBitmapData"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ destPoint : null, srcRect : null })</span><a href="#drawToBitmapData"><span class="identifier">drawToBitmapData</span></a>(<span style="white-space:nowrap">destination:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>,</span> <span style="white-space:nowrap">?srcRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">?destPoint:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Draws the current render buffer to a bitmap.</p>
+<p>The current contents of the back render buffer are copied to a BitmapData
+object. This is potentially a very slow operation that can take up to a second.
+Use with care. Note that this function does not copy the front render buffer
+(the one shown on stage), but the buffer being drawn to. To capture the rendered
+image as it appears on the stage, call <code>drawToBitmapData()</code> immediately before you
+calling <code>present()</code>.</p>
+<p>Beginning with AIR 25, two new parameters have been introduced in the API
+<code>drawToBitmapData()</code>. This API now takes three parameters. The first one is the
+existing parameter <code>destination:<a href="../../openfl/display/BitmapData.html#BitmapData">BitmapData</a></code>. The second parameter is
+<code>srcRect:<a href="../../lime/math/Rectangle.html#Rectangle">Rectangle</a></code>, which is target rectangle on Stage3D. The third parameter is
+<code>destPoint:<a href="../../openfl/geom/Point.html#Point">Point</a></code>, which is the coordinate on the destination bitmap. The
+parameters <code>srcRect</code> and <code>destPoint</code> are optional and default to
+<code>(0,0,bitmapWidth,bitmapHeight)</code> and <code>(0,0)</code>, respectively.</p>
+<p>When the image is drawn, it is not scaled to fit the bitmap. Instead, the
+contents are clipped to the size of the destination bitmap.</p>
+<p>OpenFL BitmapData objects store colors already multiplied by the alpha component.
+For example, if the "pure" rgb color components of a pixel are (0x0A, 0x12, 0xBB)
+and the alpha component is 0x7F (.5), then the pixel is stored in the
+BitmapData object with the rgba values: (0x05, 0x09, 0x5D, 0x7F). You can set the
+blend factors so that the colors rendered to the buffer are multiplied by alpha
+or perform the operation in the fragment shader. The rendering context does not
+validate that the colors are stored in premultiplied format.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>destination</code></th><td><p>The target BitmapData for this drawing operation</p></td></tr><tr><th style="width:25%;"><code>srcRect</code></th><td><p>The source rectangle in the current Stage3D context</p></td></tr><tr><th style="width:25%;"><code>destPoint</code></th><td><p>A destination point to write to in the target BitmapData</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: if this Context3D object has been disposed by
+a calling <code>dispose()</code> or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>3768: The Stage3D API may not be used during background execution.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>3802: If either one of the parameters <code>destPoint:<a href="../../openfl/geom/Point.html#Point">Point</a></code> or
+<code>srcRect:<a href="../../lime/math/Rectangle.html#Rectangle">Rectangle</a></code> is outside the bitmap/stage3D coordinate bound, or if
+non-numeric(NaN) values are passed as input.</p></td></tr></table></div></div><div class="field "><a name="drawTriangles"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ numTriangles : -1, firstIndex : 0 })</span><a href="#drawTriangles"><span class="identifier">drawTriangles</span></a>(<span style="white-space:nowrap">indexBuffer:<a class="type" title="openfl.display3D.IndexBuffer3D - IndexBuffer3D is used to represent lists of vertex indices comprising graphic elements retained by the graphics subsystem." href="../../openfl/display3D/IndexBuffer3D.html">IndexBuffer3D</a>,</span> <span style="white-space:nowrap">firstIndex:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">numTriangles:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = -1</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Render the specified triangles using the current buffers and state of this
+Context3D object.</p>
+<p>For each triangle, the triangle vertices are processed by the vertex shader
+program and the triangle surface is processed by the pixel shader program. The
+output color from the pixel program for each pixel is drawn to the render
+target depending on the stencil operations, depth test, source and destination
+alpha, and the current blend mode. The render destination can be the main render
+buffer or a texture.</p>
+<p>If culling is enabled, (with the <code>setCulling()</code> method), then triangles can be
+discarded from the scene before the pixel program is run. If stencil and depth
+testing are enabled, then output pixels from the pixel program can be discarded
+without updating the render destination. In addition, the pixel program can
+decide not to output a color for a pixel.</p>
+<p>The rendered triangles are not displayed in the viewport until you call the
+<code>present()</code> method. After each <code>present()</code> call, the <code>clear()</code> method must be
+called before the first <code>drawTriangles()</code> call or rendering fails.</p>
+<p>When <code>enableErrorChecking</code> is <code><a href="../../Bool.html">false</a></code>, this function returns immediately, does
+not wait for results, and throws exceptions only if this Context3D instance has
+been disposed or there are too many draw calls. If the rendering context state
+is invalid rendering fails silently. When the <code>enableErrorChecking</code> property is
+<code><a href="../../Bool.html">true</a></code>, this function returns after the triangles are drawn and throws exceptions
+for any drawing errors or invalid context state.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>indexBuffer:IndexBuffer3D</code></th><td><p>— a set of vertex indices referencing the
+vertices to render.</p></td></tr><tr><th style="width:25%;"><code>firstIndex:int</code></th><td><p>(default = 0) — the index of the first vertex index
+selected to render. Default 0.</p></td></tr><tr><th style="width:25%;"><code>numTriangles:int</code></th><td><p>(default = -1) — the number of triangles to render.
+Each triangle consumes three indices. Pass -1 to draw all triangles in the index
+buffer. Default -1.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Object Disposed: if this Context3D object has been disposed by
+a calling <code>dispose()</code> or because the underlying rendering hardware has been lost.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— If this method is called too many times between calls to
+<code>present()</code>. The maximum number of calls is 32,768.
+The following errors are only thrown when <code>enableErrorChecking</code> property is true:</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Need To Clear Before Draw: If the buffer has not been cleared
+since the last <code>present()</code> call.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>If a valid Program3D object is not set.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>No Valid Index Buffer Set: If an IndexBuffer3D object is not set.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Sanity Check On Parameters Failed: when the number of triangles
+to be drawn or the <code>firstIndex</code> exceed allowed values.</p></td></tr><tr class="indent"><th style="width:25%;"><code>RangeError</code></th><td><p>— Not Enough Indices In This Buffer: when there aren't enough
+indices in the buffer to define the number of triangles to be drawn.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Sample Binds Texture Also Bound To Render: when the render target
+is a texture and that texture assigned to a texture input of the current fragment
+program.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Sample Binds Invalid Texture: an invalid texture is specified as
+the input to the current fragment program.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Sampler Format Does Not Match Texture Format: when the texture
+assigned as the input to the current fragment program has a different format than
+that specified for the sampler register. For example, a 2D texture is assigned to
+a cube texture sampler.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Sample Binds Undefined Texture: The current fragment program
+accesses a texture register that has not been set (using <code>setTextureAt()</code>).</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Same Texture Needs Same Sampler Params: If a texture is used for
+more than one sampler register, all of the samplers must have the same settings.
+For example, you cannot set one sampler to clamp and another to wrap.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Texture Bound But Not Used: A texture is set as a shader input,
+but it is not used.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Stream Is Not Used: A vertex buffer is assigned to a vertex
+attribute input, but the vertex program does not reference the corresponding
+register.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Stream Is Invalid: a VertexBuffer3D object assigned to a vertex
+program input is not a valid object.</p></td></tr><tr class="indent"><th style="width:25%;"><code>RangeError</code></th><td><p>— Stream Does Not Have Enough Vertices: A vertex buffer
+supplying data for drawing the specified triangles does not have enough data.</p></td></tr><tr class="indent"><th style="width:25%;"><code>RangeError</code></th><td><p>— Stream Vertex Offset Out Of Bounds: The offset specified in
+a <code>setVertexBufferAt()</code> call is negative or past the end of the buffer.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Stream Read But Not Set: A vertex attribute used by the current
+vertex program is not set (using <code>setVertexBufferAt()</code>).</p></td></tr></table></div></div><div class="field "><a name="present"></a><h3 class="anchor"><code><a href="#present"><span class="identifier">present</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Displays the back rendering buffer.</p>
+<p>Calling the <code>present()</code> method makes the results of all rendering operations
+since the last <code>present()</code> call visible and starts a new rendering cycle.
+After calling <code>present</code>, you must call <code>clear()</code> before making another
+<code>drawTriangles()</code> call. Otherwise, this function will alternately clear the
+render buffer to yellow and green or, if <code>enableErrorChecking</code> has been set to
+<code><a href="../../Bool.html">true</a></code>, an exception is thrown.</p>
+<p>Calling <code>present()</code> also resets the render target, just like calling
+<code>setRenderToBackBuffer()</code>.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Need To Clear Before Draw: If the <code>clear()</code> has not been called
+since the previous call to <code>present()</code>. (Two consecutive <code>present()</code> calls are
+not allowed without calling <code>clear()</code> in between.)</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>3768: The Stage3D API may not be used during background execution.</p></td></tr></table></div></div><div class="field "><a name="setBlendFactors"></a><h3 class="anchor"><code><a href="#setBlendFactors"><span class="identifier">setBlendFactors</span></a>(<span style="white-space:nowrap">sourceFactor:<a class="type" title="openfl.display3D.Context3DBlendFactor - Defines the values to use for specifying the source and destination blend factors." href="../../openfl/display3D/Context3DBlendFactor.html">Context3DBlendFactor</a>,</span> <span style="white-space:nowrap">destinationFactor:<a class="type" title="openfl.display3D.Context3DBlendFactor - Defines the values to use for specifying the source and destination blend factors." href="../../openfl/display3D/Context3DBlendFactor.html">Context3DBlendFactor</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Specifies the factors used to blend the output color of a drawing operation with
+the existing color.</p>
+<p>The output (source) color of the pixel shader program is combined with the
+existing (destination) color at that pixel according to the following formula:</p>
+<p><code>result color = (source color * sourceFactor) + (destination color * destinationFactor)</code></p>
+<p>The destination color is the current color in the render buffer for that pixel.
+Thus it is the result of the most recent <code>clear()</code> call and any intervening
+<code>drawTriangles()</code> calls.</p>
+<p>Use <code>setBlendFactors()</code> to set the factors used to multiply the source and
+destination colors before they are added together. The default blend factors
+are, <code>sourceFactor = <a href="../../openfl/display3D/Context3DBlendFactor.html#ONE">Context3DBlendFactor.ONE</a></code>, and
+<code>destinationFactor = <a href="../../openfl/display3D/Context3DBlendFactor.html#ZERO">Context3DBlendFactor.ZERO</a></code>, which results in the source
+color overwriting the destination color (in other words, no blending of the
+two colors occurs). For normal alpha blending, use
+<code>sourceFactor = <a href="../../openfl/display3D/Context3DBlendFactor.html#SOURCE_ALPHA">Context3DBlendFactor.SOURCE_ALPHA</a></code> and
+<code>destinationFactor = <a href="../../openfl/display3D/Context3DBlendFactor.html#ONE_MINUS_SOURCE_ALPHA">Context3DBlendFactor.ONE_MINUS_SOURCE_ALPHA</a></code>.</p>
+<p>Use the constants defined in the Context3DBlendFactor class to set the
+parameters of this function.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sourceFactor</code></th><td><p>The factor with which to multiply the source color.
+Defaults to <code><a href="../../openfl/display3D/Context3DBlendFactor.html#ONE">Context3DBlendFactor.ONE</a></code>.</p></td></tr><tr><th style="width:25%;"><code>destinationFactor</code></th><td><p>The factor with which to multiply the destination
+color. Defaults to <code><a href="../../openfl/display3D/Context3DBlendFactor.html#ZERO">Context3DBlendFactor.ZERO</a></code>.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>— Invalid Enum: when <code>sourceFactor</code> or <code>destinationFactor</code> is
+not one of the recognized values, which are defined in the
+Context3DBlendFactor class.</p></td></tr></table></div></div><div class="field "><a name="setColorMask"></a><h3 class="anchor"><code><a href="#setColorMask"><span class="identifier">setColorMask</span></a>(<span style="white-space:nowrap">red:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a>,</span> <span style="white-space:nowrap">green:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a>,</span> <span style="white-space:nowrap">blue:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a>,</span> <span style="white-space:nowrap">alpha:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets the mask used when writing colors to the render buffer.</p>
+<p>Only color components for which the corresponding color mask parameter is <code><a href="../../Bool.html">true</a></code>
+are updated when a color is written to the render buffer. For example, if
+you call: <code>setColorMask(<a href="../../Bool.html">true</a>, <a href="../../Bool.html">false</a>, <a href="../../Bool.html">false</a>, <a href="../../Bool.html">false</a>)</code>, only the red component
+of a color is written to the buffer until you change the color mask again. The
+color mask does not affect the behavior of the <code>clear()</code> method.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>red</code></th><td><p>set false to block changes to the red channel.</p></td></tr><tr><th style="width:25%;"><code>green</code></th><td><p>set false to block changes to the green channel.</p></td></tr><tr><th style="width:25%;"><code>blue</code></th><td><p>set false to block changes to the blue channel.</p></td></tr><tr><th style="width:25%;"><code>alpha</code></th><td><p>set false to block changes to the alpha channel.</p></td></tr></table></div></div><div class="field "><a name="setCulling"></a><h3 class="anchor"><code><a href="#setCulling"><span class="identifier">setCulling</span></a>(<span style="white-space:nowrap">triangleFaceToCull:<a class="type" title="openfl.display3D.Context3DTriangleFace - Constants to specify the orientation of a triangle relative to the view point." href="../../openfl/display3D/Context3DTriangleFace.html">Context3DTriangleFace</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets triangle culling mode.</p>
+<p>Triangles may be excluded from the scene early in the rendering pipeline based
+on their orientation relative to the view plane. Specify vertex order
+consistently (clockwise or counter-clockwise) as seen from the outside of the
+model to cull correctly.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>triangleFaceToCull</code></th><td><p>the culling mode. Use one of the constants defined
+in the Context3DTriangleFace class.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Invalid Enum Error: when triangleFaceToCull is not one of the
+values defined in the Context3DTriangleFace class.</p></td></tr></table></div></div><div class="field "><a name="setDepthTest"></a><h3 class="anchor"><code><a href="#setDepthTest"><span class="identifier">setDepthTest</span></a>(<span style="white-space:nowrap">depthMask:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a>,</span> <span style="white-space:nowrap">passCompareMode:<a class="type" title="openfl.display3D.Context3DCompareMode - Defines the values to use for specifying 3D buffer comparisons in the setDepthTest() and setStencilAction() methods of a Context3D instance." href="../../openfl/display3D/Context3DCompareMode.html">Context3DCompareMode</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets type of comparison used for depth testing.</p>
+<p>The depth of the source pixel output from the pixel shader program is compared
+to the current value in the depth buffer. If the comparison evaluates as <code><a href="../../Bool.html">false</a></code>,
+then the source pixel is discarded. If <code><a href="../../Bool.html">true</a></code>, then the source pixel is processed
+by the next step in the rendering pipeline, the stencil test. In addition, the
+depth buffer is updated with the depth of the source pixel, as long as the
+<code>depthMask</code> parameter is set to <code><a href="../../Bool.html">true</a></code>.</p>
+<p>Sets the test used to compare depth values for source and destination pixels.
+The source pixel is composited with the destination pixel when the comparison is
+<code><a href="../../Bool.html">true</a></code>. The comparison operator is applied as an infix operator between the
+source and destination pixel values, in that order.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>depthMask</code></th><td><p>the destination depth value will be updated from the source
+pixel when <code><a href="../../Bool.html">true</a></code>.</p></td></tr><tr><th style="width:25%;"><code>passCompareMode</code></th><td><p>the depth comparison test operation. One of the values
+of Context3DCompareMode.</p></td></tr></table></div></div><div class="field "><a name="setProgram"></a><h3 class="anchor"><code><a href="#setProgram"><span class="identifier">setProgram</span></a>(<span style="white-space:nowrap">program:<a class="type" title="openfl.display3D.Program3D - The Program3D class represents a pair of rendering programs (also called &quot;shaders&quot;) uploaded to the rendering context." href="../../openfl/display3D/Program3D.html">Program3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets vertex and fragment shader programs to use for subsequent rendering.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>program</code></th><td><p>the Program3D object representing the vertex and fragment
+programs to use.</p></td></tr></table></div></div><div class="field "><a name="setProgramConstantsFromByteArray"></a><h3 class="anchor"><code><a href="#setProgramConstantsFromByteArray"><span class="identifier">setProgramConstantsFromByteArray</span></a>(<span style="white-space:nowrap">programType:<a class="type" title="openfl.display3D.Context3DProgramType - Defines the values to use for specifying whether a shader program is a fragment or a vertex program." href="../../openfl/display3D/Context3DProgramType.html">Context3DProgramType</a>,</span> <span style="white-space:nowrap">firstRegister:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">numRegisters:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">data:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a>,</span> <span style="white-space:nowrap">byteArrayOffset:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Set constants for use by shader programs using values stored in a ByteArray.</p>
+<p>Sets constants that can be accessed from the vertex or fragment program.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>programType</code></th><td><p>one of Context3DProgramType.</p></td></tr><tr><th style="width:25%;"><code>firstRegister</code></th><td><p>the index of the first shader program constant to set.</p></td></tr><tr><th style="width:25%;"><code>numRegisters</code></th><td><p>the number of registers to set. Every register is read
+as four float values.</p></td></tr><tr><th style="width:25%;"><code>data</code></th><td><p>the source ByteArray object</p></td></tr><tr><th style="width:25%;"><code>byteArrayOffset</code></th><td><p>an offset into the ByteArray for reading</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>kNullPointerError when data is null.</p></td></tr><tr class="indent"><th style="width:25%;"><code>RangeError</code></th><td><p>kConstantRegisterOutOfBounds when attempting to set more than
+the maximum number of shader constants.</p></td></tr><tr class="indent"><th style="width:25%;"><code>RangeError</code></th><td><p>kBadInputSize if <code>byteArrayOffset</code> is greater than or equal to
+the length of data or no. of elements in <code>data - byteArrayOffset</code> is less than
+<code>numRegisters*16</code></p></td></tr></table></div></div><div class="field "><a name="setProgramConstantsFromMatrix"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ transposedMatrix : false })</span><a href="#setProgramConstantsFromMatrix"><span class="identifier">setProgramConstantsFromMatrix</span></a>(<span style="white-space:nowrap">programType:<a class="type" title="openfl.display3D.Context3DProgramType - Defines the values to use for specifying whether a shader program is a fragment or a vertex program." href="../../openfl/display3D/Context3DProgramType.html">Context3DProgramType</a>,</span> <span style="white-space:nowrap">firstRegister:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">matrix:<a class="type" title="openfl.geom.Matrix3D - The Matrix3D class represents a transformation matrix that determines the position and orientation of a three-dimensional (3D) display object." href="../../openfl/geom/Matrix3D.html">Matrix3D</a>,</span> <span style="white-space:nowrap">transposedMatrix:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets constants for use by shader programs using values stored in a Matrix3D.</p>
+<p>Use this function to pass a matrix to a shader program. The function sets 4
+constant registers used by the vertex or fragment program. The matrix is
+assigned to registers row by row. The first constant register is assigned the
+top row of the matrix. You can set 128 registers for a vertex program and 28
+for a fragment program.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>programType</code></th><td><p>The type of shader program, either
+<code><a href="../../openfl/display3D/Context3DProgramType.html#VERTEX">Context3DProgramType.VERTEX</a></code> or <code><a href="../../openfl/display3D/Context3DProgramType.html#FRAGMENT">Context3DProgramType.FRAGMENT</a></code>.</p></td></tr><tr><th style="width:25%;"><code>firstRegister</code></th><td><p>the index of the first constant register to set. Since
+a Matrix3D has 16 values, four registers are set.</p></td></tr><tr><th style="width:25%;"><code>matrix</code></th><td><p>the matrix containing the constant values.</p></td></tr><tr><th style="width:25%;"><code>transposedMatrix</code></th><td><p>if <code><a href="../../Bool.html">true</a></code> the matrix entries are copied to registers
+in transposed order. The default value is <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>Null Pointer Error: when matrix is <code>null</code>.</p></td></tr><tr class="indent"><th style="width:25%;"><code>RangeError</code></th><td><p>Constant Register Out Of Bounds: when attempting to set more
+than the maximum number of shader constant registers.</p></td></tr></table></div></div><div class="field "><a name="setProgramConstantsFromVector"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ numRegisters : -1 })</span><a href="#setProgramConstantsFromVector"><span class="identifier">setProgramConstantsFromVector</span></a>(<span style="white-space:nowrap">programType:<a class="type" title="openfl.display3D.Context3DProgramType - Defines the values to use for specifying whether a shader program is a fragment or a vertex program." href="../../openfl/display3D/Context3DProgramType.html">Context3DProgramType</a>,</span> <span style="white-space:nowrap">firstRegister:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">data:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">numRegisters:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = -1</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets the constant inputs for the shader programs.</p>
+<p>Sets an array of constants to be accessed by a vertex or fragment shader
+program. Constants set in Program3D are accessed within the shader programs as
+constant registers. Each constant register is comprised of 4 floating point
+values (x, y, z, w). Therefore every register requires 4 entries in the data
+Vector. The number of registers that you can set for vertex program and
+fragment program depends on the Context3DProfile.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>programType</code></th><td><p>The type of shader program, either
+<code><a href="../../openfl/display3D/Context3DProgramType.html#VERTEX">Context3DProgramType.VERTEX</a></code> or <code><a href="../../openfl/display3D/Context3DProgramType.html#FRAGMENT">Context3DProgramType.FRAGMENT</a></code>.</p></td></tr><tr><th style="width:25%;"><code>firstRegister</code></th><td><p>the index of the first constant register to set.</p></td></tr><tr><th style="width:25%;"><code>data</code></th><td><p>the floating point constant values. There must be at least
+<code>numRegisters</code> 4 elements in data.</p></td></tr><tr><th style="width:25%;"><code>numRegisters</code></th><td><p>the number of constants to set. Specify -1, the default
+value, to set enough registers to use all of the available data.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>Null Pointer Error: when data is <code>null</code>.</p></td></tr><tr class="indent"><th style="width:25%;"><code>RangeError</code></th><td><p>Constant Register Out Of Bounds: when attempting to set more
+than the maximum number of shader constant registers.</p></td></tr><tr class="indent"><th style="width:25%;"><code>RangeError</code></th><td><p>Bad Input Size: When the number of elements in data is less
+than <code>numRegisters*4</code></p></td></tr></table></div></div><div class="field "><a name="setRenderToBackBuffer"></a><h3 class="anchor"><code><a href="#setRenderToBackBuffer"><span class="identifier">setRenderToBackBuffer</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets the back rendering buffer as the render target. Subsequent calls to
+<code>drawTriangles()</code> and <code>clear()</code> methods result in updates to the back buffer.
+Use this method to resume normal rendering after using the
+<code>setRenderToTexture()</code> method.</p></div></div><div class="field "><a name="setRenderToTexture"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ surfaceSelector : 0, antiAlias : 0, enableDepthAndStencil : false })</span><a href="#setRenderToTexture"><span class="identifier">setRenderToTexture</span></a>(<span style="white-space:nowrap">texture:<a class="type" title="openfl.display3D.textures.TextureBase - The TextureBase class is the base class for Context3D texture objects." href="../../openfl/display3D/textures/TextureBase.html">TextureBase</a>,</span> <span style="white-space:nowrap">enableDepthAndStencil:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">antiAlias:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">surfaceSelector:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets the specified texture as the rendering target.</p>
+<p>Subsequent calls to <code>drawTriangles()</code> and <code>clear()</code> methods update the
+specified texture instead of the back buffer. Mip maps are created
+automatically. Use the <code>setRenderToBackBuffer()</code> to resume normal rendering to
+the back buffer.</p>
+<p>No clear is needed before drawing. If there is no clear operation, the render
+content will be retained. depth buffer and stencil buffer will also not be
+cleared. But it is forced to clear when first drawing. Calling <code>present()</code>
+resets the target to the back buffer.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>texture</code></th><td><p>the target texture to render into. Set to <code>null</code> to resume
+rendering to the back buffer (<code>setRenderToBackBuffer()</code> and <code>present</code> also reset
+the target to the back buffer).</p></td></tr><tr><th style="width:25%;"><code>enableDepthAndStencil</code></th><td><p>if <code><a href="../../Bool.html">true</a></code>, depth and stencil testing are
+available. If <code><a href="../../Bool.html">false</a></code>, all depth and stencil state is ignored for subsequent
+drawing operations.</p></td></tr><tr><th style="width:25%;"><code>antiAlias</code></th><td><p>the antialiasing quality. Use 0 to disable antialiasing;
+higher values improve antialiasing quality, but require more calculations. The
+value is currently ignored by mobile platform and software rendering context.</p></td></tr><tr><th style="width:25%;"><code>surfaceSelector</code></th><td><p>specifies which element of the texture to update.
+Texture objects have one surface, so you must specify 0, the default value.
+CubeTexture objects have six surfaces, so you can specify an integer from 0
+through 5.</p></td></tr><tr><th style="width:25%;"><code>colorOutputIndex</code></th><td><p>The output color register. Must be 0 for constrained
+or baseline mode. Otherwise specifies the output color register.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>for a mismatched surfaceSelector parameter. The value
+must be 0 for 2D textures and 0..5 for cube maps.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>texture is not derived from the TextureBase class
+(either Texture or CubeTexture classes).</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>colorOutputIndex must be an integer is from 0 through 3.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>this call requires a Context3D that is created with the
+standard profile or above.</p></td></tr></table></div></div><div class="field "><a name="setSamplerStateAt"></a><h3 class="anchor"><code><a href="#setSamplerStateAt"><span class="identifier">setSamplerStateAt</span></a>(<span style="white-space:nowrap">sampler:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">wrap:<a class="type" title="openfl.display3D.Context3DWrapMode" href="../../openfl/display3D/Context3DWrapMode.html">Context3DWrapMode</a>,</span> <span style="white-space:nowrap">filter:<a class="type" title="openfl.display3D.Context3DTextureFilter - Defines the values to use for sampler filter mode." href="../../openfl/display3D/Context3DTextureFilter.html">Context3DTextureFilter</a>,</span> <span style="white-space:nowrap">mipfilter:<a class="type" title="openfl.display3D.Context3DMipFilter" href="../../openfl/display3D/Context3DMipFilter.html">Context3DMipFilter</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Manually override texture sampler state.</p>
+<p>Texture sampling state is typically set at the time setProgram is called.
+However, you can override texture sampler state with this function. If you do not
+want the program to change sampler state, set the <code>ignoresamnpler</code> bit in AGAL
+and use this function.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sampler</code></th><td><p>sampler The sampler register to use. Maps to the sampler register
+in AGAL.</p></td></tr><tr><th style="width:25%;"><code>wrap</code></th><td><p>Wrapping mode. Defined in Context3DWrapMode. The default is repeat.</p></td></tr><tr><th style="width:25%;"><code>filter</code></th><td><p>Texture filtering mode. Defined in Context3DTextureFilter. The
+default is nearest.</p></td></tr><tr><th style="width:25%;"><code>mipfilter</code></th><td><p>Mip map filter. Defined in Context3DMipFilter. The default
+is none.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>sampler out of range</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>wrap, filter, mipfilter bad enum</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Object Disposed: if this Context3D object has been disposed by a
+calling <code>dispose()</code> or because the underlying rendering hardware has been lost.</p></td></tr></table></div></div><div class="field "><a name="setScissorRectangle"></a><h3 class="anchor"><code><a href="#setScissorRectangle"><span class="identifier">setScissorRectangle</span></a>(<span style="white-space:nowrap">rectangle:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets a scissor rectangle, which is type of drawing mask. The renderer only draws
+to the area inside the scissor rectangle. Scissoring does not affect clear
+operations.</p>
+<p>Pass <code>null</code> to turn off scissoring.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>rectangle</code></th><td><p>The rectangle in which to draw. Specify the rectangle
+position and dimensions in pixels. The coordinate system origin is the top left
+corner of the viewport, with positive values increasing down and to the right
+(the same as the normal OpenFL display coordinate system).</p></td></tr></table></div></div><div class="field "><a name="setStencilActions"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ actionOnDepthPassStencilFail : KEEP, actionOnDepthFail : KEEP, actionOnBothPass : KEEP, compareMode : ALWAYS, triangleFace : FRONT_AND_BACK })</span><a href="#setStencilActions"><span class="identifier">setStencilActions</span></a>(<span style="white-space:nowrap">triangleFace:<a class="type" title="openfl.display3D.Context3DTriangleFace - Constants to specify the orientation of a triangle relative to the view point." href="../../openfl/display3D/Context3DTriangleFace.html">Context3DTriangleFace</a> = FRONT_AND_BACK,</span> <span style="white-space:nowrap">compareMode:<a class="type" title="openfl.display3D.Context3DCompareMode - Defines the values to use for specifying 3D buffer comparisons in the setDepthTest() and setStencilAction() methods of a Context3D instance." href="../../openfl/display3D/Context3DCompareMode.html">Context3DCompareMode</a> = ALWAYS,</span> <span style="white-space:nowrap">actionOnBothPass:<a class="type" title="openfl.display3D.Context3DStencilAction - Defines the values to use for specifying stencil actions." href="../../openfl/display3D/Context3DStencilAction.html">Context3DStencilAction</a> = KEEP,</span> <span style="white-space:nowrap">actionOnDepthFail:<a class="type" title="openfl.display3D.Context3DStencilAction - Defines the values to use for specifying stencil actions." href="../../openfl/display3D/Context3DStencilAction.html">Context3DStencilAction</a> = KEEP,</span> <span style="white-space:nowrap">actionOnDepthPassStencilFail:<a class="type" title="openfl.display3D.Context3DStencilAction - Defines the values to use for specifying stencil actions." href="../../openfl/display3D/Context3DStencilAction.html">Context3DStencilAction</a> = KEEP</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets stencil mode and operation.</p>
+<p>An 8-bit stencil reference value can be associated with each draw call. During
+rendering, the reference value can be tested against values stored previously
+in the frame buffer. The result of the test can control the draw action and
+whether or how the stored stencil value is updated. In addition, depth testing
+controls whether stencil testing is performed. A failed depth test can also be
+used to control the action taken on the stencil buffer.</p>
+<p>In the pixel processing pipeline, depth testing is performed first. If the depth
+test fails, a stencil buffer update action can be taken, but no further evaluation
+of the stencil buffer value can be made. If the depth test passes, then the
+stencil test is performed. Alternate actions can be taken depending on the outcome
+of the stencil test.</p>
+<p>The stencil reference value is set using <code>setStencilReferenceValue()</code>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>triangleFace</code></th><td><p>the triangle orientations allowed to contribute to the
+stencil operation. One of Context3DTriangleFace.</p></td></tr><tr><th style="width:25%;"><code>compareMode</code></th><td><p>the test operator used to compare the current stencil
+reference value and the destination pixel stencil value. Destination pixel color
+and depth update is performed when the comparison is true. The stencil actions
+are performed as requested in the following action parameters. The comparison
+operator is applied as an infix operator between the current and destination
+reference values, in that order (in pseudocode:
+<code>if stencilReference OPERATOR stencilBuffer then pass</code>). Use one of the constants
+defined in the Context3DCompareMode class.</p></td></tr><tr><th style="width:25%;"><code>actionOnBothPass</code></th><td><p>action to be taken when both depth and stencil
+comparisons pass. Use one of the constants defined in the Context3DStencilAction
+class.</p></td></tr><tr><th style="width:25%;"><code>actionOnDepthFail</code></th><td><p>action to be taken when depth comparison fails. Use
+one of the constants defined in the Context3DStencilAction class.</p></td></tr><tr><th style="width:25%;"><code>actionOnDepthPassStencilFail</code></th><td><p>action to be taken when depth comparison
+passes and the stencil comparison fails. Use one of the constants defined in the
+Context3DStencilAction class.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Invalid Enum Error: when <code>triangleFace</code> is not one of the values
+defined in the Context3DTriangleFace class.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Invalid Enum Error: when <code>compareMode</code> is not one of the values
+defined in the Context3DCompareMode class.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Invalid Enum Error: when <code>actionOnBothPass</code>, <code>actionOnDepthFail</code>,
+or <code>actionOnDepthPassStencilFail</code> is not one of the values defined in the
+Context3DStencilAction class.</p></td></tr></table></div></div><div class="field "><a name="setStencilReferenceValue"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ writeMask : 0xFF, readMask : 0xFF })</span><a href="#setStencilReferenceValue"><span class="identifier">setStencilReferenceValue</span></a>(<span style="white-space:nowrap">referenceValue:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a>,</span> <span style="white-space:nowrap">readMask:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a> = 0xFF,</span> <span style="white-space:nowrap">writeMask:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a> = 0xFF</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets the stencil comparison value used for stencil tests.</p>
+<p>Only the lower 8 bits of the reference value are used. The stencil buffer value
+is also 8 bits in length. Use the <code>readMask</code> and <code>writeMask</code> to use the stencil
+buffer as a bit field.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>referenceValue</code></th><td><p>an 8-bit reference value used in reference value
+comparison tests.</p></td></tr><tr><th style="width:25%;"><code>readMask</code></th><td><p>an 8-bit mask for applied to both the current stencil
+buffer value and the reference value before the comparison.</p></td></tr><tr><th style="width:25%;"><code>writeMask</code></th><td><p>an 8-bit mask applied to the reference value before updating
+the stencil buffer.</p></td></tr></table></div></div><div class="field "><a name="setTextureAt"></a><h3 class="anchor"><code><a href="#setTextureAt"><span class="identifier">setTextureAt</span></a>(<span style="white-space:nowrap">sampler:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">texture:<a class="type" title="openfl.display3D.textures.TextureBase - The TextureBase class is the base class for Context3D texture objects." href="../../openfl/display3D/textures/TextureBase.html">TextureBase</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Specifies the texture to use for a texture input register of a fragment program.</p>
+<p>A fragment program can read information from up to eight texture objects. Use
+this function to assign a Texture or CubeTexture object to one of the sampler
+registers used by the fragment program.</p>
+<p><strong>Note:</strong> if you change the active fragment program (with setProgram) to a
+shader that uses fewer textures, set the unused registers to <code>null</code>:</p>
+<p><code></code>haxe
+setTextureAt(7, null);</p>
+<pre><code>
+</code></pre><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sampler</code></th><td><p>the sampler register index, a value from 0 through 7.</p></td></tr><tr><th style="width:25%;"><code>texture</code></th><td><p>the texture object to make available, either a Texture or a
+CubeTexture instance.</p></td></tr></table></div></div><div class="field "><a name="setVertexBufferAt"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ format : FLOAT_4, bufferOffset : 0 })</span><a href="#setVertexBufferAt"><span class="identifier">setVertexBufferAt</span></a>(<span style="white-space:nowrap">index:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">buffer:<a class="type" title="openfl.display3D.VertexBuffer3D - The VertexBuffer3D class represents a set of vertex data uploaded to a rendering context." href="../../openfl/display3D/VertexBuffer3D.html">VertexBuffer3D</a>,</span> <span style="white-space:nowrap">bufferOffset:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">format:<a class="type" title="openfl.display3D.Context3DVertexBufferFormat - Defines the values to use for specifying vertex buffers." href="../../openfl/display3D/Context3DVertexBufferFormat.html">Context3DVertexBufferFormat</a> = FLOAT_4</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Specifies which vertex data components correspond to a single vertex shader
+program input.</p>
+<p>Use the setVertexBufferAt method to identify which components of the data
+defined for each vertex in a VertexBuffer3D buffer belong to which inputs to the
+vertex program. The developer of the vertex program determines how much data is
+needed per vertex. That data is mapped from 1 or more VertexBuffer3D stream(s) to
+the attribute registers of the vertex shader program.</p>
+<p>The smallest unit of data consumed by the vertex shader is a 32-bit data.
+Offsets into the vertex stream are specified in multiples of 32-bits.</p>
+<p>As an example, a programmer might define each vertex with the following data:</p>
+<pre><code>position:  x    float32
+		   y    float32
+		   z    float32
+color:     r    unsigned byte
+		   g    unsigned byte
+		   b    unsigned byte
+		   a    unsigned byte</code></pre>
+<p>Assuming the vertex was defined in a VertexBuffer3D object named buffer, it
+would be assigned to a vertex shader with the following code:</p>
+<pre><code class="prettyprint haxe">setVertexBufferAt(0, buffer, 0, Context3DVertexBufferFormat.FLOAT_3);   // attribute #0 will contain the position information
+setVertexBufferAt(1, buffer, 3, Context3DVertexBufferFormat.BYTES_4);    // attribute #1 will contain the color information</code></pre><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>index</code></th><td><p>the index of the attribute register in the vertex shader (0
+through 7).</p></td></tr><tr><th style="width:25%;"><code>buffer</code></th><td><p>the buffer that contains the source vertex data to be fed to the
+vertex shader.</p></td></tr><tr><th style="width:25%;"><code>bufferOffset</code></th><td><p>an offset from the start of the data for a single vertex
+at which to start reading this attribute. In the example above, the position data
+has an offset of 0 because it is the first attribute; color has an offset of 3
+because the color attribute follows the three 32-bit position values. The offset
+is specified in units of 32 bits.</p></td></tr><tr><th style="width:25%;"><code>format</code></th><td><p>a value from the Context3DVertexBufferFormat class specifying
+the data type of this attribute.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Invalid Enum: when format is not one of the values defined in
+the Context3DVertexBufferFormat class.</p></td></tr><tr class="indent"><th style="width:25%;"><code>RangeError</code></th><td><p>Attribute Register Out Of Bounds: when the index parameter
+is outside the range from 0 through 7. (A maximum of eight vertex attribute
+registers can be used by a shader.)</p></td></tr></table></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></h4><div style="display:none"><div class="field "><a name="addEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useWeakReference : false, priority : 0, useCapture : false })</span><a href="#addEventListener"><span class="identifier">addEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">priority:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">useWeakReference:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Registers an event listener object with an EventDispatcher object so that
+the listener receives notification of an event. You can register event
+listeners on all nodes in the display list for a specific type of event,
+phase, and priority.</p>
+<p>After you successfully register an event listener, you cannot change
+its priority through additional calls to <code>addEventListener()</code>.
+To change a listener's priority, you must first call
+<code>removeListener()</code>. Then you can register the listener again
+with the new priority level.</p>
+<p>Keep in mind that after the listener is registered, subsequent calls to
+<code>addEventListener()</code> with a different <code>type</code> or
+<code>useCapture</code> value result in the creation of a separate
+listener registration. For example, if you first register a listener with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>, it listens only during
+the capture phase. If you call <code>addEventListener()</code> again using
+the same listener object, but with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>, you have two separate listeners: one that listens
+during the capture phase and another that listens during the target and
+bubbling phases.</p>
+<p>You cannot register an event listener for only the target phase or the
+bubbling phase. Those phases are coupled during registration because
+bubbling applies only to the ancestors of the target node.</p>
+<p>If you no longer need an event listener, remove it by calling
+<code>removeEventListener()</code>, or memory problems could result. Event
+listeners are not automatically removed from memory because the garbage
+collector does not remove the listener as long as the dispatching object
+exists(unless the <code>useWeakReference</code> parameter is set to
+<code><a href="../../Bool.html">true</a></code>).</p>
+<p>Copying an EventDispatcher instance does not copy the event listeners
+attached to it.(If your newly created node needs an event listener, you
+must attach the listener after creating the node.) However, if you move an
+EventDispatcher instance, the event listeners attached to it move along
+with it.</p>
+<p>If the event listener is being registered on a node while an event is
+being processed on this node, the event listener is not triggered during
+the current phase but can be triggered during a later phase in the event
+flow, such as the bubbling phase.</p>
+<p>If an event listener is removed from a node while an event is being
+processed on the node, it is still triggered by the current actions. After
+it is removed, the event listener is never invoked again(unless
+registered again for future processing).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Determines whether the listener works in the
+capture phase or the target and bubbling phases.
+If <code>useCapture</code> is set to
+<code><a href="../../Bool.html">true</a></code>, the listener processes the
+event only during the capture phase and not in the
+target or bubbling phase. If
+<code>useCapture</code> is <code><a href="../../Bool.html">false</a></code>, the
+listener processes the event only during the
+target or bubbling phase. To listen for the event
+in all three phases, call
+<code>addEventListener</code> twice, once with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>,
+then again with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>.</p></td></tr><tr><th style="width:25%;"><code>priority</code></th><td><p>The priority level of the event listener. The
+priority is designated by a signed 32-bit integer.
+The higher the number, the higher the priority.
+All listeners with priority <em>n</em> are processed
+before listeners of priority <em>n</em>-1. If two or
+more listeners share the same priority, they are
+processed in the order in which they were added.
+The default priority is 0.</p></td></tr><tr><th style="width:25%;"><code>useWeakReference</code></th><td><p>Determines whether the reference to the listener
+is strong or weak. A strong reference(the
+default) prevents your listener from being
+garbage-collected. A weak reference does not.</p>
+<p>Class-level member functions are not subject to
+garbage collection, so you can set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for class-level member functions without
+subjecting them to garbage collection. If you set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for a listener that is a nested inner function,
+the function will be garbage-collected and no
+longer persistent. If you create references to the
+inner function(save it in another variable) then
+it is not garbage-collected and stays
+persistent.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The <code>listener</code> specified is not a
+function.</p></td></tr></table></div></div><div class="field "><a name="dispatchEvent"></a><h3 class="anchor"><code><a href="#dispatchEvent"><span class="identifier">dispatchEvent</span></a>(<span style="white-space:nowrap">event:<a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Dispatches an event into the event flow. The event target is the
+EventDispatcher object upon which the <code>dispatchEvent()</code> method
+is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>event</code></th><td><p>The Event object that is dispatched into the event flow. If
+the event is being redispatched, a clone of the event is
+created automatically. After an event is dispatched, its
+<code>target</code> property cannot be changed, so you must
+create a new copy of the event for redispatching to work.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if the event was successfully
+dispatched. A value of <code><a href="../../Bool.html">false</a></code> indicates failure or
+that <code>preventDefault()</code> was called on the event.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The event dispatch recursion limit has been reached.</p></td></tr></table></div></div><div class="field "><a name="hasEventListener"></a><h3 class="anchor"><code><a href="#hasEventListener"><span class="identifier">hasEventListener</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the EventDispatcher object has any listeners registered for
+a specific type of event. This allows you to determine where an
+EventDispatcher object has altered handling of an event type in the event
+flow hierarchy. To determine whether a specific event type actually
+triggers an event listener, use <code>willTrigger()</code>.</p>
+<p>The difference between <code>hasEventListener()</code> and
+<code>willTrigger()</code> is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas
+<code>willTrigger()</code> examines the entire event flow for the event
+specified by the <code>type</code> parameter.</p>
+<p>When <code>hasEventListener()</code> is called from a LoaderInfo
+object, only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+is registered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="removeEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useCapture : false })</span><a href="#removeEventListener"><span class="identifier">removeEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Removes a listener from the EventDispatcher object. If there is no
+matching listener registered with the EventDispatcher object, a call to
+this method has no effect.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Specifies whether the listener was registered for the
+capture phase or the target and bubbling phases. If the
+listener was registered for both the capture phase and
+the target and bubbling phases, two calls to
+<code>removeEventListener()</code> are required to
+remove both, one call with <code>useCapture()</code> set
+to <code><a href="../../Bool.html">true</a></code>, and another call with
+<code>useCapture()</code> set to <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table></div></div><div class="field "><a name="toString"></a><h3 class="anchor"><code><a href="#toString"><span class="identifier">toString</span></a>():<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="willTrigger"></a><h3 class="anchor"><code><a href="#willTrigger"><span class="identifier">willTrigger</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether an event listener is registered with this EventDispatcher
+object or any of its ancestors for the specified event type. This method
+returns <code><a href="../../Bool.html">true</a></code> if an event listener is triggered during any
+phase of the event flow when an event of the specified type is dispatched
+to this EventDispatcher object or any of its descendants.</p>
+<p>The difference between the <code>hasEventListener()</code> and the
+<code>willTrigger()</code> methods is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas the
+<code>willTrigger()</code> method examines the entire event flow for the
+event specified by the <code>type</code> parameter.</p>
+<p>When <code>willTrigger()</code> is called from a LoaderInfo object,
+only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+will be triggered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

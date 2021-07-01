@@ -306,9 +306,7 @@ class Alphabet extends FlxSpriteGroup
 				case "D-Shape":
 					y = FlxMath.lerp(y, (scaledY * 90) + (FlxG.height * 0.45), 0.16 / (CoolUtil.fps / 60));
 
-					x = FlxMath.lerp(x, Math.exp(scaledY * 0.8) * -70 + (FlxG.width * 0.35), 0.16 / (CoolUtil.fps / 60));
-					if (scaledY < 0)
-						x = FlxMath.lerp(x, Math.exp(scaledY * -0.8) * -70 + (FlxG.width * 0.35), 0.16 / (CoolUtil.fps / 60));
+					x = FlxMath.lerp(x, Math.exp(Math.abs(scaledY * 0.8)) * -70 + (FlxG.width * 0.35), 0.16 / (CoolUtil.fps / 60));
 
 					if (x < -900)
 						x = -900;

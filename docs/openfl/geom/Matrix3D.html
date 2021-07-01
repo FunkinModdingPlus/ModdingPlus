@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.geom.Matrix3D</title><meta name="description" content="The Matrix3D class represents a transformation matrix that determines the position and
+orientation of a three-dimensional (3D) display object. The matrix can perform
+transformation functions including translation (repositioning along the x, y, and z
+axes), rotation, and scaling (resizing). The Matrix3D class can also perform
+perspective projection, which maps points from the 3D coordinate space to a
+two-dimensional (2D) view."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> Matrix3D</h1><h4><small>package <a href="../../openfl/geom/index.html">openfl.geom</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>The Matrix3D class represents a transformation matrix that determines the position and
+orientation of a three-dimensional (3D) display object. The matrix can perform
+transformation functions including translation (repositioning along the x, y, and z
+axes), rotation, and scaling (resizing). The Matrix3D class can also perform
+perspective projection, which maps points from the 3D coordinate space to a
+two-dimensional (2D) view.</p>
+<p>A single matrix can combine multiple transformations and apply them at once to a 3D
+display object. For example, a matrix can be applied to 3D coordinates to perform a
+rotation followed by a translation.</p>
+<p>When you explicitly set the <code>z</code> property or any of the rotation or scaling properties
+of a display object, a corresponding Matrix3D object is automatically created.</p>
+<p>You can access a 3D display object's Matrix3D object through the <code>transform.matrix3d</code>
+property. 2D objects do not have a Matrix3D object.</p>
+<p>The value of the <code>z</code> property of a 2D object is zero and the value of its <code>matrix3D</code>
+property is <code>null</code>.</p>
+<p><strong>Note:</strong> If the same Matrix3D object is assigned to two different display objects, a
+runtime error is thrown.</p>
+<p>The Matrix3D class uses a 4x4 square matrix: a table of four rows and columns of
+numbers that hold the data for the transformation. The first three rows of the matrix
+hold data for each 3D axis (x,y,z). The translation information is in the last column.
+The orientation and scaling data are in the first three columns. The scaling factors
+are the diagonal numbers in the first three columns. Here is a representation of
+Matrix3D elements:</p>
+<p><img src="/images/Matrix3Delements.jpg" alt="Matrix3D elements" /></p>
+<p>You don't need to understand matrix mathematics to use the Matrix3D class. It offers
+specific methods that simplify the task of transformation and projection, such as the
+<code>appendTranslation()</code>, <code>appendRotation()</code>, or <code>interpolateTo()</code> methods. You also can
+use the <code>decompose()</code> and <code>recompose()</code> methods or the <code>rawData</code> property to access
+the underlying matrix elements.</p>
+<p>Display objects cache their axis rotation properties to have separate rotation for
+each axis and to manage the different combinations of rotations. When a method of a
+Matrix3D object is called to transform a display object, the rotation cache of the
+object is invalidated.</p></div><h3 class="section">Static methods</h3><div class="fields"><div class="field "><a name="interpolate"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#interpolate"><span class="identifier">interpolate</span></a>(<span style="white-space:nowrap">thisMat:<a class="type" title="openfl.geom.Matrix3D - The Matrix3D class represents a transformation matrix that determines the position and orientation of a three-dimensional (3D) display object." href="../../openfl/geom/Matrix3D.html">Matrix3D</a>,</span> <span style="white-space:nowrap">toMat:<a class="type" title="openfl.geom.Matrix3D - The Matrix3D class represents a transformation matrix that determines the position and orientation of a three-dimensional (3D) display object." href="../../openfl/geom/Matrix3D.html">Matrix3D</a>,</span> <span style="white-space:nowrap">percent:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="openfl.geom.Matrix3D - The Matrix3D class represents a transformation matrix that determines the position and orientation of a three-dimensional (3D) display object." href="../../openfl/geom/Matrix3D.html">Matrix3D</a></code></h3><div class="doc"><p>Interpolates the translation, rotation, and scale transformation of one matrix
+toward those of the target matrix.</p>
+<p>The <code>interpolate()</code> method avoids some of the unwanted results that can occur
+when using methods such as the display object's axis rotation properties. The
+<code>interpolate()</code> method invalidates the cached value of the rotation property of
+the display object and converts the orientation elements of the display object's
+matrix to a quaternion before interpolation. This method guarantees the shortest,
+most efficient path for the rotation. It also produces a smooth, gimbal-lock-free
+rotation. A gimbal lock can occur when using Euler Angles, where each axis is
+handled independently. During the rotation around two or more axes, the axes can
+become aligned, leading to unexpected results. Quaternion rotation avoids the
+gimbal lock.</p>
+<p>Consecutive calls to the <code>interpolate()</code> method can produce the effect of a
+display object starting quickly and then slowly approaching another display
+object. For example, if you set the <code>thisMat</code> parameter to the returned Matrix3D
+object, the <code>toMat</code> parameter to the target display object's associated Matrix3D
+object, and the <code>percent</code> parameter to 0.1, the display object moves ten percent
+toward the target object. On subsequent calls or in subsequent frames, the object
+moves ten percent of the remaining 90 percent, then ten percent of the remaining
+distance, and continues until it reaches the target.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>thisMat</code></th><td><p>The Matrix3D object that is to be interpolated.</p></td></tr><tr><th style="width:25%;"><code>toMat</code></th><td><p>The target Matrix3D object.</p></td></tr><tr><th style="width:25%;"><code>percent</code></th><td><p>A value between 0 and 1 that determines the percent the
+<code>thisMat</code> Matrix3D object is interpolated toward the target Matrix3D object.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A Matrix3D object with elements that place the values of the matrix
+between the original matrix and the target matrix. When the returned matrix is
+applied to the this display object, the object moves the specified percent closer
+to the target object.</p></div></div></div></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ v : null })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">?v:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;</span>)</code></h3><div class="doc"><p></p></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="determinant"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#determinant"><span class="identifier">determinant</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>A Number that determines whether a matrix is invertible.</p>
+<p>A Matrix3D object must be invertible. You can use the <code>determinant</code> property to make
+sure that a Matrix3D object is invertible. If determinant is zero, an inverse of
+the matrix does not exist. For example, if an entire row or column of a matrix is
+zero or if two rows or columns are equal, the determinant is zero. Determinant is
+also used to solve a series of equations.</p>
+<p>Only a square matrix, like the Matrix3D class, has a determinant.</p></div></div><div class="field "><a name="position"></a><h3 class="anchor"><code><a href="#position"><span class="identifier">position</span></a>:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></code></h3><div class="doc"><p>A Vector3D object that holds the position, the 3D coordinate (x,y,z) of a display
+object within the transformation's frame of reference. The <code>position</code> property
+provides immediate access to the translation vector of the display object's
+matrix without needing to decompose and recompose the matrix.</p>
+<p>With the <code>position</code> property, you can get and set the translation elements of the
+transformation matrix.</p></div></div><div class="field "><a name="rawData"></a><h3 class="anchor"><code><a href="#rawData"><span class="identifier">rawData</span></a>:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;</code></h3><div class="doc"><p>A Vector of 16 Numbers, where every four elements is a column of a 4x4 matrix.</p>
+<p>An exception is thrown if the <code>rawData</code> property is set to a matrix that is not
+invertible. The Matrix3D object must be invertible. If a non-invertible matrix is
+needed, create a subclass of the Matrix3D object.</p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="append"></a><h3 class="anchor"><code><a href="#append"><span class="identifier">append</span></a>(<span style="white-space:nowrap">lhs:<a class="type" title="openfl.geom.Matrix3D - The Matrix3D class represents a transformation matrix that determines the position and orientation of a three-dimensional (3D) display object." href="../../openfl/geom/Matrix3D.html">Matrix3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>A Vector of 16 Numbers, where every four elements is a column of a 4x4 matrix.</p>
+<p>An exception is thrown if the <code>rawData</code> property is set to a matrix that is not
+invertible. The Matrix3D object must be invertible. If a non-invertible matrix is
+needed, create a subclass of the Matrix3D object.</p></div></div><div class="field "><a name="appendRotation"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ pivotPoint : null })</span><a href="#appendRotation"><span class="identifier">appendRotation</span></a>(<span style="white-space:nowrap">degrees:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">axis:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a>,</span> <span style="white-space:nowrap">?pivotPoint:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Appends an incremental rotation to a Matrix3D object. When the Matrix3D object is
+applied to a display object, the matrix performs the rotation after other
+transformations in the Matrix3D object.</p>
+<p>The display object's rotation is defined by an axis, an incremental degree of
+rotation around the axis, and an optional pivot point for the center of the
+object's rotation. The axis can be any general direction. The common axes are the
+<code>X_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(1,0,0))</code>, <code>Y_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(0,1,0))</code>, and
+<code>Z_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(0,0,1))</code>. In aviation terminology, the rotation about the y axis
+is called yaw. The rotation about the x axis is called pitch. The rotation about
+the z axis is called roll.</p>
+<p>The order of transformation matters. A rotation followed by a translation
+transformation produces a different effect than a translation followed by a
+rotation transformation.</p>
+<p>The rotation effect is not absolute. It is relative to the current position and
+orientation. To make an absolute change to the transformation matrix, use the
+<code>recompose()</code> method. The <code>appendRotation()</code> method is also different from the
+axis rotation property of the display object, such as <code>rotationX</code> property. The
+<code>rotation</code> property is always performed before any translation, whereas the
+<code>appendRotation()</code> method is performed relative to what is already in the matrix.
+To make sure that you get a similar effect as the display object's axis rotation
+property, use the <code>prependRotation()</code> method, which performs the rotation before
+other transformations in the matrix.</p>
+<p>When the <code>appendRotation()</code> method's transformation is applied to a Matrix3D object
+of a display object, the cached rotation property values of the display object
+are invalidated.</p>
+<p>One way to have a display object rotate around a specific point relative to its
+location is to set the translation of the object to the specified point, rotate
+the object using the <code>appendRotation()</code> method, and translate the object back to
+the original position. In the following example, the myObject 3D display object
+makes a y-axis rotation around the coordinate (10,10,0).</p>
+<pre><code class="prettyprint haxe">myObject.z = 1;
+myObject.transform.matrix3D.appendTranslation(10,10,0);
+myObject.transform.matrix3D.appendRotation(1, Vector3D.Y_AXIS);
+myObject.transform.matrix3D.appendTranslation(-10,-10,0);</code></pre><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>degrees</code></th><td><p>The degree of the rotation.</p></td></tr><tr><th style="width:25%;"><code>axis</code></th><td><p>The axis or direction of rotation. The usual axes are the
+<code>X_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(1,0,0))</code>, <code>Y_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(0,1,0))</code>, and
+<code>Z_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(0,0,1))</code>. This vector should have a length of one.</p></td></tr><tr><th style="width:25%;"><code>pivotPoint</code></th><td><p>A point that determines the center of an object's rotation.
+The default pivot point for an object is its registration point.</p></td></tr></table></div></div><div class="field "><a name="appendScale"></a><h3 class="anchor"><code><a href="#appendScale"><span class="identifier">appendScale</span></a>(<span style="white-space:nowrap">xScale:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">yScale:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">zScale:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Appends an incremental scale change along the x, y, and z axes to a Matrix3D
+object. When the Matrix3D object is applied to a display object, the matrix
+performs the scale changes after other transformations in the Matrix3D object.
+The default scale factor is (1.0, 1.0, 1.0).</p>
+<p>The scale is defined as a set of three incremental changes along the three axes
+(x,y,z). You can multiply each axis with a different number. When the scale
+changes are applied to a display object, the object's size increases or decreases.
+For example, setting the x, y, and z axes to two doubles the size of the object,
+while setting the axes to 0.5 halves the size. To make sure that the scale
+transformation only affects a specific axis, set the other parameters to one. A
+parameter of one means no scale change along the specific axis.</p>
+<p>The <code>appendScale()</code> method can be used for resizing as well as for managing
+distortions, such as stretch or contract of a display object, or for zooming in
+and out on a location. Scale transformations are automatically performed during a
+display object's rotation and translation.</p>
+<p>The order of transformation matters. A resizing followed by a translation
+transformation produces a different effect than a translation followed by a
+resizing transformation.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>xScale</code></th><td><p>A multiplier used to scale the object along the x axis.</p></td></tr><tr><th style="width:25%;"><code>yScale</code></th><td><p>A multiplier used to scale the object along the y axis.</p></td></tr><tr><th style="width:25%;"><code>zScale</code></th><td><p>A multiplier used to scale the object along the z axis.</p></td></tr></table></div></div><div class="field "><a name="appendTranslation"></a><h3 class="anchor"><code><a href="#appendTranslation"><span class="identifier">appendTranslation</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">z:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Appends an incremental translation, a repositioning along the x, y, and z axes,
+to a Matrix3D object. When the Matrix3D object is applied to a display object,
+the matrix performs the translation changes after other transformations in the
+Matrix3D object.</p>
+<p>The translation is defined as a set of three incremental changes along the
+three axes (x,y,z). When the transformation is applied to a display object, the
+display object moves from it current location along the x, y, and z axes as
+specified by the parameters. To make sure that the translation only affects a
+specific axis, set the other parameters to zero. A zero parameter means no change
+along the specific axis.</p>
+<p>The translation changes are not absolute. They are relative to the current
+position and orientation of the matrix. To make an absolute change to the
+transformation matrix, use the recompose() method. The order of transformation
+also matters. A translation followed by a rotation transformation produces a
+different effect than a rotation followed by a translation.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>An incremental translation along the x axis.</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>An incremental translation along the y axis.</p></td></tr><tr><th style="width:25%;"><code>z</code></th><td><p>An incremental translation along the z axis.</p></td></tr></table></div></div><div class="field "><a name="clone"></a><h3 class="anchor"><code><a href="#clone"><span class="identifier">clone</span></a>():<a class="type" title="openfl.geom.Matrix3D - The Matrix3D class represents a transformation matrix that determines the position and orientation of a three-dimensional (3D) display object." href="../../openfl/geom/Matrix3D.html">Matrix3D</a></code></h3><div class="doc"><p>Returns a new Matrix3D object that is an exact copy of the current Matrix3D object.</p><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new Matrix3D object that is an exact copy of the current Matrix3D
+object.</p></div></div></div><div class="field "><a name="copyColumnFrom"></a><h3 class="anchor"><code><a href="#copyColumnFrom"><span class="identifier">copyColumnFrom</span></a>(<span style="white-space:nowrap">column:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">vector3D:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Copies a Vector3D object into specific column of the calling Matrix3D object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>column</code></th><td><p>The destination column of the copy.</p></td></tr><tr><th style="width:25%;"><code>vector3D</code></th><td><p>The Vector3D object from which to copy the data.</p></td></tr></table></div></div><div class="field "><a name="copyColumnTo"></a><h3 class="anchor"><code><a href="#copyColumnTo"><span class="identifier">copyColumnTo</span></a>(<span style="white-space:nowrap">column:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">vector3D:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Copies specific column of the calling Matrix3D object into the Vector3D object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>column</code></th><td><p>The column from which to copy the data.</p></td></tr><tr><th style="width:25%;"><code>vector3D</code></th><td><p>The destination Vector3D object of the copy.</p></td></tr></table></div></div><div class="field "><a name="copyFrom"></a><h3 class="anchor"><code><a href="#copyFrom"><span class="identifier">copyFrom</span></a>(<span style="white-space:nowrap">other:<a class="type" title="openfl.geom.Matrix3D - The Matrix3D class represents a transformation matrix that determines the position and orientation of a three-dimensional (3D) display object." href="../../openfl/geom/Matrix3D.html">Matrix3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Copies all of the matrix data from the source Matrix3D object into the calling
+Matrix3D object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sourceMatrix3D</code></th><td><p>The Matrix3D object from which to copy the data.</p></td></tr></table></div></div><div class="field "><a name="copyRawDataFrom"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ transpose : false, index : 0 })</span><a href="#copyRawDataFrom"><span class="identifier">copyRawDataFrom</span></a>(<span style="white-space:nowrap">vector:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">index:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a> = 0,</span> <span style="white-space:nowrap">transpose:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Copies all of the vector data from the source vector object into the calling
+Matrix3D object. The optional <code>index</code> parameter allows you to select any starting
+slot in the vector.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>vector</code></th><td><p>The vector object from which to copy the data.</p></td></tr><tr><th style="width:25%;"><code>index</code></th><td></td></tr><tr><th style="width:25%;"><code>null</code></th><td><p>transpose</p></td></tr></table></div></div><div class="field "><a name="copyRawDataTo"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ transpose : false, index : 0 })</span><a href="#copyRawDataTo"><span class="identifier">copyRawDataTo</span></a>(<span style="white-space:nowrap">vector:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">index:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a> = 0,</span> <span style="white-space:nowrap">transpose:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Copies all of the matrix data from the calling Matrix3D object into the
+provided vector. The optional index parameter allows you to select any target
+starting slot in the vector.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>vector</code></th><td><p>The vector object to which to copy the data.</p></td></tr><tr><th style="width:25%;"><code>index</code></th><td></td></tr><tr><th style="width:25%;"><code>null</code></th><td><p>transpose</p></td></tr></table></div></div><div class="field "><a name="copyRowFrom"></a><h3 class="anchor"><code><a href="#copyRowFrom"><span class="identifier">copyRowFrom</span></a>(<span style="white-space:nowrap">row:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a>,</span> <span style="white-space:nowrap">vector3D:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Copies a Vector3D object into specific row of the calling Matrix3D object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>row</code></th><td><p>The row from which to copy the data to.</p></td></tr><tr><th style="width:25%;"><code>vector3D</code></th><td><p>The Vector3D object from which to copy the data.</p></td></tr></table></div></div><div class="field "><a name="copyRowTo"></a><h3 class="anchor"><code><a href="#copyRowTo"><span class="identifier">copyRowTo</span></a>(<span style="white-space:nowrap">row:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">vector3D:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Copies specific row of the calling Matrix3D object into the Vector3D object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>row</code></th><td><p>The row from which to copy the data from.</p></td></tr><tr><th style="width:25%;"><code>vector3D</code></th><td><p>The Vector3D object to copy the data into.</p></td></tr></table></div></div><div class="field "><a name="copyToMatrix3D"></a><h3 class="anchor"><code><a href="#copyToMatrix3D"><span class="identifier">copyToMatrix3D</span></a>(<span style="white-space:nowrap">other:<a class="type" title="openfl.geom.Matrix3D - The Matrix3D class represents a transformation matrix that determines the position and orientation of a three-dimensional (3D) display object." href="../../openfl/geom/Matrix3D.html">Matrix3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>null</code></th><td><p>other</p></td></tr></table></div></div><div class="field "><a name="decompose"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ orientationStyle : EULER_ANGLES })</span><a href="#decompose"><span class="identifier">decompose</span></a>(<span style="white-space:nowrap">orientationStyle:<a class="type" title="openfl.geom.Orientation3D - The Orientation3D class is an enumeration of constant values for representing the orientation style of a Matrix3D object." href="../../openfl/geom/Orientation3D.html">Orientation3D</a> = EULER_ANGLES</span>):<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a>&gt;</code></h3><div class="doc"><p>Returns the transformation matrix's translation, rotation, and scale settings as
+a Vector of three Vector3D objects. The first Vector3D object holds the
+translation elements. The second Vector3D object holds the rotation elements.
+The third Vector3D object holds the scale elements.</p>
+<p>Some Matrix3D methods, such as the <code>interpolateTo()</code> method, automatically
+decompose and recompose the matrix to perform their transformation.</p>
+<p>To modify the matrix's transformation with an absolute parent frame of reference,
+retrieve the settings with the <code>decompose()</code> method and make the appropriate
+changes. You can then set the Matrix3D object to the modified transformation
+using the <code>recompose()</code> method.</p>
+<p>The <code>decompose()</code> method's parameter specifies the orientation style that is
+meant to be used for the transformation. The default orientation is <code>eulerAngles</code>,
+which defines the orientation with three separate angles of rotation for each
+axis. The rotations occur consecutively and do not change the axis of each other.
+The display object's axis rotation properties perform Euler Angles orientation
+style transformation. The other orientation style options are <code>axisAngle</code> and
+<code>quaternion</code>. The Axis Angle orientation uses a combination of an axis and an
+angle to determine the orientation. The axis around which the object is rotated
+is a unit vector that represents a direction. The angle represents the magnitude
+of the rotation about the vector. The direction also determines where a display
+object is facing and the angle determines which way is up. The <code>appendRotation()</code>
+and <code>prependRotation()</code> methods use the Axis Angle orientation. The <code>quaternion</code>
+orientation uses complex numbers and the fourth element of a vector. The three
+axes of rotation (x,y,z) and an angle of rotation (w) represent the orientation.
+The <code>interpolate()</code> method uses quaternion.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>orientationStyle</code></th><td><p>An optional parameter that determines the orientation
+style used for the matrix transformation. The three types of orientation style
+are <code>eulerAngles</code> (constant <code>EULER_ANGLES</code>), <code>axisAngle</code> (constant <code>AXIS_ANGLE</code>),
+and <code>quaternion</code> (constant <code>QUATERNION</code>). For additional information on the
+different orientation style, see the geom.Orientation3D class.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A Vector of three Vector3D objects, each holding the translation,
+rotation, and scale settings, respectively.</p></div></div></div><div class="field "><a name="deltaTransformVector"></a><h3 class="anchor"><code><a href="#deltaTransformVector"><span class="identifier">deltaTransformVector</span></a>(<span style="white-space:nowrap">v:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></span>):<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></code></h3><div class="doc"><p>Uses the transformation matrix without its translation elements to transform a
+Vector3D object from one space coordinate to another. The returned Vector3D
+object holds the new coordinates after the rotation and scaling transformations
+have been applied. If the <code>deltaTransformVector()</code> method applies a matrix that
+only contains a translation transformation, the returned Vector3D is the same as
+the original Vector3D object.</p>
+<p>You can use the <code>deltaTransformVector()</code> method to have a display object in one
+coordinate space respond to the rotation transformation of a second display
+object. The object does not copy the rotation; it only changes its position to
+reflect the changes in the rotation. For example, to use the display.Graphics
+API for drawing a rotating 3D display object, you must map the object's rotating
+coordinates to a 2D point. First, retrieve the object's 3D coordinates after each
+rotation, using the <code>deltaTransformVector()</code> method. Next, apply the display
+object's <code>local3DToGlobal()</code> method to translate the 3D coordinates to 2D points.
+You can then use the 2D points to draw the rotating 3D object.</p>
+<p><strong>Note:</strong> This method automatically sets the <code>w</code> component of the passed Vector3D
+to 0.0.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>v</code></th><td><p>A Vector3D object holding the coordinates that are going to be
+transformed.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>Vector3D    A Vector3D object with the transformed coordinates.</p></div></div></div><div class="field "><a name="identity"></a><h3 class="anchor"><code><a href="#identity"><span class="identifier">identity</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Converts the current matrix to an identity or unit matrix. An identity matrix has
+a value of one for the elements on the main diagonal and a value of zero for all
+other elements. The result is a matrix where the rawData value is
+1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1 and the rotation setting is set to
+<code><a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(0,0,0)</code>, the position or translation setting is set to <code><a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(0,0,0)</code>,
+and the scale is set to <code><a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(1,1,1)</code>. Here is a representation of an
+identity matrix.</p>
+<p><img src="/images/identityMatrix.jpg" alt="Identity Matrix" /></p>
+<p>An object transformed by applying an identity matrix performs no transformation.
+In other words, if a matrix is multiplied by an identity matrix, the result is a
+matrix that is the same as (identical to) the original matrix.</p></div></div><div class="field "><a name="interpolateTo"></a><h3 class="anchor"><code><a href="#interpolateTo"><span class="identifier">interpolateTo</span></a>(<span style="white-space:nowrap">toMat:<a class="type" title="openfl.geom.Matrix3D - The Matrix3D class represents a transformation matrix that determines the position and orientation of a three-dimensional (3D) display object." href="../../openfl/geom/Matrix3D.html">Matrix3D</a>,</span> <span style="white-space:nowrap">percent:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Interpolates this matrix towards the translation, rotation, and scale
+transformations of the target matrix.</p>
+<p>The <code>interpolateTo()</code> method avoids the unwanted results that can occur when
+using methods such as the display object's axis rotation properties. The
+<code>interpolateTo()</code> method invalidates the cached value of the rotation property of
+the display object and converts the orientation elements of the display object's
+matrix to a quaternion before interpolation. This method guarantees the shortest,
+most efficient path for the rotation. It also produces a smooth, gimbal-lock-free
+rotation. A gimbal lock can occur when using Euler Angles, where each axis is
+handled independently. During the rotation around two or more axes, the axes can
+become aligned, leading to unexpected results. Quaternion rotation avoids the
+gimbal lock.</p>
+<p><strong>Note:</strong> In case of interpolation, the scaling value of the matrix will reset and
+the matrix will be normalized.</p>
+<p>Consecutive calls to the <code>interpolateTo()</code> method can produce the effect of a
+display object starting quickly and then slowly approaching another display
+object. For example, if the percent parameter is set to 0.1, the display object
+moves ten percent toward the target object specified by the <code>toMat</code> parameter.
+On subsequent calls or in subsequent frames, the object moves ten percent of the
+remaining 90 percent, then ten percent of the remaining distance, and continues
+until it reaches the target.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>toMat</code></th><td><p>The target Matrix3D object.</p></td></tr><tr><th style="width:25%;"><code>percent</code></th><td><p>A value between 0 and 1 that determines the location of the
+display object relative to the target. The closer the value is to 1.0, the closer
+the display object is to its current position. The closer the value is to 0, the
+closer the display object is to the target.</p></td></tr></table></div></div><div class="field "><a name="invert"></a><h3 class="anchor"><code><a href="#invert"><span class="identifier">invert</span></a>():<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Inverts the current matrix. An inverted matrix is the same size as the original
+but performs the opposite transformation of the original matrix. For example, if
+the original matrix has an object rotate around the x axis in one direction, the
+inverse of the matrix will have the object rotate around the axis in the opposite
+direction. Applying an inverted matrix to an object undoes the transformation
+performed by the original matrix. If a matrix is multiplied by its inverse
+matrix, the result is an identity matrix.</p>
+<p>An inverse of a matrix can be used to divide one matrix by another. The way to
+divide matrix A by matrix B is to multiply matrix A by the inverse of matrix B.
+The inverse matrix can also be used with a camera space. When the camera moves in
+the world space, the object in the world needs to move in the opposite direction
+to transform from the world view to the camera or view space. For example, if the
+camera moves closer, the objects becomes bigger. In other words, if the camera
+moves down the world z axis, the object moves up world z axis.</p>
+<p>The <code>invert()</code> method replaces the current matrix with an inverted matrix. If you
+want to invert a matrix without altering the current matrix, first copy the
+current matrix by using the clone() method and then apply the <code>invert()</code> method
+to the copy.</p>
+<p>The Matrix3D object must be invertible.</p><p class="javadoc">Returns:</p><div class="indent inline-content"><p>Returns <code><a href="../../Bool.html">true</a></code> if the matrix was successfully inverted.</p></div></div></div><div class="field "><a name="pointAt"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ up : null, at : null })</span><a href="#pointAt"><span class="identifier">pointAt</span></a>(<span style="white-space:nowrap">pos:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a>,</span> <span style="white-space:nowrap">?at:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a>,</span> <span style="white-space:nowrap">?up:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Rotates the display object so that it faces a specified position. This method
+allows for an in-place modification to the orientation. The forward direction
+vector of the display object (the at Vector3D object) points at the specified
+world-relative position. The display object's up direction is specified with the
+up Vector3D object.</p>
+<p>The <code>pointAt()</code> method invalidates the cached rotation property value of the
+display object. The method decomposes the display object's matrix and modifies the
+rotation elements to have the object turn to the specified position. It then
+recomposes (updates) the display object's matrix, which performs the
+transformation. If the object is pointing at a moving target, such as a moving
+object's position, then with each subsequent call, the method has the object
+rotate toward the moving target.</p>
+<p><strong>Note:</strong> If you use the <code><a href="../../openfl/geom/Matrix3D.html#pointAt">Matrix3D.pointAt</a>()</code> method without setting the
+optional parameters, a target object does not face the specified world-relative
+position by default. You need to set the values for at to the -y-axis (0,-1,0)
+and up to the -z axis (0,0,-1).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>pos</code></th><td><p>The world-relative position of the target object. World-relative
+defines the object's transformation relative to the world space and coordinates,
+where all objects are positioned.</p></td></tr><tr><th style="width:25%;"><code>at</code></th><td><p>The object-relative vector that defines where the display object is
+pointing. Object-relative defines the object's transformation relative to the
+object space, the object's own frame of reference and coordinate system. Default
+value is the +y axis (0,1,0).</p></td></tr><tr><th style="width:25%;"><code>up</code></th><td><p>The object-relative vector that defines "up" for the display object.
+If the object is drawn looking down from above, the +z axis is its "up" vector.
+Object-relative defines the object's transformation relative to the object space,
+the object's own frame of reference and coordinate system. Default value is the
++z-axis (0,0,1).</p></td></tr></table></div></div><div class="field "><a name="prepend"></a><h3 class="anchor"><code><a href="#prepend"><span class="identifier">prepend</span></a>(<span style="white-space:nowrap">rhs:<a class="type" title="openfl.geom.Matrix3D - The Matrix3D class represents a transformation matrix that determines the position and orientation of a three-dimensional (3D) display object." href="../../openfl/geom/Matrix3D.html">Matrix3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Prepends a matrix by multiplying the current Matrix3D object by another Matrix3D
+object. The result combines both matrix transformations.</p>
+<p>Matrix multiplication is different from matrix addition. Matrix multiplication is
+not commutative. In other words, A times B is not equal to B times A. With the
+<code>prepend()</code> method, the multiplication happens from the right side, meaning the <code>rhs</code>
+Matrix3D object is on the right side of the multiplication operator.</p>
+<pre><code class="prettyprint haxe">thisMatrix = thisMatrix * rhs</code></pre>
+<p>The modifications made by <code>prepend()</code> method are object-space-relative. In other
+words, they are always relative to the object's initial frame of reference.</p>
+<p>The <code>prepend()</code> method replaces the current matrix with the prepended matrix. If
+you want to prepend two matrixes without altering the current matrix, first copy
+the current matrix by using the <code>clone()</code> method and then apply the <code>prepend()</code>
+method to the copy.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>rhs</code></th><td><p>A right-hand-side of the matrix by which the current Matrix3D is
+multiplied.</p></td></tr></table></div></div><div class="field "><a name="prependRotation"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ pivotPoint : null })</span><a href="#prependRotation"><span class="identifier">prependRotation</span></a>(<span style="white-space:nowrap">degrees:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">axis:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a>,</span> <span style="white-space:nowrap">?pivotPoint:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Prepends an incremental rotation to a Matrix3D object. When the Matrix3D object is
+applied to a display object, the matrix performs the rotation before other
+transformations in the Matrix3D object.</p>
+<p>The display object's rotation is defined by an axis, an incremental degree of
+rotation around the axis, and an optional pivot point for the center of the
+object's rotation. The axis can be any general direction. The common axes are the
+<code>X_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(1,0,0))</code>, <code>Y_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(0,1,0))</code>, and
+<code>Z_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(0,0,1))</code>. In aviation terminology, the rotation about the y
+axis is called yaw. The rotation about the x axis is called pitch. The rotation
+about the z axis is called roll.</p>
+<p>The order of transformation matters. A rotation followed by a translation
+transformation produces a different effect than a translation followed by a
+rotation.</p>
+<p>The rotation effect is not absolute. The effect is object-relative, relative to
+the frame of reference of the original position and orientation. To make an
+absolute change to the transformation, use the <code>recompose()</code> method.</p>
+<p>When the <code>prependRotation()</code> method's transformation is applied to a Matrix3D
+object of a display object, the cached rotation property values of the display
+object are invalidated.</p>
+<p>One way to have a display object rotate around a specific point relative to its
+location is to set the translation of the object to the specified point, rotate
+the object using the <code>prependRotation()</code> method, and translate the object back to
+the original position. In the following example, the <code>myObject</code> 3D display object
+makes a y-axis rotation around the coordinate (10,10,0).</p>
+<pre><code class="prettyprint haxe">myObject.z = 1;
+myObject.transform.matrix3D.prependTranslation(10,10,0);
+myObject.transform.matrix3D.prependRotation(1, Vector3D.Y_AXIS);
+myObject.transform.matrix3D.prependTranslation(-10,-10,0);</code></pre><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>degrees</code></th><td><p>The degree of rotation.</p></td></tr><tr><th style="width:25%;"><code>axis</code></th><td><p>The axis or direction of rotation. The usual axes are the
+<code>X_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(1,0,0))</code>, <code>Y_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(0,1,0))</code>, and
+<code>Z_AXIS (<a href="../../openfl/geom/Vector3D.html#Vector3D">Vector3D</a>(0,0,1))</code>. This vector should have a length of one.</p></td></tr><tr><th style="width:25%;"><code>pivotPoint</code></th><td><p>A point that determines the center of rotation. The default
+pivot point for an object is its registration point.</p></td></tr></table></div></div><div class="field "><a name="prependScale"></a><h3 class="anchor"><code><a href="#prependScale"><span class="identifier">prependScale</span></a>(<span style="white-space:nowrap">xScale:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">yScale:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">zScale:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Prepends an incremental scale change along the x, y, and z axes to a Matrix3D
+object. When the Matrix3D object is applied to a display object, the matrix
+performs the scale changes before other transformations in the Matrix3D
+object. The changes are object-relative, relative to the frame of reference of
+the original position and orientation. The default scale factor is (1.0, 1.0, 1.0).</p>
+<p>The scale is defined as a set of three incremental changes along the three
+axes (x,y,z). You can multiply each axis with a different number. When the
+scale changes are applied to a display object, the object's size increases or
+decreases. For example, setting the x, y, and z axes to two doubles the size of
+the object, while setting the axes to 0.5 halves the size. To make sure that the
+scale transformation only affects a specific axis, set the other parameters to
+one. A parameter of one means no scale change along the specific axis.</p>
+<p>The <code>prependScale()</code> method can be used for resizing as well as for managing
+distortions, such as stretch or contract of a display object. It can also be used
+for zooming in and out on a location. Scale transformations are automatically
+performed during a display object's rotation and translation.</p>
+<p>The order of transformation matters. A resizing followed by a translation
+transformation produces a different effect than a translation followed by a
+resizing transformation.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>xScale</code></th><td><p>A multiplier used to scale the object along the x axis.</p></td></tr><tr><th style="width:25%;"><code>yScale</code></th><td><p>A multiplier used to scale the object along the y axis.</p></td></tr><tr><th style="width:25%;"><code>zScale</code></th><td><p>A multiplier used to scale the object along the z axis.</p></td></tr></table></div></div><div class="field "><a name="prependTranslation"></a><h3 class="anchor"><code><a href="#prependTranslation"><span class="identifier">prependTranslation</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">z:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Prepends an incremental translation, a repositioning along the x, y, and z axes,
+to a Matrix3D object. When the Matrix3D object is applied to a display object,
+the matrix performs the translation changes before other transformations in the
+Matrix3D object.</p>
+<p>Translation specifies the distance the display object moves from its current
+location along the x, y, and z axes. The <code>prependTranslation()</code> method sets the
+translation as a set of three incremental changes along the three axes (x,y,z).
+To have a translation change only a specific axis, set the other parameters to
+zero. A zero parameter means no change along the specific axis.</p>
+<p>The translation changes are not absolute. The effect is object-relative,
+relative to the frame of reference of the original position and orientation.
+To make an absolute change to the transformation matrix, use the <code>recompose()</code>
+method. The order of transformation also matters. A translation followed by a
+rotation transformation produces a different effect than a rotation followed by
+a translation transformation. When prependTranslation() is used, the display
+object continues to move in the direction it is facing, regardless of the other
+transformations. For example, if a display object was facing toward a positive x
+axis, it continues to move in the direction specified by the
+<code>prependTranslation()</code> method, regardless of how the object has been rotated. To
+make translation changes occur after other transformations, use the
+<code>appendTranslation()</code> method.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>An incremental translation along the x axis.</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>An incremental translation along the y axis.</p></td></tr><tr><th style="width:25%;"><code>z</code></th><td><p>An incremental translation along the z axis.</p></td></tr></table></div></div><div class="field "><a name="recompose"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ orientationStyle : EULER_ANGLES })</span><a href="#recompose"><span class="identifier">recompose</span></a>(<span style="white-space:nowrap">components:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a>&gt;,</span> <span style="white-space:nowrap">orientationStyle:<a class="type" title="openfl.geom.Orientation3D - The Orientation3D class is an enumeration of constant values for representing the orientation style of a Matrix3D object." href="../../openfl/geom/Orientation3D.html">Orientation3D</a> = EULER_ANGLES</span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Sets the transformation matrix's translation, rotation, and scale settings. Unlike
+the incremental changes made by the display object's rotation properties or
+Matrix3D object's rotation methods, the changes made by <code>recompose()</code> method are
+absolute changes. The <code>recompose()</code> method overwrites the matrix's transformation.</p>
+<p>To modify the matrix's transformation with an absolute parent frame of reference,
+retrieve the settings with the decompose() method and make the appropriate
+changes. You can then set the Matrix3D object to the modified transformation
+using the <code>recompose()</code> method.</p>
+<p>The <code>recompose()</code> method's parameter specifies the orientation style that was
+used for the transformation. The default orientation is eulerAngles, which defines
+the orientation with three separate angles of rotation for each axis. The
+rotations occur consecutively and do not change the axis of each other. The
+display object's axis rotation properties perform Euler Angles orientation style
+transformation. The other orientation style options are axisAngle and quaternion.
+The Axis Angle orientation uses the combination of an axis and an angle to
+determine the orientation. The axis around which the object is rotated is a unit
+vector that represents a direction. The angle represents the magnitude of the
+rotation about the vector. The direction also determines where a display object
+is facing and the angle determines which way is up. The <code>appendRotation()</code> and
+<code>prependRotation()</code> methods use the Axis Angle orientation. The quaternion
+orientation uses complex numbers and the fourth element of a vector. An
+orientation is represented by the three axes of rotation (x,y,z) and an angle of
+rotation (w). The interpolate() method uses quaternion.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>components</code></th><td><p>A Vector of three Vector3D objects that replace the Matrix3D
+object's translation, rotation, and scale elements.</p></td></tr><tr><th style="width:25%;"><code>orientationStyle</code></th><td><p>An optional parameter that determines the orientation
+style used for the matrix transformation. The three types of orientation styles
+are eulerAngles (constant <code>EULER_ANGLES</code>), axisAngle (constant <code>AXIS_ANGLE</code>), and
+quaternion (constant <code>QUATERNION</code>). For additional information on the different
+orientation style, see the geom.Orientation3D class.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>Returns <code><a href="../../Bool.html">false</a></code> if any of the Vector3D elements of the components
+Vector do not exist or are <code>null</code>.</p></div></div></div><div class="field "><a name="transformVector"></a><h3 class="anchor"><code><a href="#transformVector"><span class="identifier">transformVector</span></a>(<span style="white-space:nowrap">v:<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></span>):<a class="type" title="openfl.geom.Vector3D - The Vector3D class represents a point or a location in the three-dimensional space using the Cartesian coordinates x, y, and z." href="../../openfl/geom/Vector3D.html">Vector3D</a></code></h3><div class="doc"><p>Uses the transformation matrix to transform a Vector3D object from one space
+coordinate to another. The returned Vector3D object holds the new coordinates
+after the transformation. All the matrix transformations including translation
+are applied to the Vector3D object.</p>
+<p>If the result of the <code>transformVector()</code> method was applied to the position of a
+display object, only the display object's position changes. The display object's
+rotation and scale elements remain the same.</p>
+<p><strong>Note:</strong> This method automatically sets the w component of the passed Vector3D
+to 1.0.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>v</code></th><td><p>A Vector3D object holding the coordinates that are going to be
+transformed.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A Vector3D object with the transformed coordinates.</p></div></div></div><div class="field "><a name="transformVectors"></a><h3 class="anchor"><code><a href="#transformVectors"><span class="identifier">transformVectors</span></a>(<span style="white-space:nowrap">vin:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">vout:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Uses the transformation matrix to transform a Vector of Numbers from one
+coordinate space to another. The <code>tranformVectors()</code> method reads every three
+Numbers in the <code>vin</code> Vector object as a 3D coordinate (x,y,z) and places a
+transformed 3D coordinate in the <code>vout</code> Vector object. All the matrix
+transformations including translation are applied to the <code>vin</code> Vector object.
+You can use the <code>transformVectors()</code> method to render and transform a 3D object
+as a mesh. A mesh is a collection of vertices that defines the shape of the object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>vin</code></th><td><p>A Vector of Floats, where every three Numbers are a 3D coordinate
+(x,y,z) that is going to be transformed.</p></td></tr><tr><th style="width:25%;"><code>vout</code></th><td><p>A Vector of Floats, where every three Numbers are a 3D
+transformed coordinate (x,y,z).</p></td></tr></table></div></div><div class="field "><a name="transpose"></a><h3 class="anchor"><code><a href="#transpose"><span class="identifier">transpose</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Converts the current Matrix3D object to a matrix where the rows and columns are
+swapped. For example, if the current Matrix3D object's rawData contains the
+following 16 numbers, <code>1,2,3,4,11,12,13,14,21,22,23,24,31,32,33,34</code>, the
+<code>transpose()</code> method reads every four elements as a row and turns the rows into
+columns. The result is a matrix with the rawData of:
+<code>1,11,21,31,2,12,22,32,3,13,23,33,4,14,24,34</code>.</p>
+<p>The <code>transpose()</code> method replaces the current matrix with a transposed matrix.
+If you want to transpose a matrix without altering the current matrix, first copy
+the current matrix by using the <code>clone()</code> method and then apply the <code>transpose()</code>
+method to the copy.</p>
+<p>An orthogonal matrix is a square matrix whose transpose is equal to its inverse.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

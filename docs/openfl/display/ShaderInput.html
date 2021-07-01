@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.display.ShaderInput</title><meta name="description" content="// TODO: Document GLSL Shaders
+A ShaderInput instance represents a single input image for a shader
+kernel. A kernel can be defined to accept zero, one, or more source images
+that are used in the kernel execution. A ShaderInput instance provides a
+mechanism for specifying the input image that is used when the shader
+executes. To specify a value for the input, create a BitmapData,
+ByteArray, or Vector.&lt;Number&gt; instance containing the image data and
+assign it to the &lt;code&gt;input&lt;/code&gt; property.
+The ShaderInput instance representing a Shader instance&#039;s input image is
+accessed as a property of the Shader instance&#039;s &lt;code&gt;data&lt;/code&gt; property. The
+ShaderInput property has the same name as the input&#039;s name in the shader
+code. For example, if a shader defines an input named &lt;code&gt;src&lt;/code&gt;, the
+ShaderInput instance representing the &lt;code&gt;src&lt;/code&gt; input is available as the
+&lt;code&gt;src&lt;/code&gt; property, as this example shows:"/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> ShaderInput&lt;<span class="type">T</span>&gt;</h1><h4><small>package <a href="../../openfl/display/index.html">openfl.display</a></small></h4>    <span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.Context3D)</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-generic" title="Marks a class or class field as generic so each type parameter combination generates its own type/field.">@:generic</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>// TODO: Document GLSL Shaders
+A ShaderInput instance represents a single input image for a shader
+kernel. A kernel can be defined to accept zero, one, or more source images
+that are used in the kernel execution. A ShaderInput instance provides a
+mechanism for specifying the input image that is used when the shader
+executes. To specify a value for the input, create a BitmapData,
+ByteArray, or Vector.<Number> instance containing the image data and
+assign it to the <code>input</code> property.
+The ShaderInput instance representing a Shader instance's input image is
+accessed as a property of the Shader instance's <code>data</code> property. The
+ShaderInput property has the same name as the input's name in the shader
+code. For example, if a shader defines an input named <code>src</code>, the
+ShaderInput instance representing the <code>src</code> input is available as the
+<code>src</code> property, as this example shows:</p>
+<pre><code class="prettyprint haxe">myShader.data.src.input = new BitmapData(50, 50, true, 0xFF990000);</code></pre>
+<p>For some uses of a Shader instance, you do not need to specify an input
+image, because it is automatically specified by the operation. You only
+need to specify an input when a Shader is used for the following:</p><ul><li>Shader fill</li><li>ShaderFilter, only for the second or additional inputs if the shader is
+defined to use more than one input. (The object to which the filter is
+applied is automatically used as the first input.)</li><li>Shader blend mode, only for the third or additional inputs if the shader
+is defined to use more than two inputs. (The objects being blended are
+automatically used as the first and second inputs.)</li><li>ShaderJob background execution</li></ul>
+<p>If the shader is being executed using a ShaderJob instance to process a
+ByteArray containing a linear array of data, set the ShaderInput
+instance's <code>height</code> to 1 and <code>width</code> to the number of 32-bit floating
+point values in the ByteArray. In that case, the input in the shader must
+be defined with the <code>image1</code> data type.</p>
+<p>Generally, developer code does not create a ShaderInput instance directly.
+A ShaderInput instance is created for each of a shader's inputs when the
+Shader instance is created.</p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><a href="#new"><span class="identifier">new</span></a>()</code></h3><div class="doc"><p>Creates a ShaderInput instance. Developer code does not call the
+ShaderInput constructor directly. A ShaderInput instance is created
+for each of a shader's inputs when the Shader instance is created.</p></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="channels"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#channels"><span class="identifier">channels</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The number of channels that a shader input expects. This property must
+be accounted for when the input data is a ByteArray or Vector.<Number>
+instance.</p></div></div><div class="field "><a name="filter"></a><h3 class="anchor"><code><a href="#filter"><span class="identifier">filter</span></a>:<a class="type" title="openfl.display3D.Context3DTextureFilter - Defines the values to use for sampler filter mode." href="../../openfl/display3D/Context3DTextureFilter.html">Context3DTextureFilter</a></code></h3><div class="doc"><p>The texture filter to use when binding this shader input.</p>
+<p>This property is not available when targeting Flash.</p></div></div><div class="field "><a name="height"></a><h3 class="anchor"><code><a href="#height"><span class="identifier">height</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The height of the shader input. This property is only used when the
+input data is a ByteArray or Vector.<Number> instance. When the input
+is a BitmapData instance the height is automatically determined.</p></div></div><div class="field "><a name="index"></a><h3 class="anchor"><code><span class="label label-meta label-meta-uppressWarnings" title="">@SuppressWarnings(&quot;checkstyle:Dynamic&quot;)</span><span class="label">read only</span><a href="#index"><span class="identifier">index</span></a>:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>The zero-based index of the input in the shader, indicating the order
+of the input definitions in the shader.</p></div></div><div class="field "><a name="input"></a><h3 class="anchor"><code><a href="#input"><span class="identifier">input</span></a>:<span class="type">T</span></code></h3><div class="doc"><p>The input data that is used when the shader executes. This property
+can be a BitmapData instance, a ByteArray instance, or a
+Vector.<Number> instance.
+If a ByteArray value is assigned to the <code>input</code> property, the
+following conditions must be met:</p><ul><li>The <code>height</code> and <code>width</code> properties must be set.</li><li>The byte array's contents must only consist of 32-bit floating-point
+values. These values can be written using the <code><a href="../../openfl/utils/ByteArray.html#writeFloat">ByteArray.writeFloat</a>()</code>
+method.</li><li>The total length in bytes of the ByteArray must be exactly <code>width</code>
+times <code>height</code> times <code>channels</code> times 4.</li><li>The byte array's <code>endian</code> property must be <code><a href="../../lime/system/Endian.html#LITTLE_ENDIAN">Endian.LITTLE_ENDIAN</a></code>.</li></ul>
+<p>If a Vector.<Number> instance is assigned to the <code>input</code> property, the
+length of the Vector must be equal to <code>width</code> times <code>height</code> times
+<code>channels</code>.</p></div></div><div class="field "><a name="mipFilter"></a><h3 class="anchor"><code><a href="#mipFilter"><span class="identifier">mipFilter</span></a>:<a class="type" title="openfl.display3D.Context3DMipFilter" href="../../openfl/display3D/Context3DMipFilter.html">Context3DMipFilter</a></code></h3><div class="doc"><p>The mip filter to use when binding this shader input.</p>
+<p>This property is not available when targeting Flash.</p></div></div><div class="field "><a name="width"></a><h3 class="anchor"><code><a href="#width"><span class="identifier">width</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The width of the shader input. This property is only used when the
+input data is a ByteArray or Vector.<Number> instance. When the input
+is a BitmapData instance the width is automatically determined.</p></div></div><div class="field "><a name="wrap"></a><h3 class="anchor"><code><a href="#wrap"><span class="identifier">wrap</span></a>:<a class="type" title="openfl.display3D.Context3DWrapMode" href="../../openfl/display3D/Context3DWrapMode.html">Context3DWrapMode</a></code></h3><div class="doc"><p>The wrap mode to use when binding this shader input.</p>
+<p>This property is not available when targeting Flash.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

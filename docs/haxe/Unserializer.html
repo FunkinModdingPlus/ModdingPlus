@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../jquery-1.9.1.min.js"></script><script src="../bootstrap/js/bootstrap.min.js"></script><script src="../bootstrap/js/bootstrap-select.min.js"></script><link href="../styles.css" rel="stylesheet"/><link href="../extra-styles.css" rel="stylesheet"/><link href="../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../",platforms: ["types"]};</script><script src="../nav.js"></script><script src="../index.js"></script><link rel="icon" href="../favicon.ico" type="image/x-icon"/><title>haxe.Unserializer</title><meta name="description" content="The &lt;code&gt;&lt;a href=&quot;../haxe/Unserializer.html#Unserializer&quot;&gt;Unserializer&lt;/a&gt;&lt;/code&gt; class is the complement to the &lt;code&gt;&lt;a href=&quot;../haxe/Serializer.html#Serializer&quot;&gt;Serializer&lt;/a&gt;&lt;/code&gt; class. It parses
+a serialization &lt;code&gt;&lt;a href=&quot;../String.html&quot;&gt;String&lt;/a&gt;&lt;/code&gt; and creates objects from the contained data."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> Unserializer</h1><h4><small>package <a href="../haxe/index.html">haxe</a></small></h4>    <span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span></div><div class="body"><div class="doc doc-main"><p>The <code><a href="../haxe/Unserializer.html#Unserializer">Unserializer</a></code> class is the complement to the <code><a href="../haxe/Serializer.html#Serializer">Serializer</a></code> class. It parses
+a serialization <code><a href="../String.html">String</a></code> and creates objects from the contained data.</p>
+<p>This class can be used in two ways:</p><ul><li>create a <code>new <a href="../haxe/Unserializer.html#Unserializer">Unserializer</a>()</code> instance with a given serialization
+String, then call its <code>unserialize()</code> method until all values are
+extracted</li><li>call <code><a href="../haxe/Unserializer.html#run">Unserializer.run</a>()</code>  to unserialize a single value from a given
+String</li></ul>
+<p>The specification of the serialization format can be found here:
+<a href="https://haxe.org/manual/serialization/format">https://haxe.org/manual/serialization/format</a></p></div><h3 class="section">Static variables</h3><div class="fields"><div class="field "><a name="DEFAULT_RESOLVER"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(new DefaultResolver())</span><span class="label label-static">static</span><a href="#DEFAULT_RESOLVER"><span class="identifier">DEFAULT_RESOLVER</span></a>:<span class="type">TypeResolver</span><span> = new DefaultResolver()</span></code></h3><div class="doc"><p>This value can be set to use custom type resolvers.</p>
+<p>A type resolver finds a <code><a href="../Class.html">Class</a></code> or <code><a href="../Enum.html">Enum</a></code> instance from a given <code><a href="../String.html">String</a></code>.
+By default, the Haxe <code><a href="../Type.html">Type</a></code> Api is used.</p>
+<p>A type resolver must provide two methods:</p><ol><li>
+<p><code>resolveClass(name:<a href="../String.html">String</a>):<a href="../Class.html">Class</a>&lt;<a href="../Dynamic.html">Dynamic</a>&gt;</code> is called to determine a</p>
+<pre><code>`Class` from a class name
+</code></pre></li><li>
+<p><code>resolveEnum(name:<a href="../String.html">String</a>):<a href="../Enum.html">Enum</a>&lt;<a href="../Dynamic.html">Dynamic</a>&gt;</code> is called to determine an</p>
+<pre><code>`Enum` from an enum name
+</code></pre></li></ol>
+<p>This value is applied when a new <code><a href="../haxe/Unserializer.html#Unserializer">Unserializer</a></code> instance is created.
+Changing it afterwards has no effect on previously created instances.</p></div></div></div><h3 class="section">Static methods</h3><div class="fields"><div class="field "><a name="run"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#run"><span class="identifier">run</span></a>(<span style="white-space:nowrap">v:<a class="type" title="String - The basic String class." href="../String.html">String</a></span>):<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>Unserializes <code>v</code> and returns the according value.</p>
+<p>This is a convenience function for creating a new instance of
+Unserializer with <code>v</code> as buffer and calling its <code>unserialize()</code> method
+once.</p></div></div></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">buf:<a class="type" title="String - The basic String class." href="../String.html">String</a></span>)</code></h3><div class="doc"><p>Creates a new Unserializer instance, with its internal buffer
+initialized to <code>buf</code>.</p>
+<p>This does not parse <code>buf</code> immediately. It is parsed only when calls to
+<code>this.<a href="#unserialize">unserialize</a></code> are made.</p>
+<p>Each Unserializer instance maintains its own cache.</p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="setResolver"></a><h3 class="anchor"><code><a href="#setResolver"><span class="identifier">setResolver</span></a>(<span style="white-space:nowrap">r:<span class="type">TypeResolver</span></span>):<a class="type" title="Void - The standard Void type." href="../Void.html">Void</a></code></h3><div class="doc"><p>Sets the type resolver of <code>this</code> Unserializer instance to <code>r</code>.</p>
+<p>If <code>r</code> is <code>null</code>, a special resolver is used which returns <code>null</code> for all
+input values.</p>
+<p>See <code>DEFAULT_RESOLVER</code> for more information on type resolvers.</p></div></div><div class="field "><a name="unserialize"></a><h3 class="anchor"><code><a href="#unserialize"><span class="identifier">unserialize</span></a>():<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>Unserializes the next part of <code>this</code> Unserializer instance and returns
+the according value.</p>
+<p>This function may call <code>this.<a href="#resolver">resolver</a>.resolveClass</code> to determine a
+Class from a String, and <code>this.<a href="#resolver">resolver</a>.resolveEnum</code> to determine an
+Enum from a String.</p>
+<p>If <code>this</code> Unserializer instance contains no more or invalid data, an
+exception is thrown.</p>
+<p>This operation may fail on structurally valid data if a type cannot be
+resolved or if a field cannot be set. This can happen when unserializing
+Strings that were serialized on a different Haxe target, in which the
+serialization side has to make sure not to include platform-specific
+data.</p>
+<p>Classes are created from <code><a href="../Type.html#createEmptyInstance">Type.createEmptyInstance</a></code>, which means their
+constructors are not called.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="..//highlighter.js"></script><link href="../highlighter.css" rel="stylesheet"/></body></html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.text</title></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><h1>openfl.text </h1>  <table class="table table-condensed"><tbody><tr><th style="width:200px;"><i class="fa fa-folder-o"></i><a href="../../openfl/index.html" title="openfl">..</a></th><td></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/text/AntiAliasType.html" title="openfl.text.AntiAliasType">AntiAliasType</a></td><td><p>The AntiAliasType class provides values for anti-aliasing in the
+openfl.text.TextField class.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/text/Font.html" title="openfl.text.Font">Font</a></td><td><p>The Font class is used to manage embedded fonts in SWF files. Embedded
+fonts are represented as a subclass of the Font class. The Font class is
+currently useful only to find out information about embedded fonts; you
+cannot alter a font by using this class. You cannot use the Font class to
+load external fonts, or to create an instance of a Font object by itself.
+Use the Font class as an abstract base class.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/text/FontStyle.html" title="openfl.text.FontStyle">FontStyle</a></td><td><p>The FontStyle class provides values for the TextRenderer class.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/text/FontType.html" title="openfl.text.FontType">FontType</a></td><td><p>The FontType class contains the enumerated constants
+<code>"embedded"</code> and <code>"device"</code> for the
+<code>fontType</code> property of the Font class.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/text/GridFitType.html" title="openfl.text.GridFitType">GridFitType</a></td><td><p>The GridFitType class defines values for grid fitting in the TextField
+class.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/text/TextField.html" title="openfl.text.TextField">TextField</a></td><td><p>The TextField class is used to create display objects for text display and
+input. <ph outputclass="flexonly">You can use the TextField class to
+perform low-level text rendering. However, in Flex, you typically use the
+Label, Text, TextArea, and TextInput controls to process text. &lt;ph
+outputclass="flashonly">You can give a text field an instance name in the
+Property inspector and use the methods and properties of the TextField
+class to manipulate it with ActionScript. TextField instance names are
+displayed in the Movie Explorer and in the Insert Target Path dialog box in
+the Actions panel.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/text/TextFieldAutoSize.html" title="openfl.text.TextFieldAutoSize">TextFieldAutoSize</a></td><td><p>The TextFieldAutoSize class is an enumeration of constant values used in
+setting the <code>autoSize</code> property of the TextField class.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/text/TextFieldType.html" title="openfl.text.TextFieldType">TextFieldType</a></td><td><p>The TextFieldType class is an enumeration of constant values used in
+setting the <code>type</code> property of the TextField class.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/text/TextFormat.html" title="openfl.text.TextFormat">TextFormat</a></td><td><p>The TextFormat class represents character formatting information. Use the
+TextFormat class to create specific text formatting for text fields. You
+can apply text formatting to both static and dynamic text fields. The
+properties of the TextFormat class apply to device and embedded fonts.
+However, for embedded fonts, bold and italic text actually require
+specific fonts. If you want to display bold or italic text with an
+embedded font, you need to embed the bold and italic variations of that
+font.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/text/TextFormatAlign.html" title="openfl.text.TextFormatAlign">TextFormatAlign</a></td><td><p>The TextFormatAlign class provides values for text alignment in the
+TextFormat class.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/text/TextLineMetrics.html" title="openfl.text.TextLineMetrics">TextLineMetrics</a></td><td><p>The TextLineMetrics class contains information about the text position and
+measurements of a <em>line of text</em> within a text field. All measurements are
+in pixels. Objects of this class are returned by the
+<code><a href="../../openfl/text/TextField.html#getLineMetrics">openfl.text.TextField.getLineMetrics</a>()</code> method.
+For measurements related to the text field containing the line of text
+(for example, the "Text Field height" measurement in the diagram), see
+openfl.text.TextField.</p></td></tr></tbody></table></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

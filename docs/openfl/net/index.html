@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.net</title></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><h1>openfl.net </h1>  <table class="table table-condensed"><tbody><tr><th style="width:200px;"><i class="fa fa-folder-o"></i><a href="../../openfl/index.html" title="openfl">..</a></th><td></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/net/FileFilter.html" title="openfl.net.FileFilter">FileFilter</a></td><td><p>The FileFilter class is used to indicate what files on the user's system
+are shown in the file-browsing dialog box that is displayed when the
+<code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code> method, the <code>FileReferenceList.browse()</code> method
+is called or a browse method of a File, FileReference, or
+FileReferenceList object is called. FileFilter instances are passed as a
+value for the optional <code>typeFilter</code> parameter to the method. If you use a
+FileFilter instance, extensions and file types that aren't specified in
+the FileFilter instance are filtered out; that is, they are not available
+to the user for selection. If no FileFilter object is passed to the
+method, all files are shown in the dialog box.
+You can use FileFilter instances in one of two ways:</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/net/FileReference.html" title="openfl.net.FileReference">FileReference</a></td><td><p>The FileReference class provides a means to upload and download files
+between a user's computer and a server. An operating-system dialog box
+prompts the user to select a file to upload or a location for download.
+Each FileReference object refers to a single file on the user's disk and
+has properties that contain information about the file's size, type, name,
+creation date, modification date, and creator type (Macintosh only).
+<strong>Note:</strong> In Adobe AIR, the File class, which extends the FileReference
+class, provides more capabilities and has less security restrictions than
+the FileReference class.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/net/NetConnection.html" title="openfl.net.NetConnection">NetConnection</a></td><td><p>The NetConnection class creates a two-way connection between a client and
+a server. The client can be a Flash Player or AIR application. The server
+can be a web server, Flash Media Server, an application server running
+Flash Remoting, or the &lt;a
+href="<a href="http://labs.adobe.com/technologies/stratus">http://labs.adobe.com/technologies/stratus</a>/" scope="external">Adobe
+Stratus</a> service. Call <code><a href="../../openfl/net/NetConnection.html#connect">NetConnection.connect</a>()</code> to establish the
+connection. Use the NetStream class to send streams of media and data over
+the connection.
+For security information about loading content and data into Flash Player
+and AIR, see the following:</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/net/NetStream.html" title="openfl.net.NetStream">NetStream</a></td><td><p>The NetStream class opens a one-way streaming channel over a
+NetConnection.
+Use the NetStream class to do the following:</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/net/ObjectEncoding.html" title="openfl.net.ObjectEncoding">ObjectEncoding</a></td><td><p>The ObjectEncoding class is used in defining serialization settings in
+classes that serialize objects (such as FileStream, NetStream,
+NetConnection, SharedObject, and ByteArray).</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/net/SharedObject.html" title="openfl.net.SharedObject">SharedObject</a></td><td><p>The SharedObject class is used to read and store limited amounts of data on
+a user's computer or on a server. Shared objects offer real-time data
+sharing between multiple client SWF files and objects that are persistent
+on the local computer or remote server. Local shared objects are similar to
+browser cookies and remote shared objects are similar to real-time data
+transfer devices. To use remote shared objects, you need Adobe Flash Media
+Server.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/net/SharedObjectFlushStatus.html" title="openfl.net.SharedObjectFlushStatus">SharedObjectFlushStatus</a></td><td><p>The SharedObjectFlushStatus class provides values for the code returned
+from a call to the <code><a href="../../openfl/net/SharedObject.html#flush">SharedObject.flush</a>()</code> method.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/net/URLLoader.html" title="openfl.net.URLLoader">URLLoader</a></td><td><p>The URLLoader class downloads data from a URL as text, binary data, or
+URL-encoded variables. It is useful for downloading text files, XML, or
+other information to be used in a dynamic, data-driven application.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/net/URLLoaderDataFormat.html" title="openfl.net.URLLoaderDataFormat">URLLoaderDataFormat</a></td><td><p>The URLLoaderDataFormat class provides values that specify how downloaded
+data is received.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/net/URLRequest.html" title="openfl.net.URLRequest">URLRequest</a></td><td><p>The URLRequest class captures all of the information in a single HTTP
+request. URLRequest objects are passed to the <code>load()</code> methods
+of the Loader, URLStream, and URLLoader classes, and to other loading
+operations, to initiate URL downloads. They are also passed to the
+<code>upload()</code> and <code>download()</code> methods of the
+FileReference class.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/net/URLRequestDefaults.html" title="openfl.net.URLRequestDefaults">URLRequestDefaults</a></td><td><p>The URLRequestDefaults class includes static properties that you can set to define
+default values for the properties of the URLRequest class. It also includes a static
+method, <code><a href="../../openfl/net/URLRequestDefaults.html#setLoginCredentialsForHost">URLRequestDefaults.setLoginCredentialsForHost</a>()</code>, which lets you define
+default authentication credentials for requests. The URLRequest class defines the
+information to use in an HTTP request.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/net/URLRequestHeader.html" title="openfl.net.URLRequestHeader">URLRequestHeader</a></td><td><p>A URLRequestHeader object encapsulates a single HTTP request header and
+consists of a name/value pair. URLRequestHeader objects are used in the
+<code>requestHeaders</code> property of the URLRequest class.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/net/URLRequestMethod.html" title="openfl.net.URLRequestMethod">URLRequestMethod</a></td><td><p>The URLRequestMethod class provides values that specify whether the
+URLRequest object should use the <code>POST</code> method or the
+<code>GET</code> method when sending data to a server.</p></td></tr></tbody></table></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

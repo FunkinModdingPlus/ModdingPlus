@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.net.URLLoader</title><meta name="description" content="The URLLoader class downloads data from a URL as text, binary data, or
+URL-encoded variables. It is useful for downloading text files, XML, or
+other information to be used in a dynamic, data-driven application."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> URLLoader</h1><h4><small>package <a href="../../openfl/net/index.html">openfl.net</a></small></h4><h4><small>extends <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>The URLLoader class downloads data from a URL as text, binary data, or
+URL-encoded variables. It is useful for downloading text files, XML, or
+other information to be used in a dynamic, data-driven application.</p>
+<p>A URLLoader object downloads all of the data from a URL before making it
+available to code in the applications. It sends out notifications about the
+progress of the download, which you can monitor through the
+<code>bytesLoaded</code> and <code>bytesTotal</code> properties, as well as
+through dispatched events.</p>
+<p>When loading very large video files, such as FLV's, out-of-memory errors
+may occur.</p>
+<p>When you use this class in Flash Player and in AIR application content
+in security sandboxes other than then application security sandbox,
+consider the following security model:</p><ul><li>A SWF file in the local-with-filesystem sandbox may not load data
+from, or provide data to, a resource that is in the network sandbox.</li><li>By default, the calling SWF file and the URL you load must be in
+exactly the same domain. For example, a SWF file at www.adobe.com can load
+data only from sources that are also at www.adobe.com. To load data from a
+different domain, place a URL policy file on the server hosting the
+data.</li></ul>
+<p>For more information related to security, see the Flash Player Developer
+Center Topic: <a href="http://www.adobe.com/go/devnet_security_en">Security</a>.</p><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>complete</code></th><td><p>Dispatched after all the received data is decoded
+and placed in the data property of the URLLoader
+object. The received data may be accessed once
+this event has been dispatched.</p></td></tr><tr class="indent"><th style="width:25%;"><code>httpResponseStatus</code></th><td><p>Dispatched if a call to the load() method
+attempts to access data over HTTP, and Adobe AIR
+is able to detect and return the status code for
+the request.</p></td></tr><tr class="indent"><th style="width:25%;"><code>httpStatus</code></th><td><p>Dispatched if a call to URLLoader.load() attempts
+to access data over HTTP. For content running in
+Flash Player, this event is only dispatched if
+the current Flash Player environment is able to
+detect and return the status code for the
+request.(Some browser environments may not be
+able to provide this information.) Note that the
+<code>httpStatus</code> event(if any) is sent
+before(and in addition to) any
+<code>complete</code> or <code>error</code>
+event.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ioError</code></th><td><p>Dispatched if a call to URLLoader.load() results
+in a fatal error that terminates the download.</p></td></tr><tr class="indent"><th style="width:25%;"><code>open</code></th><td><p>Dispatched when the download operation commences
+following a call to the
+<code><a href="../../openfl/net/URLLoader.html#load">URLLoader.load</a>()</code> method.</p></td></tr><tr class="indent"><th style="width:25%;"><code>progress</code></th><td><p>Dispatched when data is received as the download
+operation progresses.</p>
+<p>Note that with a URLLoader object, it is not
+possible to access the data until it has been
+received completely. So, the progress event only
+serves as a notification of how far the download
+has progressed. To access the data before it's
+entirely downloaded, use a URLStream object.</p></td></tr><tr class="indent"><th style="width:25%;"><code>securityError</code></th><td><p>Dispatched if a call to URLLoader.load() attempts
+to load data from a server outside the security
+sandbox. Also dispatched if a call to
+<code><a href="../../openfl/net/URLLoader.html#load">URLLoader.load</a>()</code> attempts to load a
+SWZ file and the certificate is invalid or the
+digest string does not match the component.</p></td></tr></table></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ request : null })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">?request:<a class="type" title="openfl.net.URLRequest - The URLRequest class captures all of the information in a single HTTP request." href="../../openfl/net/URLRequest.html">URLRequest</a></span>)</code></h3><div class="doc"><p>Creates a URLLoader object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>request</code></th><td><p>A URLRequest object specifying the URL to download. If this
+parameter is omitted, no load operation begins. If
+specified, the load operation begins immediately(see the
+<code>load</code> entry for more information).</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="bytesLoaded"></a><h3 class="anchor"><code><a href="#bytesLoaded"><span class="identifier">bytesLoaded</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Indicates the number of bytes that have been loaded thus far during the
+load operation.</p></div></div><div class="field "><a name="bytesTotal"></a><h3 class="anchor"><code><a href="#bytesTotal"><span class="identifier">bytesTotal</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Indicates the total number of bytes in the downloaded data. This property
+contains 0 while the load operation is in progress and is populated when
+the operation is complete. Also, a missing Content-Length header will
+result in bytesTotal being indeterminate.</p></div></div><div class="field "><a name="data"></a><h3 class="anchor"><code><a href="#data"><span class="identifier">data</span></a>:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>The data received from the load operation. This property is populated only
+when the load operation is complete. The format of the data depends on the
+setting of the <code>dataFormat</code> property:</p>
+<p>If the <code>dataFormat</code> property is
+<code><a href="../../openfl/net/URLLoaderDataFormat.html#TEXT">URLLoaderDataFormat.TEXT</a></code>, the received data is a string
+containing the text of the loaded file.</p>
+<p>If the <code>dataFormat</code> property is
+<code><a href="../../openfl/net/URLLoaderDataFormat.html#BINARY">URLLoaderDataFormat.BINARY</a></code>, the received data is a ByteArray
+object containing the raw binary data.</p>
+<p>If the <code>dataFormat</code> property is
+<code><a href="../../openfl/net/URLLoaderDataFormat.html#VARIABLES">URLLoaderDataFormat.VARIABLES</a></code>, the received data is a
+URLVariables object containing the URL-encoded variables.</p></div></div><div class="field "><a name="dataFormat"></a><h3 class="anchor"><code><a href="#dataFormat"><span class="identifier">dataFormat</span></a>:<a class="type" title="openfl.net.URLLoaderDataFormat - The URLLoaderDataFormat class provides values that specify how downloaded data is received." href="../../openfl/net/URLLoaderDataFormat.html">URLLoaderDataFormat</a></code></h3><div class="doc"><p>Controls whether the downloaded data is received as text
+(<code><a href="../../openfl/net/URLLoaderDataFormat.html#TEXT">URLLoaderDataFormat.TEXT</a></code>), raw binary data
+(<code><a href="../../openfl/net/URLLoaderDataFormat.html#BINARY">URLLoaderDataFormat.BINARY</a></code>), or URL-encoded variables
+(<code><a href="../../openfl/net/URLLoaderDataFormat.html#VARIABLES">URLLoaderDataFormat.VARIABLES</a></code>).</p>
+<p>If the value of the <code>dataFormat</code> property is
+<code><a href="../../openfl/net/URLLoaderDataFormat.html#TEXT">URLLoaderDataFormat.TEXT</a></code>, the received data is a string
+containing the text of the loaded file.</p>
+<p>If the value of the <code>dataFormat</code> property is
+<code><a href="../../openfl/net/URLLoaderDataFormat.html#BINARY">URLLoaderDataFormat.BINARY</a></code>, the received data is a ByteArray
+object containing the raw binary data.</p>
+<p>If the value of the <code>dataFormat</code> property is
+<code><a href="../../openfl/net/URLLoaderDataFormat.html#VARIABLES">URLLoaderDataFormat.VARIABLES</a></code>, the received data is a
+URLVariables object containing the URL-encoded variables.</p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="close"></a><h3 class="anchor"><code><a href="#close"><span class="identifier">close</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Closes the load operation in progress. Any load operation in progress is
+immediately terminated. If no URL is currently being streamed, an invalid
+stream error is thrown.</p></div></div><div class="field "><a name="load"></a><h3 class="anchor"><code><a href="#load"><span class="identifier">load</span></a>(<span style="white-space:nowrap">request:<a class="type" title="openfl.net.URLRequest - The URLRequest class captures all of the information in a single HTTP request." href="../../openfl/net/URLRequest.html">URLRequest</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sends and loads data from the specified URL. The data can be received as
+text, raw binary data, or URL-encoded variables, depending on the value
+you set for the <code>dataFormat</code> property. Note that the default
+value of the <code>dataFormat</code> property is text. If you want to send
+data to the specified URL, you can set the <code>data</code> property in
+the URLRequest object.</p>
+<p><strong>Note:</strong> If a file being loaded contains non-ASCII characters(as
+found in many non-English languages), it is recommended that you save the
+file with UTF-8 or UTF-16 encoding as opposed to a non-Unicode format like
+ASCII.</p>
+<p>A SWF file in the local-with-filesystem sandbox may not load data
+from, or provide data to, a resource that is in the network sandbox.</p>
+<p>By default, the calling SWF file and the URL you load must be in
+exactly the same domain. For example, a SWF file at www.adobe.com can load
+data only from sources that are also at www.adobe.com. To load data from a
+different domain, place a URL policy file on the server hosting the
+data.</p>
+<p>You cannot connect to commonly reserved ports. For a complete list of
+blocked ports, see "Restricting Networking APIs" in the <em>ActionScript
+3.0 Developer's Guide</em>.</p>
+<p>In Flash Player 10 and later, if you use a multipart Content-Type(for
+example "multipart/form-data") that contains an upload(indicated by a
+"filename" parameter in a "content-disposition" header within the POST
+body), the POST operation is subject to the security rules applied to
+uploads:</p><ul><li>The POST operation must be performed in response to a user-initiated
+action, such as a mouse click or key press.</li><li>If the POST operation is cross-domain(the POST target is not on the
+same server as the SWF file that is sending the POST request), the target
+server must provide a URL policy file that permits cross-domain
+access.</li></ul>
+<p>Also, for any multipart Content-Type, the syntax must be valid
+(according to the RFC2046 standards). If the syntax appears to be invalid,
+the POST operation is subject to the security rules applied to
+uploads.</p>
+<p>For more information related to security, see the Flash Player
+Developer Center Topic: <a href="http://www.adobe.com/go/devnet_security_en">Security</a>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>request</code></th><td><p>A URLRequest object specifying the URL to download.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p><code><a href="../../openfl/net/URLRequest.html#requestHeader">URLRequest.requestHeader</a></code> objects may
+not contain certain prohibited HTTP request headers.
+For more information, see the URLRequestHeader class
+description.</p></td></tr><tr class="indent"><th style="width:25%;"><code>MemoryError</code></th><td><p>This error can occur for the following reasons: 1)
+Flash Player or AIR cannot convert the
+<code><a href="../../openfl/net/URLRequest.html#data">URLRequest.data</a></code> parameter from UTF8 to
+MBCS. This error is applicable if the URLRequest
+object passed to <code>load()</code> is set to
+perform a <code>GET</code> operation and if
+<code><a href="../../lime/system/System.html#useCodePage">System.useCodePage</a></code> is set to
+<code><a href="../../Bool.html">true</a></code>. 2) Flash Player or AIR cannot
+allocate memory for the <code>POST</code> data. This
+error is applicable if the URLRequest object passed
+to <code>load</code> is set to perform a
+<code>POST</code> operation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>Local untrusted files may not communicate with the
+Internet. This may be worked around by reclassifying
+this file as local-with-networking or trusted.</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>You are trying to connect to a commonly reserved
+port. For a complete list of blocked ports, see
+"Restricting Networking APIs" in the <em>ActionScript
+3.0 Developer's Guide</em>.</p></td></tr><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The value of the request parameter or the
+<code><a href="../../openfl/net/URLRequest.html#url">URLRequest.url</a></code> property of the
+URLRequest object passed are <code>null</code>.</p></td></tr></table><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>complete</code></th><td><p>Dispatched after data has loaded successfully.</p></td></tr><tr class="indent"><th style="width:25%;"><code>httpResponseStatus</code></th><td><p>Dispatched if a call to the <code>load()</code>
+method attempts to access data over HTTP and
+Adobe AIR is able to detect and return the
+status code for the request.</p></td></tr><tr class="indent"><th style="width:25%;"><code>httpStatus</code></th><td><p>If access is over HTTP, and the current Flash
+Player environment supports obtaining status
+codes, you may receive these events in addition
+to any <code>complete</code> or
+<code>error</code> event.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ioError</code></th><td><p>The load operation could not be completed.</p></td></tr><tr class="indent"><th style="width:25%;"><code>open</code></th><td><p>Dispatched when a load operation commences.</p></td></tr><tr class="indent"><th style="width:25%;"><code>progress</code></th><td><p>Dispatched when data is received as the download
+operation progresses.</p></td></tr><tr class="indent"><th style="width:25%;"><code>securityError</code></th><td><p>A load operation attempted to retrieve data from
+a server outside the caller's security sandbox.
+This may be worked around using a policy file on
+the server.</p></td></tr><tr class="indent"><th style="width:25%;"><code>securityError</code></th><td><p>A load operation attempted to load a SWZ file(a
+Adobe platform component), but the certificate
+is invalid or the digest does not match the
+component.</p></td></tr></table></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></h4><div style="display:none"><div class="field "><a name="addEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useWeakReference : false, priority : 0, useCapture : false })</span><a href="#addEventListener"><span class="identifier">addEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">priority:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">useWeakReference:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Registers an event listener object with an EventDispatcher object so that
+the listener receives notification of an event. You can register event
+listeners on all nodes in the display list for a specific type of event,
+phase, and priority.</p>
+<p>After you successfully register an event listener, you cannot change
+its priority through additional calls to <code>addEventListener()</code>.
+To change a listener's priority, you must first call
+<code>removeListener()</code>. Then you can register the listener again
+with the new priority level.</p>
+<p>Keep in mind that after the listener is registered, subsequent calls to
+<code>addEventListener()</code> with a different <code>type</code> or
+<code>useCapture</code> value result in the creation of a separate
+listener registration. For example, if you first register a listener with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>, it listens only during
+the capture phase. If you call <code>addEventListener()</code> again using
+the same listener object, but with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>, you have two separate listeners: one that listens
+during the capture phase and another that listens during the target and
+bubbling phases.</p>
+<p>You cannot register an event listener for only the target phase or the
+bubbling phase. Those phases are coupled during registration because
+bubbling applies only to the ancestors of the target node.</p>
+<p>If you no longer need an event listener, remove it by calling
+<code>removeEventListener()</code>, or memory problems could result. Event
+listeners are not automatically removed from memory because the garbage
+collector does not remove the listener as long as the dispatching object
+exists(unless the <code>useWeakReference</code> parameter is set to
+<code><a href="../../Bool.html">true</a></code>).</p>
+<p>Copying an EventDispatcher instance does not copy the event listeners
+attached to it.(If your newly created node needs an event listener, you
+must attach the listener after creating the node.) However, if you move an
+EventDispatcher instance, the event listeners attached to it move along
+with it.</p>
+<p>If the event listener is being registered on a node while an event is
+being processed on this node, the event listener is not triggered during
+the current phase but can be triggered during a later phase in the event
+flow, such as the bubbling phase.</p>
+<p>If an event listener is removed from a node while an event is being
+processed on the node, it is still triggered by the current actions. After
+it is removed, the event listener is never invoked again(unless
+registered again for future processing).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Determines whether the listener works in the
+capture phase or the target and bubbling phases.
+If <code>useCapture</code> is set to
+<code><a href="../../Bool.html">true</a></code>, the listener processes the
+event only during the capture phase and not in the
+target or bubbling phase. If
+<code>useCapture</code> is <code><a href="../../Bool.html">false</a></code>, the
+listener processes the event only during the
+target or bubbling phase. To listen for the event
+in all three phases, call
+<code>addEventListener</code> twice, once with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>,
+then again with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>.</p></td></tr><tr><th style="width:25%;"><code>priority</code></th><td><p>The priority level of the event listener. The
+priority is designated by a signed 32-bit integer.
+The higher the number, the higher the priority.
+All listeners with priority <em>n</em> are processed
+before listeners of priority <em>n</em>-1. If two or
+more listeners share the same priority, they are
+processed in the order in which they were added.
+The default priority is 0.</p></td></tr><tr><th style="width:25%;"><code>useWeakReference</code></th><td><p>Determines whether the reference to the listener
+is strong or weak. A strong reference(the
+default) prevents your listener from being
+garbage-collected. A weak reference does not.</p>
+<p>Class-level member functions are not subject to
+garbage collection, so you can set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for class-level member functions without
+subjecting them to garbage collection. If you set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for a listener that is a nested inner function,
+the function will be garbage-collected and no
+longer persistent. If you create references to the
+inner function(save it in another variable) then
+it is not garbage-collected and stays
+persistent.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The <code>listener</code> specified is not a
+function.</p></td></tr></table></div></div><div class="field "><a name="dispatchEvent"></a><h3 class="anchor"><code><a href="#dispatchEvent"><span class="identifier">dispatchEvent</span></a>(<span style="white-space:nowrap">event:<a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Dispatches an event into the event flow. The event target is the
+EventDispatcher object upon which the <code>dispatchEvent()</code> method
+is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>event</code></th><td><p>The Event object that is dispatched into the event flow. If
+the event is being redispatched, a clone of the event is
+created automatically. After an event is dispatched, its
+<code>target</code> property cannot be changed, so you must
+create a new copy of the event for redispatching to work.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if the event was successfully
+dispatched. A value of <code><a href="../../Bool.html">false</a></code> indicates failure or
+that <code>preventDefault()</code> was called on the event.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The event dispatch recursion limit has been reached.</p></td></tr></table></div></div><div class="field "><a name="hasEventListener"></a><h3 class="anchor"><code><a href="#hasEventListener"><span class="identifier">hasEventListener</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the EventDispatcher object has any listeners registered for
+a specific type of event. This allows you to determine where an
+EventDispatcher object has altered handling of an event type in the event
+flow hierarchy. To determine whether a specific event type actually
+triggers an event listener, use <code>willTrigger()</code>.</p>
+<p>The difference between <code>hasEventListener()</code> and
+<code>willTrigger()</code> is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas
+<code>willTrigger()</code> examines the entire event flow for the event
+specified by the <code>type</code> parameter.</p>
+<p>When <code>hasEventListener()</code> is called from a LoaderInfo
+object, only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+is registered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="removeEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useCapture : false })</span><a href="#removeEventListener"><span class="identifier">removeEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Removes a listener from the EventDispatcher object. If there is no
+matching listener registered with the EventDispatcher object, a call to
+this method has no effect.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Specifies whether the listener was registered for the
+capture phase or the target and bubbling phases. If the
+listener was registered for both the capture phase and
+the target and bubbling phases, two calls to
+<code>removeEventListener()</code> are required to
+remove both, one call with <code>useCapture()</code> set
+to <code><a href="../../Bool.html">true</a></code>, and another call with
+<code>useCapture()</code> set to <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table></div></div><div class="field "><a name="toString"></a><h3 class="anchor"><code><a href="#toString"><span class="identifier">toString</span></a>():<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="willTrigger"></a><h3 class="anchor"><code><a href="#willTrigger"><span class="identifier">willTrigger</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether an event listener is registered with this EventDispatcher
+object or any of its ancestors for the specified event type. This method
+returns <code><a href="../../Bool.html">true</a></code> if an event listener is triggered during any
+phase of the event flow when an event of the specified type is dispatched
+to this EventDispatcher object or any of its descendants.</p>
+<p>The difference between the <code>hasEventListener()</code> and the
+<code>willTrigger()</code> methods is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas the
+<code>willTrigger()</code> method examines the entire event flow for the
+event specified by the <code>type</code> parameter.</p>
+<p>When <code>willTrigger()</code> is called from a LoaderInfo object,
+only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+will be triggered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

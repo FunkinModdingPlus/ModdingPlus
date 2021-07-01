@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>lime.graphics.OpenGLRenderContext</title><meta name="description" content="The &lt;code&gt;&lt;a href=&quot;../../lime/graphics/OpenGLRenderContext.html#OpenGLRenderContext&quot;&gt;OpenGLRenderContext&lt;/a&gt;&lt;/code&gt; allows access to OpenGL features when OpenGL is the render
+context type of the &lt;code&gt;&lt;a href=&quot;../../flixel/system/debug/Window.html#Window&quot;&gt;Window&lt;/a&gt;&lt;/code&gt;. Historically, Lime was designed for WebGL render support
+on all platforms, and support has expanded to provide additional OpenGL ES native APIs."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>abstract</small> OpenGLRenderContext(<span class="type">NativeOpenGLRenderContext</span>)</h1><h4><small>package <a href="../../lime/graphics/index.html">lime.graphics</a></small></h4><h4><small>from <span class="type">NativeOpenGLRenderContext</span>, </small><small> to <span class="type">NativeOpenGLRenderContext</span></small></h4><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(lime.graphics.RenderContext)</span><span class="label label-meta label-meta-forward" title="Forwards field access to underlying type.">@:forward</span><span class="label label-meta label-meta-transitive" title="">@:transitive</span></div><div class="body"><div class="doc doc-main"><p>The <code><a href="../../lime/graphics/OpenGLRenderContext.html#OpenGLRenderContext">OpenGLRenderContext</a></code> allows access to OpenGL features when OpenGL is the render
+context type of the <code><a href="../../flixel/system/debug/Window.html#Window">Window</a></code>. Historically, Lime was designed for WebGL render support
+on all platforms, and support has expanded to provide additional OpenGL ES native APIs.</p>
+<p>Support for desktop OpenGL-specific features is currently sparse, but the
+<code><a href="../../lime/graphics/OpenGLRenderContext.html#OpenGLRenderContext">OpenGLRenderContext</a></code> provides the platform for us to add additional desktop specific
+features.</p>
+<p>The <code><a href="../../lime/graphics/OpenGLRenderContext.html#OpenGLRenderContext">OpenGLRenderContext</a></code> is not compatible with mobile or web targets, but it can be
+converted to an OpenGL ES or a WebGL-style context for cross-platform development.</p>
+<p>You can convert from <code><a href="../../lime/graphics/RenderContext.html#RenderContext">lime.graphics.RenderContext</a></code> or <code><a href="../../lime/graphics/opengl/GL.html#GL">lime.graphics.opengl.GL</a></code>, and
+can convert to <code><a href="../../lime/graphics/OpenGLES3RenderContext.html#OpenGLES3RenderContext">lime.graphics.OpenGLES3RenderContext</a></code>,
+<code><a href="../../lime/graphics/OpenGLES2RenderContext.html#OpenGLES2RenderContext">lime.graphics.OpenGLES2RenderContext</a></code>, <code><a href="../../lime/graphics/WebGL2RenderContext.html#WebGL2RenderContext">lime.graphics.WebGL2RenderContext</a></code>, or
+<code><a href="../../lime/graphics/WebGLRenderContext.html#WebGLRenderContext">lime.graphics.WebGLRenderContext</a></code> directly if desired:</p>
+<pre><code class="prettyprint haxe">var gl:OpenGLRenderContext = window.context;
+var gl:OpenGLRenderContext = GL;
+
+var gles3:OpenGLES3RenderContext = gl;
+var gles2:OpenGLES2RenderContext = gl;
+var webgl2:WebGL2RenderContext = gl;
+var webgl:WebGLRenderContext = gl;</code></pre></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

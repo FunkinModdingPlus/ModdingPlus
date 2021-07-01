@@ -27,7 +27,7 @@ take down mods that don't follow this rule.
 - [KawaiSprite](https://twitter.com/kawaisprite) - Musician
 ## Modding+ Credits
 
-- [BulbyVR](https://gamebanana.com/members/1776425) - Owner/Programmer
+- [BulbyVR](https://github.com/TheDrawingCoder-Gamer) - Owner/Programmer
 - [DJ Popsicle](https://gamebanana.com/members/1780306) - Co-Owner/Additional Programmer
 - [Matheus L/Mlops](https://gamebanana.com/members/1767306) and [AndreDoodles](https://gamebanana.com/members/1764840) - Artist for the Poison Icons
 - [ThePinkPhantom/JuliettePink](https://gamebanana.com/members/1892442) - Portrait Artist

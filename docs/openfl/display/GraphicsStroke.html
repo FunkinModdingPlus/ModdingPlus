@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.display.GraphicsStroke</title><meta name="description" content="Defines a line style or stroke."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> GraphicsStroke</h1><h4><small>package <a href="../../openfl/display/index.html">openfl.display</a></small></h4>    <h4><small>implements <a class="type" title="openfl.display.IGraphicsStroke" href="../../openfl/display/IGraphicsStroke.html">IGraphicsStroke</a>, <a class="type" title="openfl.display.IGraphicsData" href="../../openfl/display/IGraphicsData.html">IGraphicsData</a></small></h4><span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>Defines a line style or stroke.</p>
+<p>Use a GraphicsStroke object with the
+<code><a href="../../openfl/display/Graphics.html#drawGraphicsData">Graphics.drawGraphicsData</a>()</code> method. Drawing a GraphicsStroke
+object is the equivalent of calling one of the methods of the Graphics
+class that sets the line style, such as the
+<code><a href="../../openfl/display/Graphics.html#lineStyle">Graphics.lineStyle</a>()</code> method, the
+<code><a href="../../openfl/display/Graphics.html#lineBitmapStyle">Graphics.lineBitmapStyle</a>()</code> method, or the
+<code><a href="../../openfl/display/Graphics.html#lineGradientStyle">Graphics.lineGradientStyle</a>()</code> method.</p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ fill : null, miterLimit : 3, joints : JointStyle.ROUND, caps : CapsStyle.NONE, scaleMode : LineScaleMode.NORMAL, pixelHinting : false, thickness : null })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">?thickness:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">pixelHinting:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">scaleMode:<a class="type" title="openfl.display.LineScaleMode - The LineScaleMode class provides values for the scaleMode parameter in the Graphics." href="../../openfl/display/LineScaleMode.html">LineScaleMode</a> = LineScaleMode.NORMAL,</span> <span style="white-space:nowrap">caps:<a class="type" title="openfl.display.CapsStyle - The CapsStyle class is an enumeration of constant values that specify the caps style to use in drawing lines." href="../../openfl/display/CapsStyle.html">CapsStyle</a> = CapsStyle.NONE,</span> <span style="white-space:nowrap">joints:<a class="type" title="openfl.display.JointStyle - The JointStyle class is an enumeration of constant values that specify the joint style to use in drawing lines." href="../../openfl/display/JointStyle.html">JointStyle</a> = JointStyle.ROUND,</span> <span style="white-space:nowrap">miterLimit:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 3,</span> <span style="white-space:nowrap">?fill:<a class="type" title="openfl.display.IGraphicsFill" href="../../openfl/display/IGraphicsFill.html">IGraphicsFill</a></span>)</code></h3><div class="doc"><p>Creates a new GraphicsStroke object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>pixelHinting</code></th><td><p>A Boolean value that specifies whether to hint strokes
+to full pixels. This affects both the position of
+anchors of a curve and the line stroke size itself.
+With <code>pixelHinting</code> set to
+<code><a href="../../Bool.html">true</a></code>, Flash Player hints line widths to
+full pixel widths. With <code>pixelHinting</code> set
+to <code><a href="../../Bool.html">false</a></code>, disjoints can appear for curves
+and straight lines. For example, the following
+illustrations show how Flash Player renders two
+rounded rectangles that are identical, except that the
+<code>pixelHinting</code> parameter used in the
+<code>lineStyle()</code> method is set differently</p>
+<pre><code>			   (the images are scaled by 200%, to emphasize the
+</code></pre>
+<p>difference):</p>
+<p>If a value is not supplied, the line does not use
+pixel hinting.</p></td></tr><tr><th style="width:25%;"><code>scaleMode</code></th><td><p>A value from the LineScaleMode class that specifies
+which scale mode to use:</p><ul><li>
+<p><code><a href="../../openfl/display/LineScaleMode.html#NORMAL">LineScaleMode.NORMAL</a></code> - Always
+scale the line thickness when the object is scaled</p>
+<pre><code>		   (the default).
+</code></pre></li><li><code><a href="../../openfl/display/LineScaleMode.html#NONE">LineScaleMode.NONE</a></code> - Never scale
+the line thickness.</li><li>
+<p><code><a href="../../openfl/display/LineScaleMode.html#VERTICAL">LineScaleMode.VERTICAL</a></code> - Do not
+scale the line thickness if the object is scaled
+vertically <em>only</em>. For example, consider the
+following circles, drawn with a one-pixel line, and
+each with the <code>scaleMode</code> parameter set to
+<code><a href="../../openfl/display/LineScaleMode.html#VERTICAL">LineScaleMode.VERTICAL</a></code>. The circle on the
+left is scaled vertically only, and the circle on the
+right is scaled both vertically and horizontally:</p></li><li>
+<p><code><a href="../../openfl/display/LineScaleMode.html#HORIZONTAL">LineScaleMode.HORIZONTAL</a></code> - Do not
+scale the line thickness if the object is scaled
+horizontally <em>only</em>. For example, consider the
+following circles, drawn with a one-pixel line, and
+each with the <code>scaleMode</code> parameter set to
+<code><a href="../../openfl/display/LineScaleMode.html#HORIZONTAL">LineScaleMode.HORIZONTAL</a></code>. The circle on
+the left is scaled horizontally only, and the circle
+on the right is scaled both vertically and
+horizontally:</p></li></ul></td></tr><tr><th style="width:25%;"><code>caps</code></th><td><p>A value from the CapsStyle class that specifies the
+type of caps at the end of lines. Valid values are:
+<code><a href="../../openfl/display/CapsStyle.html#NONE">CapsStyle.NONE</a></code>,
+<code><a href="../../openfl/display/CapsStyle.html#ROUND">CapsStyle.ROUND</a></code>, and
+<code><a href="../../openfl/display/CapsStyle.html#SQUARE">CapsStyle.SQUARE</a></code>. If a value is not
+indicated, Flash uses round caps.</p>
+<p>For example, the following illustrations show the
+different <code>capsStyle</code> settings. For each
+setting, the illustration shows a blue line with a
+thickness of 30(for which the <code>capsStyle</code>
+applies), and a superimposed black line with a
+thickness of 1(for which no <code>capsStyle</code>
+applies):</p></td></tr><tr><th style="width:25%;"><code>joints</code></th><td><p>A value from the JointStyle class that specifies the
+type of joint appearance used at angles. Valid values
+are: <code><a href="../../openfl/display/JointStyle.html#BEVEL">JointStyle.BEVEL</a></code>,
+<code><a href="../../openfl/display/JointStyle.html#MITER">JointStyle.MITER</a></code>, and
+<code><a href="../../openfl/display/JointStyle.html#ROUND">JointStyle.ROUND</a></code>. If a value is not
+indicated, Flash uses round joints.</p>
+<p>For example, the following illustrations show the
+different <code>joints</code> settings. For each
+setting, the illustration shows an angled blue line
+with a thickness of 30(for which the
+<code>jointStyle</code> applies), and a superimposed
+angled black line with a thickness of 1(for which no
+<code>jointStyle</code> applies):</p>
+<p><strong>Note:</strong> For <code>joints</code> set to
+<code><a href="../../openfl/display/JointStyle.html#MITER">JointStyle.MITER</a></code>, you can use the
+<code>miterLimit</code> parameter to limit the length
+of the miter.</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="caps"></a><h3 class="anchor"><code><a href="#caps"><span class="identifier">caps</span></a>:<a class="type" title="openfl.display.CapsStyle - The CapsStyle class is an enumeration of constant values that specify the caps style to use in drawing lines." href="../../openfl/display/CapsStyle.html">CapsStyle</a></code></h3><div class="doc"><p>Specifies the type of caps at the end of lines. Valid values are:
+<code><a href="../../openfl/display/CapsStyle.html#NONE">CapsStyle.NONE</a></code>, <code><a href="../../openfl/display/CapsStyle.html#ROUND">CapsStyle.ROUND</a></code>, and
+<code><a href="../../openfl/display/CapsStyle.html#SQUARE">CapsStyle.SQUARE</a></code>. If a value is not indicated, Flash uses
+round caps.</p>
+<p>For example, the following illustrations show the different
+<code>capsStyle</code> settings. For each setting, the illustration shows
+a blue line with a thickness of 30(for which the <code>capsStyle</code>
+applies), and a superimposed black line with a thickness of 1(for which
+no <code>capsStyle</code> applies):</p></div></div><div class="field "><a name="fill"></a><h3 class="anchor"><code><a href="#fill"><span class="identifier">fill</span></a>:<a class="type" title="openfl.display.IGraphicsFill" href="../../openfl/display/IGraphicsFill.html">IGraphicsFill</a></code></h3><div class="doc"><p>Specifies the instance containing data for filling a stroke. An
+IGraphicsFill instance can represent a series of fill commands.</p></div></div><div class="field "><a name="joints"></a><h3 class="anchor"><code><a href="#joints"><span class="identifier">joints</span></a>:<a class="type" title="openfl.display.JointStyle - The JointStyle class is an enumeration of constant values that specify the joint style to use in drawing lines." href="../../openfl/display/JointStyle.html">JointStyle</a></code></h3><div class="doc"><p>Specifies the type of joint appearance used at angles. Valid values are:
+<code><a href="../../openfl/display/JointStyle.html#BEVEL">JointStyle.BEVEL</a></code>, <code><a href="../../openfl/display/JointStyle.html#MITER">JointStyle.MITER</a></code>, and
+<code><a href="../../openfl/display/JointStyle.html#ROUND">JointStyle.ROUND</a></code>. If a value is not indicated, Flash uses
+round joints.</p>
+<p>For example, the following illustrations show the different
+<code>joints</code> settings. For each setting, the illustration shows an
+angled blue line with a thickness of 30(for which the
+<code>jointStyle</code> applies), and a superimposed angled black line
+with a thickness of 1(for which no <code>jointStyle</code> applies):</p>
+<p><strong>Note:</strong> For <code>joints</code> set to
+<code><a href="../../openfl/display/JointStyle.html#MITER">JointStyle.MITER</a></code>, you can use the <code>miterLimit</code>
+parameter to limit the length of the miter.</p></div></div><div class="field "><a name="miterLimit"></a><h3 class="anchor"><code><a href="#miterLimit"><span class="identifier">miterLimit</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the limit at which a miter is cut off. Valid values range from 1
+to 255(and values outside that range are rounded to 1 or 255). This value
+is only used if the <code>jointStyle</code> is set to
+<code>"miter"</code>. The <code>miterLimit</code> value represents the
+length that a miter can extend beyond the point at which the lines meet to
+form a joint. The value expresses a factor of the line
+<code>thickness</code>. For example, with a <code>miterLimit</code> factor
+of 2.5 and a <code>thickness</code> of 10 pixels, the miter is cut off at
+25 pixels.</p>
+<p>For example, consider the following angled lines, each drawn with a
+<code>thickness</code> of 20, but with <code>miterLimit</code> set to 1,
+2, and 4. Superimposed are black reference lines showing the meeting
+points of the joints:</p>
+<p>Notice that a given <code>miterLimit</code> value has a specific
+maximum angle for which the miter is cut off. The following table lists
+some examples:</p></div></div><div class="field "><a name="pixelHinting"></a><h3 class="anchor"><code><a href="#pixelHinting"><span class="identifier">pixelHinting</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Specifies whether to hint strokes to full pixels. This affects both the
+position of anchors of a curve and the line stroke size itself. With
+<code>pixelHinting</code> set to <code><a href="../../Bool.html">true</a></code>, Flash Player hints
+line widths to full pixel widths. With <code>pixelHinting</code> set to
+<code><a href="../../Bool.html">false</a></code>, disjoints can appear for curves and straight lines.
+For example, the following illustrations show how Flash Player renders two
+rounded rectangles that are identical, except that the
+<code>pixelHinting</code> parameter used in the <code>lineStyle()</code>
+method is set differently(the images are scaled by 200%, to emphasize the
+difference):</p></div></div><div class="field "><a name="scaleMode"></a><h3 class="anchor"><code><a href="#scaleMode"><span class="identifier">scaleMode</span></a>:<a class="type" title="openfl.display.LineScaleMode - The LineScaleMode class provides values for the scaleMode parameter in the Graphics." href="../../openfl/display/LineScaleMode.html">LineScaleMode</a></code></h3><div class="doc"><p>Specifies the stroke thickness scaling. Valid values are:</p>
+<p><code><a href="../../openfl/display/LineScaleMode.html#NORMAL">LineScaleMode.NORMAL</a></code> - Always scale the line thickness</p>
+<pre><code>	when the object is scaled(the default).
+</code></pre>
+<p><code><a href="../../openfl/display/LineScaleMode.html#NONE">LineScaleMode.NONE</a></code> - Never scale the line thickness.</p>
+<p><code><a href="../../openfl/display/LineScaleMode.html#VERTICAL">LineScaleMode.VERTICAL</a></code> - Do not scale the line</p>
+<pre><code>	thickness if the object is scaled vertically _only_. For example,
+	consider the following circles, drawn with a one-pixel line, and each with
+	the `scaleMode` parameter set to
+	`LineScaleMode.VERTICAL`. The circle on the left is scaled
+	vertically only, and the circle on the right is scaled both vertically and
+	horizontally:
+</code></pre>
+<p><code><a href="../../openfl/display/LineScaleMode.html#HORIZONTAL">LineScaleMode.HORIZONTAL</a></code> - Do not scale the line</p>
+<pre><code>	thickness if the object is scaled horizontally _only_. For example,
+	consider the following circles, drawn with a one-pixel line, and each with
+	the `scaleMode` parameter set to
+	`LineScaleMode.HORIZONTAL`. The circle on the left is scaled
+	horizontally only, and the circle on the right is scaled both vertically
+	and horizontally:
+</code></pre></div></div><div class="field "><a name="thickness"></a><h3 class="anchor"><code><a href="#thickness"><span class="identifier">thickness</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the thickness of the line in points; valid values are 0-255. If
+a number is not specified, or if the parameter is undefined, a line is not
+drawn. If a value of less than 0 is passed, the default is 0. The value 0
+indicates hairline thickness; the maximum thickness is 255. If a value
+greater than 255 is passed, the default is 255.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

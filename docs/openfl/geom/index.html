@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.geom</title></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><h1>openfl.geom </h1>  <table class="table table-condensed"><tbody><tr><th style="width:200px;"><i class="fa fa-folder-o"></i><a href="../../openfl/index.html" title="openfl">..</a></th><td></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/geom/ColorTransform.html" title="openfl.geom.ColorTransform">ColorTransform</a></td><td><p>The ColorTransform class lets you adjust the color values in a display
+object. The color adjustment or <em>color transformation</em> can be applied
+to all four channels: red, green, blue, and alpha transparency.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/geom/Matrix.html" title="openfl.geom.Matrix">Matrix</a></td><td><p>The Matrix class represents a transformation matrix that determines how to
+map points from one coordinate space to another. You can perform various
+graphical transformations on a display object by setting the properties of
+a Matrix object, applying that Matrix object to the <code>matrix</code> property of a
+Transform object, and then applying that Transform object as the
+<code>transform</code> property of the display object. These transformation functions
+include translation (<em>x</em> and <em>y</em> repositioning), rotation, scaling, and
+skewing.
+Together these types of transformations are known as <em>affine
+transformations</em>. Affine transformations preserve the straightness of
+lines while transforming, so that parallel lines stay parallel.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/geom/Matrix3D.html" title="openfl.geom.Matrix3D">Matrix3D</a></td><td><p>The Matrix3D class represents a transformation matrix that determines the position and
+orientation of a three-dimensional (3D) display object. The matrix can perform
+transformation functions including translation (repositioning along the x, y, and z
+axes), rotation, and scaling (resizing). The Matrix3D class can also perform
+perspective projection, which maps points from the 3D coordinate space to a
+two-dimensional (2D) view.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/geom/Orientation3D.html" title="openfl.geom.Orientation3D">Orientation3D</a></td><td><p>The Orientation3D class is an enumeration of constant
+values for representing the orientation style of a Matrix3D object.
+The three types of orientation are Euler angles, axis angle, and quaternion.
+The <code>decompose</code> and <code>recompose</code> methods of the Matrix3D object take one of these
+enumerated types to identify the rotational components of the Matrix.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/geom/Point.html" title="openfl.geom.Point">Point</a></td><td><p>The Point object represents a location in a two-dimensional coordinate
+system, where <em>x</em> represents the horizontal axis and <em>y</em>
+represents the vertical axis.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/geom/Rectangle.html" title="openfl.geom.Rectangle">Rectangle</a></td><td><p>A Rectangle object is an area defined by its position, as indicated by its
+top-left corner point(<em>x</em>, <em>y</em>) and by its width and its height.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/geom/Transform.html" title="openfl.geom.Transform">Transform</a></td><td><p>The Transform class provides access to color adjustment properties and two-
+or three-dimensional transformation objects that can be applied to a
+display object. During the transformation, the color or the orientation and
+position of a display object is adjusted(offset) from the current values
+or coordinates to new values or coordinates. The Transform class also
+collects data about color and two-dimensional matrix transformations that
+are applied to a display object and all of its parent objects. You can
+access these combined transformations through the
+<code>concatenatedColorTransform</code> and <code>concatenatedMatrix</code>
+properties.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/geom/Vector3D.html" title="openfl.geom.Vector3D">Vector3D</a></td><td><p>The Vector3D class represents a point or a location in the three-dimensional space using
+the Cartesian coordinates x, y, and z. As in a two-dimensional space, the <code>x</code> property
+represents the horizontal axis and the <code>y</code> property represents the vertical axis. In
+three-dimensional space, the <code>z</code> property represents depth. The value of the <code>x</code> property increases as the object moves to the right. The value of the <code>y</code> property
+increases as the object moves down. The <code>z</code> property increases as the object moves
+farther from the point of view. Using perspective projection and scaling, the object is
+seen to be bigger when near and smaller when farther away from the screen. As in a
+right-handed three-dimensional coordinate system, the positive z-axis points away from
+the viewer and the value of the <code>z</code> property increases as the object moves away from the
+viewer's eye. The origin point (0,0,0) of the global space is the upper-left corner of
+the stage.</p></td></tr></tbody></table></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.display.GraphicsGradientFill</title><meta name="description" content="Defines a gradient fill.
+Use a GraphicsGradientFill object with the &lt;code&gt;&lt;a href=&quot;../../openfl/display/Graphics.html#drawGraphicsData&quot;&gt;Graphics.drawGraphicsData&lt;/a&gt;()&lt;/code&gt;
+method. Drawing a GraphicsGradientFill object is the equivalent of calling
+the &lt;code&gt;&lt;a href=&quot;../../openfl/display/Graphics.html#beginGradientFill&quot;&gt;Graphics.beginGradientFill&lt;/a&gt;()&lt;/code&gt; method."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> GraphicsGradientFill</h1><h4><small>package <a href="../../openfl/display/index.html">openfl.display</a></small></h4>    <h4><small>implements <a class="type" title="openfl.display.IGraphicsFill" href="../../openfl/display/IGraphicsFill.html">IGraphicsFill</a>, <a class="type" title="openfl.display.IGraphicsData" href="../../openfl/display/IGraphicsData.html">IGraphicsData</a></small></h4><span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>Defines a gradient fill.
+Use a GraphicsGradientFill object with the <code><a href="../../openfl/display/Graphics.html#drawGraphicsData">Graphics.drawGraphicsData</a>()</code>
+method. Drawing a GraphicsGradientFill object is the equivalent of calling
+the <code><a href="../../openfl/display/Graphics.html#beginGradientFill">Graphics.beginGradientFill</a>()</code> method.</p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ focalPointRatio : 0, interpolationMethod : null, spreadMethod : null, matrix : null, ratios : null, alphas : null, colors : null, type : null })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">?type:<a class="type" title="openfl.display.GradientType - The GradientType class provides values for the type parameter in the beginGradientFill() and lineGradientStyle() methods of the openfl." href="../../openfl/display/GradientType.html">GradientType</a>,</span> <span style="white-space:nowrap">?colors:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">?alphas:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">?ratios:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">?matrix:<a class="type" title="openfl.geom.Matrix - The Matrix class represents a transformation matrix that determines how to map points from one coordinate space to another." href="../../openfl/geom/Matrix.html">Matrix</a>,</span> <span style="white-space:nowrap">?spreadMethod:<a class="type" title="openfl.display.SpreadMethod - The SpreadMethod class provides values for the spreadMethod parameter in the beginGradientFill() and lineGradientStyle() methods of the Graphics class." href="../../openfl/display/SpreadMethod.html">SpreadMethod</a>,</span> <span style="white-space:nowrap">?interpolationMethod:<a class="type" title="openfl.display.InterpolationMethod - The InterpolationMethod class provides values for the interpolationMethod parameter in the Graphics." href="../../openfl/display/InterpolationMethod.html">InterpolationMethod</a>,</span> <span style="white-space:nowrap">focalPointRatio:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 0</span>)</code></h3><div class="doc"><p>Creates a new GraphicsGradientFill object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>A value from the GradientType class that
+specifies which gradient type to use:
+<code><a href="../../openfl/display/GradientType.html#LINEAR">GradientType.LINEAR</a></code> or
+<code><a href="../../openfl/display/GradientType.html#RADIAL">GradientType.RADIAL</a></code>.</p></td></tr><tr><th style="width:25%;"><code>matrix</code></th><td><p>A transformation matrix as defined by the
+openfl.geom.Matrix class. The
+openfl.geom.Matrix class includes a
+<code>createGradientBox()</code> method, which lets
+you conveniently set up the matrix for use
+with the <code>beginGradientFill()</code> method.</p></td></tr><tr><th style="width:25%;"><code>spreadMethod</code></th><td><p>A value from the SpreadMethod class that
+specifies which spread method to use,
+either: <code><a href="../../openfl/display/SpreadMethod.html#PAD">SpreadMethod.PAD</a></code>,
+<code><a href="../../openfl/display/SpreadMethod.html#REFLECT">SpreadMethod.REFLECT</a></code>, or
+<code><a href="../../openfl/display/SpreadMethod.html#REPEAT">SpreadMethod.REPEAT</a></code>.</p></td></tr><tr><th style="width:25%;"><code>interpolationMethod</code></th><td><p>A value from the InterpolationMethod class
+that specifies which value to use:
+<code><a href="../../openfl/display/InterpolationMethod.html#LINEAR_RGB">InterpolationMethod.LINEAR_RGB</a></code> or
+<code><a href="../../openfl/display/InterpolationMethod.html#RGB">InterpolationMethod.RGB</a></code></p></td></tr><tr><th style="width:25%;"><code>focalPointRatio</code></th><td><p>A number that controls the location of the
+focal point of the gradient. A value of 0
+sets the focal point in the center. A value
+of 1 sets the focal point at one border of
+the gradient circle. A value of -1 sets the
+focal point at the other border of the
+gradient circle. A value less than -1 or
+greater than 1 is rounded to -1 or 1,
+respectively.</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="alphas"></a><h3 class="anchor"><code><a href="#alphas"><span class="identifier">alphas</span></a>:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;</code></h3><div class="doc"><p>An array of alpha values for the corresponding colors in the colors
+array. Valid values are between 0 and 1. If the value is less than 0,
+0 is used. If the value is greater than 1, 1 is used.</p></div></div><div class="field "><a name="colors"></a><h3 class="anchor"><code><a href="#colors"><span class="identifier">colors</span></a>:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;</code></h3><div class="doc"><p>An array of RGB hexadecimal color values to use in the gradient. For
+example, red is 0xFF0000, blue is 0x0000FF, and so on. You can specify
+up to 15 colors. For each color, specify a corresponding value in the
+alphas and ratios properties.</p></div></div><div class="field "><a name="focalPointRatio"></a><h3 class="anchor"><code><a href="#focalPointRatio"><span class="identifier">focalPointRatio</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>A number that controls the location of the focal point of the
+gradient. A value of 0 sets the focal point in the center. A value of
+1 means that the focal point is at one border of the gradient circle.A
+value of -1 sets the focal point at the other border of the gradient
+circle. A value of less than -1 or greater than 1 is rounded to -1 or
+1, respectively. For example, the following shows a <code>focalPointRatio</code>
+set to 0.75:</p>
+<p><img src="/images/radial_sketch.jpg" alt="radial gradient with focalPointRatio set to 0.75" /></p></div></div><div class="field "><a name="interpolationMethod"></a><h3 class="anchor"><code><a href="#interpolationMethod"><span class="identifier">interpolationMethod</span></a>:<a class="type" title="openfl.display.InterpolationMethod - The InterpolationMethod class provides values for the interpolationMethod parameter in the Graphics." href="../../openfl/display/InterpolationMethod.html">InterpolationMethod</a></code></h3><div class="doc"><p>A value from the InterpolationMethod class that specifies which value
+to use. Valid values are: <code><a href="../../openfl/display/InterpolationMethod.html#LINEAR_RGB">InterpolationMethod.LINEAR_RGB</a></code> or
+<code><a href="../../openfl/display/InterpolationMethod.html#RGB">InterpolationMethod.RGB</a></code>
+For example, the following shows a simple linear gradient between two
+colors (with the <code>spreadMethod</code> parameter set to
+<code><a href="../../openfl/display/SpreadMethod.html#REFLECT">SpreadMethod.REFLECT</a></code>). The different interpolation methods change
+the appearance as follows:</p><table><thead><th><code><a href="../../openfl/display/InterpolationMethod.html#LINEAR_RGB">InterpolationMethod.LINEAR_RGB</a></code></th><th><code><a href="../../openfl/display/InterpolationMethod.html#RGB">InterpolationMethod.RGB</a></code></th></thead><tbody><tr><td><img src="/images/beginGradientFill_interp_linearrgb.jpg" alt="linear gradient with InterpolationMethod.LINEAR_RGB" /></td><td><img src="/images/beginGradientFill_interp_rgb.jpg" alt="linear gradient with InterpolationMethod.RGB" /></td></tr></tbody></table></div></div><div class="field "><a name="matrix"></a><h3 class="anchor"><code><a href="#matrix"><span class="identifier">matrix</span></a>:<a class="type" title="openfl.geom.Matrix - The Matrix class represents a transformation matrix that determines how to map points from one coordinate space to another." href="../../openfl/geom/Matrix.html">Matrix</a></code></h3><div class="doc"><p>A transformation matrix as defined by the Matrix class. The
+openfl.geom.Matrix class includes a <code>createGradientBox()</code> method to set
+up the matrix for use with the <code>beginGradientFill()</code> method.</p></div></div><div class="field "><a name="ratios"></a><h3 class="anchor"><code><a href="#ratios"><span class="identifier">ratios</span></a>:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;</code></h3><div class="doc"><p>An array of color distribution ratios. Valid values are between 0 and
+255. This value defines the percentage of the width where the color is
+sampled at 100%. The value 0 represents the left position in the
+gradient box, and the value 255 represents the right position in the
+gradient box.
+<strong>Note:</strong> This value represents positions in the gradient box, not the
+coordinate space of the final gradient which can be wider or thinner
+than the gradient box. Specify a value for corresponding to each value
+in the <code>colors</code> property.</p>
+<p>For example, for a linear gradient that includes two colors (blue and
+green) the following example illustrates the placement of the colors
+in the gradient based on different values in the <code>ratios</code> array:</p><table><thead><th><code>ratios</code></th><th>Gradient</th></thead><tbody><tr><td><code>[0, 127]</code></td><td><img src="/images/gradient-ratios-1.jpg" alt="linear gradient blue to green with ratios 0 and 127" /></td></tr><tr><td><code>[0, 255]</code></td><td><img src="/images/gradient-ratios-2.jpg" alt="linear gradient blue to green with ratios 0 and 255" /></td></tr><tr><td><code>[127, 255]</code></td><td><img src="/images/gradient-ratios-3.jpg" alt="linear gradient blue to green with ratios 127 and 255" /></td></tr></tbody></table>
+<p>The values in the array must increase sequentially; for example, <code>[0,
+63, 127, 190, 255]</code>.</p></div></div><div class="field "><a name="spreadMethod"></a><h3 class="anchor"><code><a href="#spreadMethod"><span class="identifier">spreadMethod</span></a>:<a class="type" title="openfl.display.SpreadMethod - The SpreadMethod class provides values for the spreadMethod parameter in the beginGradientFill() and lineGradientStyle() methods of the Graphics class." href="../../openfl/display/SpreadMethod.html">SpreadMethod</a></code></h3><div class="doc"><p>A value from the SpreadMethod class that specifies which spread method
+to use. Valid values are: <code><a href="../../openfl/display/SpreadMethod.html#PAD">SpreadMethod.PAD</a></code>, <code><a href="../../openfl/display/SpreadMethod.html#REFLECT">SpreadMethod.REFLECT</a></code>,
+or <code><a href="../../openfl/display/SpreadMethod.html#REPEAT">SpreadMethod.REPEAT</a></code>.</p>
+<p>For example, the following shows a simple linear gradient between two
+colors:</p>
+<pre><code class="prettyprint haxe">import openfl.geom.*;
+import openfl.display.*;
+
+var fillType = GradientType.LINEAR;
+var colors = [0xFF0000, 0x0000FF];
+var alphas = [1, 1];
+var ratios = [0x00, 0xFF];
+var matr = new Matrix();
+matr.createGradientBox(20, 20, 0, 0, 0);
+var spreadMethod = SpreadMethod.PAD;
+graphics.beginGradientFill(fillType, colors, alphas, ratios, matr, spreadMethod);
+graphics.drawRect(0,0,100,100);</code></pre>
+<p>This example uses <code><a href="../../openfl/display/SpreadMethod.html#PAD">SpreadMethod.PAD</a></code> for the spread method, and the
+gradient fill looks like the following:</p>
+<p><img src="/images/beginGradientFill_spread_pad.jpg" alt="linear gradient with SpreadMethod.PAD" /></p>
+<p>If you use <code><a href="../../openfl/display/SpreadMethod.html#REFLECT">SpreadMethod.REFLECT</a></code> for the spread method, the gradient
+fill looks like the following:</p>
+<p><img src="/images/beginGradientFill_spread_reflect.jpg" alt="linear gradient with SpreadMethod.REFLECT" /></p>
+<p>If you use <code><a href="../../openfl/display/SpreadMethod.html#REPEAT">SpreadMethod.REPEAT</a></code> for the spread method, the gradient
+fill looks like the following:</p>
+<p><img src="/images/beginGradientFill_spread_repeat.jpg" alt="linear gradient with SpreadMethod.REPEAT" /></p></div></div><div class="field "><a name="type"></a><h3 class="anchor"><code><a href="#type"><span class="identifier">type</span></a>:<a class="type" title="openfl.display.GradientType - The GradientType class provides values for the type parameter in the beginGradientFill() and lineGradientStyle() methods of the openfl." href="../../openfl/display/GradientType.html">GradientType</a></code></h3><div class="doc"><p>A value from the GradientType class that specifies which gradient type
+to use. Values are <code><a href="../../openfl/display/GradientType.html#LINEAR">GradientType.LINEAR</a></code> or <code><a href="../../openfl/display/GradientType.html#RADIAL">GradientType.RADIAL</a></code>.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

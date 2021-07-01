@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.display.Graphics</title><meta name="description" content="The Graphics class contains a set of methods that you can use to create a
+vector shape. Display objects that support drawing include Sprite and Shape
+objects. Each of these classes includes a &lt;code&gt;graphics&lt;/code&gt; property
+that is a Graphics object. The following are among those helper functions
+provided for ease of use: &lt;code&gt;drawRect()&lt;/code&gt;,
+&lt;code&gt;drawRoundRect()&lt;/code&gt;, &lt;code&gt;drawCircle()&lt;/code&gt;, and
+&lt;code&gt;drawEllipse()&lt;/code&gt;."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> Graphics</h1><h4><small>package <a href="../../openfl/display/index.html">openfl.display</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.DisplayObject)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.GraphicsPath)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.IGraphicsData)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.IGraphicsFill)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.Shader)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.geom.Matrix)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.geom.Rectangle)</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>The Graphics class contains a set of methods that you can use to create a
+vector shape. Display objects that support drawing include Sprite and Shape
+objects. Each of these classes includes a <code>graphics</code> property
+that is a Graphics object. The following are among those helper functions
+provided for ease of use: <code>drawRect()</code>,
+<code>drawRoundRect()</code>, <code>drawCircle()</code>, and
+<code>drawEllipse()</code>.</p>
+<p>You cannot create a Graphics object directly from ActionScript code. If
+you call <code>new <a href="../../openfl/display/Graphics.html#Graphics">Graphics</a>()</code>, an exception is thrown.</p>
+<p>The Graphics class is final; it cannot be subclassed.</p></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="beginBitmapFill"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ smooth : false, repeat : true, matrix : null })</span><a href="#beginBitmapFill"><span class="identifier">beginBitmapFill</span></a>(<span style="white-space:nowrap">bitmap:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>,</span> <span style="white-space:nowrap">?matrix:<a class="type" title="openfl.geom.Matrix - The Matrix class represents a transformation matrix that determines how to map points from one coordinate space to another." href="../../openfl/geom/Matrix.html">Matrix</a>,</span> <span style="white-space:nowrap">repeat:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = true,</span> <span style="white-space:nowrap">smooth:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Fills a drawing area with a bitmap image. The bitmap can be repeated or
+tiled to fill the area. The fill remains in effect until you call the
+<code>beginFill()</code>, <code>beginBitmapFill()</code>,
+<code>beginGradientFill()</code>, or <code>beginShaderFill()</code>
+method. Calling the <code>clear()</code> method clears the fill.</p>
+<p>The application renders the fill whenever three or more points are
+drawn, or when the <code>endFill()</code> method is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>bitmap</code></th><td><p>A transparent or opaque bitmap image that contains the bits
+to be displayed.</p></td></tr><tr><th style="width:25%;"><code>matrix</code></th><td><p>A matrix object(of the openfl.geom.Matrix class), which you
+can use to define transformations on the bitmap. For
+example, you can use the following matrix to rotate a bitmap
+by 45 degrees(pi/4 radians):</p>
+<pre><code class="prettyprint haxe">matrix = new openfl.geom.Matrix();
+	 	matrix.rotate(Math.PI / 4);
+	 	```
+
+</code></pre></td></tr><tr><th style="width:25%;"><code>repeat</code></th><td><p>If <code><a href="../../Bool.html">true</a></code>, the bitmap image repeats in a tiled
+pattern. If <code><a href="../../Bool.html">false</a></code>, the bitmap image does not
+repeat, and the edges of the bitmap are used for any fill
+area that extends beyond the bitmap.</p>
+<p>For example, consider the following bitmap(a 20 x
+20-pixel checkerboard pattern):</p>
+<p><img src="/images/movieClip_beginBitmapFill_repeat_1.jpg" alt="20 by 20 pixel checkerboard" /></p>
+<p>When <code>repeat</code> is set to <code><a href="../../Bool.html">true</a></code>(as
+in the following example), the bitmap fill repeats the
+bitmap:</p>
+<p><img src="/images/movieClip_beginBitmapFill_repeat_2.jpg" alt="60 by 60 pixel checkerboard" /></p>
+<p>When <code>repeat</code> is set to <code><a href="../../Bool.html">false</a></code>,
+the bitmap fill uses the edge pixels for the fill area
+outside the bitmap:</p>
+<p><img src="/images/movieClip_beginBitmapFill_repeat_3.jpg" alt="60 by 60 pixel image with no repeating" /></p></td></tr><tr><th style="width:25%;"><code>smooth</code></th><td><p>If <code><a href="../../Bool.html">false</a></code>, upscaled bitmap images are rendered
+by using a nearest-neighbor algorithm and look pixelated. If
+<code><a href="../../Bool.html">true</a></code>, upscaled bitmap images are rendered by
+using a bilinear algorithm. Rendering by using the nearest
+neighbor algorithm is faster.</p></td></tr></table></div></div><div class="field "><a name="beginFill"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ alpha : 1, color : 0 })</span><a href="#beginFill"><span class="identifier">beginFill</span></a>(<span style="white-space:nowrap">color:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">alpha:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 1</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Specifies a simple one-color fill that subsequent calls to other Graphics
+methods(such as <code>lineTo()</code> or <code>drawCircle()</code>) use
+when drawing. The fill remains in effect until you call the
+<code>beginFill()</code>, <code>beginBitmapFill()</code>,
+<code>beginGradientFill()</code>, or <code>beginShaderFill()</code>
+method. Calling the <code>clear()</code> method clears the fill.</p>
+<p>The application renders the fill whenever three or more points are
+drawn, or when the <code>endFill()</code> method is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>color</code></th><td><p>The color of the fill(0xRRGGBB).</p></td></tr><tr><th style="width:25%;"><code>alpha</code></th><td><p>The alpha value of the fill(0.0 to 1.0).</p></td></tr></table></div></div><div class="field "><a name="beginGradientFill"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ focalPointRatio : 0, interpolationMethod : InterpolationMethod.RGB, spreadMethod : SpreadMethod.PAD, matrix : null })</span><a href="#beginGradientFill"><span class="identifier">beginGradientFill</span></a>(<span style="white-space:nowrap">type:<a class="type" title="openfl.display.GradientType - The GradientType class provides values for the type parameter in the beginGradientFill() and lineGradientStyle() methods of the openfl." href="../../openfl/display/GradientType.html">GradientType</a>,</span> <span style="white-space:nowrap">colors:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">alphas:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">ratios:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">?matrix:<a class="type" title="openfl.geom.Matrix - The Matrix class represents a transformation matrix that determines how to map points from one coordinate space to another." href="../../openfl/geom/Matrix.html">Matrix</a>,</span> <span style="white-space:nowrap">spreadMethod:<a class="type" title="openfl.display.SpreadMethod - The SpreadMethod class provides values for the spreadMethod parameter in the beginGradientFill() and lineGradientStyle() methods of the Graphics class." href="../../openfl/display/SpreadMethod.html">SpreadMethod</a> = SpreadMethod.PAD,</span> <span style="white-space:nowrap">interpolationMethod:<a class="type" title="openfl.display.InterpolationMethod - The InterpolationMethod class provides values for the interpolationMethod parameter in the Graphics." href="../../openfl/display/InterpolationMethod.html">InterpolationMethod</a> = InterpolationMethod.RGB,</span> <span style="white-space:nowrap">focalPointRatio:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 0</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Specifies a gradient fill used by subsequent calls to other Graphics
+methods(such as <code>lineTo()</code> or <code>drawCircle()</code>) for
+the object. The fill remains in effect until you call the
+<code>beginFill()</code>, <code>beginBitmapFill()</code>,
+<code>beginGradientFill()</code>, or <code>beginShaderFill()</code>
+method. Calling the <code>clear()</code> method clears the fill.</p>
+<p>The application renders the fill whenever three or more points are
+drawn, or when the <code>endFill()</code> method is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>A value from the GradientType class that specifies which gradient type to use:
+<code><a href="../../openfl/display/GradientType.html#LINEAR">GradientType.LINEAR</a></code> or <code><a href="../../openfl/display/GradientType.html#RADIAL">GradientType.RADIAL</a></code>.</p></td></tr><tr><th style="width:25%;"><code>colors</code></th><td><p>An array of RGB hexadecimal color values used in the gradient; for example, red is 0xFF0000,
+blue is 0x0000FF, and so on. You can specify up to 15 colors. For each color, specify a corresponding value
+in the <code>alphas</code> and <code>ratios</code> parameters.</p></td></tr><tr><th style="width:25%;"><code>alphas</code></th><td><p>An array of alpha values for the corresponding colors in the <code>colors</code> array; valid values
+are 0 to 1. If the value is less than 0, the default is 0. If the value is greater than 1, the default is 1.</p></td></tr><tr><th style="width:25%;"><code>ratios</code></th><td><p>An array of color distribution ratios; valid values are 0-255. This value defines the
+percentage of the width where the color is sampled at 100%. The value 0 represents the left position in the
+gradient box, and 255 represents the right position in the gradient box.
+<strong>Note:</strong> This value represents positions in the gradient box, not the coordinate space of the final gradient,
+which can be wider or thinner than the gradient box. Specify a value for each value in the <code>colors</code> parameter.
+For example, for a linear gradient that includes two colors, blue and green, the following example illustrates
+the placement of the colors in the gradient based on different values in the ratios array:
+| ratios | Gradient |
+| --- | --- |
+| <code>[0, 127]</code> | <img src="/images/gradient-ratios-1.jpg" alt="linear gradient blue to green with ratios 0 and 127" /> |
+| <code>[0, 255]</code> | <img src="/images/gradient-ratios-2.jpg" alt="linear gradient blue to green with ratios 0 and 255" /> |
+| <code>[127, 255]</code> | <img src="/images/gradient-ratios-3.jpg" alt="linear gradient blue to green with ratios 127 and 255" /> |
+The values in the array must increase sequentially; for example, <code>[0, 63, 127, 190, 255]</code>.</p></td></tr><tr><th style="width:25%;"><code>matrix</code></th><td><p>A transformation matrix as defined by the openfl.geom.Matrix class. The openfl.geom.Matrix
+class includes a <code>createGradientBox()</code> method, which lets you conveniently set up the matrix for use with the
+<code>beginGradientFill()</code> method.</p></td></tr><tr><th style="width:25%;"><code>spreadMethod</code></th><td><p>A value from the SpreadMethod class that specifies which spread method to use, either:
+<code><a href="../../openfl/display/SpreadMethod.html#PAD">SpreadMethod.PAD</a></code>, <code><a href="../../openfl/display/SpreadMethod.html#REFLECT">SpreadMethod.REFLECT</a></code>, or <code><a href="../../openfl/display/SpreadMethod.html#REPEAT">SpreadMethod.REPEAT</a></code>.
+For example, consider a simple linear gradient between two colors:</p>
+<pre><code class="prettyprint as3">import flash.geom.*
+import flash.display.*
+var fillType:String = GradientType.LINEAR;
+var colors:Array = [0xFF0000, 0x0000FF];
+var alphas:Array = [1, 1];
+var ratios:Array = [0x00, 0xFF];
+var matr:Matrix = new Matrix();
+matr.createGradientBox(20, 20, 0, 0, 0);
+var spreadMethod:String = SpreadMethod.PAD;
+this.graphics.beginGradientFill(fillType, colors, alphas, ratios, matr, spreadMethod);
+this.graphics.drawRect(0,0,100,100);</code></pre>
+<p>This example uses <code><a href="../../openfl/display/SpreadMethod.html#PAD">SpreadMethod.PAD</a></code> for the spread method, and the gradient fill looks like the following:
+<img src="/images/beginGradientFill_spread_pad.jpg" alt="linear gradient with SpreadMethod.PAD" />
+If you use SpreadMethod.REFLECT for the spread method, the gradient fill looks like the following:
+<img src="/images/beginGradientFill_spread_reflect.jpg" alt="linear gradient with SpreadMethod.REFLECT" />
+If you use SpreadMethod.REPEAT for the spread method, the gradient fill looks like the following:
+<img src="/images/beginGradientFill_spread_repeat.jpg" alt="linear gradient with SpreadMethod.REPEAT" /></p></td></tr><tr><th style="width:25%;"><code>interpolationMethod</code></th><td><p>A value from the InterpolationMethod class that specifies which value to use:
+<code><a href="../../openfl/display/InterpolationMethod.html#LINEAR_RGB">InterpolationMethod.LINEAR_RGB</a></code> or <code><a href="../../openfl/display/InterpolationMethod.html#RGB">InterpolationMethod.RGB</a></code>
+For example, consider a simple linear gradient between two colors (with the <code>spreadMethod</code> parameter set to
+<code><a href="../../openfl/display/SpreadMethod.html#REFLECT">SpreadMethod.REFLECT</a></code>). The different interpolation methods affect the appearance as follows:
+| | |
+| --- | --- |
+| <img src="/images/beginGradientFill_interp_linearrgb.jpg" alt="linear gradient with InterpolationMethod.LINEAR_RGB" /><br><code><a href="../../openfl/display/InterpolationMethod.html#LINEAR_RGB">InterpolationMethod.LINEAR_RGB</a></code> | <img src="/images/beginGradientFill_interp_rgb.jpg" alt="linear gradient with InterpolationMethod.RGB" /><br><code><a href="../../openfl/display/InterpolationMethod.html#RGB">InterpolationMethod.RGB</a></code> |</p></td></tr><tr><th style="width:25%;"><code>focalPointRatio</code></th><td><p>A number that controls the location of the focal point of the gradient. 0 means that
+the focal point is in the center. 1 means that the focal point is at one border of the gradient circle. -1
+means that the focal point is at the other border of the gradient circle. A value less than -1 or greater
+than 1 is rounded to -1 or 1. For example, the following example shows a <code>focalPointRatio</code> set to 0.75:
+<img src="/images/radial_sketch.jpg" alt="radial gradient with focalPointRatio set to 0.75" /></p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>If the <code>type</code> parameter is not valid.</p></td></tr></table></div></div><div class="field "><a name="beginShaderFill"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ matrix : null })</span><a href="#beginShaderFill"><span class="identifier">beginShaderFill</span></a>(<span style="white-space:nowrap">shader:<a class="type" title="openfl.display.Shader - // TODO: Document GLSL Shaders A Shader instance represents a Pixel Bender shader kernel in ActionScript." href="../../openfl/display/Shader.html">Shader</a>,</span> <span style="white-space:nowrap">?matrix:<a class="type" title="openfl.geom.Matrix - The Matrix class represents a transformation matrix that determines how to map points from one coordinate space to another." href="../../openfl/geom/Matrix.html">Matrix</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Specifies a shader fill used by subsequent calls to other Graphics
+methods (such as <code>lineTo()</code> or <code>drawCircle()</code>) for the object. The
+fill remains in effect until you call the <code>beginFill()</code>,
+<code>beginBitmapFill()</code>, <code>beginGradientFill()</code>, or <code>beginShaderFill()</code>
+method. Calling the <code>clear()</code> method clears the fill.
+The application renders the fill whenever three or more points are
+drawn, or when the <code>endFill()</code> method is called.</p>
+<p>Shader fills are not supported under GPU rendering; filled areas will
+be colored cyan.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>shader</code></th><td><p>The shader to use for the fill. This Shader instance is
+not required to specify an image input. However, if an
+image input is specified in the shader, the input must
+be provided manually. To specify the input, set the
+<code>input</code> property of the corresponding ShaderInput
+property of the <code><a href="../../openfl/display/Shader.html#data">Shader.data</a></code> property.
+When you pass a Shader instance as an argument the
+shader is copied internally. The drawing fill operation
+uses that internal copy, not a reference to the original
+shader. Any changes made to the shader, such as changing
+a parameter value, input, or bytecode, are not applied
+to the copied shader that's used for the fill.</p></td></tr><tr><th style="width:25%;"><code>matrix</code></th><td><p>A matrix object (of the openfl.geom.Matrix class), which
+you can use to define transformations on the shader. For
+example, you can use the following matrix to rotate a
+shader by 45 degrees (pi/4 radians):</p>
+<pre><code class="prettyprint haxe">matrix = new openfl.geom.Matrix();
+matrix.rotate(Math.PI / 4);</code></pre>
+<p>The coordinates received in the shader are based on the
+matrix that is specified for the <code>matrix</code> parameter. For
+a default (<code>null</code>) matrix, the coordinates in the shader
+are local pixel coordinates which can be used to sample
+an input.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>When the shader output type is not compatible
+with this operation (the shader must specify a
+<code>pixel3</code> or <code>pixel4</code> output).</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>When the shader specifies an image input that
+isn't provided.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>When a ByteArray or Vector.<Number> instance is
+used as an input and the <code>width</code> and <code>height</code>
+properties aren't specified for the ShaderInput,
+or the specified values don't match the amount
+of data in the input object. See the
+<code><a href="../../openfl/display/ShaderInput.html#input">ShaderInput.input</a></code> property for more
+information.</p></td></tr></table></div></div><div class="field "><a name="clear"></a><h3 class="anchor"><code><a href="#clear"><span class="identifier">clear</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Clears the graphics that were drawn to this Graphics object, and resets
+fill and line style settings.</p></div></div><div class="field "><a name="copyFrom"></a><h3 class="anchor"><code><a href="#copyFrom"><span class="identifier">copyFrom</span></a>(<span style="white-space:nowrap">sourceGraphics:<a class="type" title="openfl.display.Graphics - The Graphics class contains a set of methods that you can use to create a vector shape." href="../../openfl/display/Graphics.html">Graphics</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Copies all of drawing commands from the source Graphics object into
+the calling Graphics object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sourceGraphics</code></th><td><p>The Graphics object from which to copy the
+drawing commands.</p></td></tr></table></div></div><div class="field "><a name="cubicCurveTo"></a><h3 class="anchor"><code><a href="#cubicCurveTo"><span class="identifier">cubicCurveTo</span></a>(<span style="white-space:nowrap">controlX1:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">controlY1:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">controlX2:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">controlY2:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">anchorX:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">anchorY:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Draws a cubic Bezier curve from the current drawing position to the specified
+anchor point. Cubic Bezier curves consist of two anchor points and two control
+points. The curve interpolates the two anchor points and curves toward the two
+control points.</p>
+<p><img src="/images/cubic_bezier.png" alt="cubic bezier" /></p>
+<p>The four points you use to draw a cubic Bezier curve with the <code>cubicCurveTo()</code>
+method are as follows:</p><ul><li>The current drawing position is the first anchor point.</li><li>The <code>anchorX</code> and <code>anchorY</code> parameters specify the second anchor point.</li><li>The <code>controlX1</code> and <code>controlY1</code> parameters specify the first control point.</li><li>The <code>controlX2</code> and <code>controlY2</code> parameters specify the second control point.</li></ul>
+<p>If you call the <code>cubicCurveTo()</code> method before calling the <code>moveTo()</code> method, your
+curve starts at position (0, 0).</p>
+<p>If the <code>cubicCurveTo()</code> method succeeds, the OpenFL runtime sets the current
+drawing position to (<code>anchorX</code>, <code>anchorY</code>). If the <code>cubicCurveTo()</code> method fails,
+the current drawing position remains unchanged.</p>
+<p>If your movie clip contains content created with the Flash drawing tools, the
+results of calls to the <code>cubicCurveTo()</code> method are drawn underneath that content.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>controlX1</code></th><td><p>Specifies the horizontal position of the first control point
+relative to the registration point of the parent display object.</p></td></tr><tr><th style="width:25%;"><code>controlY1</code></th><td><p>Specifies the vertical position of the first control point
+relative to the registration point of the parent display object.</p></td></tr><tr><th style="width:25%;"><code>controlX2</code></th><td><p>Specifies the horizontal position of the second control point
+relative to the registration point of the parent display object.</p></td></tr><tr><th style="width:25%;"><code>controlY2</code></th><td><p>Specifies the vertical position of the second control point
+relative to the registration point of the parent display object.</p></td></tr><tr><th style="width:25%;"><code>anchorX</code></th><td><p>Specifies the horizontal position of the anchor point relative to
+the registration point of the parent display object.</p></td></tr><tr><th style="width:25%;"><code>anchorY</code></th><td><p>Specifies the vertical position of the anchor point relative to
+the registration point of the parent display object.</p></td></tr></table></div></div><div class="field "><a name="curveTo"></a><h3 class="anchor"><code><a href="#curveTo"><span class="identifier">curveTo</span></a>(<span style="white-space:nowrap">controlX:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">controlY:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">anchorX:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">anchorY:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Draws a quadratic curve using the current line style from the current drawing
+position to(anchorX, anchorY) and using the control point that
+(<code>controlX</code>, <code>controlY</code>) specifies. The current
+drawing position is then set to(<code>anchorX</code>,
+<code>anchorY</code>). If the movie clip in which you are drawing contains
+content created with the Flash drawing tools, calls to the
+<code>curveTo()</code> method are drawn underneath this content. If you
+call the <code>curveTo()</code> method before any calls to the
+<code>moveTo()</code> method, the default of the current drawing position
+is(0, 0). If any of the parameters are missing, this method fails and the
+current drawing position is not changed.</p>
+<p>The curve drawn is a quadratic Bezier curve. Quadratic Bezier curves
+consist of two anchor points and one control point. The curve interpolates
+the two anchor points and curves toward the control point.</p>
+<p><img src="quad_bezier.png" alt="quadratic bezier" /></p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>controlX</code></th><td><p>A number that specifies the horizontal position of the
+control point relative to the registration point of the
+parent display object.</p></td></tr><tr><th style="width:25%;"><code>controlY</code></th><td><p>A number that specifies the vertical position of the
+control point relative to the registration point of the
+parent display object.</p></td></tr><tr><th style="width:25%;"><code>anchorX</code></th><td><p>A number that specifies the horizontal position of the
+next anchor point relative to the registration point of
+the parent display object.</p></td></tr><tr><th style="width:25%;"><code>anchorY</code></th><td><p>A number that specifies the vertical position of the next
+anchor point relative to the registration point of the
+parent display object.</p></td></tr></table></div></div><div class="field "><a name="drawCircle"></a><h3 class="anchor"><code><a href="#drawCircle"><span class="identifier">drawCircle</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">radius:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="drawEllipse"></a><h3 class="anchor"><code><a href="#drawEllipse"><span class="identifier">drawEllipse</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">width:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">height:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Draws an ellipse. Set the line style, fill, or both before you call the
+<code>drawEllipse()</code> method, by calling the
+<code>linestyle()</code>, <code>lineGradientStyle()</code>,
+<code>beginFill()</code>, <code>beginGradientFill()</code>, or
+<code>beginBitmapFill()</code> method.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>The <em>x</em> location of the top-left of the bounding-box of
+the ellipse relative to the registration point of the parent
+display object(in pixels).</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>The <em>y</em> location of the top left of the bounding-box of
+the ellipse relative to the registration point of the parent
+display object(in pixels).</p></td></tr><tr><th style="width:25%;"><code>width</code></th><td><p>The width of the ellipse(in pixels).</p></td></tr><tr><th style="width:25%;"><code>height</code></th><td><p>The height of the ellipse(in pixels).</p></td></tr></table></div></div><div class="field "><a name="drawGraphicsData"></a><h3 class="anchor"><code><a href="#drawGraphicsData"><span class="identifier">drawGraphicsData</span></a>(<span style="white-space:nowrap">graphicsData:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="openfl.display.IGraphicsData" href="../../openfl/display/IGraphicsData.html">IGraphicsData</a>&gt;</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Submits a series of IGraphicsData instances for drawing. This method
+accepts a Vector containing objects including paths, fills, and strokes
+that implement the IGraphicsData interface. A Vector of IGraphicsData
+instances can refer to a part of a shape, or a complex fully defined set
+of data for rendering a complete shape.</p>
+<p>Graphics paths can contain other graphics paths. If the
+<code>graphicsData</code> Vector includes a path, that path and all its
+sub-paths are rendered during this operation.</p></div></div><div class="field "><a name="drawPath"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ winding : GraphicsPathWinding.EVEN_ODD })</span><a href="#drawPath"><span class="identifier">drawPath</span></a>(<span style="white-space:nowrap">commands:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">data:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">winding:<a class="type" title="openfl.display.GraphicsPathWinding - The GraphicsPathWinding class provides values for the openfl." href="../../openfl/display/GraphicsPathWinding.html">GraphicsPathWinding</a> = GraphicsPathWinding.EVEN_ODD</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Submits a series of commands for drawing. The <code>drawPath()</code>
+method uses vector arrays to consolidate individual <code>moveTo()</code>,
+<code>lineTo()</code>, and <code>curveTo()</code> drawing commands into a
+single call. The <code>drawPath()</code> method parameters combine drawing
+commands with x- and y-coordinate value pairs and a drawing direction. The
+drawing commands are values from the GraphicsPathCommand class. The x- and
+y-coordinate value pairs are Numbers in an array where each pair defines a
+coordinate location. The drawing direction is a value from the
+GraphicsPathWinding class.</p>
+<p>Generally, drawings render faster with <code>drawPath()</code> than
+with a series of individual <code>lineTo()</code> and
+<code>curveTo()</code> methods.</p>
+<p>The <code>drawPath()</code> method uses a uses a floating computation
+so rotation and scaling of shapes is more accurate and gives better
+results. However, curves submitted using the <code>drawPath()</code>
+method can have small sub-pixel alignment errors when used in conjunction
+with the <code>lineTo()</code> and <code>curveTo()</code> methods.</p>
+<p>The <code>drawPath()</code> method also uses slightly different rules
+for filling and drawing lines. They are:</p><ul><li>When a fill is applied to rendering a path:
+<em> A sub-path of less than 3 points is not rendered.(But note that the
+stroke rendering will still occur, consistent with the rules for strokes
+below.)
+</em> A sub-path that isn't closed(the end point is not equal to the
+begin point) is implicitly closed.</li><li>When a stroke is applied to rendering a path:
+<em> The sub-paths can be composed of any number of points.
+</em> The sub-path is never implicitly closed.</li></ul><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>commands</code></th><td><p>A Vector of integers representing drawing commands. The set
+of accepted values is defined by the constants in the GraphicsPathCommand class.</p></td></tr><tr><th style="width:25%;"><code>data</code></th><td><p>A Vector of Number instances where each pair of numbers is treated
+as a coordinate location (an x, y pair). The x- and y-coordinate value pairs are
+not Point objects; the data vector is a series of numbers where each group of two
+numbers represents a coordinate location.</p></td></tr><tr><th style="width:25%;"><code>winding</code></th><td><p>Specifies the winding rule using a value defined in the
+GraphicsPathWinding class.</p></td></tr></table></div></div><div class="field "><a name="drawQuads"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ transforms : null, indices : null })</span><a href="#drawQuads"><span class="identifier">drawQuads</span></a>(<span style="white-space:nowrap">rects:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">?indices:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">?transforms:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Renders a set of quadrilaterals. This is similar to calling <code>drawRect</code>
+repeatedly, but each rectangle can use a transform value to rotate, scale
+or skew the result.</p>
+<p>Any type of fill can be used, but if the fill has a transform matrix
+that transform matrix is ignored.</p>
+<p>The optional <code>indices</code> parameter allows the use of either repeated
+rectangle geometry, or allows the use of a subset of a broader rectangle
+data Vector, such as Tileset <code>rectData</code>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>rects</code></th><td><p>A Vector containing rectangle coordinates in
+[ x0, y0, width0, height0, x1, y1 ... ] format.</p></td></tr><tr><th style="width:25%;"><code>indices</code></th><td><p>A Vector containing optional index values to reference
+the data contained in <code>rects</code>. Each index is a rectangle
+index in the Vector, not an array index. If this parameter
+is ommitted, each index from <code>rects</code> will be used in order.</p></td></tr><tr><th style="width:25%;"><code>transforms</code></th><td><p>A Vector containing optional transform data to adjust
+<em>x</em>, <em>y</em>, <em>a</em>, <em>b</em>, <em>c</em> or <em>d</em> value for the resulting
+quadrilateral. A <code>transforms</code> Vector that is double the
+size of the draw count (the length of <code>indices</code>, or if
+omitted, the rectangle count in <code>rects</code>) will be treated
+as [ x, y, ... ] pairs. A <code>transforms</code> Vector that is
+four times the size of the draw count will be used as
+matrix [ a, b, c, d, ... ] values. A <code>transforms</code> object
+which is six times the draw count in size will use full
+matrix [ a, b, c, d, tx, ty, ... ] values per draw.</p></td></tr></table></div></div><div class="field "><a name="drawRect"></a><h3 class="anchor"><code><a href="#drawRect"><span class="identifier">drawRect</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">width:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">height:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Draws a rectangle. Set the line style, fill, or both before you call the
+<code>drawRect()</code> method, by calling the <code>linestyle()</code>,
+<code>lineGradientStyle()</code>, <code>beginFill()</code>,
+<code>beginGradientFill()</code>, or <code>beginBitmapFill()</code>
+method.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>A number indicating the horizontal position relative to the
+registration point of the parent display object(in pixels).</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>A number indicating the vertical position relative to the
+registration point of the parent display object(in pixels).</p></td></tr><tr><th style="width:25%;"><code>width</code></th><td><p>The width of the rectangle(in pixels).</p></td></tr><tr><th style="width:25%;"><code>height</code></th><td><p>The height of the rectangle(in pixels).</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>If the <code>width</code> or <code>height</code>
+parameters are not a number</p>
+<pre><code>				 (`Number.NaN`).
+</code></pre></td></tr></table></div></div><div class="field "><a name="drawRoundRect"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ ellipseHeight : null })</span><a href="#drawRoundRect"><span class="identifier">drawRoundRect</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">width:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">height:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">ellipseWidth:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">?ellipseHeight:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Draws a rounded rectangle. Set the line style, fill, or both before you
+call the <code>drawRoundRect()</code> method, by calling the
+<code>linestyle()</code>, <code>lineGradientStyle()</code>,
+<code>beginFill()</code>, <code>beginGradientFill()</code>, or
+<code>beginBitmapFill()</code> method.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>A number indicating the horizontal position relative
+to the registration point of the parent display
+object(in pixels).</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>A number indicating the vertical position relative to
+the registration point of the parent display object</p>
+<pre><code>				(in pixels).
+</code></pre></td></tr><tr><th style="width:25%;"><code>width</code></th><td><p>The width of the round rectangle(in pixels).</p></td></tr><tr><th style="width:25%;"><code>height</code></th><td><p>The height of the round rectangle(in pixels).</p></td></tr><tr><th style="width:25%;"><code>ellipseWidth</code></th><td><p>The width of the ellipse used to draw the rounded
+corners(in pixels).</p></td></tr><tr><th style="width:25%;"><code>ellipseHeight</code></th><td><p>The height of the ellipse used to draw the rounded
+corners(in pixels). Optional; if no value is
+specified, the default value matches that provided
+for the <code>ellipseWidth</code> parameter.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>If the <code>width</code>, <code>height</code>,
+<code>ellipseWidth</code> or
+<code>ellipseHeight</code> parameters are not a
+number(<code>Number.NaN</code>).</p></td></tr></table></div></div><div class="field "><a name="drawRoundRectComplex"></a><h3 class="anchor"><code><a href="#drawRoundRectComplex"><span class="identifier">drawRoundRectComplex</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">width:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">height:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">topLeftRadius:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">topRightRadius:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">bottomLeftRadius:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">bottomRightRadius:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Undocumented method</p></div></div><div class="field "><a name="drawTriangles"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ culling : TriangleCulling.NONE, uvtData : null, indices : null })</span><a href="#drawTriangles"><span class="identifier">drawTriangles</span></a>(<span style="white-space:nowrap">vertices:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">?indices:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">?uvtData:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">culling:<a class="type" title="openfl.display.TriangleCulling - Defines codes for culling algorithms that determine which triangles not to render when drawing triangle paths." href="../../openfl/display/TriangleCulling.html">TriangleCulling</a> = TriangleCulling.NONE</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Renders a set of triangles, typically to distort bitmaps and give them a
+three-dimensional appearance. The <code>drawTriangles()</code> method maps
+either the current fill, or a bitmap fill, to the triangle faces using a
+set of(u,v) coordinates.</p>
+<p>Any type of fill can be used, but if the fill has a transform matrix
+that transform matrix is ignored.</p>
+<p>A <code>uvtData</code> parameter improves texture mapping when a
+bitmap fill is used.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>culling</code></th><td><p>Specifies whether to render triangles that face in a
+specified direction. This parameter prevents the rendering
+of triangles that cannot be seen in the current view. This
+parameter can be set to any value defined by the
+TriangleCulling class.</p></td></tr></table></div></div><div class="field "><a name="endFill"></a><h3 class="anchor"><code><a href="#endFill"><span class="identifier">endFill</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Applies a fill to the lines and curves that were added since the last call
+to the <code>beginFill()</code>, <code>beginGradientFill()</code>, or
+<code>beginBitmapFill()</code> method. Flash uses the fill that was
+specified in the previous call to the <code>beginFill()</code>,
+<code>beginGradientFill()</code>, or <code>beginBitmapFill()</code>
+method. If the current drawing position does not equal the previous
+position specified in a <code>moveTo()</code> method and a fill is
+defined, the path is closed with a line and then filled.</p></div></div><div class="field "><a name="lineBitmapStyle"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ smooth : false, repeat : true, matrix : null })</span><a href="#lineBitmapStyle"><span class="identifier">lineBitmapStyle</span></a>(<span style="white-space:nowrap">bitmap:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>,</span> <span style="white-space:nowrap">?matrix:<a class="type" title="openfl.geom.Matrix - The Matrix class represents a transformation matrix that determines how to map points from one coordinate space to another." href="../../openfl/geom/Matrix.html">Matrix</a>,</span> <span style="white-space:nowrap">repeat:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = true,</span> <span style="white-space:nowrap">smooth:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Specifies a bitmap to use for the line stroke when drawing lines.</p>
+<p>The bitmap line style is used for subsequent calls to Graphics methods
+such as the <code>lineTo()</code> method or the <code>drawCircle()</code>
+method. The line style remains in effect until you call the
+<code>lineStyle()</code> or <code>lineGradientStyle()</code> methods, or
+the <code>lineBitmapStyle()</code> method again with different parameters.</p>
+<p>You can call the <code>lineBitmapStyle()</code> method in the middle of
+drawing a path to specify different styles for different line segments
+within a path.</p>
+<p>Call the <code>lineStyle()</code> method before you call the
+<code>lineBitmapStyle()</code> method to enable a stroke, or else the
+value of the line style is <code>undefined</code>.</p>
+<p>Calls to the <code>clear()</code> method set the line style back to
+<code>undefined</code>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>bitmap</code></th><td><p>The bitmap to use for the line stroke.</p></td></tr><tr><th style="width:25%;"><code>matrix</code></th><td><p>An optional transformation matrix as defined by the
+openfl.geom.Matrix class. The matrix can be used to scale or
+otherwise manipulate the bitmap before applying it to the
+line style.</p></td></tr><tr><th style="width:25%;"><code>repeat</code></th><td><p>Whether to repeat the bitmap in a tiled fashion.</p></td></tr><tr><th style="width:25%;"><code>smooth</code></th><td><p>Whether smoothing should be applied to the bitmap.</p></td></tr></table></div></div><div class="field "><a name="lineGradientStyle"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ focalPointRatio : 0, interpolationMethod : InterpolationMethod.RGB, spreadMethod : SpreadMethod.PAD, matrix : null })</span><a href="#lineGradientStyle"><span class="identifier">lineGradientStyle</span></a>(<span style="white-space:nowrap">type:<a class="type" title="openfl.display.GradientType - The GradientType class provides values for the type parameter in the beginGradientFill() and lineGradientStyle() methods of the openfl." href="../../openfl/display/GradientType.html">GradientType</a>,</span> <span style="white-space:nowrap">colors:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">alphas:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>&gt;,</span> <span style="white-space:nowrap">ratios:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">?matrix:<a class="type" title="openfl.geom.Matrix - The Matrix class represents a transformation matrix that determines how to map points from one coordinate space to another." href="../../openfl/geom/Matrix.html">Matrix</a>,</span> <span style="white-space:nowrap">spreadMethod:<a class="type" title="openfl.display.SpreadMethod - The SpreadMethod class provides values for the spreadMethod parameter in the beginGradientFill() and lineGradientStyle() methods of the Graphics class." href="../../openfl/display/SpreadMethod.html">SpreadMethod</a> = SpreadMethod.PAD,</span> <span style="white-space:nowrap">interpolationMethod:<a class="type" title="openfl.display.InterpolationMethod - The InterpolationMethod class provides values for the interpolationMethod parameter in the Graphics." href="../../openfl/display/InterpolationMethod.html">InterpolationMethod</a> = InterpolationMethod.RGB,</span> <span style="white-space:nowrap">focalPointRatio:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 0</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Specifies a gradient to use for the stroke when drawing lines.</p>
+<p>The gradient line style is used for subsequent calls to Graphics
+methods such as the <code>lineTo()</code> methods or the
+<code>drawCircle()</code> method. The line style remains in effect until
+you call the <code>lineStyle()</code> or <code>lineBitmapStyle()</code>
+methods, or the <code>lineGradientStyle()</code> method again with
+different parameters.</p>
+<p>You can call the <code>lineGradientStyle()</code> method in the middle
+of drawing a path to specify different styles for different line segments
+within a path.</p>
+<p>Call the <code>lineStyle()</code> method before you call the
+<code>lineGradientStyle()</code> method to enable a stroke, or else the
+value of the line style is <code>undefined</code>.</p>
+<p>Calls to the <code>clear()</code> method set the line style back to
+<code>undefined</code>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>A value from the GradientType class that specifies which gradient type to use:
+<code><a href="../../openfl/display/GradientType.html#LINEAR">GradientType.LINEAR</a></code> or <code><a href="../../openfl/display/GradientType.html#RADIAL">GradientType.RADIAL</a></code>.</p></td></tr><tr><th style="width:25%;"><code>colors</code></th><td><p>An array of RGB hex color values to be used in the gradient (for example, red is 0xFF0000,
+blue is 0x0000FF, and so on).</p></td></tr><tr><th style="width:25%;"><code>alphas</code></th><td><p>An array of alpha values for the corresponding colors in the <code>colors</code> array; valid values
+are 0 to 1. If the value is less than 0, the default is 0. If the value is greater than 1, the default is 1.</p></td></tr><tr><th style="width:25%;"><code>ratios</code></th><td><p>An array of color distribution ratios; valid values are from 0 to 255. This value defines the
+percentage of the width where the color is sampled at 100%. The value 0 represents the left position in the
+gradient box, and 255 represents the right position in the gradient box. This value represents positions in
+the gradient box, not the coordinate space of the final gradient, which can be wider or thinner than the
+gradient box. Specify a value for each value in the <code>colors</code> parameter.
+For example, for a linear gradient that includes two colors, blue and green, the following figure illustrates
+the placement of the colors in the gradient based on different values in the <code>ratios</code> array:
+| ratios | Gradient |
+| --- | --- |
+| <code>[0, 127]</code> | <img src="/images/gradient-ratios-1.jpg" alt="linear gradient blue to green with ratios 0 and 127" /> |
+| <code>[0, 255]</code> | <img src="/images/gradient-ratios-2.jpg" alt="linear gradient blue to green with ratios 0 and 255" /> |
+| <code>[127, 255]</code> | <img src="/images/gradient-ratios-3.jpg" alt="linear gradient blue to green with ratios 127 and 255" /> |
+The values in the array must increase sequentially; for example, <code>[0, 63, 127, 190, 255]</code>.</p></td></tr><tr><th style="width:25%;"><code>matrix</code></th><td><p>A transformation matrix as defined by the openfl.geom.Matrix class. The openfl.geom.Matrix
+class includes a <code>createGradientBox()</code> method, which lets you conveniently set up the matrix for use with the
+<code>lineGradientStyle()</code> method.</p></td></tr><tr><th style="width:25%;"><code>spreadMethod</code></th><td><p>A value from the SpreadMethod class that specifies which spread method to use:
+| | | |
+| --- | --- | --- |
+| <img src="/images/beginGradientFill_spread_pad.jpg" alt="linear gradient with SpreadMethod.PAD" /><br><code><a href="../../openfl/display/SpreadMethod.html#PAD">SpreadMethod.PAD</a></code> | <img src="/images/beginGradientFill_spread_reflect.jpg" alt="linear gradient with SpreadMethod.REFLECT" /><br><code><a href="../../openfl/display/SpreadMethod.html#REFLECT">SpreadMethod.REFLECT</a></code> | <img src="/images/beginGradientFill_spread_repeat.jpg" alt="linear gradient with SpreadMethod.REPEAT" /><br><code><a href="../../openfl/display/SpreadMethod.html#REPEAT">SpreadMethod.REPEAT</a></code> |</p></td></tr><tr><th style="width:25%;"><code>interpolationMethod</code></th><td><p>A value from the InterpolationMethod class that specifies which value to use. For
+example, consider a simple linear gradient between two colors (with the <code>spreadMethod</code> parameter set to
+<code><a href="../../openfl/display/SpreadMethod.html#REFLECT">SpreadMethod.REFLECT</a></code>). The different interpolation methods affect the appearance as follows:
+| | |
+| --- | --- |
+| <img src="/images/beginGradientFill_interp_linearrgb.jpg" alt="linear gradient with InterpolationMethod.LINEAR_RGB" /><br><code><a href="../../openfl/display/InterpolationMethod.html#LINEAR_RGB">InterpolationMethod.LINEAR_RGB</a></code> | <img src="/images/beginGradientFill_interp_rgb.jpg" alt="linear gradient with InterpolationMethod.RGB" /><br><code><a href="../../openfl/display/InterpolationMethod.html#RGB">InterpolationMethod.RGB</a></code> |</p></td></tr><tr><th style="width:25%;"><code>focalPointRatio</code></th><td><p>A number that controls the location of the focal point of the gradient. The value 0
+means the focal point is in the center. The value 1 means the focal point is at one border of the gradient
+circle. The value -1 means that the focal point is at the other border of the gradient circle. Values less
+than -1 or greater than 1 are rounded to -1 or 1. The following image shows a gradient with a
+<code>focalPointRatio</code> of -0.75:
+<img src="/images/radial_sketch.jpg" alt="radial gradient with focalPointRatio set to 0.75" /></p></td></tr></table></div></div><div class="field "><a name="lineStyle"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ miterLimit : 3, joints : null, caps : null, scaleMode : LineScaleMode.NORMAL, pixelHinting : false, alpha : 1, color : 0, thickness : null })</span><a href="#lineStyle"><span class="identifier">lineStyle</span></a>(<span style="white-space:nowrap">?thickness:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">color:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">alpha:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 1,</span> <span style="white-space:nowrap">pixelHinting:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">scaleMode:<a class="type" title="openfl.display.LineScaleMode - The LineScaleMode class provides values for the scaleMode parameter in the Graphics." href="../../openfl/display/LineScaleMode.html">LineScaleMode</a> = LineScaleMode.NORMAL,</span> <span style="white-space:nowrap">?caps:<a class="type" title="openfl.display.CapsStyle - The CapsStyle class is an enumeration of constant values that specify the caps style to use in drawing lines." href="../../openfl/display/CapsStyle.html">CapsStyle</a>,</span> <span style="white-space:nowrap">?joints:<a class="type" title="openfl.display.JointStyle - The JointStyle class is an enumeration of constant values that specify the joint style to use in drawing lines." href="../../openfl/display/JointStyle.html">JointStyle</a>,</span> <span style="white-space:nowrap">miterLimit:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = 3</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Specifies a shader to use for the line stroke when drawing lines.</p>
+<p>The shader line style is used for subsequent calls to Graphics methods such as the <code>lineTo()</code> method or the
+<code>drawCircle()</code> method. The line style remains in effect until you call the <code>lineStyle()</code> or
+<code>lineGradientStyle()</code> methods, or the <code>lineBitmapStyle()</code> method again with different parameters.</p>
+<p>You can call the <code>lineShaderStyle()</code> method in the middle of drawing a path to specify different styles for
+different line segments within a path.</p>
+<p>Call the <code>lineStyle()</code> method before you call the <code>lineShaderStyle()</code> method to enable a stroke, or else the
+value of the line style is undefined.</p>
+<p>Calls to the <code>clear()</code> method set the line style back to undefined.</p></div></div><div class="field "><a name="lineTo"></a><h3 class="anchor"><code><a href="#lineTo"><span class="identifier">lineTo</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Draws a line using the current line style from the current drawing
+position to(<code>x</code>, <code>y</code>); the current drawing position
+is then set to(<code>x</code>, <code>y</code>). If the display object in
+which you are drawing contains content that was created with the Flash
+drawing tools, calls to the <code>lineTo()</code> method are drawn
+underneath the content. If you call <code>lineTo()</code> before any calls
+to the <code>moveTo()</code> method, the default position for the current
+drawing is(<em>0, 0</em>). If any of the parameters are missing, this
+method fails and the current drawing position is not changed.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>A number that indicates the horizontal position relative to the
+registration point of the parent display object(in pixels).</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>A number that indicates the vertical position relative to the
+registration point of the parent display object(in pixels).</p></td></tr></table></div></div><div class="field "><a name="moveTo"></a><h3 class="anchor"><code><a href="#moveTo"><span class="identifier">moveTo</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Moves the current drawing position to(<code>x</code>, <code>y</code>). If
+any of the parameters are missing, this method fails and the current
+drawing position is not changed.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>A number that indicates the horizontal position relative to the
+registration point of the parent display object(in pixels).</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>A number that indicates the vertical position relative to the
+registration point of the parent display object(in pixels).</p></td></tr></table></div></div><div class="field "><a name="readGraphicsData"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ recurse : true })</span><a href="#readGraphicsData"><span class="identifier">readGraphicsData</span></a>(<span style="white-space:nowrap">recurse:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = true</span>):<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="openfl.display.IGraphicsData" href="../../openfl/display/IGraphicsData.html">IGraphicsData</a>&gt;</code></h3><div class="doc"><p>Queries a Sprite or Shape object (and optionally, its children) for its vector
+graphics content. The result is a Vector of IGraphicsData objects. Transformations
+are applied to the display object before the query, so the returned paths are all
+in the same coordinate space. Coordinates in the result data set are relative to
+the stage, not the display object being sampled.</p>
+<p>The result includes the following types of objects, with the specified limitations:</p><ul><li>GraphicsSolidFill</li><li>GraphicsGradientFill
+<em> All properties of the gradient fill are returned by <code>readGraphicsData()</code>.
+</em> The matrix returned is close to, but not exactly the same as, the input
+matrix.</li><li>GraphicsEndFill</li><li>GraphicsBitmapFill
+<em> The matrix returned is close to, but not exactly the same as, the input
+matrix.
+</em> <code>repeat</code> is always <code><a href="../../Bool.html">true</a></code>.
+* <code>smooth</code> is always <code><a href="../../Bool.html">false</a></code>.</li><li>GraphicsStroke
+<em> <code>thickness</code> is supported.
+</em> <code>fill</code> supports GraphicsSolidFill, GraphicsGradientFill, and GraphicsBitmapFill
+as described previously
+* All other properties have default values.</li><li>GraphicsPath
+* The only supported commands are <code>MOVE_TO</code>, <code>CURVE_TO</code>, and <code>LINE_TO</code>.</li></ul>
+<p>The following visual elements and transformations can't be represented and are not
+included in the result:</p><ul><li>Masks</li><li>Text, with one exception: Static text that is defined with anti-alias type
+"anti-alias for animation" is rendered as vector shapes so it is included in the
+result.</li><li>Shader fills</li><li>Blend modes</li><li>9-slice scaling</li><li>Triangles (created with the <code>drawTriangles()</code> method)</li><li>Opaque background</li><li><code>scrollRect</code> settings</li><li>2.5D transformations</li><li>Non-visible objects (objects whose <code>visible</code> property is <code><a href="../../Bool.html">false</a></code>)</li></ul><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>recurse</code></th><td><p>whether the runtime should also query display object children of
+the current display object. A recursive query can take more time and memory to
+execute. The results are returned in a single flattened result set, not separated
+by display object.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A Vector of IGraphicsData objects representing the vector graphics
+content of the related display object</p></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

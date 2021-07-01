@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.display.LoaderInfo</title><meta name="description" content="The LoaderInfo class provides information about a loaded SWF file or a
+loaded image file(JPEG, GIF, or PNG). LoaderInfo objects are available for
+any display object. The information provided includes load progress, the
+URLs of the loader and loaded content, the number of bytes total for the
+media, and the nominal height and width of the media."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> LoaderInfo</h1><h4><small>package <a href="../../openfl/display/index.html">openfl.display</a></small></h4><h4><small>extends <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>The LoaderInfo class provides information about a loaded SWF file or a
+loaded image file(JPEG, GIF, or PNG). LoaderInfo objects are available for
+any display object. The information provided includes load progress, the
+URLs of the loader and loaded content, the number of bytes total for the
+media, and the nominal height and width of the media.</p>
+<p>You can access LoaderInfo objects in two ways:</p><ul><li>The <code>contentLoaderInfo</code> property of a openfl.display.Loader
+object -  The <code>contentLoaderInfo</code> property is always available
+for any Loader object. For a Loader object that has not called the
+<code>load()</code> or <code>loadBytes()</code> method, or that has not
+sufficiently loaded, attempting to access many of the properties of the
+<code>contentLoaderInfo</code> property throws an error.</li><li>The <code>loaderInfo</code> property of a display object.</li></ul>
+<p>The <code>contentLoaderInfo</code> property of a Loader object provides
+information about the content that the Loader object is loading, whereas
+the <code>loaderInfo</code> property of a DisplayObject provides
+information about the root SWF file for that display object.</p>
+<p>When you use a Loader object to load a display object(such as a SWF
+file or a bitmap), the <code>loaderInfo</code> property of the display
+object is the same as the <code>contentLoaderInfo</code> property of the
+Loader object(<code><a href="../../openfl/display/DisplayObject.html#loaderInfo">DisplayObject.loaderInfo</a> =
+<a href="../../openfl/display/Loader.html#contentLoaderInfo">Loader.contentLoaderInfo</a></code>). Because the instance of the main class of
+the SWF file has no Loader object, the <code>loaderInfo</code> property is
+the only way to access the LoaderInfo for the instance of the main class of
+the SWF file.</p>
+<p>The following diagram shows the different uses of the LoaderInfo
+object - for the instance of the main class of the SWF file, for the
+<code>contentLoaderInfo</code> property of a Loader object, and for the
+<code>loaderInfo</code> property of a loaded object:</p>
+<p>When a loading operation is not complete, some properties of the
+<code>contentLoaderInfo</code> property of a Loader object are not
+available. You can obtain some properties, such as
+<code>bytesLoaded</code>, <code>bytesTotal</code>, <code>url</code>,
+<code>loaderURL</code>, and <code>applicationDomain</code>. When the
+<code>loaderInfo</code> object dispatches the <code>init</code> event, you
+can access all properties of the <code>loaderInfo</code> object and the
+loaded image or SWF file.</p>
+<p><strong>Note:</strong> All properties of LoaderInfo objects are read-only.</p>
+<p>The <code><a href="../../openfl/events/EventDispatcher.html#dispatchEvent">EventDispatcher.dispatchEvent</a>()</code> method is not
+applicable to LoaderInfo objects. If you call <code>dispatchEvent()</code>
+on a LoaderInfo object, an IllegalOperationError exception is thrown.</p><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>complete</code></th><td><p>Dispatched when data has loaded successfully. In other
+words, it is dispatched when all the content has been
+downloaded and the loading has finished. The
+<code>complete</code> event is always dispatched after
+the <code>init</code> event. The <code>init</code> event
+is dispatched when the object is ready to access, though
+the content may still be downloading.</p></td></tr><tr class="indent"><th style="width:25%;"><code>httpStatus</code></th><td><p>Dispatched when a network request is made over HTTP and
+an HTTP status code can be detected.</p></td></tr><tr class="indent"><th style="width:25%;"><code>init</code></th><td><p>Dispatched when the properties and methods of a loaded
+SWF file are accessible and ready for use. The content,
+however, can still be downloading. A LoaderInfo object
+dispatches the <code>init</code> event when the following
+conditions exist:</p><ul><li>All properties and methods associated with the
+loaded object and those associated with the LoaderInfo
+object are accessible.</li><li>The constructors for all child objects have
+completed.</li><li>All ActionScript code in the first frame of the
+loaded SWF's main timeline has been executed.</li></ul>
+<p>For example, an <code><a href="../../lime/app/Event.html#INIT">Event.INIT</a></code> is dispatched
+when the first frame of a movie or animation is loaded.
+The movie is then accessible and can be added to the
+display list. The complete movie, however, can take
+longer to download. The <code><a href="../../lime/app/Event.html#COMPLETE">Event.COMPLETE</a></code> is
+only dispatched once the full movie is loaded.</p>
+<p>The <code>init</code> event always precedes the
+<code>complete</code> event.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ioError</code></th><td><p>Dispatched when an input or output error occurs that
+causes a load operation to fail.</p></td></tr><tr class="indent"><th style="width:25%;"><code>open</code></th><td><p>Dispatched when a load operation starts.</p></td></tr><tr class="indent"><th style="width:25%;"><code>progress</code></th><td><p>Dispatched when data is received as the download
+operation progresses.</p></td></tr><tr class="indent"><th style="width:25%;"><code>unload</code></th><td><p>Dispatched by a LoaderInfo object whenever a loaded
+object is removed by using the <code>unload()</code>
+method of the Loader object, or when a second load is
+performed by the same Loader object and the original
+content is removed prior to the load beginning.</p></td></tr></table></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="applicationDomain"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#applicationDomain"><span class="identifier">applicationDomain</span></a>:<a class="type" title="openfl.system.ApplicationDomain - The ApplicationDomain class is a container for discrete groups of class definitions." href="../../openfl/system/ApplicationDomain.html">ApplicationDomain</a></code></h3><div class="doc"><p>When an external SWF file is loaded, all ActionScript 3.0 definitions
+contained in the loaded class are stored in the
+<code>applicationDomain</code> property.</p>
+<p>All code in a SWF file is defined to exist in an application domain.
+The current application domain is where your main application runs. The
+system domain contains all application domains, including the current
+domain and all classes used by Flash Player or Adobe AIR.</p>
+<p>All application domains, except the system domain, have an associated
+parent domain. The parent domain of your main application's
+<code>applicationDomain</code> is the system domain. Loaded classes are
+defined only when their parent doesn't already define them. You cannot
+override a loaded class definition with a newer definition.</p>
+<p>For usage examples of application domains, see the "Client System
+Environment" chapter in the <em>ActionScript 3.0 Developer's Guide</em>.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>This security sandbox of the caller is not allowed
+to access this ApplicationDomain.</p></td></tr></table></div></div><div class="field "><a name="bytes"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#bytes"><span class="identifier">bytes</span></a>:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a></code></h3><div class="doc"><p>The bytes associated with a LoaderInfo object.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>If the object accessing this API is prevented from
+accessing the loaded object due to security
+restrictions. This situation can occur, for
+instance, when a Loader object attempts to access
+the <code>contentLoaderInfo.content</code> property
+and it is not granted security permission to access
+the loaded content.</p>
+<p>For more information related to security, see the
+Flash Player Developer Center Topic:
+<a href="http://www.adobe.com/go/devnet_security_en">Security</a>.</p></td></tr></table></div></div><div class="field "><a name="bytesLoaded"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#bytesLoaded"><span class="identifier">bytesLoaded</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The number of bytes that are loaded for the media. When this number equals
+the value of <code>bytesTotal</code>, all of the bytes are loaded.</p></div></div><div class="field "><a name="bytesTotal"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#bytesTotal"><span class="identifier">bytesTotal</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The number of compressed bytes in the entire media file.</p>
+<p>Before the first <code>progress</code> event is dispatched by this
+LoaderInfo object's corresponding Loader object, <code>bytesTotal</code>
+is 0. After the first <code>progress</code> event from the Loader object,
+<code>bytesTotal</code> reflects the actual number of bytes to be
+downloaded.</p></div></div><div class="field "><a name="childAllowsParent"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#childAllowsParent"><span class="identifier">childAllowsParent</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Expresses the trust relationship from content(child) to the Loader
+(parent). If the child has allowed the parent access, <code><a href="../../Bool.html">true</a></code>;
+otherwise, <code><a href="../../Bool.html">false</a></code>. This property is set to <code><a href="../../Bool.html">true</a></code>
+if the child object has called the <code>allowDomain()</code> method to
+grant permission to the parent domain or if a URL policy is loaded at the
+child domain that grants permission to the parent domain. If child and
+parent are in the same domain, this property is set to <code><a href="../../Bool.html">true</a></code>.</p>
+<p>For more information related to security, see the Flash Player
+Developer Center Topic: <a href="http://www.adobe.com/go/devnet_security_en">Security</a>.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Thrown if the file is not downloaded sufficiently to
+retrieve the requested information.</p></td></tr></table></div></div><div class="field "><a name="content"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#content"><span class="identifier">content</span></a>:<a class="type" title="openfl.display.DisplayObject - The DisplayObject class is the base class for all objects that can be placed on the display list." href="../../openfl/display/DisplayObject.html">DisplayObject</a></code></h3><div class="doc"><p>The loaded object associated with this LoaderInfo object.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>If the object accessing this API is prevented from
+accessing the loaded object due to security
+restrictions. This situation can occur, for
+instance, when a Loader object attempts to access
+the <code>contentLoaderInfo.content</code> property
+and it is not granted security permission to access
+the loaded content.</p>
+<p>For more information related to security, see the
+Flash Player Developer Center Topic:
+<a href="http://www.adobe.com/go/devnet_security_en">Security</a>.</p></td></tr></table></div></div><div class="field "><a name="contentType"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#contentType"><span class="identifier">contentType</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The MIME type of the loaded file. The value is <code>null</code> if not
+enough of the file has loaded in order to determine the type. The
+following list gives the possible values:</p><ul><li><code>"application/x-shockwave-flash"</code></li><li><code>"image/jpeg"</code></li><li><code>"image/gif"</code></li><li><code>"image/png"</code></li></ul></div></div><div class="field "><a name="frameRate"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#frameRate"><span class="identifier">frameRate</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>The nominal frame rate, in frames per second, of the loaded SWF file. This
+number is often an integer, but need not be.</p>
+<p>This value may differ from the actual frame rate in use. Flash Player
+or Adobe AIR only uses a single frame rate for all loaded SWF files at any
+one time, and this frame rate is determined by the nominal frame rate of
+the main SWF file. Also, the main frame rate may not be able to be
+achieved, depending on hardware, sound synchronization, and other
+factors.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>If the file is not downloaded sufficiently to retrieve the
+requested information.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>If the file is not a SWF file.</p></td></tr></table></div></div><div class="field "><a name="height"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#height"><span class="identifier">height</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The nominal height of the loaded file. This value might differ from the
+actual height at which the content is displayed, since the loaded content
+or its parent display objects might be scaled.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>If the file is not downloaded sufficiently to retrieve the
+requested information.</p></td></tr></table></div></div><div class="field "><a name="loader"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#loader"><span class="identifier">loader</span></a>:<a class="type" title="openfl.display.Loader - The Loader class is used to load SWF files or image (JPG, PNG, or GIF) files." href="../../openfl/display/Loader.html">Loader</a></code></h3><div class="doc"><p>The Loader object associated with this LoaderInfo object. If this
+LoaderInfo object is the <code>loaderInfo</code> property of the instance
+of the main class of the SWF file, no Loader object is associated.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>If the object accessing this API is prevented from
+accessing the Loader object because of security
+restrictions. This can occur, for instance, when a
+loaded SWF file attempts to access its
+<code>loaderInfo.loader</code> property and it is
+not granted security permission to access the
+loading SWF file.</p>
+<p>For more information related to security, see the
+Flash Player Developer Center Topic:
+<a href="http://www.adobe.com/go/devnet_security_en">Security</a>.</p></td></tr></table></div></div><div class="field "><a name="loaderURL"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#loaderURL"><span class="identifier">loaderURL</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The URL of the SWF file that initiated the loading of the media described
+by this LoaderInfo object. For the instance of the main class of the SWF
+file, this URL is the same as the SWF file's own URL.</p></div></div><div class="field "><a name="parameters"></a><h3 class="anchor"><code><span class="label label-meta label-meta-uppressWarnings" title="">@SuppressWarnings(&quot;checkstyle:Dynamic&quot;)</span><span class="label">read only</span><a href="#parameters"><span class="identifier">parameters</span></a>:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a>&lt;<a class="type" title="String - The basic String class." href="../../String.html">String</a>&gt;</code></h3><div class="doc"><p>An object that contains name-value pairs that represent the parameters
+provided to the loaded SWF file.</p>
+<p>You can use a <code>for-in</code> loop to extract all the names and
+values from the <code>parameters</code> object.</p>
+<p>The two sources of parameters are: the query string in the URL of the
+main SWF file, and the value of the <code>FlashVars</code> HTML parameter
+(this affects only the main SWF file).</p>
+<p>The <code>parameters</code> property replaces the ActionScript 1.0 and
+2.0 technique of providing SWF file parameters as properties of the main
+timeline.</p>
+<p>The value of the <code>parameters</code> property is null for Loader
+objects that contain SWF files that use ActionScript 1.0 or 2.0. It is
+only non-null for Loader objects that contain SWF files that use
+ActionScript 3.0.</p></div></div><div class="field "><a name="parentAllowsChild"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#parentAllowsChild"><span class="identifier">parentAllowsChild</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Expresses the trust relationship from Loader(parent) to the content
+(child). If the parent has allowed the child access, <code><a href="../../Bool.html">true</a></code>;
+otherwise, <code><a href="../../Bool.html">false</a></code>. This property is set to <code><a href="../../Bool.html">true</a></code>
+if the parent object called the <code>allowDomain()</code> method to grant
+permission to the child domain or if a URL policy file is loaded at the
+parent domain granting permission to the child domain. If child and parent
+are in the same domain, this property is set to <code><a href="../../Bool.html">true</a></code>.</p>
+<p>For more information related to security, see the Flash Player
+Developer Center Topic: <a href="http://www.adobe.com/go/devnet_security_en">Security</a>.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Thrown if the file is not downloaded sufficiently to
+retrieve the requested information.</p></td></tr></table></div></div><div class="field "><a name="sameDomain"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#sameDomain"><span class="identifier">sameDomain</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Expresses the domain relationship between the loader and the content:
+<code><a href="../../Bool.html">true</a></code> if they have the same origin domain; <code><a href="../../Bool.html">false</a></code>
+otherwise.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Thrown if the file is not downloaded sufficiently to
+retrieve the requested information.</p></td></tr></table></div></div><div class="field "><a name="sharedEvents"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#sharedEvents"><span class="identifier">sharedEvents</span></a>:<a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></code></h3><div class="doc"><p>An EventDispatcher instance that can be used to exchange events across
+security boundaries. Even when the Loader object and the loaded content
+originate from security domains that do not trust one another, both can
+access <code>sharedEvents</code> and send and receive events via this
+object.</p></div></div><div class="field "><a name="uncaughtErrorEvents"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#uncaughtErrorEvents"><span class="identifier">uncaughtErrorEvents</span></a>:<a class="type" title="openfl.events.UncaughtErrorEvents - The UncaughtErrorEvents class provides a way to receive uncaught error events." href="../../openfl/events/UncaughtErrorEvents.html">UncaughtErrorEvents</a></code></h3><div class="doc"><p>An object that dispatches an <code>uncaughtError</code> event when an
+unhandled error occurs in code in this LoaderInfo object's SWF file. An
+uncaught error happens when an error is thrown outside of any
+<code>try..catch</code> blocks or when an ErrorEvent object is dispatched
+with no registered listeners.</p>
+<p>This property is created when the SWF associated with this LoaderInfo
+has finished loading. Until then the <code>uncaughtErrorEvents</code>
+property is <code>null</code>. In an ActionScript-only project, you can
+access this property during or after the execution of the constructor
+function of the main class of the SWF file. For a Flex project, the
+<code>uncaughtErrorEvents</code> property is available after the
+<code>applicationComplete</code> event is dispatched.</p></div></div><div class="field "><a name="url"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#url"><span class="identifier">url</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The URL of the media being loaded.</p>
+<p>Before the first <code>progress</code> event is dispatched by this
+LoaderInfo object's corresponding Loader object, the value of the
+<code>url</code> property might reflect only the initial URL specified in
+the call to the <code>load()</code> method of the Loader object. After the
+first <code>progress</code> event, the <code>url</code> property reflects
+the media's final URL, after any redirects and relative URLs are
+resolved.</p>
+<p>In some cases, the value of the <code>url</code> property is truncated;
+see the <code>isURLInaccessible</code> property for details.</p></div></div><div class="field "><a name="width"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#width"><span class="identifier">width</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The nominal width of the loaded content. This value might differ from the
+actual width at which the content is displayed, since the loaded content
+or its parent display objects might be scaled.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>If the file is not downloaded sufficiently to retrieve the
+requested information.</p></td></tr></table></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></h4><div style="display:none"><div class="field "><a name="addEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useWeakReference : false, priority : 0, useCapture : false })</span><a href="#addEventListener"><span class="identifier">addEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">priority:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">useWeakReference:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Registers an event listener object with an EventDispatcher object so that
+the listener receives notification of an event. You can register event
+listeners on all nodes in the display list for a specific type of event,
+phase, and priority.</p>
+<p>After you successfully register an event listener, you cannot change
+its priority through additional calls to <code>addEventListener()</code>.
+To change a listener's priority, you must first call
+<code>removeListener()</code>. Then you can register the listener again
+with the new priority level.</p>
+<p>Keep in mind that after the listener is registered, subsequent calls to
+<code>addEventListener()</code> with a different <code>type</code> or
+<code>useCapture</code> value result in the creation of a separate
+listener registration. For example, if you first register a listener with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>, it listens only during
+the capture phase. If you call <code>addEventListener()</code> again using
+the same listener object, but with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>, you have two separate listeners: one that listens
+during the capture phase and another that listens during the target and
+bubbling phases.</p>
+<p>You cannot register an event listener for only the target phase or the
+bubbling phase. Those phases are coupled during registration because
+bubbling applies only to the ancestors of the target node.</p>
+<p>If you no longer need an event listener, remove it by calling
+<code>removeEventListener()</code>, or memory problems could result. Event
+listeners are not automatically removed from memory because the garbage
+collector does not remove the listener as long as the dispatching object
+exists(unless the <code>useWeakReference</code> parameter is set to
+<code><a href="../../Bool.html">true</a></code>).</p>
+<p>Copying an EventDispatcher instance does not copy the event listeners
+attached to it.(If your newly created node needs an event listener, you
+must attach the listener after creating the node.) However, if you move an
+EventDispatcher instance, the event listeners attached to it move along
+with it.</p>
+<p>If the event listener is being registered on a node while an event is
+being processed on this node, the event listener is not triggered during
+the current phase but can be triggered during a later phase in the event
+flow, such as the bubbling phase.</p>
+<p>If an event listener is removed from a node while an event is being
+processed on the node, it is still triggered by the current actions. After
+it is removed, the event listener is never invoked again(unless
+registered again for future processing).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Determines whether the listener works in the
+capture phase or the target and bubbling phases.
+If <code>useCapture</code> is set to
+<code><a href="../../Bool.html">true</a></code>, the listener processes the
+event only during the capture phase and not in the
+target or bubbling phase. If
+<code>useCapture</code> is <code><a href="../../Bool.html">false</a></code>, the
+listener processes the event only during the
+target or bubbling phase. To listen for the event
+in all three phases, call
+<code>addEventListener</code> twice, once with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>,
+then again with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>.</p></td></tr><tr><th style="width:25%;"><code>priority</code></th><td><p>The priority level of the event listener. The
+priority is designated by a signed 32-bit integer.
+The higher the number, the higher the priority.
+All listeners with priority <em>n</em> are processed
+before listeners of priority <em>n</em>-1. If two or
+more listeners share the same priority, they are
+processed in the order in which they were added.
+The default priority is 0.</p></td></tr><tr><th style="width:25%;"><code>useWeakReference</code></th><td><p>Determines whether the reference to the listener
+is strong or weak. A strong reference(the
+default) prevents your listener from being
+garbage-collected. A weak reference does not.</p>
+<p>Class-level member functions are not subject to
+garbage collection, so you can set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for class-level member functions without
+subjecting them to garbage collection. If you set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for a listener that is a nested inner function,
+the function will be garbage-collected and no
+longer persistent. If you create references to the
+inner function(save it in another variable) then
+it is not garbage-collected and stays
+persistent.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The <code>listener</code> specified is not a
+function.</p></td></tr></table></div></div><div class="field "><a name="dispatchEvent"></a><h3 class="anchor"><code><a href="#dispatchEvent"><span class="identifier">dispatchEvent</span></a>(<span style="white-space:nowrap">event:<a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Dispatches an event into the event flow. The event target is the
+EventDispatcher object upon which the <code>dispatchEvent()</code> method
+is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>event</code></th><td><p>The Event object that is dispatched into the event flow. If
+the event is being redispatched, a clone of the event is
+created automatically. After an event is dispatched, its
+<code>target</code> property cannot be changed, so you must
+create a new copy of the event for redispatching to work.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if the event was successfully
+dispatched. A value of <code><a href="../../Bool.html">false</a></code> indicates failure or
+that <code>preventDefault()</code> was called on the event.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The event dispatch recursion limit has been reached.</p></td></tr></table></div></div><div class="field "><a name="hasEventListener"></a><h3 class="anchor"><code><a href="#hasEventListener"><span class="identifier">hasEventListener</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the EventDispatcher object has any listeners registered for
+a specific type of event. This allows you to determine where an
+EventDispatcher object has altered handling of an event type in the event
+flow hierarchy. To determine whether a specific event type actually
+triggers an event listener, use <code>willTrigger()</code>.</p>
+<p>The difference between <code>hasEventListener()</code> and
+<code>willTrigger()</code> is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas
+<code>willTrigger()</code> examines the entire event flow for the event
+specified by the <code>type</code> parameter.</p>
+<p>When <code>hasEventListener()</code> is called from a LoaderInfo
+object, only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+is registered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="removeEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useCapture : false })</span><a href="#removeEventListener"><span class="identifier">removeEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Removes a listener from the EventDispatcher object. If there is no
+matching listener registered with the EventDispatcher object, a call to
+this method has no effect.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Specifies whether the listener was registered for the
+capture phase or the target and bubbling phases. If the
+listener was registered for both the capture phase and
+the target and bubbling phases, two calls to
+<code>removeEventListener()</code> are required to
+remove both, one call with <code>useCapture()</code> set
+to <code><a href="../../Bool.html">true</a></code>, and another call with
+<code>useCapture()</code> set to <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table></div></div><div class="field "><a name="toString"></a><h3 class="anchor"><code><a href="#toString"><span class="identifier">toString</span></a>():<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="willTrigger"></a><h3 class="anchor"><code><a href="#willTrigger"><span class="identifier">willTrigger</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether an event listener is registered with this EventDispatcher
+object or any of its ancestors for the specified event type. This method
+returns <code><a href="../../Bool.html">true</a></code> if an event listener is triggered during any
+phase of the event flow when an event of the specified type is dispatched
+to this EventDispatcher object or any of its descendants.</p>
+<p>The difference between the <code>hasEventListener()</code> and the
+<code>willTrigger()</code> methods is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas the
+<code>willTrigger()</code> method examines the entire event flow for the
+event specified by the <code>type</code> parameter.</p>
+<p>When <code>willTrigger()</code> is called from a LoaderInfo object,
+only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+will be triggered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

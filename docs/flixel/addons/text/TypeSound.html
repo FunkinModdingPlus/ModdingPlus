@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../../jquery-1.9.1.min.js"></script><script src="../../../bootstrap/js/bootstrap.min.js"></script><script src="../../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../../styles.css" rel="stylesheet"/><link href="../../../extra-styles.css" rel="stylesheet"/><link href="../../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../../",platforms: ["types"]};</script><script src="../../../nav.js"></script><script src="../../../index.js"></script><link rel="icon" href="../../../favicon.ico" type="image/x-icon"/><title>flixel.addons.text.TypeSound</title></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> TypeSound</h1><h4><small>package <a href="../../../flixel/addons/text/index.html">flixel.addons.text</a></small></h4><h4><small>extends <a class="type" title="openfl.media.Sound - The Sound class lets you work with sound in an application." href="../../../openfl/media/Sound.html">Sound</a> &rsaquo; <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../../openfl/events/EventDispatcher.html">EventDispatcher</a></small></h4>    <h4><small>import <a href="../../../flixel/addons/text/FlxTypeText.html">flixel.addons.text.FlxTypeText</a></small></h4><span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-build" title="Builds a class or enum from a macro.">@:build(openfl.utils._internal.AssetsMacro.embedSound())</span><span class="label label-meta label-meta-autoBuild" title="Extends `@:build` metadata to all extending and implementing classes.">@:autoBuild(openfl.utils._internal.AssetsMacro.embedSound())</span><span class="label label-meta label-meta-sound" title="Includes a given .wav or .mp3 file into the target SWF and associates it with the class (must extend `flash.media.Sound`).">@:sound(&quot;assets/sounds/type.ogg&quot;)</span></div><div class="body"><div class="doc doc-main"><p></p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">?stream:<a class="type" title="openfl.net.URLRequest - The URLRequest class captures all of the information in a single HTTP request." href="../../../openfl/net/URLRequest.html">URLRequest</a>,</span> <span style="white-space:nowrap">?context:<a class="type" title="openfl.media.SoundLoaderContext - The SoundLoaderContext class provides security checks for files that load sound." href="../../../openfl/media/SoundLoaderContext.html">SoundLoaderContext</a></span>)</code></h3><div class="doc"><p></p></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.media.Sound - The Sound class lets you work with sound in an application." href="../../../openfl/media/Sound.html">Sound</a></h4><div style="display:none"><div class="field "><a name="bytesLoaded"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#bytesLoaded"><span class="identifier">bytesLoaded</span></a>:<a class="type" title="Int - The standard Int type." href="../../../Int.html">Int</a></code></h3><div class="doc"><p>Returns the currently available number of bytes in this sound object. This
+property is usually useful only for externally loaded files.</p></div></div><div class="field "><a name="bytesTotal"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#bytesTotal"><span class="identifier">bytesTotal</span></a>:<a class="type" title="Int - The standard Int type." href="../../../Int.html">Int</a></code></h3><div class="doc"><p>Returns the total number of bytes in this sound object.</p></div></div><div class="field "><a name="id3"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#id3"><span class="identifier">id3</span></a>:<a class="type" title="openfl.media.ID3Info - The ID3Info class contains properties that reflect ID3 metadata." href="../../../openfl/media/ID3Info.html">ID3Info</a></code></h3><div class="doc"><p>Provides access to the metadata that is part of an MP3 file.
+MP3 sound files can contain ID3 tags, which provide metadata about the
+file. If an MP3 sound that you load using the <code><a href="../../openfl/media/Sound.html#load">Sound.load</a>()</code> method
+contains ID3 tags, you can query these properties. Only ID3 tags that
+use the UTF-8 character set are supported.</p>
+<p>Flash Player 9 and later and AIR support ID3 2.0 tags, specifically
+2.3 and 2.4. The following tables list the standard ID3 2.0 tags and
+the type of content the tags represent. The <code><a href="../../openfl/media/Sound.html#id3">Sound.id3</a></code> property
+provides access to these tags through the format <code>my_sound.id3.COMM</code>,
+<code>my_sound.id3.TIME</code>, and so on. The first table describes tags that
+can be accessed either through the ID3 2.0 property name or the
+ActionScript property name. The second table describes ID3 tags that
+are supported but do not have predefined properties in ActionScript.</p><table><thead><th>ID3 2.0 tag</th><th>Corresponding Sound class property</th></thead><tbody><tr><td>COMM</td><td>Sound.id3.comment</td></tr><tr><td>TALB</td><td>Sound.id3.album</td></tr><tr><td>TCON</td><td>Sound.id3.genre</td></tr><tr><td>TIT2</td><td>Sound.id3.songName</td></tr><tr><td>TPE1</td><td>Sound.id3.artist</td></tr><tr><td>TRCK</td><td>Sound.id3.track</td></tr><tr><td>TYER</td><td>Sound.id3.year</td></tr></tbody></table>
+<p>The following table describes ID3 tags that are supported but do not
+have predefined properties in the Sound class. You access them by
+calling <code>mySound.id3.TFLT</code>, <code>mySound.id3.TIME</code>, and so on. <strong>NOTE:</strong>
+None of these tags are supported in Flash Lite 4.</p><table><thead><th>Property</th><th>Description</th></thead><tbody><tr><td>TFLT</td><td>File type</td></tr><tr><td>TIME</td><td>Time</td></tr><tr><td>TIT1</td><td>Content group description</td></tr><tr><td>TIT2</td><td>Title/song name/content description</td></tr><tr><td>TIT3</td><td>Subtitle/description refinement</td></tr><tr><td>TKEY</td><td>Initial key</td></tr><tr><td>TLAN</td><td>Languages</td></tr><tr><td>TLEN</td><td>Length</td></tr><tr><td>TMED</td><td>Media type</td></tr><tr><td>TOAL</td><td>Original album/movie/show title</td></tr><tr><td>TOFN</td><td>Original filename</td></tr><tr><td>TOLY</td><td>Original lyricists/text writers</td></tr><tr><td>TOPE</td><td>Original artists/performers</td></tr><tr><td>TORY</td><td>Original release year</td></tr><tr><td>TOWN</td><td>File owner/licensee</td></tr><tr><td>TPE1</td><td>Lead performers/soloists</td></tr><tr><td>TPE2</td><td>Band/orchestra/accompaniment</td></tr><tr><td>TPE3</td><td>Conductor/performer refinement</td></tr><tr><td>TPE4</td><td>Interpreted, remixed, or otherwise modified by</td></tr><tr><td>TPOS</td><td>Part of a set</td></tr><tr><td>TPUB</td><td>Publisher</td></tr><tr><td>TRCK</td><td>Track number/position in set</td></tr><tr><td>TRDA</td><td>Recording dates</td></tr><tr><td>TRSN</td><td>Internet radio station name</td></tr><tr><td>TRSO</td><td>Internet radio station owner</td></tr><tr><td>TSIZ</td><td>Size</td></tr><tr><td>TSRC</td><td>ISRC (international standard recording code)</td></tr><tr><td>TSSE</td><td>Software/hardware and settings used for encoding</td></tr><tr><td>TYER</td><td>Year</td></tr><tr><td>WXXX</td><td>URL link frame</td></tr></tbody></table>
+<p>When using this property, consider the Flash Player security model:</p><ul><li>The <code>id3</code> property of a Sound object is always permitted for SWF
+files that are in the same security sandbox as the sound file. For
+files in other sandboxes, there are security checks.</li><li>When you load the sound, using the <code>load()</code> method of the Sound
+class, you can specify a <code>context</code> parameter, which is a
+SoundLoaderContext object. If you set the <code>checkPolicyFile</code> property
+of the SoundLoaderContext object to <code><a href="../../Bool.html">true</a></code>, Flash Player checks for a
+URL policy file on the server from which the sound is loaded. If a
+policy file exists and permits access from the domain of the loading
+SWF file, then the file is allowed to access the <code>id3</code> property of the
+Sound object; otherwise it is not.</li></ul>
+<p>However, in Adobe AIR, content in the <code>application</code> security sandbox
+(content installed with the AIR application) are not restricted by
+these security limitations.</p>
+<p>For more information related to security, see the Flash Player
+Developer Center Topic: &lt;a
+href="<a href="http://www.adobe.com/go/devnet_security_en">http://www.adobe.com/go/devnet_security_en</a>"
+scope="external">Security</a>.</p></div></div><div class="field "><a name="isBuffering"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#isBuffering"><span class="identifier">isBuffering</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../../Bool.html">Bool</a></code></h3><div class="doc"><p>Returns the buffering state of external MP3 files. If the value is
+<code><a href="../../Bool.html">true</a></code>, any playback is currently suspended while the object
+waits for more data.</p></div></div><div class="field "><a name="length"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#length"><span class="identifier">length</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../../Float.html">Float</a></code></h3><div class="doc"><p>The length of the current sound in milliseconds.</p></div></div><div class="field "><a name="url"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#url"><span class="identifier">url</span></a>:<a class="type" title="String - The basic String class." href="../../../String.html">String</a></code></h3><div class="doc"><p>The URL from which this sound was loaded. This property is applicable only
+to Sound objects that were loaded using the <code><a href="../../openfl/media/Sound.html#load">Sound.load</a>()</code>
+method. For Sound objects that are associated with a sound asset from a
+SWF file's library, the value of the <code>url</code> property is
+<code>null</code>.</p>
+<p>When you first call <code><a href="../../openfl/media/Sound.html#load">Sound.load</a>()</code>, the <code>url</code>
+property initially has a value of <code>null</code>, because the final URL
+is not yet known. The <code>url</code> property will have a non-null value
+as soon as an <code>open</code> event is dispatched from the Sound
+object.</p>
+<p>The <code>url</code> property contains the final, absolute URL from
+which a sound was loaded. The value of <code>url</code> is usually the
+same as the value passed to the <code>stream</code> parameter of
+<code><a href="../../openfl/media/Sound.html#load">Sound.load</a>()</code>. However, if you passed a relative URL to
+<code><a href="../../openfl/media/Sound.html#load">Sound.load</a>()</code> the value of the <code>url</code> property
+represents the absolute URL. Additionally, if the original URL request is
+redirected by an HTTP server, the value of the <code>url</code> property
+reflects the final URL from which the sound file was actually downloaded.
+This reporting of an absolute, final URL is equivalent to the behavior of
+<code><a href="../../openfl/display/LoaderInfo.html#url">LoaderInfo.url</a></code>.</p>
+<p>In some cases, the value of the <code>url</code> property is truncated;
+see the <code>isURLInaccessible</code> property for details.</p></div></div></div><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.media.Sound - The Sound class lets you work with sound in an application." href="../../../openfl/media/Sound.html">Sound</a></h4><div style="display:none"><div class="field "><a name="close"></a><h3 class="anchor"><code><a href="#close"><span class="identifier">close</span></a>():<a class="type" title="Void - The standard Void type." href="../../../Void.html">Void</a></code></h3><div class="doc"><p>Closes the stream, causing any download of data to cease. No data may
+be read from the stream after the <code>close()</code> method is called.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IOError</code></th><td><p>The stream could not be closed, or the stream was not
+open.</p></td></tr></table></div></div><div class="field "><a name="load"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ context : null })</span><a href="#load"><span class="identifier">load</span></a>(<span style="white-space:nowrap">stream:<a class="type" title="openfl.net.URLRequest - The URLRequest class captures all of the information in a single HTTP request." href="../../../openfl/net/URLRequest.html">URLRequest</a>,</span> <span style="white-space:nowrap">?context:<a class="type" title="openfl.media.SoundLoaderContext - The SoundLoaderContext class provides security checks for files that load sound." href="../../../openfl/media/SoundLoaderContext.html">SoundLoaderContext</a></span>):<a class="type" title="Void - The standard Void type." href="../../../Void.html">Void</a></code></h3><div class="doc"><p>Initiates loading of an external MP3 file from the specified URL. If you
+provide a valid URLRequest object to the Sound constructor, the
+constructor calls <code><a href="../../openfl/media/Sound.html#load">Sound.load</a>()</code> for you. You only need to call
+<code><a href="../../openfl/media/Sound.html#load">Sound.load</a>()</code> yourself if you don't pass a valid URLRequest
+object to the Sound constructor or you pass a <code>null</code> value.</p>
+<p>Once <code>load()</code> is called on a Sound object, you can't later
+load a different sound file into that Sound object. To load a different
+sound file, create a new Sound object.</p>
+<p>When using this method, consider the following security model:</p><ul><li>Calling <code><a href="../../openfl/media/Sound.html#load">Sound.load</a>()</code> is not allowed if the calling file
+is in the local-with-file-system sandbox and the sound is in a network
+sandbox.</li><li>Access from the local-trusted or local-with-networking sandbox
+requires permission from a website through a URL policy file.</li><li>You cannot connect to commonly reserved ports. For a complete list
+of blocked ports, see "Restricting Networking APIs" in the <em>ActionScript
+3.0 Developer's Guide</em>.</li><li>You can prevent a SWF file from using this method by setting the
+<code>allowNetworking</code> parameter of the <code>object</code> and
+<code>embed</code> tags in the HTML page that contains the SWF
+content.</li></ul>
+<p>In Flash Player 10 and later, if you use a multipart Content-Type(for
+example "multipart/form-data") that contains an upload(indicated by a
+"filename" parameter in a "content-disposition" header within the POST
+body), the POST operation is subject to the security rules applied to
+uploads:</p><ul><li>The POST operation must be performed in response to a user-initiated
+action, such as a mouse click or key press.</li><li>If the POST operation is cross-domain(the POST target is not on the
+same server as the SWF file that is sending the POST request), the target
+server must provide a URL policy file that permits cross-domain
+access.</li></ul>
+<p>Also, for any multipart Content-Type, the syntax must be valid
+(according to the RFC2046 standards). If the syntax appears to be invalid,
+the POST operation is subject to the security rules applied to
+uploads.</p>
+<p>In Adobe AIR, content in the <code>application</code> security sandbox
+(content installed with the AIR application) are not restricted by these
+security limitations.</p>
+<p>For more information related to security, see the Flash Player
+Developer Center Topic: <a href="http://www.adobe.com/go/devnet_security_en">Security</a>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>stream</code></th><td><p>A URL that points to an external MP3 file.</p></td></tr><tr><th style="width:25%;"><code>context</code></th><td><p>An optional SoundLoader context object, which can define
+the buffer time(the minimum number of milliseconds of MP3
+data to hold in the Sound object's buffer) and can specify
+whether the application should check for a cross-domain
+policy file prior to loading the sound.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IOError</code></th><td><p>A network error caused the load to fail.</p></td></tr><tr class="indent"><th style="width:25%;"><code>IOError</code></th><td><p>The <code>digest</code> property of the
+<code>stream</code> object is not <code>null</code>.
+You should only set the <code>digest</code> property
+of a URLRequest object when calling the
+<code><a href="../../openfl/net/URLLoader.html#load">URLLoader.load</a>()</code> method when loading a
+SWZ file(an Adobe platform component).</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>Local untrusted files may not communicate with the
+Internet. You can work around this by reclassifying
+this file as local-with-networking or trusted.</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>You cannot connect to commonly reserved ports. For a
+complete list of blocked ports, see "Restricting
+Networking APIs" in the <em>ActionScript 3.0
+Developer's Guide</em>.</p></td></tr></table></div></div><div class="field "><a name="loadCompressedDataFromByteArray"></a><h3 class="anchor"><code><a href="#loadCompressedDataFromByteArray"><span class="identifier">loadCompressedDataFromByteArray</span></a>(<span style="white-space:nowrap">bytes:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../../openfl/utils/ByteArray.html">ByteArray</a>,</span> <span style="white-space:nowrap">bytesLength:<a class="type" title="Int - The standard Int type." href="../../../Int.html">Int</a></span>):<a class="type" title="Void - The standard Void type." href="../../../Void.html">Void</a></code></h3><div class="doc"><p>Load MP3 sound data from a ByteArray object into a Sound object. The data will be read from the current
+ByteArray position and will leave the ByteArray position at the end of the specified bytes length once
+finished. If the MP3 sound data contains ID3 data ID3 events will be dispatched during this function call.
+This function will throw an exception if the ByteArray object does not contain enough data.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>bytes</code></th><td></td></tr><tr><th style="width:25%;"><code>null</code></th><td><p>bytesLength</p></td></tr></table></div></div><div class="field "><a name="loadPCMFromByteArray"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ sampleRate : 44100, stereo : true, format : &quot;float&quot; })</span><a href="#loadPCMFromByteArray"><span class="identifier">loadPCMFromByteArray</span></a>(<span style="white-space:nowrap">bytes:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../../openfl/utils/ByteArray.html">ByteArray</a>,</span> <span style="white-space:nowrap">samples:<a class="type" title="Int - The standard Int type." href="../../../Int.html">Int</a>,</span> <span style="white-space:nowrap">format:<a class="type" title="String - The basic String class." href="../../../String.html">String</a> = &quot;float&quot;,</span> <span style="white-space:nowrap">stereo:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../../Bool.html">Bool</a> = true,</span> <span style="white-space:nowrap">sampleRate:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../../Float.html">Float</a> = 44100</span>):<a class="type" title="Void - The standard Void type." href="../../../Void.html">Void</a></code></h3><div class="doc"><p>Load PCM 32-bit floating point sound data from a ByteArray object into a Sound object. The data will be read
+from the current ByteArray position and will leave the ByteArray position at the end of the specified sample
+length multiplied by either 1 channel or 2 channels if the stereo flag is set once finished.</p>
+<p>Starting with Flash Player 11.8, the amount of audio data that can be passed to this function is limited. For
+SWF versions >= 21, this function throws an exception if the amount of audio data passed into this function is
+more than 1800 seconds. That is, samples / sampleRate should be less than or equal to 1800. For swf versions &lt;
+21, the runtime fails silently if the amount of audio data passed in is more than 12000 seconds. This is
+provided only for backward compatibility.</p>
+<p>This function throws an exception if the ByteArray object does not contain enough data.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>bytes</code></th><td></td></tr><tr><th style="width:25%;"><code>samples</code></th><td></td></tr><tr><th style="width:25%;"><code>format</code></th><td></td></tr><tr><th style="width:25%;"><code>stereo</code></th><td></td></tr><tr><th style="width:25%;"><code>null</code></th><td><p>sampleRate</p></td></tr></table></div></div><div class="field "><a name="play"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ sndTransform : null, loops : 0, startTime : 0.0 })</span><a href="#play"><span class="identifier">play</span></a>(<span style="white-space:nowrap">startTime:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../../Float.html">Float</a> = 0.0,</span> <span style="white-space:nowrap">loops:<a class="type" title="Int - The standard Int type." href="../../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">?sndTransform:<a class="type" title="openfl.media.SoundTransform - The SoundTransform class contains properties for volume and panning." href="../../../openfl/media/SoundTransform.html">SoundTransform</a></span>):<a class="type" title="openfl.media.SoundChannel - The SoundChannel class controls a sound in an application." href="../../../openfl/media/SoundChannel.html">SoundChannel</a></code></h3><div class="doc"><p>Generates a new SoundChannel object to play back the sound. This method
+returns a SoundChannel object, which you access to stop the sound and to
+monitor volume.(To control the volume, panning, and balance, access the
+SoundTransform object assigned to the sound channel.)</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>startTime</code></th><td><p>The initial position in milliseconds at which playback
+should start.</p></td></tr><tr><th style="width:25%;"><code>loops</code></th><td><p>Defines the number of times a sound loops back to the
+<code>startTime</code> value before the sound channel
+stops playback.</p></td></tr><tr><th style="width:25%;"><code>sndTransform</code></th><td><p>The initial SoundTransform object assigned to the
+sound channel.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A SoundChannel object, which you use to control the sound. This
+method returns <code>null</code> if you have no sound card or if
+you run out of available sound channels. The maximum number of
+sound channels available at once is 32.</p></div></div></div></div><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../../openfl/events/EventDispatcher.html">EventDispatcher</a></h4><div style="display:none"><div class="field "><a name="addEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useWeakReference : false, priority : 0, useCapture : false })</span><a href="#addEventListener"><span class="identifier">addEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">priority:<a class="type" title="Int - The standard Int type." href="../../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">useWeakReference:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../../Void.html">Void</a></code></h3><div class="doc"><p>Registers an event listener object with an EventDispatcher object so that
+the listener receives notification of an event. You can register event
+listeners on all nodes in the display list for a specific type of event,
+phase, and priority.</p>
+<p>After you successfully register an event listener, you cannot change
+its priority through additional calls to <code>addEventListener()</code>.
+To change a listener's priority, you must first call
+<code>removeListener()</code>. Then you can register the listener again
+with the new priority level.</p>
+<p>Keep in mind that after the listener is registered, subsequent calls to
+<code>addEventListener()</code> with a different <code>type</code> or
+<code>useCapture</code> value result in the creation of a separate
+listener registration. For example, if you first register a listener with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>, it listens only during
+the capture phase. If you call <code>addEventListener()</code> again using
+the same listener object, but with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>, you have two separate listeners: one that listens
+during the capture phase and another that listens during the target and
+bubbling phases.</p>
+<p>You cannot register an event listener for only the target phase or the
+bubbling phase. Those phases are coupled during registration because
+bubbling applies only to the ancestors of the target node.</p>
+<p>If you no longer need an event listener, remove it by calling
+<code>removeEventListener()</code>, or memory problems could result. Event
+listeners are not automatically removed from memory because the garbage
+collector does not remove the listener as long as the dispatching object
+exists(unless the <code>useWeakReference</code> parameter is set to
+<code><a href="../../Bool.html">true</a></code>).</p>
+<p>Copying an EventDispatcher instance does not copy the event listeners
+attached to it.(If your newly created node needs an event listener, you
+must attach the listener after creating the node.) However, if you move an
+EventDispatcher instance, the event listeners attached to it move along
+with it.</p>
+<p>If the event listener is being registered on a node while an event is
+being processed on this node, the event listener is not triggered during
+the current phase but can be triggered during a later phase in the event
+flow, such as the bubbling phase.</p>
+<p>If an event listener is removed from a node while an event is being
+processed on the node, it is still triggered by the current actions. After
+it is removed, the event listener is never invoked again(unless
+registered again for future processing).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Determines whether the listener works in the
+capture phase or the target and bubbling phases.
+If <code>useCapture</code> is set to
+<code><a href="../../Bool.html">true</a></code>, the listener processes the
+event only during the capture phase and not in the
+target or bubbling phase. If
+<code>useCapture</code> is <code><a href="../../Bool.html">false</a></code>, the
+listener processes the event only during the
+target or bubbling phase. To listen for the event
+in all three phases, call
+<code>addEventListener</code> twice, once with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>,
+then again with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>.</p></td></tr><tr><th style="width:25%;"><code>priority</code></th><td><p>The priority level of the event listener. The
+priority is designated by a signed 32-bit integer.
+The higher the number, the higher the priority.
+All listeners with priority <em>n</em> are processed
+before listeners of priority <em>n</em>-1. If two or
+more listeners share the same priority, they are
+processed in the order in which they were added.
+The default priority is 0.</p></td></tr><tr><th style="width:25%;"><code>useWeakReference</code></th><td><p>Determines whether the reference to the listener
+is strong or weak. A strong reference(the
+default) prevents your listener from being
+garbage-collected. A weak reference does not.</p>
+<p>Class-level member functions are not subject to
+garbage collection, so you can set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for class-level member functions without
+subjecting them to garbage collection. If you set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for a listener that is a nested inner function,
+the function will be garbage-collected and no
+longer persistent. If you create references to the
+inner function(save it in another variable) then
+it is not garbage-collected and stays
+persistent.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The <code>listener</code> specified is not a
+function.</p></td></tr></table></div></div><div class="field "><a name="dispatchEvent"></a><h3 class="anchor"><code><a href="#dispatchEvent"><span class="identifier">dispatchEvent</span></a>(<span style="white-space:nowrap">event:<a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../../openfl/events/Event.html">Event</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../../Bool.html">Bool</a></code></h3><div class="doc"><p>Dispatches an event into the event flow. The event target is the
+EventDispatcher object upon which the <code>dispatchEvent()</code> method
+is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>event</code></th><td><p>The Event object that is dispatched into the event flow. If
+the event is being redispatched, a clone of the event is
+created automatically. After an event is dispatched, its
+<code>target</code> property cannot be changed, so you must
+create a new copy of the event for redispatching to work.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if the event was successfully
+dispatched. A value of <code><a href="../../Bool.html">false</a></code> indicates failure or
+that <code>preventDefault()</code> was called on the event.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The event dispatch recursion limit has been reached.</p></td></tr></table></div></div><div class="field "><a name="hasEventListener"></a><h3 class="anchor"><code><a href="#hasEventListener"><span class="identifier">hasEventListener</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the EventDispatcher object has any listeners registered for
+a specific type of event. This allows you to determine where an
+EventDispatcher object has altered handling of an event type in the event
+flow hierarchy. To determine whether a specific event type actually
+triggers an event listener, use <code>willTrigger()</code>.</p>
+<p>The difference between <code>hasEventListener()</code> and
+<code>willTrigger()</code> is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas
+<code>willTrigger()</code> examines the entire event flow for the event
+specified by the <code>type</code> parameter.</p>
+<p>When <code>hasEventListener()</code> is called from a LoaderInfo
+object, only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+is registered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="removeEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useCapture : false })</span><a href="#removeEventListener"><span class="identifier">removeEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../../Void.html">Void</a></code></h3><div class="doc"><p>Removes a listener from the EventDispatcher object. If there is no
+matching listener registered with the EventDispatcher object, a call to
+this method has no effect.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Specifies whether the listener was registered for the
+capture phase or the target and bubbling phases. If the
+listener was registered for both the capture phase and
+the target and bubbling phases, two calls to
+<code>removeEventListener()</code> are required to
+remove both, one call with <code>useCapture()</code> set
+to <code><a href="../../Bool.html">true</a></code>, and another call with
+<code>useCapture()</code> set to <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table></div></div><div class="field "><a name="toString"></a><h3 class="anchor"><code><a href="#toString"><span class="identifier">toString</span></a>():<a class="type" title="String - The basic String class." href="../../../String.html">String</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="willTrigger"></a><h3 class="anchor"><code><a href="#willTrigger"><span class="identifier">willTrigger</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether an event listener is registered with this EventDispatcher
+object or any of its ancestors for the specified event type. This method
+returns <code><a href="../../Bool.html">true</a></code> if an event listener is triggered during any
+phase of the event flow when an event of the specified type is dispatched
+to this EventDispatcher object or any of its descendants.</p>
+<p>The difference between the <code>hasEventListener()</code> and the
+<code>willTrigger()</code> methods is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas the
+<code>willTrigger()</code> method examines the entire event flow for the
+event specified by the <code>type</code> parameter.</p>
+<p>When <code>willTrigger()</code> is called from a LoaderInfo object,
+only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+will be triggered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../../..//highlighter.js"></script><link href="../../../highlighter.css" rel="stylesheet"/></body></html>

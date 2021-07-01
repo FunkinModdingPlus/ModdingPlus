@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.net.NetStream</title><meta name="description" content="The NetStream class opens a one-way streaming channel over a
+NetConnection.
+Use the NetStream class to do the following:"/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> NetStream</h1><h4><small>package <a href="../../openfl/net/index.html">openfl.net</a></small></h4><h4><small>extends <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></small></h4>    <span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.media.SoundMixer)</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>The NetStream class opens a one-way streaming channel over a
+NetConnection.
+Use the NetStream class to do the following:</p><ul><li>Call <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code> to play a media file from a local disk, a web
+server, or Flash Media Server.</li><li>Call <code><a href="../../openfl/net/NetStream.html#publish">NetStream.publish</a>()</code> to publish a video, audio, and data stream to
+Flash Media Server.</li><li>Call <code><a href="../../openfl/net/NetStream.html#send">NetStream.send</a>()</code> to send data messages to all subscribed clients.</li><li>Call <code><a href="../../openfl/net/NetStream.html#send">NetStream.send</a>()</code> to add metadata to a live stream.</li><li>Call <code><a href="../../openfl/net/NetStream.html#appendBytes">NetStream.appendBytes</a>()</code> to pass ByteArray data into the
+NetStream.</li></ul>
+<p><strong>Note:</strong>You cannot play and publish a stream over the same NetStream
+object.</p>
+<p>Adobe AIR and Flash Player 9.0.115.0 and later versions support files
+derived from the standard MPEG-4 container format. These files include
+F4V, MP4, M4A, MOV, MP4V, 3GP, and 3G2 if they contain H.264 video, HEAAC
+v2 encoded audio, or both. H.264 delivers higher quality video at lower
+bit rates when compared to the same encoding profile in Sorenson or On2.
+AAC is a standard audio format defined in the MPEG-4 video standard.
+HE-AAC v2 is an extension of AAC that uses Spectral Band Replication (SBR)
+and Parametric Stereo (PS) techniques to increase coding efficiency at low
+bit rates.</p>
+<p>For information about supported codecs and file formats, see the
+following:</p><ul><li><a href="http://www.adobe.com/go/learn_fms_fileformats_en"
+scope="external">Flash Media Server documentation</a></li><li><a href="http://www.adobe.com/go/hardware_scaling_en"
+scope="external">Exploring Flash Player support for high-definition H.264
+video and AAC audio</a></li><li><a href="http://www.adobe.com/go/video_file_format"
+scope="external">FLV/F4V open specification documents</a></li></ul>
+<p><strong>Receiving data from a Flash Media Server stream, progressive F4V file,
+or progressive FLV file</strong></p>
+<p>Flash Media Server, F4V files, and FLV files can send event objects
+containing data at specific data points during streaming or playback. You
+can handle data from a stream or FLV file during playback in two ways:</p><ul><li>
+<p>Associate a client property with an event handler to receive the data
+object. Use the <code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> property to assign an object to call
+specific data handling functions. The object assigned to the
+<code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> property can listen for the following data points:
+<code>onCuePoint()</code>, <code>onImageData()</code>, <code>onMetaData()</code>, <code>onPlayStatus()</code>,
+<code>onSeekPoint()</code>, <code>onTextData()</code>, and <code>onXMPData()</code>. Write procedures
+within those functions to handle the data object returned from the stream
+during playback. See the <code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> property for more information.</p></li><li>
+<p>Associate a client property with a subclass of the NetStream class,
+then write an event handler to receive the data object. NetStream is a
+sealed class, which means that properties or methods cannot be added to a
+NetStream object at runtime. However, you can create a subclass of
+NetStream and define your event handler in the subclass. You can also make
+the subclass dynamic and add the event handler to an instance of the
+subclass.</p></li></ul>
+<p>Wait to receive a <code>NetGroup.Neighbor.Connect</code> event before you use the
+object replication, direct routing, or posting APIs.</p>
+<p><strong>Note:</strong> To send data through an audio file, like an mp3 file, use the
+Sound class to associate the audio file with a Sound object. Then, use the
+<code><a href="../../openfl/media/Sound.html#id3">Sound.id3</a></code> property to read metadata from the sound file.</p><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>asyncError</code></th><td><p>Dispatched when an exception is thrown
+asynchronously נthat is, from native
+asynchronous code. This event is dispatched when a
+server calls a method on the client that is not
+defined.</p></td></tr><tr class="indent"><th style="width:25%;"><code>drmAuthenticate</code></th><td><p>Dispatched when a NetStream object tries to play a
+digital rights management (DRM) encrypted content
+that requires a user credential for authentication
+before playing.
+Use the <code> setDRMAuthenticationCredentials()</code>
+method of the NetStream object to authenticate the
+user. If user authentication failed, the
+application retries authentication and dispatches
+a new DRMAuthenticateEvent event for the NetStream
+object.</p></td></tr><tr class="indent"><th style="width:25%;"><code>drmError</code></th><td><p>Dispatched when a NetStream object, trying to play
+a digital rights management (DRM) encrypted file,
+encounters a DRM-related error. For example, a
+DRMErrorEvent object is dispatched when the user
+authorization fails. This may be because the user
+has not purchased the rights to view the content
+or because the content provider does not support
+the viewing application.</p></td></tr><tr class="indent"><th style="width:25%;"><code>drmStatus</code></th><td><p>Dispatched when the digital rights management
+(DRM) encrypted content begins playing (when the
+user is authenticated and authorized to play the
+content).
+DRMStatusEvent object contains information related
+to the voucher, such as whether the content is
+available offline or when the voucher expires and
+users can no longer view the content.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ioError</code></th><td><p>Dispatched when an input or output error occurs
+that causes a network operation to fail.</p></td></tr><tr class="indent"><th style="width:25%;"><code>mediaTypeData</code></th><td><p>Dispatched when playing video content and certain
+type of messages are processed.
+A NetDataEvent is dispatched for the following
+messages:</p><ul><li>onCuePoint</li><li>onImageData</li><li>onMetaData</li><li>onPlayStatus (for code NetStream.Play.Complete)</li><li>onTextData</li><li>onXMPData</li></ul>
+<p><strong>Note:</strong> This event is not dispatched by content
+running in Flash Player in the browser on Android
+or Blackberry Tablet OS or by content running in
+AIR on iOS.</p></td></tr><tr class="indent"><th style="width:25%;"><code>netStatus</code></th><td><p>Dispatched when a NetStream object is reporting
+its status or error condition. The <code>netStatus</code>
+event contains an <code>info</code> property, which is an
+information object that contains specific
+information about the event, such as if a
+connection attempt succeeded or failed.</p></td></tr><tr class="indent"><th style="width:25%;"><code>onCuePoint</code></th><td><p>Establishes a listener to respond when an embedded
+cue point is reached while playing a video file.
+You can use the listener to trigger actions in
+your code when the video reaches a specific cue
+point, which lets you synchronize other actions in
+your application with video playback events. For
+information about video file formats supported by
+Flash Media Server, see the &lt;a
+href="<a href="http://www.adobe.com/go/learn_fms_fileformats_en">http://www.adobe.com/go/learn_fms_fileformats_en</a>"
+scope="external">www.adobe.com/go/learn_fms_fileformats_en</a>.</p>
+<p><code>onCuePoint</code> is actually a property of the
+<code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> object. IThe property is listed
+in the Events section because it responds to a
+data event, either when streaming media using
+Flash Media Server or during FLV file playback.
+For more information, see the NetStream class
+description. You cannot use the
+<code>addEventListener()</code> method, or any other
+EventDispatcher methods, to listen for, or process
+<code>onCuePoint</code> as an event. Define a callback
+function and attach it to one of the following
+objects:</p><ul><li>The object that the <code>client</code> property of a
+NetStream instance references.</li><li>An instance of a NetStream subclass. NetStream
+is a sealed class, which means that properties or
+methods cannot be added to a NetStream object at
+runtime. Create a subclass of NetStream and define
+your event handler in the subclass. You can also
+make the subclass dynamic and add the event
+handler function to an instance of the subclass.</li></ul>
+<p>The associated event listener is triggered after a
+call to the <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code> method, but before
+the video playhead has advanced.</p>
+<p>You can embed the following types of cue points in
+a video file:</p><ul><li>A navigation cue point specifies a keyframe
+within the video file and the cue point's <code>time</code>
+property corresponds to that exact keyframe.
+Navigation cue points are often used as bookmarks
+or entry points to let users navigate through the
+video file.</li><li>An event cue point specifies a time. The time
+may or may not correspond to a specific keyframe.
+An event cue point usually represents a time in
+the video when something happens that could be
+used to trigger other application events.</li></ul>
+<p>The <code>onCuePoint</code> event object has the following
+properties:</p><table><thead><th>Property</th><th>Description</th></thead><tbody><tr><td><code>name</code></td><td>The name given to the cue point when it was embedded in the video file.</td></tr><tr><td><code>parameters</code></td><td>An associative array of name and value pair strings specified for this cue point. Any valid string can be used for the parameter name or value.</td></tr><tr><td><code>time</code></td><td>The time in seconds at which the cue point occurred in the video file during playback.</td></tr><tr><td><code>type</code></td><td>The type of cue point that was reached, either navigation or event.</td></tr></tbody></table>
+<p>You can define cue points in a video file when you
+first encode the file, or when you import a video
+clip in the Flash authoring tool by using the
+Video Import wizard.</p>
+<p>The <code>onMetaData</code> event also retrieves information
+about the cue points in a video file. However the
+<code>onMetaData</code> event gets information about all of
+the cue points before the video begins playing.
+The <code>onCuePoint</code> event receives information about
+a single cue point at the time specified for that
+cue point during playback.</p>
+<p>Generally, to have your code respond to a specific
+cue point at the time it occurs, use the
+<code>onCuePoint</code> event to trigger some action in your
+code.</p>
+<p>You can use the list of cue points provided to the
+<code>onMetaData</code> event to let the user start playing
+the video at predefined points along the video
+stream. Pass the value of the cue point's <code>time</code>
+property to the <code><a href="../../openfl/net/NetStream.html#seek">NetStream.seek</a>()</code> method to play
+the video from that cue point.</p></td></tr><tr class="indent"><th style="width:25%;"><code>onDRMContentData</code></th><td><p>Establishes a listener to respond when AIR
+extracts DRM content metadata embedded in a media
+file.
+A DRMContentData object contains the information
+needed to obtain a voucher required to play a
+DRM-protected media file. Use the DRMManager class
+to download the voucher with this information.</p>
+<p><code>onDRMContentData</code> is a property of the
+<code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> object. This property is listed
+in the Events section because it responds to a
+data event when preloading embedded data from a
+local media file. For more information, see the
+NetStream class description. You cannot use the
+<code>addEventListener()</code> method, or any other
+EventDispatcher methods, to listen for, or process
+<code>onDRMContentData</code> as an event. Rather, you must
+define a single callback function and attach it
+directly to one of the following objects:</p><ul><li>The object that the <code>client</code> property of a
+NetStream instance references.</li><li>An instance of a NetStream subclass. NetStream
+is a sealed class, which means that properties or
+methods cannot be added to a NetStream object at
+runtime. However, you can create a subclass of
+NetStream and define your event handler in the
+subclass or make the subclass dynamic and add the
+event handler function to an instance of the
+subclass.</li></ul></td></tr><tr class="indent"><th style="width:25%;"><code>onImageData</code></th><td><p>Establishes a listener to respond when Flash
+Player receives image data as a byte array
+embedded in a media file that is playing. The
+image data can produce either JPEG, PNG, or GIF
+content. Use the
+<code><a href="../../openfl/display/Loader.html#loadBytes">openfl.display.Loader.loadBytes</a>()</code> method to load
+the byte array into a display object.
+<code>onImageData</code> is actually a property of the
+<code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> object. The property is listed
+in the Events section because it responds to a
+data event, either when streaming media using
+Flash Media Server or during FLV file playback.
+For more information, see the NetStream class
+description. You cannot use the
+<code>addEventListener()</code> method, or any other
+EventDispatcher methods, to listen for, or process
+<code>onImageData</code> as an event. Define a single
+callback function and attach it to one of the
+following objects:</p><ul><li>The object that the <code>client</code> property of a
+NetStream instance references.</li><li>An instance of a NetStream subclass. NetStream
+is a sealed class, which means that properties or
+methods cannot be added to a NetStream object at
+runtime. Create a subclass of NetStream and define
+your event handler in the subclass. You can also
+make the subclass dynamic and add the event
+handler function to an instance of the subclass.</li></ul>
+<p>The associated event listener is triggered after a
+call to the <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code> method, but before
+the video playhead has advanced.</p>
+<p>The onImageData event object contains the image
+data as a byte array sent through an AMF0 data
+channel.</p></td></tr><tr class="indent"><th style="width:25%;"><code>onMetaData</code></th><td><p>Establishes a listener to respond when Flash
+Player receives descriptive information embedded
+in the video being played. For information about
+video file formats supported by Flash Media
+Server, see the &lt;a
+href="<a href="http://www.adobe.com/go/learn_fms_fileformats_en">http://www.adobe.com/go/learn_fms_fileformats_en</a>"
+scope="external">www.adobe.com/go/learn_fms_fileformats_en</a>.</p>
+<p><code>onMetaData</code> is actually a property of the
+<code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> object. The property is listed
+in the Events section because it responds to a
+data event, either when streaming media using
+Flash Media Server or during FLV file playback.
+For more information, see the NetStream class
+description and the <code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> property.
+You cannot use the <code>addEventListener()</code> method, or
+any other EventDispatcher methods, to listen for
+or process <code>onMetaData</code> as an event. Define a
+single callback function and attach it to one of
+the following objects:</p><ul><li>The object that the <code>client</code> property of a
+NetStream instance references.</li><li>An instance of a NetStream subclass. NetStream
+is a sealed class, which means that properties or
+methods cannot be added to a NetStream object at
+runtime. You can create a subclass of NetStream
+and define your event handler in the subclass. You
+can also make the subclass dynamic and add the
+event handler function to an instance of the
+subclass.</li></ul>
+<p>The Flash Video Exporter utility (version 1.1 or
+later) embeds a video's duration, creation date,
+data rates, and other information into the video
+file itself. Different video encoders embed
+different sets of meta data.</p>
+<p>The associated event listener is triggered after a
+call to the <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code> method, but before
+the video playhead has advanced.</p>
+<p>In many cases, the duration value embedded in
+stream metadata approximates the actual duration
+but is not exact. In other words, it does not
+always match the value of the <code><a href="../../openfl/net/NetStream.html#time">NetStream.time</a></code>
+property when the playhead is at the end of the
+video stream.</p>
+<p>The event object passed to the onMetaData event
+handler contains one property for each piece of
+data.</p></td></tr><tr class="indent"><th style="width:25%;"><code>onPlayStatus</code></th><td><p>Establishes a listener to respond when a NetStream
+object has completely played a stream. The
+associated event object provides information in
+addition to what's returned by the <code>netStatus</code>
+event. You can use this property to trigger
+actions in your code when a NetStream object has
+switched from one stream to another stream in a
+playlist (as indicated by the information object
+<code><a href="../../openfl/net/NetStream.html#Switch">NetStream.Play.Switch</a></code>) or when a NetStream
+object has played to the end (as indicated by the
+information object <code><a href="../../openfl/net/NetStream.html#Complete">NetStream.Play.Complete</a></code>).
+<code>onPlayStaus</code> is actually a property of the
+<code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> object. The property is listed
+in the Events section because it responds to a
+data event, either when streaming media using
+Flash Media Server or during FLV file playback.
+For more information, see the NetStream class
+description. You cannot use the
+<code>addEventListener()</code> method, or any other
+EventDispatcher methods, to listen for, or process
+<code>onPlayStatus</code> as an event. Define a callback
+function and attach it to one of the following
+objects:</p><ul><li>The object that the <code>client</code> property of a
+NetStream instance references.</li><li>An instance of a NetStream subclass. NetStream
+is a sealed class, which means that properties or
+methods cannot be added to a NetStream object at
+runtime. Create a subclass of NetStream and define
+your event handler in the subclass. You can also
+make the subclass dynamic and add the event
+handler function to an instance of the subclass.</li></ul>
+<p>This event can return an information object with
+the following properties:</p><table><thead><th>Code property</th><th>Level property</th><th>Meaning</th></thead><tbody><tr><td><code><a href="../../openfl/net/NetStream.html#Switch">NetStream.Play.Switch</a></code></td><td><code>"status"</code></td><td>The subscriber is switching from one stream to another in a playlist.</td></tr><tr><td><code><a href="../../openfl/net/NetStream.html#Complete">NetStream.Play.Complete</a></code></td><td><code>"status"</code></td><td>Playback has completed.</td></tr><tr><td><code><a href="../../openfl/net/NetStream.html#TransitionComplete">NetStream.Play.TransitionComplete</a></code></td><td><code>"status"</code></td><td>The subscriber is switching to a new stream as a result of stream bit-rate switching</td></tr></tbody></table></td></tr><tr class="indent"><th style="width:25%;"><code>onSeekPoint</code></th><td><p>Called synchronously from <code>appendBytes()</code> when the
+append bytes parser encounters a point that it
+believes is a seekable point (for example, a video
+key frame). Use this event to construct a seek
+point table. The <code>byteCount</code> corresponds to the
+<code>byteCount</code> at the first byte of the parseable
+message for that seek point, and is reset to zero
+as described above. To seek, at the event
+<code><a href="../../openfl/net/NetStream.html#Notify">NetStream.Seek.Notify</a></code>, find the bytes that start
+at a seekable point and call <code>appendBytes(bytes)</code>.
+If the <code>bytes</code> argument is a <code><a href="../../openfl/utils/ByteArray.html#ByteArray">ByteArray</a></code>
+consisting of bytes starting at the seekable
+point, the video plays at that seek point.
+<strong>Note:</strong> Calls to <code>appendBytes()</code> from within
+this callback are ignored.</p>
+<p>The <code>onSeekPoint</code> property is a property of the
+<code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> object. The property is listed
+in the Events section because it responds to data
+coming into the <code>appendBytes()</code> method. For more
+information, see the NetStream class description
+and the <code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> property. You cannot
+use the <code>addEventListener()</code> method, or any other
+EventDispatcher methods, to listen for or process
+<code>onSeekPoint</code> as an event. To use <code>onSeekPoint</code>,
+define a callback function and attach it to one of
+the following objects:</p><ul><li>The object that the <code>client</code> property of a
+NetStream instance references.</li><li>An instance of a NetStream subclass. NetStream
+is a sealed class, which means that properties or
+methods cannot be added to a NetStream object at
+runtime. However, you can create a subclass of
+NetStream and define your event handler in the
+subclass. You can also make the subclass dynamic
+and add the event handler function to an instance
+of the subclass.</li></ul></td></tr><tr class="indent"><th style="width:25%;"><code>onTextData</code></th><td><p>Establishes a listener to respond when Flash
+Player receives text data embedded in a media file
+that is playing. The text data is in UTF-8 format
+and can contain information about formatting based
+on the 3GP timed text specification.
+<code>onTextData</code> is actually a property of the
+<code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> object. The property is listed
+in the Events section because it responds to a
+data event, either when streaming media using
+Flash Media Server or during FLV file playback.
+For more information, see the NetStream class
+description. You cannot use the
+<code>addEventListener()</code> method, or any other
+EventDispatcher methods, to listen for, or process
+<code>onTextData</code> as an event. Define a callback
+function and attach it to one of the following
+objects:</p><ul><li>The object that the <code>client</code> property of a
+NetStream instance references.</li><li>An instance of a NetStream subclass. NetStream
+is a sealed class, which means that properties or
+methods cannot be added to a NetStream object at
+runtime. Create a subclass of NetStream and define
+your event handler in the subclass. You can also
+make the subclass dynamic and add the event
+handler function to an instance of the subclass.</li></ul>
+<p>The associated event listener is triggered after a
+call to the <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code> method, but before
+the video playhead has advanced.</p>
+<p>The onTextData event object contains one property
+for each piece of text data.</p></td></tr><tr class="indent"><th style="width:25%;"><code>onXMPData</code></th><td><p>Establishes a listener to respond when Flash
+Player receives information specific to Adobe
+Extensible Metadata Platform (XMP) embedded in the
+video being played. For information about video
+file formats supported by Flash Media Server, see
+the &lt;a
+href="<a href="http://www.adobe.com/go/learn_fms_fileformats_en">http://www.adobe.com/go/learn_fms_fileformats_en</a>"
+scope="external">www.adobe.com/go/learn_fms_fileformats_en</a>.</p>
+<p><code>onXMPData</code> is actually a property of the
+<code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> object. The property is listed
+in the Events section because it responds to a
+data event, either when streaming media using
+Flash Media Server or during FLV file playback.
+For more information, see the NetStream class
+description and the <code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a></code> property.
+You cannot use the <code>addEventListener()</code> method, or
+any other EventDispatcher methods, to listen for
+or process <code>onMetaData</code> as an event. Define a
+callback function and attach it to one of the
+following objects:</p><ul><li>The object that the <code>client</code> property of a
+NetStream instance references.</li><li>An instance of a NetStream subclass. NetStream
+is a sealed class, which means that properties or
+methods cannot be added to a NetStream object at
+runtime. However, you can create a subclass of
+NetStream and define your event handler in the
+subclass. You can also make the subclass dynamic
+and add the event handler function to an instance
+of the subclass.</li></ul>
+<p>The associated event listener is triggered after a
+call to the <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code> method, but before
+the video playhead has advanced.</p>
+<p>The object passed to the <code>onXMPData()</code> event
+handling function has one <code>data</code> property, which
+is a string. The string is generated from a
+top-level UUID box. (The 128-bit UUID of the top
+level box is
+<code>BE7ACFCB-97A9-42E8-9C71-999491E3AFAC</code>.) This
+top-level UUID box contains exactly one XML
+document represented as a null-terminated UTF-8
+string.</p></td></tr><tr class="indent"><th style="width:25%;"><code>status</code></th><td><p>Dispatched when the application attempts to play
+content encrypted with digital rights management
+(DRM), by invoking the <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code> method.
+The value of the status code property will be
+<code>"DRM.encryptedFLV"</code>.</p></td></tr></table></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ peerID : null })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">connection:<a class="type" title="openfl.net.NetConnection - The NetConnection class creates a two-way connection between a client and a server." href="../../openfl/net/NetConnection.html">NetConnection</a>,</span> <span style="white-space:nowrap">?peerID:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>)</code></h3><div class="doc"><p>Creates a stream that you can use to play media files and send data
+over a NetConnection object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>connection</code></th><td><p>A NetConnection object.</p></td></tr><tr><th style="width:25%;"><code>peerID</code></th><td><p>This optional parameter is available in Flash Player
+10 and later, for use with RTMFP connections. (If
+the value of the <code><a href="../../openfl/net/NetConnection.html#protocol">NetConnection.protocol</a></code> property
+is not <code>"rtmfp"</code>, this parameter is ignored.) Use
+one of the following values:
+<em> To connect to Flash Media Server, specify
+<code><a href="../../openfl/net/NetStream.html#CONNECT_TO_FMS">NetStream.CONNECT_TO_FMS</a></code>.
+</em> To publish directly to peers, specify
+<code><a href="../../openfl/net/NetStream.html#DIRECT_CONNECTIONS">NetStream.DIRECT_CONNECTIONS</a></code>.
+<em> To play directly from a specific peer, specify
+that peer's identity (see <code><a href="../../openfl/net/NetConnection.html#nearID">NetConnection.nearID</a></code> and
+<code><a href="../../openfl/net/NetStream.html#farID">NetStream.farID</a></code>).
+</em> (Flash Player 10.1 or AIR 2 or later) To publish
+or play a stream in a peer-to-peer multicast group,
+specify a <code>groupspec</code> string (see the GroupSpecifier
+class).</p>
+<p>In most cases, a <code>groupspec</code> has the potential to
+use the network uplink on the local system. In this
+case, the user is asked for permission to use the
+computer's network resources. If the user allows
+this use, a <code><a href="../../openfl/net/NetStream.html#Success">NetStream.Connect.Success</a></code>
+NetStatusEvent is sent to the NetConnection's event
+listener. If the user denies permission, a
+<code><a href="../../openfl/net/NetStream.html#Rejected">NetStream.Connect.Rejected</a></code> event is sent. When
+specifying a <code>groupspec</code>, until a
+<code><a href="../../openfl/net/NetStream.html#Success">NetStream.Connect.Success</a></code> event is received, it is
+an error to use any method of the NetStream object,
+and an exception is raised.</p>
+<p>If you include this parameter in your constructor
+statement but pass a value of <code>null</code>, the value is
+set to <code>"connectToFMS"</code>.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The NetConnection instance is not connected.</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="bufferLength"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#bufferLength"><span class="identifier">bufferLength</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>The number of seconds of data currently in the buffer. You can use
+this property with the <code>bufferTime</code> property to estimate how close the
+buffer is to being full נfor example, to display feedback to a user
+who is waiting for data to be loaded into the buffer.</p></div></div><div class="field "><a name="bufferTime"></a><h3 class="anchor"><code><a href="#bufferTime"><span class="identifier">bufferTime</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Specifies how long to buffer messages before starting to display the
+stream.
+The default value is 0.1 (one-tenth of a second). To determine the
+number of seconds currently in the buffer, use the <code>bufferLength</code>
+property.</p>
+<p>To play a server-side playlist, set <code>bufferTime</code> to at least 1 second.
+If you experience playback issues, increase the length of
+<code>bufferTime</code>.</p>
+<p><strong>Recorded content</strong> To avoid distortion when streaming pre-recorded
+(not live) content, do not set the value of <code>Netstream.bufferTime</code> to
+0. By default, the application uses an input buffer for pre-recorded
+content that queues the media data and plays the media properly. For
+pre-recorded content, use the default setting or increase the buffer
+time.</p>
+<p><strong>Live content</strong> When streaming live content, set the <code>bufferTime</code>
+property to 0.</p>
+<p>Starting with Flash Player 9.0.115.0, Flash Player no longer clears
+the buffer when <code><a href="../../openfl/net/NetStream.html#pause">NetStream.pause</a>()</code> is called. Before Flash Player
+9.0.115.0, Flash Player waited for the buffer to fill up before
+resuming playback, which often caused a delay.</p>
+<p>For a single pause, the <code><a href="../../openfl/net/NetStream.html#bufferLength">NetStream.bufferLength</a></code> property has a limit
+of either 60 seconds or twice the value of <code><a href="../../openfl/net/NetStream.html#bufferTime">NetStream.bufferTime</a></code>,
+whichever value is higher. For example, if <code>bufferTime</code> is 20 seconds,
+Flash Player buffers until <code><a href="../../openfl/net/NetStream.html#bufferLength">NetStream.bufferLength</a></code> is the higher
+value of either 20<em>2 (40), or 60. In this case it buffers until
+<code>bufferLength</code> is 60. If <code>bufferTime</code> is 40 seconds, Flash Player
+buffers until <code>bufferLength</code> is the higher value of 40</em>2 (80), or 60.
+In this case it buffers until <code>bufferLength</code> is 80 seconds.</p>
+<p>The <code>bufferLength</code> property also has an absolute limit. If any call to
+<code>pause()</code> causes <code>bufferLength</code> to increase more than 600 seconds or
+the value of <code>bufferTime</code>* 2, whichever is higher, Flash Player
+flushes the buffer and resets <code>bufferLength</code> to 0. For example, if
+<code>bufferTime</code> is 120 seconds, Flash Player flushes the buffer if
+<code>bufferLength</code> reaches 600 seconds; if <code>bufferTime</code> is 360 seconds,
+Flash Player flushes the buffer if <code>bufferLength</code> reaches 720 seconds.</p>
+<p><strong>Tip</strong>: You can use <code><a href="../../openfl/net/NetStream.html#pause">NetStream.pause</a>()</code> in code to buffer data while
+viewers are watching a commercial, for example, and then unpause when
+the main video starts.</p>
+<p>For more information about the new pause behavior, see &lt;a
+href="<a href="http://www.adobe.com/go/learn_fms_smartpause_en">http://www.adobe.com/go/learn_fms_smartpause_en</a>"
+scope="external"><a href="http://www.adobe.com/go/learn_fms_smartpause_en</a">http://www.adobe.com/go/learn_fms_smartpause_en&lt;/a</a>>.</p>
+<p><strong>Flash Media Server</strong>. The buffer behavior depends on whether the
+buffer time is set on a publishing stream or a subscribing stream. For
+a publishing stream, <code>bufferTime</code> specifies how long the outgoing
+buffer can grow before the application starts dropping frames. On a
+high-speed connection, buffer time is not a concern; data is sent
+almost as quickly as the application can buffer it. On a slow
+connection, however, there can be a significant difference between how
+fast the application buffers the data and how fast it is sent to the
+client.</p>
+<p>For a subscribing stream, <code>bufferTime</code> specifies how long to buffer
+incoming data before starting to display the stream.</p>
+<p>When a recorded stream is played, if <code>bufferTime</code> is 0, Flash sets it
+to a small value (approximately 10 milliseconds). If live streams are
+later played (for example, from a playlist), this buffer time
+persists. That is, <code>bufferTime</code> remains nonzero for the stream.</p></div></div><div class="field "><a name="bytesLoaded"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#bytesLoaded"><span class="identifier">bytesLoaded</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The number of bytes of data that have been loaded into the
+application. You can use this property with the <code>bytesTotal</code> property
+to estimate how close the buffer is to being full נfor example, to
+display feedback to a user who is waiting for data to be loaded into
+the buffer.</p></div></div><div class="field "><a name="bytesTotal"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#bytesTotal"><span class="identifier">bytesTotal</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The total size in bytes of the file being loaded into the application.</p></div></div><div class="field "><a name="checkPolicyFile"></a><h3 class="anchor"><code><a href="#checkPolicyFile"><span class="identifier">checkPolicyFile</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Specifies whether the application tries to download a cross-domain
+policy file from the loaded video file's server before beginning to
+load the video file. Use this property for progressive video download,
+and to load files that are outside the calling SWF file's own domain.
+This property is ignored when you are using RTMP.
+Set this property to <code><a href="../../Bool.html">true</a></code> to call <code><a href="../../openfl/display/BitmapData.html#draw">BitmapData.draw</a>()</code> on a video
+file loaded from a domain outside that of the calling SWF. The
+<code><a href="../../openfl/display/BitmapData.html#draw">BitmapData.draw</a>()</code> method provides pixel-level access to the video.
+If you call <code><a href="../../openfl/display/BitmapData.html#draw">BitmapData.draw</a>()</code> without setting the <code>checkPolicyFile</code>
+property to <code><a href="../../Bool.html">true</a></code> at loading time, you can get a <code>SecurityError</code>
+exception because the required policy file was not downloaded.</p>
+<p>Do not set this property to true unless you want pixel-level access to
+the video you are loading. Checking for a policy file consumes network
+bandwidth and can delay the start of your download.</p>
+<p>When you call the <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code> method with <code>checkPolicyFile</code> set
+to <code><a href="../../Bool.html">true</a></code>, Flash Player or the AIR runtime must either successfully
+download a relevant cross-domain policy file or determine that no such
+policy file exists before it begins downloading. To verify the
+existence of a policy file, Flash Player or the AIR runtime performs
+the following actions, in this order:</p><ol><li>The application considers policy files that have already been
+downloaded.</li><li>The application tries to download any pending policy files specified
+in calls to the <code>Security.loadPolicyFile()</code> method.</li><li>The application tries to download a policy file from the default
+location that corresponds to the URL you passed to <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code>,
+which is <code>/crossdomain.xml</code> on the same server as that URL.</li></ol>
+<p>In all cases, Flash Player or Adobe AIR requires that an appropriate
+policy file exist on the video's server, that it provide access to the
+object at the URL you passed to <code>play()</code> based on the policy file's
+location, and that it allow the domain of the calling code's file to
+access the video, through one or more <code>&lt;allow-access-from&gt;</code> tags.</p>
+<p>If you set <code>checkPolicyFile</code> to <code><a href="../../Bool.html">true</a></code>, the application waits until
+the policy file is verified before downloading the video. Wait to
+perform any pixel-level operations on the video data, such as calling
+<code><a href="../../openfl/display/BitmapData.html#draw">BitmapData.draw</a>()</code>, until you receive <code>onMetaData</code> or <code>NetStatus</code>
+events from your NetStream object.</p>
+<p>If you set <code>checkPolicyFile</code> to <code><a href="../../Bool.html">true</a></code> but no relevant policy file is
+found, you won't receive an error until you perform an operation that
+requires a policy file, and then the application throws a
+SecurityError exception.</p>
+<p>Be careful with <code>checkPolicyFile</code> if you are downloading a file from a
+URL that uses server-side HTTP redirects. The application tries to
+retrieve policy files that correspond to the initial URL that you
+specify in <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code>. If the final file comes from a
+different URL because of HTTP redirects, the initially downloaded
+policy files might not be applicable to the file's final URL, which is
+the URL that matters in security decisions.</p>
+<p>For more information on policy files, see "Website controls (policy
+files)" in the <em>ActionScript 3.0 Developer's Guide</em> and the Flash
+Player Developer Center Topic: &lt;a
+href="<a href="http://www.adobe.com/go/devnet_security_en">http://www.adobe.com/go/devnet_security_en</a>"
+scope="external">Security</a>.</p></div></div><div class="field "><a name="client"></a><h3 class="anchor"><code><a href="#client"><span class="identifier">client</span></a>:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>Specifies the object on which callback methods are invoked to handle
+streaming or F4V/FLV file data. The default object is <code>this</code>, the
+NetStream object being created. If you set the <code>client</code> property to
+another object, callback methods are invoked on that other object. The
+<code><a href="../../openfl/net/NetStream.html#client">NetStream.client</a> </code> object can call the following functions and
+receive an associated data object: <code>onCuePoint()</code>, <code>onImageData()</code>,
+<code>onMetaData()</code>, <code>onPlayStatus()</code>, <code>onSeekPoint()</code>, <code>onTextData()</code>, and
+<code>onXMPData()</code>.
+<strong>To associate the <code>client</code> property with an event handler:</strong></p><ol><li>Create an object and assign it to the <code>client</code> property of the
+NetStream object:</li></ol>
+<pre><code class="prettyprint as3">var customClient = new Object();
+my_netstream.client = customClient;</code></pre><ol><li>Assign a handler function for the desired data event as a property
+of the client object:</li></ol>
+<pre><code class="prettyprint haxe">customClient.onImageData = onImageDataHandler;</code></pre><ol><li>Write the handler function to receive the data event object, such
+as:</li></ol>
+<pre><code class="prettyprint as3">public function onImageDataHandler(imageData:Object):void {
+	trace("imageData length: " + imageData.data.length);
+}</code></pre>
+<p>When data is passed through the stream or during playback, the data
+event object (in this case the <code>imageData</code> object) is populated with
+the data. See the <code>onImageData</code> description, which includes a full
+example of an object assigned to the <code>client</code> property.</p>
+<p><strong>To associate the <code>client</code> property with a subclass:</strong></p><ol><li>Create a subclass with a handler function to receive the data event
+object:</li></ol>
+<pre><code class="prettyprint as3">class CustomClient {
+	public function onMetaData(info:Object):void {
+		trace("metadata: duration=" + info.duration + " framerate=" + info.framerate);
+	}</code></pre><ol><li>Assign an instance of the subclass to the <code>client</code> property of the
+NetStream object:</li></ol>
+<pre><code class="prettyprint as3">my_netstream.client = new CustomClient();</code></pre>
+<p>When data is passed through the stream or during playback, the data
+event object (in this case the <code>info</code> object) is populated with the
+data. See the class example at the end of the NetStream class, which
+shows the assignment of a subclass instance to the <code>client</code> property.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The <code>client</code> property must be set to a non-null
+object.</p></td></tr></table></div></div><div class="field "><a name="currentFPS"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#currentFPS"><span class="identifier">currentFPS</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>The number of frames per second being displayed. If you are exporting
+video files to be played back on a number of systems, you can check
+this value during testing to help you determine how much compression
+to apply when exporting the file.</p></div></div><div class="field "><a name="liveDelay"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#liveDelay"><span class="identifier">liveDelay</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>The number of seconds of data in the subscribing stream's buffer in
+live (unbuffered) mode. This property specifies the current network
+transmission delay (lag time).
+This property is intended primarily for use with a server such as
+Flash Media Server; for more information, see the class description.</p>
+<p>You can get the value of this property to roughly gauge the
+transmission quality of the stream and communicate it to the user.</p></div></div><div class="field "><a name="objectEncoding"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#objectEncoding"><span class="identifier">objectEncoding</span></a>:<a class="type" title="openfl.net.ObjectEncoding - The ObjectEncoding class is used in defining serialization settings in classes that serialize objects (such as FileStream, NetStream, NetConnection, SharedObject, and ByteArray)." href="../../openfl/net/ObjectEncoding.html">ObjectEncoding</a></code></h3><div class="doc"><p>The object encoding (AMF version) for this NetStream object. The
+NetStream object inherits its <code>objectEncoding</code> value from the
+associated NetConnection object. It's important to understand this
+property if your ActionScript 3.0 SWF file needs to communicate with
+servers released prior to Flash Player 9. For more information, see
+the <code>objectEncoding</code> property description in the NetConnection class.
+The value of this property depends on whether the stream is local or
+remote. Local streams, where <code>null</code> was passed to the
+<code><a href="../../openfl/net/NetConnection.html#connect">NetConnection.connect</a>()</code> method, return the value of
+<code><a href="../../openfl/net/NetConnection.html#defaultObjectEncoding">NetConnection.defaultObjectEncoding</a></code>. Remote streams, where you are
+connecting to a server, return the object encoding of the connection
+to the server.</p>
+<p>If you try to read this property when not connected, or if you try to
+change this property, the application throws an exception.</p></div></div><div class="field "><a name="soundTransform"></a><h3 class="anchor"><code><a href="#soundTransform"><span class="identifier">soundTransform</span></a>:<a class="type" title="openfl.media.SoundTransform - The SoundTransform class contains properties for volume and panning." href="../../openfl/media/SoundTransform.html">SoundTransform</a></code></h3><div class="doc"><p>Controls sound in this NetStream object. For more information, see the
+SoundTransform class.</p></div></div><div class="field "><a name="time"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#time"><span class="identifier">time</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>The position of the playhead, in seconds.
+<strong>Flash Media Server</strong> For a subscribing stream, the number of seconds
+the stream has been playing. For a publishing stream, the number of
+seconds the stream has been publishing. This number is accurate to the
+thousandths decimal place; multiply by 1000 to get the number of
+milliseconds the stream has been playing.</p>
+<p>For a subscribing stream, if the server stops sending data but the
+stream remains open, the value of the <code>time</code> property stops advancing.
+When the server begins sending data again, the value continues to
+advance from the point at which it stopped (when the server stopped
+sending data).</p>
+<p>The value of <code>time</code> continues to advance when the stream switches from
+one playlist element to another. This property is set to 0 when
+<code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code> is called with <code>reset</code> set to <code>1</code> or <code><a href="../../Bool.html">true</a></code>, or
+when <code><a href="../../openfl/net/NetStream.html#close">NetStream.close</a>()</code> is called.</p></div></div><div class="field "><a name="videoCode"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#videoCode"><span class="identifier">videoCode</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p></p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="close"></a><h3 class="anchor"><code><a href="#close"><span class="identifier">close</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Stops playing all data on the stream, sets the <code>time</code> property to 0,
+and makes the stream available for another use. This method also
+deletes the local copy of a video file that was downloaded through
+HTTP. Although the application deletes the local copy of the file that
+it creates, a copy might persist in the cache directory. If you must
+completely prevent caching or local storage of the video file, use
+Flash Media Server.
+When using Flash Media Server, this method is invoked implicitly when
+you call <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code> from a publishing stream or
+<code><a href="../../openfl/net/NetStream.html#publish">NetStream.publish</a>()</code> from a subscribing stream. Please note that:</p><ul><li>If <code>close()</code> is called from a publishing stream, the stream stops
+publishing and the publisher can now use the stream for another
+purpose. Subscribers no longer receive anything that was being
+published on the stream, because the stream has stopped publishing.</li><li>If <code>close()</code> is called from a subscribing stream, the stream stops
+playing for the subscriber, and the subscriber can use the stream for
+another purpose. Other subscribers are not affected.</li><li>You can stop a subscribing stream from playing, without closing the
+stream or changing the stream type by using
+<code><a href="../../openfl/net/NetStream.html#play">openfl.net.NetStream.play</a>(<a href="../../Bool.html">false</a>)</code>.</li></ul></div></div><div class="field "><a name="dispose"></a><h3 class="anchor"><code><a href="#dispose"><span class="identifier">dispose</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Releases all the resources held by the NetStream object.</p>
+<p>The <code>dispose()</code> method is similar to the <code>close</code> method. The main difference
+between the two methods is that <code>dispose()</code> releases the memory used to display
+the current video frame. If that frame is currently displayed on screen, the
+display will go blank. The <code>close()</code> method does not blank the display because it
+does not release this memory.</p></div></div><div class="field "><a name="pause"></a><h3 class="anchor"><code><a href="#pause"><span class="identifier">pause</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Pauses playback of a video stream. Calling this method does nothing if
+the video is already paused. To resume play after pausing a video,
+call <code>resume()</code>. To toggle between pause and play (first pausing the
+video, then resuming), call <code>togglePause()</code>.
+Starting with Flash Player 9.0.115.0, Flash Player no longer clears
+the buffer when <code><a href="../../openfl/net/NetStream.html#pause">NetStream.pause</a>()</code> is called. This behavior is called
+"smart pause". Before Flash Player 9.0.115.0, Flash Player waited for
+the buffer to fill up before resuming playback, which often caused a
+delay.</p>
+<p><strong>Note:</strong> For backwards compatibility, the <code>"<a href="../../openfl/net/NetStream.html#Flush">NetStream.Buffer.Flush</a>"</code>
+event (see the <code><a href="../../openfl/events/NetStatusEvent.html#info">NetStatusEvent.info</a></code> property) still fires, although
+the server does not flush the buffer.</p>
+<p>For a single pause, the <code><a href="../../openfl/net/NetStream.html#bufferLength">NetStream.bufferLength</a></code> property has a limit
+of either 60 seconds or twice the value of <code><a href="../../openfl/net/NetStream.html#bufferTime">NetStream.bufferTime</a></code>,
+whichever value is higher. For example, if <code>bufferTime</code> is 20 seconds,
+Flash Player buffers until <code><a href="../../openfl/net/NetStream.html#bufferLength">NetStream.bufferLength</a></code> is the higher
+value of either 20~~2 (40), or 60, so in this case it buffers until
+<code>bufferLength</code> is 60. If <code>bufferTime</code> is 40 seconds, Flash Player
+buffers until <code>bufferLength</code> is the higher value of 40~~2 (80), or 60,
+so in this case it buffers until <code>bufferLength</code> is 80 seconds.</p>
+<p>The <code>bufferLength</code> property also has an absolute limit. If any call to
+<code>pause()</code> causes <code>bufferLength</code> to increase more than 600 seconds or
+the value of <code>bufferTime</code> ~~ 2, whichever is higher, Flash Player
+flushes the buffer and resets <code>bufferLength</code> to 0. For example, if
+<code>bufferTime</code> is 120 seconds, Flash Player flushes the buffer if
+<code>bufferLength</code> reaches 600 seconds; if <code>bufferTime</code> is 360 seconds,
+Flash Player flushes the buffer if <code>bufferLength</code> reaches 720 seconds.</p>
+<p><strong>Tip</strong>: You can use <code><a href="../../openfl/net/NetStream.html#pause">NetStream.pause</a>()</code> in code to buffer data while
+viewers are watching a commercial, for example, and then unpause when
+the main video starts.</p></div></div><div class="field "><a name="play"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ p5 : null, p4 : null, p3 : null, p2 : null, p1 : null })</span><a href="#play"><span class="identifier">play</span></a>(<span style="white-space:nowrap">url:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">?p1:Unknown,</span> <span style="white-space:nowrap">?p2:Unknown,</span> <span style="white-space:nowrap">?p3:Unknown,</span> <span style="white-space:nowrap">?p4:Unknown,</span> <span style="white-space:nowrap">?p5:Unknown</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Plays a media file from a local directory or a web server; plays a
+media file or a live stream from Flash Media Server. Dispatches a
+<code><a href="../../openfl/events/NetStatusEvent.html#NetStatusEvent">NetStatusEvent</a></code> object to report status and error messages.
+For information about supported codecs and file formats, see the
+following:</p><ul><li><a href="http://www.adobe.com/go/learn_fms_fileformats_en"
+scope="external">Flash Media Server documentation</a></li><li><a href="http://www.adobe.com/go/hardware_scaling_en"
+scope="external">Exploring Flash Player support for high-definition
+H.264 video and AAC audio</a></li><li><a href="http://www.adobe.com/go/video_file_format"
+scope="external">FLV/F4V open specification documents</a></li></ul>
+<p><strong>Workflow for playing a file or live stream</strong></p><ol><li>Create a NetConnection object and call <code><a href="../../openfl/net/NetConnection.html#connect">NetConnection.connect</a>()</code>.
+To play a file from a local directory or web server, pass null.</li></ol>
+<p>To play a recorded file or live stream from Flash Media Server, pass
+the URI of a Flash Media Server application.
+2. Call <code><a href="../../openfl/net/NetConnection.html#addEventListener">NetConnection.addEventListener</a>(<a href="../../openfl/events/NetStatusEvent.html#NET_STATUS">NetStatusEvent.NET_STATUS</a>,
+netStatusHandler)</code> to listen for NetStatusEvent events.
+3. On <code>"<a href="../../openfl/net/NetConnection.html#Success">NetConnection.Connect.Success</a>"</code>, create a NetStream object and
+pass the NetConnection object to the constructor.
+4. Create a Video object and call <code><a href="../../openfl/media/Video.html#attachNetStream">Video.attachNetStream</a>()</code> and pass
+the NetStream object.
+5. Call <code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code>.
+To play a live stream, pass the stream name passed to the
+<code><a href="../../openfl/net/NetStream.html#publish">NetStream.publish</a>()</code> method.</p>
+<p>To play a recorded file, pass the file name.
+6. Call <code>addChild()</code> and pass the Video object to display the video.</p>
+<p><strong>Note:</strong>To see sample code, scroll to the example at the bottom of
+this page.</p>
+<p><strong>Enable Data Generation Mode</strong></p>
+<p>Call <code>play(null)</code> to enable "Data Generation Mode". In this mode, call
+the <code>appendBytes()</code> method to deliver data to the NetStream. Use Data
+Generation Mode to stream content over HTTP from the Adobe HTTP
+Dynamic Streaming Origin Module on an Apache HTTP Server. HTTP Dynamic
+Streaming lets clients seek quickly to any point in a file. The Open
+Source Media Framework (OSMF) supports HTTP Dynamic Streaming for vod
+and live streams. For examples of how to use NetStream Data Generation
+Mode, download the &lt;a href="<a href="http://www.opensourcemediaframework.com">http://www.opensourcemediaframework.com</a>"
+scope="external">OSMF</a> source. For more information about HTTP
+Dynamic Streaming, see &lt;a
+href="<a href="http://www.adobe.com/go/learn_fms_http_en">http://www.adobe.com/go/learn_fms_http_en</a>" scope="external">HTTP
+Dynamic Streaming</a>.</p>
+<p>When you use this method without Flash Media Server, there are
+security considerations. A file in the local-trusted or
+local-with-networking sandbox can load and play a video file from the
+remote sandbox, but cannot access the remote file's data without
+explicit permission in the form of a URL policy file. Also, you can
+prevent a SWF file running in Flash Player from using this method by
+setting the <code>allowNetworking</code> parameter of the the <code>object</code> and
+<code>embed</code> tags in the HTML page that contains the SWF content. For more
+information related to security, see the Flash Player Developer Center
+Topic: &lt;a href="<a href="http://www.adobe.com/go/devnet_security_en">http://www.adobe.com/go/devnet_security_en</a>"
+scope="external">Security</a>.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>At least one parameter must be specified.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The NetStream Object is invalid. This may be due
+to a failed NetConnection.</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>Local untrusted SWF files cannot communicate
+with the Internet. You can work around this
+restriction by reclassifying this SWF file as
+local-with-networking or trusted.</p></td></tr></table><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>status</code></th><td><p>Dispatched when attempting to play content encrypted
+with digital rights management (DRM). The value of the
+<code>code</code> property is <code>"DRM.encryptedFLV"</code>.</p></td></tr></table></div></div><div class="field "><a name="resume"></a><h3 class="anchor"><code><a href="#resume"><span class="identifier">resume</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Resumes playback of a video stream that is paused. If the video is
+already playing, calling this method does nothing.</p></div></div><div class="field "><a name="seek"></a><h3 class="anchor"><code><a href="#seek"><span class="identifier">seek</span></a>(<span style="white-space:nowrap">time:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Seeks the keyframe (also called an I-frame in the video industry)
+closest to the specified location. The keyframe is placed at an
+offset, in seconds, from the beginning of the stream.
+Video streams are usually encoded with two types of frames, keyframes
+(or I-frames) and P-frames. A keyframe contains an entire image, while
+a P-frame is an interim frame that provides additional video
+information between keyframes. A video stream typically has a keyframe
+every 10-50 frames.</p>
+<p>Flash Media Server has several types of seek behavior: enhanced
+seeking and smart seeking.</p>
+<p><strong>Enhanced seeking</strong></p>
+<p>Enhanced seeking is enabled by default. To disable enhanced seeking,
+on Flash Media Server set the <code>EnhancedSeek</code> element in the
+<code><a href="../../lime/app/Application.html#xml">Application.xml</a></code> configuration file to <code><a href="../../Bool.html">false</a></code>.</p>
+<p>If enhanced seeking is enabled, the server generates a new keyframe at
+<code>offset</code> based on the previous keyframe and any intervening P-frames.
+However, generating keyframes creates a high processing load on the
+server and distortion might occur in the generated keyframe. If the
+video codec is On2, the keyframe before the seek point and any
+P-frames between the keyframe and the seek point are sent to the
+client.</p>
+<p>If enhanced seeking is disabled, the server starts streaming from the
+nearest keyframe. For example, suppose a video has keyframes at 0
+seconds and 10 seconds. A seek to 4 seconds causes playback to start
+at 4 seconds using the keyframe at 0 seconds. The video stays frozen
+until it reaches the next keyframe at 10 seconds. To get a better
+seeking experience, you need to reduce the keyframe interval. In
+normal seek mode, you cannot start the video at a point between the
+keyframes.</p>
+<p><strong>Smart seeking</strong></p>
+<p>To enable smart seeking, set <code><a href="../../openfl/net/NetStream.html#inBufferSeek">NetStream.inBufferSeek</a></code> to <code><a href="../../Bool.html">true</a></code>.</p>
+<p>Smart seeking allows Flash Player to seek within an existing back
+buffer and forward buffer. When smart seeking is disabled, each time
+<code>seek()</code> is called Flash Player flushes the buffer and requests data
+from the server. For more information, see <code><a href="../../openfl/net/NetStream.html#inBufferSeek">NetStream.inBufferSeek</a></code>.</p>
+<p><strong>Seeking in Data Generation Mode</strong></p>
+<p>When you call <code>seek()</code> on a NetStream in Data Generation Mode, all
+bytes passed to <code>appendBytes()</code> are discarded (not placed in the
+buffer, accumulated in the partial message FIFO, or parsed for seek
+points) until you call
+<code>appendBytesAction(NetStreamAppendBytesAction.RESET_BEGIN)</code> or
+<code>appendBytesAction(NetStreamAppendBytesAction.RESET_SEEK)</code> to reset
+the parser. For information about Data Generation Mode, see
+<code><a href="../../openfl/net/NetStream.html#play">NetStream.play</a>()</code>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>offset</code></th><td><p>The approximate time value, in seconds, to move to in a
+video file. With Flash Media Server, if <code>&lt;EnhancedSeek&gt;</code>
+is set to <code><a href="../../Bool.html">true</a></code> in the Application.xml configuration
+file (which it is by default), the server generates a
+keyframe at <code>offset</code>.
+<em> To return to the beginning of the stream, pass 0 for
+<code>offset</code>.
+</em> To seek forward from the beginning of the stream, pass
+the number of seconds to advance. For example, to
+position the playhead at 15 seconds from the beginning
+(or the keyframe before 15 seconds), use
+<code>myStream.seek(15)</code>.
+* To seek relative to the current position, pass
+<code><a href="../../openfl/net/NetStream.html#time">NetStream.time</a> + n</code> or <code><a href="../../openfl/net/NetStream.html#time">NetStream.time</a> - n</code> to seek <code>n</code>
+seconds forward or backward, respectively, from the
+current position. For example, to rewind 20 seconds from
+the current position, use <code><a href="../../openfl/net/NetStream.html#seek">NetStream.seek</a>(<a href="../../openfl/net/NetStream.html#time">NetStream.time</a>
+- 20).</code></p></td></tr></table></div></div><div class="field "><a name="togglePause"></a><h3 class="anchor"><code><a href="#togglePause"><span class="identifier">togglePause</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Pauses or resumes playback of a stream. The first time you call this
+method, it pauses play; the next time, it resumes play. You could use
+this method to let users pause or resume playback by pressing a single
+button.</p></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></h4><div style="display:none"><div class="field "><a name="addEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useWeakReference : false, priority : 0, useCapture : false })</span><a href="#addEventListener"><span class="identifier">addEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">priority:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">useWeakReference:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Registers an event listener object with an EventDispatcher object so that
+the listener receives notification of an event. You can register event
+listeners on all nodes in the display list for a specific type of event,
+phase, and priority.</p>
+<p>After you successfully register an event listener, you cannot change
+its priority through additional calls to <code>addEventListener()</code>.
+To change a listener's priority, you must first call
+<code>removeListener()</code>. Then you can register the listener again
+with the new priority level.</p>
+<p>Keep in mind that after the listener is registered, subsequent calls to
+<code>addEventListener()</code> with a different <code>type</code> or
+<code>useCapture</code> value result in the creation of a separate
+listener registration. For example, if you first register a listener with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>, it listens only during
+the capture phase. If you call <code>addEventListener()</code> again using
+the same listener object, but with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>, you have two separate listeners: one that listens
+during the capture phase and another that listens during the target and
+bubbling phases.</p>
+<p>You cannot register an event listener for only the target phase or the
+bubbling phase. Those phases are coupled during registration because
+bubbling applies only to the ancestors of the target node.</p>
+<p>If you no longer need an event listener, remove it by calling
+<code>removeEventListener()</code>, or memory problems could result. Event
+listeners are not automatically removed from memory because the garbage
+collector does not remove the listener as long as the dispatching object
+exists(unless the <code>useWeakReference</code> parameter is set to
+<code><a href="../../Bool.html">true</a></code>).</p>
+<p>Copying an EventDispatcher instance does not copy the event listeners
+attached to it.(If your newly created node needs an event listener, you
+must attach the listener after creating the node.) However, if you move an
+EventDispatcher instance, the event listeners attached to it move along
+with it.</p>
+<p>If the event listener is being registered on a node while an event is
+being processed on this node, the event listener is not triggered during
+the current phase but can be triggered during a later phase in the event
+flow, such as the bubbling phase.</p>
+<p>If an event listener is removed from a node while an event is being
+processed on the node, it is still triggered by the current actions. After
+it is removed, the event listener is never invoked again(unless
+registered again for future processing).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Determines whether the listener works in the
+capture phase or the target and bubbling phases.
+If <code>useCapture</code> is set to
+<code><a href="../../Bool.html">true</a></code>, the listener processes the
+event only during the capture phase and not in the
+target or bubbling phase. If
+<code>useCapture</code> is <code><a href="../../Bool.html">false</a></code>, the
+listener processes the event only during the
+target or bubbling phase. To listen for the event
+in all three phases, call
+<code>addEventListener</code> twice, once with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>,
+then again with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>.</p></td></tr><tr><th style="width:25%;"><code>priority</code></th><td><p>The priority level of the event listener. The
+priority is designated by a signed 32-bit integer.
+The higher the number, the higher the priority.
+All listeners with priority <em>n</em> are processed
+before listeners of priority <em>n</em>-1. If two or
+more listeners share the same priority, they are
+processed in the order in which they were added.
+The default priority is 0.</p></td></tr><tr><th style="width:25%;"><code>useWeakReference</code></th><td><p>Determines whether the reference to the listener
+is strong or weak. A strong reference(the
+default) prevents your listener from being
+garbage-collected. A weak reference does not.</p>
+<p>Class-level member functions are not subject to
+garbage collection, so you can set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for class-level member functions without
+subjecting them to garbage collection. If you set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for a listener that is a nested inner function,
+the function will be garbage-collected and no
+longer persistent. If you create references to the
+inner function(save it in another variable) then
+it is not garbage-collected and stays
+persistent.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The <code>listener</code> specified is not a
+function.</p></td></tr></table></div></div><div class="field "><a name="dispatchEvent"></a><h3 class="anchor"><code><a href="#dispatchEvent"><span class="identifier">dispatchEvent</span></a>(<span style="white-space:nowrap">event:<a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Dispatches an event into the event flow. The event target is the
+EventDispatcher object upon which the <code>dispatchEvent()</code> method
+is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>event</code></th><td><p>The Event object that is dispatched into the event flow. If
+the event is being redispatched, a clone of the event is
+created automatically. After an event is dispatched, its
+<code>target</code> property cannot be changed, so you must
+create a new copy of the event for redispatching to work.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if the event was successfully
+dispatched. A value of <code><a href="../../Bool.html">false</a></code> indicates failure or
+that <code>preventDefault()</code> was called on the event.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The event dispatch recursion limit has been reached.</p></td></tr></table></div></div><div class="field "><a name="hasEventListener"></a><h3 class="anchor"><code><a href="#hasEventListener"><span class="identifier">hasEventListener</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the EventDispatcher object has any listeners registered for
+a specific type of event. This allows you to determine where an
+EventDispatcher object has altered handling of an event type in the event
+flow hierarchy. To determine whether a specific event type actually
+triggers an event listener, use <code>willTrigger()</code>.</p>
+<p>The difference between <code>hasEventListener()</code> and
+<code>willTrigger()</code> is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas
+<code>willTrigger()</code> examines the entire event flow for the event
+specified by the <code>type</code> parameter.</p>
+<p>When <code>hasEventListener()</code> is called from a LoaderInfo
+object, only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+is registered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="removeEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useCapture : false })</span><a href="#removeEventListener"><span class="identifier">removeEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Removes a listener from the EventDispatcher object. If there is no
+matching listener registered with the EventDispatcher object, a call to
+this method has no effect.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Specifies whether the listener was registered for the
+capture phase or the target and bubbling phases. If the
+listener was registered for both the capture phase and
+the target and bubbling phases, two calls to
+<code>removeEventListener()</code> are required to
+remove both, one call with <code>useCapture()</code> set
+to <code><a href="../../Bool.html">true</a></code>, and another call with
+<code>useCapture()</code> set to <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table></div></div><div class="field "><a name="toString"></a><h3 class="anchor"><code><a href="#toString"><span class="identifier">toString</span></a>():<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="willTrigger"></a><h3 class="anchor"><code><a href="#willTrigger"><span class="identifier">willTrigger</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether an event listener is registered with this EventDispatcher
+object or any of its ancestors for the specified event type. This method
+returns <code><a href="../../Bool.html">true</a></code> if an event listener is triggered during any
+phase of the event flow when an event of the specified type is dispatched
+to this EventDispatcher object or any of its descendants.</p>
+<p>The difference between the <code>hasEventListener()</code> and the
+<code>willTrigger()</code> methods is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas the
+<code>willTrigger()</code> method examines the entire event flow for the
+event specified by the <code>type</code> parameter.</p>
+<p>When <code>willTrigger()</code> is called from a LoaderInfo object,
+only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+will be triggered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

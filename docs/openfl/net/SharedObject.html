@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.net.SharedObject</title><meta name="description" content="The SharedObject class is used to read and store limited amounts of data on
+a user&#039;s computer or on a server. Shared objects offer real-time data
+sharing between multiple client SWF files and objects that are persistent
+on the local computer or remote server. Local shared objects are similar to
+browser cookies and remote shared objects are similar to real-time data
+transfer devices. To use remote shared objects, you need Adobe Flash Media
+Server."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> SharedObject</h1><h4><small>package <a href="../../openfl/net/index.html">openfl.net</a></small></h4><h4><small>extends <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>The SharedObject class is used to read and store limited amounts of data on
+a user's computer or on a server. Shared objects offer real-time data
+sharing between multiple client SWF files and objects that are persistent
+on the local computer or remote server. Local shared objects are similar to
+browser cookies and remote shared objects are similar to real-time data
+transfer devices. To use remote shared objects, you need Adobe Flash Media
+Server.</p>
+<p>Use shared objects to do the following:</p><ul><li><strong>Maintain local persistence</strong>. This is the simplest way to use a
+shared object, and does not require Flash Media Server. For example, you
+can call <code><a href="../../openfl/net/SharedObject.html#getLocal">SharedObject.getLocal</a>()</code> to create a shared object in
+an application, such as a calculator with memory. When the user closes the
+calculator, Flash Player saves the last value in a shared object on the
+user's computer. The next time the calculator is run, it contains the
+values it had previously. Alternatively, if you set the shared object's
+properties to <code>null</code> before the calculator application is
+closed, the next time the application runs, it opens without any values.
+Another example of maintaining local persistence is tracking user
+preferences or other data for a complex website, such as a record of which
+articles a user read on a news site. Tracking this information allows you
+to display articles that have already been read differently from new,
+unread articles. Storing this information on the user's computer reduces
+server load.</li><li><strong>Store and share data on Flash Media Server</strong>. A shared object
+can store data on the server for other clients to retrieve. For example,
+call <code><a href="../../openfl/net/SharedObject.html#getRemote">SharedObject.getRemote</a>()</code> to create a remote shared
+object, such as a phone list, that is persistent on the server. Whenever a
+client makes changes to the shared object, the revised data is available to
+all clients currently connected to the object or who later connect to it.
+If the object is also persistent locally, and a client changes data while
+not connected to the server, the data is copied to the remote shared object
+the next time the client connects to the object.</li><li><strong>Share data in real time</strong>. A shared object can share data among
+multiple clients in real time. For example, you can open a remote shared
+object that stores a list of users connected to a chat room that is visible
+to all clients connected to the object. When a user enters or leaves the
+chat room, the object is updated and all clients that are connected to the
+object see the revised list of chat room users.</li></ul>
+<p>To create a local shared object, call
+<code><a href="../../openfl/net/SharedObject.html#getLocal">SharedObject.getLocal</a>()</code>. To create a remote shared object,
+call <code><a href="../../openfl/net/SharedObject.html#getRemote">SharedObject.getRemote</a>()</code>.</p>
+<p>When an application closes, shared objects are <em>flushed</em>, or
+written to a disk. You can also call the <code>flush()</code> method to
+explicitly write data to a disk.</p>
+<p><strong>Local disk space considerations.</strong> Local shared objects have some
+limitations that are important to consider as you design your application.
+Sometimes SWF files may not be allowed to write local shared objects, and
+sometimes the data stored in local shared objects can be deleted without
+your knowledge. Flash Player users can manage the disk space that is
+available to individual domains or to all domains. When users decrease the
+amount of disk space available, some local shared objects may be deleted.
+Flash Player users also have privacy controls that can prevent third-party
+domains(domains other than the domain in the current browser address bar)
+from reading or writing local shared objects.</p>
+<p><strong>Note</strong>: SWF files that are stored and run on a local computer, not
+from a remote server, can always write third-party shared objects to disk.
+For more information about third-party shared objects, see the
+<a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager03.html">Global Storage Settings panel</a>
+in Flash Player Help.</p>
+<p>It's a good idea to check for failures related to the amount of disk
+space and to user privacy controls. Perform these checks when you call
+<code>getLocal()</code> and <code>flush()</code>:</p><ul><li><code><a href="../../openfl/net/SharedObject.html#getLocal">SharedObject.getLocal</a>()</code>  -  Flash Player throws an
+exception when a call to this method fails, such as when the user has
+disabled third-party shared objects and the domain of your SWF file does
+not match the domain in the browser address bar.</li><li><code><a href="../../openfl/net/SharedObject.html#flush">SharedObject.flush</a>()</code>  -  Flash Player throws an
+exception when a call to this method fails. It returns
+<code><a href="../../openfl/net/SharedObjectFlushStatus.html#FLUSHED">SharedObjectFlushStatus.FLUSHED</a></code> when it succeeds. It returns
+<code><a href="../../openfl/net/SharedObjectFlushStatus.html#PENDING">SharedObjectFlushStatus.PENDING</a></code> when additional storage space
+is needed. Flash Player prompts the user to allow an increase in storage
+space for locally saved information. Thereafter, the <code>netStatus</code>
+event is dispatched with an information object indicating whether the flush
+failed or succeeded.</li></ul>
+<p>If your SWF file attempts to create or modify local shared objects, make
+sure that your SWF file is at least 215 pixels wide and at least 138 pixels
+high(the minimum dimensions for displaying the dialog box that prompts
+users to increase their local shared object storage limit). If your SWF
+file is smaller than these dimensions and an increase in the storage limit
+is required, <code><a href="../../openfl/net/SharedObject.html#flush">SharedObject.flush</a>()</code> fails, returning
+<code>SharedObjectFlushedStatus.PENDING</code> and dispatching the
+<code>netStatus</code> event.</p>
+<p><strong>Remote shared objects.</strong> With Flash Media Server, you can create
+and use remote shared objects, that are shared in real-time by all clients
+connected to your application. When one client changes a property of a
+remote shared object, the property is changed for all connected clients.
+You can use remote shared objects to synchronize clients, for example,
+users in a multi-player game.</p>
+<p>Each remote shared object has a <code>data</code> property which is an
+Object with properties that store data. Call <code>setProperty()</code> to
+change an property of the data object. The server updates the properties,
+dispatches a <code>sync</code> event, and sends the properties back to the
+connected clients.</p>
+<p>You can choose to make remote shared objects persistent on the client,
+the server, or both. By default, Flash Player saves locally persistent
+remote shared objects up to 100K in size. When you try to save a larger
+object, Flash Player displays the Local Storage dialog box, which lets the
+user allow or deny local storage for the shared object. Make sure your
+Stage size is at least 215 by 138 pixels; this is the minimum size Flash
+requires to display the dialog box.</p>
+<p>If the user selects Allow, the server saves the shared object and
+dispatches a <code>netStatus</code> event with a <code>code</code> property
+of <code><a href="../../openfl/net/SharedObject.html#Success">SharedObject.Flush.Success</a></code>. If the user select Deny, the
+server does not save the shared object and dispatches a
+<code>netStatus</code> event with a <code>code</code> property of
+<code><a href="../../openfl/net/SharedObject.html#Failed">SharedObject.Flush.Failed</a></code>.</p><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>asyncError</code></th><td><p>Dispatched when an exception is thrown asynchronously  -
+that is, from native asynchronous code.</p></td></tr><tr class="indent"><th style="width:25%;"><code>netStatus</code></th><td><p>Dispatched when a SharedObject instance is reporting its
+status or error condition. The <code>netStatus</code>
+event contains an <code>info</code> property, which is an
+information object that contains specific information
+about the event, such as whether a connection attempt
+succeeded or whether the shared object was successfully
+written to the local disk.</p></td></tr><tr class="indent"><th style="width:25%;"><code>sync</code></th><td><p>Dispatched when a remote shared object has been updated
+by the server.</p></td></tr></table></div><h3 class="section">Static variables</h3><div class="fields"><div class="field "><a name="defaultObjectEncoding"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(ObjectEncoding.DEFAULT)</span><span class="label label-static">static</span><a href="#defaultObjectEncoding"><span class="identifier">defaultObjectEncoding</span></a>:<a class="type" title="openfl.net.ObjectEncoding - The ObjectEncoding class is used in defining serialization settings in classes that serialize objects (such as FileStream, NetStream, NetConnection, SharedObject, and ByteArray)." href="../../openfl/net/ObjectEncoding.html">ObjectEncoding</a><span> = ObjectEncoding.DEFAULT</span></code></h3><div class="doc"><p>The default object encoding (AMF version) for all local shared objects created in
+the SWF file. When local shared objects are written to disk, the
+<code><a href="../../openfl/net/SharedObject.html#defaultObjectEncoding">SharedObject.defaultObjectEncoding</a></code> property indicates which Action Message
+Format version should be used: the ActionScript 3.0 format (AMF3) or the
+ActionScript 1.0 or 2.0 format (AMF0).</p>
+<p>For more information about object encoding, including the difference between
+encoding in local and remote shared objects, see the description of the
+<code>objectEncoding</code> property.</p>
+<p>The default value of <code><a href="../../openfl/net/SharedObject.html#defaultObjectEncoding">SharedObject.defaultObjectEncoding</a></code> is set to use the
+ActionScript 3.0 format, AMF3. If you need to write local shared objects that
+ActionScript 2.0 or 1.0 SWF files can read, set
+<code><a href="../../openfl/net/SharedObject.html#defaultObjectEncoding">SharedObject.defaultObjectEncoding</a></code> to use the ActionScript 1.0 or ActionScript
+2.0 format, <code><a href="../../openfl/net/ObjectEncoding.html#AMF0">openfl.net.ObjectEncoding.AMF0</a></code>, at the beginning of your script,
+before you create any local shared objects. All local shared objects created
+thereafter will use AMF0 encoding and can interact with older content. You cannot
+change the <code>objectEncoding</code> value of existing local shared objects by setting
+<code><a href="../../openfl/net/SharedObject.html#defaultObjectEncoding">SharedObject.defaultObjectEncoding</a></code> after the local shared objects have been
+created.</p>
+<p>To set the object encoding on a per-object basis, rather than for all shared
+objects created by the SWF file, set the objectEncoding property of the local
+shared object instead.</p></div></div></div><h3 class="section">Static methods</h3><div class="fields"><div class="field "><a name="getLocal"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ secure : false, localPath : null })</span><span class="label label-static">static</span><a href="#getLocal"><span class="identifier">getLocal</span></a>(<span style="white-space:nowrap">name:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">?localPath:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">secure:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="openfl.net.SharedObject - The SharedObject class is used to read and store limited amounts of data on a user&#039;s computer or on a server." href="../../openfl/net/SharedObject.html">SharedObject</a></code></h3><div class="doc"><p>Returns a reference to a locally persistent shared object that is only
+available to the current client. If the shared object does not already
+exist, this method creates one. If any values passed to
+<code>getLocal()</code> are invalid or if the call fails, Flash Player
+throws an exception.</p>
+<p>The following code shows how you assign the returned shared object
+reference to a variable:</p>
+<p><code>var so:<a href="../../openfl/net/SharedObject.html#SharedObject">SharedObject</a> =
+<a href="../../openfl/net/SharedObject.html#getLocal">SharedObject.getLocal</a>("savedData");</code></p>
+<p><strong>Note:</strong> If the user has chosen to never allow local storage for
+this domain, the object is not saved locally, even if a value for
+<code>localPath</code> is specified. The exception to this rule is local
+content. Local content can always write shared objects from third-party
+domains(domains other than the domain in the current browser address bar)
+to disk, even if writing of third-party shared objects to disk is
+disallowed.</p>
+<p>To avoid name conflicts, Flash looks at the location of the SWF file
+creating the shared object. For example, if a SWF file at
+www.myCompany.com/apps/stockwatcher.swf creates a shared object named
+<code>portfolio</code>, that shared object does not conflict with another
+object named <code>portfolio</code> that was created by a SWF file at
+www.yourCompany.com/photoshoot.swf because the SWF files originate from
+different directories.</p>
+<p>Although the <code>localPath</code> parameter is optional, you should
+give some thought to its use, especially if other SWF files need to access
+the shared object. If the data in the shared object is specific to one SWF
+file that will not be moved to another location, then use of the default
+value makes sense. If other SWF files need access to the shared object, or
+if the SWF file that creates the shared object will later be moved, then
+the value of this parameter affects how accessible the shared object will
+be. For example, if you create a shared object with <code>localPath</code>
+set to the default value of the full path to the SWF file, no other SWF
+file can access that shared object. If you later move the original SWF
+file to another location, not even that SWF file can access the data
+already stored in the shared object.</p>
+<p>To avoid inadvertently restricting access to a shared object, use the
+<code>localpath</code> parameter. The most permissive approach is to set
+<code>localPath</code> to <code>/</code>(slash), which makes the shared
+object available to all SWF files in the domain, but increases the
+likelihood of name conflicts with other shared objects in the domain. A
+more restrictive approach is to append <code>localPath</code> with folder
+names that are in the full path to the SWF file. For example, for a
+<code>portfolio</code> shared object created by the SWF file at
+www.myCompany.com/apps/stockwatcher.swf, you could set the
+<code>localPath</code> parameter to <code>/</code>, <code>/apps</code>, or
+<code>/apps/stockwatcher.swf</code>. You must determine which approach
+provides optimal flexibility for your application.</p>
+<p>When using this method, consider the following security model:</p><ul><li>You cannot access shared objects across sandbox boundaries.</li><li>Users can restrict shared object access by using the Flash Player
+Settings dialog box or the Settings Manager. By default, an application
+can create shared objects of up 100 KB of data per domain. Administrators
+and users can also place restrictions on the ability to write to the file
+system.</li></ul>
+<p>Suppose you publish SWF file content to be played back as local files
+(either locally installed SWF files or EXE files), and you need to access
+a specific shared object from more than one local SWF file. In this
+situation, be aware that for local files, two different locations might be
+used to store shared objects. The domain that is used depends on the
+security permissions granted to the local file that created the shared
+object. Local files can have three different levels of permissions:</p><ol><li>Access to the local filesystem only.</li><li>Access to the network only.</li><li>Access to both the network and the local filesystem.</li></ol>
+<p>Local files with access to the local filesystem(level 1 or 3) store
+their shared objects in one location. Local files without access to the
+local filesystem(level 2) store their shared objects in another
+location.</p>
+<p>You can prevent a SWF file from using this method by setting the
+<code>allowNetworking</code> parameter of the the <code>object</code> and
+<code>embed</code> tags in the HTML page that contains the SWF
+content.</p>
+<p>For more information, see the Flash Player Developer Center Topic:
+<a href="http://www.adobe.com/go/devnet_security_en">Security</a>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>name</code></th><td><p>The name of the object. The name can include forward
+slashes(<code>/</code>); for example,
+<code>work/addresses</code> is a legal name. Spaces are
+not allowed in a shared object name, nor are the
+following characters: <code>~ % &amp; \
+; : " ' , &lt; &gt; ? #</code></p></td></tr><tr><th style="width:25%;"><code>localPath</code></th><td><p>The full or partial path to the SWF file that created the
+shared object, and that determines where the shared
+object will be stored locally. If you do not specify this
+parameter, the full path is used.</p></td></tr><tr><th style="width:25%;"><code>secure</code></th><td><p>Determines whether access to this shared object is
+restricted to SWF files that are delivered over an HTTPS
+connection. If your SWF file is delivered over HTTPS,
+this parameter's value has the following effects:</p><ul><li>If this parameter is set to <code><a href="../../Bool.html">true</a></code>,
+Flash Player creates a new secure shared object or gets a
+reference to an existing secure shared object. This
+secure shared object can be read from or written to only
+by SWF files delivered over HTTPS that call
+<code><a href="../../openfl/net/SharedObject.html#getLocal">SharedObject.getLocal</a>()</code> with the
+<code>secure</code> parameter set to
+<code><a href="../../Bool.html">true</a></code>.</li><li>If this parameter is set to <code><a href="../../Bool.html">false</a></code>,
+Flash Player creates a new shared object or gets a
+reference to an existing shared object that can be read
+from or written to by SWF files delivered over non-HTTPS
+connections.</li></ul>
+<p>If your SWF file is delivered over a non-HTTPS
+connection and you try to set this parameter to
+<code><a href="../../Bool.html">true</a></code>, the creation of a new shared object</p>
+<pre><code>			(or the access of a previously created secure shared
+</code></pre>
+<p>object) fails and <code>null</code> is returned.
+Regardless of the value of this parameter, the created
+shared objects count toward the total amount of disk
+space allowed for a domain.</p>
+<p>The following diagram shows the use of the
+<code>secure</code> parameter:</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A reference to a shared object that is persistent locally and is
+available only to the current client. If Flash Player can't create
+or find the shared object(for example, if <code>localPath</code>
+was specified but no such directory exists), this method throws an
+exception.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Flash Player cannot create the shared object for whatever
+reason. This error might occur is if persistent shared
+object creation and storage by third-party Flash content is
+prohibited(does not apply to local content). Users can
+prohibit third-party persistent shared objects on the Global
+Storage Settings panel of the Settings Manager, located at
+[<a href="http://www.adobe.com/support/documentation/en/flashplayer/help/settings_manager03.html](http://www.adobe.com/support/documentation/en/flashplayer/help/settings_manager03.html">http://www.adobe.com/support/documentation/en/flashplayer/help/settings_manager03.html](http://www.adobe.com/support/documentation/en/flashplayer/help/settings_manager03.html</a>).</p></td></tr></table></div></div><div class="field "><a name="getRemote"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ secure : false, persistence : false, remotePath : null })</span><span class="label label-static">static</span><a href="#getRemote"><span class="identifier">getRemote</span></a>(<span style="white-space:nowrap">name:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">?remotePath:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">persistence:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a> = false,</span> <span style="white-space:nowrap">secure:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="openfl.net.SharedObject - The SharedObject class is used to read and store limited amounts of data on a user&#039;s computer or on a server." href="../../openfl/net/SharedObject.html">SharedObject</a></code></h3><div class="doc"><p>Returns a reference to a shared object on Flash Media Server that
+multiple clients can access. If the remote shared object does not
+already exist, this method creates one.
+To create a remote shared object, call <code>getRemote()</code> the call
+<code>connect()</code> to connect the remote shared object to the server, as in
+the following:</p>
+<pre><code class="prettyprint as3">var nc:NetConnection = new NetConnection();
+nc.connect("rtmp://somedomain.com/applicationName");
+var myRemoteSO:SharedObject = SharedObject.getRemote("mo", nc.uri, false);
+myRemoteSO.connect(nc);</code></pre>
+<p>To confirm that the local and remote copies of the shared object are
+synchronized, listen for and handle the <code>sync</code> event. All clients that
+want to share this object must pass the same values for the <code>name</code> and
+<code>remotePath</code> parameters.</p>
+<p>To create a shared object that is available only to the current
+client, use <code><a href="../../openfl/net/SharedObject.html#getLocal">SharedObject.getLocal</a>()</code>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>name</code></th><td><p>The name of the remote shared object. The name can
+include forward slashes (/); for example,
+work/addresses is a legal name. Spaces are not
+allowed in a shared object name, nor are the
+following characters: <code>~ % &amp; \ ; :  " ' , &gt; ? ? #</code></p></td></tr><tr><th style="width:25%;"><code>remotePath</code></th><td><p>The URI of the server on which the shared object
+will be stored. This URI must be identical to the
+URI of the NetConnection object passed to the
+<code>connect()</code> method.</p></td></tr><tr><th style="width:25%;"><code>persistence</code></th><td><p>Specifies whether the attributes of the shared
+object's data property are persistent locally,
+remotely, or both. This parameter can also specify
+where the shared object will be stored locally.
+Acceptable values are as follows:
+<em> A value of <code><a href="../../Bool.html">false</a></code> specifies that the shared
+object is not persistent on the client or server.
+</em> A value of <code><a href="../../Bool.html">true</a></code> specifies that the shared
+object is persistent only on the server.
+* A full or partial local path to the shared object
+indicates that the shared object is persistent on
+the client and the server. On the client, it is
+stored in the specified path; on the server, it is
+stored in a subdirectory within the application
+directory.</p>
+<p><strong>Note:</strong> If the user has chosen to never allow
+local storage for this domain, the object will not
+be saved locally, even if a local path is specified
+for persistence. For more information, see the
+class description.</p></td></tr><tr><th style="width:25%;"><code>secure</code></th><td><p>Determines whether access to this shared object is
+restricted to SWF files that are delivered over an
+HTTPS connection. For more information, see the
+description of the <code>secure</code> parameter in the
+<code>getLocal</code> method entry.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A reference to an object that can be shared across multiple
+clients.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Flash Player can't create or find the shared object.
+This might occur if nonexistent paths were specified for
+the <code>remotePath</code> and <code>persistence</code> parameters.</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="client"></a><h3 class="anchor"><code><a href="#client"><span class="identifier">client</span></a>:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>Indicates the object on which callback methods are invoked. The
+default object is <code>this</code>. You can set the client property to another
+object, and callback methods will be invoked on that other object.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The <code>client</code> property must be set to a non-null
+object.</p></td></tr></table></div></div><div class="field "><a name="data"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#data"><span class="identifier">data</span></a>:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>The collection of attributes assigned to the <code>data</code> property of
+the object; these attributes can be shared and stored. Each attribute can
+be an object of any ActionScript or JavaScript type  -  Array, Number,
+Boolean, ByteArray, XML, and so on. For example, the following lines
+assign values to various aspects of a shared object:</p>
+<p>For remote shared objects used with a server, all attributes of the
+<code>data</code> property are available to all clients connected to the
+shared object, and all attributes are saved if the object is persistent.
+If one client changes the value of an attribute, all clients now see the
+new value.</p></div></div><div class="field "><a name="fps"></a><h3 class="anchor"><code><span class="label">write only</span><a href="#fps"><span class="identifier">fps</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Specifies the number of times per second that a client's changes to a
+shared object are sent to the server.
+Use this method when you want to control the amount of traffic between
+the client and the server. For example, if the connection between the
+client and server is relatively slow, you may want to set <code>fps</code> to a
+relatively low value. Conversely, if the client is connected to a
+multiuser application in which timing is important, you may want to
+set <code>fps</code> to a relatively high value.</p>
+<p>Setting <code>fps</code> will trigger a <code>sync</code> event and update all changes to
+the server. If you only want to update the server manually, set <code>fps</code>
+to 0.</p>
+<p>Changes are not sent to the server until the <code>sync</code> event has been
+dispatched. That is, if the response time from the server is slow,
+updates may be sent to the server less frequently than the value
+specified in this property.</p></div></div><div class="field "><a name="objectEncoding"></a><h3 class="anchor"><code><a href="#objectEncoding"><span class="identifier">objectEncoding</span></a>:<a class="type" title="openfl.net.ObjectEncoding - The ObjectEncoding class is used in defining serialization settings in classes that serialize objects (such as FileStream, NetStream, NetConnection, SharedObject, and ByteArray)." href="../../openfl/net/ObjectEncoding.html">ObjectEncoding</a></code></h3><div class="doc"><p>The object encoding (AMF version) for this shared object. When a local
+shared object is written to disk, the <code>objectEncoding</code> property
+indicates which Action Message Format version should be used: the
+ActionScript 3.0 format (AMF3) or the ActionScript 1.0 or 2.0 format
+(AMF0).
+Object encoding is handled differently depending if the shared object
+is local or remote.</p><ul><li><strong>Local shared objects</strong>. You can get or set the value of the
+<code>objectEncoding</code> property for local shared objects. The value of
+<code>objectEncoding</code> affects what formatting is used for <em>writing</em> this
+local shared object. If this local shared object must be readable by
+ActionScript 2.0 or 1.0 SWF files, set <code>objectEncoding</code> to
+<code><a href="../../openfl/net/ObjectEncoding.html#AMF0">ObjectEncoding.AMF0</a></code>. Even if object encoding is set to write AMF3,
+Flash Player can still read AMF0 local shared objects. That is, if you
+use the default value of this property, <code><a href="../../openfl/net/ObjectEncoding.html#AMF3">ObjectEncoding.AMF3</a></code>, your
+SWF file can still read shared objects created by ActionScript 2.0 or
+1.0 SWF files.</li><li><strong>Remote shared objects</strong>. When connected to the server, a remote
+shared object inherits its <code>objectEncoding</code> setting from the
+associated NetConnection instance (the instance used to connect to the
+remote shared object). When not connected to the server, a remote
+shared object inherits the <code>defaultObjectEncoding</code> setting from the
+associated NetConnection instance. Because the value of a remote
+shared object's <code>objectEncoding</code> property is determined by the
+NetConnection instance, this property is read-only for remote shared
+objects.</li></ul><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ReferenceError</code></th><td><p>You attempted to set the value of the
+<code>objectEncoding</code> property on a remote shared
+object. This property is read-only for remote
+shared objects because its value is determined
+by the associated NetConnection instance.</p></td></tr></table></div></div><div class="field "><a name="size"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#size"><span class="identifier">size</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The current size of the shared object, in bytes.</p>
+<p>Flash calculates the size of a shared object by stepping through all of
+its data properties; the more data properties the object has, the longer
+it takes to estimate its size. Estimating object size can take significant
+processing time, so you may want to avoid using this method unless you
+have a specific need for it.</p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="clear"></a><h3 class="anchor"><code><a href="#clear"><span class="identifier">clear</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>For local shared objects, purges all of the data and deletes the shared
+object from the disk. The reference to the shared object is still active,
+but its data properties are deleted.</p>
+<p>For remote shared objects used with Flash Media Server,
+<code>clear()</code> disconnects the object and purges all of the data. If
+the shared object is locally persistent, this method also deletes the
+shared object from the disk. The reference to the shared object is still
+active, but its data properties are deleted.</p></div></div><div class="field "><a name="close"></a><h3 class="anchor"><code><a href="#close"><span class="identifier">close</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Closes the connection between a remote shared object and the server.
+If a remote shared object is locally persistent, the user can make
+changes to the local copy of the object after this method is called.
+Any changes made to the local object are sent to the server the next
+time the user connects to the remote shared object.</p></div></div><div class="field "><a name="connect"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ params : null })</span><a href="#connect"><span class="identifier">connect</span></a>(<span style="white-space:nowrap">myConnection:<a class="type" title="openfl.net.NetConnection - The NetConnection class creates a two-way connection between a client and a server." href="../../openfl/net/NetConnection.html">NetConnection</a>,</span> <span style="white-space:nowrap">?params:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Connects to a remote shared object on a server through a specified
+NetConnection object. Use this method after calling <code>getRemote()</code>.
+When a connection is successful, the <code>sync</code> event is dispatched.
+Before attempting to work with a remote shared object, first check for
+any errors using a <code>try..catch..finally</code> statement. Then, listen for
+and handle the <code>sync</code> event before you make changes to the shared
+object. Any changes made locally — before the <code>sync</code> event is
+dispatched — might be lost.</p>
+<p>Call the <code>connect()</code> method to connect to a remote shared object, for
+example:</p>
+<pre><code class="prettyprint as3">var myRemoteSO:SharedObject = SharedObject.getRemote("mo", myNC.uri, false);
+myRemoteSO.connect(myNC);</code></pre><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>myConnection</code></th><td><p>A NetConnection object that uses the Real-Time
+Messaging Protocol (RTMP), such as a NetConnection
+object used to communicate with Flash Media
+Server.</p></td></tr><tr><th style="width:25%;"><code>params</code></th><td><p>A string defining a message to pass to the remote
+shared object on the server. Cannot be used with
+Flash Media Server.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Flash Player could not connect to the specified remote
+shared object. Verify that the NetConnection instance is
+valid and connected and that the remote shared object
+was successfully created on the server.</p></td></tr></table></div></div><div class="field "><a name="flush"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ minDiskSpace : 0 })</span><a href="#flush"><span class="identifier">flush</span></a>(<span style="white-space:nowrap">minDiskSpace:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0</span>):<a class="type" title="openfl.net.SharedObjectFlushStatus - The SharedObjectFlushStatus class provides values for the code returned from a call to the SharedObject." href="../../openfl/net/SharedObjectFlushStatus.html">SharedObjectFlushStatus</a></code></h3><div class="doc"><p>Immediately writes a locally persistent shared object to a local file. If
+you don't use this method, Flash Player writes the shared object to a file
+when the shared object session ends  -  that is, when the SWF file is
+closed, when the shared object is garbage-collected because it no longer
+has any references to it, or when you call
+<code><a href="../../openfl/net/SharedObject.html#clear">SharedObject.clear</a>()</code> or <code><a href="../../openfl/net/SharedObject.html#close">SharedObject.close</a>()</code>.</p>
+<p>If this method returns <code><a href="../../openfl/net/SharedObjectFlushStatus.html#PENDING">SharedObjectFlushStatus.PENDING</a></code>,
+Flash Player displays a dialog box asking the user to increase the amount
+of disk space available to objects from this domain. To allow space for
+the shared object to grow when it is saved in the future, which avoids
+return values of <code>PENDING</code>, pass a value for
+<code>minDiskSpace</code>. When Flash Player tries to write the file, it
+looks for the number of bytes passed to <code>minDiskSpace</code>, instead
+of looking for enough space to save the shared object at its current size.</p>
+<p>For example, if you expect a shared object to grow to a maximum size of
+500 bytes, even though it might start out much smaller, pass 500 for
+<code>minDiskSpace</code>. If Flash asks the user to allot disk space for
+the shared object, it asks for 500 bytes. After the user allots the
+requested amount of space, Flash won't have to ask for more space on
+future attempts to flush the object(as long as its size doesn't exceed
+500 bytes).</p>
+<p>After the user responds to the dialog box, this method is called again.
+A <code>netStatus</code> event is dispatched with a <code>code</code>
+property of <code><a href="../../openfl/net/SharedObject.html#Success">SharedObject.Flush.Success</a></code> or
+<code><a href="../../openfl/net/SharedObject.html#Failed">SharedObject.Flush.Failed</a></code>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>minDiskSpace</code></th><td><p>The minimum disk space, in bytes, that must be
+allotted for this object.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>Either of the following values:
+* <code><a href="../../openfl/net/SharedObjectFlushStatus.html#PENDING">SharedObjectFlushStatus.PENDING</a></code>: The user has</p>
+<pre><code>	permitted local information storage for objects from this domain,
+	but the amount of space allotted is not sufficient to store the
+	object. Flash Player prompts the user to allow more space. To
+	allow space for the shared object to grow when it is saved, thus
+	avoiding a `SharedObjectFlushStatus.PENDING` return
+	value, pass a value for `minDiskSpace`.
+	 * `SharedObjectFlushStatus.FLUSHED`: The shared
+	object has been successfully written to a file on the local
+	disk.
+</code></pre></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>Flash Player cannot write the shared object to disk. This
+error might occur if the user has permanently disallowed
+local information storage for objects from this domain.</p>
+<p><strong>Note:</strong> Local content can always write shared
+objects from third-party domains(domains other than the
+domain in the current browser address bar) to disk, even if
+writing of third-party shared objects to disk is
+disallowed.</p></td></tr></table></div></div><div class="field "><a name="send"></a><h3 class="anchor"><code><a href="#send"><span class="identifier">send</span></a>(<span style="white-space:nowrap">args:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a>&gt;</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Broadcasts a message to all clients connected to a remote shared
+object, including the client that sent the message. To process and
+respond to the message, create a callback function attached to the
+shared object.</p></div></div><div class="field "><a name="setDirty"></a><h3 class="anchor"><code><a href="#setDirty"><span class="identifier">setDirty</span></a>(<span style="white-space:nowrap">propertyName:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Indicates to the server that the value of a property in the shared
+object has changed. This method marks properties as <em>dirty</em>, which
+means changed.
+Call the <code><a href="../../openfl/net/SharedObject.html#setProperty">SharedObject.setProperty</a>()</code> to create properties for a
+shared object.</p>
+<p>The <code><a href="../../openfl/net/SharedObject.html#setProperty">SharedObject.setProperty</a>()</code> method implements <code>setDirty()</code>. In
+most cases, such as when the value of a property is a primitive type
+like String or Number, you can call <code>setProperty()</code> instead of calling
+<code>setDirty()</code>. However, when the value of a property is an object that
+contains its own properties, call <code>setDirty()</code> to indicate when a
+value within the object has changed.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>propertyName</code></th><td><p>The name of the property that has changed.</p></td></tr></table></div></div><div class="field "><a name="setProperty"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ value : null })</span><a href="#setProperty"><span class="identifier">setProperty</span></a>(<span style="white-space:nowrap">propertyName:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">?value:<a class="type" title="openfl.utils.Object" href="../../openfl/utils/Object.html">Object</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Updates the value of a property in a shared object and indicates to
+the server that the value of the property has changed. The
+<code>setProperty()</code> method explicitly marks properties as changed, or
+dirty.
+For more information about remote shared objects see the &lt;a
+href="<a href="http://www.adobe.com/go/learn_fms_docs_en">http://www.adobe.com/go/learn_fms_docs_en</a>"> Flash Media Server
+documentation</a>.</p>
+<p><strong>Note:</strong> The <code><a href="../../openfl/net/SharedObject.html#setProperty">SharedObject.setProperty</a>()</code> method implements the
+<code>setDirty()</code> method. In most cases, such as when the value of a
+property is a primitive type like String or Number, you would use
+<code>setProperty()</code> instead of <code>setDirty</code>. However, when the value of a
+property is an object that contains its own properties, use
+<code>setDirty()</code> to indicate when a value within the object has changed.
+In general, it is a good idea to call <code>setProperty()</code> rather than
+<code>setDirty()</code>, because <code>setProperty()</code> updates a property value only
+when that value has changed, whereas <code>setDirty()</code> forces
+synchronization on all subscribed clients.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>propertyName</code></th><td><p>The name of the property in the shared object.</p></td></tr><tr><th style="width:25%;"><code>value</code></th><td><p>The value of the property (an ActionScript
+object), or <code>null</code> to delete the property.</p></td></tr></table></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></h4><div style="display:none"><div class="field "><a name="addEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useWeakReference : false, priority : 0, useCapture : false })</span><a href="#addEventListener"><span class="identifier">addEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">priority:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">useWeakReference:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Registers an event listener object with an EventDispatcher object so that
+the listener receives notification of an event. You can register event
+listeners on all nodes in the display list for a specific type of event,
+phase, and priority.</p>
+<p>After you successfully register an event listener, you cannot change
+its priority through additional calls to <code>addEventListener()</code>.
+To change a listener's priority, you must first call
+<code>removeListener()</code>. Then you can register the listener again
+with the new priority level.</p>
+<p>Keep in mind that after the listener is registered, subsequent calls to
+<code>addEventListener()</code> with a different <code>type</code> or
+<code>useCapture</code> value result in the creation of a separate
+listener registration. For example, if you first register a listener with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>, it listens only during
+the capture phase. If you call <code>addEventListener()</code> again using
+the same listener object, but with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>, you have two separate listeners: one that listens
+during the capture phase and another that listens during the target and
+bubbling phases.</p>
+<p>You cannot register an event listener for only the target phase or the
+bubbling phase. Those phases are coupled during registration because
+bubbling applies only to the ancestors of the target node.</p>
+<p>If you no longer need an event listener, remove it by calling
+<code>removeEventListener()</code>, or memory problems could result. Event
+listeners are not automatically removed from memory because the garbage
+collector does not remove the listener as long as the dispatching object
+exists(unless the <code>useWeakReference</code> parameter is set to
+<code><a href="../../Bool.html">true</a></code>).</p>
+<p>Copying an EventDispatcher instance does not copy the event listeners
+attached to it.(If your newly created node needs an event listener, you
+must attach the listener after creating the node.) However, if you move an
+EventDispatcher instance, the event listeners attached to it move along
+with it.</p>
+<p>If the event listener is being registered on a node while an event is
+being processed on this node, the event listener is not triggered during
+the current phase but can be triggered during a later phase in the event
+flow, such as the bubbling phase.</p>
+<p>If an event listener is removed from a node while an event is being
+processed on the node, it is still triggered by the current actions. After
+it is removed, the event listener is never invoked again(unless
+registered again for future processing).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Determines whether the listener works in the
+capture phase or the target and bubbling phases.
+If <code>useCapture</code> is set to
+<code><a href="../../Bool.html">true</a></code>, the listener processes the
+event only during the capture phase and not in the
+target or bubbling phase. If
+<code>useCapture</code> is <code><a href="../../Bool.html">false</a></code>, the
+listener processes the event only during the
+target or bubbling phase. To listen for the event
+in all three phases, call
+<code>addEventListener</code> twice, once with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>,
+then again with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>.</p></td></tr><tr><th style="width:25%;"><code>priority</code></th><td><p>The priority level of the event listener. The
+priority is designated by a signed 32-bit integer.
+The higher the number, the higher the priority.
+All listeners with priority <em>n</em> are processed
+before listeners of priority <em>n</em>-1. If two or
+more listeners share the same priority, they are
+processed in the order in which they were added.
+The default priority is 0.</p></td></tr><tr><th style="width:25%;"><code>useWeakReference</code></th><td><p>Determines whether the reference to the listener
+is strong or weak. A strong reference(the
+default) prevents your listener from being
+garbage-collected. A weak reference does not.</p>
+<p>Class-level member functions are not subject to
+garbage collection, so you can set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for class-level member functions without
+subjecting them to garbage collection. If you set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for a listener that is a nested inner function,
+the function will be garbage-collected and no
+longer persistent. If you create references to the
+inner function(save it in another variable) then
+it is not garbage-collected and stays
+persistent.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The <code>listener</code> specified is not a
+function.</p></td></tr></table></div></div><div class="field "><a name="dispatchEvent"></a><h3 class="anchor"><code><a href="#dispatchEvent"><span class="identifier">dispatchEvent</span></a>(<span style="white-space:nowrap">event:<a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Dispatches an event into the event flow. The event target is the
+EventDispatcher object upon which the <code>dispatchEvent()</code> method
+is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>event</code></th><td><p>The Event object that is dispatched into the event flow. If
+the event is being redispatched, a clone of the event is
+created automatically. After an event is dispatched, its
+<code>target</code> property cannot be changed, so you must
+create a new copy of the event for redispatching to work.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if the event was successfully
+dispatched. A value of <code><a href="../../Bool.html">false</a></code> indicates failure or
+that <code>preventDefault()</code> was called on the event.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The event dispatch recursion limit has been reached.</p></td></tr></table></div></div><div class="field "><a name="hasEventListener"></a><h3 class="anchor"><code><a href="#hasEventListener"><span class="identifier">hasEventListener</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the EventDispatcher object has any listeners registered for
+a specific type of event. This allows you to determine where an
+EventDispatcher object has altered handling of an event type in the event
+flow hierarchy. To determine whether a specific event type actually
+triggers an event listener, use <code>willTrigger()</code>.</p>
+<p>The difference between <code>hasEventListener()</code> and
+<code>willTrigger()</code> is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas
+<code>willTrigger()</code> examines the entire event flow for the event
+specified by the <code>type</code> parameter.</p>
+<p>When <code>hasEventListener()</code> is called from a LoaderInfo
+object, only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+is registered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="removeEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useCapture : false })</span><a href="#removeEventListener"><span class="identifier">removeEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Removes a listener from the EventDispatcher object. If there is no
+matching listener registered with the EventDispatcher object, a call to
+this method has no effect.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Specifies whether the listener was registered for the
+capture phase or the target and bubbling phases. If the
+listener was registered for both the capture phase and
+the target and bubbling phases, two calls to
+<code>removeEventListener()</code> are required to
+remove both, one call with <code>useCapture()</code> set
+to <code><a href="../../Bool.html">true</a></code>, and another call with
+<code>useCapture()</code> set to <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table></div></div><div class="field "><a name="toString"></a><h3 class="anchor"><code><a href="#toString"><span class="identifier">toString</span></a>():<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="willTrigger"></a><h3 class="anchor"><code><a href="#willTrigger"><span class="identifier">willTrigger</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether an event listener is registered with this EventDispatcher
+object or any of its ancestors for the specified event type. This method
+returns <code><a href="../../Bool.html">true</a></code> if an event listener is triggered during any
+phase of the event flow when an event of the specified type is dispatched
+to this EventDispatcher object or any of its descendants.</p>
+<p>The difference between the <code>hasEventListener()</code> and the
+<code>willTrigger()</code> methods is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas the
+<code>willTrigger()</code> method examines the entire event flow for the
+event specified by the <code>type</code> parameter.</p>
+<p>When <code>willTrigger()</code> is called from a LoaderInfo object,
+only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+will be triggered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

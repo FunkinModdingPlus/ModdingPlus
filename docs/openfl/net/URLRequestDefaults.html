@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.net.URLRequestDefaults</title><meta name="description" content="The URLRequestDefaults class includes static properties that you can set to define
+default values for the properties of the URLRequest class. It also includes a static
+method, &lt;code&gt;&lt;a href=&quot;../../openfl/net/URLRequestDefaults.html#setLoginCredentialsForHost&quot;&gt;URLRequestDefaults.setLoginCredentialsForHost&lt;/a&gt;()&lt;/code&gt;, which lets you define
+default authentication credentials for requests. The URLRequest class defines the
+information to use in an HTTP request."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> URLRequestDefaults</h1><h4><small>package <a href="../../openfl/net/index.html">openfl.net</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>The URLRequestDefaults class includes static properties that you can set to define
+default values for the properties of the URLRequest class. It also includes a static
+method, <code><a href="../../openfl/net/URLRequestDefaults.html#setLoginCredentialsForHost">URLRequestDefaults.setLoginCredentialsForHost</a>()</code>, which lets you define
+default authentication credentials for requests. The URLRequest class defines the
+information to use in an HTTP request.</p>
+<p>Any properties set in a URLRequest object override those static properties set for the
+URLRequestDefaults class.</p>
+<p>URLRequestDefault settings only apply to content in the caller's application domain,
+with one exception: settings made by calling
+<code><a href="../../openfl/net/URLRequestDefaults.html#setLoginCredentialsForHost">URLRequestDefaults.setLoginCredentialsForHost</a>()</code> apply to all application domains in
+the currently running application.</p>
+<p>Only Adobe® AIR® content running in the application security sandbox can use the
+URLRequestDefaults class. Other content will result in a SecurityError being thrown
+when accessing the members or properties of this class.</p></div><h3 class="section">Static variables</h3><div class="fields"><div class="field "><a name="followRedirects"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(true)</span><span class="label label-static">static</span><a href="#followRedirects"><span class="identifier">followRedirects</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a><span> = true</span></code></h3><div class="doc"><p>The default setting for the <code>followRedirects</code> property of URLRequest objects.
+Setting the <code>followRedirects</code> property in a URLRequest object overrides this
+default setting. This setting does not apply to URLRequest objects used in file
+upload or RTMP requests.</p>
+<p>The default value is <code><a href="../../Bool.html">true</a></code>.</p></div></div><div class="field "><a name="idleTimeout"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(0)</span><span class="label label-static">static</span><a href="#idleTimeout"><span class="identifier">idleTimeout</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a><span> = 0</span></code></h3><div class="doc"><p>The default setting for the <code>idleTimeout</code> property of URLRequest objects and
+HTMLLoader objects.</p>
+<p>The idle timeout is the amount of time (in milliseconds) that the client waits for
+a response from the server, after the connection is established, before abandoning
+the request.</p>
+<p>This defines the default idle timeout used by the URLRequest or HTMLLoader object.
+Setting the <code>idleTimeout</code> property in a URLRequest object or an HTMLLoader object
+overrides this default setting.</p>
+<p>When this property is set to 0 (the default), the runtime uses the default idle
+timeout value defined by the operating system. The default idle timeout value
+varies between operating systems (such as Mac OS, Linux, or Windows) and between
+operating system versions.</p>
+<p>This setting does not apply to URLRequest objects used in file upload or RTMP
+requests.</p>
+<p>The default value is 0.</p></div></div><div class="field "><a name="manageCookies"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(false)</span><span class="label label-static">static</span><a href="#manageCookies"><span class="identifier">manageCookies</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a><span> = false</span></code></h3><div class="doc"><p>The default setting for the manageCookies property of URLRequest objects. Setting
+the manageCookies property in a URLRequest object overrides this default setting.</p>
+<p><strong>Note:</strong> This setting does not apply to URLRequest objects used in file upload
+or RTMP requests.</p>
+<p>The default value is <code><a href="../../Bool.html">true</a></code>.</p></div></div><div class="field "><a name="userAgent"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#userAgent"><span class="identifier">userAgent</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The default setting for the <code>userAgent</code> property of URLRequest objects. Setting the
+<code>userAgent</code> property in a URLRequest object overrides this default setting.</p>
+<p>This is also the default user agent string for all HTMLLoader objects (used when
+you call the <code>load()</code> method of the HTMLLoader object). Setting the <code>userAgent</code>
+property of the HTMLLoader object overrides the <code><a href="../../openfl/net/URLRequestDefaults.html#userAgent">URLRequestDefaults.userAgent</a></code>
+setting.</p>
+<p>This default value varies depending on the runtime operating system (such as Mac OS,
+Linux or Windows), the runtime language, and the runtime version, as in the
+following examples:</p><ul><li><code>"Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/526.9+ (KHTML, like Gecko) AdobeAIR/1.5"</code></li><li><code>"Mozilla/5.0 (Windows; U; en) AppleWebKit/526.9+ (KHTML, like Gecko) AdobeAIR/1.5"</code></li><li><code>"Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/526.9+ (KHTML, like Gecko) AdobeAIR/1.5"</code></li></ul></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

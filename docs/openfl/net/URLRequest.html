@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.net.URLRequest</title><meta name="description" content="The URLRequest class captures all of the information in a single HTTP
+request. URLRequest objects are passed to the &lt;code&gt;load()&lt;/code&gt; methods
+of the Loader, URLStream, and URLLoader classes, and to other loading
+operations, to initiate URL downloads. They are also passed to the
+&lt;code&gt;upload()&lt;/code&gt; and &lt;code&gt;download()&lt;/code&gt; methods of the
+FileReference class."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> URLRequest</h1><h4><small>package <a href="../../openfl/net/index.html">openfl.net</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>The URLRequest class captures all of the information in a single HTTP
+request. URLRequest objects are passed to the <code>load()</code> methods
+of the Loader, URLStream, and URLLoader classes, and to other loading
+operations, to initiate URL downloads. They are also passed to the
+<code>upload()</code> and <code>download()</code> methods of the
+FileReference class.</p>
+<p>A SWF file in the local-with-filesystem sandbox may not load data from,
+or provide data to, a resource that is in the network sandbox.</p>
+<p>By default, the calling SWF file and the URL you load must be in the
+same domain. For example, a SWF file at www.adobe.com can load data only
+from sources that are also at www.adobe.com. To load data from a different
+domain, place a URL policy file on the server hosting the data.</p>
+<p>However, in Adobe AIR, content in the application security sandbox
+(content installed with the AIR application) is not restricted by these
+security limitations. For content running in Adobe AIR, files in the
+application security sandbox can access URLs using any of the following URL
+schemes:</p><ul><li><code>http</code> and <code>https</code></li><li><code>file</code></li><li><code>app-storage</code></li><li><code>app</code></li></ul>
+<p>Content running in Adobe AIR that is not in the application security
+sandbox observes the same restrictions as content running in the browser
+(in Flash Player), and loading is governed by the content's domain and any
+permissions granted in URL policy files.</p>
+<p>For more information related to security, see the Flash Player Developer
+Center Topic: <a href="http://www.adobe.com/go/devnet_security_en">Security</a>.</p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ url : null })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">?url:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>)</code></h3><div class="doc"><p>Creates a URLRequest object. If <code><a href="../../lime/system/System.html#useCodePage">System.useCodePage</a></code> is
+<code><a href="../../Bool.html">true</a></code>, the request is encoded using the system code page,
+rather than Unicode. If <code><a href="../../lime/system/System.html#useCodePage">System.useCodePage</a></code> is
+<code><a href="../../Bool.html">false</a></code>, the request is encoded using Unicode, rather than the
+system code page.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>url</code></th><td><p>The URL to be requested. You can set the URL later by using the
+<code>url</code> property.</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="contentType"></a><h3 class="anchor"><code><a href="#contentType"><span class="identifier">contentType</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The MIME content type of the content in the the <code>data</code>
+property.</p>
+<p>The default value is
+<code>application/x-www-form-urlencoded</code>.</p>
+<p><strong>Note</strong>:The <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>, and <code>HTMLLoader.load()</code>
+methods do not support the <code><a href="../../openfl/net/URLRequest.html#contentType">URLRequest.contentType</a></code>
+property.</p>
+<p>When sending a POST request, the values of the <code>contentType</code>
+and <code>data</code> properties must correspond properly. The value of
+the <code>contentType</code> property instructs servers on how to
+interpret the value of the <code>data</code> property.</p><ul><li>If the value of the <code>data</code> property is a URLVariables
+object, the value of <code>contentType</code> must be
+<code>application/x-www-form-urlencoded</code>.</li><li>If the value of the <code>data</code> property is any other type,
+the value of <code>contentType</code> should indicate the type of the POST
+data that will be sent(which is the binary or string data contained in
+the value of the <code>data</code> property).</li><li>For <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>, the Content-Type of the
+request is set automatically to <code>multipart/form-data</code>, and the
+value of the <code>contentType</code> property is ignored.</li></ul>
+<p>In Flash Player 10 and later, if you use a multipart Content-Type(for
+example "multipart/form-data") that contains an upload(indicated by a
+"filename" parameter in a "content-disposition" header within the POST
+body), the POST operation is subject to the security rules applied to
+uploads:</p><ul><li>The POST operation must be performed in response to a user-initiated
+action, such as a mouse click or key press.</li><li>If the POST operation is cross-domain(the POST target is not on the
+same server as the SWF file that is sending the POST request), the target
+server must provide a URL policy file that permits cross-domain
+access.</li></ul>
+<p>Also, for any multipart Content-Type, the syntax must be valid
+(according to the RFC2046 standards). If the syntax appears to be invalid,
+the POST operation is subject to the security rules applied to
+uploads.</p></div></div><div class="field "><a name="data"></a><h3 class="anchor"><code><a href="#data"><span class="identifier">data</span></a>:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>An object containing data to be transmitted with the URL request.</p>
+<p>This property is used in conjunction with the <code>method</code>
+property. When the value of <code>method</code> is <code>GET</code>, the
+value of <code>data</code> is appended to the value of
+<code><a href="../../openfl/net/URLRequest.html#url">URLRequest.url</a></code>, using HTTP query-string syntax. When the
+<code>method</code> value is <code>POST</code>(or any value other than
+<code>GET</code>), the value of <code>data</code> is transmitted in the
+body of the HTTP request.</p>
+<p>The URLRequest API offers binary <code>POST</code> support and support
+for URL-encoded variables, as well as support for strings. The data object
+can be a ByteArray, URLVariables, or String object.</p>
+<p>The way in which the data is used depends on the type of object
+used:</p><ul><li>If the object is a ByteArray object, the binary data of the
+ByteArray object is used as <code>POST</code> data. For <code>GET</code>,
+data of ByteArray type is not supported. Also, data of ByteArray type is
+not supported for <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> and
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>.</li><li>If the object is a URLVariables object and the method is
+<code>POST</code>, the variables are encoded using
+<em>x-www-form-urlencoded</em> format and the resulting string is used as
+<code>POST</code> data. An exception is a call to
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>, in which the variables are sent as
+separate fields in a <code>multipart/form-data</code> post.</li><li>If the object is a URLVariables object and the method is
+<code>GET</code>, the URLVariables object defines variables to be sent
+with the URLRequest object.</li><li>Otherwise, the object is converted to a string, and the string is
+used as the <code>POST</code> or <code>GET</code> data.</li></ul>
+<p>This data is not sent until a method, such as
+<code>navigateToURL()</code> or <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>, uses
+the URLRequest object.</p>
+<p><strong>Note</strong>: The value of <code>contentType</code> must correspond to
+the type of data in the <code>data</code> property. See the note in the
+description of the <code>contentType</code> property.</p></div></div><div class="field "><a name="followRedirects"></a><h3 class="anchor"><code><a href="#followRedirects"><span class="identifier">followRedirects</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Specifies whether redirects are to be followed (<code><a href="../../Bool.html">true</a></code>) or not (<code><a href="../../Bool.html">false</a></code>).</p>
+<p><strong>Note:</strong> The <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>, <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>, and
+<code>HTMLLoader.load()</code> methods do not support the <code><a href="../../openfl/net/URLRequest.html#followRedirects">URLRequest.followRedirects</a></code> property.</p>
+<p>The default value is <code><a href="../../Bool.html">true</a></code>.</p></div></div><div class="field "><a name="idleTimeout"></a><h3 class="anchor"><code><a href="#idleTimeout"><span class="identifier">idleTimeout</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Specifies the idle timeout value (in milliseconds) for this request.</p>
+<p>The idle timeout is the amount of time the client waits for a response from the
+server, after the connection is established, before abandoning the request.</p>
+<p><strong>Note:</strong> The <code>HTMLLoader.load()</code> method does not support the
+<code><a href="../../openfl/net/URLRequest.html#idleTimeout">URLRequest.idleTimeout</a></code> property. The HTMLLoader class defines its own
+<code>idleTimeout</code> property.</p>
+<p>The default value is initialized from the <code><a href="../../openfl/net/URLRequestDefaults.html#idleTimeout">URLRequestDefaults.idleTimeout</a></code> property.</p></div></div><div class="field "><a name="manageCookies"></a><h3 class="anchor"><code><a href="#manageCookies"><span class="identifier">manageCookies</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Specifies whether the HTTP protocol stack should manage cookies for this request.
+When <code><a href="../../Bool.html">true</a></code>, cookies are added to the request and response cookies are remembered.
+If <code><a href="../../Bool.html">false</a></code>, cookies are not added to the request and response cookies are not
+remembered, but users can manage cookies themselves by direct header manipulation.
+<strong>Note:</strong> On Windows, you cannot add cookies to a URL request manually when
+<code>manageCookies</code> is set to <code><a href="../../Bool.html">true</a></code>. On other operating systems, adding cookies to a
+request is permitted irrespective of whether <code>manageCookies</code> is set to <code><a href="../../Bool.html">true</a></code> or
+<code><a href="../../Bool.html">false</a></code>. When permitted, you can add cookies to a request manually by adding a
+URLRequestHeader object containing the cookie data to the <code>requestHeaders</code> array.</p>
+<p>On Mac OS, cookies are shared with Safari. To clear cookies on Mac OS:</p><ol><li>Open Safari.</li><li>Select Safari > Preferences, and click the Security panel.</li><li>Click the Show Cookies button.</li><li>Click the Reomove All button.</li></ol>
+<p>To clear cookies on Windows:</p><ol><li>Open the Internet Properties control panel, and click the General tab.</li><li>Click the Delete Cookies button.</li></ol>
+<p>The default value is <code><a href="../../Bool.html">true</a></code>.</p></div></div><div class="field "><a name="method"></a><h3 class="anchor"><code><a href="#method"><span class="identifier">method</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>Controls the HTTP form submission method.</p>
+<p>For SWF content running in Flash Player(in the browser), this property
+is limited to GET or POST operations, and valid values are
+<code><a href="../../openfl/net/URLRequestMethod.html#GET">URLRequestMethod.GET</a></code> or
+<code><a href="../../openfl/net/URLRequestMethod.html#POST">URLRequestMethod.POST</a></code>.</p>
+<p>For content running in Adobe AIR, you can use any string value if the
+content is in the application security sandbox. Otherwise, as with content
+running in Flash Player, you are restricted to using GET or POST
+operations.</p>
+<p>For content running in Adobe AIR, when using the
+<code>navigateToURL()</code> function, the runtime treats a URLRequest
+that uses the POST method(one that has its <code>method</code> property
+set to <code><a href="../../openfl/net/URLRequestMethod.html#POST">URLRequestMethod.POST</a></code>) as using the GET method.</p>
+<p><strong>Note:</strong> If running in Flash Player and the referenced form has no
+body, Flash Player automatically uses a GET operation, even if the method
+is set to <code><a href="../../openfl/net/URLRequestMethod.html#POST">URLRequestMethod.POST</a></code>. For this reason, it is
+recommended to always include a "dummy" body to ensure that the correct
+method is used.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>If the <code>value</code> parameter is not
+<code><a href="../../openfl/net/URLRequestMethod.html#GET">URLRequestMethod.GET</a></code> or
+<code><a href="../../openfl/net/URLRequestMethod.html#POST">URLRequestMethod.POST</a></code>.</p></td></tr></table></div></div><div class="field "><a name="requestHeaders"></a><h3 class="anchor"><code><a href="#requestHeaders"><span class="identifier">requestHeaders</span></a>:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="openfl.net.URLRequestHeader - A URLRequestHeader object encapsulates a single HTTP request header and consists of a name/value pair." href="../../openfl/net/URLRequestHeader.html">URLRequestHeader</a>&gt;</code></h3><div class="doc"><p>The array of HTTP request headers to be appended to the HTTP request. The
+array is composed of URLRequestHeader objects. Each object in the array
+must be a URLRequestHeader object that contains a name string and a value
+string, as follows:</p>
+<p>Flash Player and the AIR runtime impose certain restrictions on request
+headers; for more information, see the URLRequestHeader class
+description.</p>
+<p>Not all methods that accept URLRequest parameters support the
+<code>requestHeaders</code> property, consult the documentation for the
+method you are calling. For example, the
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> and
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> methods do not support the
+<code><a href="../../openfl/net/URLRequest.html#requestHeaders">URLRequest.requestHeaders</a></code> property.</p>
+<p>Due to browser limitations, custom HTTP request headers are only
+supported for <code>POST</code> requests, not for <code>GET</code>
+requests.</p></div></div><div class="field "><a name="url"></a><h3 class="anchor"><code><a href="#url"><span class="identifier">url</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The URL to be requested.</p>
+<p>Be sure to encode any characters that are either described as unsafe in
+the Uniform Resource Locator specification(see
+http://www.faqs.org/rfcs/rfc1738.html) or that are reserved in the URL
+scheme of the URLRequest object(when not used for their reserved
+purpose). For example, use <code>"%25"</code> for the percent(%) symbol
+and <code>"%23"</code> for the number sign(#), as in
+<code>"http://www.example.com/orderForm.cfm?item=%23B-3&amp;discount=50%25"</code>.</p>
+<p>By default, the URL must be in the same domain as the calling file,
+unless the content is running in the Adobe AIR application security
+sandbox. If you need to load data from a different domain, put a URL
+policy file on the server that is hosting the data. For more information,
+see the description of the URLRequest class.</p>
+<p>For content running in Adobe AIR, files in the application security
+sandbox  -  files installed with the AIR application  -  can access URLs
+using any of the following URL schemes:</p><ul><li><code>http</code> and <code>https</code></li><li><code>file</code></li><li><code>app-storage</code></li><li><code>app</code></li></ul>
+<p><strong>Note:</strong> IPv6(Internet Protocol version 6) is supported in AIR and
+in Flash Player 9.0.115.0 and later. IPv6 is a version of Internet
+Protocol that supports 128-bit addresses(an improvement on the earlier
+IPv4 protocol that supports 32-bit addresses). You might need to activate
+IPv6 on your networking interfaces. For more information, see the Help for
+the operating system hosting the data. If IPv6 is supported on the hosting
+system, you can specify numeric IPv6 literal addresses in URLs enclosed in
+brackets([]), as in the following.
+<code>rtmp://[2001:db8:ccc3:ffff:0:444d:555e:666f]:1935/test</code></p></div></div><div class="field "><a name="userAgent"></a><h3 class="anchor"><code><a href="#userAgent"><span class="identifier">userAgent</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>Specifies the user-agent string to be used in the HTTP request.</p>
+<p>The default value is the same user agent string that is used by OpenFL on native
+targets, by the web browser or by Flash Player (depending upon the target).</p>
+<p><strong>Note:</strong> This property does not affect the user agent string when the
+URLRequest object is used with the <code>load()</code> method of an HTMLLoader object. To set
+the user agent string for an HTMLLoader object, set the <code>userAgent</code> property of the
+HTMLLoader object or set the static <code><a href="../../openfl/net/URLRequestDefaults.html#userAgent">URLRequestDefaults.userAgent</a></code> property.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

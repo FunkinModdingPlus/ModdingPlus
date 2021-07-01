@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.net.FileReference</title><meta name="description" content="The FileReference class provides a means to upload and download files
+between a user&#039;s computer and a server. An operating-system dialog box
+prompts the user to select a file to upload or a location for download.
+Each FileReference object refers to a single file on the user&#039;s disk and
+has properties that contain information about the file&#039;s size, type, name,
+creation date, modification date, and creator type (Macintosh only).
+&lt;strong&gt;Note:&lt;/strong&gt; In Adobe AIR, the File class, which extends the FileReference
+class, provides more capabilities and has less security restrictions than
+the FileReference class."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> FileReference</h1><h4><small>package <a href="../../openfl/net/index.html">openfl.net</a></small></h4><h4><small>extends <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>The FileReference class provides a means to upload and download files
+between a user's computer and a server. An operating-system dialog box
+prompts the user to select a file to upload or a location for download.
+Each FileReference object refers to a single file on the user's disk and
+has properties that contain information about the file's size, type, name,
+creation date, modification date, and creator type (Macintosh only).
+<strong>Note:</strong> In Adobe AIR, the File class, which extends the FileReference
+class, provides more capabilities and has less security restrictions than
+the FileReference class.</p>
+<p>FileReference instances are created in the following ways:</p><ul><li>When you use the <code>new</code> operator with the FileReference constructor: <code>var
+myFileReference = new <a href="../../openfl/net/FileReference.html#FileReference">FileReference</a>();</code></li><li>When you call the <code>FileReferenceList.browse()</code> method, which creates an
+array of FileReference objects.</li></ul>
+<p>During an upload operation, all the properties of a FileReference object
+are populated by calls to the <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code> or
+<code>FileReferenceList.browse()</code> methods. During a download operation, the
+<code>name</code> property is populated when the <code>select</code> event is dispatched; all
+other properties are populated when the <code>complete</code> event is dispatched.</p>
+<p>The <code>browse()</code> method opens an operating-system dialog box that prompts
+the user to select a file for upload. The <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code> method
+lets the user select a single file; the <code>FileReferenceList.browse()</code>
+method lets the user select multiple files. After a successful call to the
+<code>browse()</code> method, call the <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> method to upload one
+file at a time. The <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> method prompts the user for
+a location to save the file and initiates downloading from a remote URL.</p>
+<p>The FileReference and FileReferenceList classes do not let you set the
+default file location for the dialog box that the <code>browse()</code> or
+<code>download()</code> methods generate. The default location shown in the dialog
+box is the most recently browsed folder, if that location can be
+determined, or the desktop. The classes do not allow you to read from or
+write to the transferred file. They do not allow the SWF file that
+initiated the upload or download to access the uploaded or downloaded file
+or the file's location on the user's disk.</p>
+<p>The FileReference and FileReferenceList classes also do not provide
+methods for authentication. With servers that require authentication, you
+can download files with the Flash<sup>?/sup> Player browser plug-in, but
+uploading (on all players) and downloading (on the stand-alone or external
+player) fails. Listen for FileReference events to determine whether
+operations complete successfully and to handle errors.</p>
+<p>For content running in Flash Player or for content running in Adobe AIR
+outside of the application security sandbox, uploading and downloading
+operations can access files only within its own domain and within any
+domains that a URL policy file specifies. Put a policy file on the file
+server if the content initiating the upload or download doesn't come from
+the same domain as the file server.</p>
+<p>Note that because of new functionality added to the Flash Player, when
+publishing to Flash Player 10, you can have only one of the following
+operations active at one time: <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>, <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#load">FileReference.load</a>()</code>, <code><a href="../../openfl/net/FileReference.html#save">FileReference.save</a>()</code>. Otherwise, Flash Player
+throws a runtime error (code 2174). Use <code><a href="../../openfl/net/FileReference.html#cancel">FileReference.cancel</a>()</code> to stop
+an operation in progress. This restriction applies only to Flash Player
+10. Previous versions of Flash Player are unaffected by this restriction
+on simultaneous multiple operations.</p>
+<p>While calls to the <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>, <code>FileReferenceList.browse()</code>,
+or <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> methods are executing, SWF file playback
+pauses in stand-alone and external versions of Flash Player and in AIR for
+Linux and Mac OS X 10.1 and earlier</p>
+<p>The following sample HTTP <code>POST</code> request is sent from Flash Player to a
+server-side script if no parameters are specified:</p>
+<pre><code>POST /handler.cfm HTTP/1.1
+Accept: text/*
+Content-Type: multipart/form-data;
+boundary=----------Ij5ae0ae0KM7GI3KM7
+User-Agent: Shockwave Flash
+Host: www.example.com
+Content-Length: 421
+Connection: Keep-Alive
+Cache-Control: no-cache
+
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7
+Content-Disposition: form-data; name="Filename"
+
+MyFile.jpg
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7
+Content-Disposition: form-data; name="Filedata"; filename="MyFile.jpg"
+Content-Type: application/octet-stream
+
+FileDataHere
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7
+Content-Disposition: form-data; name="Upload"
+
+Submit Query
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7--</code></pre>
+<p>Flash Player sends the following HTTP <code>POST</code> request if the user specifies
+the parameters <code>"api_sig"</code>, <code>"api_key"</code>, and <code>"auth_token"</code>:</p>
+<pre><code>POST /handler.cfm HTTP/1.1
+Accept: text/*
+Content-Type: multipart/form-data;
+boundary=----------Ij5ae0ae0KM7GI3KM7
+User-Agent: Shockwave Flash
+Host: www.example.com
+Content-Length: 421
+Connection: Keep-Alive
+Cache-Control: no-cache
+
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7
+Content-Disposition: form-data; name="Filename"
+
+MyFile.jpg
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7
+Content-Disposition: form-data; name="api_sig"
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7
+Content-Disposition: form-data; name="api_key"
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7
+Content-Disposition: form-data; name="auth_token"
+
+XXXXXXXXXXXXXXXXXXXXXX
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7
+Content-Disposition: form-data; name="Filedata"; filename="MyFile.jpg"
+Content-Type: application/octet-stream
+
+FileDataHere
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7
+Content-Disposition: form-data; name="Upload"
+
+Submit Query
+------------Ij5GI3GI3ei4GI3ei4KM7GI3KM7KM7--</code></pre><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>cancel</code></th><td><p>Dispatched when a file upload or download is
+canceled through the file-browsing dialog box by
+the user. Flash Player does not dispatch this
+event if the user cancels an upload or download
+through other means (closing the browser or
+stopping the current application).</p></td></tr><tr class="indent"><th style="width:25%;"><code>complete</code></th><td><p>Dispatched when download is complete or when
+upload generates an HTTP status code of 200. For
+file download, this event is dispatched when
+Flash Player or Adobe AIR finishes downloading
+the entire file to disk. For file upload, this
+event is dispatched after the Flash Player or
+Adobe AIR receives an HTTP status code of 200
+from the server receiving the transmission.</p></td></tr><tr class="indent"><th style="width:25%;"><code>httpResponseStatus</code></th><td><p>Dispatched if a call to the <code>upload()</code> or
+<code>uploadUnencoded()</code> method attempts to access
+data over HTTP and Adobe AIR is able to detect
+and return the status code for the request.</p></td></tr><tr class="indent"><th style="width:25%;"><code>httpStatus</code></th><td><p>Dispatched when an upload fails and an HTTP
+status code is available to describe the
+failure. The <code>httpStatus</code> event is dispatched,
+followed by an <code>ioError</code> event.
+The <code>httpStatus</code> event is dispatched only for
+upload failures. For content running in Flash
+Player this event is not applicable for download
+failures. If a download fails because of an HTTP
+error, the error is reported as an I/O error.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ioError</code></th><td><p>Dispatched when the upload or download fails. A
+file transfer can fail for one of the following
+reasons:
+<em> An input/output error occurs while the player
+is reading, writing, or transmitting the file.
+</em> The SWF file tries to upload a file to a
+server that requires authentication (such as a
+user name and password). During upload, Flash
+Player or Adobe AIR does not provide a means for
+users to enter passwords. If a SWF file tries to
+upload a file to a server that requires
+authentication, the upload fails.
+<em> The SWF file tries to download a file from a
+server that requires authentication, within the
+stand-alone or external player. During download,
+the stand-alone and external players do not
+provide a means for users to enter passwords. If
+a SWF file in these players tries to download a
+file from a server that requires authentication,
+the download fails. File download can succeed
+only in the ActiveX control, browser plug-in
+players, and the Adobe AIR runtime.
+</em> The value passed to the <code>url</code> parameter in the
+<code>upload()</code> method contains an invalid protocol.
+Valid protocols are HTTP and HTTPS.</p>
+<p><strong>Important:</strong> Only applications running in a
+browser ?that is, using the browser plug-in
+or ActiveX control ?and content running in
+Adobe AIR can provide a dialog box to prompt the
+user to enter a user name and password for
+authentication, and then only for downloads. For
+uploads using the plug-in or ActiveX control
+version of Flash Player, or for upload or
+download using either the stand-alone or the
+external player, the file transfer fails.</p></td></tr><tr class="indent"><th style="width:25%;"><code>open</code></th><td><p>Dispatched when an upload or download operation
+starts.</p></td></tr><tr class="indent"><th style="width:25%;"><code>progress</code></th><td><p>Dispatched periodically during the file upload
+or download operation. The <code>progress</code> event is
+dispatched while Flash Player transmits bytes to
+a server, and it is periodically dispatched
+during the transmission, even if the
+transmission is ultimately not successful. To
+determine if and when the file transmission is
+actually successful and complete, listen for the
+<code>complete</code> event.
+In some cases, <code>progress</code> events are not
+received. For example, when the file being
+transmitted is very small or the upload or
+download happens very quickly a <code>progress</code> event
+might not be dispatched.</p>
+<p>File upload progress cannot be determined on
+Macintosh platforms earlier than OS X 10.3. The
+<code>progress</code> event is called during the upload
+operation, but the value of the <code>bytesLoaded</code>
+property of the progress event is -1, indicating
+that the progress cannot be determined.</p></td></tr><tr class="indent"><th style="width:25%;"><code>securityError</code></th><td><p>Dispatched when a call to the
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> or
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> method tries to
+upload a file to a server or get a file from a
+server that is outside the caller's security
+sandbox. The value of the text property that
+describes the specific error that occurred is
+normally <code>"securitySandboxError"</code>. The calling
+SWF file may have tried to access a SWF file
+outside its domain and does not have permission
+to do so. You can try to remedy this error by
+using a URL policy file.
+In Adobe AIR, these security restrictions do not
+apply to content in the application security
+sandbox.</p>
+<p>In Adobe AIR, these security restrictions do not
+apply to content in the application security
+sandbox.</p></td></tr><tr class="indent"><th style="width:25%;"><code>select</code></th><td><p>Dispatched when the user selects a file for
+upload or download from the file-browsing dialog
+box. (This dialog box opens when you call the
+<code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code>FileReferenceList.browse()</code>, or
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> method.) When the
+user selects a file and confirms the operation
+(for example, by clicking OK), the properties of
+the FileReference object are populated.
+For content running in Flash Player or outside
+of the application security sandbox in the Adobe
+AIR runtime, the <code>select</code> event acts slightly
+differently depending on what method invokes it.
+When the <code>select</code> event is dispatched after a
+<code>browse()</code> call, Flash Player or the AIR
+application can read all the FileReference
+object's properties, because the file selected
+by the user is on the local file system. When
+the <code>select</code> event occurs after a <code>download()</code>
+call, Flash Player or the AIR application can
+read only the <code>name</code> property, because the file
+hasn't yet been downloaded to the local file
+system at the moment the <code>select</code> event is
+dispatched. When the file is downloaded and the
+<code>complete</code> event dispatched, Flash Player or the
+AIR application can read all other properties of
+the FileReference object.</p></td></tr><tr class="indent"><th style="width:25%;"><code>uploadCompleteData</code></th><td><p>Dispatched after data is received from the
+server after a successful upload. This event is
+not dispatched if data is not returned from the
+server.</p></td></tr></table></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><a href="#new"><span class="identifier">new</span></a>()</code></h3><div class="doc"><p>Creates a new FileReference object. When populated, a FileReference
+object represents a file on the user's local disk.</p></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="creationDate"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#creationDate"><span class="identifier">creationDate</span></a>:<a class="type" title="Date - The Date class provides a basic structure for date and time related information." href="../../Date.html">Date</a></code></h3><div class="doc"><p>The creation date of the file on the local disk. If the object is was
+not populated, a call to get the value of this property returns
+<code>null</code>.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IOError</code></th><td><p>If the file information cannot be
+accessed, an exception is thrown with a
+message indicating a file I/O error.</p></td></tr><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>If the <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code>FileReferenceList.browse()</code>, or
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> method was
+not called successfully, an exception is
+thrown with a message indicating that
+functions were called in the incorrect
+sequence or an earlier call was
+unsuccessful. In this case, the value of
+the <code>creationDate</code> property is <code>null</code>.</p></td></tr></table></div></div><div class="field "><a name="creator"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#creator"><span class="identifier">creator</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The Macintosh creator type of the file, which is only used in Mac OS
+versions prior to Mac OS X. In Windows or Linux, this property is
+<code>null</code>. If the FileReference object was not populated, a call to get
+the value of this property returns <code>null</code>.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>On Macintosh, if the
+<code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code>FileReferenceList.browse()</code>, or
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> method was
+not called successfully, an exception is
+thrown with a message indicating that
+functions were called in the incorrect
+sequence or an earlier call was
+unsuccessful. In this case, the value of
+the <code>creator</code> property is <code>null</code>.</p></td></tr></table></div></div><div class="field "><a name="data"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#data"><span class="identifier">data</span></a>:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a></code></h3><div class="doc"><p>The ByteArray object representing the data from the loaded file after
+a successful call to the <code>load()</code> method.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IOError</code></th><td><p>If the file cannot be opened or read, or
+if a similar error is encountered in
+accessing the file, an exception is
+thrown with a message indicating a file
+I/O error. In this case, the value of
+the <code>data</code> property is <code>null</code>.</p></td></tr><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>If the <code>load()</code> method was not called
+successfully, an exception is thrown
+with a message indicating that functions
+were called in the incorrect sequence or
+an earlier call was unsuccessful. In
+this case, the value of the <code>data</code>
+property is <code>null</code>.</p></td></tr></table></div></div><div class="field "><a name="modificationDate"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#modificationDate"><span class="identifier">modificationDate</span></a>:<a class="type" title="Date - The Date class provides a basic structure for date and time related information." href="../../Date.html">Date</a></code></h3><div class="doc"><p>The date that the file on the local disk was last modified. If the
+FileReference object was not populated, a call to get the value of
+this property returns <code>null</code>.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IOError</code></th><td><p>If the file information cannot be
+accessed, an exception is thrown with a
+message indicating a file I/O error.</p></td></tr><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>If the <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code>FileReferenceList.browse()</code>, or
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> method was
+not called successfully, an exception is
+thrown with a message indicating that
+functions were called in the incorrect
+sequence or an earlier call was
+unsuccessful. In this case, the value of
+the <code>modificationDate</code> property is
+<code>null</code>.</p></td></tr></table></div></div><div class="field "><a name="name"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#name"><span class="identifier">name</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The name of the file on the local disk. If the FileReference object
+was not populated (by a valid call to <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> or <code>
+<a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>), Flash Player throws an error when you try to
+get the value of this property.
+All the properties of a FileReference object are populated by calling
+the <code>browse()</code> method. Unlike other FileReference properties, if you
+call the <code>download()</code> method, the <code>name</code> property is populated when
+the <code>select</code> event is dispatched.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>If the <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code>FileReferenceList.browse()</code>, or
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> method was
+not called successfully, an exception is
+thrown with a message indicating that
+functions were called in the incorrect
+sequence or an earlier call was
+unsuccessful.</p></td></tr></table></div></div><div class="field "><a name="size"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#size"><span class="identifier">size</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The size of the file on the local disk in bytes. If <code>size</code> is 0, an
+exception is thrown.
+<em>Note:</em> In the initial version of ActionScript 3.0, the <code>size</code>
+property was defined as a uint object, which supported files with
+sizes up to about 4 GB. It is now implemented as a Number object to
+support larger files.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IOError</code></th><td><p>If the file cannot be opened or read, or
+if a similar error is encountered in
+accessing the file, an exception is
+thrown with a message indicating a file
+I/O error.</p></td></tr><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>If the <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code>FileReferenceList.browse()</code>, or
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> method was
+not called successfully, an exception is
+thrown with a message indicating that
+functions were called in the incorrect
+sequence or an earlier call was
+unsuccessful.</p></td></tr></table></div></div><div class="field "><a name="type"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#type"><span class="identifier">type</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>The file type.
+In Windows or Linux, this property is the file extension. On the
+Macintosh, this property is the four-character file type, which is
+only used in Mac OS versions prior to Mac OS X. If the FileReference
+object was not populated, a call to get the value of this property
+returns <code>null</code>.</p>
+<p>For Windows, Linux, and Mac OS X, the file extension ?the portion
+of the <code>name</code> property that follows the last occurrence of the dot (.)
+character ?identifies the file type.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>If the <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code>FileReferenceList.browse()</code>, or
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> method was
+not called successfully, an exception is
+thrown with a message indicating that
+functions were called in the incorrect
+sequence or an earlier call was
+unsuccessful. In this case, the value of
+the <code>type</code> property is <code>null</code>.</p></td></tr></table></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="browse"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ typeFilter : null })</span><a href="#browse"><span class="identifier">browse</span></a>(<span style="white-space:nowrap">?typeFilter:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="openfl.net.FileFilter - The FileFilter class is used to indicate what files on the user&#039;s system are shown in the file-browsing dialog box that is displayed when the FileReference." href="../../openfl/net/FileFilter.html">FileFilter</a>&gt;</span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Displays a file-browsing dialog box that lets the user select a file
+to upload. The dialog box is native to the user's operating system.
+The user can select a file on the local computer or from other
+systems, for example, through a UNC path on Windows.
+<strong>Note:</strong> The File class, available in Adobe AIR, includes methods for
+accessing more specific system file selection dialog boxes. These
+methods are <code><a href="../../sys/io/File.html#browseForDirectory">File.browseForDirectory</a>()</code>, <code><a href="../../sys/io/File.html#browseForOpen">File.browseForOpen</a>()</code>,
+<code><a href="../../sys/io/File.html#browseForOpenMultiple">File.browseForOpenMultiple</a>()</code>, and <code><a href="../../sys/io/File.html#browseForSave">File.browseForSave</a>()</code>.</p>
+<p>When you call this method and the user successfully selects a file,
+the properties of this FileReference object are populated with the
+properties of that file. Each subsequent time that the
+<code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code> method is called, the FileReference object's
+properties are reset to the file that the user selects in the dialog
+box. Only one <code>browse()</code> or <code>download()</code> session can be performed at a
+time (because only one dialog box can be invoked at a time).</p>
+<p>Using the <code>typeFilter</code> parameter, you can determine which files the
+dialog box displays.</p>
+<p>In Flash Player 10 and Flash Player 9 Update 5, you can only call this
+method successfully in response to a user event (for example, in an
+event handler for a mouse click or keypress event). Otherwise, calling
+this method results in Flash Player throwing an Error exception.</p>
+<p>Note that because of new functionality added to the Flash Player, when
+publishing to Flash Player 10, you can have only one of the following
+operations active at one time: <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>, <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#load">FileReference.load</a>()</code>, <code><a href="../../openfl/net/FileReference.html#save">FileReference.save</a>()</code>. Otherwise, Flash
+Player throws a runtime error (code 2174). Use
+<code><a href="../../openfl/net/FileReference.html#cancel">FileReference.cancel</a>()</code> to stop an operation in progress. This
+restriction applies only to Flash Player 10. Previous versions of
+Flash Player are unaffected by this restriction on simultaneous
+multiple operations.</p>
+<p>In Adobe AIR, the file-browsing dialog is not always displayed in
+front of windows that are "owned" by another window (windows that have
+a non-null <code>owner</code> property). To avoid window ordering issues, hide
+owned windows before calling this method.</p><p class="javadoc">Returns:</p><div class="indent inline-content"><p>Returns <code><a href="../../Bool.html">true</a></code> if the parameters are valid and the
+file-browsing dialog box opens.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>If the <code>typeFilter</code> array contains
+FileFilter objects that are incorrectly
+formatted, an exception is thrown. For
+information on the correct format for
+FileFilter objects, see the &lt;a
+href="FileFilter.html">FileFilter</a>
+class.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>If the method is not called in response
+to a user action, such as a mouse event
+or keypress event.</p></td></tr><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>Thrown in the following situations: 1)
+Another FileReference or
+FileReferenceList browse session is in
+progress; only one file browsing session
+may be performed at a time. 2) A setting
+in the user's mms.cfg file prohibits
+this operation.</p></td></tr></table><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>cancel</code></th><td><p>Dispatched when the user cancels the file upload Browse
+window.</p></td></tr><tr class="indent"><th style="width:25%;"><code>select</code></th><td><p>Dispatched when the user successfully selects an item
+from the Browse file chooser.</p></td></tr></table></div></div><div class="field "><a name="cancel"></a><h3 class="anchor"><code><a href="#cancel"><span class="identifier">cancel</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Cancels any ongoing upload or download operation on this FileReference
+object. Calling this method does not dispatch the <code>cancel</code> event; that
+event is dispatched only when the user cancels the operation by
+dismissing the file upload or download dialog box.</p></div></div><div class="field "><a name="download"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ defaultFileName : null })</span><a href="#download"><span class="identifier">download</span></a>(<span style="white-space:nowrap">request:<a class="type" title="openfl.net.URLRequest - The URLRequest class captures all of the information in a single HTTP request." href="../../openfl/net/URLRequest.html">URLRequest</a>,</span> <span style="white-space:nowrap">?defaultFileName:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Opens a dialog box that lets the user download a file from a remote
+server. Although Flash Player has no restriction on the size of files
+you can upload or download, the player officially supports uploads or
+downloads of up to 100 MB.
+The <code>download()</code> method first opens an operating-system dialog box
+that asks the user to enter a filename and select a location on the
+local computer to save the file. When the user selects a location and
+confirms the download operation (for example, by clicking Save), the
+download from the remote server begins. Listeners receive events to
+indicate the progress, success, or failure of the download. To
+ascertain the status of the dialog box and the download operation
+after calling <code>download()</code>, your code must listen for events such as
+<code>cancel</code>, <code>open</code>, <code>progress</code>, and <code>complete</code>.</p>
+<p>The <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> and <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> functions
+are nonblocking. These functions return after they are called, before
+the file transmission is complete. In addition, if the FileReference
+object goes out of scope, any upload or download that is not yet
+completed on that object is canceled upon leaving the scope. Be sure
+that your FileReference object remains in scope for as long as the
+upload or download is expected to continue.</p>
+<p>When the file is downloaded successfully, the properties of the
+FileReference object are populated with the properties of the local
+file. The <code>complete</code> event is dispatched if the download is
+successful.</p>
+<p>Only one <code>browse()</code> or <code>download()</code> session can be performed at a time
+(because only one dialog box can be invoked at a time).</p>
+<p>This method supports downloading of any file type, with either HTTP or
+HTTPS.</p>
+<p>You cannot connect to commonly reserved ports. For a complete list of
+blocked ports, see "Restricting Networking APIs" in the <em>ActionScript
+3.0 Developer's Guide</em>.</p>
+<p><strong>Note</strong>: If your server requires user authentication, only SWF files
+running in a browser ?that is, using the browser plug-in or ActiveX
+control ?can provide a dialog box to prompt the user for a user
+name and password for authentication, and only for downloads. For
+uploads using the plug-in or ActiveX control, or for uploads and
+downloads using the stand-alone or external player, the file transfer
+fails.</p>
+<p>When you use this method , consider the Flash Player security model:</p><ul><li>Loading operations are not allowed if the calling SWF file is in an
+untrusted local sandbox.</li><li>The default behavior is to deny access between sandboxes. A website
+can enable access to a resource by adding a URL policy file.</li><li>You can prevent a SWF file from using this method by setting the
+<code>allowNetworking</code> parameter of the the <code>object</code> and <code>embed</code> tags in
+the HTML page that contains the SWF content.</li><li>In Flash Player 10 and Flash Player 9 Update 5, you can only call
+this method successfully in response to a user event (for example, in
+an event handler for a mouse click or keypress event). Otherwise,
+calling this method results in Flash Player throwing an Error
+exception.</li></ul>
+<p>However, in Adobe AIR, content in the <code>application</code> security sandbox
+(content installed with the AIR application) is not restricted by
+these security limitations.</p>
+<p>For more information related to security, see the Flash Player
+Developer Center Topic: &lt;a
+href="<a href="http://www.adobe.com/go/devnet_security_en">http://www.adobe.com/go/devnet_security_en</a>"
+scope="external">Security</a>.</p>
+<p>When you download a file using this method, it is flagged as
+downloaded on operating systems that flag downloaded files:</p><ul><li>Windows XP service pack 2 and later, and on Windows Vista</li><li>Mac OS 10.5 and later</li></ul>
+<p>Some operating systems, such as Linux, do not flag downloaded files.</p>
+<p>Note that because of new functionality added to the Flash Player, when
+publishing to Flash Player 10, you can have only one of the following
+operations active at one time: <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>, <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#load">FileReference.load</a>()</code>, <code><a href="../../openfl/net/FileReference.html#save">FileReference.save</a>()</code>. Otherwise, Flash
+Player throws a runtime error (code 2174). Use
+<code><a href="../../openfl/net/FileReference.html#cancel">FileReference.cancel</a>()</code> to stop an operation in progress. This
+restriction applies only to Flash Player 10. Previous versions of
+Flash Player are unaffected by this restriction on simultaneous
+multiple operations.</p>
+<p>In Adobe AIR, the download dialog is not always displayed in front of
+windows that are "owned" by another window (windows that have a
+non-null <code>owner</code> property). To avoid window ordering issues, hide
+owned windows before calling this method.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>request</code></th><td><p>The URLRequest object. The <code>url</code> property of
+the URLRequest object should contain the URL of
+the file to download to the local computer. If
+this parameter is <code>null</code>, an exception is
+thrown. The <code>requestHeaders</code> property of the
+URLRequest object is ignored; custom HTTP
+request headers are not supported in uploads or
+downloads. To send <code>POST</code> or GET parameters to
+the server, set the value of <code><a href="../../openfl/net/URLRequest.html#data">URLRequest.data</a></code>
+to your parameters, and set <code><a href="../../openfl/net/URLRequest.html#method">URLRequest.method</a></code>
+to either <code><a href="../../openfl/net/URLRequestMethod.html#POST">URLRequestMethod.POST</a></code> or
+<code><a href="../../openfl/net/URLRequestMethod.html#GET">URLRequestMethod.GET</a></code>.
+On some browsers, URL strings are limited in
+length. Lengths greater than 256 characters may
+fail on some browsers or servers.</p></td></tr><tr><th style="width:25%;"><code>defaultFileName</code></th><td><p>The default filename displayed in the dialog
+box for the file to be downloaded. This string
+must not contain the following characters: <code>/ \ : * ? " &lt; &gt; | %</code>
+If you omit this parameter, the filename of the
+remote URL is parsed and used as the default.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>If <code>url.data</code> is of type ByteArray, an
+exception is thrown. For use with the
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> and
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> methods,
+<code>url.data</code> can only be of type
+URLVariables or String.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>If the method is not called in response
+to a user action, such as a mouse event
+or keypress event.</p></td></tr><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>Thrown in the following situations: 1)
+Another browse session is in progress;
+only one file browsing session can be
+performed at a time. 2) The value passed
+to <code>request</code> does not contain a valid
+path or protocol. 3) The filename to
+download contains prohibited characters.
+4) A setting in the user's mms.cfg file
+prohibits this operation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>MemoryError</code></th><td><p>This error can occur for the following
+reasons: 1) Flash Player cannot convert
+the <code><a href="../../openfl/net/URLRequest.html#data">URLRequest.data</a></code> parameter from
+UTF8 to MBCS. This error is applicable
+if the URLRequest object passed to the
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> method is set
+to perform a GET operation and if
+<code><a href="../../lime/system/System.html#useCodePage">System.useCodePage</a></code> is set to <code><a href="../../Bool.html">true</a></code>.
+2) Flash Player cannot allocate memory
+for the <code>POST</code> data. This error is
+applicable if the URLRequest object
+passed to the <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>
+method is set to perform a <code>POST</code>
+operation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>Local untrusted content may not
+communicate with the Internet. To avoid
+this situation, reclassify this SWF file
+as local-with-networking or trusted.
+This exception is thrown with a message
+indicating the filename and the URL that
+may not be accessed because of local
+file security restrictions.</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>You cannot connect to commonly reserved
+ports. For a complete list of blocked
+ports, see "Restricting Networking APIs"
+in the <em>ActionScript 3.0 Developer's
+Guide</em>.</p></td></tr></table><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>cancel</code></th><td><p>Dispatched when the user dismisses the dialog
+box.</p></td></tr><tr class="indent"><th style="width:25%;"><code>complete</code></th><td><p>Dispatched when the file download operation
+successfully completes.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ioError</code></th><td><p>Dispatched for any of the following reasons:
+<em> An input/output error occurs while the file is
+being read or transmitted.
+</em> SWF content running in the stand-alone or
+external versions of Flash Player tries to
+download a file from a server that requires
+authentication. During download, the standalone
+and external players do not provide a means for
+users to enter passwords. If a SWF file in these
+players tries to download a file from a server
+that requires authentication, the download fails.
+File download can succeed only in the ActiveX
+control and browser plug-in players.</p></td></tr><tr class="indent"><th style="width:25%;"><code>open</code></th><td><p>Dispatched when a download operation starts.</p></td></tr><tr class="indent"><th style="width:25%;"><code>progress</code></th><td><p>Dispatched periodically during the file download
+operation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>securityError</code></th><td><p>Dispatched when a download fails because of a
+security error.</p></td></tr><tr class="indent"><th style="width:25%;"><code>select</code></th><td><p>Dispatched when the user selects a file for
+download from the dialog box.</p></td></tr></table></div></div><div class="field "><a name="load"></a><h3 class="anchor"><code><a href="#load"><span class="identifier">load</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Starts the load of a local file selected by a user. Although Flash
+Player has no restriction on the size of files you can upload,
+download, load or save, it officially supports sizes of up to 100 MB.
+For content running in Flash Player, you must call the
+<code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code> or <code>FileReferenceList.browse()</code> method before
+you call the <code>load()</code> method. However, content running in AIR in the
+application sandbox can call the <code>load()</code> method of a File object
+without first calling the <code>browse()</code> method. (The AIR File class
+extends the FileReference class.)
+Listeners receive events to indicate the progress, success, or failure
+of the load. Although you can use the FileReferenceList object to let
+users select multiple files to load, you must load the files one by
+one. To load the files one by one, iterate through the
+<code>FileReferenceList.fileList</code> array of FileReference objects.</p>
+<p>Adobe AIR also includes the FileStream class which provides more
+options for reading files.</p>
+<p>The <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>, <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#load">FileReference.load</a>()</code> and <code><a href="../../openfl/net/FileReference.html#save">FileReference.save</a>()</code> functions are
+nonblocking. These functions return after they are called, before the
+file transmission is complete. In addition, if the FileReference
+object goes out of scope, any transaction that is not yet completed on
+that object is canceled upon leaving the scope. Be sure that your
+FileReference object remains in scope for as long as the upload,
+download, load or save is expected to continue.</p>
+<p>If the file finishes loading successfully, its contents are stored as
+a byte array in the <code>data</code> property of the FileReference object.</p>
+<p>The following security considerations apply:</p><ul><li>Loading operations are not allowed if the calling SWF file is in an
+untrusted local sandbox.</li><li>The default behavior is to deny access between sandboxes. A website
+can enable access to a resource by adding a cross-domain policy file.</li><li>You can prevent a file from using this method by setting the
+<code>allowNetworking</code> parameter of the the <code>object</code> and <code>embed</code> tags in
+the HTML page that contains the SWF content.</li></ul>
+<p>However, these considerations do not apply to AIR content in the
+application sandbox.</p>
+<p>Note that when publishing to Flash Player 10 or AIR 1.5, you can have
+only one of the following operations active at one time:
+<code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>, <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>, <code><a href="../../openfl/net/FileReference.html#load">FileReference.load</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#save">FileReference.save</a>()</code>. Otherwise, the application throws a runtime
+error (code 2174). Use <code><a href="../../openfl/net/FileReference.html#cancel">FileReference.cancel</a>()</code> to stop an operation
+in progress. This restriction applies only to Flash Player 10 and AIR
+1.5. Previous versions of Flash Player or AIR are unaffected by this
+restriction on simultaneous multiple operations.</p>
+<p>In Adobe AIR, the file-browsing dialog is not always displayed in
+front of windows that are "owned" by another window (windows that have
+a non-null <code>owner</code> property). To avoid window ordering issues, hide
+owned windows before calling this method.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>Thrown in the following situations: 1)
+Another FileReference or
+FileReferenceList browse session is in
+progress; only one file browsing session
+may be performed at a time. 2) A setting
+in the user's mms.cfg file prohibits
+this operation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>MemoryError</code></th><td><p>This error can occur if the application
+cannot allocate memory for the file. The
+file may be too large or available
+memory may be too low.</p></td></tr></table><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>complete</code></th><td><p>Dispatched when the file load operation completes
+successfully.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ioError</code></th><td><p>Invoked if the load fails because of an input/output
+error while the application is reading or writing the
+file.</p></td></tr><tr class="indent"><th style="width:25%;"><code>open</code></th><td><p>Dispatched when an load operation starts.</p></td></tr><tr class="indent"><th style="width:25%;"><code>progress</code></th><td><p>Dispatched periodically during the file load
+operation.</p></td></tr></table></div></div><div class="field "><a name="save"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ defaultFileName : null })</span><a href="#save"><span class="identifier">save</span></a>(<span style="white-space:nowrap">data:<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a>,</span> <span style="white-space:nowrap">?defaultFileName:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Opens a dialog box that lets the user save a file to the local
+filesystem. Although Flash Player has no restriction on the size of
+files you can upload, download, load or save, the player officially
+supports sizes of up to 100 MB.
+The <code>save()</code> method first opens an operating-system dialog box that
+asks the user to enter a filename and select a location on the local
+computer to save the file. When the user selects a location and
+confirms the save operation (for example, by clicking Save), the save
+process begins. Listeners receive events to indicate the progress,
+success, or failure of the save operation. To ascertain the status of
+the dialog box and the save operation after calling <code>save()</code>, your
+code must listen for events such as <code>cancel</code>, <code>open</code>, <code>progress</code>, and
+<code>complete</code>.</p>
+<p>Adobe AIR also includes the FileStream class which provides more
+options for saving files locally.</p>
+<p>The <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>, <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#load">FileReference.load</a>()</code> and <code><a href="../../openfl/net/FileReference.html#save">FileReference.save</a>()</code> functions are
+nonblocking. These functions return after they are called, before the
+file transmission is complete. In addition, if the FileReference
+object goes out of scope, any transaction that is not yet completed on
+that object is canceled upon leaving the scope. Be sure that your
+FileReference object remains in scope for as long as the upload,
+download, load or save is expected to continue.</p>
+<p>When the file is saved successfully, the properties of the
+FileReference object are populated with the properties of the local
+file. The <code>complete</code> event is dispatched if the save is successful.</p>
+<p>Only one <code>browse()</code> or <code>save()</code> session can be performed at a time
+(because only one dialog box can be invoked at a time).</p>
+<p>In Flash Player, you can only call this method successfully in
+response to a user event (for example, in an event handler for a mouse
+click or keypress event). Otherwise, calling this method results in
+Flash Player throwing an Error exception. This limitation does not
+apply to AIR content in the application sandbox.</p>
+<p>In Adobe AIR, the save dialog is not always displayed in front of
+windows that are "owned" by another window (windows that have a
+non-null <code>owner</code> property). To avoid window ordering issues, hide
+owned windows before calling this method.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>data</code></th><td><p>The data to be saved. The data can be in one of
+several formats, and will be treated
+appropriately:
+<em> If the value is <code>null</code>, the application
+throws an ArgumentError exception.
+</em> If the value is a String, it is saved as a
+UTF-8 text file.
+<em> If the value is XML, it is written to a text
+file in XML format, with all formatting
+preserved.
+</em> If the value is a ByteArray object, it is
+written to a data file verbatim.
+* If the value is none of the above, the
+<code>save()</code> method calls the <code>toString()</code> method
+of the object to convert the data to a string,
+and it then saves the data as a text file. If
+that fails, the application throws an
+ArgumentError exception.</p></td></tr><tr><th style="width:25%;"><code>defaultFileName</code></th><td><p>The default filename displayed in the dialog
+box for the file to be saved. This string must
+not contain the following characters: <code>/ \ : * ? " &lt; &gt; | %</code>
+If a File object calls this method, the
+filename will be that of the file the File
+object references. (The AIR File class extends
+the FileReference class.)</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>If <code>data</code> is not of type ByteArray, and
+it does not have a <code>toString()</code> method,
+an exception is thrown. If <code>data</code> is not
+of type XML, and it does not have a
+<code>toXMLString()</code> method, an exception is
+thrown.</p></td></tr><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>If the method is not called in response
+to a user action, such as a mouse event
+or keypress event.</p></td></tr><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>Thrown in the following situations: 1)
+Another browse session is in progress;
+only one file browsing session can be
+performed at a time. 2) The filename to
+download contains prohibited characters.
+3) A setting in the user's mms.cfg file
+prohibits this operation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>MemoryError</code></th><td><p>This error can occur if Flash Player
+cannot allocate memory for the file. The
+file may be too large or available
+memory may be too low.</p></td></tr></table><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>cancel</code></th><td><p>Dispatched when the user dismisses the dialog box.</p></td></tr><tr class="indent"><th style="width:25%;"><code>complete</code></th><td><p>Dispatched when the file download operation
+successfully completes.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ioError</code></th><td><p>Dispatched if an input/output error occurs while the
+file is being read or transmitted.</p></td></tr><tr class="indent"><th style="width:25%;"><code>open</code></th><td><p>Dispatched when a download operation starts.</p></td></tr><tr class="indent"><th style="width:25%;"><code>progress</code></th><td><p>Dispatched periodically during the file download
+operation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>select</code></th><td><p>Dispatched when the user selects a file for download
+from the dialog box.</p></td></tr></table></div></div><div class="field "><a name="upload"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ testUpload : false, uploadDataFieldName : &quot;Filedata&quot; })</span><a href="#upload"><span class="identifier">upload</span></a>(<span style="white-space:nowrap">request:<a class="type" title="openfl.net.URLRequest - The URLRequest class captures all of the information in a single HTTP request." href="../../openfl/net/URLRequest.html">URLRequest</a>,</span> <span style="white-space:nowrap">uploadDataFieldName:<a class="type" title="String - The basic String class." href="../../String.html">String</a> = &quot;Filedata&quot;,</span> <span style="white-space:nowrap">testUpload:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Starts the upload of the file to a remote server. Although Flash
+Player has no restriction on the size of files you can upload or
+download, the player officially supports uploads or downloads of up to
+100 MB. You must call the <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code> or
+<code>FileReferenceList.browse()</code> method before you call this method.
+For the Adobe AIR File class, which extends the FileReference class,
+you can use the <code>upload()</code> method to upload any file. For the
+FileReference class (used in Flash Player), the user must first select
+a file.</p>
+<p>Listeners receive events to indicate the progress, success, or failure
+of the upload. Although you can use the FileReferenceList object to
+let users select multiple files for upload, you must upload the files
+one by one; to do so, iterate through the <code>FileReferenceList.fileList</code>
+array of FileReference objects.</p>
+<p>The <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> and <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> functions
+are nonblocking. These functions return after they are called, before
+the file transmission is complete. In addition, if the FileReference
+object goes out of scope, any upload or download that is not yet
+completed on that object is canceled upon leaving the scope. Be sure
+that your FileReference object remains in scope for as long as the
+upload or download is expected to continue.</p>
+<p>The file is uploaded to the URL passed in the <code>url</code> parameter. The URL
+must be a server script configured to accept uploads. Flash Player
+uploads files by using the HTTP <code>POST</code> method. The server script that
+handles the upload should expect a <code>POST</code> request with the following
+elements:</p><ul><li><code>Content-<a href="../../Type.html">Type</a></code> of <code>multipart/form-data</code></li><li><code>Content-Disposition</code> with a <code>name</code> attribute set to <code>"Filedata"</code> by
+default and a <code>filename</code> attribute set to the name of the original
+file</li><li>The binary contents of the file</li></ul>
+<p>You cannot connect to commonly reserved ports. For a complete list of
+blocked ports, see "Restricting Networking APIs" in the <em>ActionScript
+3.0 Developer's Guide</em>.</p>
+<p>For a sample <code>POST</code> request, see the description of the
+<code>uploadDataFieldName</code> parameter. You can send <code>POST</code> or <code>GET</code>
+parameters to the server with the <code>upload()</code> method; see the
+description of the <code>request</code> parameter.</p>
+<p>If the <code>testUpload</code> parameter is <code><a href="../../Bool.html">true</a></code>, and the file to be uploaded
+is bigger than approximately 10 KB, Flash Player on Windows first
+sends a test upload <code>POST</code> operation with zero content before
+uploading the actual file, to verify that the transmission is likely
+to succeed. Flash Player then sends a second <code>POST</code> operation that
+contains the actual file content. For files smaller than 10 KB, Flash
+Player performs a single upload <code>POST</code> with the actual file content to
+be uploaded. Flash Player on Macintosh does not perform test upload
+<code>POST</code> operations.</p>
+<p><strong>Note</strong>: If your server requires user authentication, only SWF files
+running in a browser ?that is, using the browser plug-in or ActiveX
+control ?can provide a dialog box to prompt the user for a username
+and password for authentication, and only for downloads. For uploads
+using the plug-in or ActiveX control, or for uploads and downloads
+using the stand-alone or external player, the file transfer fails.</p>
+<p>When you use this method , consider the Flash Player security model:</p><ul><li>Loading operations are not allowed if the calling SWF file is in an
+untrusted local sandbox.</li><li>The default behavior is to deny access between sandboxes. A website
+can enable access to a resource by adding a URL policy file.</li><li>You can prevent a SWF file from using this method by setting the
+<code>allowNetworking</code> parameter of the the <code>object</code> and <code>embed</code> tags in
+the HTML page that contains the SWF content.</li></ul>
+<p>However, in Adobe AIR, content in the <code>application</code> security sandbox
+(content installed with the AIR application) are not restricted by
+these security limitations.</p>
+<p>For more information related to security, see the Flash Player
+Developer Center Topic: &lt;a
+href="<a href="http://www.adobe.com/go/devnet_security_en">http://www.adobe.com/go/devnet_security_en</a>"
+scope="external">Security</a>.</p>
+<p>Note that because of new functionality added to the Flash Player, when
+publishing to Flash Player 10, you can have only one of the following
+operations active at one time: <code><a href="../../openfl/net/FileReference.html#browse">FileReference.browse</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code>, <code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code>,
+<code><a href="../../openfl/net/FileReference.html#load">FileReference.load</a>()</code>, <code><a href="../../openfl/net/FileReference.html#save">FileReference.save</a>()</code>. Otherwise, Flash
+Player throws a runtime error (code 2174). Use
+<code><a href="../../openfl/net/FileReference.html#cancel">FileReference.cancel</a>()</code> to stop an operation in progress. This
+restriction applies only to Flash Player 10. Previous versions of
+Flash Player are unaffected by this restriction on simultaneous
+multiple operations.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>request</code></th><td><p>The URLRequest object; the <code>url</code> property
+of the URLRequest object should contain the
+URL of the server script configured to
+handle upload through HTTP <code>POST</code> calls. On
+some browsers, URL strings are limited in
+length. Lengths greater than 256 characters
+may fail on some browsers or servers. If
+this parameter is <code>null</code>, an exception is
+thrown. The <code>requestHeaders</code> property of
+the URLRequest object is ignored; custom
+HTTP request headers are not supported in
+uploads or downloads.
+The URL can be HTTP or, for secure uploads,
+HTTPS. To use HTTPS, use an HTTPS url in
+the <code>url</code> parameter. If you do not specify
+a port number in the <code>url</code> parameter, port
+80 is used for HTTP and port 443 us used
+for HTTPS, by default.</p>
+<p>To send <code>POST</code> or <code>GET</code> parameters to the
+server, set the <code>data</code> property of the
+URLRequest object to your parameters, and
+set the <code>method</code> property to either
+<code><a href="../../openfl/net/URLRequestMethod.html#POST">URLRequestMethod.POST</a></code> or
+<code><a href="../../openfl/net/URLRequestMethod.html#GET">URLRequestMethod.GET</a></code>.</p></td></tr><tr><th style="width:25%;"><code>uploadDataFieldName</code></th><td><p>The field name that precedes the file data
+in the upload <code>POST</code> operation. The
+<code>uploadDataFieldName</code> value must be
+non-null and a non-empty String. By
+default, the value of <code>uploadDataFieldName</code>
+is <code>"Filedata"</code>, as shown in the following
+sample <code>POST</code> request: &lt;pre
+xml:space="preserve"> Content-Type:
+multipart/form-data; boundary=AaB03x
+--AaB03x Content-Disposition: form-data;
+name="Filedata"; filename="example.jpg"
+Content-Type: application/octet-stream ...
+contents of example.jpg ... --AaB03x--
+</pre></p></td></tr><tr><th style="width:25%;"><code>testUpload</code></th><td><p>A setting to request a test file upload. If
+<code>testUpload</code> is <code><a href="../../Bool.html">true</a></code>, for files larger
+than 10 KB, Flash Player attempts a test
+file upload <code>POST</code> with a Content-Length of
+0. The test upload checks whether the
+actual file upload will be successful and
+that server authentication, if required,
+will succeed. A test upload is only
+available for Windows players.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>Thrown in the following situations: 1)
+The <code>uploadDataFieldName</code> parameter is
+an empty string. 2) <code>url.data</code> is of
+type ByteArray. For use with the
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> and
+<code><a href="../../openfl/net/FileReference.html#download">FileReference.download</a>()</code> methods,
+<code>url.data</code> may only be of type
+URLVariables or String. 3) In the AIR
+runtime (in the application security
+sandbox), the method of the URLRequest
+is not GET or POST (use
+<code>uploadEncoded()</code> instead).</p></td></tr><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>Thrown in the following situations: 1)
+Another FileReference or
+FileReferenceList browse session is in
+progress; only one file browsing session
+may be performed at a time. 2) The URL
+parameter is not a valid path or
+protocol. File upload must use HTTP, and
+file download must use FTP or HTTP. 3)
+The <code>uploadDataFieldName</code> parameter is
+set to <code>null</code>. 4) A setting in the
+user's mms.cfg file prohibits this
+operation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>MemoryError</code></th><td><p>This error can occur for the following
+reasons: 1) Flash Player cannot convert
+the <code><a href="../../openfl/net/URLRequest.html#data">URLRequest.data</a></code> parameter from
+UTF8 to MBCS. This error is applicable
+if the URLRequest object passed to
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> is set to
+perform a GET operation and if
+<code><a href="../../lime/system/System.html#useCodePage">System.useCodePage</a></code> is set to <code><a href="../../Bool.html">true</a></code>.
+2) Flash Player cannot allocate memory
+for the <code>POST</code> data. This error is
+applicable if the URLRequest object
+passed to <code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> is
+set to perform a <code>POST</code> operation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>Local untrusted SWF files may not
+communicate with the Internet. To avoid
+this situation, reclassify this SWF file
+as local-with-networking or trusted.
+This exception is thrown with a message
+indicating the name of the local file
+and the URL that may not be accessed.</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>You cannot connect to commonly reserved
+ports. For a complete list of blocked
+ports, see "Restricting Networking APIs"
+in the <em>ActionScript 3.0 Developer's
+Guide</em>.</p></td></tr></table><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>complete</code></th><td><p>Dispatched when the file upload operation
+completes successfully.</p></td></tr><tr class="indent"><th style="width:25%;"><code>httpResponseStatus</code></th><td><p>The upload operation completes successfully
+and the server returns a response URL and
+response headers.</p></td></tr><tr class="indent"><th style="width:25%;"><code>httpStatus</code></th><td><p>Dispatched when an upload fails because of
+an HTTP error.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ioError</code></th><td><p>Invoked in any of the following situations:
+<em> The upload fails because of an
+input/output error while Flash Player or
+Adobe AIR is reading, writing, or
+transmitting the file.
+</em> The upload fails because an attempt to
+upload a file to a server that requires
+authentication (such as a user name and
+password). During upload, no mean is
+provided for users to enter passwords.
+* The upload fails because the <code>url</code>
+parameter contains an invalid protocol.
+<code><a href="../../openfl/net/FileReference.html#upload">FileReference.upload</a>()</code> must use HTTP or
+HTTPS.</p></td></tr><tr class="indent"><th style="width:25%;"><code>open</code></th><td><p>Dispatched when an upload operation starts.</p></td></tr><tr class="indent"><th style="width:25%;"><code>progress</code></th><td><p>Dispatched periodically during the file
+upload operation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>securityError</code></th><td><p>Dispatched when an upload fails because of a
+security violation.</p></td></tr><tr class="indent"><th style="width:25%;"><code>uploadCompleteData</code></th><td><p>Dispatched when data has been received from
+the server after a successful file upload.</p></td></tr></table></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></h4><div style="display:none"><div class="field "><a name="addEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useWeakReference : false, priority : 0, useCapture : false })</span><a href="#addEventListener"><span class="identifier">addEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">priority:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">useWeakReference:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Registers an event listener object with an EventDispatcher object so that
+the listener receives notification of an event. You can register event
+listeners on all nodes in the display list for a specific type of event,
+phase, and priority.</p>
+<p>After you successfully register an event listener, you cannot change
+its priority through additional calls to <code>addEventListener()</code>.
+To change a listener's priority, you must first call
+<code>removeListener()</code>. Then you can register the listener again
+with the new priority level.</p>
+<p>Keep in mind that after the listener is registered, subsequent calls to
+<code>addEventListener()</code> with a different <code>type</code> or
+<code>useCapture</code> value result in the creation of a separate
+listener registration. For example, if you first register a listener with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>, it listens only during
+the capture phase. If you call <code>addEventListener()</code> again using
+the same listener object, but with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>, you have two separate listeners: one that listens
+during the capture phase and another that listens during the target and
+bubbling phases.</p>
+<p>You cannot register an event listener for only the target phase or the
+bubbling phase. Those phases are coupled during registration because
+bubbling applies only to the ancestors of the target node.</p>
+<p>If you no longer need an event listener, remove it by calling
+<code>removeEventListener()</code>, or memory problems could result. Event
+listeners are not automatically removed from memory because the garbage
+collector does not remove the listener as long as the dispatching object
+exists(unless the <code>useWeakReference</code> parameter is set to
+<code><a href="../../Bool.html">true</a></code>).</p>
+<p>Copying an EventDispatcher instance does not copy the event listeners
+attached to it.(If your newly created node needs an event listener, you
+must attach the listener after creating the node.) However, if you move an
+EventDispatcher instance, the event listeners attached to it move along
+with it.</p>
+<p>If the event listener is being registered on a node while an event is
+being processed on this node, the event listener is not triggered during
+the current phase but can be triggered during a later phase in the event
+flow, such as the bubbling phase.</p>
+<p>If an event listener is removed from a node while an event is being
+processed on the node, it is still triggered by the current actions. After
+it is removed, the event listener is never invoked again(unless
+registered again for future processing).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Determines whether the listener works in the
+capture phase or the target and bubbling phases.
+If <code>useCapture</code> is set to
+<code><a href="../../Bool.html">true</a></code>, the listener processes the
+event only during the capture phase and not in the
+target or bubbling phase. If
+<code>useCapture</code> is <code><a href="../../Bool.html">false</a></code>, the
+listener processes the event only during the
+target or bubbling phase. To listen for the event
+in all three phases, call
+<code>addEventListener</code> twice, once with
+<code>useCapture</code> set to <code><a href="../../Bool.html">true</a></code>,
+then again with <code>useCapture</code> set to
+<code><a href="../../Bool.html">false</a></code>.</p></td></tr><tr><th style="width:25%;"><code>priority</code></th><td><p>The priority level of the event listener. The
+priority is designated by a signed 32-bit integer.
+The higher the number, the higher the priority.
+All listeners with priority <em>n</em> are processed
+before listeners of priority <em>n</em>-1. If two or
+more listeners share the same priority, they are
+processed in the order in which they were added.
+The default priority is 0.</p></td></tr><tr><th style="width:25%;"><code>useWeakReference</code></th><td><p>Determines whether the reference to the listener
+is strong or weak. A strong reference(the
+default) prevents your listener from being
+garbage-collected. A weak reference does not.</p>
+<p>Class-level member functions are not subject to
+garbage collection, so you can set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for class-level member functions without
+subjecting them to garbage collection. If you set
+<code>useWeakReference</code> to <code><a href="../../Bool.html">true</a></code>
+for a listener that is a nested inner function,
+the function will be garbage-collected and no
+longer persistent. If you create references to the
+inner function(save it in another variable) then
+it is not garbage-collected and stays
+persistent.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The <code>listener</code> specified is not a
+function.</p></td></tr></table></div></div><div class="field "><a name="dispatchEvent"></a><h3 class="anchor"><code><a href="#dispatchEvent"><span class="identifier">dispatchEvent</span></a>(<span style="white-space:nowrap">event:<a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Dispatches an event into the event flow. The event target is the
+EventDispatcher object upon which the <code>dispatchEvent()</code> method
+is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>event</code></th><td><p>The Event object that is dispatched into the event flow. If
+the event is being redispatched, a clone of the event is
+created automatically. After an event is dispatched, its
+<code>target</code> property cannot be changed, so you must
+create a new copy of the event for redispatching to work.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if the event was successfully
+dispatched. A value of <code><a href="../../Bool.html">false</a></code> indicates failure or
+that <code>preventDefault()</code> was called on the event.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The event dispatch recursion limit has been reached.</p></td></tr></table></div></div><div class="field "><a name="hasEventListener"></a><h3 class="anchor"><code><a href="#hasEventListener"><span class="identifier">hasEventListener</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the EventDispatcher object has any listeners registered for
+a specific type of event. This allows you to determine where an
+EventDispatcher object has altered handling of an event type in the event
+flow hierarchy. To determine whether a specific event type actually
+triggers an event listener, use <code>willTrigger()</code>.</p>
+<p>The difference between <code>hasEventListener()</code> and
+<code>willTrigger()</code> is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas
+<code>willTrigger()</code> examines the entire event flow for the event
+specified by the <code>type</code> parameter.</p>
+<p>When <code>hasEventListener()</code> is called from a LoaderInfo
+object, only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+is registered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="removeEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useCapture : false })</span><a href="#removeEventListener"><span class="identifier">removeEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Removes a listener from the EventDispatcher object. If there is no
+matching listener registered with the EventDispatcher object, a call to
+this method has no effect.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Specifies whether the listener was registered for the
+capture phase or the target and bubbling phases. If the
+listener was registered for both the capture phase and
+the target and bubbling phases, two calls to
+<code>removeEventListener()</code> are required to
+remove both, one call with <code>useCapture()</code> set
+to <code><a href="../../Bool.html">true</a></code>, and another call with
+<code>useCapture()</code> set to <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table></div></div><div class="field "><a name="toString"></a><h3 class="anchor"><code><a href="#toString"><span class="identifier">toString</span></a>():<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="willTrigger"></a><h3 class="anchor"><code><a href="#willTrigger"><span class="identifier">willTrigger</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether an event listener is registered with this EventDispatcher
+object or any of its ancestors for the specified event type. This method
+returns <code><a href="../../Bool.html">true</a></code> if an event listener is triggered during any
+phase of the event flow when an event of the specified type is dispatched
+to this EventDispatcher object or any of its descendants.</p>
+<p>The difference between the <code>hasEventListener()</code> and the
+<code>willTrigger()</code> methods is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas the
+<code>willTrigger()</code> method examines the entire event flow for the
+event specified by the <code>type</code> parameter.</p>
+<p>When <code>willTrigger()</code> is called from a LoaderInfo object,
+only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+will be triggered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

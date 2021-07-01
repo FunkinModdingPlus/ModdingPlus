@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.display.BitmapData</title><meta name="description" content="The BitmapData class lets you work with the data (pixels) of a Bitmap
+object. You can use the methods of the BitmapData class to create
+arbitrarily sized transparent or opaque bitmap images and manipulate them
+in various ways at runtime. You can also access the BitmapData for a bitmap
+image that you load with the &lt;code&gt;&lt;a href=&quot;../../lime/utils/Assets.html#Assets&quot;&gt;openfl.Assets&lt;/a&gt;&lt;/code&gt; or
+&lt;code&gt;&lt;a href=&quot;../../openfl/display/Loader.html#Loader&quot;&gt;openfl.display.Loader&lt;/a&gt;&lt;/code&gt; classes."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> BitmapData</h1><h4><small>package <a href="../../openfl/display/index.html">openfl.display</a></small></h4>    <h4><small>implements <a class="type" title="openfl.display.IBitmapDrawable" href="../../openfl/display/IBitmapDrawable.html">IBitmapDrawable</a></small></h4><h4><small><span class="muted">extended by </span><a class="type" title="flixel.addons.transition.GraphicTransTileCircle" href="../../flixel/addons/transition/GraphicTransTileCircle.html">GraphicTransTileCircle</a>, <a class="type" title="flixel.addons.transition.GraphicTransTileDiamond" href="../../flixel/addons/transition/GraphicTransTileDiamond.html">GraphicTransTileDiamond</a>, <a class="type" title="flixel.addons.transition.GraphicTransTileSquare" href="../../flixel/addons/transition/GraphicTransTileSquare.html">GraphicTransTileSquare</a>, <a class="type" title="flixel.system.debug.interaction.tools.GraphicCursorCross" href="../../flixel/system/debug/interaction/tools/GraphicCursorCross.html">GraphicCursorCross</a>, <a class="type" title="flixel.system.GraphicLogo" href="../../flixel/system/GraphicLogo.html">GraphicLogo</a>, <a class="type" title="flixel.system.GraphicVirtualInput" href="../../flixel/system/GraphicVirtualInput.html">GraphicVirtualInput</a></small></h4><span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(lime.graphics.opengl.GL)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(lime.graphics.Image)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(lime.graphics.ImageBuffer)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(lime.math.Rectangle)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.textures.TextureBase)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display3D.Context3D)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.DisplayObject)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.DisplayObjectShader)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.Graphics)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.display.Shader)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.filters.BitmapFilter)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.geom.ColorTransform)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.geom.Matrix)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.geom.Point)</span><span class="label label-meta label-meta-access" title="Forces private access to package, type or field.">@:access(openfl.geom.Rectangle)</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-autoBuild" title="Extends `@:build` metadata to all extending and implementing classes.">@:autoBuild(openfl.utils._internal.AssetsMacro.embedBitmap())</span></div><div class="body"><div class="doc doc-main"><p>The BitmapData class lets you work with the data (pixels) of a Bitmap
+object. You can use the methods of the BitmapData class to create
+arbitrarily sized transparent or opaque bitmap images and manipulate them
+in various ways at runtime. You can also access the BitmapData for a bitmap
+image that you load with the <code><a href="../../lime/utils/Assets.html#Assets">openfl.Assets</a></code> or
+<code><a href="../../openfl/display/Loader.html#Loader">openfl.display.Loader</a></code> classes.</p>
+<p>This class lets you separate bitmap rendering operations from the
+internal display updating routines of OpenFL. By manipulating a
+BitmapData object directly, you can create complex images without incurring
+the per-frame overhead of constantly redrawing the content from vector
+data.</p>
+<p>The methods of the BitmapData class support effects that are not
+available through the filters available to non-bitmap display objects.</p>
+<p>A BitmapData object contains an array of pixel data. This data can
+represent either a fully opaque bitmap or a transparent bitmap that
+contains alpha channel data. Either type of BitmapData object is stored as
+a buffer of 32-bit integers. Each 32-bit integer determines the properties
+of a single pixel in the bitmap.</p>
+<p>Each 32-bit integer is a combination of four 8-bit channel values (from
+0 to 255) that describe the alpha transparency and the red, green, and blue
+(ARGB) values of the pixel. (For ARGB values, the most significant byte
+represents the alpha channel value, followed by red, green, and blue.)</p>
+<p>The four channels (alpha, red, green, and blue) are represented as
+numbers when you use them with the <code><a href="../../openfl/display/BitmapData.html#copyChannel">BitmapData.copyChannel</a>()</code>
+method or the <code>DisplacementMapFilter.componentX</code> and
+<code>DisplacementMapFilter.componentY</code> properties, and these numbers
+are represented by the following constants in the BitmapDataChannel
+class:</p><ul><li><code><a href="../../openfl/display/BitmapDataChannel.html#ALPHA">BitmapDataChannel.ALPHA</a></code></li><li><code><a href="../../openfl/display/BitmapDataChannel.html#RED">BitmapDataChannel.RED</a></code></li><li><code><a href="../../openfl/display/BitmapDataChannel.html#GREEN">BitmapDataChannel.GREEN</a></code></li><li><code><a href="../../openfl/display/BitmapDataChannel.html#BLUE">BitmapDataChannel.BLUE</a></code></li></ul>
+<p>You can attach BitmapData objects to a Bitmap object by using the
+<code>bitmapData</code> property of the Bitmap object.</p>
+<p>You can use a BitmapData object to fill a Graphics object by using the
+<code><a href="../../openfl/display/Graphics.html#beginBitmapFill">Graphics.beginBitmapFill</a>()</code> method.</p>
+<p>You can also use a BitmapData object to perform batch tile rendering
+using the <code><a href="../../openfl/display/Tilemap.html#Tilemap">openfl.display.Tilemap</a></code> class.</p>
+<p>In Flash Player 10, the maximum size for a BitmapData object
+is 8,191 pixels in width or height, and the total number of pixels cannot
+exceed 16,777,215 pixels. (So, if a BitmapData object is 8,191 pixels wide,
+it can only be 2,048 pixels high.) In Flash Player 9 and earlier, the limitation
+is 2,880 pixels in height and 2,880 in width.</p></div><h3 class="section">Static methods</h3><div class="fields"><div class="field "><a name="fromBase64"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#fromBase64"><span class="identifier">fromBase64</span></a>(<span style="white-space:nowrap">base64:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a></code></h3><div class="doc"><p>Creates a new BitmapData instance from Base64-encoded data synchronously. This means
+that the BitmapData will be returned immediately (if supported).</p>
+<p>HTML5 and Flash do not support creating BitmapData synchronously, so these targets
+always return <code>null</code>. Other targets will return <code>null</code> if decoding was unsuccessful.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>base64</code></th><td><p>Base64-encoded data</p></td></tr><tr><th style="width:25%;"><code>type</code></th><td><p>The MIME-type for the encoded data ("image/jpeg", etc)</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new BitmapData if successful, or <code>null</code> if unsuccessful</p></div></div></div><div class="field "><a name="fromBytes"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ rawAlpha : null })</span><span class="label label-static">static</span><a href="#fromBytes"><span class="identifier">fromBytes</span></a>(<span style="white-space:nowrap">bytes:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a>,</span> <span style="white-space:nowrap">?rawAlpha:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a></span>):<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a></code></h3><div class="doc"><p>Creates a new BitmapData from bytes (a haxe.io.Bytes or openfl.utils.ByteArray)
+synchronously. This means that the BitmapData will be returned immediately (if
+supported).</p>
+<p>HTML5 and Flash do not support creating BitmapData synchronously, so these targets
+always return <code>null</code>. Other targets will return <code>null</code> if decoding was unsuccessful.</p>
+<p>The optional <code>rawAlpha</code> parameter makes it easier to process images that have alpha
+data stored separately.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>bytes</code></th><td><p>A haxe.io.Bytes or openfl.utils.ByteArray instance</p></td></tr><tr><th style="width:25%;"><code>rawAlpha</code></th><td><p>An optional byte array with alpha data</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new BitmapData if successful, or <code>null</code> if unsuccessful</p></div></div></div><div class="field "><a name="fromFile"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#fromFile"><span class="identifier">fromFile</span></a>(<span style="white-space:nowrap">path:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a></code></h3><div class="doc"><p>Creates a new BitmapData from a file path synchronously. This means that the
+BitmapData will be returned immediately (if supported).</p>
+<p>HTML5 and Flash do not support creating BitmapData synchronously, so these targets
+always return <code>null</code>.</p>
+<p>In order to load files from a remote web address, use the <code>loadFromFile</code> method,
+which supports asynchronous loading.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>path</code></th><td><p>A local file path containing an image</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new BitmapData if successful, or <code>null</code> if unsuccessful</p></div></div></div><div class="field "><a name="fromImage"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ transparent : true })</span><span class="label label-static">static</span><a href="#fromImage"><span class="identifier">fromImage</span></a>(<span style="white-space:nowrap">image:<a class="type" title="lime.graphics.Image - Image is a convenience class for working with bitmap images in Lime." href="../../lime/graphics/Image.html">Image</a>,</span> <span style="white-space:nowrap">transparent:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = true</span>):<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a></code></h3><div class="doc"><p>Creates a new BitmapData using an existing Lime Image instance.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>image</code></th><td><p>A Lime Image object</p></td></tr><tr><th style="width:25%;"><code>transparent</code></th><td><p>Whether the new BitmapData object should be considered
+transparent</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new BitmapData if the Image (and associated ImageBuffer) are not
+<code>null</code>, otherwise <code>null</code> will be returned</p></div></div></div><div class="field "><a name="fromTexture"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#fromTexture"><span class="identifier">fromTexture</span></a>(<span style="white-space:nowrap">texture:<a class="type" title="openfl.display3D.textures.TextureBase - The TextureBase class is the base class for Context3D texture objects." href="../../openfl/display3D/textures/TextureBase.html">TextureBase</a></span>):<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a></code></h3><div class="doc"><p>BETA**</p>
+<p>Creates a new BitmapData instance from a Stage3D rectangle texture.</p>
+<p>This method is not supported by the Flash target.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>texture</code></th><td><p>A Texture or RectangleTexture instance</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new BitmapData if successful, or <code>null</code> if unsuccessful</p></div></div></div><div class="field "><a name="loadFromBase64"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#loadFromBase64"><span class="identifier">loadFromBase64</span></a>(<span style="white-space:nowrap">base64:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="openfl.utils.Future" href="../../openfl/utils/Future.html">Future</a>&lt;<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>&gt;</code></h3><div class="doc"><p>Creates a new BitmapData from Base64-encoded data asynchronously. The data
+and (if successful) decoding the data into an image occur in the background.
+Progress, completion and error callbacks will be dispatched in the current
+thread using callbacks attached to a returned Future object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>base64</code></th><td><p>Base64-encoded data</p></td></tr><tr><th style="width:25%;"><code>type</code></th><td><p>The MIME-type for the encoded data ("image/jpeg", etc)</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A Future BitmapData</p></div></div></div><div class="field "><a name="loadFromBytes"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ rawAlpha : null })</span><span class="label label-static">static</span><a href="#loadFromBytes"><span class="identifier">loadFromBytes</span></a>(<span style="white-space:nowrap">bytes:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a>,</span> <span style="white-space:nowrap">?rawAlpha:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a></span>):<a class="type" title="openfl.utils.Future" href="../../openfl/utils/Future.html">Future</a>&lt;<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>&gt;</code></h3><div class="doc"><p>Creates a new BitmapData from haxe.io.Bytes or openfl.utils.ByteArray data
+asynchronously. The data and image decoding will occur in the background.
+Progress, completion and error callbacks will be dispatched in the current
+thread using callbacks attached to a returned Future object.</p>
+<p>The optional <code>rawAlpha</code> parameter makes it easier to process images that have alpha
+data stored separately.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>bytes</code></th><td><p>A haxe.io.Bytes or openfl.utils.ByteArray instance</p></td></tr><tr><th style="width:25%;"><code>rawAlpha</code></th><td><p>An optional byte array with alpha data</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A Future BitmapData</p></div></div></div><div class="field "><a name="loadFromFile"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#loadFromFile"><span class="identifier">loadFromFile</span></a>(<span style="white-space:nowrap">path:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="openfl.utils.Future" href="../../openfl/utils/Future.html">Future</a>&lt;<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>&gt;</code></h3><div class="doc"><p>Creates a new BitmapData from a file path or web address asynchronously. The file
+load and image decoding will occur in the background.
+Progress, completion and error callbacks will be dispatched in the current
+thread using callbacks attached to a returned Future object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>path</code></th><td><p>A local file path or web address containing an image</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A Future BitmapData</p></div></div></div></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ fillColor : 0xFFFFFFFF, transparent : true })</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">width:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">height:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">transparent:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = true,</span> <span style="white-space:nowrap">fillColor:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a> = 0xFFFFFFFF</span>)</code></h3><div class="doc"><p>Creates a BitmapData object with a specified width and height. If you specify a value for
+the <code>fillColor</code> parameter, every pixel in the bitmap is set to that color.</p>
+<p>By default, the bitmap is created as transparent, unless you pass the value <code><a href="../../Bool.html">false</a></code>
+for the transparent parameter. After you create an opaque bitmap, you cannot change it
+to a transparent bitmap. Every pixel in an opaque bitmap uses only 24 bits of color channel
+information. If you define the bitmap as transparent, every pixel uses 32 bits of color
+channel information, including an alpha transparency channel.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>width</code></th><td><p>The width of the bitmap image in pixels.</p></td></tr><tr><th style="width:25%;"><code>height</code></th><td><p>The height of the bitmap image in pixels.</p></td></tr><tr><th style="width:25%;"><code>transparent</code></th><td><p>Specifies whether the bitmap image supports per-pixel transparency. The default value is <code><a href="../../Bool.html">true</a></code>(transparent). To create a fully transparent bitmap, set the value of the <code>transparent</code> parameter to <code><a href="../../Bool.html">true</a></code> and the value of the <code>fillColor</code> parameter to 0x00000000(or to 0). Setting the <code>transparent</code> property to <code><a href="../../Bool.html">false</a></code> can result in minor improvements in rendering performance.</p></td></tr><tr><th style="width:25%;"><code>fillColor</code></th><td><p>A 32-bit ARGB color value that you use to fill the bitmap image area. The default value is 0xFFFFFFFF(solid white).</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="height"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#height"><span class="identifier">height</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The height of the bitmap image in pixels.</p></div></div><div class="field "><a name="image"></a><h3 class="anchor"><code><span class="label label-meta label-meta-uppressWarnings" title="">@SuppressWarnings(&quot;checkstyle:Dynamic&quot;)</span><span class="label">read only</span><a href="#image"><span class="identifier">image</span></a>:<a class="type" title="lime.graphics.Image - Image is a convenience class for working with bitmap images in Lime." href="../../lime/graphics/Image.html">Image</a></code></h3><div class="doc"><p>The Lime image that holds the pixels for the current image.</p>
+<p>In Flash Player, this property is always <code>null</code>.</p></div></div><div class="field "><a name="readable"></a><h3 class="anchor"><code><span class="label label-meta label-meta-beta" title="">@:beta</span><span class="label">read only</span><a href="#readable"><span class="identifier">readable</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Defines whether the bitmap image is readable. Hardware-only bitmap images
+do not support <code>getPixels</code>, <code>setPixels</code> and other
+BitmapData methods, though they can still be used inside a Bitmap object
+or other display objects that do not need to modify the pixels.</p>
+<p>As an exception to the rule, <code>bitmapData.draw</code> is supported for
+non-readable bitmap images.</p>
+<p>Since non-readable bitmap images do not have a software image buffer, they
+will need to be recreated if the current hardware rendering context is lost.</p></div></div><div class="field "><a name="rect"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#rect"><span class="identifier">rect</span></a>:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></code></h3><div class="doc"><p>The rectangle that defines the size and location of the bitmap image. The
+top and left of the rectangle are 0; the width and height are equal to the
+width and height in pixels of the BitmapData object.</p></div></div><div class="field "><a name="transparent"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#transparent"><span class="identifier">transparent</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Defines whether the bitmap image supports per-pixel transparency. You can
+set this value only when you construct a BitmapData object by passing in
+<code><a href="../../Bool.html">true</a></code> for the <code>transparent</code> parameter of the
+constructor. Then, after you create a BitmapData object, you can check
+whether it supports per-pixel transparency by determining if the value of
+the <code>transparent</code> property is <code><a href="../../Bool.html">true</a></code>.</p></div></div><div class="field "><a name="width"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#width"><span class="identifier">width</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The width of the bitmap image in pixels.</p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="applyFilter"></a><h3 class="anchor"><code><a href="#applyFilter"><span class="identifier">applyFilter</span></a>(<span style="white-space:nowrap">sourceBitmapData:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>,</span> <span style="white-space:nowrap">sourceRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">destPoint:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a>,</span> <span style="white-space:nowrap">filter:<a class="type" title="openfl.filters.BitmapFilter - The BitmapFilter class is the base class for all image filter effects." href="../../openfl/filters/BitmapFilter.html">BitmapFilter</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Takes a source image and a filter object and generates the filtered image.</p>
+<p>This method relies on the behavior of built-in filter objects, which determine the
+destination rectangle that is affected by an input source rectangle.</p>
+<p>After a filter is applied, the resulting image can be larger than the input image.
+For example, if you use a BlurFilter class to blur a source rectangle of(50,50,100,100)
+and a destination point of(10,10), the area that changes in the destination image is
+larger than(10,10,60,60) because of the blurring. This happens internally during the
+applyFilter() call.</p>
+<p>If the <code>sourceRect</code> parameter of the sourceBitmapData parameter is an
+interior region, such as(50,50,100,100) in a 200 x 200 image, the filter uses the source
+pixels outside the <code>sourceRect</code> parameter to generate the destination rectangle.</p>
+<p>If the BitmapData object and the object specified as the <code>sourceBitmapData</code>
+parameter are the same object, the application uses a temporary copy of the object to
+perform the filter. For best performance, avoid this situation.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sourceBitmapData</code></th><td><p>The input bitmap image to use. The source image can be a different BitmapData object or it can refer to the current BitmapData instance.</p></td></tr><tr><th style="width:25%;"><code>sourceRect</code></th><td><p>A rectangle that defines the area of the source image to use as input.</p></td></tr><tr><th style="width:25%;"><code>destPoint</code></th><td><p>The point within the destination image(the current BitmapData instance) that corresponds to the upper-left corner of the source rectangle.</p></td></tr><tr><th style="width:25%;"><code>filter</code></th><td><p>The filter object that you use to perform the filtering operation.</p></td></tr></table></div></div><div class="field "><a name="clone"></a><h3 class="anchor"><code><a href="#clone"><span class="identifier">clone</span></a>():<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a></code></h3><div class="doc"><p>Returns a new BitmapData object that is a clone of the original instance with an exact copy of the contained bitmap.</p><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A new BitmapData object that is identical to the original.</p></div></div></div><div class="field "><a name="colorTransform"></a><h3 class="anchor"><code><a href="#colorTransform"><span class="identifier">colorTransform</span></a>(<span style="white-space:nowrap">rect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">colorTransform:<a class="type" title="openfl.geom.ColorTransform - The ColorTransform class lets you adjust the color values in a display object." href="../../openfl/geom/ColorTransform.html">ColorTransform</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Adjusts the color values in a specified area of a bitmap image by using a <code><a href="../../openfl/geom/ColorTransform.html#ColorTransform">ColorTransform</a></code>
+object. If the rectangle matches the boundaries of the bitmap image, this method transforms the color
+values of the entire image.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>rect</code></th><td><p>A Rectangle object that defines the area of the image in which the ColorTransform object is applied.</p></td></tr><tr><th style="width:25%;"><code>colorTransform</code></th><td><p>A ColorTransform object that describes the color transformation values to apply.</p></td></tr></table></div></div><div class="field "><a name="compare"></a><h3 class="anchor"><code><span class="label label-meta label-meta-uppressWarnings" title="">@SuppressWarnings(&quot;checkstyle:Dynamic&quot;)</span><a href="#compare"><span class="identifier">compare</span></a>(<span style="white-space:nowrap">otherBitmapData:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a></span>):<a class="type" title="Dynamic - Dynamic is a special type which is compatible with all other types." href="../../Dynamic.html">Dynamic</a></code></h3><div class="doc"><p>Compares two BitmapData objects. If the two BitmapData objects have the same dimensions (width and height), the method returns a new BitmapData object, in which each pixel is the "difference" between the pixels in the two source objects:</p><ul><li>If two pixels are equal, the difference pixel is 0x00000000.</li><li>If two pixels have different RGB values (ignoring the alpha value), the difference pixel is 0xFFRRGGBB where RR/GG/BB are the individual difference values between red, green, and blue channels. Alpha channel differences are ignored in this case.</li><li>If only the alpha channel value is different, the pixel value is 0xZZFFFFFF, where ZZ is the difference in the alpha value.</li></ul><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>otherBitmapData</code></th><td><p>The BitmapData object to compare with the source BitmapData object.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>If the two BitmapData objects have the same dimensions (width and height), the method returns a new BitmapData object that has the difference between the two objects (see the main discussion).If the BitmapData objects are equivalent, the method returns the number 0. If no argument is passed or if the argument is not a BitmapData object, the method returns -1. If either BitmapData object has been disposed of, the method returns -2. If the widths of the BitmapData objects are not equal, the method returns the number -3. If the heights of the BitmapData objects are not equal, the method returns the number -4.</p></div></div></div><div class="field "><a name="copyChannel"></a><h3 class="anchor"><code><a href="#copyChannel"><span class="identifier">copyChannel</span></a>(<span style="white-space:nowrap">sourceBitmapData:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>,</span> <span style="white-space:nowrap">sourceRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">destPoint:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a>,</span> <span style="white-space:nowrap">sourceChannel:<a class="type" title="openfl.display.BitmapDataChannel - The BitmapDataChannel class is an enumeration of constant values that indicate which channel to use: red, blue, green, or alpha transparency." href="../../openfl/display/BitmapDataChannel.html">BitmapDataChannel</a>,</span> <span style="white-space:nowrap">destChannel:<a class="type" title="openfl.display.BitmapDataChannel - The BitmapDataChannel class is an enumeration of constant values that indicate which channel to use: red, blue, green, or alpha transparency." href="../../openfl/display/BitmapDataChannel.html">BitmapDataChannel</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Transfers data from one channel of another BitmapData object or the
+current BitmapData object into a channel of the current BitmapData object.
+All of the data in the other channels in the destination BitmapData object
+are preserved.</p>
+<p>The source channel value and destination channel value can be one of
+following values:</p><ul><li><code><a href="../../openfl/display/BitmapDataChannel.html#RED">BitmapDataChannel.RED</a></code></li><li><code><a href="../../openfl/display/BitmapDataChannel.html#GREEN">BitmapDataChannel.GREEN</a></code></li><li><code><a href="../../openfl/display/BitmapDataChannel.html#BLUE">BitmapDataChannel.BLUE</a></code></li><li><code><a href="../../openfl/display/BitmapDataChannel.html#ALPHA">BitmapDataChannel.ALPHA</a></code></li></ul><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sourceBitmapData</code></th><td><p>The input bitmap image to use. The source image
+can be a different BitmapData object or it can
+refer to the current BitmapData object.</p></td></tr><tr><th style="width:25%;"><code>sourceRect</code></th><td><p>The source Rectangle object. To copy only channel
+data from a smaller area within the bitmap,
+specify a source rectangle that is smaller than
+the overall size of the BitmapData object.</p></td></tr><tr><th style="width:25%;"><code>destPoint</code></th><td><p>The destination Point object that represents the
+upper-left corner of the rectangular area where
+the new channel data is placed. To copy only
+channel data from one area to a different area in
+the destination image, specify a point other than</p>
+<pre><code>				   (0,0).
+</code></pre></td></tr><tr><th style="width:25%;"><code>sourceChannel</code></th><td><p>The source channel. Use a value from the
+BitmapDataChannel class</p>
+<pre><code>				   (`BitmapDataChannel.RED`,
+</code></pre>
+<p><code><a href="../../openfl/display/BitmapDataChannel.html#BLUE">BitmapDataChannel.BLUE</a></code>,
+<code><a href="../../openfl/display/BitmapDataChannel.html#GREEN">BitmapDataChannel.GREEN</a></code>,
+<code><a href="../../openfl/display/BitmapDataChannel.html#ALPHA">BitmapDataChannel.ALPHA</a></code>).</p></td></tr><tr><th style="width:25%;"><code>destChannel</code></th><td><p>The destination channel. Use a value from the
+BitmapDataChannel class</p>
+<pre><code>				   (`BitmapDataChannel.RED`,
+</code></pre>
+<p><code><a href="../../openfl/display/BitmapDataChannel.html#BLUE">BitmapDataChannel.BLUE</a></code>,
+<code><a href="../../openfl/display/BitmapDataChannel.html#GREEN">BitmapDataChannel.GREEN</a></code>,
+<code><a href="../../openfl/display/BitmapDataChannel.html#ALPHA">BitmapDataChannel.ALPHA</a></code>).</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The sourceBitmapData, sourceRect or destPoint are null.</p></td></tr></table></div></div><div class="field "><a name="copyPixels"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ mergeAlpha : false, alphaPoint : null, alphaBitmapData : null })</span><a href="#copyPixels"><span class="identifier">copyPixels</span></a>(<span style="white-space:nowrap">sourceBitmapData:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>,</span> <span style="white-space:nowrap">sourceRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">destPoint:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a>,</span> <span style="white-space:nowrap">?alphaBitmapData:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>,</span> <span style="white-space:nowrap">?alphaPoint:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a>,</span> <span style="white-space:nowrap">mergeAlpha:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Provides a fast routine to perform pixel manipulation between images with
+no stretching, rotation, or color effects. This method copies a
+rectangular area of a source image to a rectangular area of the same size
+at the destination point of the destination BitmapData object.</p>
+<p>If you include the <code>alphaBitmap</code> and <code>alphaPoint</code>
+parameters, you can use a secondary image as an alpha source for the
+source image. If the source image has alpha data, both sets of alpha data
+are used to composite pixels from the source image to the destination
+image. The <code>alphaPoint</code> parameter is the point in the alpha
+image that corresponds to the upper-left corner of the source rectangle.
+Any pixels outside the intersection of the source image and alpha image
+are not copied to the destination image.</p>
+<p>The <code>mergeAlpha</code> property controls whether or not the alpha
+channel is used when a transparent image is copied onto another
+transparent image. To copy pixels with the alpha channel data, set the
+<code>mergeAlpha</code> property to <code><a href="../../Bool.html">true</a></code>. By default, the
+<code>mergeAlpha</code> property is <code><a href="../../Bool.html">false</a></code>.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sourceBitmapData</code></th><td><p>The input bitmap image from which to copy pixels.
+The source image can be a different BitmapData
+instance, or it can refer to the current
+BitmapData instance.</p></td></tr><tr><th style="width:25%;"><code>sourceRect</code></th><td><p>A rectangle that defines the area of the source
+image to use as input.</p></td></tr><tr><th style="width:25%;"><code>destPoint</code></th><td><p>The destination point that represents the
+upper-left corner of the rectangular area where
+the new pixels are placed.</p></td></tr><tr><th style="width:25%;"><code>alphaBitmapData</code></th><td><p>A secondary, alpha BitmapData object source.</p></td></tr><tr><th style="width:25%;"><code>alphaPoint</code></th><td><p>The point in the alpha BitmapData object source
+that corresponds to the upper-left corner of the
+<code>sourceRect</code> parameter.</p></td></tr><tr><th style="width:25%;"><code>mergeAlpha</code></th><td><p>To use the alpha channel, set the value to
+<code><a href="../../Bool.html">true</a></code>. To copy pixels with no alpha
+channel, set the value to <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The sourceBitmapData, sourceRect, destPoint are null.</p></td></tr></table></div></div><div class="field "><a name="dispose"></a><h3 class="anchor"><code><a href="#dispose"><span class="identifier">dispose</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Frees memory that is used to store the BitmapData object.</p>
+<p>When the <code>dispose()</code> method is called on an image, the width
+and height of the image are set to 0. All subsequent calls to methods or
+properties of this BitmapData instance fail, and an exception is thrown.</p>
+<p><code><a href="../../openfl/display/BitmapData.html#dispose">BitmapData.dispose</a>()</code> releases the memory occupied by the
+actual bitmap data, immediately(a bitmap can consume up to 64 MB of
+memory). After using <code><a href="../../openfl/display/BitmapData.html#dispose">BitmapData.dispose</a>()</code>, the BitmapData
+object is no longer usable and an exception may be thrown if
+you call functions on the BitmapData object. However,
+<code><a href="../../openfl/display/BitmapData.html#dispose">BitmapData.dispose</a>()</code> does not garbage collect the BitmapData
+object(approximately 128 bytes); the memory occupied by the actual
+BitmapData object is released at the time the BitmapData object is
+collected by the garbage collector.</p></div></div><div class="field "><a name="disposeImage"></a><h3 class="anchor"><code><span class="label label-meta label-meta-beta" title="">@:beta</span><a href="#disposeImage"><span class="identifier">disposeImage</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Frees the backing Lime image buffer, if possible.</p>
+<p>When using a software renderer, such as Flash Player or desktop targets
+without OpenGL, the software buffer will be retained so that the BitmapData
+will work properly. When using a hardware renderer, the Lime image
+buffer will be available to garbage collection after a hardware texture
+has been created internally.</p>
+<p><code><a href="../../openfl/display/BitmapData.html#disposeImage">BitmapData.disposeImage</a>()</code> will immediately change the value of
+the <code>readable</code> property to <code><a href="../../Bool.html">false</a></code>.</p></div></div><div class="field "><a name="draw"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ smoothing : false, clipRect : null, blendMode : null, colorTransform : null, matrix : null })</span><a href="#draw"><span class="identifier">draw</span></a>(<span style="white-space:nowrap">source:<a class="type" title="openfl.display.IBitmapDrawable" href="../../openfl/display/IBitmapDrawable.html">IBitmapDrawable</a>,</span> <span style="white-space:nowrap">?matrix:<a class="type" title="openfl.geom.Matrix - The Matrix class represents a transformation matrix that determines how to map points from one coordinate space to another." href="../../openfl/geom/Matrix.html">Matrix</a>,</span> <span style="white-space:nowrap">?colorTransform:<a class="type" title="openfl.geom.ColorTransform - The ColorTransform class lets you adjust the color values in a display object." href="../../openfl/geom/ColorTransform.html">ColorTransform</a>,</span> <span style="white-space:nowrap">?blendMode:<a class="type" title="openfl.display.BlendMode - A class that provides constant values for visual blend mode effects." href="../../openfl/display/BlendMode.html">BlendMode</a>,</span> <span style="white-space:nowrap">?clipRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">smoothing:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Draws the <code>source</code> display object onto the bitmap image, using
+the OpenFL software renderer. You can specify <code>matrix</code>,
+<code>colorTransform</code>, <code>blendMode</code>, and a destination
+<code>clipRect</code> parameter to control how the rendering performs.
+Optionally, you can specify whether the bitmap should be smoothed when
+scaled(this works only if the source object is a BitmapData object).</p>
+<p>The source display object does not use any of its applied
+transformations for this call. It is treated as it exists in the library
+or file, with no matrix transform, no color transform, and no blend mode.
+To draw a display object(such as a movie clip) by using its own transform
+properties, you can copy its <code>transform</code> property object to the
+<code>transform</code> property of the Bitmap object that uses the
+BitmapData object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>source</code></th><td><p>The display object or BitmapData object to draw to
+the BitmapData object.(The DisplayObject and
+BitmapData classes implement the IBitmapDrawable
+interface.)</p></td></tr><tr><th style="width:25%;"><code>matrix</code></th><td><p>A Matrix object used to scale, rotate, or translate
+the coordinates of the bitmap. If you do not want to
+apply a matrix transformation to the image, set this
+parameter to an identity matrix, created with the
+default <code>new <a href="../../openfl/geom/Matrix.html#Matrix">Matrix</a>()</code> constructor, or
+pass a <code>null</code> value.</p></td></tr><tr><th style="width:25%;"><code>colorTransform</code></th><td><p>A ColorTransform object that you use to adjust the
+color values of the bitmap. If no object is
+supplied, the bitmap image's colors are not
+transformed. If you must pass this parameter but you
+do not want to transform the image, set this
+parameter to a ColorTransform object created with
+the default <code>new <a href="../../openfl/geom/ColorTransform.html#ColorTransform">ColorTransform</a>()</code>
+constructor.</p></td></tr><tr><th style="width:25%;"><code>blendMode</code></th><td><p>A string value, from the openfl.display.BlendMode
+class, specifying the blend mode to be applied to
+the resulting bitmap.</p></td></tr><tr><th style="width:25%;"><code>clipRect</code></th><td><p>A Rectangle object that defines the area of the
+source object to draw. If you do not supply this
+value, no clipping occurs and the entire source
+object is drawn.</p></td></tr><tr><th style="width:25%;"><code>smoothing</code></th><td><p>A Boolean value that determines whether a BitmapData
+object is smoothed when scaled or rotated, due to a
+scaling or rotation in the <code>matrix</code>
+parameter. The <code>smoothing</code> parameter only
+applies if the <code>source</code> parameter is a
+BitmapData object. With <code>smoothing</code> set
+to <code><a href="../../Bool.html">false</a></code>, the rotated or scaled
+BitmapData image can appear pixelated or jagged. For
+example, the following two images use the same
+BitmapData object for the <code>source</code>
+parameter, but the <code>smoothing</code> parameter
+is set to <code><a href="../../Bool.html">true</a></code> on the left and
+<code><a href="../../Bool.html">false</a></code> on the right:</p>
+<p><img src="/images/bitmapData_draw_smoothing.jpg" alt="Two images: the left one with smoothing and the right one without smoothing." /></p>
+<p>Drawing a bitmap with <code>smoothing</code> set
+to <code><a href="../../Bool.html">true</a></code> takes longer than doing so with
+<code>smoothing</code> set to
+<code><a href="../../Bool.html">false</a></code>.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The <code>source</code> parameter is not a
+BitmapData or DisplayObject object.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The source is null or not a valid IBitmapDrawable
+object.</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>The <code>source</code> object and(in the case of a
+Sprite or MovieClip object) all of its child objects
+do not come from the same domain as the caller, or
+are not in a content that is accessible to the
+caller by having called the
+<code>Security.allowDomain()</code> method. This
+restriction does not apply to AIR content in the
+application security sandbox.</p></td></tr></table></div></div><div class="field "><a name="drawWithQuality"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ quality : null, smoothing : false, clipRect : null, blendMode : null, colorTransform : null, matrix : null })</span><a href="#drawWithQuality"><span class="identifier">drawWithQuality</span></a>(<span style="white-space:nowrap">source:<a class="type" title="openfl.display.IBitmapDrawable" href="../../openfl/display/IBitmapDrawable.html">IBitmapDrawable</a>,</span> <span style="white-space:nowrap">?matrix:<a class="type" title="openfl.geom.Matrix - The Matrix class represents a transformation matrix that determines how to map points from one coordinate space to another." href="../../openfl/geom/Matrix.html">Matrix</a>,</span> <span style="white-space:nowrap">?colorTransform:<a class="type" title="openfl.geom.ColorTransform - The ColorTransform class lets you adjust the color values in a display object." href="../../openfl/geom/ColorTransform.html">ColorTransform</a>,</span> <span style="white-space:nowrap">?blendMode:<a class="type" title="openfl.display.BlendMode - A class that provides constant values for visual blend mode effects." href="../../openfl/display/BlendMode.html">BlendMode</a>,</span> <span style="white-space:nowrap">?clipRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">smoothing:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">?quality:<a class="type" title="openfl.display.StageQuality - The StageQuality class provides values for the Stage." href="../../openfl/display/StageQuality.html">StageQuality</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Draws the <code>source</code> display object onto the bitmap image, using the Flash runtime
+vector renderer. You can specify <code>matrix</code>, <code>colorTransform</code>, <code>blendMode</code>, and a
+destination <code>clipRect</code> parameter to control how the rendering performs.
+Optionally, you can specify whether the bitmap should be smoothed when scaled
+(this works only if the source object is a BitmapData object).</p>
+<p><strong>Note:</strong> The <code>drawWithQuality()</code> method works exactly like the <code>draw()</code> method,
+but instead of using the <code><a href="../../openfl/display/Stage.html#quality">Stage.quality</a></code> property to determine the quality of
+vector rendering, you specify the <code>quality</code> parameter to the <code>drawWithQuality()</code>
+method.</p>
+<p>This method directly corresponds to how objects are drawn with the standard
+vector renderer for objects in the authoring tool interface.</p>
+<p>The source display object does not use any of its applied transformations for
+this call. It is treated as it exists in the library or file, with no matrix
+transform, no color transform, and no blend mode. To draw a display object
+(such as a movie clip) by using its own transform properties, you can copy its
+<code>transform</code> property object to the <code>transform</code> property of the Bitmap object that
+uses the BitmapData object.</p>
+<p>This method is supported over RTMP in Flash Player 9.0.115.0 and later and in
+Adobe AIR. You can control access to streams on Flash Media Server in a
+server-side script. For more information, see the <code>Client.audioSampleAccess</code> and
+<code>Client.videoSampleAccess</code> properties in Server-Side ActionScript Language
+Reference for Adobe Flash Media Server.</p>
+<p>If the source object and (in the case of a Sprite or MovieClip object) all of
+its child objects do not come from the same domain as the caller, or are not in
+a content that is accessible to the caller by having called the
+<code>Security.allowDomain()</code> method, a call to the <code>drawWithQuality()</code> throws a
+SecurityError exception. This restriction does not apply to AIR content in the
+application security sandbox.</p>
+<p>There are also restrictions on using a loaded bitmap image as the source. A call
+to the <code>drawWithQuality()</code> method is successful if the loaded image comes from the
+same domain as the caller. Also, a cross-domain policy file on the image's server
+can grant permission to the domain of the SWF content calling the
+<code>drawWithQuality()</code> method. In this case, you must set the <code>checkPolicyFile</code> property
+of a LoaderContext object, and use this object as the <code>context</code> parameter when
+calling the <code>load()</code> method of the Loader object used to load the image. These
+restrictions do not apply to AIR content in the application security sandbox.</p>
+<p>On Windows, the <code>drawWithQuality()</code> method cannot capture SWF content embedded in an
+HTML page in an HTMLLoader object in Adobe AIR.</p>
+<p>The <code>drawWithQuality()</code> method cannot capture PDF content in Adobe AIR. Nor can it
+capture or SWF content embedded in HTML in which the <code>wmode</code> attribute is set to
+<code>"window"</code> in Adobe AIR.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>source</code></th><td><p>The display object or BitmapData object to draw to the BitmapData
+object. (The DisplayObject and BitmapData classes implement the IBitmapDrawable
+interface.)</p></td></tr><tr><th style="width:25%;"><code>matrix</code></th><td><p>A Matrix object used to scale, rotate, or translate the coordinates
+of the bitmap. If you do not want to apply a matrix transformation to the image,
+set this parameter to an identity matrix, created with the default <code>new <a href="../../openfl/geom/Matrix.html#Matrix">Matrix</a>()</code>
+constructor, or pass a <code>null</code> value.</p></td></tr><tr><th style="width:25%;"><code>colorTransform</code></th><td><p>A ColorTransform object that you use to adjust the color
+values of the bitmap. If no object is supplied, the bitmap image's colors are not
+transformed. If you must pass this parameter but you do not want to transform the
+image, set this parameter to a ColorTransform object created with the default
+<code>new <a href="../../openfl/geom/ColorTransform.html#ColorTransform">ColorTransform</a>()</code> constructor.</p></td></tr><tr><th style="width:25%;"><code>blendMode</code></th><td><p>A string value, from the flash.display.BlendMode class,
+specifying the blend mode to be applied to the resulting bitmap.</p></td></tr><tr><th style="width:25%;"><code>clipRect</code></th><td><p>A Rectangle object that defines the area of the source object
+to draw. If you do not supply this value, no clipping occurs and the entire source
+object is drawn.</p></td></tr><tr><th style="width:25%;"><code>smoothing</code></th><td><p>A Boolean value that determines whether a BitmapData object is
+smoothed when scaled or rotated, due to a scaling or rotation in the <code>matrix</code>
+parameter. The smoothing parameter only applies if the <code>source</code> parameter is a
+BitmapData object. With <code>smoothing</code> set to <code><a href="../../Bool.html">false</a></code>, the rotated or scaled BitmapData
+image can appear pixelated or jagged. For example, the following two images use the
+same BitmapData object for the <code>source</code> parameter, but the <code>smoothing</code> parameter is
+set to <code><a href="../../Bool.html">true</a></code> on the left and <code><a href="../../Bool.html">false</a></code> on the right:
+<img src="/images/bitmapData_draw_smoothing.jpg" alt="Two images: the left one with smoothing and the right one without smoothing." />
+Drawing a bitmap with <code>smoothing</code> set to <code><a href="../../Bool.html">true</a></code> takes longer than doing so with
+<code>smoothing</code> set to <code><a href="../../Bool.html">false</a></code>.</p></td></tr><tr><th style="width:25%;"><code>quality</code></th><td><p>Any of one of the StageQuality values. Selects the antialiasing
+quality to be used when drawing vectors graphics.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The source parameter is not a BitmapData or DisplayObject
+object.</p></td></tr><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>The source object and (in the case of a Sprite or MovieClip
+object) all of its child objects do not come from the same domain as the caller,
+or are not in a content that is accessible to the caller by having called the
+<code>Security.allowDomain()</code> method. This restriction does not apply to AIR content
+in the application security sandbox.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The source is <code>null</code> or not a valid IBitmapDrawable object.</p></td></tr></table></div></div><div class="field "><a name="encode"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ byteArray : null })</span><a href="#encode"><span class="identifier">encode</span></a>(<span style="white-space:nowrap">rect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">compressor:<a class="type" title="openfl.utils.Object" href="../../openfl/utils/Object.html">Object</a>,</span> <span style="white-space:nowrap">?byteArray:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a></span>):<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a></code></h3><div class="doc"><p>Compresses this BitmapData object using the selected compressor algorithm and
+returns a new ByteArray object. Optionally, writes the resulting data to the
+specified ByteArray. The <code>compressor</code> argument specifies the encoding algorithm,
+and can be PNGEncoderOptions, JPEGEncoderOptions, or JPEGXREncoderOptions.</p>
+<p>The following example compresses a BitmapData object using the JPEGEncoderOptions:</p>
+<pre><code class="prettyprint haxe">// Compress a BitmapData object as a JPEG file.
+var bitmapData:BitmapData = new BitmapData(640,480,false,0x00FF00);
+var byteArray:ByteArray = new ByteArray();
+bitmapData.encode(new Rectangle(0,0,640,480), new openfl.display.JPEGEncoderOptions(), byteArray);</code></pre><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>rect</code></th><td><p>The area of the BitmapData object to compress.</p></td></tr><tr><th style="width:25%;"><code>compressor</code></th><td><p>The compressor type to use. Valid values are:
+flash.display.PNGEncoderOptions, flash.display.JPEGEncoderOptions, and
+flash.display.JPEGXREncoderOptions.</p></td></tr><tr><th style="width:25%;"><code>byteArray</code></th><td><p>The output ByteArray to hold the encoded image.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A ByteArray containing the encoded image.</p></div></div></div><div class="field "><a name="fillRect"></a><h3 class="anchor"><code><a href="#fillRect"><span class="identifier">fillRect</span></a>(<span style="white-space:nowrap">rect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">color:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Fills a rectangular area of pixels with a specified ARGB color.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>rect</code></th><td><p>The rectangular area to fill.</p></td></tr><tr><th style="width:25%;"><code>color</code></th><td><p>The ARGB color value that fills the area. ARGB colors are
+often specified in hexadecimal format; for example,
+0xFF336699.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The rect is null.</p></td></tr></table></div></div><div class="field "><a name="floodFill"></a><h3 class="anchor"><code><a href="#floodFill"><span class="identifier">floodFill</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">color:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Performs a flood fill operation on an image starting at an(<em>x</em>,
+<em>y</em>) coordinate and filling with a certain color. The
+<code>floodFill()</code> method is similar to the paint bucket tool in
+various paint programs. The color is an ARGB color that contains alpha
+information and color information.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>The <em>x</em> coordinate of the image.</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>The <em>y</em> coordinate of the image.</p></td></tr><tr><th style="width:25%;"><code>color</code></th><td><p>The ARGB color to use as a fill.</p></td></tr></table></div></div><div class="field "><a name="generateFilterRect"></a><h3 class="anchor"><code><a href="#generateFilterRect"><span class="identifier">generateFilterRect</span></a>(<span style="white-space:nowrap">sourceRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">filter:<a class="type" title="openfl.filters.BitmapFilter - The BitmapFilter class is the base class for all image filter effects." href="../../openfl/filters/BitmapFilter.html">BitmapFilter</a></span>):<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></code></h3><div class="doc"><p>Determines the destination rectangle that the <code>applyFilter()</code>
+method call affects, given a BitmapData object, a source rectangle, and a
+filter object.</p>
+<p>For example, a blur filter normally affects an area larger than the
+size of the original image. A 100 x 200 pixel image that is being filtered
+by a default BlurFilter instance, where <code>blurX = blurY = 4</code>
+generates a destination rectangle of <code>(-2,-2,104,204)</code>. The
+<code>generateFilterRect()</code> method lets you find out the size of
+this destination rectangle in advance so that you can size the destination
+image appropriately before you perform a filter operation.</p>
+<p>Some filters clip their destination rectangle based on the source image
+size. For example, an inner <code>DropShadow</code> does not generate a
+larger result than its source image. In this API, the BitmapData object is
+used as the source bounds and not the source <code>rect</code>
+parameter.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sourceRect</code></th><td><p>A rectangle defining the area of the source image to use
+as input.</p></td></tr><tr><th style="width:25%;"><code>filter</code></th><td><p>A filter object that you use to calculate the
+destination rectangle.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A destination rectangle computed by using an image, the
+<code>sourceRect</code> parameter, and a filter.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The sourceRect or filter are null.</p></td></tr></table></div></div><div class="field "><a name="getColorBoundsRect"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ findColor : true })</span><a href="#getColorBoundsRect"><span class="identifier">getColorBoundsRect</span></a>(<span style="white-space:nowrap">mask:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">color:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">findColor:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = true</span>):<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></code></h3><div class="doc"><p>Determines a rectangular region that either fully encloses all pixels of a
+specified color within the bitmap image(if the <code>findColor</code>
+parameter is set to <code><a href="../../Bool.html">true</a></code>) or fully encloses all pixels that
+do not include the specified color(if the <code>findColor</code>
+parameter is set to <code><a href="../../Bool.html">false</a></code>).</p>
+<p>For example, if you have a source image and you want to determine the
+rectangle of the image that contains a nonzero alpha channel, pass
+<code>{mask: 0xFF000000, color: 0x00000000}</code> as parameters. If the
+<code>findColor</code> parameter is set to <code><a href="../../Bool.html">true</a></code>, the entire
+image is searched for the bounds of pixels for which <code>(value &amp; mask)
+== color</code>(where <code>value</code> is the color value of the
+pixel). If the <code>findColor</code> parameter is set to
+<code><a href="../../Bool.html">false</a></code>, the entire image is searched for the bounds of pixels
+for which <code>(value &amp; mask) != color</code>(where <code>value</code>
+is the color value of the pixel). To determine white space around an
+image, pass <code>{mask: 0xFFFFFFFF, color: 0xFFFFFFFF}</code> to find the
+bounds of nonwhite pixels.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>mask</code></th><td><p>A hexadecimal value, specifying the bits of the ARGB
+color to consider. The color value is combined with this
+hexadecimal value, by using the <code>&amp;</code>(bitwise
+AND) operator.</p></td></tr><tr><th style="width:25%;"><code>color</code></th><td><p>A hexadecimal value, specifying the ARGB color to match
+(if <code>findColor</code> is set to <code><a href="../../Bool.html">true</a></code>)
+or <em>not</em> to match(if <code>findColor</code> is set
+to <code><a href="../../Bool.html">false</a></code>).</p></td></tr><tr><th style="width:25%;"><code>findColor</code></th><td><p>If the value is set to <code><a href="../../Bool.html">true</a></code>, returns the
+bounds of a color value in an image. If the value is set
+to <code><a href="../../Bool.html">false</a></code>, returns the bounds of where this
+color doesn't exist in an image.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>The region of the image that is the specified color.</p></div></div></div><div class="field "><a name="getPixel"></a><h3 class="anchor"><code><a href="#getPixel"><span class="identifier">getPixel</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></span>):<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Returns an integer that represents an RGB pixel value from a BitmapData
+object at a specific point(<em>x</em>, <em>y</em>). The
+<code>getPixel()</code> method returns an unmultiplied pixel value. No
+alpha information is returned.</p>
+<p>All pixels in a BitmapData object are stored as premultiplied color
+values. A premultiplied image pixel has the red, green, and blue color
+channel values already multiplied by the alpha data. For example, if the
+alpha value is 0, the values for the RGB channels are also 0, independent
+of their unmultiplied values. This loss of data can cause some problems
+when you perform operations. All BitmapData methods take and return
+unmultiplied values. The internal pixel representation is converted from
+premultiplied to unmultiplied before it is returned as a value. During a
+set operation, the pixel value is premultiplied before the raw image pixel
+is set.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>The <em>x</em> position of the pixel.</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>The <em>y</em> position of the pixel.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A number that represents an RGB pixel value. If the(<em>x</em>,
+<em>y</em>) coordinates are outside the bounds of the image, the
+method returns 0.</p></div></div></div><div class="field "><a name="getPixel32"></a><h3 class="anchor"><code><a href="#getPixel32"><span class="identifier">getPixel32</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></span>):<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Returns an ARGB color value that contains alpha channel data and RGB data.
+This method is similar to the <code>getPixel()</code> method, which
+returns an RGB color without alpha channel data.</p>
+<p>All pixels in a BitmapData object are stored as premultiplied color
+values. A premultiplied image pixel has the red, green, and blue color
+channel values already multiplied by the alpha data. For example, if the
+alpha value is 0, the values for the RGB channels are also 0, independent
+of their unmultiplied values. This loss of data can cause some problems
+when you perform operations. All BitmapData methods take and return
+unmultiplied values. The internal pixel representation is converted from
+premultiplied to unmultiplied before it is returned as a value. During a
+set operation, the pixel value is premultiplied before the raw image pixel
+is set.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>The <em>x</em> position of the pixel.</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>The <em>y</em> position of the pixel.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A number representing an ARGB pixel value. If the(<em>x</em>,
+<em>y</em>) coordinates are outside the bounds of the image, 0 is
+returned.</p></div></div></div><div class="field "><a name="getPixels"></a><h3 class="anchor"><code><a href="#getPixels"><span class="identifier">getPixels</span></a>(<span style="white-space:nowrap">rect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></span>):<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a></code></h3><div class="doc"><p>Generates a byte array from a rectangular region of pixel data. Writes an
+unsigned integer(a 32-bit unmultiplied pixel value) for each pixel into
+the byte array.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>rect</code></th><td><p>A rectangular area in the current BitmapData object.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A ByteArray representing the pixels in the given Rectangle.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The rect is null.</p></td></tr></table></div></div><div class="field "><a name="getVector"></a><h3 class="anchor"><code><a href="#getVector"><span class="identifier">getVector</span></a>(<span style="white-space:nowrap">rect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></span>):<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a>&gt;</code></h3><div class="doc"><p>Generates a vector array from a rectangular region of pixel data. Returns
+a Vector object of unsigned integers(a 32-bit unmultiplied pixel value)
+for the specified rectangle.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>rect</code></th><td><p>A rectangular area in the current BitmapData object.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A Vector representing the given Rectangle.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The rect is null.</p></td></tr></table></div></div><div class="field "><a name="histogram"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ hRect : null })</span><a href="#histogram"><span class="identifier">histogram</span></a>(<span style="white-space:nowrap">?hRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></span>):<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;&gt;</code></h3><div class="doc"><p>Computes a 256-value binary number histogram of a BitmapData object. This method
+returns a Vector object containing four Vector<Float> instances (four Vector
+objects that contain Float objects). The four Vector instances represent the
+red, green, blue and alpha components in order. Each Vector instance contains
+256 values that represent the population count of an individual component value,
+from 0 to 255.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>hRect</code></th><td><p>The area of the BitmapData object to use.</p></td></tr></table></div></div><div class="field "><a name="hitTest"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ secondAlphaThreshold : 1, secondBitmapDataPoint : null })</span><a href="#hitTest"><span class="identifier">hitTest</span></a>(<span style="white-space:nowrap">firstPoint:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a>,</span> <span style="white-space:nowrap">firstAlphaThreshold:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">secondObject:<a class="type" title="openfl.utils.Object" href="../../openfl/utils/Object.html">Object</a>,</span> <span style="white-space:nowrap">?secondBitmapDataPoint:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a>,</span> <span style="white-space:nowrap">secondAlphaThreshold:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 1</span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Performs pixel-level hit detection between one bitmap image and a point,
+rectangle, or other bitmap image. A hit is defined as an overlap of a point or
+rectangle over an opaque pixel, or two overlapping opaque pixels. No stretching,
+rotation, or other transformation of either object is considered when the hit test
+is performed.</p>
+<p>If an image is an opaque image, it is considered a fully opaque rectangle for this
+method. Both images must be transparent images to perform pixel-level hit testing
+that considers transparency. When you are testing two transparent images, the alpha
+threshold parameters control what alpha channel values, from 0 to 255, are
+considered opaque.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>firstPoint</code></th><td><p>A position of the upper-left corner of the BitmapData image
+in an arbitrary coordinate space. The same coordinate space is used in defining
+the secondBitmapPoint parameter.</p></td></tr><tr><th style="width:25%;"><code>firstAlphaThreshold</code></th><td><p>The smallest alpha channel value that is considered
+opaque for this hit test.</p></td></tr><tr><th style="width:25%;"><code>secondObject</code></th><td><p>A Rectangle, Point, Bitmap, or BitmapData object.</p></td></tr><tr><th style="width:25%;"><code>secondBitmapDataPoint</code></th><td><p>A point that defines a pixel location in the
+second BitmapData object. Use this parameter only when the value of <code>secondObject</code>
+is a BitmapData object.</p></td></tr><tr><th style="width:25%;"><code>secondAlphaThreshold</code></th><td><p>The smallest alpha channel value that is
+considered opaque in the second BitmapData object. Use this parameter only when
+the value of <code>secondObject</code> is a BitmapData object and both BitmapData objects
+are transparent.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a hit occurs; otherwise, <code><a href="../../Bool.html">false</a></code>.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The <code>secondObject</code> parameter is not a Point, Rectangle,
+Bitmap, or BitmapData object.</p></td></tr><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The <code>firstPoint</code> is <code>null</code>.</p></td></tr></table></div></div><div class="field "><a name="lock"></a><h3 class="anchor"><code><a href="#lock"><span class="identifier">lock</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Locks an image so that any objects that reference the BitmapData object,
+such as Bitmap objects, are not updated when this BitmapData object
+changes. To improve performance, use this method along with the
+<code>unlock()</code> method before and after numerous calls to the
+<code>setPixel()</code> or <code>setPixel32()</code> method.</p></div></div><div class="field "><a name="merge"></a><h3 class="anchor"><code><a href="#merge"><span class="identifier">merge</span></a>(<span style="white-space:nowrap">sourceBitmapData:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>,</span> <span style="white-space:nowrap">sourceRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">destPoint:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a>,</span> <span style="white-space:nowrap">redMultiplier:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a>,</span> <span style="white-space:nowrap">greenMultiplier:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a>,</span> <span style="white-space:nowrap">blueMultiplier:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a>,</span> <span style="white-space:nowrap">alphaMultiplier:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Performs per-channel blending from a source image to a destination image. For
+each channel and each pixel, a new value is computed based on the channel
+values of the source and destination pixels. For example, in the red channel,
+the new value is computed as follows (where <code>redSrc</code> is the red channel value
+for a pixel in the source image and <code>redDest</code> is the red channel value at the
+corresponding pixel of the destination image):</p>
+<pre><code class="prettyprint haxe">redDest = [(redSrc * redMultiplier) + (redDest * (256 - redMultiplier))] / 256;</code></pre>
+<p>The <code>redMultiplier</code>, <code>greenMultiplier</code>, <code>blueMultiplier</code>, and <code>alphaMultiplier</code>
+values are the multipliers used for each color channel. Use a hexadecimal
+value ranging from 0 to 0x100 (256) where 0 specifies the full value from the
+destination is used in the result, 0x100 specifies the full value from the
+source is used, and numbers in between specify a blend is used (such as 0x80
+for 50%).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sourceBitmapData</code></th><td><p>The input bitmap image to use. The source image can
+be a different BitmapData object, or it can refer to the current BitmapData
+object.</p></td></tr><tr><th style="width:25%;"><code>sourceRect</code></th><td><p>A rectangle that defines the area of the source image to use
+as input.</p></td></tr><tr><th style="width:25%;"><code>destPoint</code></th><td><p>The point within the destination image (the current
+BitmapData instance) that corresponds to the upper-left corner of the source
+rectangle.</p></td></tr><tr><th style="width:25%;"><code>redMultiplier</code></th><td><p>A hexadecimal uint value by which to multiply the red
+channel value.</p></td></tr><tr><th style="width:25%;"><code>greenMultiplier</code></th><td><p>A hexadecimal uint value by which to multiply the green
+channel value.</p></td></tr><tr><th style="width:25%;"><code>blueMultiplier</code></th><td><p>A hexadecimal uint value by which to multiply the blue
+channel value.</p></td></tr><tr><th style="width:25%;"><code>alphaMultiplier</code></th><td><p>A hexadecimal uint value by which to multiply the alpha
+transparency value.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The <code>sourceBitmapData</code>, <code>sourceRect</code> or <code>destPoint</code> are <code>null</code>.</p></td></tr></table></div></div><div class="field "><a name="noise"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ grayScale : false, channelOptions : 7, high : 255, low : 0 })</span><a href="#noise"><span class="identifier">noise</span></a>(<span style="white-space:nowrap">randomSeed:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">low:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0,</span> <span style="white-space:nowrap">high:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 255,</span> <span style="white-space:nowrap">channelOptions:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 7,</span> <span style="white-space:nowrap">grayScale:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Fills an image with pixels representing random noise.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>randomSeed</code></th><td><p>The random seed number to use. If you keep all other
+parameters the same, you can generate different
+pseudo-random results by varying the random seed
+value. The noise function is a mapping function, not
+a true random-number generation function, so it
+creates the same results each time from the same
+random seed.</p></td></tr><tr><th style="width:25%;"><code>low</code></th><td><p>The lowest value to generate for each channel(0 to
+255).</p></td></tr><tr><th style="width:25%;"><code>high</code></th><td><p>The highest value to generate for each channel(0 to
+255).</p></td></tr><tr><th style="width:25%;"><code>channelOptions</code></th><td><p>A number that can be a combination of any of the
+four color channel values</p>
+<pre><code>				 (`BitmapDataChannel.RED`,
+</code></pre>
+<p><code><a href="../../openfl/display/BitmapDataChannel.html#BLUE">BitmapDataChannel.BLUE</a></code>,
+<code><a href="../../openfl/display/BitmapDataChannel.html#GREEN">BitmapDataChannel.GREEN</a></code>, and
+<code><a href="../../openfl/display/BitmapDataChannel.html#ALPHA">BitmapDataChannel.ALPHA</a></code>). You can use
+the logical OR operator(<code>|</code>) to combine
+channel values.</p></td></tr><tr><th style="width:25%;"><code>grayScale</code></th><td><p>A Boolean value. If the value is <code><a href="../../Bool.html">true</a></code>,
+a grayscale image is created by setting all of the
+color channels to the same value. The alpha channel
+selection is not affected by setting this parameter
+to <code><a href="../../Bool.html">true</a></code>.</p></td></tr></table></div></div><div class="field "><a name="paletteMap"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ alphaArray : null, blueArray : null, greenArray : null, redArray : null })</span><a href="#paletteMap"><span class="identifier">paletteMap</span></a>(<span style="white-space:nowrap">sourceBitmapData:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>,</span> <span style="white-space:nowrap">sourceRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">destPoint:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a>,</span> <span style="white-space:nowrap">?redArray:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">?greenArray:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">?blueArray:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;,</span> <span style="white-space:nowrap">?alphaArray:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Remaps the color channel values in an image that has up to four arrays of
+color palette data, one for each channel.</p>
+<p>Flash runtimes use the following steps to generate the resulting image:</p><ol><li>After the red, green, blue, and alpha values are computed, they are added
+together using standard 32-bit-integer arithmetic.</li><li>The red, green, blue, and alpha channel values of each pixel are extracted
+into separate 0 to 255 values. These values are used to look up new color
+values in the appropriate array: <code>redArray</code>, <code>greenArray</code>, <code>blueArray</code>, and
+<code>alphaArray</code>. Each of these four arrays should contain 256 values.</li><li>After all four of the new channel values are retrieved, they are combined
+into a standard ARGB value that is applied to the pixel.</li></ol>
+<p>Cross-channel effects can be supported with this method. Each input array can
+contain full 32-bit values, and no shifting occurs when the values are added
+together. This routine does not support per-channel clamping.</p>
+<p>If no array is specified for a channel, the color channel is copied from the
+source image to the destination image.</p>
+<p>You can use this method for a variety of effects such as general palette mapping
+(taking one channel and converting it to a false color image). You can also use
+this method for a variety of advanced color manipulation algorithms, such as
+gamma, curves, levels, and quantizing.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sourceBitmapData</code></th><td><p>The input bitmap image to use. The source image can
+be a different BitmapData object, or it can refer to the current BitmapData
+instance.</p></td></tr><tr><th style="width:25%;"><code>sourceRect</code></th><td><p>A rectangle that defines the area of the source image to use
+as input.</p></td></tr><tr><th style="width:25%;"><code>destPoint</code></th><td><p>The point within the destination image (the current BitmapData
+object) that corresponds to the upper-left corner of the source rectangle.</p></td></tr><tr><th style="width:25%;"><code>redArray</code></th><td><p>If <code>redArray</code> is not <code>null</code>, <code>red = redArray[source red value] else red = source rect value</code>.</p></td></tr><tr><th style="width:25%;"><code>greenArray</code></th><td><p>If <code>greenArray</code> is not <code>null</code>, <code>green = greenArray[source green value] else green = source green value</code>.</p></td></tr><tr><th style="width:25%;"><code>blueArray</code></th><td><p>If <code>blueArray</code> is not <code>null, </code>blue = blueArray[source blue value] else blue = source blue value`.</p></td></tr><tr><th style="width:25%;"><code>alphaArray</code></th><td><p>If <code>alphaArray</code> is not <code>null, </code>alpha = alphaArray[source alpha value] else alpha = source alpha value`.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The <code>sourceBitmapData</code>, <code>sourceRect</code> or <code>destPoint</code> are <code>null</code>.</p></td></tr></table></div></div><div class="field "><a name="perlinNoise"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ offsets : null, grayScale : false, channelOptions : 7 })</span><a href="#perlinNoise"><span class="identifier">perlinNoise</span></a>(<span style="white-space:nowrap">baseX:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">baseY:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">numOctaves:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a>,</span> <span style="white-space:nowrap">randomSeed:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">stitch:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a>,</span> <span style="white-space:nowrap">fractalNoise:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a>,</span> <span style="white-space:nowrap">channelOptions:<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a> = 7,</span> <span style="white-space:nowrap">grayScale:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false,</span> <span style="white-space:nowrap">?offsets:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a>&gt;</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Generates a Perlin noise image.</p>
+<p>The Perlin noise generation algorithm interpolates and combines
+individual random noise functions(called octaves) into a single function
+that generates more natural-seeming random noise. Like musical octaves,
+each octave function is twice the frequency of the one before it. Perlin
+noise has been described as a "fractal sum of noise" because it combines
+multiple sets of noise data with different levels of detail.</p>
+<p>You can use Perlin noise functions to simulate natural phenomena and
+landscapes, such as wood grain, clouds, and mountain ranges. In most
+cases, the output of a Perlin noise function is not displayed directly but
+is used to enhance other images and give them pseudo-random
+variations.</p>
+<p>Simple digital random noise functions often produce images with harsh,
+contrasting points. This kind of harsh contrast is not often found in
+nature. The Perlin noise algorithm blends multiple noise functions that
+operate at different levels of detail. This algorithm results in smaller
+variations among neighboring pixel values.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>baseX</code></th><td><p>Frequency to use in the <em>x</em> direction. For
+example, to generate a noise that is sized for a 64
+x 128 image, pass 64 for the <code>baseX</code>
+value.</p></td></tr><tr><th style="width:25%;"><code>baseY</code></th><td><p>Frequency to use in the <em>y</em> direction. For
+example, to generate a noise that is sized for a 64
+x 128 image, pass 128 for the <code>baseY</code>
+value.</p></td></tr><tr><th style="width:25%;"><code>numOctaves</code></th><td><p>Number of octaves or individual noise functions to
+combine to create this noise. Larger numbers of
+octaves create images with greater detail. Larger
+numbers of octaves also require more processing
+time.</p></td></tr><tr><th style="width:25%;"><code>randomSeed</code></th><td><p>The random seed number to use. If you keep all other
+parameters the same, you can generate different
+pseudo-random results by varying the random seed
+value. The Perlin noise function is a mapping
+function, not a true random-number generation
+function, so it creates the same results each time
+from the same random seed.</p></td></tr><tr><th style="width:25%;"><code>stitch</code></th><td><p>A Boolean value. If the value is <code><a href="../../Bool.html">true</a></code>,
+the method attempts to smooth the transition edges
+of the image to create seamless textures for tiling
+as a bitmap fill.</p></td></tr><tr><th style="width:25%;"><code>fractalNoise</code></th><td><p>A Boolean value. If the value is <code><a href="../../Bool.html">true</a></code>,
+the method generates fractal noise; otherwise, it
+generates turbulence. An image with turbulence has
+visible discontinuities in the gradient that can
+make it better approximate sharper visual effects
+like flames and ocean waves.</p></td></tr><tr><th style="width:25%;"><code>channelOptions</code></th><td><p>A number that can be a combination of any of the
+four color channel values</p>
+<pre><code>				 (`BitmapDataChannel.RED`,
+</code></pre>
+<p><code><a href="../../openfl/display/BitmapDataChannel.html#BLUE">BitmapDataChannel.BLUE</a></code>,
+<code><a href="../../openfl/display/BitmapDataChannel.html#GREEN">BitmapDataChannel.GREEN</a></code>, and
+<code><a href="../../openfl/display/BitmapDataChannel.html#ALPHA">BitmapDataChannel.ALPHA</a></code>). You can use
+the logical OR operator(<code>|</code>) to combine
+channel values.</p></td></tr><tr><th style="width:25%;"><code>grayScale</code></th><td><p>A Boolean value. If the value is <code><a href="../../Bool.html">true</a></code>,
+a grayscale image is created by setting each of the
+red, green, and blue color channels to identical
+values. The alpha channel value is not affected if
+this value is set to <code><a href="../../Bool.html">true</a></code>.</p></td></tr></table></div></div><div class="field "><a name="scroll"></a><h3 class="anchor"><code><a href="#scroll"><span class="identifier">scroll</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Scrolls an image by a certain(<em>x</em>, <em>y</em>) pixel amount. Edge
+regions outside the scrolling area are left unchanged.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>The amount by which to scroll horizontally.</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>The amount by which to scroll vertically.</p></td></tr></table></div></div><div class="field "><a name="setPixel"></a><h3 class="anchor"><code><a href="#setPixel"><span class="identifier">setPixel</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">color:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets a single pixel of a BitmapData object. The current alpha channel
+value of the image pixel is preserved during this operation. The value of
+the RGB color parameter is treated as an unmultiplied color value.</p>
+<p><strong>Note:</strong> To increase performance, when you use the
+<code>setPixel()</code> or <code>setPixel32()</code> method repeatedly,
+call the <code>lock()</code> method before you call the
+<code>setPixel()</code> or <code>setPixel32()</code> method, and then call
+the <code>unlock()</code> method when you have made all pixel changes.
+This process prevents objects that reference this BitmapData instance from
+updating until you finish making the pixel changes.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>The <em>x</em> position of the pixel whose value changes.</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>The <em>y</em> position of the pixel whose value changes.</p></td></tr><tr><th style="width:25%;"><code>color</code></th><td><p>The resulting RGB color for the pixel.</p></td></tr></table></div></div><div class="field "><a name="setPixel32"></a><h3 class="anchor"><code><a href="#setPixel32"><span class="identifier">setPixel32</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">color:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Sets the color and alpha transparency values of a single pixel of a
+BitmapData object. This method is similar to the <code>setPixel()</code>
+method; the main difference is that the <code>setPixel32()</code> method
+takes an ARGB color value that contains alpha channel information.</p>
+<p>All pixels in a BitmapData object are stored as premultiplied color
+values. A premultiplied image pixel has the red, green, and blue color
+channel values already multiplied by the alpha data. For example, if the
+alpha value is 0, the values for the RGB channels are also 0, independent
+of their unmultiplied values. This loss of data can cause some problems
+when you perform operations. All BitmapData methods take and return
+unmultiplied values. The internal pixel representation is converted from
+premultiplied to unmultiplied before it is returned as a value. During a
+set operation, the pixel value is premultiplied before the raw image pixel
+is set.</p>
+<p><strong>Note:</strong> To increase performance, when you use the
+<code>setPixel()</code> or <code>setPixel32()</code> method repeatedly,
+call the <code>lock()</code> method before you call the
+<code>setPixel()</code> or <code>setPixel32()</code> method, and then call
+the <code>unlock()</code> method when you have made all pixel changes.
+This process prevents objects that reference this BitmapData instance from
+updating until you finish making the pixel changes.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>The <em>x</em> position of the pixel whose value changes.</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>The <em>y</em> position of the pixel whose value changes.</p></td></tr><tr><th style="width:25%;"><code>color</code></th><td><p>The resulting ARGB color for the pixel. If the bitmap is
+opaque(not transparent), the alpha transparency portion of
+this color value is ignored.</p></td></tr></table></div></div><div class="field "><a name="setPixels"></a><h3 class="anchor"><code><a href="#setPixels"><span class="identifier">setPixels</span></a>(<span style="white-space:nowrap">rect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">byteArray:<a class="type" title="openfl.utils.ByteArray - The ByteArray class provides methods and properties to optimize reading, writing, and working with binary data." href="../../openfl/utils/ByteArray.html">ByteArray</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Converts a byte array into a rectangular region of pixel data. For each
+pixel, the <code><a href="../../openfl/utils/ByteArray.html#readUnsignedInt">ByteArray.readUnsignedInt</a>()</code> method is called and
+the return value is written into the pixel. If the byte array ends before
+the full rectangle is written, the function returns. The data in the byte
+array is expected to be 32-bit ARGB pixel values. No seeking is performed
+on the byte array before or after the pixels are read.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>rect</code></th><td><p>Specifies the rectangular region of the BitmapData
+object.</p></td></tr><tr><th style="width:25%;"><code>inputByteArray</code></th><td><p>A ByteArray object that consists of 32-bit
+unmultiplied pixel values to be used in the
+rectangular region.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>EOFError</code></th><td><p>The <code>inputByteArray</code> object does not include
+enough data to fill the area of the <code>rect</code>
+rectangle. The method fills as many pixels as possible
+before throwing the exception.</p></td></tr><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The rect or inputByteArray are null.</p></td></tr></table></div></div><div class="field "><a name="setVector"></a><h3 class="anchor"><code><a href="#setVector"><span class="identifier">setVector</span></a>(<span style="white-space:nowrap">rect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">inputVector:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="UInt - The unsigned Int type is only defined for Flash and C#." href="../../UInt.html">UInt</a>&gt;</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Converts a Vector into a rectangular region of pixel data. For each pixel,
+a Vector element is read and written into the BitmapData pixel. The data
+in the Vector is expected to be 32-bit ARGB pixel values.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>rect</code></th><td><p>Specifies the rectangular region of the BitmapData object.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>RangeError</code></th><td><p>The vector array is not large enough to read all the
+pixel data.</p></td></tr></table></div></div><div class="field "><a name="threshold"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ copySource : false, mask : 0xFFFFFFFF, color : 0x00000000 })</span><a href="#threshold"><span class="identifier">threshold</span></a>(<span style="white-space:nowrap">sourceBitmapData:<a class="type" title="openfl.display.BitmapData - The BitmapData class lets you work with the data (pixels) of a Bitmap object." href="../../openfl/display/BitmapData.html">BitmapData</a>,</span> <span style="white-space:nowrap">sourceRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a>,</span> <span style="white-space:nowrap">destPoint:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a>,</span> <span style="white-space:nowrap">operation:<a class="type" title="String - The basic String class." href="../../String.html">String</a>,</span> <span style="white-space:nowrap">threshold:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>,</span> <span style="white-space:nowrap">color:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0x00000000,</span> <span style="white-space:nowrap">mask:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a> = 0xFFFFFFFF,</span> <span style="white-space:nowrap">copySource:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Tests pixel values in an image against a specified threshold and sets
+pixels that pass the test to new color values. Using the
+<code>threshold()</code> method, you can isolate and replace color ranges
+in an image and perform other logical operations on image pixels.</p>
+<p>The <code>threshold()</code> method's test logic is as follows:</p><ol><li>If <code>((pixelValue &amp; mask) operation(threshold &amp; mask))</code>,
+then set the pixel to <code>color</code>;</li><li>Otherwise, if <code>copySource == <a href="../../Bool.html">true</a></code>, then set the pixel to
+corresponding pixel value from <code>sourceBitmap</code>.</li></ol>
+<p>The <code>operation</code> parameter specifies the comparison operator
+to use for the threshold test. For example, by using "==" as the
+<code>operation</code> parameter, you can isolate a specific color value
+in an image. Or by using <code>{operation: "&lt;", mask: 0xFF000000,
+threshold: 0x7F000000, color: 0x00000000}</code>, you can set all
+destination pixels to be fully transparent when the source image pixel's
+alpha is less than 0x7F. You can use this technique for animated
+transitions and other effects.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>sourceBitmapData</code></th><td><p>The input bitmap image to use. The source image
+can be a different BitmapData object or it can
+refer to the current BitmapData instance.</p></td></tr><tr><th style="width:25%;"><code>sourceRect</code></th><td><p>A rectangle that defines the area of the source
+image to use as input.</p></td></tr><tr><th style="width:25%;"><code>destPoint</code></th><td><p>The point within the destination image(the
+current BitmapData instance) that corresponds to
+the upper-left corner of the source rectangle.</p></td></tr><tr><th style="width:25%;"><code>operation</code></th><td><p>One of the following comparison operators, passed
+as a String: "&lt;", "&lt;=", ">", ">=", "==", "!="</p></td></tr><tr><th style="width:25%;"><code>threshold</code></th><td><p>The value that each pixel is tested against to see
+if it meets or exceeds the threshhold.</p></td></tr><tr><th style="width:25%;"><code>color</code></th><td><p>The color value that a pixel is set to if the
+threshold test succeeds. The default value is
+0x00000000.</p></td></tr><tr><th style="width:25%;"><code>mask</code></th><td><p>The mask to use to isolate a color component.</p></td></tr><tr><th style="width:25%;"><code>copySource</code></th><td><p>If the value is <code><a href="../../Bool.html">true</a></code>, pixel values
+from the source image are copied to the
+destination when the threshold test fails. If the
+value is <code><a href="../../Bool.html">false</a></code>, the source image is
+not copied when the threshold test fails.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>The number of pixels that were changed.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The operation string is not a valid operation</p></td></tr><tr class="indent"><th style="width:25%;"><code>TypeError</code></th><td><p>The sourceBitmapData, sourceRect destPoint or
+operation are null.</p></td></tr></table></div></div><div class="field "><a name="unlock"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ changeRect : null })</span><a href="#unlock"><span class="identifier">unlock</span></a>(<span style="white-space:nowrap">?changeRect:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Unlocks an image so that any objects that reference the BitmapData object,
+such as Bitmap objects, are updated when this BitmapData object changes.
+To improve performance, use this method along with the <code>lock()</code>
+method before and after numerous calls to the <code>setPixel()</code> or
+<code>setPixel32()</code> method.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>changeRect</code></th><td><p>The area of the BitmapData object that has changed. If
+you do not specify a value for this parameter, the
+entire area of the BitmapData object is considered
+changed.</p></td></tr></table></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

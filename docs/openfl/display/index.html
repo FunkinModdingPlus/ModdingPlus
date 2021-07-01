@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.display</title></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><h1>openfl.display </h1>  <table class="table table-condensed"><tbody><tr><th style="width:200px;"><i class="fa fa-folder-o"></i><a href="../../openfl/index.html" title="openfl">..</a></th><td></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Application.html" title="openfl.display.Application">Application</a></td><td><p>The Application class is a Lime Application instance that uses
+OpenFL Window by default when a new window is created.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Bitmap.html" title="openfl.display.Bitmap">Bitmap</a></td><td><p>The Bitmap class represents display objects that represent bitmap images.
+These can be images that you load with the <code><a href="../../lime/utils/Assets.html#Assets">openfl.Assets</a></code> or
+<code><a href="../../openfl/display/Loader.html#Loader">openfl.display.Loader</a></code> classes, or they can be images that you
+create with the <code><a href="../../openfl/display/Bitmap.html#Bitmap">Bitmap</a>()</code> constructor.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/BitmapData.html" title="openfl.display.BitmapData">BitmapData</a></td><td><p>The BitmapData class lets you work with the data (pixels) of a Bitmap
+object. You can use the methods of the BitmapData class to create
+arbitrarily sized transparent or opaque bitmap images and manipulate them
+in various ways at runtime. You can also access the BitmapData for a bitmap
+image that you load with the <code><a href="../../lime/utils/Assets.html#Assets">openfl.Assets</a></code> or
+<code><a href="../../openfl/display/Loader.html#Loader">openfl.display.Loader</a></code> classes.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/BitmapDataChannel.html" title="openfl.display.BitmapDataChannel">BitmapDataChannel</a></td><td><p>The BitmapDataChannel class is an enumeration of constant values that
+indicate which channel to use: red, blue, green, or alpha transparency.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/BlendMode.html" title="openfl.display.BlendMode">BlendMode</a></td><td><p>A class that provides constant values for visual blend mode effects. These
+constants are used in the following:</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/CairoRenderer.html" title="openfl.display.CairoRenderer">CairoRenderer</a></td><td><p>BETA**</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/CanvasRenderer.html" title="openfl.display.CanvasRenderer">CanvasRenderer</a></td><td><p>BETA**</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/CapsStyle.html" title="openfl.display.CapsStyle">CapsStyle</a></td><td><p>The CapsStyle class is an enumeration of constant values that specify the
+caps style to use in drawing lines. The constants are provided for use as
+values in the <code>caps</code> parameter of the
+<code><a href="../../openfl/display/Graphics.html#lineStyle">openfl.display.Graphics.lineStyle</a>()</code> method. You can specify the
+following three types of caps:</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/DOMRenderer.html" title="openfl.display.DOMRenderer">DOMRenderer</a></td><td><p>BETA**</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/DisplayObject.html" title="openfl.display.DisplayObject">DisplayObject</a></td><td><p>The DisplayObject class is the base class for all objects that can be
+placed on the display list. The display list manages all objects displayed
+in openfl. Use the DisplayObjectContainer class to arrange the
+display objects in the display list. DisplayObjectContainer objects can
+have child display objects, while other display objects, such as Shape and
+TextField objects, are "leaf" nodes that have only parents and siblings, no
+children.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/DisplayObjectContainer.html" title="openfl.display.DisplayObjectContainer">DisplayObjectContainer</a></td><td><p>The DisplayObjectContainer class is the base class for all objects that can
+serve as display object containers on the display list. The display list
+manages all objects displayed in the Flash runtimes. Use the
+DisplayObjectContainer class to arrange the display objects in the display
+list. Each DisplayObjectContainer object has its own child list for
+organizing the z-order of the objects. The z-order is the front-to-back
+order that determines which object is drawn in front, which is behind, and
+so on.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/DisplayObjectRenderer.html" title="openfl.display.DisplayObjectRenderer">DisplayObjectRenderer</a></td><td><p></p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/DisplayObjectShader.html" title="openfl.display.DisplayObjectShader">DisplayObjectShader</a></td><td><p></p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/FPS.html" title="openfl.display.FPS">FPS</a></td><td><p>The FPS class provides an easy-to-use monitor to display
+the current frame rate of an OpenFL project</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/FrameLabel.html" title="openfl.display.FrameLabel">FrameLabel</a></td><td><p>The FrameLabel object contains properties that specify a frame number and
+the corresponding label name. The Scene class includes a <code>labels</code>
+property, which is an array of FrameLabel objects for the scene.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/FrameScript.html" title="openfl.display.FrameScript">FrameScript</a></td><td><p></p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/GradientType.html" title="openfl.display.GradientType">GradientType</a></td><td><p>The GradientType class provides values for the <code>type</code> parameter
+in the <code>beginGradientFill()</code> and
+<code>lineGradientStyle()</code> methods of the openfl.display.Graphics
+class.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Graphics.html" title="openfl.display.Graphics">Graphics</a></td><td><p>The Graphics class contains a set of methods that you can use to create a
+vector shape. Display objects that support drawing include Sprite and Shape
+objects. Each of these classes includes a <code>graphics</code> property
+that is a Graphics object. The following are among those helper functions
+provided for ease of use: <code>drawRect()</code>,
+<code>drawRoundRect()</code>, <code>drawCircle()</code>, and
+<code>drawEllipse()</code>.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/GraphicsBitmapFill.html" title="openfl.display.GraphicsBitmapFill">GraphicsBitmapFill</a></td><td><p>Defines a bitmap fill. The bitmap can be smoothed, repeated or tiled to
+fill the area; or manipulated using a transformation matrix.
+Use a GraphicsBitmapFill object with the <code><a href="../../openfl/display/Graphics.html#drawGraphicsData">Graphics.drawGraphicsData</a>()</code>
+method. Drawing a GraphicsBitmapFill object is the equivalent of calling
+the <code><a href="../../openfl/display/Graphics.html#beginBitmapFill">Graphics.beginBitmapFill</a>()</code> method.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/GraphicsEndFill.html" title="openfl.display.GraphicsEndFill">GraphicsEndFill</a></td><td><p>Indicates the end of a graphics fill. Use a GraphicsEndFill object with the
+<code><a href="../../openfl/display/Graphics.html#drawGraphicsData">Graphics.drawGraphicsData</a>()</code> method.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/GraphicsGradientFill.html" title="openfl.display.GraphicsGradientFill">GraphicsGradientFill</a></td><td><p>Defines a gradient fill.
+Use a GraphicsGradientFill object with the <code><a href="../../openfl/display/Graphics.html#drawGraphicsData">Graphics.drawGraphicsData</a>()</code>
+method. Drawing a GraphicsGradientFill object is the equivalent of calling
+the <code><a href="../../openfl/display/Graphics.html#beginGradientFill">Graphics.beginGradientFill</a>()</code> method.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/GraphicsPath.html" title="openfl.display.GraphicsPath">GraphicsPath</a></td><td><p>A collection of drawing commands and the coordinate parameters for those
+commands.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/GraphicsPathCommand.html" title="openfl.display.GraphicsPathCommand">GraphicsPathCommand</a></td><td><p>Defines the values to use for specifying path-drawing commands.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/GraphicsPathWinding.html" title="openfl.display.GraphicsPathWinding">GraphicsPathWinding</a></td><td><p>The GraphicsPathWinding class provides values for the
+<code><a href="../../openfl/display/GraphicsPath.html#winding">openfl.display.GraphicsPath.winding</a></code> property and the
+<code><a href="../../openfl/display/Graphics.html#drawPath">openfl.display.Graphics.drawPath</a>()</code> method to determine the
+direction to draw a path. A clockwise path is positively wound, and a
+counter-clockwise path is negatively wound:</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/GraphicsQuadPath.html" title="openfl.display.GraphicsQuadPath">GraphicsQuadPath</a></td><td><p>Defines a set of quadrilaterals. This is similar to using GraphicsPath <code>drawRect</code>
+repeatedly, but each rectangle can use a transform value to rotate, scale or skew
+the result.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/GraphicsShader.html" title="openfl.display.GraphicsShader">GraphicsShader</a></td><td><p></p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/GraphicsShaderFill.html" title="openfl.display.GraphicsShaderFill">GraphicsShaderFill</a></td><td><p>Defines a shader fill.
+Use a GraphicsShaderFill object with the <code><a href="../../openfl/display/Graphics.html#drawGraphicsData">Graphics.drawGraphicsData</a>()</code>
+method. Drawing a GraphicsShaderFill object is the equivalent of calling
+the <code><a href="../../openfl/display/Graphics.html#beginShaderFill">Graphics.beginShaderFill</a>()</code> method.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/GraphicsSolidFill.html" title="openfl.display.GraphicsSolidFill">GraphicsSolidFill</a></td><td><p>Defines a solid fill.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/GraphicsStroke.html" title="openfl.display.GraphicsStroke">GraphicsStroke</a></td><td><p>Defines a line style or stroke.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/GraphicsTrianglePath.html" title="openfl.display.GraphicsTrianglePath">GraphicsTrianglePath</a></td><td><p>Defines an ordered set of triangles that can be rendered using either
+(u,v) fill coordinates or a normal fill. Each triangle in the path is
+represented by three sets of (x, y) coordinates, each of which is one
+point of the triangle.
+The triangle vertices do not contain z coordinates and do not necessarily
+represent 3D faces. However a triangle path can be used to support the
+rendering of 3D geometry in a 2D space.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/IBitmapDrawable.html" title="openfl.display.IBitmapDrawable">IBitmapDrawable</a></td><td><p></p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/IGraphicsData.html" title="openfl.display.IGraphicsData">IGraphicsData</a></td><td><p></p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/IGraphicsFill.html" title="openfl.display.IGraphicsFill">IGraphicsFill</a></td><td><p></p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/IGraphicsPath.html" title="openfl.display.IGraphicsPath">IGraphicsPath</a></td><td><p></p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/IGraphicsStroke.html" title="openfl.display.IGraphicsStroke">IGraphicsStroke</a></td><td><p></p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/ITileContainer.html" title="openfl.display.ITileContainer">ITileContainer</a></td><td><p>ITileContainer is an interface implemented by compatible tile container
+objects, including the Tilemap and TileContainer classes.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/InteractiveObject.html" title="openfl.display.InteractiveObject">InteractiveObject</a></td><td><p>The InteractiveObject class is the abstract base class for all display
+objects with which the user can interact, using the mouse, keyboard, or
+other user input device.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/InterpolationMethod.html" title="openfl.display.InterpolationMethod">InterpolationMethod</a></td><td><p>The InterpolationMethod class provides values for the
+<code>interpolationMethod</code> parameter in the
+<code><a href="../../openfl/display/Graphics.html#beginGradientFill">Graphics.beginGradientFill</a>()</code> and
+<code><a href="../../openfl/display/Graphics.html#lineGradientStyle">Graphics.lineGradientStyle</a>()</code> methods. This parameter
+determines the RGB space to use when rendering the gradient.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/JPEGEncoderOptions.html" title="openfl.display.JPEGEncoderOptions">JPEGEncoderOptions</a></td><td><p>The JPEGEncoderOptions class defines a compression algorithm for the
+<code><a href="../../openfl/display/BitmapData.html#encode">openfl.display.BitmapData.encode</a>()</code> method.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/JointStyle.html" title="openfl.display.JointStyle">JointStyle</a></td><td><p>The JointStyle class is an enumeration of constant values that specify the
+joint style to use in drawing lines. These constants are provided for use
+as values in the <code>joints</code> parameter of the
+<code><a href="../../openfl/display/Graphics.html#lineStyle">openfl.display.Graphics.lineStyle</a>()</code> method. The method supports
+three types of joints: miter, round, and bevel, as the following example
+shows:</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/LineScaleMode.html" title="openfl.display.LineScaleMode">LineScaleMode</a></td><td><p>The LineScaleMode class provides values for the <code>scaleMode</code>
+parameter in the <code><a href="../../openfl/display/Graphics.html#lineStyle">Graphics.lineStyle</a>()</code> method.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Loader.html" title="openfl.display.Loader">Loader</a></td><td><p>The Loader class is used to load SWF files or image (JPG, PNG, or GIF)
+files. Use the <code>load()</code> method to initiate loading. The loaded
+display object is added as a child of the Loader object.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/LoaderInfo.html" title="openfl.display.LoaderInfo">LoaderInfo</a></td><td><p>The LoaderInfo class provides information about a loaded SWF file or a
+loaded image file(JPEG, GIF, or PNG). LoaderInfo objects are available for
+any display object. The information provided includes load progress, the
+URLs of the loader and loaded content, the number of bytes total for the
+media, and the nominal height and width of the media.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/MovieClip.html" title="openfl.display.MovieClip">MovieClip</a></td><td><p>The MovieClip class inherits from the following classes: Sprite,
+DisplayObjectContainer, InteractiveObject, DisplayObject, and
+EventDispatcher.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/OpenGLRenderer.html" title="openfl.display.OpenGLRenderer">OpenGLRenderer</a></td><td><p>BETA**</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/PNGEncoderOptions.html" title="openfl.display.PNGEncoderOptions">PNGEncoderOptions</a></td><td><p>The PNGEncoderOptions class defines a compression algorithm for the
+<code><a href="../../openfl/display/BitmapData.html#encode">openfl.display.BitmapData.encode</a>()</code> method.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/PixelSnapping.html" title="openfl.display.PixelSnapping">PixelSnapping</a></td><td><p>The PixelSnapping class is an enumeration of constant values for setting
+the pixel snapping options by using the <code>pixelSnapping</code> property
+of a Bitmap object.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Preloader.html" title="openfl.display.Preloader">Preloader</a></td><td><p>The Preloader class is a Lime Preloader instance that uses an OpenFL
+display object to display loading progress.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Scene.html" title="openfl.display.Scene">Scene</a></td><td><p></p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Shader.html" title="openfl.display.Shader">Shader</a></td><td><p>// TODO: Document GLSL Shaders
+A Shader instance represents a Pixel Bender shader kernel in ActionScript.
+To use a shader in your application, you create a Shader instance for it.
+You then use that Shader instance in the appropriate way according to the
+effect you want to create. For example, to use the shader as a filter, you
+assign the Shader instance to the <code>shader</code> property of a ShaderFilter
+object.
+A shader defines a function that executes on all the pixels in an image,
+one pixel at a time. The result of each call to the function is the output
+color at that pixel coordinate in the image. A shader can specify one or
+more input images, which are images whose content can be used in
+determining the output of the function. A shader can also specify one or
+more parameters, which are input values that can be used in calculating
+the function output. In a single shader execution, the input and parameter
+values are constant. The only thing that varies is the coordinate of the
+pixel whose color is the function result. Shader function calls for
+multiple output pixel coordinates execute in parallel to improve shader
+execution performance.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/ShaderData.html" title="openfl.display.ShaderData">ShaderData</a></td><td><p>// TODO: Document GLSL Shaders
+A ShaderData object contains properties representing any parameters and
+inputs for a shader kernel, as well as properties containing any metadata
+specified for the shader.
+These properties are added to the ShaderData object when it is created.
+The properties' names match the names specified in the shader's source
+code. The data type of each property varies according to what aspect of
+the shader the property represents. The properties that represent shader
+parameters are ShaderParameter instances, the properties that represent
+input images are ShaderInput instances, and the properties that represent
+shader metadata are instances of the ActionScript class corresponding to
+their data type (for example, a String instance for textual metadata and a
+uint for uint metadata).</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/ShaderInput.html" title="openfl.display.ShaderInput">ShaderInput</a></td><td><p>// TODO: Document GLSL Shaders
+A ShaderInput instance represents a single input image for a shader
+kernel. A kernel can be defined to accept zero, one, or more source images
+that are used in the kernel execution. A ShaderInput instance provides a
+mechanism for specifying the input image that is used when the shader
+executes. To specify a value for the input, create a BitmapData,
+ByteArray, or Vector.<Number> instance containing the image data and
+assign it to the <code>input</code> property.
+The ShaderInput instance representing a Shader instance's input image is
+accessed as a property of the Shader instance's <code>data</code> property. The
+ShaderInput property has the same name as the input's name in the shader
+code. For example, if a shader defines an input named <code>src</code>, the
+ShaderInput instance representing the <code>src</code> input is available as the
+<code>src</code> property, as this example shows:</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/ShaderParameter.html" title="openfl.display.ShaderParameter">ShaderParameter</a></td><td><p>TODO: Document GLSL Shaders</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/ShaderParameterType.html" title="openfl.display.ShaderParameterType">ShaderParameterType</a></td><td><p>This class defines the constants that represent the possible values for
+the ShaderParameter class's <code>type</code> property. Each constant represents one
+of the data types available in Flash Player for parameters in the Pixel
+Bender shader language.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/ShaderPrecision.html" title="openfl.display.ShaderPrecision">ShaderPrecision</a></td><td><p>This class defines the constants that represent the possible values for
+the Shader class's <code>precisionHint</code> property. Each constant represents one
+of the precision modes for executing shader operations.
+The precision mode selection affects the following shader operations.
+These operations are faster on an Intel processor with the SSE instruction
+set:</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Shape.html" title="openfl.display.Shape">Shape</a></td><td><p>This class is used to create lightweight shapes using the ActionScript
+drawing application program interface(API). The Shape class includes a
+<code>graphics</code> property, which lets you access methods from the
+Graphics class.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/SimpleButton.html" title="openfl.display.SimpleButton">SimpleButton</a></td><td><p>The SimpleButton class lets you control all instances of button symbols in
+a SWF file.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/SpreadMethod.html" title="openfl.display.SpreadMethod">SpreadMethod</a></td><td><p>The SpreadMethod class provides values for the <code>spreadMethod</code>
+parameter in the <code>beginGradientFill()</code> and
+<code>lineGradientStyle()</code> methods of the Graphics class.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Sprite.html" title="openfl.display.Sprite">Sprite</a></td><td><p>The Sprite class is a basic display list building block: a display list
+node that can display graphics and can also contain children.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Stage.html" title="openfl.display.Stage">Stage</a></td><td><p>The Stage class represents the main drawing area.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Stage3D.html" title="openfl.display.Stage3D">Stage3D</a></td><td><p>The Stage class represents the main drawing area.
+For SWF content running in the browser (in Flash<sup>஼/sup> Player), the
+Stage represents the entire area where Flash content is shown. For content
+running in AIR on desktop operating systems, each NativeWindow object has
+a corresponding Stage object.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/StageAlign.html" title="openfl.display.StageAlign">StageAlign</a></td><td><p>The StageAlign class provides constant values to use for the
+<code><a href="../../openfl/display/Stage.html#align">Stage.align</a></code> property.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/StageDisplayState.html" title="openfl.display.StageDisplayState">StageDisplayState</a></td><td><p>The StageDisplayState class provides values for the
+<code><a href="../../openfl/display/Stage.html#displayState">Stage.displayState</a></code> property.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/StageQuality.html" title="openfl.display.StageQuality">StageQuality</a></td><td><p>The StageQuality class provides values for the <code><a href="../../openfl/display/Stage.html#quality">Stage.quality</a></code>
+property.</p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/StageScaleMode.html" title="openfl.display.StageScaleMode">StageScaleMode</a></td><td><p>The StageScaleMode class provides values for the
+<code><a href="../../openfl/display/Stage.html#scaleMode">Stage.scaleMode</a></code> property.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Tile.html" title="openfl.display.Tile">Tile</a></td><td><p>The Tile class is the base class for all objects that can be contained in a
+ITileContainer object. Use the Tilemap or TileContainer class to arrange the tile
+objects in the tile list. Tilemap or TileContainer objects can contain tile'
+objects, while other the Tile class is a "leaf" node that have only parents and
+siblings, no children.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/TileContainer.html" title="openfl.display.TileContainer">TileContainer</a></td><td><p>The TileContainer type is a special kind of Tile that can hold
+other tiles within it.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Tilemap.html" title="openfl.display.Tilemap">Tilemap</a></td><td><p>The Tilemap class represents a "quad batch", or series of objects that are
+rendered from the same bitmap. The Tilemap class is designed to encourage
+the use of a single Tileset reference for best performance, but it is possible
+to use unique Tileset references for each Tile or TileContainer within a
+Tilemap.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Tileset.html" title="openfl.display.Tileset">Tileset</a></td><td><p>The Tileset class lets you specify logical rectangles within a larger
+BitmapData object, to be rendered using a Tilemap instance.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Timeline.html" title="openfl.display.Timeline">Timeline</a></td><td><p></p></td></tr><tr class="abstract"><td style="width:200px;"><a href="../../openfl/display/TriangleCulling.html" title="openfl.display.TriangleCulling">TriangleCulling</a></td><td><p>Defines codes for culling algorithms that determine which triangles not to
+render when drawing triangle paths.</p></td></tr><tr class="class"><td style="width:200px;"><a href="../../openfl/display/Window.html" title="openfl.display.Window">Window</a></td><td><p>The Window class is a Lime Window instance that automatically
+initializes an OpenFL stage for the current window.</p></td></tr></tbody></table></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>
