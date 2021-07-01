@@ -182,7 +182,6 @@ class PlayState extends MusicBeatState
 	private var camGame:FlxCamera;
 
 	public var doof:DialogueBox;
-	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 
 
 	var wiggleShit:WiggleEffect = new WiggleEffect();
@@ -602,47 +601,42 @@ class PlayState extends MusicBeatState
 		} else if (perfectMode || fullComboMode || goodCombo) {
 			dialogSuffix = "-perfect";
 		}
+		var filename:Null<String> = null;
 		if (FNFAssets.exists('assets/images/custom_chars/' + SONG.player1 + '/' + SONG.song.toLowerCase() + 'Dialog.txt'))
 		{	
-			var filename = 'assets/images/custom_chars/' + SONG.player1 + '/' + SONG.song.toLowerCase() + 'Dialog.txt';
+			filename = 'assets/images/custom_chars/' + SONG.player1 + '/' + SONG.song.toLowerCase() + 'Dialog.txt';
 			if (FNFAssets.exists('assets/images/custom_chars/' + SONG.player1 + '/' + SONG.song.toLowerCase() + 'Dialog'+dialogSuffix+'.txt'))
 				filename = 'assets/images/custom_chars/' + SONG.player1 + '/' + SONG.song.toLowerCase() + 'Dialog' + dialogSuffix + '.txt';
-			dialogue = CoolUtil.coolDynamicTextFile(filename);
 		}
 		else if (FNFAssets.exists('assets/images/custom_chars/' + SONG.player2 + '/' + SONG.song.toLowerCase() + 'Dialog.txt'))
 		{
-			var filename = 'assets/images/custom_chars/' + SONG.player2 + '/' + SONG.song.toLowerCase() + 'Dialog.txt';
+			filename = 'assets/images/custom_chars/' + SONG.player2 + '/' + SONG.song.toLowerCase() + 'Dialog.txt';
 			if (FNFAssets.exists('assets/images/custom_chars/' + SONG.player2 + '/' + SONG.song.toLowerCase() + 'Dialog${dialogSuffix}.txt')) {
 				filename = 'assets/images/custom_chars/' + SONG.player2 + '/' + SONG.song.toLowerCase() + 'Dialog${dialogSuffix}.txt';
 			}
-			dialogue = CoolUtil.coolDynamicTextFile(filename);
 			// if no player dialog, use default
 		}
 		else if (FNFAssets.exists('assets/data/' + SONG.song.toLowerCase() + '/dialog.txt'))
 		{
-			var filename = 'assets/data/' + SONG.song.toLowerCase() + '/dialog.txt';
+			filename = 'assets/data/' + SONG.song.toLowerCase() + '/dialog.txt';
 			if (FNFAssets.exists('assets/data/' + SONG.song.toLowerCase() + '/dialog${dialogSuffix}.txt'))
 			{
 				filename = 'assets/data/' + SONG.song.toLowerCase() + '/dialog${dialogSuffix}.txt';
 			}
-			trace(filename);
-			dialogue = CoolUtil.coolDynamicTextFile(filename);
 		}
 		else if (FNFAssets.exists('assets/data/' + SONG.song.toLowerCase() + '/dialogue.txt'))
 		{
-			var filename = 'assets/data/' + SONG.song.toLowerCase() + '/dialogue.txt';
+			filename = 'assets/data/' + SONG.song.toLowerCase() + '/dialogue.txt';
 			if (FNFAssets.exists('assets/data/' + SONG.song.toLowerCase() + '/dialogue${dialogSuffix}.txt'))
 			{
 				filename = 'assets/data/' + SONG.song.toLowerCase() + '/dialogue${dialogSuffix}.txt';
 			}
-			trace(filename);
-			dialogue = CoolUtil.coolDynamicTextFile(filename);
 		}
-		else
-		{
-			dialogue = [
-				':dad: The game tried to get a dialog file but couldn\'t find it. Please make sure there is a dialog file named "dialog.txt".'
-			];
+		var goodDialog:String;
+		if (filename != null) {
+			goodDialog = FNFAssets.getText(filename);
+		} else {
+			goodDialog = ':dad: The game tried to get a dialog file but couldn\'t find it. Please make sure there is a dialog file named "dialog.txt".';
 		}
 
 		var gfVersion:String = 'gf';
@@ -726,7 +720,7 @@ class PlayState extends MusicBeatState
 		add(boyfriend);
 		trace('bf cheeks');
 
-		doof = new DialogueBox(false, dialogue);
+		doof = new DialogueBox(false, goodDialog);
 		trace('doofensmiz');
 		// doof.x += 70;
 		// doof.y = FlxG.height * 0.5;

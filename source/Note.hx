@@ -89,7 +89,7 @@ typedef NoteInfo = {
 	 */
 	var ?dontStrum:Null<Bool>;
 	/**
-	 * Info about how the opponent sings the note. The opponent _always_ sings this note even if it isn't hit. 
+	 * Info about how the opponent sings the note. The opponent _always_ sings this note even if it isn't hit.
 	 */
 	var ?singInfo:Null<SingInfo>;
 	/**

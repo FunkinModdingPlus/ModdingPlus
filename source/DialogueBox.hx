@@ -84,10 +84,10 @@ class DialogueBox extends FlxSpriteGroup
 
 	var handSelect:FlxSprite;
 	var bgFade:FlxSprite;
-	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
+	public function new(talkingRight:Bool = true, ?dialogueInput:String)
 	{	
 		super();
-		if (dialogueList[0] == ':dad: The game tried to get a dialog file but couldn\'t find it. Please make sure there is a dialog file named "dialog.txt".')
+		if (dialogueInput.split('\n')[0] == ':dad: The game tried to get a dialog file but couldn\'t find it. Please make sure there is a dialog file named "dialog.txt".')
 			return;
 		_dialogue = {
 			addY: 0,
@@ -95,12 +95,7 @@ class DialogueBox extends FlxSpriteGroup
 			isPixel : false
 		};
 		var fileContent = "";
-		for (dialogText in dialogueList)
-		{
-			fileContent += dialogText;
-			fileContent += '\n';
-		}
-		fileContent = fileContent.trim();
+		fileContent = dialogueInput.trim();
 		trace(dialogueFile = FileParser.parseAdvancedDialog(fileContent));
 
 		setUp();
