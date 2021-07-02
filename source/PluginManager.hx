@@ -20,6 +20,8 @@ class PluginManager {
     }
     /**
      * Create a simple interp, that already added all the needed shit
+     * This is what has all the default things for hscript.
+     * @see https://github.com/TheDrawingCoder-Gamer/Funkin/wiki/HScript-Commands
      * @return Interp
      */
     public static function createSimpleInterp():Interp {

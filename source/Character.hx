@@ -73,11 +73,29 @@ class Character extends FlxSprite
 	public var animationNotes:Array<Dynamic> = [];
 	public var like:String = "bf";
 	public var beNormal:Bool = true;
+	/**
+	 * Color used by default for enemy, when not in duo mode or oppnt play.
+	 */
 	public var enemyColor:FlxColor = 0xFFFF0000;
+	/**
+	 * Color used by default for enemy in duo mode and oppnt play.
+	 */
 	public var opponentColor:FlxColor = 0xFFE7C53C;
+	/**
+	 * Color used by player while not in duo mode or oppnt play.
+	 */
 	public var playerColor:FlxColor = 0xFF66FF33;
+	/**
+	 * Color used by player when poisoned in fragile funkin.
+	 */
 	public var poisonColor:FlxColor = 0xFFA22CD1;
+	/**
+	 * Color used by enemy when poisoned in fragile funkin. 
+	 */
 	public var poisonColorEnemy:FlxColor = 0xFFEA2FFF;
+	/**
+	 * Color used by player in duo mode or oppnt play.
+	 */
 	public var bfColor:FlxColor = 0xFF149DFF;
 	// sits on speakers, replaces gf
 	public var likeGf:Bool = false;
