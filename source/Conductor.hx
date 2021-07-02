@@ -11,7 +11,7 @@ typedef BPMChangeEvent =
 {
 	var stepTime:Int;
 	var songTime:Float;
-	var bpm:Int;
+	var bpm:Float;
 }
 /**
  * Class that handles song position and timing. 
@@ -21,7 +21,7 @@ class Conductor
 	/**
 	 *  Current song bpm.
 	 */
-	public static var bpm:Int = 100;
+	public static var bpm:Float = 100;
 	/**
 	 * Beats in milliseconds.
 	 */
@@ -68,7 +68,7 @@ class Conductor
 	{
 		bpmChangeMap = [];
 
-		var curBPM:Int = song.bpm;
+		var curBPM:Float = song.bpm;
 		var totalSteps:Int = 0;
 		var totalPos:Float = 0;
 		for (i in 0...song.notes.length)
@@ -94,7 +94,7 @@ class Conductor
 	 * Change bpm. also updated crochet. 
 	 * @param newBpm New bpm.
 	 */
-	public static function changeBPM(newBpm:Int)
+	public static function changeBPM(newBpm:Float)
 	{
 		bpm = newBpm;
 
