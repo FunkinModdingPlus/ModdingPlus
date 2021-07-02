@@ -2071,29 +2071,29 @@ class PlayState extends MusicBeatState
 				player1Icon = "gf";
 				
 		}
-		if (poisonTimes == 0 || opponentPlayer) {
-			if (healthBar.percent < 20) {
-				iconP1.animation.curAnim.curFrame = 1;
-				#if windows
-				iconRPC = player1Icon+"-dead";
-				#end
-			}
-			else {
-				iconP1.animation.curAnim.curFrame = 0;
-				#if windows
-				iconRPC = player1Icon;
-				#end
-			}
-
-		} else {
-			if (!opponentPlayer) {
-				iconP1.animation.curAnim.curFrame = 2;
-				#if windows
-				iconRPC = player1Icon+"-dazed";
-				#end
-			}	
-			
+		if (healthBar.percent < 20)
+		{
+			iconP1.iconState = Dying;
+			iconP2.iconState = Winning;
+			#if windows
+			iconRPC = player1Icon + "-dead";
+			#end
 		}
+		else
+		{
+			iconP1.iconState = Normal;
+			#if windows
+			iconRPC = player1Icon;
+			#end
+		}
+		if (!opponentPlayer && poisonTimes != 0)
+		{
+			iconP1.iconState = Poisoned;
+			#if windows
+			iconRPC = player1Icon + "-dazed";
+			#end
+		}	
+		
 		// duo mode shouldn't show low health
 		if (properHealth < 20 && !duoMode) {
 			healthTxt.setFormat("assets/fonts/vcr.ttf", 20, FlxColor.RED, RIGHT, OUTLINE, FlxColor.BLACK);
@@ -2126,14 +2126,17 @@ class PlayState extends MusicBeatState
 		}
 
 		if (healthBar.percent > 80) {
-			iconP2.animation.curAnim.curFrame = 1;
+			iconP2.iconState = Dying;
+			if (iconP1.iconState != Poisoned) {
+				iconP1.iconState = Winning;
+			}
 			#if windows
 			if (opponentPlayer)
 				iconRPC = player2Icon + "-dead";
 			#end
 		}
 		else {
-			iconP2.animation.curAnim.curFrame = 0;
+			iconP2.iconState = Normal;
 			#if windows
 			if (opponentPlayer)
 				iconRPC = player2Icon;
@@ -2141,14 +2144,12 @@ class PlayState extends MusicBeatState
 		}
 			
 		if (poisonTimes != 0 && opponentPlayer) {
-			iconP2.animation.curAnim.curFrame = 2;
+			iconP2.iconState = Poisoned;
 			#if windows
 			if (opponentPlayer)
 				iconRPC = player2Icon + "-dazed";
 			#end
 		}
-			
-		
 		/* if (FlxG.keys.justPressed.NINE)
 			LoadingState.loadAndSwitchState(new Charting()); */
 

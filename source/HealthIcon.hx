@@ -15,10 +15,37 @@ import haxe.Json;
 import haxe.format.JsonParser;
 import tjson.TJSON;
 using StringTools;
+enum abstract IconState(Int) from Int to Int {
+	var Normal;
+	var Dying;
+	var Poisoned;
+	var Winning;
+}
 class HealthIcon extends FlxSprite
 {
 	var player:Bool = false;
 	public var sprTracker:FlxSprite;
+	public var iconState(default, set):IconState = Normal;
+	function set_iconState(x:IconState):IconState {
+		switch (x) {
+			case Normal:
+				animation.curAnim.curFrame = 0;
+			case Dying:
+				// if we set it out of bounds it doesn't realy matter as it goes to normal anyway
+				animation.curAnim.curFrame = 1;
+			case Poisoned:
+				// same deal it will go to dying which is good enough
+				animation.curAnim.curFrame = 2;
+			case Winning:
+				// we DO do it here here we want to make sure it isn't silly
+				if (animation.curAnim.frames.length >= 3) {
+					animation.curAnim.curFrame = 3;
+				} else {
+					animation.curAnim.curFrame = 0;
+				}
+		}
+		return iconState = x;
+	}
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		player = isPlayer;
@@ -42,7 +69,7 @@ class HealthIcon extends FlxSprite
 		}
 		else
 		{
-			iconFrames = [0, 0, 0];
+			iconFrames = [0, 0, 0, 0];
 		}
 		if (FNFAssets.exists('assets/images/custom_chars/' + char + "/icons.png"))
 		{
