@@ -2142,7 +2142,9 @@ class PlayState extends MusicBeatState
 				iconRPC = player2Icon;
 			#end
 		}
-			
+		if (healthBar.percent < 20) {
+			iconP2.iconState = Winning;
+		}
 		if (poisonTimes != 0 && opponentPlayer) {
 			iconP2.iconState = Poisoned;
 			#if windows
