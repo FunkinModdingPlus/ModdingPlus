@@ -6,6 +6,7 @@ if (charJson.like == "dad") {
     dadVar = 4.0;
 }
 function init(char) {
+    trace(": )");
     var playerSuffix = "char";
     if (char.isDie) {
         // poor programming but whatev
@@ -41,7 +42,7 @@ function init(char) {
         if (Reflect.hasField(Reflect.field(charJson.animation,field),"flippedname") && !char.isPlayer) {
 
             if (Reflect.hasField(Reflect.field(charJson.animation,field),"indices")) {
-                var indicesAnim:Array<Int> = Reflect.field(charJson.animation,field).indices;
+                var indicesAnim = Reflect.field(charJson.animation,field).indices;
                 char.animation.addByIndices(field, Reflect.field(charJson.animation,field).flippedname, indicesAnim, "", fps, loop);
             } else {
                 char.animation.addByPrefix(field,Reflect.field(charJson.animation,field).flippedname, fps, loop);
@@ -49,7 +50,7 @@ function init(char) {
 
         } else {
             if (Reflect.hasField(Reflect.field(charJson.animation,field),"indices")) {
-                var indicesAnim:Array<Int> = Reflect.field(charJson.animation,field).indices;
+                var indicesAnim = Reflect.field(charJson.animation,field).indices;
                 char.animation.addByIndices(field, Reflect.field(charJson.animation,field).name, indicesAnim, "", fps, loop);
             } else {
                 char.animation.addByPrefix(field,Reflect.field(charJson.animation,field).name, fps, loop);
@@ -71,11 +72,11 @@ function init(char) {
     char.flipX = if (charJson.flipx != null) charJson.flipx else false;
     trace("before like");
 
-    char.like = parsedAnimJson.like;
-    switch(char.like) {
+    char.like = charJson.like;
+    switch(charJson.like) {
         case 'bf' | 'bf-car' | 'bf-pixel' | 'bf-christmas':
             char.likeBf = true;
-        case 'gf' | 'gf-car' | 'pico-speaker' | 'gf-christmas' | 'gf-pixel':
+        case 'gf' | 'gf-car' | 'pico-speaker' | 'gf-christmas' | 'gf-pixel' | 'gf-tankmen':
             char.likeGf = true;
             switch (char.like) {
                 case 'gf':
@@ -87,11 +88,14 @@ function init(char) {
                 case 'pico-speaker':
                     char.hasGun = true;
             }
+        
     }
-
+    trace("after like");
+    trace(charJson);
     if (charJson.isPixel) {
+        trace(": ( ");
         char.antialiasing = false;
-        char.setGraphicSize(Std.int(width * 6));
+        char.setGraphicSize(Std.int(char.width * 6));
         char.updateHitbox(); // when the hitbox is sus!
     }
     trace("tgiu");
@@ -99,7 +103,7 @@ function init(char) {
         char.width += if (charJson.size != null) charJson.size[0] else 0;
         char.height += if (charJson.size != null) charJson.size[1] else 0;
     }
-    playAnim(charJson.playAnim);
+    char.playAnim(charJson.playAnim);
     trace("hmmb");
 }
 function update(elapsed,char) {
@@ -107,7 +111,7 @@ function update(elapsed,char) {
 }
 var danced = false;
 function dance(char) {
-    if (char.likeGf || char.like == "spooky") {
+    if (char.gfEpicLevel != Level_NotAHoe || char.like == "spooky") {
         danced = !danced;
         if (danced) {
             char.playAnim('danceLeft');
