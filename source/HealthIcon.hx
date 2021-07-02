@@ -38,7 +38,7 @@ class HealthIcon extends FlxSprite
 				animation.curAnim.curFrame = 2;
 			case Winning:
 				// we DO do it here here we want to make sure it isn't silly
-				if (animation.curAnim.frames.length >= 3) {
+				if (animation.curAnim.frames.length >= 4) {
 					animation.curAnim.curFrame = 3;
 				} else {
 					animation.curAnim.curFrame = 0;
