@@ -1,6 +1,6 @@
 {
-    "bf-old": {"frames": [0,1,2], "colors": ["yellow"]},
-    "face": {"frames": [0,1,2], "colors": ["GRAY"]},
-    "bf-pixel-old": {"frames": [0,1,2], "colors": ["yellow"]},
-    "bf-alpha": {"frames": [0,1,2], "colors": ["yellow"]}
+    "bf-old": {"frames": [0,1,2,3], "colors": ["#FFF829"]},
+    "face": {"frames": [0,1,2,3], "colors": ["#8A8A8A"]},
+    "bf-pixel-old": {"frames": [0,1,2,0], "colors": ["#FFF829"]},
+    "bf-alpha": {"frames": [0,1,2,3], "colors": ["#FA1111"]}
 }
