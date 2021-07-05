@@ -61,12 +61,12 @@
   },
   "monster": {
     "like": "newmonster",
-    "icons": [0,1,2,3],
+    "icons": [0,1,2],
     "colors": ["#F2D046"]
   },
   "monster-christmas": {
     "like": "monster-christmas",
-    "icons": [0,1,2,3],
+    "icons": [0,1,2],
     "colors": ["#F2D046"]
   },
   "parents-christmas": {
