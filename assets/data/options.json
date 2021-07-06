@@ -2,9 +2,7 @@
     "skipVictoryScreen": false,
     "skipModifierMenu": false,
     "alwaysDoCutscenes": false,
-    "useCustomInput": false,
-    "ignoreShittyTiming": false,
-    "DJFKKeys": false,
+    "useCustomInput": true,
     "allowEditOptions": true,
     "useSaveDataMenu": true, 
     "downscroll": false,
@@ -18,5 +16,7 @@
     "newJudgementPos": false,
     "emuOsuLifts": false,
     "skipDebugScreen": false,
-    "showComboBreaks": true
+    "showComboBreaks": true,
+    "useKadeHealth": false,
+    "useMissStun": false
 }

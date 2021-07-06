@@ -86,6 +86,8 @@ class SaveDataState extends MusicBeatState
 						{name: "Emulate Osu Lifts", value: false, intName: "emuOsuLifts", desc: "Whether to add lift notes at the end of sustains to force releasing buttons."},
 						{name: "Show Combo Breaks", value: false, intName:"showComboBreaks", desc: "Whether to display any combo breaks by flashing the screen."},
 						{name: "Funny Songs", value: false, intName: "stressTankmen", desc: "funny songs"},
+						{name: "Use Kade Health", value: false, intName: "useKadeHealth", desc: "Use kade engines health numbers when healing and dealing damage"},
+						{name: "Use Miss Stun", value: false, intName: "useMissStun", desc: "Prevent hitting notes for a short time after missing."},
 						{name: "Credits", value: false, intName:'credits', desc: "Show the credits!", ignore: true},
 						{name: "Sound Test...", value: false, intName: 'soundtest', desc: "Listen to the soundtrack", ignore: true},
 						{name: "Controls...", value: false, intName:'controls', desc:"Edit bindings!", ignore: true},

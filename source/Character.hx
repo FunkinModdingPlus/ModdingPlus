@@ -101,7 +101,7 @@ class Character extends FlxSprite
 	public var likeGf:Bool = false;
 	// uses animation notes
 	public var hasGun:Bool = false;
-	public var stunned:Bool = false;
+	public var stunned(get, default):Bool = false;
 	public var beingControlled:Bool = false;
 	/**
 	 * how many animations our current gf supports. 
@@ -118,6 +118,12 @@ class Character extends FlxSprite
 	public var isDie:Bool = false;
 	public var isPixel:Bool = false;
 	private var interp:Interp;
+	function get_stunned():Bool {
+		if (OptionsHandler.options.useMissStun){
+			return stunned;
+		}
+		return false;
+	}
 	function callInterp(func_name:String, args:Array<Dynamic>) {
 		if (interp == null) return;
 		if (!interp.variables.exists(func_name)) return;

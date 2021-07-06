@@ -28,6 +28,8 @@ typedef TOptions = {
     var emuOsuLifts:Bool;
     var skipDebugScreen:Bool;
     var showComboBreaks:Bool;
+    var useKadeHealth:Bool;
+    var useMissStun:Bool;
 }
 /**
  * OptionsHandler Handles options : )

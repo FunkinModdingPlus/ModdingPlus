@@ -596,92 +596,98 @@ class Note extends FlxSprite
 			}
 		} else {
 			var healies = 0.0;
+			var shitHeal = OptionsHandler.options.useKadeHealth ? 0.2 : 0.06;
+			var badHeal = OptionsHandler.options.useKadeHealth ? 0.06 : 0.03;
+			var goodHeal = OptionsHandler.options.useKadeHealth ? 0.04  : 0.03;
+			var missHeal = 0.04;
+			var sickHeal = OptionsHandler.options.useKadeHealth ? 0.1 : 0.07;
 			switch (healCutoff) {
 				case "shit":
 					switch (rating) {
 						case "shit" | 'wayoff':
-							healies = -0.06;
+							healies = -shitHeal;
 						case "bad":
-							healies = 0.03;
+							healies = badHeal;
 						case "good":
-							healies = 0.03;
+							healies = goodHeal;
 						case "miss":
-							healies = -0.04;
+							
+							healies = -missHeal;
 						case "sick":
-							healies = 0.07;
+							healies = sickHeal;
 					}
 				case "bad" | null: 
 					switch (rating)
 					{
 						case "shit" | 'wayoff':
-							healies = -0.06;
+							healies = -shitHeal;
 						case "bad":
-							healies = -0.03;
+							healies = -badHeal;
 						case "good":
-							healies = 0.03;
+							healies = goodHeal;
 						case "miss":
-							healies = -0.04;
+							healies = -missHeal;
 						case "sick":
-							healies = 0.07;
+							healies = sickHeal;
 					}
 				case "good": 
 					switch (rating)
 					{
 						case "shit" | 'wayoff':
-							healies = -0.06;
+							healies = -shitHeal;
 						case "bad":
-							healies = -0.03;
+							healies = -badHeal;
 						case "good":
-							healies = -0.03;
+							healies = -goodHeal;
 						case "miss":
-							healies = -0.04;
+							healies = -missHeal;
 						case "sick":
-							healies = 0.07;
+							healies = sickHeal;
 					}
 				case "wayoff":
 					switch (rating)
 					{
 						case "shit":
-							healies = 0.06;
+							healies = shitHeal;
 						case 'wayoff': 
-							healies = -0.06;
+							healies = -shitHeal;
 						case "bad":
-							healies = -0.03;
+							healies = badHeal;
 						case "good":
-							healies = 0.03;
+							healies = goodHeal;
 						case "miss":
-							healies = -0.04;
+							healies = -missHeal;
 						case "sick":
-							healies = 0.07;
+							healies = sickHeal;
 					}
 				case "miss":
 					switch (rating)
 					{
 						case "shit" | 'wayoff':
-							healies = 0.06;
+							healies = shitHeal;
 						case "bad":
-							healies = 0.03;
+							healies = badHeal;
 						case "good":
-							healies = 0.03;
+							healies = goodHeal;
 						case "miss":
-							healies = -0.04;
+							healies = -missHeal;
 						case "sick":
-							healies = 0.07;
+							healies = sickHeal;
 					}
 
 				case "sick":
 					switch (rating)
 					{
 						case "shit" | 'wayoff':
-							healies = -0.06;
+							healies = -shitHeal;
 						case "bad":
-							healies = -0.03;
+							healies = -badHeal;
 						case "good":
-							healies = -0.03;
+							healies = -goodHeal;
 						case "miss":
-							healies = -0.04;
+							healies = -missHeal;
 						case "sick":
-							healies = -0.07;
+							healies = -sickHeal;
 					}
 			}
 			if (healies > 0) {

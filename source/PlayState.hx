@@ -2971,13 +2971,6 @@ class PlayState extends MusicBeatState
 						score = -5;
 					}
 			}
-		} else {
-			switch (daRating) {
-				case 'miss':
-					// do nothing??
-				default:
-					healthBonus = -0.45;
-			}
 		}
 		
 		if (daNote.nukeNote && daRating != 'miss')
