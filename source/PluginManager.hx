@@ -24,16 +24,21 @@ import FNFAssets.HScriptAssets;
 import hscript.InterpEx;
 import hscript.Interp;
 import flixel.FlxG;
+
 class PluginManager {
     public static var interp = new InterpEx();
     public static var hscriptClasses:Array<String> = [];
+	@:access(hscript.InterpEx)
     public static function init() {
         var filelist = hscriptClasses = CoolUtil.coolTextFile("assets/scripts/plugin_classes/classes.txt");
+		interp = addVarsToInterp(interp);
+        HscriptGlobals.init();
         for (file in filelist) {
-            if (FNFAssets.exists(file)) {
-                interp.addModule(FNFAssets.getText(file));
+            if (FNFAssets.exists("assets/scripts/plugin_classes/" + file + ".hx")) {
+				interp.addModule(FNFAssets.getText("assets/scripts/plugin_classes/" + file + '.hx'));
             }
         }
+        trace(InterpEx._scriptClassDescriptors);
     }
     /**
      * Create a simple interp, that already added all the needed shit
@@ -43,34 +48,38 @@ class PluginManager {
      */
     public static function createSimpleInterp():Interp {
         var reterp = new Interp();
-        reterp.variables.set("Conductor", Conductor);
-        reterp.variables.set("FlxSprite", DynamicSprite);
-        reterp.variables.set("FlxSound", DynamicSound);
-        reterp.variables.set("FlxAtlasFrames", DynamicSprite.DynamicAtlasFrames);
-        reterp.variables.set("FlxGroup", flixel.group.FlxGroup);
-        reterp.variables.set("FlxAngle", flixel.math.FlxAngle);
-        reterp.variables.set("FlxMath", flixel.math.FlxMath);
-        reterp.variables.set("TitleState", TitleState);
-        reterp.variables.set("makeRangeArray", CoolUtil.numberArray);
-        reterp.variables.set("FNFAssets", HScriptAssets);
-        // : ) 
-        reterp.variables.set("FlxG", HscriptGlobals);
-        reterp.variables.set("FlxTimer", flixel.util.FlxTimer);
-        reterp.variables.set("FlxTween", flixel.tweens.FlxTween);
-        reterp.variables.set("Std", Std);
-        reterp.variables.set("StringTools", StringTools);
-        reterp.variables.set("MetroSprite",MetroSprite);
-        reterp.variables.set("FlxTrail", FlxTrail);
-        reterp.variables.set("FlxEase", FlxEase);
-        reterp.variables.set("Reflect", Reflect);
-        reterp.variables.set("Character", Character);
-        reterp.variables.set("OptionsHandler", OptionsHandler);
-        #if debug
-        reterp.variables.set("debug", true);
-        #else
-        reterp.variables.set("debug", false);
-        #end
+        reterp = addVarsToInterp(reterp);
         return reterp;
+    }
+    public static function addVarsToInterp<T:Interp>(interp:T):T {
+		interp.variables.set("Conductor", Conductor);
+		interp.variables.set("FlxSprite", DynamicSprite);
+		interp.variables.set("FlxSound", DynamicSound);
+		interp.variables.set("FlxAtlasFrames", DynamicSprite.DynamicAtlasFrames);
+		interp.variables.set("FlxGroup", flixel.group.FlxGroup);
+		interp.variables.set("FlxAngle", flixel.math.FlxAngle);
+		interp.variables.set("FlxMath", flixel.math.FlxMath);
+		interp.variables.set("TitleState", TitleState);
+		interp.variables.set("makeRangeArray", CoolUtil.numberArray);
+		interp.variables.set("FNFAssets", HScriptAssets);
+		// : )
+		interp.variables.set("FlxG", HscriptGlobals);
+		interp.variables.set("FlxTimer", flixel.util.FlxTimer);
+		interp.variables.set("FlxTween", flixel.tweens.FlxTween);
+		interp.variables.set("Std", Std);
+		interp.variables.set("StringTools", StringTools);
+		interp.variables.set("MetroSprite", MetroSprite);
+		interp.variables.set("FlxTrail", FlxTrail);
+		interp.variables.set("FlxEase", FlxEase);
+		interp.variables.set("Reflect", Reflect);
+		interp.variables.set("Character", Character);
+		interp.variables.set("OptionsHandler", OptionsHandler);
+		#if debug
+		interp.variables.set("debug", true);
+		#else
+		interp.variables.set("debug", false);
+		#end
+        return interp;
     }
 }
 class HscriptGlobals {
@@ -103,7 +112,7 @@ class HscriptGlobals {
     public static var renderMethod(get, never):FlxRenderMethod;
     public static var renderTile(get, never):Bool;
     // no save because there are other ways to access it and i don't trust you guys
-    public static var sound(default, never):HscriptSoundFrontEndWrapper = new HscriptSoundFrontEndWrapper(FlxG.sound);
+    public static var sound(default, null):HscriptSoundFrontEndWrapper;
     public static var stage(get, never):Stage;
     public static var state(get, never):FlxState;
     // no swipes because no mobile : )
@@ -115,6 +124,9 @@ class HscriptGlobals {
     public static var width(get, never):Int;
     public static var worldBounds(get, never):FlxRect;
     public static var worldDivisions(get, set):Int;
+    public static function init() {
+        sound = new HscriptSoundFrontEndWrapper(FlxG.sound);
+    }
     static function get_bitmap() {
         return FlxG.bitmap;
     }
