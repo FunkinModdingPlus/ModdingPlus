@@ -42,7 +42,7 @@ class NumberDisplay extends FlxText {
                 return;
             }
         }
-        text = "" + value;
+        text = "" + HelperFunctions.truncateFloat(value, 3);
     }
     public function resetValues() {
         value = useDefaultValue;

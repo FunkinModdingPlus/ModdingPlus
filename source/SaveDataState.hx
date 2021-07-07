@@ -29,9 +29,11 @@ typedef TOption = {
 	var value:Bool;
 	var desc:String;
 	var ?ignore:Bool;
-	var ?amount:Int;
-	var ?defAmount:Int;
-	var ?max:Int;
+	var ?amount:Float;
+	var ?defAmount:Float;
+	var ?precision:Float;
+	var ?max:Float;
+	var ?min:Float;
 }
 class SaveDataState extends MusicBeatState
 {
@@ -88,6 +90,7 @@ class SaveDataState extends MusicBeatState
 						{name: "Funny Songs", value: false, intName: "stressTankmen", desc: "funny songs"},
 						{name: "Use Kade Health", value: false, intName: "useKadeHealth", desc: "Use kade engines health numbers when healing and dealing damage"},
 						{name: "Use Miss Stun", value: false, intName: "useMissStun", desc: "Prevent hitting notes for a short time after missing."},
+						{name: "Offset", value: false, intName: "offset", desc: "How much to offset notes when playing. Can fix some latency issues!", amount: 0, defAmount: 0, max: 1000, min: 1000, precision: 0.1},
 						{name: "Credits", value: false, intName:'credits', desc: "Show the credits!", ignore: true},
 						{name: "Sound Test...", value: false, intName: 'soundtest', desc: "Listen to the soundtrack", ignore: true},
 						{name: "Controls...", value: false, intName:'controls', desc:"Edit bindings!", ignore: true},
@@ -106,7 +109,7 @@ class SaveDataState extends MusicBeatState
 				continue;
 			Reflect.setField(mappedOptions, optionList[i].intName, optionList[i]);
 			optionList[i].value = Reflect.field(curOptions, optionList[i].intName);
-			if ((Reflect.field(curOptions, optionList[i].intName) is Int)) {
+			if ((Reflect.field(curOptions, optionList[i].intName) is Int) || (Reflect.field(curOptions, optionList[i].intName) is Float)) {
 				optionList[i].amount = Reflect.field(curOptions, optionList[i].intName);
 				optionList[i].value = optionList[i].amount != optionList[i].defAmount;
 			}
@@ -149,13 +152,13 @@ class SaveDataState extends MusicBeatState
 			swagOption.targetY = j;
 			trace("l57");
 			var coolCheckmark = new FlxSprite().loadGraphic('assets/images/checkmark.png');
-			var numDisplay = new NumberDisplay(0, 0, optionList[j].defAmount, 1, 0, optionList[j].max);
+			var numDisplay = new NumberDisplay(0, 0, optionList[j].defAmount, optionList[j].precision != null ? optionList[j].precision : 1, 0, optionList[j].max);
 			numDisplay.visible = optionList[j].amount != null;
 			numberDisplays.push(numDisplay);
 			numDisplay.value = optionList[j].amount;
 			coolCheckmark.visible = optionList[j].value;
 			if (optionList[j].intName == "judge") {
-				switch (cast(optionList[j].amount : Judge.Jury))
+				switch (cast(Std.int(optionList[j].amount) : Judge.Jury))
 				{
 					case Judge.Jury.Classic:
 						numberDisplays[j].text = "Classic";
@@ -230,6 +233,13 @@ class SaveDataState extends MusicBeatState
 						swapMenus();
 
 				}
+			}
+		}
+		// holding control makes changing things go WEEEEEEEEEEE
+		if (FlxG.keys.pressed.CONTROL && (controls.RIGHT_MENU_H || controls.LEFT_MENU_H)) {
+			if (inOptionsMenu && optionList[optionsSelected].amount != null)
+			{
+				changeAmount(controls.RIGHT_MENU_H);
 			}
 		}
 		if (controls.ACCEPT) {
@@ -332,7 +342,7 @@ class SaveDataState extends MusicBeatState
 			toggleSelection();
 		}
 		if (optionList[optionsSelected].intName == "judge") {
-			switch (cast (optionList[optionsSelected].amount : Judge.Jury)) {
+			switch (cast (Std.int(optionList[optionsSelected].amount) : Judge.Jury)) {
 				case Judge.Jury.Classic:
 					numberDisplays[optionsSelected].text = "Classic";
 				case Judge.Jury.Hard:
@@ -343,7 +353,7 @@ class SaveDataState extends MusicBeatState
 		}
 		if (optionList[optionsSelected].intName == "preferJudgement") {
 			var judgementList = CoolUtil.coolTextFile('assets/data/judgements.txt');
-			numberDisplays[optionsSelected].text = judgementList[optionList[optionsSelected].amount];
+			numberDisplays[optionsSelected].text = judgementList[Std.int(optionList[optionsSelected].amount)];
 		}
 	}
 	function changeSelection(change:Int = 0)

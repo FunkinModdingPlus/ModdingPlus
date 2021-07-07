@@ -1373,7 +1373,7 @@ class PlayState extends MusicBeatState
 
 			for (songNotes in section.sectionNotes)
 			{
-				var daStrumTime:Float = songNotes[0];
+				var daStrumTime:Float = songNotes[0] + OptionsHandler.options.offset;
 				var daNoteData:Int = Std.int(songNotes[1] % Note.NOTE_AMOUNT);
 				var daLift:Bool = songNotes[4];
 				var noteHeal:Float = songNotes[5] == null ? 1 : songNotes[5];

@@ -30,6 +30,7 @@ typedef TOptions = {
     var showComboBreaks:Bool;
     var useKadeHealth:Bool;
     var useMissStun:Bool;
+    var offset:Float;
 }
 /**
  * OptionsHandler Handles options : )

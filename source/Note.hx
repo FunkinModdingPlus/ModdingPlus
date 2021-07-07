@@ -538,6 +538,13 @@ class Note extends FlxSprite
 				alpha = 0.3;
 		}
 	}
+	// inline because it's 1 fucking line dumbass
+	public inline function daStrumTime():Float {
+		return strumTime + OptionsHandler.options.offset;
+	}
+	public static inline function getTrueStrumTime(strumTime:Float):Float {
+		return strumTime + OptionsHandler.options.offset;
+	}
 	public function getHealth(rating:String):Float {
 		if (mineNote) {
 			if (rating != 'miss') {
