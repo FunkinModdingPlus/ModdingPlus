@@ -18,5 +18,7 @@
     "skipDebugScreen": false,
     "showComboBreaks": true,
     "useKadeHealth": false,
-    "useMissStun": false
+    "useMissStun": false,
+    "offset": 0,
+    "accuracyMode": 0
 }

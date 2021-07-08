@@ -1962,10 +1962,16 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 		var properHealth = opponentPlayer ? 100 - Math.round(health*50) : Math.round(health*50);
 		healthTxt.text = "Health:" + properHealth + "%";
-		if (notesPassing != 0)
-			accuracy = HelperFunctions.truncateFloat((notesHit / notesPassing) * 100, 2);
-		else
-			accuracy = 100;
+		/*
+		switch (OptionsHandler.options.accuracyMode) {
+			case Simple | Binary | Complex: 
+				if (notesPassing != 0)
+					accuracy = HelperFunctions.truncateFloat((notesHit / notesPassing) * 100, 2);
+				else
+					accuracy = 100;
+			case None:
+				accuracy = 0;
+		}*/
 		scoreTxt.text = Ratings.CalculateRanking(songScore, songScoreDef, nps, accuracy);
 		if (perfectMode && !Ratings.CalculateFullCombo(Sick))
 		{
@@ -1986,11 +1992,7 @@ class PlayState extends MusicBeatState
 			else
 				health = -50;
 		}
-		if (notesPassing != 0) {
-			accuracyTxt.text = "Accuracy:" + accuracy + "%";
-		} else {
-			accuracyTxt.text = "Accuracy:100%";
-		}
+		accuracyTxt.text = "Accuracy:" + accuracy + "%";
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
@@ -2860,7 +2862,7 @@ class PlayState extends MusicBeatState
 	{
 		var noteDiff:Float = Math.abs(Conductor.songPosition - daNote.strumTime);
 		var noteDiffSigned:Float = Conductor.songPosition - daNote.strumTime;
-		var wife:Float = HelperFunctions.wife3(noteDiff, Conductor.timeScale);
+		var wife:Float = HelperFunctions.wife3(noteDiffSigned, Conductor.timeScale);
 		// boyfriend.playAnim('hey');
 		vocals.volume = 1;
 		camZooming = true;
@@ -2890,6 +2892,9 @@ class PlayState extends MusicBeatState
 		if (forceMiss) {
 			daRating = 'miss';
 		}
+		if (OptionsHandler.options.accuracyMode == Complex)
+			totalNotesHit += wife;
+		
 		// SHIT IS A COMBO BREAKER IN ETTERNA NERDS
 		// GIT GUD
 		var dontCountNote = daNote.dontCountNote;
@@ -2901,7 +2906,11 @@ class PlayState extends MusicBeatState
 					{
 						ss = false;
 						shits++;
-						notesHit += 0.25;
+						
+						if (OptionsHandler.options.accuracyMode == Simple)
+						{
+							totalNotesHit -= 1;
+						} 
 						misses++;
 						score = -300;
 						combo = 0;
@@ -2917,7 +2926,10 @@ class PlayState extends MusicBeatState
 						misses++;
 						ss = false;
 						shits++;
-						notesHit += 0.1;
+						if (OptionsHandler.options.accuracyMode == Simple)
+						{
+							totalNotesHit -= 1;
+						}
 					}
 
 					// healthBonus -= 0.06 * if (daNote.ignoreHealthMods) 1 else healthLossMultiplier * daNote.damageMultiplier;
@@ -2928,7 +2940,14 @@ class PlayState extends MusicBeatState
 						score = 0;
 						ss = false;
 						bads++;
-						notesHit += 0.50;
+						if (OptionsHandler.options.accuracyMode == Simple)
+						{
+							totalNotesHit += 0.50;
+						}
+						else if (OptionsHandler.options.accuracyMode == Binary)
+						{
+							totalNotesHit += 1;
+						}
 					}
 					daRating = 'bad';
 
@@ -2940,7 +2959,14 @@ class PlayState extends MusicBeatState
 						score = 200;
 						ss = false;
 						goods++;
-						notesHit += 0.75;
+						if (OptionsHandler.options.accuracyMode == Simple)
+						{
+							totalNotesHit += 0.75;
+						}
+						else if (OptionsHandler.options.accuracyMode == Binary)
+						{
+							totalNotesHit += 1;
+						}
 					}
 					daRating = 'good';
 
@@ -2950,7 +2976,16 @@ class PlayState extends MusicBeatState
 					// healthBonus += 0.07 * if (daNote.ignoreHealthMods) 1 else healthGainMultiplier * daNote.healMultiplier;
 					if (!dontCountNote)
 					{
-						notesHit += 1;
+						// if it be binary or not
+						// it shall be a 1
+						if (OptionsHandler.options.accuracyMode == Simple)
+						{
+							totalNotesHit += 1;
+						}
+						else if (OptionsHandler.options.accuracyMode == Binary)
+						{
+							totalNotesHit += 1;
+						}
 						sicks++;
 					}
 
@@ -2967,12 +3002,15 @@ class PlayState extends MusicBeatState
 					if (!dontCountNote)
 					{
 						misses++;
+						if (OptionsHandler.options.accuracyMode == Simple)
+						{
+							totalNotesHit -= 1;
+						}
 						ss = false;
 						score = -5;
 					}
 			}
 		}
-		
 		if (daNote.nukeNote && daRating != 'miss')
 			// die <3
 			healthBonus = -4;
@@ -2986,7 +3024,7 @@ class PlayState extends MusicBeatState
 			health -= healthBonus;
 		else
 			health += healthBonus;
-		
+		updateAccuracy();
 		if (daNote.isSustainNote) {
 			return;
 		}
@@ -3446,7 +3484,7 @@ class PlayState extends MusicBeatState
 		if (!actingOn.stunned)
 		{
 			misses += 1;
-			notesPassing += 1;
+			
 			var healthBonus = -0.04 * healthLossMultiplier;
 			if (note != null) {
 				healthBonus = note.getHealth('miss');
@@ -3459,6 +3497,7 @@ class PlayState extends MusicBeatState
 			{
 				gf.playAnim('sad');
 			}
+			updateAccuracy();
 			combo = 0;
 			if (!practiceMode) {
 				songScore -= 5;
@@ -3756,5 +3795,4 @@ class PlayState extends MusicBeatState
 		callAllHScript('beatHit', [curBeat]);
 	}
 
-	var curLight:Int = 0;
 }

@@ -4,8 +4,15 @@ import lime.utils.Assets;
 import sys.io.File;
 #end
 import flixel.FlxG;
+enum abstract AccuracyMode(Int) from Int to Int {
+    var None = -1;
+    var Simple;
+    var Complex;
+    var Binary;
+}
 /**
  * Avaliable options. 
+ * 
  */
 typedef TOptions = {
     var skipVictoryScreen:Bool;
@@ -31,6 +38,7 @@ typedef TOptions = {
     var useKadeHealth:Bool;
     var useMissStun:Bool;
     var offset:Float;
+    var accuracyMode:AccuracyMode;
 }
 /**
  * OptionsHandler Handles options : )

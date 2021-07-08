@@ -15,6 +15,7 @@ import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 import Controls.KeyboardScheme;
+import OptionsHandler.AccuracyMode;
 // visual studio code gets pissy when you don't use conditionals
 #if sys
 import sys.io.File;
@@ -90,7 +91,8 @@ class SaveDataState extends MusicBeatState
 						{name: "Funny Songs", value: false, intName: "stressTankmen", desc: "funny songs"},
 						{name: "Use Kade Health", value: false, intName: "useKadeHealth", desc: "Use kade engines health numbers when healing and dealing damage"},
 						{name: "Use Miss Stun", value: false, intName: "useMissStun", desc: "Prevent hitting notes for a short time after missing."},
-						{name: "Offset", value: false, intName: "offset", desc: "How much to offset notes when playing. Can fix some latency issues!", amount: 0, defAmount: 0, max: 1000, min: 1000, precision: 0.1},
+						{name: "Offset", value: false, intName: "offset", desc: "How much to offset notes when playing. Can fix some latency issues! Hold Control to scroll faster.", amount: 0, defAmount: 0, max: 1000, min: -1000, precision: 0.1},
+						{name: "Accuracy Mode", value: false, intName: "accuracyMode", desc: "How accuracy is calculated. Complex = uses ms timing, Simple = uses rating only", amount: 0, defAmount: 0, min: -1, max: 2},
 						{name: "Credits", value: false, intName:'credits', desc: "Show the credits!", ignore: true},
 						{name: "Sound Test...", value: false, intName: 'soundtest', desc: "Listen to the soundtrack", ignore: true},
 						{name: "Controls...", value: false, intName:'controls', desc:"Edit bindings!", ignore: true},
@@ -152,7 +154,7 @@ class SaveDataState extends MusicBeatState
 			swagOption.targetY = j;
 			trace("l57");
 			var coolCheckmark = new FlxSprite().loadGraphic('assets/images/checkmark.png');
-			var numDisplay = new NumberDisplay(0, 0, optionList[j].defAmount, optionList[j].precision != null ? optionList[j].precision : 1, 0, optionList[j].max);
+			var numDisplay = new NumberDisplay(0, 0, optionList[j].defAmount, optionList[j].precision != null ? optionList[j].precision : 1, optionList[j].min != null ? optionList[j].min : 0, optionList[j].max);
 			numDisplay.visible = optionList[j].amount != null;
 			numberDisplays.push(numDisplay);
 			numDisplay.value = optionList[j].amount;
@@ -354,6 +356,18 @@ class SaveDataState extends MusicBeatState
 		if (optionList[optionsSelected].intName == "preferJudgement") {
 			var judgementList = CoolUtil.coolTextFile('assets/data/judgements.txt');
 			numberDisplays[optionsSelected].text = judgementList[Std.int(optionList[optionsSelected].amount)];
+		}
+		if (optionList[optionsSelected].intName == "accuracyMode") {
+			switch (cast (Std.int(optionList[optionsSelected].amount) : OptionsHandler.AccuracyMode)) {
+				case Simple: 
+					numberDisplays[optionsSelected].text = "Simple";
+				case Binary:
+					numberDisplays[optionsSelected].text = "Binary";
+				case Complex:
+					numberDisplays[optionsSelected].text = "Complex";
+				case None:
+					numberDisplays[optionsSelected].text = "Disable";
+			}
 		}
 	}
 	function changeSelection(change:Int = 0)

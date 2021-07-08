@@ -71,12 +71,12 @@ class HelperFunctions
 	{
 		var max_points = 1.0;
 		var miss_weight = -5.5;
-		var ridic = 5 * ts;
-		var max_boo_weight = 180 * ts;
+		var ridic = 5;
+		var max_boo_weight = 180;
 		var ts_pow = 0.75;
-		var zero = 65 * (Math.pow(ts, ts_pow));
+		var zero = 65 * (Math.pow(1, ts_pow));
 		var power = 2.5;
-		var dev = 22.7 * (Math.pow(ts, ts_pow));
+		var dev = 22.7 * (Math.pow(1, ts_pow));
 
 		if (maxms <= ridic) // anything below this (judge scaled) threshold is counted as full pts
 			return max_points;
@@ -87,4 +87,5 @@ class HelperFunctions
 		else
 			return miss_weight;
 	}
+
 }
