@@ -386,6 +386,7 @@ class PlayState extends MusicBeatState
 		interp.variables.set("add", add);
 		interp.variables.set("remove", remove);
 		interp.variables.set("insert", insert);
+		interp.variables.set("switchCharacter", switchCharacter);
 		interp.variables.set("setDefaultZoom", function(zoom) {defaultCamZoom = zoom;});
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
@@ -961,7 +962,7 @@ class PlayState extends MusicBeatState
 
 		startingSong = true;
 		trace('finish uo');
-		interp.variables.set("switchCharacter", switchCharacter);
+		
 		
 		var stageJson = CoolUtil.parseJson(FNFAssets.getText("assets/images/custom_stages/custom_stages.json"));
 		makeHaxeState("stages", "assets/images/custom_stages/" + SONG.stage + "/", "../"+Reflect.field(stageJson, SONG.stage)+".hscript");
