@@ -961,6 +961,7 @@ class PlayState extends MusicBeatState
 
 		startingSong = true;
 		trace('finish uo');
+		interp.variables.set("switchCharacter", switchCharacter);
 		
 		var stageJson = CoolUtil.parseJson(FNFAssets.getText("assets/images/custom_stages/custom_stages.json"));
 		makeHaxeState("stages", "assets/images/custom_stages/" + SONG.stage + "/", "../"+Reflect.field(stageJson, SONG.stage)+".hscript");
