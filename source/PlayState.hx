@@ -315,6 +315,7 @@ class PlayState extends MusicBeatState
 		var interp = PluginManager.createSimpleInterp();
 		// set vars
 		interp.variables.set("BEHIND_GF", BEHIND_GF);
+		interp.variables.set("switchCharacter", switchCharacter)
 		interp.variables.set("BEHIND_BF", BEHIND_BF);
 		interp.variables.set("BEHIND_DAD", BEHIND_DAD);
 		interp.variables.set("BEHIND_ALL", BEHIND_ALL);
