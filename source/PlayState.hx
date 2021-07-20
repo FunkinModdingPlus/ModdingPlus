@@ -315,7 +315,7 @@ class PlayState extends MusicBeatState
 		var interp = PluginManager.createSimpleInterp();
 		// set vars
 		interp.variables.set("BEHIND_GF", BEHIND_GF);
-		interp.variables.set("switchCharacter", switchCharacter)
+		interp.variables.set("switchCharacter", switchCharacter);
 		interp.variables.set("BEHIND_BF", BEHIND_BF);
 		interp.variables.set("BEHIND_DAD", BEHIND_DAD);
 		interp.variables.set("BEHIND_ALL", BEHIND_ALL);
@@ -387,7 +387,6 @@ class PlayState extends MusicBeatState
 		interp.variables.set("add", add);
 		interp.variables.set("remove", remove);
 		interp.variables.set("insert", insert);
-		interp.variables.set("switchCharacter", switchCharacter);
 		interp.variables.set("setDefaultZoom", function(zoom) {defaultCamZoom = zoom;});
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
@@ -754,9 +753,6 @@ class PlayState extends MusicBeatState
 				add(gf);
 				add(dad);
 				add(boyfriend);
-		}
-    }
-
 					}
 				}
 		}
@@ -1857,6 +1853,95 @@ class PlayState extends MusicBeatState
 	{
 		FlxTween.tween(FlxG.camera, {zoom: 1.3}, (Conductor.stepCrochet * 4 / 1000), {ease: FlxEase.elasticInOut});
 	}
+	function switchCharacter(charTo:String, charState:String) {
+	    switch(charState) {
+			case 'boyfriend':
+			    remove(boyfriend);
+				remove(iconP1);
+				boyfriend = new Character(770, 450, charTo, true);
+				var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+				camPos.x += boyfriend.camOffsetX;
+				camPos.y += boyfriend.camOffsetY;
+				boyfriend.x += boyfriend.playerOffsetX;
+				boyfriend.y += boyfriend.playerOffsetY;
+				if (boyfriend.likeGf) {
+					boyfriend.setPosition(gf.x, gf.y);
+					gf.visible = false;
+					if (isStoryMode)
+					{
+						camPos.x += 600;
+						tweenCamIn();
+					}
+				} else if (!dad.likeGf) {
+					gf.visible = true;
+				}
+				boyfriend.x += bfoffset[0];
+				boyfriend.y += bfoffset[1];
+				iconP1 = new HealthIcon(charTo, true);
+				iconP1.y = healthBar.y - (iconP1.height / 2);
+				iconP1.cameras = [camHUD];
+
+				// Layering nonsense
+				add(boyfriend);
+				remove(healthBarBG);
+				remove(healthBar);
+				remove(iconP2);
+				add(healthBarBG);
+				add(healthBar);
+				add(iconP1);
+				add(iconP2);
+			case 'dad':
+				remove(dad);
+				remove(iconP2);
+				dad = new Character(100, 100, charTo);
+				var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+				dad.x += dad.enemyOffsetX;
+				dad.y += dad.enemyOffsetY;
+				camPos.x += dad.camOffsetX;
+				camPos.y += dad.camOffsetY;
+				if (dad.likeGf) {
+					dad.setPosition(gf.x, gf.y);
+					gf.visible = false;
+					if (isStoryMode)
+					{
+						camPos.x += 600;
+						tweenCamIn();
+					}
+				} else if (!boyfriend.likeGf) {
+					gf.visible = true;
+				}
+				dad.x += dadoffset[0];
+		                dad.y += dadoffset[1];
+				iconP2 = new HealthIcon(charTo, false);
+				iconP2.y = healthBar.y - (iconP2.height / 2);
+				iconP2.cameras = [camHUD];
+
+				// Layering nonsense
+				remove(boyfriend);
+				add(dad);
+				add(boyfriend);
+				remove(healthBarBG);
+				remove(healthBar);
+				remove(iconP1);
+				add(healthBarBG);
+				add(healthBar);
+				add(iconP1);
+				add(iconP2);
+			case 'gf':
+				remove(gf);
+				gf = new Character(400, 130, charTo);
+				gf.scrollFactor.set(0.95, 0.95);
+				gf.x += gfoffset[0];
+				gf.y += gfoffset[1];
+
+				// Layering nonsense
+				remove(boyfriend);
+				remove(dad);
+				add(gf);
+				add(dad);
+				add(boyfriend);
+		}
+    }
 
 	override function openSubState(SubState:FlxSubState)
 	{
