@@ -665,6 +665,96 @@ class PlayState extends MusicBeatState
 					{
 						camPos.x += 600;
 						tweenCamIn();
+						function switchCharacter(charTo:String, charState:String) {
+	    switch(charState) {
+			case 'boyfriend':
+			    remove(boyfriend);
+				remove(iconP1);
+				boyfriend = new Character(770, 450, charTo, true);
+				var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+				camPos.x += boyfriend.camOffsetX;
+				camPos.y += boyfriend.camOffsetY;
+				boyfriend.x += boyfriend.playerOffsetX;
+				boyfriend.y += boyfriend.playerOffsetY;
+				if (boyfriend.likeGf) {
+					boyfriend.setPosition(gf.x, gf.y);
+					gf.visible = false;
+					if (isStoryMode)
+					{
+						camPos.x += 600;
+						tweenCamIn();
+					}
+				} else if (!dad.likeGf) {
+					gf.visible = true;
+				}
+				boyfriend.x += bfoffset[0];
+				boyfriend.y += bfoffset[1];
+				iconP1 = new HealthIcon(charTo, true);
+				iconP1.y = healthBar.y - (iconP1.height / 2);
+				iconP1.cameras = [camHUD];
+
+				// Layering nonsense
+				add(boyfriend);
+				remove(healthBarBG);
+				remove(healthBar);
+				remove(iconP2);
+				add(healthBarBG);
+				add(healthBar);
+				add(iconP1);
+				add(iconP2);
+			case 'dad':
+				remove(dad);
+				remove(iconP2);
+				dad = new Character(100, 100, charTo);
+				var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+				dad.x += dad.enemyOffsetX;
+				dad.y += dad.enemyOffsetY;
+				camPos.x += dad.camOffsetX;
+				camPos.y += dad.camOffsetY;
+				if (dad.likeGf) {
+					dad.setPosition(gf.x, gf.y);
+					gf.visible = false;
+					if (isStoryMode)
+					{
+						camPos.x += 600;
+						tweenCamIn();
+					}
+				} else if (!boyfriend.likeGf) {
+					gf.visible = true;
+				}
+				dad.x += dadoffset[0];
+		                dad.y += dadoffset[1];
+				iconP2 = new HealthIcon(charTo, false);
+				iconP2.y = healthBar.y - (iconP2.height / 2);
+				iconP2.cameras = [camHUD];
+
+				// Layering nonsense
+				remove(boyfriend);
+				add(dad);
+				add(boyfriend);
+				remove(healthBarBG);
+				remove(healthBar);
+				remove(iconP1);
+				add(healthBarBG);
+				add(healthBar);
+				add(iconP1);
+				add(iconP2);
+			case 'gf':
+				remove(gf);
+				gf = new Character(400, 130, charTo);
+				gf.scrollFactor.set(0.95, 0.95);
+				gf.x += gfoffset[0];
+				gf.y += gfoffset[1];
+
+				// Layering nonsense
+				remove(boyfriend);
+				remove(dad);
+				add(gf);
+				add(dad);
+				add(boyfriend);
+		}
+    }
+
 					}
 				}
 		}
@@ -885,7 +975,6 @@ class PlayState extends MusicBeatState
 					add(blackScreen);
 					blackScreen.scrollFactor.set();
 					camHUD.visible = false;
-
 					new FlxTimer().start(0.1, function(tmr:FlxTimer)
 					{
 						remove(blackScreen);
@@ -894,7 +983,6 @@ class PlayState extends MusicBeatState
 						camFollow.x += 200;
 						FlxG.camera.focusOn(camFollow.getPosition());
 						FlxG.camera.zoom = 1.5;
-
 						new FlxTimer().start(0.8, function(tmr:FlxTimer)
 						{
 							camHUD.visible = true;
@@ -974,7 +1062,6 @@ class PlayState extends MusicBeatState
 		} else {
 			senpaiEvil.frames = FlxAtlasFrames.fromSparrow('assets/images/weeb/senpaiCrazy.png', 'assets/images/weeb/senpaiCrazy.xml');
 		}
-
 		senpaiEvil.animation.addByPrefix('idle', 'Senpai Pre Explosion', 24, false);
 		if (dad.isPixel) {
 			senpaiEvil.setGraphicSize(Std.int(senpaiEvil.width * 6));
@@ -2494,7 +2581,6 @@ class PlayState extends MusicBeatState
 						daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
 					}
 					
-
 					// i am so fucking sorry for this if condition
 					if (daNote.isSustainNote
 						&& (((daNote.y + daNote.offset.y <= strumLine.y + Note.swagWidth / 2) && !downscroll)
@@ -2505,7 +2591,6 @@ class PlayState extends MusicBeatState
 						var swagRect = new FlxRect(0, strumLine.y + Note.swagWidth / 2 - daNote.y, daNote.width * 2, daNote.height * 2);
 						swagRect.y /= daNote.scale.y;
 						swagRect.height -= swagRect.y;
-
 						daNote.clipRect = swagRect;
 					}*/
 				
