@@ -193,13 +193,23 @@ class MainMenuState extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 				if (optionShit[curSelected] == 'donate')
+<<<<<<< Updated upstream
 				{
 					#if linux
-					Sys.command('/usr/bin/xdg-open', ["https://ninja-muffin24.itch.io/funkin", "&"]);
+					Sys.command('/usr/bin/xdg-open', [FNFAssets.getText("assets/data/donate_button_link.txt"), "&"]);
 					#else
-					FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
+					FlxG.openURL(FNFAssets.getText("assets/data/donate_button_link.txt"));
 					#end
 				}
+=======
+					{
+						#if linux
+						Sys.command('/usr/bin/xdg-open', [FNFAssets.getText("assets/data/donate_button_link.txt"), "&"]);
+						#else
+						FlxG.openURL(FNFAssets.getText("assets/data/donate_button_link.txt"));
+						#end
+					}
+>>>>>>> Stashed changes
 				else
 				{
 					selectedSomethin = true;
