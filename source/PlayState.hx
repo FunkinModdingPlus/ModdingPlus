@@ -311,7 +311,7 @@ class PlayState extends MusicBeatState
 	function makeHaxeState(usehaxe:String, path:String, filename:String) {
 		trace("opening a haxe state (because we are cool :))");
 		var parser = new ParserEx();
-		var program = parser.parseString(FNFAssets.getText(path + filename));
+		var program = parser.parseString(FNFAssets.getHscript(path + filename));
 		var interp = PluginManager.createSimpleInterp();
 		// set vars
 		interp.variables.set("BEHIND_GF", BEHIND_GF);
@@ -406,7 +406,7 @@ class PlayState extends MusicBeatState
 	{
 		trace("opening a haxe state (because we are cool :))");
 		var parser = new ParserEx();
-		var program = parser.parseModule(FNFAssets.getText(path + filename));
+		var program = parser.parseModule(FNFAssets.getHscript(path + filename));
 		trace("set stuff");
 		exInterp.registerModule(program);
 
@@ -873,7 +873,7 @@ class PlayState extends MusicBeatState
 		trace('finish uo');
 		
 		var stageJson = CoolUtil.parseJson(FNFAssets.getText("assets/images/custom_stages/custom_stages.json"));
-		makeHaxeState("stages", "assets/images/custom_stages/" + SONG.stage + "/", "../"+Reflect.field(stageJson, SONG.stage)+".hscript");
+		makeHaxeState("stages", "assets/images/custom_stages/" + SONG.stage + "/", "../"+Reflect.field(stageJson, SONG.stage));
 	if (alwaysDoCutscenes || isStoryMode )
 		{
 
@@ -937,7 +937,7 @@ class PlayState extends MusicBeatState
 			schoolIntro(dialogueBox);
 			return;
 		}
-		makeHaxeState("cutscene", "assets/images/custom_cutscenes/"+SONG.cutsceneType+'/', "../"+Reflect.field(goodJson, SONG.cutsceneType)+'.hscript');
+		makeHaxeState("cutscene", "assets/images/custom_cutscenes/"+SONG.cutsceneType+'/', "../"+Reflect.field(goodJson, SONG.cutsceneType));
 		
 	}
 	function schoolIntro(?dialogueBox:DialogueBox):Void
@@ -1075,9 +1075,9 @@ class PlayState extends MusicBeatState
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
-		if (FNFAssets.exists("assets/data/" + SONG.song.toLowerCase() + "/modchart.hscript"))
+		if (FNFAssets.exists("assets/data/" + SONG.song.toLowerCase() + "/modchart", Hscript))
 		{
-			makeHaxeState("modchart", "assets/data/" + SONG.song.toLowerCase() + "/", "modchart.hscript");
+			makeHaxeState("modchart", "assets/data/" + SONG.song.toLowerCase() + "/", "modchart");
 		}
 		if (duoMode)
 		{

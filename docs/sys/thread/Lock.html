@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>sys.thread.Lock</title><meta name="description" content="A Lock allows blocking execution until it has been unlocked. It keeps track
+of how often &lt;code&gt;release&lt;/code&gt; has been called, and blocks exactly as many &lt;code&gt;wait&lt;/code&gt;
+calls."/></head><body><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="icon-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> Lock</h1><h4><small>package <a href="../../sys/thread/index.html">sys.thread</a></small></h4>    <span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-coreApi" title="Identifies this class as a core API class (forces API check).">@:coreApi</span></div><div class="body"><div class="doc doc-main"><p>A Lock allows blocking execution until it has been unlocked. It keeps track
+of how often <code>release</code> has been called, and blocks exactly as many <code>wait</code>
+calls.</p>
+<p>The order of the <code>release</code> and <code>wait</code> calls is irrelevant. That is, a Lock
+can be released before anyone waits for it. In that case, the <code>wait</code> call
+will execute immediately.</p>
+<p>Usage example:</p>
+<pre><code class="prettyprint haxe">var lock = new Lock();
+var elements = [1, 2, 3];
+for (element in elements) {
+	// Create one thread per element
+	new Thread(function() {
+		trace(element);
+		Sys.sleep(1);
+		// Release once per thread = 3 times
+		lock.release();
+	});
+}
+for (_ in elements) {
+	// Wait 3 times
+	lock.wait();
+}
+trace("All threads finished");</code></pre></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-has_untyped" title="Used by the typer to mark fields that have untyped expressions.">@:has_untyped</span><a href="#new"><span class="identifier">new</span></a>()</code></h3><div class="doc"><p>Creates a new Lock which is initially locked.</p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="wait"></a><h3 class="anchor"><code><span class="label label-meta label-meta-has_untyped" title="Used by the typer to mark fields that have untyped expressions.">@:has_untyped</span><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ timeout : -1 })</span><a href="#wait"><span class="identifier">wait</span></a>(<span style="white-space:nowrap">timeout:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a> = -1</span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Waits for the lock to be released, or <code>timeout</code> (in seconds)
+to expire. Returns <code><a href="../../Bool.html">true</a></code> if the lock is released and <code><a href="../../Bool.html">false</a></code>
+if a time-out occurs.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

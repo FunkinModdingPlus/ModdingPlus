@@ -56,8 +56,8 @@ class HealthIcon extends FlxSprite
 
 	}
 	public function switchAnim(char:String = 'bf') {
-		var charJson:Dynamic = CoolUtil.parseJson(FNFAssets.getText("assets/images/custom_chars/custom_chars.jsonc"));
-		var iconJson:Dynamic = CoolUtil.parseJson(FNFAssets.getText("assets/images/custom_chars/icon_only_chars.json"));
+		var charJson:Dynamic = CoolUtil.parseJson(FNFAssets.getJson("assets/images/custom_chars/custom_chars"));
+		var iconJson:Dynamic = CoolUtil.parseJson(FNFAssets.getJson("assets/images/custom_chars/icon_only_chars"));
 		var iconFrames:Array<Int> = [];
 		if (Reflect.hasField(charJson, char))
 		{

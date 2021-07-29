@@ -113,7 +113,7 @@ class MainMenuState extends MusicBeatState
 		}
 
 		FlxG.camera.follow(camFollow, null, 0.06);
-		var infoJson:Dynamic = CoolUtil.parseJson(FNFAssets.getText("assets/data/gameInfo.json"));
+		var infoJson:Dynamic = CoolUtil.parseJson(FNFAssets.getJson("assets/data/gameInfo"));
 		if (infoJson.version != "") {
 			infoJson.version = " - " + infoJson.version; 
 		}
@@ -233,7 +233,7 @@ class MainMenuState extends MusicBeatState
 										trace("Story Menu Selected");
 									case 'freeplay':
 										CategoryState.choosingFor = "freeplay";
-										var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+										var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(FNFAssets.getJson('assets/data/freeplaySongJson'));
 										FreeplayState.soundTest = false;
 										if (epicCategoryJs.length > 1)
 										{

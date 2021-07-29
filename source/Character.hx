@@ -21,6 +21,7 @@ import flixel.FlxG;
 import lime.system.System;
 import lime.app.Application;
 import flixel.system.FlxSound;
+import openfl.utils.AssetType;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -30,6 +31,7 @@ import openfl.utils.ByteArray;
 import haxe.Json;
 import tjson.TJSON;
 import haxe.format.JsonParser;
+import FNFAssets.Extensions;
 using StringTools;
 enum abstract EpicLevel(Int) from Int to Int {
 	var Level_NotAHoe = 0;
@@ -160,7 +162,7 @@ class Character extends FlxSprite
 		trace(curCharacter);
 		var charJson:Dynamic = null;
 		var isError:Bool = false;
-		charJson = CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
+		charJson = CoolUtil.parseJson(FNFAssets.getJson('assets/images/custom_chars/custom_chars'));
 		interp = Character.getAnimInterp(curCharacter);
 		callInterp("init", [this]);
 		dance();
@@ -408,14 +410,14 @@ class Character extends FlxSprite
 	public static function getAnimInterp(char:String):Interp {
 		var interp = PluginManager.createSimpleInterp();
 		var parser = new hscript.Parser();
-		var charJson = CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
+		var charJson = CoolUtil.parseJson(FNFAssets.getJson('assets/images/custom_chars/custom_chars'));
 		var program:Expr;
-		if (FNFAssets.exists('assets/images/custom_chars/' + Reflect.field(charJson, char).like + '.hscript'))
-			program = parser.parseString(FNFAssets.getText('assets/images/custom_chars/' + Reflect.field(charJson, char).like + '.hscript'));
+		if (FNFAssets.exists('assets/images/custom_chars/' + Reflect.field(charJson, char).like, Hscript))
+			program = parser.parseString(FNFAssets.getHscript('assets/images/custom_chars/' + Reflect.field(charJson, char).like));
 		else
 			program = parser.parseString(FNFAssets.getText('assets/images/custom_chars/jsonbased.hscript'));
-		if (!FNFAssets.exists('assets/images/custom_chars/' + Reflect.field(charJson, char).like + '.hscript')) 
-			interp.variables.set("charJson", CoolUtil.parseJson(FNFAssets.getText('assets/images/custom_chars/'+Reflect.field(charJson, char).like+'.json')));
+		if (!FNFAssets.exists('assets/images/custom_chars/' + Reflect.field(charJson, char).like, Hscript)) 
+			interp.variables.set("charJson", CoolUtil.parseJson(FNFAssets.getJson('assets/images/custom_chars/'+Reflect.field(charJson, char).like)));
 		else
 			interp.variables.set("charJson", {});
 		interp.variables.set("hscriptPath", 'assets/images/custom_chars/' + char + '/');

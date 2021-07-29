@@ -58,7 +58,7 @@ class OptionsHandler {
         #if sys
         // update the file
         if (needToRefresh) {
-			lastOptions = CoolUtil.parseJson(Assets.getText('assets/data/options.json'));
+			lastOptions = CoolUtil.parseJson(FNFAssets.getJson('assets/data/options'));
             // sawee
             // i think this is for the best, to be a real rhythm game
             needToRefresh = false;
@@ -67,7 +67,7 @@ class OptionsHandler {
 		return lastOptions;
         #else
         if (!Reflect.hasField(FlxG.save.data, "options"))
-			FlxG.save.data.options = CoolUtil.parseJson(Assets.getText('assets/data/options.json'));
+			FlxG.save.data.options = CoolUtil.parseJson(FNFAssets.getJson('assets/data/options'));
         return FlxG.save.data.options;
         #end
     }
