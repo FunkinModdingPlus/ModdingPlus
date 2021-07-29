@@ -27,7 +27,7 @@ class MenuItem extends FlxSpriteGroup
 		// WHY THE FUCK DO YOU READ A FILE FUCKING 5 TIMES
 		// NO WONDER THERE ARE PREFORMANCE ISSUE
 		
-		var parsedWeekJson:StoryMenuState.StorySongsJson = CoolUtil.parseJson(FNFAssets.getText("assets/data/storySongList.json"));
+		var parsedWeekJson:StoryMenuState.StorySongsJson = CoolUtil.parseJson(FNFAssets.getJson("assets/data/storySongList"));
 		var rawPic = FNFAssets.getBitmapData('assets/images/campaign-ui-week/week'+weekNum+".png");
 		
 		var rawXml:String = "";

@@ -113,7 +113,7 @@ class NewStageState extends MusicBeatState
 			File.copy(epicFile,pathString);
 		}
 
-		var epicStageFile:Dynamic =CoolUtil.parseJson(Assets.getText('assets/images/custom_stages/custom_stages.json'));
+		var epicStageFile:Dynamic =CoolUtil.parseJson(FNFAssets.getText('assets/images/custom_stages/custom_stages'));
 		trace("parsed");
 		Reflect.setField(epicStageFile,nameText.text,likeText.text);
 

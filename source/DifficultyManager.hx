@@ -13,8 +13,8 @@ class DifficultyManager {
     public static var supportedDiff:Map<String,Array<Int>> = [];
     public static var weeksSupported:Map<Int, Array<Int>> = [];
     public static function init() {
-        diffJson = CoolUtil.parseJson(FNFAssets.getText("assets/images/custom_difficulties/difficulties.json"));
-        var fpJson:Array<CoolCategory> = CoolUtil.parseJson(FNFAssets.getText("assets/data/freeplaySongJson.jsonc"));
+        diffJson = CoolUtil.parseJson(FNFAssets.getJson("assets/images/custom_difficulties/difficulties"));
+        var fpJson:Array<CoolCategory> = CoolUtil.parseJson(FNFAssets.getJson("assets/data/freeplaySongJson"));
         for (cat in fpJson) {
             for (song in cat.songs) {
                 supportedDiff.set(song.name.toLowerCase(), []);

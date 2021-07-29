@@ -86,7 +86,7 @@ class NewSongState extends MusicBeatState
 		add(bg);
 		diffButtons = new FlxTypedSpriteGroup<FlxUIButton>(0,0);
 		trace('booga ooga');
-		var diffJson:TDifficulties = CoolUtil.parseJson(Assets.getText("assets/images/custom_difficulties/difficulties.json"));
+		var diffJson:TDifficulties = CoolUtil.parseJson(FNFAssets.getJson("assets/images/custom_difficulties/difficulties"));
 		trace("hmb");
 		p1Text = new FlxUIInputText(100, 50, 70,"bf");
 		p2Text = new FlxUIInputText(100,90,70,"dad");
@@ -190,7 +190,7 @@ class NewSongState extends MusicBeatState
 		if (voicePath != null) {
 			File.copy(voicePath,'assets/music/'+nameText.text+'_Voices.ogg');
 		}
-		var coolSongListFile:Array<Dynamic> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
+		var coolSongListFile:Array<Dynamic> = CoolUtil.parseJson(FNFAssets.getJson('assets/data/freeplaySongJson'));
 		var foundSomething:Bool = false;
 		for (coolCategory in coolSongListFile) {
 			if (coolCategory.name == categoryText.text) {

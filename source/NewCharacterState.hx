@@ -198,7 +198,7 @@ class NewCharacterState extends MusicBeatState
 			File.copy(epicFiles.icons, "assets/images/custom_chars/"+nameText.text+'/icons.png');
 		}
 		trace("hello");
-		var epicCharFile:Dynamic =CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
+		var epicCharFile:Dynamic =CoolUtil.parseJson(FNFAssets.getJson('assets/images/custom_chars/custom_chars'));
 		trace("parsed");
 		var commaSeperatedColors = colorsText.text.split(",");
 		Reflect.setField(epicCharFile,nameText.text,{like:likeText.text,icons: [Std.int(iconAlive.value),Std.int(iconDead.value),Std.int(iconPoison.value)], colors: commaSeperatedColors});

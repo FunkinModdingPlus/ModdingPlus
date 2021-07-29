@@ -17,6 +17,12 @@ import flash.events.Event;
 import openfl.events.IOErrorEvent;
 import haxe.io.Bytes;
 import openfl.utils.AssetType;
+
+enum Extensions {
+	None;
+	Json;
+	Hscript;
+}
 class FNFAssets {
     public static var _file:FileReference;
     /**
@@ -45,6 +51,16 @@ class FNFAssets {
             return Assets.getText(id);
         #end
     }
+	/**
+	 * Get json, auto checking extensions.
+	 * @param id Path without extension
+	 */
+	static public function getJson(id:String):Null<String> {
+		return getAmbigAsset([id], CoolUtil.JSON_EXT, AssetType.TEXT);
+	}
+	static public function getHscript(id:String):Null<String> {
+		return getAmbigAsset([id], CoolUtil.HSCRIPT_EXT,AssetType.TEXT);
+	}
 	/**
 	 * A safer way to get assets. Checks if the first asset exists and if not ALWAYS uses 2nd asset.
 	 * This means backupID should be guarenteed to exist. 
@@ -80,6 +96,37 @@ class FNFAssets {
 				throw "Unsure of how to get type " + type;
 		}
 	}
+	/**
+	 * Get an asset that could have multiple names/extensions.
+	 * @param id Array of path names
+	 * @param ext Array of string for extension.
+	 * @param type Type of asset.
+	 * @return Dynamic WARNING, if it doesn't find anything it will return null.
+	 */
+	public static function getAmbigAsset(id:Array<String>, ext:Array<String>, type:AssetType):Dynamic {
+		for (path in id)
+		{
+			for (ex in ext)
+			{
+				if (exists(path + '.' + ex))
+				{
+					return getAsset(path + '.' + ex, type);
+				}
+			}
+		}
+		return null;
+	}
+	public static function existsAmbig(id:Array<String>, extension:Array<String>):String {
+		for (path in id)
+		{
+			for (ext in extension)
+			{
+				if (exists(path + '.' + ext))
+					return path + '.' + ext;
+			}
+		}
+		return '';
+	}
 	public static function getBytes(id:String):Bytes
 	{
 		#if sys
@@ -105,20 +152,28 @@ class FNFAssets {
     /**
      * Check if the file exists.
      * @param id The file to check
+	 * @param ext Extension to auto check against. For fine tune control use "existsAmbig"
      * @return Bool If file exists, true.
      */
-    public static function exists(id:String):Bool {
-        #if sys
-            var path = Assets.exists(id) ? Assets.getPath(id) : null;
-            if (path == null)
-                path = id;
-			else
-				// if it _does_ exist then yeah of course  it works
-				return true;
-            return FileSystem.exists(path);
-        #else
-            return Assets.exists(id);
-        #end
+    static public function exists(id:String, ?ext:Extensions):Bool {
+		switch (ext) {
+			case Json: 
+				return existsAmbig([id], CoolUtil.JSON_EXT) != '';
+			case Hscript: 
+				return existsAmbig([id], CoolUtil.HSCRIPT_EXT) != '';
+			default: 
+				#if sys
+				var path = Assets.exists(id) ? Assets.getPath(id) : null;
+				if (path == null)
+					path = id;
+				else
+					// if it _does_ exist then yeah of course  it works
+					return true;
+				return FileSystem.exists(path);
+				#else
+				return Assets.exists(id);
+				#end
+		}
     }
     /**
      * Get bitmap data of a file.

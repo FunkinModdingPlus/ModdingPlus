@@ -11,6 +11,9 @@ using StringTools;
 class CoolUtil
 {
 	public static var fps:Int = 60;
+	// hxs, like kotlin's kts
+	public static final HSCRIPT_EXT:Array<String> = ['hscript', 'hxs'];
+	public static final JSON_EXT:Array<String> = ['json', 'jsonc'];
 	public static function coolTextFile(path:String):Array<String>
 	{
 		var daList:Array<String> = FNFAssets.getText(path).trim().split('\n');

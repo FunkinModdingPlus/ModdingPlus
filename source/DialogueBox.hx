@@ -155,7 +155,7 @@ class DialogueBox extends FlxSpriteGroup
 
 		if (curBox != null)
 		{
-			var data:String = FNFAssets.getText('assets/images/custom_dialogs/dialogBoxes/' + curBox+ '.json');
+			var data:String = FNFAssets.getJson('assets/images/custom_dialogs/dialogBoxes/' + curBox);
 			_dialogue = CoolUtil.parseJson(data);
 		}
 
@@ -383,7 +383,7 @@ class DialogueBox extends FlxSpriteGroup
 			box.screenCenter(X);
 			box.y = 710 - box.height;
 
-			var data:String = FNFAssets.getText('assets/images/custom_dialogs/dialogBoxes/' + curBox+ '.json');
+			var data:String = FNFAssets.getJson('assets/images/custom_dialogs/dialogBoxes/' + curBox);
 			_dialogue = Json.parse(data);
 
 			box.y += _dialogue.addY;
