@@ -15,7 +15,8 @@ function start(song) {
     snow.antialiasing = true;
     addSprite(snow, BEHIND_ALL);
     boyfriend.x += 320;
-
+    getHaxeActor("bf").followCamY -= 60;
+    getHaxeActor("bf").followCamX -= 100;
     dad.y -=80;
 }
 

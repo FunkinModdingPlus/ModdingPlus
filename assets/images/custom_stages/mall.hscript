@@ -46,6 +46,8 @@ function start(song) {
     satan.antialiasing = true;
     addSprite(satan, BEHIND_ALL);
     boyfriend.x += 200;
+    getHaxeActor("bf").followCamY -= 150;
+    getHaxeActor("bf").followCamX -= 100;
     
 }
 
@@ -67,7 +69,6 @@ function stepHit(step)
 
 function playerTwoTurn()
 {
-   setDefaultZoom(0.8);
 }
 
 function playerTwoMiss()
@@ -80,7 +81,6 @@ function playerTwoSing()
 
 function playerOneTurn()
 {
-   setDefaultZoom(1.1);
 }
 
 function playerOneMiss()
