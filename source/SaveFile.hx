@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxSpriteGroup;
@@ -26,6 +27,18 @@ class SaveFile extends FlxSpriteGroup
 	public var askingToConfirm:Bool = false;
 	public var selectingLoad:Bool = true;
 	public var playerIcon:HealthIcon;
+	public var iconColors:Array<FlxColor> = [
+		FlxColor.fromRGB(49, 176, 209),
+		FlxColor.fromRGB(233, 255, 72),
+		FlxColor.fromRGB(123, 214, 246),
+		FlxColor.fromRGB(213, 126, 0),
+		FlxColor.fromRGB(175, 102, 206),
+		FlxColor.fromRGB(183, 216, 85),
+		FlxColor.fromRGB(216, 85, 142),
+		FlxColor.fromRGB(165, 0, 77),
+		FlxColor.fromRGB(243, 255, 110),
+		FlxColor.fromRGB(255, 170, 111)
+	];
 	public function new(x:Float, y:Float, saveNum:Int = 0)
 	{
 		super(x, y);
@@ -61,24 +74,34 @@ class SaveFile extends FlxSpriteGroup
 		switch (saveNum) {
 			case 0:
 				iconType = 'bf';
+				save.color = iconColors[0];
 			case 1:
 				iconType = 'bf-old';
+				save.color = iconColors[1];
 			case 2:
 				iconType = 'bf-pixel';
+				save.color = iconColors[2];
 			case 3:
 				iconType = 'spooky';
+				save.color = iconColors[3];
 			case 4:
 				iconType = 'dad';
+				save.color = iconColors[4];
 			case 5:
 				iconType = 'pico';
+				save.color = iconColors[5];
 			case 6:
 				iconType = 'mom';
+				save.color = iconColors[6];
 			case 7:
 				iconType = 'gf';
+				save.color = iconColors[7];
 			case 8:
 				iconType = 'monster';
+				save.color = iconColors[8];
 			case 9:
 				iconType = 'senpai';
+				save.color = iconColors[9];
 		}
 		playerIcon = new HealthIcon(iconType, false);
 		playerIcon.setGraphicSize(Std.int(playerIcon.width * 2));
