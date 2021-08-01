@@ -39,6 +39,7 @@ typedef TOptions = {
     var useMissStun:Bool;
     var offset:Float;
     var accuracyMode:AccuracyMode;
+    var danceMode:Bool;
 }
 /**
  * OptionsHandler Handles options : )
