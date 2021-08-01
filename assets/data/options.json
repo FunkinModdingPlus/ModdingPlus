@@ -20,5 +20,6 @@
     "useKadeHealth": false,
     "useMissStun": false,
     "offset": 0,
-    "accuracyMode": 0
+    "accuracyMode": 0,
+    "danceMode": false
 }

@@ -59,7 +59,7 @@ class MainMenuState extends MusicBeatState
 		scrollSound = menuSoundJson.customMenuScroll;
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
-		if (!OptionsHandler.options.useSaveDataMenu) 
+		if (!OptionsHandler.options.useSaveDataMenu && !OptionsHandler.options.allowEditOptions) 
 			optionShit = ['story mode', 'freeplay', 'donate'];
 		if (!FlxG.sound.music.playing)
 		{

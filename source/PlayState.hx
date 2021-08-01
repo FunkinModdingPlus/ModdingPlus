@@ -508,7 +508,7 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD);
 
-		FlxCamera.defaultCameras = [camGame];
+		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		persistentUpdate = true;
 		persistentDraw = true;
 		alwaysDoCutscenes = OptionsHandler.options.alwaysDoCutscenes;
@@ -2002,7 +2002,7 @@ class PlayState extends MusicBeatState
 			openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 		}
 
-		if (FlxG.keys.justPressed.SEVEN)
+		if (FlxG.keys.justPressed.SEVEN && !OptionsHandler.options.danceMode)
 		{
 			#if windows
 			DiscordClient.changePresence("Chart Editor", null, null, true);
@@ -2157,7 +2157,7 @@ class PlayState extends MusicBeatState
 		/* if (FlxG.keys.justPressed.NINE)
 			LoadingState.loadAndSwitchState(new Charting()); */
 
-		if (FlxG.keys.justPressed.EIGHT) // stop checking for debug so i can fix my offsets!
+		if (FlxG.keys.justPressed.EIGHT && !OptionsHandler.options.danceMode) // stop checking for debug so i can fix my offsets!
 			LoadingState.loadAndSwitchState(new AnimationDebug(SONG.player2, SONG.player1));
 		if (startingSong)
 		{
