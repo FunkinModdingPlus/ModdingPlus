@@ -28,9 +28,13 @@ take down mods that don't follow this rule.
 - [Alex Director](https://gamebanana.com/members/1701629) - Icon Fixer
 
 ## downloads and crap
+
 original fnf m+ https://gamebanana.com/gamefiles/14264
-itch.io for this nthing: will build soon
-u can figure most of this out from fnfs github cant you?
+
+itch.io for this thing: will build soon
+
 yeah ill make a build on ich io soon shut up
 
 source code(cuz i have to): https://github.com/AxyGitPoggers/Axy-Branch-Modding-Plus
+
+build instructions on original fnf github
