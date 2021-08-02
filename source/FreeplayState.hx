@@ -87,7 +87,7 @@ class FreeplayState extends MusicBeatState
 							var reg = ~/week(\d+)/g;
 							if (reg.match(flag)) {
 								var week:Int = Std.parseInt(reg.matched(1));
-								var diffJson = CoolUtil.parseJson(FNFAssets.getJson("assets/images/custom_difficulties/difficulties"));
+								var diffJson = CoolUtil.parseJson(Assets.getText("assets/images/custom_difficulties/difficulties.json"));
 								var difficultiesFP:Array<Dynamic> = diffJson.difficulties;
 								var existsWeek = false;
 								for (diff in 0...difficultiesFP.length) {
@@ -107,7 +107,7 @@ class FreeplayState extends MusicBeatState
 							var songReg = ~/song-(.+)/g;
 							if (songReg.match(flag)) {
 								var songie = songReg.matched(1);
-								var diffJson = CoolUtil.parseJson(FNFAssets.getJson("assets/images/custom_difficulties/difficulties"));
+								var diffJson = CoolUtil.parseJson(Assets.getText("assets/images/custom_difficulties/difficulties.json"));
 								var existsSong = false;
 								for (diff in 0...diffJson.difficulties.length) {
 									if (Highscore.getScore(songie, diff) != 0) {
@@ -139,7 +139,7 @@ class FreeplayState extends MusicBeatState
 		if (!FlxG.sound.music.playing)
 		{
 			FlxG.sound.playMusic(FNFAssets.getSound('assets/music/custom_menu_music/'
-				+ CoolUtil.parseJson(FNFAssets.getJson("assets/music/custom_menu_music/custom_menu_music")).Menu
+				+ CoolUtil.parseJson(FNFAssets.getText("assets/music/custom_menu_music/custom_menu_music.json")).Menu
 				+ '/freakyMenu'
 				+ TitleState.soundExt));
 		}
@@ -148,8 +148,8 @@ class FreeplayState extends MusicBeatState
 		Discord.DiscordClient.changePresence("In the Freeplay Menu", null);
 		#end
 		var isDebug:Bool = false;
-		charJson = CoolUtil.parseJson(FNFAssets.getJson('assets/images/custom_chars/custom_chars'));
-		iconJson = CoolUtil.parseJson(FNFAssets.getJson("assets/images/custom_chars/icon_only_chars"));
+		charJson = CoolUtil.parseJson(FNFAssets.getText('assets/images/custom_chars/custom_chars.jsonc'));
+		iconJson = CoolUtil.parseJson(FNFAssets.getText("assets/images/custom_chars/icon_only_chars.json"));
 		#if debug
 		isDebug = true;
 		#end
@@ -316,7 +316,7 @@ class FreeplayState extends MusicBeatState
 			if (soundTest)
 				LoadingState.loadAndSwitchState(new SaveDataState());
 			else {
-				var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(FNFAssets.getJson('assets/data/freeplaySongJson'));
+				var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
 				if (epicCategoryJs.length > 1)
 				{
 					LoadingState.loadAndSwitchState(new CategoryState());

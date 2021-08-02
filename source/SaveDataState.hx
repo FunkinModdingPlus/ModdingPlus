@@ -35,7 +35,6 @@ typedef TOption = {
 	var ?precision:Float;
 	var ?max:Float;
 	var ?min:Float;
-	var ?ignoreDance:Bool;
 }
 class SaveDataState extends MusicBeatState
 {
@@ -92,17 +91,17 @@ class SaveDataState extends MusicBeatState
 						{name: "Funny Songs", value: false, intName: "stressTankmen", desc: "funny songs"},
 						{name: "Use Kade Health", value: false, intName: "useKadeHealth", desc: "Use kade engines health numbers when healing and dealing damage"},
 						{name: "Use Miss Stun", value: false, intName: "useMissStun", desc: "Prevent hitting notes for a short time after missing."},
-						{name: "Offset", value: false, intName: "offset", desc: "How much to offset notes when playing. Can fix some latency issues! Hold Control to scroll faster.", amount: 0, defAmount: 0, max: 1000, min: -1000, precision: 0.1, ignoreDance: true},
-						{name: "Accuracy Mode", value: false, intName: "accuracyMode", desc: "How accuracy is calculated. Complex = uses ms timing, Simple = uses rating only", amount: 0, defAmount: 0, min: -1, max: 2, ignoreDance: true},
+						{name: "Offset", value: false, intName: "offset", desc: "How much to offset notes when playing. Can fix some latency issues! Hold Control to scroll faster.", amount: 0, defAmount: 0, max: 1000, min: -1000, precision: 0.1},
+						{name: "Accuracy Mode", value: false, intName: "accuracyMode", desc: "How accuracy is calculated. Complex = uses ms timing, Simple = uses rating only", amount: 0, defAmount: 0, min: -1, max: 2},
 						{name: "Credits", value: false, intName:'credits', desc: "Show the credits!", ignore: true},
-						{name: "Sound Test...", value: false, intName: 'soundtest', desc: "Listen to the soundtrack", ignore: true, ignoreDance: true},
-						{name: "Controls...", value: false, intName:'controls', desc:"Edit bindings!", ignore: true, ignoreDance: true},
+						{name: "Sound Test...", value: false, intName: 'soundtest', desc: "Listen to the soundtrack", ignore: true},
+						{name: "Controls...", value: false, intName:'controls', desc:"Edit bindings!", ignore: true},
 						#if sys
-						{name:"New Character...", value: false, intName:'newchar', desc: "Make a new character!", ignore: true, ignoreDance: true},
-						{name:"New Stage...", value:false, intName:'newstage', desc: "Make a new stage!", ignore: true, ignoreDance: true},
-						{name: "New Song...", value: false, intName:'newsong', desc: "Make a new song!", ignore: true, ignoreDance: true},
-						{name: "New Week...", value: false, intName: 'newweek', desc: "Make a new week!", ignore: true, ignoreDance: true},
-						{name: "Sort...", value: false, intName: 'sort', desc: "Sort some of your current songs/weeks!", ignore : true, ignoreDance: true}
+						{name:"New Character...", value: false, intName:'newchar', desc: "Make a new character!", ignore: true},
+						{name:"New Stage...", value:false, intName:'newstage', desc: "Make a new stage!", ignore: true},
+						{name: "New Song...", value: false, intName:'newsong', desc: "Make a new song!", ignore: true},
+						{name: "New Week...", value: false, intName: 'newweek', desc: "Make a new week!", ignore: true},
+						{name: "Sort...", value: false, intName: 'sort', desc: "Sort some of your current songs/weeks!", ignore : true}
 						#end
 					];
 		// amount of things that aren't options
@@ -148,14 +147,11 @@ class SaveDataState extends MusicBeatState
 		optionMenu = new FlxTypedSpriteGroup<FlxSprite>();
 		optionMenu.add(options);
 		trace("hmmm");
-		var curNum = 0;
 		for (j in 0...optionList.length) {
-			if (optionList[j].ignoreDance)
-				continue;
 			trace("l53");
 			var swagOption = new Alphabet(0,0,optionList[j].name,true,false, false);
 			swagOption.isMenuItem = true;
-			swagOption.targetY = curNum;
+			swagOption.targetY = j;
 			trace("l57");
 			var coolCheckmark = new FlxSprite().loadGraphic('assets/images/checkmark.png');
 			var numDisplay = new NumberDisplay(0, 0, optionList[j].defAmount, optionList[j].precision != null ? optionList[j].precision : 1, optionList[j].min != null ? optionList[j].min : 0, optionList[j].max);
@@ -180,7 +176,6 @@ class SaveDataState extends MusicBeatState
 			swagOption.add(coolCheckmark);
 			swagOption.add(numDisplay);
 			options.add(swagOption);
-			curNum++;
 		}
 		add(menuBG);
 		add(saves);
@@ -228,7 +223,7 @@ class SaveDataState extends MusicBeatState
 				if (inOptionsMenu||!saves.members[curSelected].beingSelected)
 					changeSelection(1);
 			}
-			if ((controls.RIGHT_MENU || controls.LEFT_MENU)) {
+			if (controls.RIGHT_MENU || controls.LEFT_MENU) {
 				if (saves.members[curSelected].beingSelected)
 					saves.members[curSelected].changeSelection();
 				else if (optionList[optionsSelected].amount != null) {
@@ -236,7 +231,7 @@ class SaveDataState extends MusicBeatState
 					changeAmount(controls.RIGHT_MENU);
 
 				}	else {
-					if ((OptionsHandler.options.allowEditOptions && !inOptionsMenu) || (OptionsHandler.options.useSaveDataMenu && inOptionsMenu))
+					if (OptionsHandler.options.allowEditOptions)
 						swapMenus();
 
 				}

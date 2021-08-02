@@ -59,7 +59,7 @@ class MainMenuState extends MusicBeatState
 		scrollSound = menuSoundJson.customMenuScroll;
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
-		if (!OptionsHandler.options.useSaveDataMenu && !OptionsHandler.options.allowEditOptions) 
+		if (!OptionsHandler.options.useSaveDataMenu) 
 			optionShit = ['story mode', 'freeplay', 'donate'];
 		if (!FlxG.sound.music.playing)
 		{
@@ -113,7 +113,7 @@ class MainMenuState extends MusicBeatState
 		}
 
 		FlxG.camera.follow(camFollow, null, 0.06);
-		var infoJson:Dynamic = CoolUtil.parseJson(FNFAssets.getJson("assets/data/gameInfo"));
+		var infoJson:Dynamic = CoolUtil.parseJson(FNFAssets.getText("assets/data/gameInfo.json"));
 		if (infoJson.version != "") {
 			infoJson.version = " - " + infoJson.version; 
 		}
@@ -233,7 +233,7 @@ class MainMenuState extends MusicBeatState
 										trace("Story Menu Selected");
 									case 'freeplay':
 										CategoryState.choosingFor = "freeplay";
-										var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(FNFAssets.getJson('assets/data/freeplaySongJson'));
+										var epicCategoryJs:Array<Dynamic> = CoolUtil.parseJson(Assets.getText('assets/data/freeplaySongJson.jsonc'));
 										FreeplayState.soundTest = false;
 										if (epicCategoryJs.length > 1)
 										{

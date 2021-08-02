@@ -66,7 +66,7 @@ class ChooseCharState extends MusicBeatState
 
 
     
-        charJson = CoolUtil.parseJson(FNFAssets.getJson('assets/images/custom_chars/custom_chars'));
+        charJson = CoolUtil.parseJson(Assets.getText('assets/images/custom_chars/custom_chars.jsonc'));
 
         if (characters == null) {
             // that is not how arrays work

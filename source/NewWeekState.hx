@@ -129,7 +129,7 @@ class NewWeekState extends MusicBeatState
 	}
 	function writeCharacters() {
 		#if sys
-		var parsedWeekJson:StoryMenuState.StorySongsJson = CoolUtil.parseJson(FNFAssets.getJson("assets/data/storySonglist"));
+		var parsedWeekJson:StoryMenuState.StorySongsJson = CoolUtil.parseJson(File.getContent("assets/data/storySonglist.json"));
 		
 		var coolSongArray:Array<String> = [];
 		coolSongArray.push(likeText.text);

@@ -15,7 +15,14 @@ class LoadingState extends FlxState {
         
     }
     override function create() {
-	FlxG.switchState(new ChartingState());
+		var titletext = new FlxText(0, 20, 0, "Yo!", 64);
+		titletext.screenCenter(X);
+		var paragraph = new FlxText(0, 120, FlxG.width / 1.5,
+			'charting is a bit broken rn im workin on it, basicly im aiming for fnf vortex but not ass in the game debug menu\npress enter to continue',
+			32);
+        add(titletext);
+        paragraph.screenCenter(X);
+        add(paragraph);
     }
     override function update(elapsed:Float) {
         if (FlxG.keys.justPressed.SPACE) {

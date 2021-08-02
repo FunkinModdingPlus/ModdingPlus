@@ -39,7 +39,7 @@ class MenuCharacter extends FlxSprite
 
 		this.character = character;
 		// use assets it is less laggy
-		var parsedCharJson:DynamicAccess<TMenuCharacterRef> = CoolUtil.parseJson(FNFAssets.getJson("assets/images/campaign-ui-char/custom_ui_chars"));
+		var parsedCharJson:DynamicAccess<TMenuCharacterRef> = CoolUtil.parseJson(Assets.getText("assets/images/campaign-ui-char/custom_ui_chars.json"));
 		if (parsedCharJson[character].defaultGraphics) {
 			// use assets, it is less laggy
 			var tex = FlxAtlasFrames.fromSparrow('assets/images/campaign-ui-char/default.png', 'assets/images/campaign-ui-char/default.xml');
@@ -52,7 +52,7 @@ class MenuCharacter extends FlxSprite
 		}
 
 		// don't use assets because you can use custom like folders
-		var animJson:TMenuCharAnimation = CoolUtil.parseJson(FNFAssets.getJson("assets/images/campaign-ui-char/"+parsedCharJson[character].like));
+		var animJson:TMenuCharAnimation = CoolUtil.parseJson(FNFAssets.getText("assets/images/campaign-ui-char/"+parsedCharJson[character].like+".json"));
 		for (field in Reflect.fields(animJson.animation)) {
 			animation.addByPrefix(field, Reflect.field(animJson.animation, field), 24, (field == "idle"));
 		}
