@@ -4,7 +4,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/it-works-why.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/just-plain-nasty.svg)](https://forthebadge.com)
 
-This is the repository for my branch of Friday Night Funkin Modding Plus, a mod for FNF to add more features for modders and players alike.
+This is the website for my branch of Friday Night Funkin Modding Plus, a mod for FNF to add more features for modders and players alike.
 
 Any mods made with this mod must have express permission from the creator of songs included. 
 (for example, if you include the Whitty Mod, you should have express permission from Nate Anim8, KadeDev, and SockClip.
@@ -29,12 +29,12 @@ take down mods that don't follow this rule.
 
 ## downloads and crap
 
-original fnf m+ https://gamebanana.com/gamefiles/14264
+[original fnf m+](https://gamebanana.com/gamefiles/14264)
 
 itch.io for this thing: will build soon
 
 yeah ill make a build on ich io soon shut up
 
-source code(cuz i have to): https://github.com/AxyGitPoggers/Axy-Branch-Modding-Plus
+source code(cuz i have to): [github](https://github.com/AxyGitPoggers/Axy-Branch-Modding-Plus).
 
 build instructions on original fnf github.
