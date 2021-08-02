@@ -7,7 +7,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/it-works-why.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/just-plain-nasty.svg)](https://forthebadge.com)
 
-This is the repository for Friday Night Funkin Modding Plus, a mod for FNF to add more features for modders and players alike.
+This is the repository for my branch of Friday Night Funkin Modding Plus, a mod for FNF to add more features for modders and players alike.
 
 Any mods made with this mod must have express permission from the creator of songs included. 
 (for example, if you include the Whitty Mod, you should have express permission from Nate Anim8, KadeDev, and SockClip.
@@ -15,11 +15,8 @@ I at least would like to see the main author and a majority of secondary offers 
 If an author gives express disapproval, and the mod is up, you should take your mod down. I own the code to this mod so I can (and will)
 take down mods that don't follow this rule.
 
-
-- Get the cutting edge build: https://dev.azure.com/benharless820/FNF%20Modding%20Plus/_build
 - Play the Original Game: https://github.com/ninjamuffin99/Funkin
-- Need Help? FNF Modding Plus Discord: https://discord.gg/96nV4Q5HMr
-- Trello Page (todo list): https://trello.com/b/cFjJJIjF/fnf-modding-plus
+- Need Help? official FNF Modding Plus Discord: https://discord.gg/96nV4Q5HMr
 ## Credits for the Original Game
 
 - [ninjamuffin99](https://twitter.com/ninja_muffin99) - Programmer
