@@ -602,8 +602,8 @@ class ChartingState extends MusicBeatState
 	{
 		curStep = recalculateSteps();
 		remove(curSteptext);
-		cirSteptext.text = Std.string(curStep);
-		curSteptext.screenscenter();
+		curSteptext.text = Std.string(curStep);
+		curSteptext.screenCenter();
 		add(curSteptext);
 		Conductor.songPosition = FlxG.sound.music.time;
 		_song.song = typingShit.text;
