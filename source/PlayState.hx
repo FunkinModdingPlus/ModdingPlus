@@ -841,7 +841,7 @@ class PlayState extends MusicBeatState
 			difficTxt.y = 0;
 		}
 		// screwy way of getting text
-		difficTxt.text = DifficultyIcons.changeDifficultyFreeplay(storyDifficulty, 0).text + ' - M+ v1.0.0-ElBartSinsoJaJa';
+		difficTxt.text = DifficultyIcons.changeDifficultyFreeplay(storyDifficulty, 0).text + ' - M+ ${MainMenuState.version}';
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		add(iconP1);
