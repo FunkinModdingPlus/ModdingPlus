@@ -94,6 +94,7 @@ class ChartingState extends MusicBeatState
 	var stageText:FlxText;
 	var uiText:FlxText;
 	var cutsceneText:FlxText;
+	var curSteptext:FlxText;
 	
 	/*
 	 * WILL BE THE CURRENT / LAST PLACED NOTE
@@ -600,7 +601,10 @@ class ChartingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
-
+		remove(curSteptext);
+		cirSteptext.text = Std.string(curStep);
+		curSteptext.screenscenter();
+		add(curSteptext);
 		Conductor.songPosition = FlxG.sound.music.time;
 		_song.song = typingShit.text;
 		_song.player1 = player1TextField.text;
