@@ -241,8 +241,13 @@ class DialogueBox extends FlxSpriteGroup
 			startDialogue();
 			dialogueStarted = true;
 		}
-
-		if (FlxG.keys.justPressed.ANY && dialogueStarted == true)
+		if (PlayerSettings.player1.controls.SECONDARY) {
+			// skip all this shit
+			if (!isEnding)
+			{
+				endDialog();
+			}
+		} else if (FlxG.keys.justPressed.ANY && dialogueStarted == true)
 		{
 			remove(dialogue);
 
@@ -252,25 +257,7 @@ class DialogueBox extends FlxSpriteGroup
 			{
 				if (!isEnding)
 				{
-					isEnding = true;
-
-					FlxG.sound.music.fadeOut(2.2, 0);
-
-					new FlxTimer().start(fadeOutTime, function(tmr:FlxTimer)
-					{
-						box.alpha -= 1 / fadeOutLoop;
-						bgFade.alpha -= 1 / fadeOutLoop * 0.7;
-						portrait.visible = false;
-						swagDialogue.alpha -= 1 / fadeOutLoop;
-						handSelect.alpha -= 1 / fadeOutLoop;
-						dropText.alpha = swagDialogue.alpha;
-					}, fadeOutLoop);
-
-					new FlxTimer().start(fadeOutTime * (fadeOutLoop + 1), function(tmr:FlxTimer)
-					{
-						finishThing();
-						kill();
-					});
+					endDialog();					
 				}
 			}
 			else
@@ -282,7 +269,27 @@ class DialogueBox extends FlxSpriteGroup
 
 		super.update(elapsed);
 	}
+	function endDialog():Void {
+		isEnding = true;
 
+		FlxG.sound.music.fadeOut(2.2, 0);
+
+		new FlxTimer().start(fadeOutTime, function(tmr:FlxTimer)
+		{
+			box.alpha -= 1 / fadeOutLoop;
+			bgFade.alpha -= 1 / fadeOutLoop * 0.7;
+			portrait.visible = false;
+			swagDialogue.alpha -= 1 / fadeOutLoop;
+			handSelect.alpha -= 1 / fadeOutLoop;
+			dropText.alpha = swagDialogue.alpha;
+		}, fadeOutLoop);
+
+		new FlxTimer().start(fadeOutTime * (fadeOutLoop + 1), function(tmr:FlxTimer)
+		{
+			finishThing();
+			kill();
+		});
+	}
 	var isEnding:Bool = false;
 
 	function startDialogue():Void
