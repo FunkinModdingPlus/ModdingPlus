@@ -508,7 +508,7 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD);
 
-		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+		FlxCamera.defaultCameras = [camGame];
 		persistentUpdate = true;
 		persistentDraw = true;
 		alwaysDoCutscenes = OptionsHandler.options.alwaysDoCutscenes;
@@ -940,7 +940,7 @@ class PlayState extends MusicBeatState
 		makeHaxeState("cutscene", "assets/images/custom_cutscenes/"+SONG.cutsceneType+'/', "../"+Reflect.field(goodJson, SONG.cutsceneType));
 		
 	}
-	function schoolIntro(?dialogueBox:DialogueBox):Void
+	function schoolIntro(?dialogueBox:DialogueBox, intro:Bool=true):Void
 	{
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
@@ -1047,7 +1047,10 @@ class PlayState extends MusicBeatState
 					add(dialogueBox);
 				}
 				else
-					startCountdown();
+					if (intro)
+						startCountdown();
+					else 
+						endForReal();
 
 				remove(black);
 			}
@@ -2190,7 +2193,8 @@ class PlayState extends MusicBeatState
 
 			// Conductor.lastSongPos = FlxG.sound.music.time;
 		}
-
+		if (endingSong)
+			return;
 		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
 		{
 			if (curBeat % 4 == 0)
@@ -2751,13 +2755,86 @@ class PlayState extends MusicBeatState
 	}
 	function endSong():Void
 	{
+		endingSong = true;
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
+		vocals.pause();
+		trace(vocals.getActualVolume());
+		var dialogSuffix = "-end";
+		if (OptionsHandler.options.stressTankmen) {
+			dialogSuffix += "-shit";
+		}
+		// if this is skipped when love is on, that means love is less than or equal to fright so
+		else if (supLove && poisonMultiplier < loveMultiplier) {
+			dialogSuffix += "-love";
+		} else if (poisonExr && poisonMultiplier < 50) {
+			dialogSuffix += "-uneasy";
+		} else if (poisonExr && poisonMultiplier >= 50 && poisonMultiplier < 100) {
+			dialogSuffix += "-scared";
+		} else if (poisonExr && poisonMultiplier >= 100 && poisonMultiplier < 200) {
+			dialogSuffix += "-terrified";
+		} else if (poisonExr && poisonMultiplier >= 200) {
+			dialogSuffix += "-depressed";
+		} else if (practiceMode) {
+			dialogSuffix += "-practice";
+		} else if (perfectMode || fullComboMode || goodCombo) {
+			dialogSuffix += "-perfect";
+		}
+		var filename:Null<String> = null;
+		if (FNFAssets.exists('assets/images/custom_chars/' + SONG.player1 + '/' + SONG.song.toLowerCase() + 'Dialog-end.txt'))
+		{	
+			filename = 'assets/images/custom_chars/' + SONG.player1 + '/' + SONG.song.toLowerCase() + 'Dialog-end.txt';
+			if (FNFAssets.exists('assets/images/custom_chars/' + SONG.player1 + '/' + SONG.song.toLowerCase() + 'Dialog'+dialogSuffix+'.txt'))
+				filename = 'assets/images/custom_chars/' + SONG.player1 + '/' + SONG.song.toLowerCase() + 'Dialog' + dialogSuffix + '.txt';
+		}
+		else if (FNFAssets.exists('assets/images/custom_chars/' + SONG.player2 + '/' + SONG.song.toLowerCase() + 'Dialog-end.txt'))
+		{
+			filename = 'assets/images/custom_chars/' + SONG.player2 + '/' + SONG.song.toLowerCase() + 'Dialog-end.txt';
+			if (FNFAssets.exists('assets/images/custom_chars/' + SONG.player2 + '/' + SONG.song.toLowerCase() + 'Dialog${dialogSuffix}.txt')) {
+				filename = 'assets/images/custom_chars/' + SONG.player2 + '/' + SONG.song.toLowerCase() + 'Dialog${dialogSuffix}.txt';
+			}
+			// if no player dialog, use default
+		}
+		else if (FNFAssets.exists('assets/data/' + SONG.song.toLowerCase() + '/dialog-end.txt'))
+		{
+			filename = 'assets/data/' + SONG.song.toLowerCase() + '/dialog-end.txt';
+			if (FNFAssets.exists('assets/data/' + SONG.song.toLowerCase() + '/dialog${dialogSuffix}.txt'))
+			{
+				filename = 'assets/data/' + SONG.song.toLowerCase() + '/dialog${dialogSuffix}.txt';
+			}
+		}
+		else if (FNFAssets.exists('assets/data/' + SONG.song.toLowerCase() + '/dialogue-end.txt'))
+		{
+			filename = 'assets/data/' + SONG.song.toLowerCase() + '/dialogue-end.txt';
+			if (FNFAssets.exists('assets/data/' + SONG.song.toLowerCase() + '/dialogue${dialogSuffix}.txt'))
+			{
+				filename = 'assets/data/' + SONG.song.toLowerCase() + '/dialogue${dialogSuffix}.txt';
+			}
+		}
+		var goodDialog:String;
+		if (filename != null) {
+			goodDialog = FNFAssets.getText(filename);
+		} else {
+			goodDialog = ':dad: The game tried to get a dialog file but couldn\'t find it. Please make sure there is a dialog file named "dialog.txt".';
+		}
+		// never play it if the file doesn't exist
+		if ((OptionsHandler.options.alwaysDoCutscenes || isStoryMode) && filename != null) {
+			doof = new DialogueBox(false, goodDialog);
+			doof.scrollFactor.set();
+			doof.finishThing = endForReal;
+
+			doof.cameras = [camHUD];
+			schoolIntro(doof, false);
+		} else {
+			endForReal();
+		}
 		
+	}
+	function endForReal() {
 		#if !switch
 		if (!demoMode && ModifierState.scoreMultiplier > 0)
-			Highscore.saveScore(SONG.song, songScore, storyDifficulty, accuracy/100, Ratings.CalculateFCRating(), OptionsHandler.options.judge);
+			Highscore.saveScore(SONG.song, songScore, storyDifficulty, accuracy / 100, Ratings.CalculateFCRating(), OptionsHandler.options.judge);
 		#end
 		controls.setKeyboardScheme(Solo(false));
 		if (isStoryMode)
@@ -2774,23 +2851,28 @@ class PlayState extends MusicBeatState
 				if (!demoMode && ModifierState.scoreMultiplier > 0)
 					Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty, campaignAccuracy / defaultPlaylistLength);
 				campaignAccuracy = campaignAccuracy / defaultPlaylistLength;
-				if (useVictoryScreen) {
-					#if windows	
+				if (useVictoryScreen)
+				{
+					#if windows
 					DiscordClient.changePresence("Reviewing Score -- "
-					+ SONG.song
-					+ " ("
-					+ storyDifficultyText
-					+ ") "
-					+ Ratings.GenerateLetterRank(accuracy),
-					"\nAcc: "
-					+ HelperFunctions.truncateFloat(accuracy, 2)
-					+ "% | Score: "
-					+ songScore
-					+ " | Misses: "
-					+ misses, iconRPC, playingAsRpc);
+						+ SONG.song
+						+ " ("
+						+ storyDifficultyText
+						+ ") "
+						+ Ratings.GenerateLetterRank(accuracy),
+						"\nAcc: "
+						+ HelperFunctions.truncateFloat(accuracy, 2)
+						+ "% | Score: "
+						+ songScore
+						+ " | Misses: "
+						+ misses, iconRPC, playingAsRpc);
 					#end
-					LoadingState.loadAndSwitchState(new VictoryLoopState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y, gf.getScreenPosition().x, gf.getScreenPosition().y, campaignAccuracy, campaignScore, dad.getScreenPosition().x, dad.getScreenPosition().y));
-				} else {
+					LoadingState.loadAndSwitchState(new VictoryLoopState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y,
+						gf.getScreenPosition().x, gf.getScreenPosition().y, campaignAccuracy, campaignScore, dad.getScreenPosition().x,
+						dad.getScreenPosition().y));
+				}
+				else
+				{
 					transIn = FlxTransitionableState.defaultTransIn;
 					transOut = FlxTransitionableState.defaultTransOut;
 					LoadingState.loadAndSwitchState(new StoryMenuState());
@@ -2819,11 +2901,12 @@ class PlayState extends MusicBeatState
 				if (SONG.song.toLowerCase() == 'senpai')
 				{
 					FlxTransitionableState.skipNextTransIn = true;
-				FlxTransitionableState.skipNextTransOut = true;
+					FlxTransitionableState.skipNextTransOut = true;
 					prevCamFollow = camFollow;
 				}
-				if (FNFAssets.exists('assets/data/'+PlayState.storyPlaylist[0].toLowerCase()+'/'+PlayState.storyPlaylist[0].toLowerCase()+difficulty+'.json'))
-				  // do this to make custom difficulties not as unstable
+				if (FNFAssets.exists('assets/data/'
+					+ PlayState.storyPlaylist[0].toLowerCase() + '/' + PlayState.storyPlaylist[0].toLowerCase() + difficulty + '.json'))
+					// do this to make custom difficulties not as unstable
 					PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
 				else
 					PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase(), PlayState.storyPlaylist[0]);
@@ -2835,7 +2918,8 @@ class PlayState extends MusicBeatState
 		else
 		{
 			trace('WENT BACK TO FREEPLAY??');
-			if (useVictoryScreen) {
+			if (useVictoryScreen)
+			{
 				#if windows
 				DiscordClient.changePresence("Reviewing Score -- "
 					+ SONG.song
@@ -2850,8 +2934,10 @@ class PlayState extends MusicBeatState
 					+ " | Misses: "
 					+ misses, iconRPC, playingAsRpc);
 				#end
-				LoadingState.loadAndSwitchState(new VictoryLoopState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y, gf.getScreenPosition().x,gf.getScreenPosition().y, accuracy, songScore, dad.getScreenPosition().x, dad.getScreenPosition().y));
-			} else
+				LoadingState.loadAndSwitchState(new VictoryLoopState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y,
+					gf.getScreenPosition().x, gf.getScreenPosition().y, accuracy, songScore, dad.getScreenPosition().x, dad.getScreenPosition().y));
+			}
+			else
 				LoadingState.loadAndSwitchState(new FreeplayState());
 		}
 	}
@@ -3750,8 +3836,8 @@ class PlayState extends MusicBeatState
 		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
-
-		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
+		
+		if (!endingSong && camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
 		{
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;

@@ -78,7 +78,7 @@ class OptionsHandler {
             lastOptions.stressTankmen = false; // sorry guys no funny songs  : (
             lastOptions.ignoreUnlocks = true; // If we are in an arcade a person won't have enough time to unlock everything
             // lastOptions.preferJudgement // going to the new menu
-            // lastOptions.judge
+            // lastOptions.judge // new menu
 			lastOptions.newJudgementPos = true;
 			lastOptions.emuOsuLifts = false;
             // lastOptions.skipDebugScreen // i'm removing debug entirely in dance mode
