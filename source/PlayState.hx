@@ -2624,10 +2624,10 @@ class PlayState extends MusicBeatState
 
 						if ((daNote.tooLate || !daNote.wasGoodHit) /* && !daNote.isSustainNote */)
 						{
-							// always show the graphic/
+							// always show the graphic
 							popUpScore(Conductor.songPosition, daNote, daNote.mustPress, true);
-							
-							vocals.volume = 0;
+							if (!OptionsHandler.options.dontMuteMiss)
+								vocals.volume = 0;
 							if (poisonPlus && poisonTimes < 3)
 							{
 								poisonTimes += 1;
@@ -2758,7 +2758,8 @@ class PlayState extends MusicBeatState
 		endingSong = true;
 		canPause = false;
 		FlxG.sound.music.volume = 0;
-		vocals.volume = 0;
+		if (!OptionsHandler.options.dontMuteMiss)
+			vocals.volume = 0;
 		vocals.pause();
 		trace(vocals.getActualVolume());
 		var dialogSuffix = "-end";

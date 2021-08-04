@@ -40,6 +40,7 @@ typedef TOptions = {
     var offset:Float;
     var accuracyMode:AccuracyMode;
     var danceMode:Bool;
+    var dontMuteMiss:Bool;
 }
 /**
  * OptionsHandler Handles options : )
@@ -87,7 +88,7 @@ class OptionsHandler {
             // lastOptions.offset // i'll remove it from options, but json can still be edited. perfect those things!
             lastOptions.useMissStun = false;
 			lastOptions.accuracyMode = Simple;
-            
+            lastOptions.dontMuteMiss = true;
 
             
         }
