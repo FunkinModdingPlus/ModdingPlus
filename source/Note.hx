@@ -1,5 +1,6 @@
 package;
 
+import DynamicSprite.DynamicAtlasFrames;
 import Judgement.TUI;
 import openfl.errors.Error;
 import flixel.util.typeLimit.OneOfTwo;
@@ -118,10 +119,12 @@ typedef SingInfo = {
 	 */
 	var ?miss:Null<Bool>;
 }
-class Note extends FlxSprite
+// sinful dynamic sprite
+class Note extends DynamicSprite
 {
 	public var strumTime:Float = 0;
-
+	public static var getFrames:Bool = true;
+	static var gotFrames:FlxAtlasFrames = null;
 	public var mustPress:Bool = false;
 	public var noteData:Int = 0;
 	public var canBeHit:Bool = false;
@@ -275,10 +278,17 @@ class Note extends FlxSprite
 		var curUiType:TUI = Reflect.field(Judgement.uiJson, PlayState.SONG.uiType);
 		// var daStage:String = PlayState.curStage;
 		if (!curUiType.isPixel)
-		{
-			frames = FlxAtlasFrames.fromSparrow('assets/images/custom_ui/ui_packs/'
-				+ curUiType.uses
-				+ "/NOTE_assets.png", 'assets/images/custom_ui/ui_packs/' + curUiType.uses + "/NOTE_assets.xml");
+		{	
+			if (getFrames) {
+				getFrames = false;
+				gotFrames = DynamicAtlasFrames.fromSparrow('assets/images/custom_ui/ui_packs/'
+					+ curUiType.uses
+					+ "/NOTE_assets.png",
+					'assets/images/custom_ui/ui_packs/'
+					+ curUiType.uses
+					+ "/NOTE_assets.xml");
+			}
+			frames = gotFrames;
 			if (animSuffix == null)
 			{
 				animSuffix = '';

@@ -1,6 +1,6 @@
 package;
 import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
+import DynamicSprite.DynamicAtlasFrames;
 import flixel.FlxG;
 import Judgement.TUI;
 class NoteSplash extends FlxSprite {
@@ -8,7 +8,7 @@ class NoteSplash extends FlxSprite {
         if (c == null) c = 0;
         super(xPos,yPos);
 		var curUiType:TUI = Reflect.field(Judgement.uiJson, PlayState.SONG.uiType);
-		frames = FlxAtlasFrames.fromSparrow('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes.png',
+		frames = DynamicAtlasFrames.fromSparrow('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes.png',
 			'assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes.xml');
         animation.addByPrefix("note1-0", "note impact 1  blue", 24, false);
 		animation.addByPrefix("note2-0", "note impact 1 green", 24, false);

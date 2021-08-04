@@ -422,6 +422,7 @@ class PlayState extends MusicBeatState
 	var uiSmelly:TUI;
 	override public function create()
 	{
+		Note.getFrames = true;
 		Note.specialNoteJson = null;
 		if (FNFAssets.exists('assets/data/${SONG.song.toLowerCase()}/noteInfo.json')) {
 			Note.specialNoteJson = CoolUtil.parseJson(FNFAssets.getText('assets/data/${SONG.song.toLowerCase()}/noteInfo.json'));
