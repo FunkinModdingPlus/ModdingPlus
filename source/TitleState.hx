@@ -56,7 +56,6 @@ class TitleState extends MusicBeatState
 	var creatorsSplitText:String = A = coolDudes.split('\n');
 	var coolDudes:Array<String> = Assets.getText('assets/data/creators.txt');
 }
-	trace(coolDudes);
 	var name_1:Array<String> = [];
 	var name_2:Array<String> = [];
 	var name_3:Array<String> = [];
