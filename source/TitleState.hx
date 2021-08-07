@@ -331,11 +331,11 @@ class TitleState extends MusicBeatState
 	}
 	function addMoreMoreText(text:String)
 	{
-		var coolText:Alphabet = new Alphabet(0, 0, text, true, false);
-		coolText.screenCenter(X);
-		coolText.y += (textGroup.length * 60) + 400;
-		credGroup.add(coolText);
-		textGroup.add(coolText);
+		var moreCoolText:Alphabet = new Alphabet(0, 0, text, true, false);
+		moreCoolText.screenCenter(X);
+		moreCoolText.y += (textGroup.length * 60) + 400;
+		credGroup.add(moreCoolText);
+		textGroup.add(moreCoolText);
 	}
 
 	function deleteCoolText()
