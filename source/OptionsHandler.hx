@@ -41,6 +41,9 @@ typedef TOptions = {
     var accuracyMode:AccuracyMode;
     var danceMode:Bool;
     var dontMuteMiss:Bool;
+    var allowStoryMode:Bool;
+    var allowFreeplay:Bool;
+    var allowDonate:Bool;
 }
 /**
  * OptionsHandler Handles options : )
