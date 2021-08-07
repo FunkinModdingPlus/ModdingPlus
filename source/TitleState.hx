@@ -54,7 +54,7 @@ class TitleState extends MusicBeatState
 	var wackyEndBeat:Int = 0;
 	var wackyImage:FlxSprite;
 	var creatorsSplitText:String = A = coolDudes.split('\n');
-	var coolDudes:Array<String> = Assets.getText('assets/data/creators.txt');
+	var coolDudes:Array<String> = Assets.getText('assets/data/creators.txt')
 	trace(coolDudes);
 	
 	var name_1:Array<String> = [];
