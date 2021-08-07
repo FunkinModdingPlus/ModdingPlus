@@ -98,6 +98,9 @@ class SaveDataState extends MusicBeatState
 						{name: "Sound Test...", value: false, intName: 'soundtest', desc: "Listen to the soundtrack", ignore: true,},
 						{name: "Controls...", value: false, intName:'controls', desc:"Edit bindings!", ignore: true,},
 						#if sys
+						{name: "Allow Story Mode", value: false, intName:"allowStoryMode", desc: "Show story mode from the main menu."},
+						{name: "Allow Freeplay", value: false, intName:"allowFreeplay", desc: "Show freeplay from the main menu."},
+						{name: "Allow Donate Button", value: false, intName:"allowDonate", desc: "Show the donate button from the main menu."},
 						{name:"New Character...", value: false, intName:'newchar', desc: "Make a new character!", ignore: true,},
 						{name:"New Stage...", value:false, intName:'newstage', desc: "Make a new stage!", ignore: true, },
 						{name: "New Song...", value: false, intName:'newsong', desc: "Make a new song!", ignore: true, },
