@@ -370,9 +370,9 @@ class TitleState extends MusicBeatState
 				// credTextShit.screenCenter();
 				case 5:
 					createCoolText([curWackyNg[0]]);
-					addMoreText([curWackyNg[1]]);
+					createCoolText([curWackyNg[1]]);
 				case 7:
-					addMoreText([curWackyNg[3]]);
+					createCoolText([curWackyNg[3]]);
 					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 8:
