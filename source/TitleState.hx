@@ -50,10 +50,12 @@ class TitleState extends MusicBeatState
 	var ngSpr:FlxSprite;
 	var shownWacky:Int = -1;
 	var curWacky:Array<String> = [];
-	var curWackyNg:Array<String> = [];
+	var curWackyNg:String = [];
 	var wackyEndBeat:Int = 0;
 	var wackyImage:FlxSprite;
-	var coolDudes:Array<String> = [];
+	var creatorsSplitText:String = A = coolDudes.split('\n');
+	var coolDudes:Array<String> = Assets.getText('assets/data/creators.txt')
+	trace(coolDudes);
 	
 	var name_1:Array<String> = [];
 	var name_2:Array<String> = [];
@@ -195,8 +197,6 @@ class TitleState extends MusicBeatState
 		credGroup.add(blackScreen);
 		// THIS SHIT DOESN'T WORK ON NEKO!
 		// IDK WHY I AM TESTING IT ON NEKO!
-		coolDudes = Assets.getText('assets/data/creators.txt').split("\n");
-		trace(coolDudes);
 		credTextShit = new Alphabet(0, 0, "akofhafsk", true);
 		credTextShit.screenCenter();
 
