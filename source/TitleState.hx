@@ -50,7 +50,6 @@ class TitleState extends MusicBeatState
 	var ngSpr:FlxSprite;
 	var shownWacky:Int = -1;
 	var curWacky:Array<String> = [];
-	var curWackyNg:Array<String> = [];
 	var wackyEndBeat:Int = 0;
 	var wackyImage:FlxSprite;
 	var coolDudes:Array<String> = [];
@@ -78,7 +77,6 @@ class TitleState extends MusicBeatState
 		DifficultyManager.init();
 		ModifierState.init();
 		curWacky = FlxG.random.getObject(getIntroTextShit());
-		curWackyNg = FlxG.random.getObject(getNgTextShit());
 		// DEBUG BULLSHIT
 		super.create();
 		FlxG.mouse.visible = false;
@@ -238,20 +236,6 @@ class TitleState extends MusicBeatState
 
 		return swagGoodArray;
 	}
-	function getNgTextShit():Array<Array<String>>
-		{
-			var fullTextNg:String = Assets.getText('assets/data/ngText.txt');
-	
-			var firstArrayNg:Array<String> = fullTextNg.split('\n');
-			var swagGoodArrayNg:Array<Array<String>> = [];
-	
-			for (i in firstArrayNg)
-			{
-				swagGoodArrayNg.push(i.split('--'));
-			}
-	
-			return swagGoodArrayNg;
-		}
 
 	var transitioning:Bool = false;
 
@@ -369,10 +353,9 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
 				case 5:
-					createCoolText([curWackyNg[0]]);
-					createCoolText([curWackyNg[1]]);
+					createCoolText(['In association', 'with']);
 				case 7:
-					createCoolText([curWackyNg[3]]);
+					addMoreText('newgrounds');
 					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 8:
