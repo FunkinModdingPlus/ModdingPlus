@@ -329,6 +329,14 @@ class TitleState extends MusicBeatState
 		credGroup.add(coolText);
 		textGroup.add(coolText);
 	}
+	function addMoreMoreText(text:String)
+	{
+		var coolText:Alphabet = new Alphabet(0, 0, text, true, false);
+		coolText.screenCenter(X);
+		coolText.y += (textGroup.length * 60) + 400;
+		credGroup.add(coolText);
+		textGroup.add(coolText);
+	}
 
 	function deleteCoolText()
 	{
@@ -372,7 +380,7 @@ class TitleState extends MusicBeatState
 					createCoolText([curWackyNg[0]]);
 					addMoreText([curWackyNg[1]]);
 				case 7:
-					addMoreText([curWackyNg[3]]);
+					addMoreMoreText([curWackyNg[2]]);
 					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 8:
