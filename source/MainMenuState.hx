@@ -31,7 +31,7 @@ typedef VersionJson = {
 	var name_3: String;
 
 }
-	
+
 class MainMenuState extends MusicBeatState
 {
 	var curSelected:Int = 0;
@@ -59,14 +59,20 @@ class MainMenuState extends MusicBeatState
 		scrollSound = menuSoundJson.customMenuScroll;
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
+		if (!OptionsHandler.options.allowStoryMode) 
+			optionShit.remove("story mode");
+		if (!OptionsHandler.options.allowFreeplay) 
+			optionShit.remove("freeplay");
+		if (!OptionsHandler.options.allowDonate) 
+			optionShit.remove("donate");
 		if (!OptionsHandler.options.useSaveDataMenu && !OptionsHandler.options.allowEditOptions) 
-			optionShit = ['story mode', 'freeplay', 'donate'];
+			optionShit.remove("options");
 		if (!FlxG.sound.music.playing)
 		{
 			FlxG.sound.playMusic(FNFAssets.getSound('assets/music/custom_menu_music/'
 				+ CoolUtil.parseJson(FNFAssets.getText("assets/music/custom_menu_music/custom_menu_music.json")).Menu+'/freakyMenu' + TitleState.soundExt));
 		}
-		
+
 		persistentUpdate = persistentDraw = true;
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic('assets/images/menuBG.png');
 		bg.scrollFactor.x = 0;
@@ -76,7 +82,7 @@ class MainMenuState extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = true;
 		add(bg);
-		
+
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
@@ -242,7 +248,7 @@ class MainMenuState extends MusicBeatState
 											FreeplayState.currentSongList = epicCategoryJs[0].songs;
 											LoadingState.loadAndSwitchState(new FreeplayState());
 										}
-										
+
 									case 'options':
 										LoadingState.loadAndSwitchState(new SaveDataState());
 								}

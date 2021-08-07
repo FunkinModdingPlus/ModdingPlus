@@ -41,6 +41,9 @@ typedef TOptions = {
     var accuracyMode:AccuracyMode;
     var danceMode:Bool;
     var dontMuteMiss:Bool;
+    var allowStoryMode:Bool;
+    var allowFreeplay:Bool;
+    var allowDonate:Bool;
 }
 /**
  * OptionsHandler Handles options : )
@@ -62,7 +65,7 @@ class OptionsHandler {
         if (needToRefresh) {
 			lastOptions = CoolUtil.parseJson(FNFAssets.getJson('assets/data/options'));
             needToRefresh = false;
-			
+
         }
         // these are the canon options
         // if your options aren't these it isn't canon
@@ -90,7 +93,7 @@ class OptionsHandler {
 			lastOptions.accuracyMode = Simple;
             lastOptions.dontMuteMiss = true;
 
-            
+
         }
 		return lastOptions;
         #else
