@@ -244,7 +244,6 @@ class PlayState extends MusicBeatState
 	var useVictoryScreen:Bool = true;
 	var demoMode:Bool = false;
 	var downscroll:Bool = false;
-	var middlescroll:Bool = false;
 	var luaRegistered:Bool = false;
 	var currentFrames:Int = 0;
 	var supLove:Bool = false;
@@ -517,7 +516,6 @@ class PlayState extends MusicBeatState
 		useCustomInput = OptionsHandler.options.useCustomInput;
 		useVictoryScreen = !OptionsHandler.options.skipVictoryScreen;
 		downscroll = OptionsHandler.options.downscroll;
-		middlescroll = OptionsHandler.options.middlescroll;
 		useSongBar = OptionsHandler.options.showSongPos;
 		Judge.setJudge(cast OptionsHandler.options.judge);
 		pixelUI = uiSmelly.isPixel;
