@@ -21,6 +21,5 @@
     "useMissStun": false,
     "offset": 0,
     "accuracyMode": 0,
-    "danceMode": false,
-    "middlescroll": false
+    "danceMode": false
 }
