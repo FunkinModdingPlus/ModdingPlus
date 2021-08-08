@@ -108,6 +108,8 @@ class ChartingState extends MusicBeatState
 	var rightIcon:HealthIcon;
 
 	var useLiftNote:Bool = false;
+	var useNukeNote:Bool = false;
+	var useMineNote:Bool = false;
 
 	override function create()
 	{
@@ -629,6 +631,8 @@ class ChartingState extends MusicBeatState
 		FlxG.watch.addQuick('daStep', curStep);
 		if (controls.TERTIARY) {
 			useLiftNote = !useLiftNote;
+			useNukeNote = !useNukeNote;
+			useMineNote = !useMineNote;
 		}
 		if (FlxG.mouse.justPressed)
 		{
@@ -1055,8 +1059,12 @@ class ChartingState extends MusicBeatState
 			var daStrumTime = i[0];
 			var daSus = i[2];
 			var daLift = i[4];
+			var daNuke = i[8];
+			var daMine = i[12];
 			
 			var note:Note = new Note(daStrumTime, daNoteInfo % 4, null, false, yummyPng, yummyXml, null, daLift);
+			var note:Note = new Note(daStrumTime, daNoteInfo % 8, null, false, yummyPng, yummyXml, null, daNuke);
+			var note:Note = new Note(daStrumTime, daNoteInfo % 12, null, false, yummyPng, yummyXml, null, daMine);
 			note.sustainLength = daSus;
 			note.setGraphicSize(GRID_SIZE, GRID_SIZE);
 			note.updateHitbox();
@@ -1152,6 +1160,8 @@ class ChartingState extends MusicBeatState
 		if (FlxG.keys.pressed.CONTROL)
 		{
 			_song.notes[curSection].sectionNotes.push([noteStrum, (noteData + 4) % 8, noteSus, false, useLiftNote]);
+			_song.notes[curSection].sectionNotes.push([noteStrum, (noteData + 8) % 8, noteSus, false, useLiftNote]);
+			_song.notes[curSection].sectionNotes.push([noteStrum, (noteData + 12) % 8, noteSus, false, useLiftNote]);
 		}
 
 		trace(noteStrum);
