@@ -49,6 +49,24 @@ class ModifierState extends MusicBeatState
 			desc: ""
 		},
 		{
+			name: "Play",
+			internName: "play",
+			value: false,
+			conflicts: [],
+			multi: 1,
+			times: true,
+			desc: "Play the Funkin Game!"
+		},
+		{
+			name: "Char Select...",
+			internName: "charselect",
+			value: false,
+			conflicts: [],
+			multi: 1,
+			times: true,
+			desc: "You can just select some custom characters"
+		},
+		{
 			name: "Sick Mode",
 			internName: "mfc",
 			value: false,
@@ -292,24 +310,6 @@ class ModifierState extends MusicBeatState
 			multi: 0,
 			times: true,
 			desc: "Let the game play itself!"
-		},
-		{
-			name: "Char Select...",
-			internName: "charselect",
-			value: false,
-			conflicts: [],
-			multi: 1,
-			times: true,
-			desc: "You can just select some custom characters"
-		},
-		{
-			name: "Play",
-			internName: "play",
-			value: false,
-			conflicts: [],
-			multi: 1,
-			times: true,
-			desc: "Play the Funkin Game!"
 		}
 	];
 	var grpAlphabet:FlxTypedGroup<Alphabet>;
