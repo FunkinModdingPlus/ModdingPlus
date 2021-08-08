@@ -734,6 +734,9 @@ class PlayState extends MusicBeatState
 		if (downscroll) {
 			strumLine.y = FlxG.height - 165;
 		}
+		if (middlescroll) {
+			strumLine.x = FlxG.width / 2 - strumLine.width / 2;
+		}
 		playerComboBreak = new FlxTypedGroup<FlxSprite>();
 		enemyComboBreak = new FlxTypedGroup<FlxSprite>();
 		playerComboBreak.cameras = [camHUD];

@@ -41,6 +41,7 @@ typedef TOptions = {
     var accuracyMode:AccuracyMode;
     var danceMode:Bool;
     var dontMuteMiss:Bool;
+    var middlescroll:Bool;
 }
 /**
  * OptionsHandler Handles options : )
