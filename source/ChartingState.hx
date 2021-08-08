@@ -56,6 +56,8 @@ class ChartingState extends MusicBeatState
 	 * Usually rounded up??
 	 */
 	var curSection:Int = 0;
+	var curStep:Int = 0;
+	var curBeat:Int = 0;
 
 	public static var lastSection:Int = 0;
 
@@ -830,6 +832,10 @@ class ChartingState extends MusicBeatState
 			+ Std.string(FlxMath.roundDecimal(FlxG.sound.music.length / 1000, 2))
 			+ "\nSection: "
 			+ curSection;
+			+ "\nCurStep: "
+			+ curStep
+			+ "\nCurBeat: "
+			+ curbeat
 		super.update(elapsed);
 	}
 
