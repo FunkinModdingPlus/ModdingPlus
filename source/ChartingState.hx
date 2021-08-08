@@ -139,7 +139,7 @@ class ChartingState extends MusicBeatState
 		curRenderedSustains = new FlxTypedGroup<FlxSprite>();
 
 		curStep = lastChange.stepTime + Math.floor((FlxG.sound.music.time - lastChange.songTime) / Conductor.stepCrochet);
-		curBeat = Math.floor(curStep/4)
+		curBeat = Math.floor(curStep/4);
 
 		if (PlayState.SONG != null)
 			_song = PlayState.SONG;
