@@ -55,5 +55,5 @@ jobs:
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: windowsBuild
+          name: windows64Build
           path: export/release/windows/bin
