@@ -15,11 +15,16 @@
     "judge": 9,
     "newJudgementPos": false,
     "emuOsuLifts": false,
-    "skipDebugScreen": false,
     "showComboBreaks": true,
     "useKadeHealth": false,
     "useMissStun": false,
     "offset": 0,
     "accuracyMode": 0,
-    "danceMode": false
+    "danceMode": false,
+    "moddingOptions": true,
+    "funnyOptions": true,
+    "allowStoryMode": true,
+    "allowFreeplay": true,
+    "allowDonate": true,
+    "fpsCap": 60
 }

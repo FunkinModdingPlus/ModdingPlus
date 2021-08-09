@@ -94,6 +94,7 @@ class ChartingState extends MusicBeatState
 	var stageText:FlxText;
 	var uiText:FlxText;
 	var cutsceneText:FlxText;
+	var coolText = new FlxText(0, 0, 0, "69", 16);
 	
 	/*
 	 * WILL BE THE CURRENT / LAST PLACED NOTE
@@ -111,6 +112,8 @@ class ChartingState extends MusicBeatState
 
 	override function create()
 	{
+		// wierd fix but might work?
+		remove(coolText);
 		curSection = lastSection;
 
 		gridBG = FlxGridOverlay.create(GRID_SIZE, GRID_SIZE, GRID_SIZE * 8, GRID_SIZE * 16);
@@ -493,7 +496,6 @@ class ChartingState extends MusicBeatState
 			loopCheck.checked = curNoteSelected.doesLoop;
 			tooltips.add(loopCheck, {title: 'Section looping', body: "Whether or not it's a simon says style section", style: tooltipType});
 			bullshitUI.add(loopCheck);
-
 		 */
 	}
 
@@ -600,6 +602,12 @@ class ChartingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
+		remove(coolText);
+		coolText.text = 'curStep - ' + Std.string(curStep);
+		coolText.x = 1000;
+		coolText.y = 100;
+		coolText.scrollFactor.set();
+		add(coolText);
 
 		Conductor.songPosition = FlxG.sound.music.time;
 		_song.song = typingShit.text;

@@ -33,7 +33,6 @@ typedef TOptions = {
     var preferJudgement:Int;
     var newJudgementPos:Bool;
     var emuOsuLifts:Bool;
-    var skipDebugScreen:Bool;
     var showComboBreaks:Bool;
     var useKadeHealth:Bool;
     var useMissStun:Bool;
@@ -41,6 +40,12 @@ typedef TOptions = {
     var accuracyMode:AccuracyMode;
     var danceMode:Bool;
     var dontMuteMiss:Bool;
+    var moddingOptions:Bool;
+    var funnyOptions:Bool;
+    var allowStoryMode:Bool;
+    var allowFreeplay:Bool;
+    var allowDonate:Bool;
+    var fpsCap:Int;
 }
 /**
  * OptionsHandler Handles options : )
@@ -89,8 +94,12 @@ class OptionsHandler {
             lastOptions.useMissStun = false;
 			lastOptions.accuracyMode = Simple;
             lastOptions.dontMuteMiss = true;
+            lastOptions.moddingOptions = true;
+            lastOptions.funnyOptions = true;
+            lastOptions.allowStoryMode = true;
+            lastOptions.allowFreeplay = true;
+            lastOptions.allowDonate = true;
 
-            
         }
 		return lastOptions;
         #else
