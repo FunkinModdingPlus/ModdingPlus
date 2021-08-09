@@ -1,0 +1,1 @@
+haxelib run dox -i export/release/windows/types.xml -o docs
