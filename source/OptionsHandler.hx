@@ -91,6 +91,7 @@ class OptionsHandler {
 			lastOptions.accuracyMode = Simple;
             lastOptions.dontMuteMiss = true;
             lastOptions.moddingOptions = true;
+            lastOptions.funnyOptions = true;
             
         }
 		return lastOptions;
