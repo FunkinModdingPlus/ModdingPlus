@@ -127,7 +127,6 @@ class SaveDataState extends MusicBeatState
 				{name: "Credits", value: false, intName:'credits', desc: "Show the credits!", ignore: true},
 				{name: "Sound Test...", value: false, intName: 'soundtest', desc: "Listen to the soundtrack", ignore: true,},
 				{name: "Controls...", value: false, intName:'controls', desc:"Edit bindings!", ignore: true,},
-				#end
 			];
 		// amount of things that aren't options
 		var curOptions:TOptions = OptionsHandler.options;
