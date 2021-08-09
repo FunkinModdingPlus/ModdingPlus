@@ -606,7 +606,7 @@ class ChartingState extends MusicBeatState
 		coolText.text = 'curStep - ' + Std.string(curStep);
 		coolText.screenCenter(X);
 		coolText.y = 100;
-		coolText.scrollfactor.set();
+		coolText.scrollFactor.set();
 		add(coolText);
 
 		Conductor.songPosition = FlxG.sound.music.time;
