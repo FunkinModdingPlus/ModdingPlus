@@ -45,6 +45,7 @@ typedef TOptions = {
     var allowStoryMode:Bool;
     var allowFreeplay:Bool;
     var allowDonate:Bool;
+    var fpsCap:Int;
 }
 /**
  * OptionsHandler Handles options : )

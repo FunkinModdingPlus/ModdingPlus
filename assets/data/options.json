@@ -25,5 +25,6 @@
     "funnyOptions": true,
     "allowStoryMode": true,
     "allowFreeplay": true,
-    "allowDonate": true
+    "allowDonate": true,
+    "fpsCap": 60
 }
