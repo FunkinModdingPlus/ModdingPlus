@@ -1776,7 +1776,7 @@ class PlayState extends MusicBeatState
 	function switchCharacter(charTo:String, charState:String) {
 	    switch(charState) {
 			case 'boyfriend':
-			    remove(boyfriend);
+			    removeSprite(boyfriend);
 				remove(iconP1);
 				boyfriend = new Character(770, 450, charTo, true);
 				var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
@@ -1802,17 +1802,11 @@ class PlayState extends MusicBeatState
 				iconP1.cameras = [camHUD];
 
 				// Layering nonsense
-				add(boyfriend);
-				remove(healthBarBG);
-				remove(healthBar);
-				remove(iconP2);
-				add(healthBarBG);
-				add(healthBar);
-				add(iconP1);
-				add(iconP2);
+				addSprite(boyfriend);
+				addSprite(iconP1);
 			case 'dad':
-				remove(dad);
-				remove(iconP2);
+				removeSprite(dad);
+				removeSprite(iconP2);
 				dad = new Character(100, 100, charTo);
 				var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 				dad.x += dad.enemyOffsetX;
@@ -1837,16 +1831,8 @@ class PlayState extends MusicBeatState
 				iconP2.cameras = [camHUD];
 
 				// Layering nonsense
-				remove(boyfriend);
-				add(dad);
-				add(boyfriend);
-				remove(healthBarBG);
-				remove(healthBar);
-				remove(iconP1);
-				add(healthBarBG);
-				add(healthBar);
-				add(iconP1);
-				add(iconP2);
+				addSprite(dad);
+				addSprite(iconP2);
 			case 'gf':
 				remove(gf);
 				gf = new Character(400, 130, charTo);
@@ -1855,11 +1841,8 @@ class PlayState extends MusicBeatState
 				gf.y += gfoffset[1];
 
 				// Layering nonsense
-				remove(boyfriend);
-				remove(dad);
-				add(gf);
-				add(dad);
-				add(boyfriend);
+				addSprite(gf);
+
 		}
     }
 
