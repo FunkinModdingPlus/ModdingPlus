@@ -33,7 +33,6 @@ typedef TOptions = {
     var preferJudgement:Int;
     var newJudgementPos:Bool;
     var emuOsuLifts:Bool;
-    var skipDebugScreen:Bool;
     var showComboBreaks:Bool;
     var useKadeHealth:Bool;
     var useMissStun:Bool;
