@@ -43,6 +43,9 @@ typedef TOptions = {
     var dontMuteMiss:Bool;
     var moddingOptions:Bool;
     var funnyOptions:Bool;
+    var allowStoryMode:Bool;
+    var allowFreeplay:Bool;
+    var allowDonate:Bool;
 }
 /**
  * OptionsHandler Handles options : )
@@ -93,6 +96,9 @@ class OptionsHandler {
             lastOptions.dontMuteMiss = true;
             lastOptions.moddingOptions = true;
             lastOptions.funnyOptions = true;
+            lastOptions.allowStoryMode = true;
+            lastOptions.allowFreeplay = true;
+            lastOptions.allowDonate = true;
 
         }
 		return lastOptions;
