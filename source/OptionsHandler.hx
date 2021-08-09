@@ -42,6 +42,7 @@ typedef TOptions = {
     var danceMode:Bool;
     var dontMuteMiss:Bool;
     var moddingOptions:Bool;
+    var funnyOptions:Bool;
 }
 /**
  * OptionsHandler Handles options : )
@@ -92,7 +93,7 @@ class OptionsHandler {
             lastOptions.dontMuteMiss = true;
             lastOptions.moddingOptions = true;
             lastOptions.funnyOptions = true;
-            
+
         }
 		return lastOptions;
         #else
