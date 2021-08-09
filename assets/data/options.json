@@ -21,5 +21,6 @@
     "useMissStun": false,
     "offset": 0,
     "accuracyMode": 0,
-    "danceMode": false
+    "danceMode": false,
+    "moddingOptions": true
 }

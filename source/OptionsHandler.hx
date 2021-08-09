@@ -41,6 +41,7 @@ typedef TOptions = {
     var accuracyMode:AccuracyMode;
     var danceMode:Bool;
     var dontMuteMiss:Bool;
+    var moddingOptions:Bool;
 }
 /**
  * OptionsHandler Handles options : )
@@ -89,7 +90,7 @@ class OptionsHandler {
             lastOptions.useMissStun = false;
 			lastOptions.accuracyMode = Simple;
             lastOptions.dontMuteMiss = true;
-
+            lastOptions.moddingOptions = true;
             
         }
 		return lastOptions;
