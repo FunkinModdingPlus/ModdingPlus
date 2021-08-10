@@ -314,12 +314,12 @@ class PlayState extends MusicBeatState
 		var program = parser.parseString(FNFAssets.getHscript(path + filename));
 		var interp = PluginManager.createSimpleInterp();
 		// set vars
-		interp.variables.set("switchCharacter", switchCharacter);
 		interp.variables.set("BEHIND_GF", BEHIND_GF);
 		interp.variables.set("BEHIND_BF", BEHIND_BF);
 		interp.variables.set("BEHIND_DAD", BEHIND_DAD);
 		interp.variables.set("BEHIND_ALL", BEHIND_ALL);
 		interp.variables.set("BEHIND_NONE", 0);
+		interp.variables.set("switchCharacter", switchCharacter);
 		interp.variables.set("difficulty", storyDifficulty);
 		interp.variables.set("bpm", Conductor.bpm);
 		interp.variables.set("songData", SONG);
