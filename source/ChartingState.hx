@@ -603,7 +603,7 @@ class ChartingState extends MusicBeatState
 	{
 		curStep = recalculateSteps();
 		remove(coolText);
-		coolText.text = 'curStep - ' + Std.string(curStep);
+		coolText.text = 'curStep: ' + Std.string(curStep);
 		coolText.x = 1000;
 		coolText.y = 100;
 		coolText.scrollFactor.set();
