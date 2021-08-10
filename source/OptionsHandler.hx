@@ -40,8 +40,8 @@ typedef TOptions = {
     var accuracyMode:AccuracyMode;
     var danceMode:Bool;
     var dontMuteMiss:Bool;
-    var moddingOptions:Bool;
-    var funnyOptions:Bool;
+    //var moddingOptions:Bool;
+    //var funnyOptions:Bool;
     var allowStoryMode:Bool;
     var allowFreeplay:Bool;
     var allowDonate:Bool;
@@ -94,11 +94,12 @@ class OptionsHandler {
             lastOptions.useMissStun = false;
 			lastOptions.accuracyMode = Simple;
             lastOptions.dontMuteMiss = true;
-            lastOptions.moddingOptions = true;
-            lastOptions.funnyOptions = true;
+            //lastOptions.moddingOptions = true;
+            //lastOptions.funnyOptions = true;
             lastOptions.allowStoryMode = true;
             lastOptions.allowFreeplay = true;
             lastOptions.allowDonate = true;
+            lastOptions.fpsCap = 120;
 
         }
 		return lastOptions;
