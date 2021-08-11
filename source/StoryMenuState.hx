@@ -63,7 +63,7 @@ class StoryMenuState extends MusicBeatState
 	var weekCharacters:Array<Dynamic> = [];
 	var weekNums:Array<Int> = [];
 	var lastWeek:Int = 0;
-	var coolors:String<FlxColor> = [];
+	var coolors:Array<FlxColor> = [];
 	/*var weekNames:Array<String> = [
 		"",
 		"Daddy Dearest",
@@ -183,6 +183,9 @@ class StoryMenuState extends MusicBeatState
 			songsParsed = storySongJson.songs;
 			titlesParsed = storySongJson.weekNames;
 			charsParsed = storySongJson.characters;
+			for (_ in 0...songsParsed.length) {
+				coolors.push(0xFFF9CF51);
+			}
 		}
 		for (storySongList in songsParsed)
 		{

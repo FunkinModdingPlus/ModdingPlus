@@ -330,7 +330,7 @@ class ModifierState extends MusicBeatState
 	override function create()
 	{
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuDesat.png');
-		menuBG.color = CoolUtil.parseJson(FNFAssets.getText("assets/data/custom_menu_colors.json").Modifiers);
+		menuBG.color = 0xFFea71fd;
 		grpAlphabet = new FlxTypedGroup<Alphabet>();
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
