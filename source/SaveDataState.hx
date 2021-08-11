@@ -135,7 +135,7 @@ class SaveDataState extends MusicBeatState
 		optionList[6].value = curOptions.showSongPos;
 		*/
 		saves = new FlxTypedSpriteGroup<SaveFile>();
-		menuBG.color = CoolUtil.parseJson(FNFAssets.getText("assets/data/custom_menu_colors.json").Options);;
+		menuBG.color = CoolUtil.parseJson(FNFAssets.getText("assets/data/custom_menu_colors.json").Options);
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
