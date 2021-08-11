@@ -63,7 +63,7 @@ class StoryMenuState extends MusicBeatState
 	var weekCharacters:Array<Dynamic> = [];
 	var weekNums:Array<Int> = [];
 	var lastWeek:Int = 0;
-	var coolors:Array<FlxColor> = [];
+	var coolors:String<FlxColor> = [];
 	/*var weekNames:Array<String> = [
 		"",
 		"Daddy Dearest",
