@@ -48,6 +48,7 @@ class MainMenuState extends MusicBeatState
 	var scrollSound:String;
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
+	var bgColor:FlxObject;
 	public static var version:String = "";
 	override function create()
 	{
@@ -74,13 +75,14 @@ class MainMenuState extends MusicBeatState
 		}
 		
 		persistentUpdate = persistentDraw = true;
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic('assets/images/menuBG.png');
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic('assets/images/menuDesat.png');
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.18;
 		bg.setGraphicSize(Std.int(bg.width * 1.2));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = true;
+		bg.color = CoolUtil.parseJson(FNFAssets.getText("assets/data/custom_menu_colors.json").MainMenu);;			
 		add(bg);
 		
 
@@ -95,7 +97,7 @@ class MainMenuState extends MusicBeatState
 		magenta.screenCenter();
 		magenta.visible = false;
 		magenta.antialiasing = true;
-		magenta.color = 0xFFfd719b;
+		magenta.color = CoolUtil.parseJson(FNFAssets.getText("assets/data/custom_menu_colors.json").MainMenuSelect);;
 		add(magenta);
 		// magenta.scrollFactor.set();
 

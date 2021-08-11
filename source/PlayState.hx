@@ -1277,9 +1277,16 @@ class PlayState extends MusicBeatState
 		// : )
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
-		var useSong = "assets/music/" + SONG.song + "_Inst" + TitleState.soundExt;
-		if (OptionsHandler.options.stressTankmen && FNFAssets.exists("assets/music/" + SONG.song + "/Shit_Inst.ogg"))
+		var useSong
+		if (FNFAssets.exists("assets/music/" + SONG.song + "_Inst" + TitleState.soundExt;))
+			useSong = "assets/music/" + SONG.song + "_Inst" + TitleState.soundExt;
+			else if (FNFAssets.exists("assets/music/" + SONG.song + "/Inst" + TitleState.soundExt;))
+				useSong = "assets/music/" + SONG.song + "/Inst" + TitleState.soundExt;
+
+		if (FNFAssets.exists("assets/music/" + SONG.song + "/Inst" + TitleState.soundExt && OptionsHandler.options.stressTankmen));
 			useSong = "assets/music/" + SONG.song + "/Shit_Inst.ogg";
+			else if (OptionsHandler.options.stressTankmen && FNFAssets.exists("assets/music/" + SONG.song + "_Shit_Inst.ogg"))
+				useSong = "assets/music/" + SONG.song + "_Shit_Inst.ogg";
 		if (!paused)
 			FlxG.sound.playMusic(FNFAssets.getSound(useSong), 1, false);
 		songLength = FlxG.sound.music.length;
