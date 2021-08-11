@@ -97,7 +97,7 @@ class MainMenuState extends MusicBeatState
 		magenta.screenCenter();
 		magenta.visible = false;
 		magenta.antialiasing = true;
-		magenta.color = CoolUtil.parseJson(FNFAssets.getText("assets/data/custom_menu_colors.json").MainMenuSelect);
+		magenta.color = CoolUtil.parseJson(FNFAssets.getText("assets/data/custom_menu_colors.json").MainMenuSelect);;
 		add(magenta);
 		// magenta.scrollFactor.set();
 
