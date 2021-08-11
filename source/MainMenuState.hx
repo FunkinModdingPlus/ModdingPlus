@@ -82,7 +82,7 @@ class MainMenuState extends MusicBeatState
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = true;
-		bg.color = CoolUtil.parseJson(FNFAssets.getText("assets/data/custom_menu_colors.json").MainMenu);
+		bg.color = CoolUtil.parseJson(FNFAssets.getText("assets/data/custom_menu_colors.json").MainMenu);;			
 		add(bg);
 		
 
