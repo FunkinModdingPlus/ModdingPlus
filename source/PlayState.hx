@@ -1277,7 +1277,7 @@ class PlayState extends MusicBeatState
 		// : )
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
-		var useSong;
+		var useSong
 		if (FNFAssets.exists("assets/music/" + SONG.song + "_Inst" + TitleState.soundExt))
 			useSong = "assets/music/" + SONG.song + "_Inst" + TitleState.soundExt;
 			else if (FNFAssets.exists("assets/music/" + SONG.song + "/Inst" + TitleState.soundExt))
