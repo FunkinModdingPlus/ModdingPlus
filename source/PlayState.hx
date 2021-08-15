@@ -14,6 +14,10 @@ import flixel.FlxG;
 import openfl.geom.Matrix;
 import flixel.FlxGame;
 import flixel.FlxObject;
+#if desktop
+import Sys;
+import sys.FileSystem;
+#end
 #if cpp
 import Discord.DiscordClient;
 #end
@@ -440,6 +444,12 @@ class PlayState extends MusicBeatState
 	var uiSmelly:TUI;
 	override public function create()
 	{
+		// pre lowercasing the song name (create)
+        var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
+        switch (songLowercase) {
+            case 'dad-battle': songLowercase = 'dadbattle';
+            case 'philly-nice': songLowercase = 'philly';
+        }
 		Note.getFrames = true;
 		Note.specialNoteJson = null;
 		if (FNFAssets.exists('assets/data/${SONG.song.toLowerCase()}/noteInfo.json')) {
@@ -662,9 +672,29 @@ class PlayState extends MusicBeatState
 
 		gfVersion = SONG.gf;
 		trace(SONG.gf);
+
 		gf = new Character(400, 130, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
-
+		if (FileSystem.exists(Paths.txt(songLowercase  + "/preload")))
+			{
+				var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt(songLowercase  + "/preload"));
+	
+				for (i in 0...characters.length)
+				{
+					var data:Array<String> = characters[i].split(' ');
+					dad = new Character (0, 0, data[0]);
+				}
+			}
+		if (FileSystem.exists(Paths.txt(songLowercase  + "/preload")))
+				{
+					var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt(songLowercase  + "/preload"));
+		
+					for (i in 0...characters.length)
+					{
+						var data:Array<String> = characters[i].split(' ');
+						bf = new Character (0, 0, data[0]);
+					}
+				}
 		dad = new Character(100, 100, SONG.player2);
 		if (duoMode || opponentPlayer)
 			dad.beingControlled = true;
