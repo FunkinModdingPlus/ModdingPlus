@@ -366,7 +366,7 @@ class PlayState extends MusicBeatState
 		interp.variables.set("playerOneSing", function()
 		{
 		});
-		interp.variables.set("noteHit", function(player1:Bool, note:Note) {});
+		interp.variables.set("noteHit", function(player1:Bool, note:Note, wasGoodHit:Bool) {});
 		interp.variables.set("addSprite", function (sprite, position) {
 			// sprite is a FlxSprite
 			// position is a Int
@@ -391,8 +391,22 @@ class PlayState extends MusicBeatState
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
 		});
+		interp.variables.set("yeetSprite", function(sprite) {
+			remove(sprite);
+			// haha funny yeet :troll:
+		});
 		interp.variables.set("getHaxeActor", getHaxeActor);
 		interp.variables.set("instancePluginClass", instanceExClass);
+		interp.variables.set("SwapChar", function (who:Character, to:String) {
+			var oldx:Float;
+			var oldy:Float;
+			remove(who);
+			remove(camHUD);
+			who = new Character(oldx, oldy, to);
+			add(who);
+			add(camHUD);
+		});
+
 		trace("set stuff");
 		interp.execute(program);
 		hscriptStates.set(usehaxe,interp);
@@ -3792,18 +3806,18 @@ class PlayState extends MusicBeatState
 					onActing.sing(note.oppntSing.direction, note.oppntSing.miss, note.oppntSing.alt);
 				}
 			}
-			callAllHScript("noteHit", [playerOne, note]);
-			
-				
-				
-		
 
 			note.wasGoodHit = true;
+			var goodhit = note.wasGoodHit;
 			vocals.volume = 1;
 
 			note.kill();
 			notes.remove(note, true);
 			note.destroy();
+
+			callAllHScript("noteHit", [playerOne, note, goodhit]);
+			
+				
 			
 		}
 	}
