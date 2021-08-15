@@ -444,12 +444,14 @@ class PlayState extends MusicBeatState
 	var uiSmelly:TUI;
 	override public function create()
 	{
+		#if desktop
 		// pre lowercasing the song name (create)
         var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
         switch (songLowercase) {
             case 'dad-battle': songLowercase = 'dadbattle';
             case 'philly-nice': songLowercase = 'philly';
         }
+		#end
 		Note.getFrames = true;
 		Note.specialNoteJson = null;
 		if (FNFAssets.exists('assets/data/${SONG.song.toLowerCase()}/noteInfo.json')) {
@@ -675,6 +677,7 @@ class PlayState extends MusicBeatState
 
 		gf = new Character(400, 130, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
+		#if desktop
 		if (FileSystem.exists(Paths.txt(songLowercase  + "/preload")))
 			{
 				var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt(songLowercase  + "/preload"));
@@ -695,6 +698,7 @@ class PlayState extends MusicBeatState
 						boyfriend = new Character (0, 0, data[0]);
 					}
 				}
+		#end
 		dad = new Character(100, 100, SONG.player2);
 		if (duoMode || opponentPlayer)
 			dad.beingControlled = true;
