@@ -162,6 +162,7 @@ class FreeplayState extends MusicBeatState
 			FlxG.autoPause = false;
 			curDifficulty = 0;
 		}
+
 		// imagine making a sprite and not assigning a var
 		bg =  new FlxSprite();
 		if (FNFAssets.exists('assets/images/Custom_Menu_BGs/Default/menuDesat.png')) {
@@ -228,6 +229,12 @@ class FreeplayState extends MusicBeatState
 			record.y -= record.height / 1.5;
 			add(record);
 		}
+		var qtooltip = new Tooltip(10, 0, "Q", "info backwards");
+		qtooltip.y = FlxG.height - qtooltip.height;
+		var etooltip = new Tooltip(10, qtooltip.y, "E", "info forwards");
+		etooltip.x = qtooltip.x + qtooltip.width + 10;
+		add(etooltip);
+		add(qtooltip);
 		infoPanel = new SongInfoPanel(FlxG.width - 500, 100, songs[0].songName, curDifficulty);
 		if (!soundTest && OptionsHandler.options.style)
 			add(infoPanel);

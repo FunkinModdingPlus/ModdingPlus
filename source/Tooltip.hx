@@ -43,8 +43,8 @@ class FnkButton extends FlxTypedSpriteGroup<FlxSprite> {
         
         text = new FlxText(17, 7, 0, button, 20);
         
-		text.setFormat(null, 20, FlxColor.WHITE, null, OUTLINE, FlxColor.BLACK);
-        if (text.width > (text.x - buttonImage.width * 2)) {
+		text.setFormat(null, 16, FlxColor.WHITE, null, OUTLINE, FlxColor.BLACK);
+        if (text.width > (buttonImage.width)) {
             buttonImage.setGraphicSize(Std.int(text.width + text.x * 3), 50);
             buttonImage.updateHitbox();
         }

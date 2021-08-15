@@ -46,6 +46,7 @@ typedef TOptions = {
     var allowFreeplay:Bool;
     var allowDonate:Bool;
     var fpsCap:Int;
+    var ignoreVile:Bool;
 }
 /**
  * OptionsHandler Handles options : )
@@ -98,8 +99,8 @@ class OptionsHandler {
             //lastOptions.funnyOptions = true;
             lastOptions.allowStoryMode = true;
             lastOptions.allowFreeplay = true;
-            lastOptions.allowDonate = true;
-            lastOptions.fpsCap = 120;
+            lastOptions.allowDonate = false;
+            lastOptions.fpsCap = 60;
 
         }
 		return lastOptions;
