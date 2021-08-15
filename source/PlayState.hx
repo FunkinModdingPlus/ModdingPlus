@@ -13,7 +13,7 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import openfl.geom.Matrix;
 import flixel.FlxGame;
-import flixel.FlxObject;
+import flixel.FlxObject;q
 #if desktop
 import Sys;
 import sys.FileSystem;
@@ -692,7 +692,7 @@ class PlayState extends MusicBeatState
 					for (i in 0...characters.length)
 					{
 						var data:Array<String> = characters[i].split(' ');
-						bf = new Character (0, 0, data[0]);
+						boyfriend = new Character (0, 0, data[0]);
 					}
 				}
 		dad = new Character(100, 100, SONG.player2);
