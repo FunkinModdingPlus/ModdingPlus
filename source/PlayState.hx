@@ -398,13 +398,10 @@ class PlayState extends MusicBeatState
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
 		});
-		interp.variables.set("yeetSprite", function(sprite) {
-			remove(sprite);
-			// haha funny yeet :troll:
-		});
+		
 		interp.variables.set("getHaxeActor", getHaxeActor);
 		interp.variables.set("instancePluginClass", instanceExClass);
-		interp.variables.set("SwapChar", function (charState:String, charTo:String) {
+		interp.variables.set("swapChar", function (charState:String, charTo:String) {
 			switch(charState) {
 				case 'boyfriend':
 					remove(boyfriend);
