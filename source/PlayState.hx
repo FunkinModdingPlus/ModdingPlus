@@ -13,7 +13,7 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import openfl.geom.Matrix;
 import flixel.FlxGame;
-import flixel.FlxObject;q
+import flixel.FlxObject;
 #if desktop
 import Sys;
 import sys.FileSystem;
