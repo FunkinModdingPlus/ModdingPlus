@@ -398,13 +398,17 @@ class PlayState extends MusicBeatState
 		interp.variables.set("getHaxeActor", getHaxeActor);
 		interp.variables.set("instancePluginClass", instanceExClass);
 		interp.variables.set("SwapChar", function (who:Character, to:String) {
-			var oldx:Float;
-			var oldy:Float;
-			remove(who);
-			remove(camHUD);
-			who = new Character(oldx, oldy, to);
-			add(who);
-			add(camHUD);
+			if (who && to) {
+				var oldx:Float;
+				var oldy:Float;
+				oldy = who.y;
+				oldx = who.x;
+				remove(who);
+				remove(camHUD);
+				who = new Character(oldx, oldy, to);
+				add(who);
+				add(camHUD);
+			}
 		});
 
 		trace("set stuff");
