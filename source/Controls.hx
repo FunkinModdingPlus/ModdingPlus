@@ -596,12 +596,12 @@ class Controls extends FlxActionSet
 			removeKeyboard();
 
 		keyboardScheme = scheme;
-		if (!Reflect.hasField(FlxG.save.data, "keys")) {
+		if (!Reflect.hasField(FlxG.save.data, "keys") || !(FlxG.save.data.keys.left is Array)) {
 			FlxG.save.data.keys = {
-				"left": D,
-				"down": F,
-				"up": J,
-				"right": K
+				"left": [D],
+				"down": [F],
+				"up": [J],
+				"right": [K]
 			};
 		}
 		#if (haxe >= "4.0.0")
@@ -609,10 +609,10 @@ class Controls extends FlxActionSet
 		{
 			// Keys are always rebinded before playstate starts. Note that this totally fucks up menuing lol.
 			case Solo(false) | Solo(true):
-				inline bindKeys(Control.UP, [FlxG.save.data.keys.up]);
-				inline bindKeys(Control.DOWN, [FlxG.save.data.keys.down]);
-				inline bindKeys(Control.LEFT, [FlxG.save.data.keys.left]);
-				inline bindKeys(Control.RIGHT, [FlxG.save.data.keys.right]);
+				inline bindKeys(Control.UP, FlxG.save.data.keys.up);
+				inline bindKeys(Control.DOWN, FlxG.save.data.keys.down);
+				inline bindKeys(Control.LEFT, FlxG.save.data.keys.left);
+				inline bindKeys(Control.RIGHT, FlxG.save.data.keys.right);
 				inline bindKeys(Control.UP_MENU, [W, FlxKey.UP]);
 				inline bindKeys(Control.DOWN_MENU, [S, FlxKey.DOWN]);
 				inline bindKeys(Control.LEFT_MENU, [A, FlxKey.LEFT]);
@@ -655,10 +655,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.RIGHT_MENU, [D, FlxKey.RIGHT]);
 			case None: // nothing
 			case Custom:
-				inline bindKeys(Control.UP, [FlxG.save.data.keys.up]);
-				inline bindKeys(Control.DOWN, [FlxG.save.data.keys.down]);
-				inline bindKeys(Control.LEFT, [FlxG.save.data.keys.left]);
-				inline bindKeys(Control.RIGHT, [FlxG.save.data.keys.right]);
+				inline bindKeys(Control.UP, FlxG.save.data.keys.up);
+				inline bindKeys(Control.DOWN, FlxG.save.data.keys.down);
+				inline bindKeys(Control.LEFT, FlxG.save.data.keys.left);
+				inline bindKeys(Control.RIGHT, FlxG.save.data.keys.right);
 				inline bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
 				inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 				inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);

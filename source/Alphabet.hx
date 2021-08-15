@@ -358,6 +358,7 @@ class AlphaCharacter extends FlxSprite
 					animName = "exclamation point bold";
 				case ",":
 					animName = "comma bold";
+					y += 50;
 				case "\\":
 					animName = "bs bold";
 				case "/":
