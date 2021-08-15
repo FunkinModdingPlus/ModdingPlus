@@ -193,6 +193,9 @@ class PlayState extends MusicBeatState
 	var healthTxt:FlxText;
 	var accuracyTxt:FlxText;
 	var difficTxt:FlxText;
+	// hehe fuck around with these lamo
+	public static var oldx:Float;
+	public static var oldy:Float;
 	/**
 	 * The total score of the week. Not a good idea to touch
 	 * as it is a total and not divided until the end.
@@ -398,17 +401,13 @@ class PlayState extends MusicBeatState
 		interp.variables.set("getHaxeActor", getHaxeActor);
 		interp.variables.set("instancePluginClass", instanceExClass);
 		interp.variables.set("SwapChar", function (who:Character, to:String) {
-			if (who && to) {
-				var oldx:Float;
-				var oldy:Float;
-				oldy = who.y;
-				oldx = who.x;
-				remove(who);
-				remove(camHUD);
-				who = new Character(oldx, oldy, to);
-				add(who);
-				add(camHUD);
-			}
+			oldy = who.y;
+			oldx = who.x;
+			remove(who);
+			remove(camHUD);
+			who = new Character(oldx, oldy, to);
+			add(who);
+			add(camHUD);
 		});
 
 		trace("set stuff");
