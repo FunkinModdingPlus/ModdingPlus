@@ -401,6 +401,22 @@ class PlayState extends MusicBeatState
 		
 		interp.variables.set("getHaxeActor", getHaxeActor);
 		interp.variables.set("instancePluginClass", instanceExClass);
+		interp.variables.set("scaleChar", function (char:String, amount:Float) {
+			switch(char) {
+				case 'boyfriend':
+					remove(boyfriend);
+					boyfriend.setGraphicSize(Std.int(boyfriend.width * amount));
+					add(boyfriend);
+				case 'dad':
+					remove(dad);
+					dad.setGraphicSize(Std.int(dad.width * amount));
+					add(dad);
+				case 'gf':
+					remove(gf);
+					gf.setGraphicSize(Std.int(gf.width * amount));
+					add(gf);
+			}
+		});
 		interp.variables.set("swapChar", function (charState:String, charTo:String) {
 			switch(charState) {
 				case 'boyfriend':
@@ -433,6 +449,7 @@ class PlayState extends MusicBeatState
 					// Layering nonsense
 					add(boyfriend);
 					add(camHUD);
+					add(iconP1);
 				case 'dad':
 					remove(dad);
 					remove(iconP2);
@@ -463,6 +480,7 @@ class PlayState extends MusicBeatState
 					// Layering nonsense
 					add(dad);
 					add(camHUD);
+					add(iconP2);
 				case 'gf':
 					remove(gf);
 					remove(camHUD);
