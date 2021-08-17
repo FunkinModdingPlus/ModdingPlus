@@ -47,6 +47,8 @@ jobs:
           haxelib install hscript
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git extension-webm https://github.com/GrowtopiaFli/extension-webm
+          lime rebuild extension-webm linux
           haxelib install hxcpp-debug-server
           haxelib list
       - name: Create Version Tag
@@ -109,6 +111,8 @@ jobs:
           haxelib install hscript
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git extension-webm https://github.com/GrowtopiaFli/extension-webm
+          lime rebuild extension-webm windows
           haxelib install hxcpp-debug-server
           haxelib list
         shell: cmd
@@ -171,6 +175,8 @@ jobs:
           haxelib install hscript
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git extension-webm https://github.com/GrowtopiaFli/extension-webm
+          lime rebuild extension-webm mac
           haxelib install hxcpp-debug-server
           haxelib list
       - name: Create Version Tag
