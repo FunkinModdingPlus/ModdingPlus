@@ -32,7 +32,9 @@ take down mods that don't follow this rule.
 - [Matheus L/Mlops](https://gamebanana.com/members/1767306), [AndreDoodles](https://gamebanana.com/members/1764840), riko, Raf, ElBartSinsoJaJa, and [plum](https://www.youtube.com/channel/UCXbiI4MJD9Y3FpjW61lG8ZQ) - Artist & Animation
 - [ThePinkPhantom/JuliettePink](https://gamebanana.com/members/1892442) - Portrait Artist
 - [Alex Director](https://gamebanana.com/members/1701629) - Icon Fixer
-
+- [TrafficKid](https://github.com/TrafficKid) - GitHub Wikipedia
+- [GwebDev](https://github.com/GrowtopiaFli) - Edited WebM code
+- [Axy](https://github.com/AxyGitPoggers) - Poggers help
 ## Build instructions
 
 THESE INSTRUCTIONS ARE FOR COMPILING THE GAME'S SOURCE CODE!!!

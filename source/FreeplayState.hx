@@ -1,5 +1,6 @@
 package;
 
+import Controls.Action;
 import flixel.input.keyboard.FlxKey;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxGradient;
@@ -229,9 +230,9 @@ class FreeplayState extends MusicBeatState
 			record.y -= record.height / 1.5;
 			add(record);
 		}
-		var qtooltip = new Tooltip(10, 0, "Q", "info backwards");
+		var qtooltip = new Tooltip(10, 0, Action.LEFT_TAB, "info backwards", Keyboard, true);
 		qtooltip.y = FlxG.height - qtooltip.height;
-		var etooltip = new Tooltip(10, qtooltip.y, "E", "info forwards");
+		var etooltip = new Tooltip(10, qtooltip.y, Action.RIGHT_TAB, "info forwards", Keyboard, true);
 		etooltip.x = qtooltip.x + qtooltip.width + 10;
 		add(etooltip);
 		add(qtooltip);
@@ -312,9 +313,9 @@ class FreeplayState extends MusicBeatState
 		if (controls.RIGHT_MENU)
 			changeDiff(1);
 		
-		if (controls.TERTIARY)
+		if (controls.LEFT_TAB)
 			infoPanel.changeDisplay(-1);
-		else if (controls.SECONDARY)
+		else if (controls.RIGHT_TAB)
 			infoPanel.changeDisplay(1);
 		if (controls.BACK)
 		{
