@@ -300,18 +300,20 @@ class TitleState extends MusicBeatState
 		for (i in 0...textArray.length)
 		{
 			var money:Alphabet = new Alphabet(0, 0, textArray[i], true, false);
+			money.y += (i * 60) + 200;
+			money.screenCenter(X);
 			credGroup.add(money);
 			textGroup.add(money);
-			FlxTween.tween(money, { x: money.x += (i * 60) + 200, y:  money.y += (i * 60) + 200 }, 2, { ease: FlxEase.quadOut });
 		}
 	}
 
 	function addMoreText(text:String)
 	{
 		var coolText:Alphabet = new Alphabet(0, 0, text, true, false);
+		coolText.y += (textGroup.length * 60);
+		coolText.screenCenter(X);
 		credGroup.add(coolText);
 		textGroup.add(coolText);
-		FlxTween.tween(coolText, { x: coolText.x += (textGroup.length * 60) + 200, y: coolText.y += (textGroup.length * 60) + 200 }, 2, { ease: FlxEase.quadOut });
 	}
 
 	function deleteCoolText()
