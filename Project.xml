@@ -38,10 +38,11 @@
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
 	<set name="BUILD_DIR" value="export/32bit" if="32bit" />
 
-	<classpath name="source" />
+	<classpath name="tiky" />
 
 	<assets path="assets/images" />
 	<assets path="assets/data" />
+	<assets path="assets/videos"/>
 	<assets path="VERSION" />
 	<assets path='example_mods' rename='mods' embed='false'/>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
@@ -71,6 +72,8 @@
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />
 	<haxelib name="tjson"/>
+	<haxelib name="actuate" />
+	<haxelib name="extension-webm" if="desktop" />
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
 	<haxelib name="faxe" if='switch'/>
