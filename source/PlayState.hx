@@ -100,7 +100,6 @@ class PlayState extends MusicBeatState
 	public static var defaultPlaylistLength = 0;
 	public static var campaignScoreDef = 0;
 	public static var ss:Bool = true;
-	public static var doneCutscene = false;
 	private var vocals:FlxSound;
 	// use old bf
 	private var oldMode:Bool = false;
@@ -316,36 +315,6 @@ class PlayState extends MusicBeatState
 				return strumLineNotes.members[Std.parseInt(name)];
 		}
 	}
-	function getHaxeActor(name:String):Dynamic {
-		switch (name) {
-			case "boyfriend" | "bf":
-				return boyfriend;
-			case "girlfriend" | "gf":
-				return gf;
-			case "dad":
-				return dad;
-			default:
-				return strumLineNotes.members[Std.parseInt(name)];
-		}
-	}
-	function makeCutsceneHaxeState(usehaxe:String, path:String, filename:String) {
-		trace("opening a haxe state (because we are cool :))");
-		var parser = new ParserEx();
-		var program = parser.parseString(FNFAssets.getHscript(path + filename));
-		var interp = PluginManager.createSimpleInterp();
-		// set vars
-		interp.variables.set("hscriptCalled", function () {};
-		interp.variables.set("startCutscene", function (webmPath:String, OnFinish:FlxState) {
-			// i messed up :(
-			FlxG.switchState(new VideoState(webmPath, onFinish));
-			// im not smart enogh to make onfinish functions
-		});
-		trace("set stuff");
-		interp.execute(program);
-		hscriptStates.set(usehaxe,interp);
-		callHscript("start", [SONG.song], usehaxe);
-		trace('executed');
-		});
 	function makeHaxeState(usehaxe:String, path:String, filename:String) {
 		trace("opening a haxe state (because we are cool :))");
 		var parser = new ParserEx();
@@ -1104,24 +1073,8 @@ class PlayState extends MusicBeatState
 			schoolIntro(dialogueBox);
 			return;
 		}
-		makeHaxeState("cutscene", "assets/images/custom_cutscenes/"+SONG.cutsceneType+'/', "../"+Reflect.field(goodJson, SONG));
+		makeHaxeState("cutscene", "assets/images/custom_cutscenes/"+SONG.cutsceneType+'/', "../"+Reflect.field(goodJson, SONG.cutsceneType));
 		
-	}
-	function webmSceneHSCRIPT() {
-		if (doneCutscene == false) {
-			if (FNFAssets.exists("assets/cutscenes/" + SONG.song.toLowerCase(), Hscript))
-				{
-					// webm when
-					makeCutsceneHaxeState("modchart", "assets/cutscenes/" + SONG.song.toLowerCase());
-					callAllHScript("hscriptCalled", []);
-				}
-			else {
-				startCountdown();
-			};
-		};
-		else {
-			startCountdown();
-		};
 	}
 	function schoolIntro(?dialogueBox:DialogueBox, intro:Bool=true):Void
 	{
