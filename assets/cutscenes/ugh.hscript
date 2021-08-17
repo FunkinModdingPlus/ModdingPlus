@@ -1,0 +1,3 @@
+function hscriptCalled() {
+    startCutscene("assets/cutscenes/ugh/boome.webm", new PlayState);
+}
