@@ -406,14 +406,17 @@ class PlayState extends MusicBeatState
 				case 'boyfriend':
 					remove(boyfriend);
 					boyfriend.setGraphicSize(Std.int(boyfriend.width * amount));
+					boyfriend.y *= amount;
 					add(boyfriend);
 				case 'dad':
 					remove(dad);
 					dad.setGraphicSize(Std.int(dad.width * amount));
+					dad.y *= amount;
 					add(dad);
 				case 'gf':
 					remove(gf);
 					gf.setGraphicSize(Std.int(gf.width * amount));
+					gf.y *= amount;
 					add(gf);
 			}
 		});
