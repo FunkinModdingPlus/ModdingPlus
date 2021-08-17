@@ -33,6 +33,7 @@ take down mods that don't follow this rule.
 - [ThePinkPhantom/JuliettePink](https://gamebanana.com/members/1892442) - Portrait Artist
 - [Alex Director](https://gamebanana.com/members/1701629) - Icon Fixer
 - [TrafficKid](https://github.com/TrafficKid) - GitHub Wikipedia
+- [GwebDev](https://github.com/GrowtopiaFli) - Edited WebM code
 - [Axy](https://github.com/AxyGitPoggers) - Poggers help
 ## Build instructions
 
