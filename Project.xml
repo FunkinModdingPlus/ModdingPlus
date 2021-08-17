@@ -45,6 +45,7 @@
 	<assets path="assets/cutscenes"/>
 	<assets path="VERSION" />
 	<assets path='example_mods' rename='mods' embed='false'/>
+        <assets path="extension-webm.ndll"/>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 	<!-- <template path='mods' /> -->
 
