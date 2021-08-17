@@ -15,6 +15,7 @@ import lime.utils.Assets;
 import lime.app.Application;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
+import flixel.FlxObject;
 #if sys
 import sys.io.File;
 import haxe.io.Path;
@@ -109,7 +110,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var menuItem:FlxSprite = new FlxSprite(0, 100 + (i * 160));
-			var center:FlxObject;
+			var center:FlxObject = new FlxObject(0, 0);
 			menuItem.frames = tex;
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
