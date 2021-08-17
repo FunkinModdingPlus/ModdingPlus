@@ -3,8 +3,8 @@ package;
 #if windows
 import Discord.DiscordClient;
 #end
-import flixel.FlxEase;
-import flixel.FlxTween;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -309,8 +309,6 @@ class TitleState extends MusicBeatState
 	function addMoreText(text:String)
 	{
 		var coolText:Alphabet = new Alphabet(0, 0, text, true, false);
-		coolText.screenCenter(X);
-		coolText.y += (textGroup.length * 60) + 200;
 		credGroup.add(coolText);
 		textGroup.add(coolText);
 		FlxTween.tween(coolText, { x: coolText.x += (textGroup.length * 60) + 200, y: coolText.y += (textGroup.length * 60) + 200 }, 2, { ease: FlxEase.quadOut });

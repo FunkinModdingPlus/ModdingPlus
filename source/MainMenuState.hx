@@ -13,6 +13,8 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 import lime.app.Application;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 #if sys
 import sys.io.File;
 import haxe.io.Path;
