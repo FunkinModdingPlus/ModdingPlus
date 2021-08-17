@@ -34,8 +34,6 @@ class NoteSplash extends FlxSprite {
         if (animation.curAnim.finished) {
             // club pengiun is
             kill();
-            remove();
-            // die XD
         }
         super.update(elapsed);
     }
