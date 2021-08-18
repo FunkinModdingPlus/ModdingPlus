@@ -1,5 +1,6 @@
 package;
 
+import Controls.Action;
 import flixel.input.keyboard.FlxKey;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxGradient;
@@ -162,6 +163,7 @@ class FreeplayState extends MusicBeatState
 			FlxG.autoPause = false;
 			curDifficulty = 0;
 		}
+
 		// imagine making a sprite and not assigning a var
 		bg =  new FlxSprite();
 		if (FNFAssets.exists('assets/images/Custom_Menu_BGs/Default/menuDesat.png')) {
@@ -228,6 +230,12 @@ class FreeplayState extends MusicBeatState
 			record.y -= record.height / 1.5;
 			add(record);
 		}
+		var qtooltip = new Tooltip(10, 0, Action.LEFT_TAB, "info backwards", Keyboard, true);
+		qtooltip.y = FlxG.height - qtooltip.height;
+		var etooltip = new Tooltip(10, qtooltip.y, Action.RIGHT_TAB, "info forwards", Keyboard, true);
+		etooltip.x = qtooltip.x + qtooltip.width + 10;
+		add(etooltip);
+		add(qtooltip);
 		infoPanel = new SongInfoPanel(FlxG.width - 500, 100, songs[0].songName, curDifficulty);
 		if (!soundTest && OptionsHandler.options.style)
 			add(infoPanel);
@@ -305,9 +313,9 @@ class FreeplayState extends MusicBeatState
 		if (controls.RIGHT_MENU)
 			changeDiff(1);
 		
-		if (controls.TERTIARY)
+		if (controls.LEFT_TAB)
 			infoPanel.changeDisplay(-1);
-		else if (controls.SECONDARY)
+		else if (controls.RIGHT_TAB)
 			infoPanel.changeDisplay(1);
 		if (controls.BACK)
 		{

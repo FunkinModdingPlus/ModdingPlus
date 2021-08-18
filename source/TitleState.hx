@@ -3,6 +3,8 @@ package;
 #if windows
 import Discord.DiscordClient;
 #end
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -298,8 +300,8 @@ class TitleState extends MusicBeatState
 		for (i in 0...textArray.length)
 		{
 			var money:Alphabet = new Alphabet(0, 0, textArray[i], true, false);
-			money.screenCenter(X);
 			money.y += (i * 60) + 200;
+			money.screenCenter(X);
 			credGroup.add(money);
 			textGroup.add(money);
 		}
@@ -308,8 +310,8 @@ class TitleState extends MusicBeatState
 	function addMoreText(text:String)
 	{
 		var coolText:Alphabet = new Alphabet(0, 0, text, true, false);
+		coolText.y += (textGroup.length * 60);
 		coolText.screenCenter(X);
-		coolText.y += (textGroup.length * 60) + 200;
 		credGroup.add(coolText);
 		textGroup.add(coolText);
 	}

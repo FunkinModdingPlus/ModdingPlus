@@ -45,6 +45,15 @@ import flash.media.Sound;
 
 using StringTools;
 
+enum abstract NoteTypes(Int) from Int to Int
+{
+	@:op(A == B) static function _(_, _):Bool;
+
+	var Normal;
+	var Lift;
+	var Mine;
+	var Death;
+}
 class ChartingState extends MusicBeatState
 {
 	//var _file:FileReference;
@@ -65,20 +74,20 @@ class ChartingState extends MusicBeatState
 	var curSong:String = 'Dadbattle';
 	var amountSteps:Int = 0;
 	var bullshitUI:FlxGroup;
-
+	var noteTypeText:FlxText;
 	var highlight:FlxSprite;
 
 	var GRID_SIZE:Int = 40;
 
 	var dummyArrow:FlxSprite;
 
-	var curRenderedNotes:FlxTypedGroup<Note>;
+	var curRenderedNotes:FlxTypedGroup<EdtNote>;
 	var curRenderedSustains:FlxTypedGroup<FlxSprite>;
 
 	var gridBG:FlxSprite;
 
 	var _song:SwagSong;
-
+	var noteType:Int = Normal;
 	var typingShit:FlxInputText;
 	var player1TextField:FlxInputText;
 	var player2TextField:FlxInputText;
@@ -136,7 +145,7 @@ class ChartingState extends MusicBeatState
 		var gridBlackLine:FlxSprite = new FlxSprite(gridBG.x + gridBG.width / 2).makeGraphic(2, Std.int(gridBG.height), FlxColor.BLACK);
 		add(gridBlackLine);
 
-		curRenderedNotes = new FlxTypedGroup<Note>();
+		curRenderedNotes = new FlxTypedGroup<EdtNote>();
 		curRenderedSustains = new FlxTypedGroup<FlxSprite>();
 
 		if (PlayState.SONG != null)
@@ -204,7 +213,10 @@ class ChartingState extends MusicBeatState
 		UI_box.x = FlxG.width / 2;
 		UI_box.y = 20;
 		add(UI_box);
-
+		noteTypeText = new FlxText(FlxG.width / 2, FlxG.height, 0, "Normal Type", 16);
+		noteTypeText.y -= noteTypeText.height;
+		noteTypeText.scrollFactor.set();
+		add(noteTypeText);
 		addSongUI();
 		addSectionUI();
 		addNoteUI();
@@ -416,6 +428,7 @@ class ChartingState extends MusicBeatState
 
 	var stepperSusLength:FlxUINumericStepper;
 	var stepperAltNote:FlxUINumericStepper;
+	
 	function addNoteUI():Void
 	{
 		var tab_group_note = new FlxUI(null, UI_box);
@@ -437,7 +450,26 @@ class ChartingState extends MusicBeatState
 		tab_group_note.add(stepperAltNote);
 		UI_box.addGroup(tab_group_note);
 	}
-
+	function changeKeyType(change:Int) {
+		noteType += change;
+		noteType = cast FlxMath.wrap(noteType, 0, 99);
+		switch (noteType)
+		{
+			case Normal:
+				noteTypeText.text = "Normal Note";
+			case Lift:
+				noteTypeText.text = "Lift Note";
+			case Mine:
+				noteTypeText.text = "Mine Note";
+			case Death:
+				noteTypeText.text = "Death Note";
+			case 4:
+				// drain
+				noteTypeText.text = "Drain Note";
+			default:
+				noteTypeText.text = 'Custom Note ${noteType - 4}';
+		}
+	}
 	function loadSong(daSong:String):Void
 	{
 		if (FlxG.sound.music != null)
@@ -635,14 +667,11 @@ class ChartingState extends MusicBeatState
 
 		FlxG.watch.addQuick('daBeat', curBeat);
 		FlxG.watch.addQuick('daStep', curStep);
-		if (controls.TERTIARY) {
-			useLiftNote = !useLiftNote;
-		}
 		if (FlxG.mouse.justPressed)
 		{
 			if (FlxG.mouse.overlaps(curRenderedNotes))
 			{
-				curRenderedNotes.forEach(function(note:Note)
+				curRenderedNotes.forEach(function(note:EdtNote)
 				{
 					if (FlxG.mouse.overlaps(note))
 					{
@@ -700,12 +729,9 @@ class ChartingState extends MusicBeatState
 		{
 			changeNoteSustain(Conductor.stepCrochet);
 		}
-		if (FlxG.keys.justPressed.F)
+		if (FlxG.keys.justPressed.Q)
 		{
 			changeNoteSustain(-Conductor.stepCrochet);
-		}
-		if (FlxG.keys.justPressed.N) {
-
 		}
 		if (FlxG.keys.justPressed.TAB)
 		{
@@ -828,7 +854,11 @@ class ChartingState extends MusicBeatState
 				Conductor.changeBPM(Conductor.bpm + 1);
 			if (FlxG.keys.justPressed.DOWN)
 				Conductor.changeBPM(Conductor.bpm - 1); */
-
+		if (FlxG.keys.justPressed.I) {
+			changeKeyType(-1);
+		} else if (FlxG.keys.justPressed.O) {
+			changeKeyType(1);
+		}
 
 
 
@@ -1064,11 +1094,11 @@ class ChartingState extends MusicBeatState
 			var daSus = i[2];
 			var daLift = i[4];
 			
-			var note:Note = new Note(daStrumTime, daNoteInfo % 4, null, false, yummyPng, yummyXml, null, daLift);
+			var note:EdtNote = new EdtNote(daStrumTime, daNoteInfo, daLift);
 			note.sustainLength = daSus;
 			note.setGraphicSize(GRID_SIZE, GRID_SIZE);
 			note.updateHitbox();
-			note.x = Math.floor(daNoteInfo * GRID_SIZE);
+			note.x = Math.floor((daNoteInfo % 8) * GRID_SIZE);
 			note.y = Math.floor(getYfromStrum((daStrumTime - sectionStartTime()) % (Conductor.stepCrochet * _song.notes[curSection].lengthInSteps)));
 
 			curRenderedNotes.add(note);
@@ -1098,13 +1128,13 @@ class ChartingState extends MusicBeatState
 		_song.notes.push(sec);
 	}
 
-	function selectNote(note:Note):Void
+	function selectNote(note:EdtNote):Void
 	{
 		var swagNum:Int = 0;
 
 		for (i in _song.notes[curSection].sectionNotes)
 		{
-			if (i.strumTime == note.strumTime && i.noteData % 4 == note.noteData)
+			if (i.strumTime == note.strumTime && i.noteData % 4 == note.noteData % 4)
 			{
 				curSelectedNote = _song.notes[curSection].sectionNotes[swagNum];
 			}
@@ -1116,11 +1146,11 @@ class ChartingState extends MusicBeatState
 		updateNoteUI();
 	}
 
-	function deleteNote(note:Note):Void
+	function deleteNote(note:EdtNote):Void
 	{
 		for (i in _song.notes[curSection].sectionNotes)
 		{
-			if (i[0] == note.strumTime && i[1] % 4 == note.noteData)
+			if (i[0] == note.strumTime && i[1] % 4 == note.noteData % 4)
 			{
 				FlxG.log.add('FOUND EVIL NUMBER');
 				_song.notes[curSection].sectionNotes.remove(i);
@@ -1152,7 +1182,18 @@ class ChartingState extends MusicBeatState
 		var noteStrum = getStrumTime(dummyArrow.y) + sectionStartTime();
 		var noteData = Math.floor(FlxG.mouse.x / GRID_SIZE);
 		var noteSus = 0;
-
+		switch (noteType) {
+			case Normal: 
+				// nothing
+			case Mine: 
+				noteData += 8;
+			case Lift: 
+				noteData += 16;
+			case Death: 
+				noteData += 24;
+			case key: 
+				noteData += 8 * key;
+		}
 		_song.notes[curSection].sectionNotes.push([noteStrum, noteData, noteSus, false, useLiftNote]);
 
 		curSelectedNote = _song.notes[curSection].sectionNotes[_song.notes[curSection].sectionNotes.length - 1];

@@ -113,7 +113,10 @@ class Ratings
 		if (noteDiff > Judge.wayoffJudge) // so god damn early its a miss
 			return "miss";
 		if (noteDiff > Judge.shitJudge ) 
-			return "wayoff";
+			if (OptionsHandler.options.ignoreVile)
+				return "miss"
+			else 
+				return "wayoff";
 		if (noteDiff > Judge.badJudge) // way early
 			return "shit";
 		else if (noteDiff > Judge.goodJudge) // early
@@ -127,7 +130,10 @@ class Ratings
 		else if (noteDiff < -1 * Judge.badJudge) // late as fuck
 			return "shit";
 		else if (noteDiff < -1 * Judge .shitJudge) // :grief:
-			return "wayoff";
+			if (OptionsHandler.options.ignoreVile)
+				return "miss"
+			else
+				return "wayoff";
 		else if (noteDiff < -1 * Judge.wayoffJudge) // so god damn late its a miss
 			return "miss";
 		return "sick";

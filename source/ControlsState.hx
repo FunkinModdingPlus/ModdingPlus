@@ -9,6 +9,7 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.input.keyboard.FlxKey;
+using Lambda;
 class ControlsState extends MusicBeatState {
     var askToBind:FlxTypedSpriteGroup<FlxSprite>;
     var bindTxt:FlxText;
@@ -29,7 +30,7 @@ class ControlsState extends MusicBeatState {
 		add(bg); 
         askToBind = new FlxTypedSpriteGroup<FlxSprite>();
         var askGraphic = new FlxSprite().makeGraphic(Std.int(FlxG.width/2),Std.int(FlxG.height/2), FlxColor.YELLOW);
-        bindTxt = new FlxText(60, 20, 0, "Waiting for input");
+        bindTxt = new FlxText(60, 20, 0, "Waiting for input\n (press esc or enter to stop binding)");
         bindTxt.setFormat(null, 24, FlxColor.BLACK);
         askToBind.add(askGraphic);
         askToBind.add(bindTxt);
@@ -43,13 +44,13 @@ class ControlsState extends MusicBeatState {
 			var coolText = switch (i)
 			{
 				case 0:
-					'Left: ${FlxKey.toStringMap.get(FlxG.save.data.keys.left)}';
+					'Left: ${FlxG.save.data.keys.left.map(function (key:FlxKey) {return FlxKey.toStringMap.get(key);}).join(",")}';
 				case 1:
-					'Down: ${FlxKey.toStringMap.get(FlxG.save.data.keys.down)}';
+					'Down: ${FlxG.save.data.keys.down.map(function (key:FlxKey) {return FlxKey.toStringMap.get(key);}).join(",")}';
 				case 2:
-					'Up: ${FlxKey.toStringMap.get(FlxG.save.data.keys.up)}';
+					'Up: ${FlxG.save.data.keys.up.map(function (key:FlxKey) {return FlxKey.toStringMap.get(key);}).join(",")}';
 				case 3:
-					'Right: ${FlxKey.toStringMap.get(FlxG.save.data.keys.right)}';
+					'Right: ${FlxG.save.data.keys.right.map(function (key:FlxKey) {return FlxKey.toStringMap.get(key);}).join(",")}';
 				default:
 					'how did we get here';
 			}
@@ -109,6 +110,7 @@ class ControlsState extends MusicBeatState {
 		// curOverlay = FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height, dealphaedColors);
 		// insert(1, curOverlay);
 	}
+	var currentKeys:Array<FlxKey> = [];
     override function update(elapsed:Float) {
         super.update(elapsed);
         if (!askingToBind) {
@@ -128,41 +130,49 @@ class ControlsState extends MusicBeatState {
                 LoadingState.loadAndSwitchState(new SaveDataState());
             }
         } else {
-            if (FlxG.keys.firstJustPressed() != -1) {
-                // blush 
-                // bind the first key pressed
-                switch (awaitingFor) {
-                    case 0:
-                        FlxG.save.data.keys.left = FlxG.keys.firstJustPressed();
-                    case 1:
-                        FlxG.save.data.keys.down = FlxG.keys.firstJustPressed();
-                    case 2:
-                        FlxG.save.data.keys.up = FlxG.keys.firstJustPressed();
-                    case 3:
-                        FlxG.save.data.keys.right = FlxG.keys.firstJustPressed();
-                }
-				var coolText = switch (awaitingFor)
-				{
-					case 0:
-						'Left: ${FlxKey.toStringMap.get(FlxG.save.data.keys.left)}';
-					case 1:
-						'Down: ${FlxKey.toStringMap.get(FlxG.save.data.keys.down)}';
-					case 2:
-						'Up: ${FlxKey.toStringMap.get(FlxG.save.data.keys.up)}';
-					case 3:
-						'Right: ${FlxKey.toStringMap.get(FlxG.save.data.keys.right)}';
-					default:
-						'how did we get here';
+			if (FlxG.keys.firstJustPressed() == ESCAPE || FlxG.keys.firstJustPressed() == ENTER) {
+				if (currentKeys.length != 0) {
+					switch (awaitingFor)
+					{
+						case 0:
+							FlxG.save.data.keys.left = currentKeys;
+						case 1:
+							FlxG.save.data.keys.down = currentKeys;
+						case 2:
+							FlxG.save.data.keys.up = currentKeys;
+						case 3:
+							FlxG.save.data.keys.right = currentKeys;
+					}
+					var coolText = switch (awaitingFor)
+					{
+						case 0:
+							'Left: ${FlxG.save.data.keys.left.map(function (key:FlxKey) { return FlxKey.toStringMap.get(key);}).join(",")}';
+						case 1:
+							'Down: ${FlxG.save.data.keys.down.map(function (key:FlxKey) { return FlxKey.toStringMap.get(key);}).join(",")}';
+						case 2:
+							'Up: ${FlxG.save.data.keys.up.map(function (key:FlxKey) { return FlxKey.toStringMap.get(key);}).join(",")}';
+						case 3:
+							'Right: ${FlxG.save.data.keys.right.map(function (key:FlxKey) { return FlxKey.toStringMap.get(key);}).join(",")}';
+						default:
+							'how did we get here';
+					}
+					FlxG.save.flush();
+					grpBind.members[awaitingFor] = new Alphabet(0, (70 * awaitingFor) + 30, coolText, true, false, false, null, null, null, true);
+					grpBind.members[awaitingFor].itemType = "Classic";
+					grpBind.members[awaitingFor].isMenuItem = true;
+					grpBind.members[awaitingFor].targetY = 0;
 				}
-                FlxG.save.flush();
-				grpBind.members[awaitingFor] = new Alphabet(0, (70 * awaitingFor) + 30, coolText, true, false, false, null, null, null, true);
-				grpBind.members[awaitingFor].itemType = "Classic";
-				grpBind.members[awaitingFor].isMenuItem = true;
-				grpBind.members[awaitingFor].targetY = 0;
-                // then reeset everything
-                awaitingFor = -1;
-                askingToBind = false;
-                askToBind.visible= false;
+				
+				
+				// then reeset everything
+				awaitingFor = -1;
+				askingToBind = false;
+				askToBind.visible= false;
+				currentKeys = [];
+			} else if (FlxG.keys.firstJustPressed() != -1) {
+                // blush 
+                // add the first key pressed
+                currentKeys.push(FlxG.keys.firstJustPressed());
             }
         }
         

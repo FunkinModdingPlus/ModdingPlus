@@ -41,6 +41,8 @@ enum abstract Action(String) to String from String
 	var PAUSE = "pause";
 	var RESET = "reset";
 	var CHEAT = "cheat";
+	var LEFT_TAB = "left-tab";
+	var RIGHT_TAB = "right-tab";
 }
 #else
 @:enum
@@ -94,7 +96,8 @@ enum Control
 	RIGHT_MENU;
 	UP_MENU;
 	DOWN_MENU;
-	
+	LEFT_TAB;
+	RIGHT_TAB;
 }
 
 enum KeyboardScheme
@@ -139,6 +142,8 @@ class Controls extends FlxActionSet
 	var _cheat = new FlxActionDigital(Action.CHEAT);
 	var _secondary = new FlxActionDigital(Action.SECONDARY);
 	var _tertiary = new FlxActionDigital(Action.TERTIARY);
+	var _leftTab = new FlxActionDigital(Action.LEFT_TAB);
+	var _rightTab = new FlxActionDigital(Action.RIGHT_TAB);
 	#if (haxe >= "4.0.0")
 	var byName:Map<String, FlxActionDigital> = [];
 	#else
@@ -268,6 +273,16 @@ class Controls extends FlxActionSet
 	public var TERTIARY(get,never):Bool;
 	inline function get_TERTIARY()
 		return _tertiary.check();
+
+	public var LEFT_TAB(get, never):Bool;
+
+	inline function get_LEFT_TAB()
+		return _leftTab.check();
+
+	public var RIGHT_TAB(get, never):Bool;
+
+	inline function get_RIGHT_TAB()
+		return _rightTab.check();
 	public var RESET(get, never):Bool;
 
 	inline function get_RESET()
@@ -310,6 +325,8 @@ class Controls extends FlxActionSet
 		add(_menuRightHold);
 		add(_menuUp);
 		add(_menuUpHold);
+		add(_leftTab);
+		add(_rightTab);
 		for (action in digitalActions)
 			byName[action.name] = action;
 
@@ -397,6 +414,8 @@ class Controls extends FlxActionSet
 			case DOWN_MENU: _menuDown;
 			case LEFT_MENU: _menuLeft;
 			case RIGHT_MENU: _menuRight;
+			case RIGHT_TAB: _rightTab;
+			case LEFT_TAB: _leftTab;
 		}
 	}
 
@@ -458,6 +477,10 @@ class Controls extends FlxActionSet
 			case DOWN_MENU:
 				func(_menuDown, JUST_PRESSED);
 				func(_menuDownHold, PRESSED);
+			case LEFT_TAB:
+				func(_leftTab, JUST_PRESSED);
+			case RIGHT_TAB:
+				func(_rightTab, JUST_PRESSED);
 		}
 	}
 
@@ -596,12 +619,12 @@ class Controls extends FlxActionSet
 			removeKeyboard();
 
 		keyboardScheme = scheme;
-		if (!Reflect.hasField(FlxG.save.data, "keys")) {
+		if (!Reflect.hasField(FlxG.save.data, "keys") || !(FlxG.save.data.keys.left is Array)) {
 			FlxG.save.data.keys = {
-				"left": D,
-				"down": F,
-				"up": J,
-				"right": K
+				"left": [D],
+				"down": [F],
+				"up": [J],
+				"right": [K]
 			};
 		}
 		#if (haxe >= "4.0.0")
@@ -609,10 +632,10 @@ class Controls extends FlxActionSet
 		{
 			// Keys are always rebinded before playstate starts. Note that this totally fucks up menuing lol.
 			case Solo(false) | Solo(true):
-				inline bindKeys(Control.UP, [FlxG.save.data.keys.up]);
-				inline bindKeys(Control.DOWN, [FlxG.save.data.keys.down]);
-				inline bindKeys(Control.LEFT, [FlxG.save.data.keys.left]);
-				inline bindKeys(Control.RIGHT, [FlxG.save.data.keys.right]);
+				inline bindKeys(Control.UP, FlxG.save.data.keys.up);
+				inline bindKeys(Control.DOWN, FlxG.save.data.keys.down);
+				inline bindKeys(Control.LEFT, FlxG.save.data.keys.left);
+				inline bindKeys(Control.RIGHT, FlxG.save.data.keys.right);
 				inline bindKeys(Control.UP_MENU, [W, FlxKey.UP]);
 				inline bindKeys(Control.DOWN_MENU, [S, FlxKey.DOWN]);
 				inline bindKeys(Control.LEFT_MENU, [A, FlxKey.LEFT]);
@@ -623,6 +646,8 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.RESET, [R]);
 				inline bindKeys(Control.SECONDARY, [E]);
 				inline bindKeys(Control.TERTIARY,[Q]);
+				inline bindKeys(Control.LEFT_TAB, [Q]);
+				inline bindKeys(Control.RIGHT_TAB, [E]);
 			case Duo(true):
 				inline bindKeys(Control.UP, [W,K]);
 				inline bindKeys(Control.DOWN, [S,J]);
@@ -653,12 +678,14 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.DOWN_MENU, [S, FlxKey.DOWN]);
 				inline bindKeys(Control.LEFT_MENU, [A, FlxKey.LEFT]);
 				inline bindKeys(Control.RIGHT_MENU, [D, FlxKey.RIGHT]);
+				inline bindKeys(Control.LEFT_TAB, [RBRACKET]);
+				inline bindKeys(Control.RIGHT_TAB, [BACKSLASH]);
 			case None: // nothing
 			case Custom:
-				inline bindKeys(Control.UP, [FlxG.save.data.keys.up]);
-				inline bindKeys(Control.DOWN, [FlxG.save.data.keys.down]);
-				inline bindKeys(Control.LEFT, [FlxG.save.data.keys.left]);
-				inline bindKeys(Control.RIGHT, [FlxG.save.data.keys.right]);
+				inline bindKeys(Control.UP, FlxG.save.data.keys.up);
+				inline bindKeys(Control.DOWN, FlxG.save.data.keys.down);
+				inline bindKeys(Control.LEFT, FlxG.save.data.keys.left);
+				inline bindKeys(Control.RIGHT, FlxG.save.data.keys.right);
 				inline bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
 				inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 				inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
@@ -669,6 +696,8 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.DOWN_MENU, [S, FlxKey.DOWN]);
 				inline bindKeys(Control.LEFT_MENU, [A, FlxKey.LEFT]);
 				inline bindKeys(Control.RIGHT_MENU, [D, FlxKey.RIGHT]);
+				inline bindKeys(Control.LEFT_TAB, [Q]);
+				inline bindKeys(Control.RIGHT_TAB, [E]);
 		}
 		#else
 		switch (scheme)
@@ -777,6 +806,10 @@ class Controls extends FlxActionSet
 			Control.LEFT_MENU => [DPAD_LEFT, LEFT_STICK_DIGITAL_LEFT],
 			Control.RIGHT_MENU => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT],
 			Control.PAUSE => [START],
+			Control.SECONDARY => [RIGHT_SHOULDER],
+			Control.TERTIARY => [LEFT_SHOULDER],
+			Control.LEFT_TAB => [LEFT_SHOULDER],
+			Control.RIGHT_TAB => [RIGHT_SHOULDER]
 			// Control.RESET => [Y]
 			// gamepads should not need to reset
 		]);
@@ -839,7 +872,25 @@ class Controls extends FlxActionSet
 				action.remove(input);
 		}
 	}
-
+	public static var controlsFromStringMap:Map<String, Control> = [
+		"up" => UP,
+		"down" => DOWN,
+		"left" => LEFT,
+		"right" => RIGHT,
+		"up-menu" => UP_MENU,
+		"left-menu" => LEFT_MENU,
+		"down-menu" => DOWN_MENU,
+		"right-menu" => RIGHT_MENU,
+		"accept" => ACCEPT,
+		"secondary" => SECONDARY,
+		"tertiary" => TERTIARY,
+		"back" => BACK,
+		"pause"=> PAUSE,
+		"reset" => RESET,
+		"cheat" => CHEAT,
+		"left-tab" => LEFT_TAB,
+		"right-tab" => RIGHT_TAB
+	];
 	public function getInputsFor(control:Control, device:Device, ?list:Array<Int>):Array<Int>
 	{
 		if (list == null)

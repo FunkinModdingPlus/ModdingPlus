@@ -14,6 +14,10 @@ import flixel.FlxG;
 import openfl.geom.Matrix;
 import flixel.FlxGame;
 import flixel.FlxObject;
+#if desktop
+import Sys;
+import sys.FileSystem;
+#end
 #if cpp
 import Discord.DiscordClient;
 #end
@@ -193,6 +197,9 @@ class PlayState extends MusicBeatState
 	var healthTxt:FlxText;
 	var accuracyTxt:FlxText;
 	var difficTxt:FlxText;
+	// hehe fuck around with these lamo
+	public static var oldx:Float;
+	public static var oldy:Float;
 	/**
 	 * The total score of the week. Not a good idea to touch
 	 * as it is a total and not divided until the end.
@@ -366,7 +373,7 @@ class PlayState extends MusicBeatState
 		interp.variables.set("playerOneSing", function()
 		{
 		});
-		interp.variables.set("noteHit", function(player1:Bool, note:Note) {});
+		interp.variables.set("noteHit", function(player1:Bool, note:Note, wasGoodHit:Bool) {});
 		interp.variables.set("addSprite", function (sprite, position) {
 			// sprite is a FlxSprite
 			// position is a Int
@@ -391,8 +398,105 @@ class PlayState extends MusicBeatState
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
 		});
+		
 		interp.variables.set("getHaxeActor", getHaxeActor);
 		interp.variables.set("instancePluginClass", instanceExClass);
+		interp.variables.set("scaleChar", function (char:String, amount:Float) {
+			switch(char) {
+				case 'boyfriend':
+					remove(boyfriend);
+					boyfriend.setGraphicSize(Std.int(boyfriend.width * amount));
+					boyfriend.y *= amount;
+					add(boyfriend);
+				case 'dad':
+					remove(dad);
+					dad.setGraphicSize(Std.int(dad.width * amount));
+					dad.y *= amount;
+					add(dad);
+				case 'gf':
+					remove(gf);
+					gf.setGraphicSize(Std.int(gf.width * amount));
+					gf.y *= amount;
+					add(gf);
+			}
+		});
+		interp.variables.set("swapChar", function (charState:String, charTo:String) {
+			switch(charState) {
+				case 'boyfriend':
+					remove(boyfriend);
+					remove(iconP1);
+					remove(camHUD);
+					boyfriend = new Character(770, 450, charTo, true);
+					var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+					camPos.x += boyfriend.camOffsetX;
+					camPos.y += boyfriend.camOffsetY;
+					boyfriend.x += boyfriend.playerOffsetX;
+					boyfriend.y += boyfriend.playerOffsetY;
+					if (boyfriend.likeGf) {
+						boyfriend.setPosition(gf.x, gf.y);
+						gf.visible = false;
+						if (isStoryMode)
+						{
+							camPos.x += 600;
+							tweenCamIn();
+						}
+					} else if (!dad.likeGf) {
+						gf.visible = true;
+					}
+					boyfriend.x += bfoffset[0];
+					boyfriend.y += bfoffset[1];
+					iconP1 = new HealthIcon(charTo, true);
+					iconP1.y = healthBar.y - (iconP1.height / 2);
+					iconP1.cameras = [camHUD];
+	
+					// Layering nonsense
+					add(boyfriend);
+					add(camHUD);
+					add(iconP1);
+				case 'dad':
+					remove(dad);
+					remove(iconP2);
+					remove(camHUD);
+					dad = new Character(100, 100, charTo);
+					var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+					dad.x += dad.enemyOffsetX;
+					dad.y += dad.enemyOffsetY;
+					camPos.x += dad.camOffsetX;
+					camPos.y += dad.camOffsetY;
+					if (dad.likeGf) {
+						dad.setPosition(gf.x, gf.y);
+						gf.visible = false;
+						if (isStoryMode)
+						{
+							camPos.x += 600;
+							tweenCamIn();
+						}
+					} else if (!boyfriend.likeGf) {
+						gf.visible = true;
+					}
+					dad.x += dadoffset[0];
+							dad.y += dadoffset[1];
+					iconP2 = new HealthIcon(charTo, false);
+					iconP2.y = healthBar.y - (iconP2.height / 2);
+					iconP2.cameras = [camHUD];
+	
+					// Layering nonsense
+					add(dad);
+					add(camHUD);
+					add(iconP2);
+				case 'gf':
+					remove(gf);
+					remove(camHUD);
+					gf = new Character(400, 130, charTo);
+					gf.scrollFactor.set(0.95, 0.95);
+					gf.x += gfoffset[0];
+					gf.y += gfoffset[1];
+					
+					add(gf);
+					add(camHUD);
+			}
+		});
+
 		trace("set stuff");
 		interp.execute(program);
 		hscriptStates.set(usehaxe,interp);
@@ -423,6 +527,14 @@ class PlayState extends MusicBeatState
 	var uiSmelly:TUI;
 	override public function create()
 	{
+		#if desktop
+		// pre lowercasing the song name (create)
+        var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
+        switch (songLowercase) {
+            case 'dad-battle': songLowercase = 'dadbattle';
+            case 'philly-nice': songLowercase = 'philly';
+        }
+		#end
 		Note.getFrames = true;
 		Note.specialNoteJson = null;
 		if (FNFAssets.exists('assets/data/${SONG.song.toLowerCase()}/noteInfo.json')) {
@@ -645,9 +757,31 @@ class PlayState extends MusicBeatState
 
 		gfVersion = SONG.gf;
 		trace(SONG.gf);
+
 		gf = new Character(400, 130, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
-
+		#if desktop
+		if (FileSystem.exists(Paths.txt(songLowercase  + "/preload")))
+			{
+				var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt(songLowercase  + "/preload"));
+	
+				for (i in 0...characters.length)
+				{
+					var data:Array<String> = characters[i].split(' ');
+					dad = new Character (0, 0, data[0]);
+				}
+			}
+		if (FileSystem.exists(Paths.txt(songLowercase  + "/preload")))
+				{
+					var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt(songLowercase  + "/preload"));
+		
+					for (i in 0...characters.length)
+					{
+						var data:Array<String> = characters[i].split(' ');
+						boyfriend = new Character (0, 0, data[0]);
+					}
+				}
+		#end
 		dad = new Character(100, 100, SONG.player2);
 		if (duoMode || opponentPlayer)
 			dad.beingControlled = true;
@@ -3792,18 +3926,18 @@ class PlayState extends MusicBeatState
 					onActing.sing(note.oppntSing.direction, note.oppntSing.miss, note.oppntSing.alt);
 				}
 			}
-			callAllHScript("noteHit", [playerOne, note]);
-			
-				
-				
-		
 
 			note.wasGoodHit = true;
+			var goodhit = note.wasGoodHit;
 			vocals.volume = 1;
 
 			note.kill();
 			notes.remove(note, true);
 			note.destroy();
+
+			callAllHScript("noteHit", [playerOne, note, goodhit]);
+			
+				
 			
 		}
 	}
