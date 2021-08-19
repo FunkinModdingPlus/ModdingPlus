@@ -156,8 +156,10 @@ class TitleState extends MusicBeatState
 		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
 		logoBl.animation.play('bump');
+		logoBl.setGraphicSize(Std.int(logoBl.width * 1.2));
 		logoBl.updateHitbox();
-		// logoBl.screenCenter();
+		logoBl.screenCenter(X);
+		logoBl.y = 2500;
 		// logoBl.color = FlxColor.BLACK;
 
 		
@@ -166,7 +168,6 @@ class TitleState extends MusicBeatState
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.antialiasing = true;
-		add(gfDance);
 		add(logoBl);
 
 		titleText = new FlxSprite(100, FlxG.height * 0.8);
@@ -176,7 +177,7 @@ class TitleState extends MusicBeatState
 		titleText.antialiasing = true;
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
-		// titleText.screenCenter(X);
+		titleText.screenCenter(X);
 		add(titleText);
 
 		var logo:FlxSprite = new FlxSprite().loadGraphic('assets/images/logo.png');
@@ -197,7 +198,7 @@ class TitleState extends MusicBeatState
 		// IDK WHY I AM TESTING IT ON NEKO!
 		coolDudes = Assets.getText('assets/data/creators.txt').split("\n");
 		trace(coolDudes);
-		credTextShit = new Alphabet(0, 0, "akofhafsk", true);
+		credTextShit = new Alphabet(0, 0, "sussy mother fucker", true);
 		credTextShit.screenCenter();
 
 		// credTextShit.alignment = CENTER;
@@ -300,8 +301,8 @@ class TitleState extends MusicBeatState
 		for (i in 0...textArray.length)
 		{
 			var money:Alphabet = new Alphabet(0, 0, textArray[i], true, false);
-			money.y += (i * 60) + 200;
-			money.screenCenter(X);
+			money.x += (i * 60) + 200;
+			money.screenCenter(Y);
 			credGroup.add(money);
 			textGroup.add(money);
 		}
@@ -310,8 +311,8 @@ class TitleState extends MusicBeatState
 	function addMoreText(text:String)
 	{
 		var coolText:Alphabet = new Alphabet(0, 0, text, true, false);
-		coolText.y += (textGroup.length * 60);
-		coolText.screenCenter(X);
+		coolText.x += (textGroup.length * 60);
+		coolText.screenCenter(Y);
 		credGroup.add(coolText);
 		textGroup.add(coolText);
 	}
@@ -379,13 +380,13 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = "Friday";
 				// credTextShit.screenCenter();
 				case 13:
-					addMoreText('Friday');
+					addMoreText('Friday Night Funkin');
 				// credTextShit.visible = true;
 				case 14:
-					addMoreText('Night');
+					addMoreText('Ax');
 				// credTextShit.text += '\nNight';
 				case 15:
-					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
+					addMoreText('Engine'); // credTextShit.text += '\nFunkin';
 
 				case 16:
 					skipIntro();
@@ -424,11 +425,15 @@ class TitleState extends MusicBeatState
 	{
 		if (!skippedIntro)
 		{
+			var center:FlxSprite = new FlxSprite();
+			center.screenCenter();
+			add(center);
+			center.visible = false;
 			remove(ngSpr);
-
 			FlxG.camera.flash(FlxColor.WHITE, 1);
 			remove(credGroup);
 			skippedIntro = true;
+			FlxTween.tween(logoBl, { x: logoBl.x , y: center.y }, 3, { ease: FlxEase.quadOut });
 		}
 	}
 }

@@ -109,15 +109,16 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(0, 100 + (i * 160));
+			var menuItem:FlxSprite = new FlxSprite(0, 1600 + (i * 160));
 			menuItem.frames = tex;
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.x = 450;
+			menuItem.screenCenter(X);
+			menuItem.x += 780;
 			menuItems.add(menuItem);
-			menuItem.scrollFactor.set();
+			menuItem.scrollFactor.set(0.6, 0.6);
 			menuItem.antialiasing = true;
 			FlxTween.tween(menuItem, { x: menuItem.x , y: 60 + (i * 160) }, 2, { ease: FlxEase.quadOut });
 		}
