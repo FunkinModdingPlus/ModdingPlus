@@ -67,15 +67,6 @@ class ModifierState extends MusicBeatState
 			desc: "You can just select some custom characters"
 		},
 		{
-			name: "Ui Select...",
-			internName: "uiselect",
-			value: false,
-			conflicts: [],
-			multi: 1,
-			times: true,
-			desc: "Select your ui"
-		},
-		{
 			name: "Sick Mode",
 			internName: "mfc",
 			value: false,
@@ -486,8 +477,6 @@ class ModifierState extends MusicBeatState
 				LoadingState.loadAndSwitchState(new ChartingState());
 			case 'charselect':
 				LoadingState.loadAndSwitchState(new ChooseCharState(PlayState.SONG.player1));
-			case 'uiselect':
-				LoadingState.loadAndSwitchState(new ChooseUiState(PlayState.SONG.uiType));
 			case 'antijank':
 				// do nothi n
 			default:
