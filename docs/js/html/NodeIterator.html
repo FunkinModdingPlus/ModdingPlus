@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><link href="../../dark-mode.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>js.html.NodeIterator</title><meta name="description" content="The &lt;code&gt;&lt;a href=&quot;../../js/html/NodeIterator.html#NodeIterator&quot;&gt;NodeIterator&lt;/a&gt;&lt;/code&gt; interface represents an iterator over the members of a list of the nodes in a subtree of the DOM. The nodes will be returned in document order."/></head><body><script>/* Here to prevent flash of unstyled content */let systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;if ((!localStorage.theme && systemDarkMode) || localStorage.theme == "dark") {document.body.style.backgroundColor = "#111";document.body.style.opacity = "0";document.addEventListener("DOMContentLoaded", function(event) {toggleTheme();document.body.style.backgroundColor = "";document.body.style.opacity = "";});}</script><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+}
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a><a href="#" id="theme-toggle" class="brand" style="color:#000000" onclick="toggleTheme()" title="Toggle Dark Mode"><i class="fa fa-moon-o"></i></a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="fa fa-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> NodeIterator</h1><h4><small>package <a href="../../js/html/index.html">js.html</a></small></h4>    <span class="label label-meta label-meta-native" title="Rewrites the path of a type or class field during generation.">@:native(&quot;NodeIterator&quot;)</span></div><div class="body"><div class="doc doc-main"><p>The <code><a href="../../js/html/NodeIterator.html#NodeIterator">NodeIterator</a></code> interface represents an iterator over the members of a list of the nodes in a subtree of the DOM. The nodes will be returned in document order.</p>
+<p>Documentation <a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator">NodeIterator</a> by <a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator$history">Mozilla Contributors</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/2.5/">CC-BY-SA 2.5</a>.</p><p class="javadoc">See also:</p><ul><li><div class="inline-content"><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator">https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator</a></p></div></li></ul></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="filter"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#filter"><span class="identifier">filter</span></a>:<a class="type" title="haxe.extern.EitherType - An abstract type allowing values to be either of T1 or T2 type." href="../../haxe/extern/EitherType.html">EitherType</a>&lt;<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>, <a class="type" title="js.html.NodeFilter - A NodeFilter interface represents an object used to filter the nodes in a NodeIterator or TreeWalker." href="../../js/html/NodeFilter.html">NodeFilter</a>&gt;</code></h3><div class="doc"><p>Returns a <code><a href="../../js/html/NodeFilter.html#NodeFilter">NodeFilter</a></code> used to select the relevant nodes.</p></div></div><div class="field "><a name="pointerBeforeReferenceNode"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#pointerBeforeReferenceNode"><span class="identifier">pointerBeforeReferenceNode</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Returns a <code>Boolean</code> flag that indicates whether the <code><a href="../../js/html/NodeIterator.html#NodeIterator">NodeIterator</a></code> is anchored before, the flag being <code><a href="../../Bool.html">true</a></code>, or after, the flag being <code><a href="../../Bool.html">false</a></code>, the anchor node.</p></div></div><div class="field "><a name="referenceNode"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#referenceNode"><span class="identifier">referenceNode</span></a>:<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Returns the <code><a href="../../js/html/Node.html#Node">Node</a></code> to which the iterator is anchored.</p></div></div><div class="field "><a name="root"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#root"><span class="identifier">root</span></a>:<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Returns a <code><a href="../../js/html/Node.html#Node">Node</a></code> representing the root node as specified when the <code><a href="../../js/html/NodeIterator.html#NodeIterator">NodeIterator</a></code> was created.</p></div></div><div class="field "><a name="whatToShow"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#whatToShow"><span class="identifier">whatToShow</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Returns an <code>unsigned long</code> being a bitmask made of constants describing the types of <code>Node</code> that must to be presented. Non-matching nodes are skipped, but their children may be included, if relevant. The possible values are:
+<table class="standard-table"></p>
+<pre><code>	&lt;tr&gt;
+		&lt;td class="header"&gt;Constant&lt;/td&gt;
+		&lt;td class="header"&gt;Numerical value&lt;/td&gt;
+		&lt;td class="header"&gt;Description&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_ALL&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;-1&lt;/code&gt; (that is the max value of &lt;code&gt;unsigned long&lt;/code&gt;)&lt;/td&gt;
+		&lt;td&gt;Shows all nodes.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_ATTRIBUTE&lt;/code&gt; &lt;em&gt;(deprecated)&lt;/em&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;2&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows attribute &lt;code&gt;Attr&lt;/code&gt; nodes. This is meaningful only when creating a &lt;code&gt;NodeIterator&lt;/code&gt; with an &lt;code&gt;Attr&lt;/code&gt; node as its root; in this case, it means that the attribute node will appear in the first position of the iteration or traversal. Since attributes are never children of other nodes, they do not appear when traversing over the document tree.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_CDATA_SECTION&lt;/code&gt; &lt;em&gt;(deprecated)&lt;/em&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;8&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;CDATASection&lt;/code&gt; nodes.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_COMMENT&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;128&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;Comment&lt;/code&gt; nodes.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_DOCUMENT&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;256&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;Document&lt;/code&gt; nodes.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_DOCUMENT_FRAGMENT&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;1024&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;DocumentFragment&lt;/code&gt; nodes.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_DOCUMENT_TYPE&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;512&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;DocumentType&lt;/code&gt; nodes.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_ELEMENT&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;Element&lt;/code&gt; nodes.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_ENTITY&lt;/code&gt; &lt;em&gt;(deprecated)&lt;/em&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;32&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;Entity&lt;/code&gt; nodes. This is meaningful only when creating a &lt;code&gt;NodeIterator&lt;/code&gt; with an &lt;code&gt;Entity&lt;/code&gt; node as its root; in this case, it means that the &lt;code&gt;Entity&lt;/code&gt; node will appear in the first position of the traversal. Since entities are not part of the document tree, they do not appear when traversing over the document tree.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_ENTITY_REFERENCE&lt;/code&gt; &lt;em&gt;(deprecated)&lt;/em&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;16&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;EntityReference&lt;/code&gt; nodes.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_NOTATION&lt;/code&gt; &lt;em&gt;(deprecated)&lt;/em&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;2048&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;Notation&lt;/code&gt; nodes. This is meaningful only when creating a &lt;code&gt;NodeIterator&lt;/code&gt; with a &lt;code&gt;Notation&lt;/code&gt; node as its root; in this case, it means that the &lt;code&gt;Notation&lt;/code&gt; node will appear in the first position of the traversal. Since entities are not part of the document tree, they do not appear when traversing over the document tree.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_PROCESSING_INSTRUCTION&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;64&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;ProcessingInstruction&lt;/code&gt; nodes.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;code&gt;NodeFilter.SHOW_TEXT&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;code&gt;4&lt;/code&gt;&lt;/td&gt;
+		&lt;td&gt;Shows &lt;code&gt;Text&lt;/code&gt; nodes.&lt;/td&gt;
+	&lt;/tr&gt;
+
+</code></pre>
+<p></table></p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="detach"></a><h3 class="anchor"><code><a href="#detach"><span class="identifier">detach</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>This operation is a no-op. It doesn't do anything. Previously it was telling the engine that the <code><a href="../../js/html/NodeIterator.html#NodeIterator">NodeIterator</a></code> was no more used, but this is now useless.</p></div></div><div class="field "><a name="nextNode"></a><h3 class="anchor"><code><a href="#nextNode"><span class="identifier">nextNode</span></a>():<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Returns the next <code><a href="../../js/html/Node.html#Node">Node</a></code> in the document, or <code>null</code> if there are none.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>null</code></th><td><p>DOMError</p></td></tr></table></div></div><div class="field "><a name="previousNode"></a><h3 class="anchor"><code><a href="#previousNode"><span class="identifier">previousNode</span></a>():<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Returns the previous <code><a href="../../js/html/Node.html#Node">Node</a></code> in the document, or <code>null</code> if there are none.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>null</code></th><td><p>DOMError</p></td></tr></table></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

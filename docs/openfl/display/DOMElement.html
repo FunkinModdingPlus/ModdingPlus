@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><link href="../../dark-mode.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.display.DOMElement</title></head><body><script>/* Here to prevent flash of unstyled content */let systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;if ((!localStorage.theme && systemDarkMode) || localStorage.theme == "dark") {document.body.style.backgroundColor = "#111";document.body.style.opacity = "0";document.addEventListener("DOMContentLoaded", function(event) {toggleTheme();document.body.style.backgroundColor = "";document.body.style.opacity = "";});}</script><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+}
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a><a href="#" id="theme-toggle" class="brand" style="color:#000000" onclick="toggleTheme()" title="Toggle Dark Mode"><i class="fa fa-moon-o"></i></a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="fa fa-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> DOMElement</h1><h4><small>package <a href="../../openfl/display/index.html">openfl.display</a></small></h4><h4><small>extends <a class="type" title="openfl.display.DisplayObject - The DisplayObject class is the base class for all objects that can be placed on the display list." href="../../openfl/display/DisplayObject.html">DisplayObject</a> &rsaquo; <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></small></h4>    </div><div class="body"><div class="doc doc-main"><p></p></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><span class="label label-meta label-meta-uppressWarnings" title="">@SuppressWarnings(&quot;checkstyle:Dynamic&quot;)</span><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">element:<a class="type" title="js.html.Element - The HTMLElement interface represents any HTML element." href="../../js/html/Element.html">Element</a></span>)</code></h3><div class="doc"><p></p></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.display.DisplayObject - The DisplayObject class is the base class for all objects that can be placed on the display list." href="../../openfl/display/DisplayObject.html">DisplayObject</a></h4><div style="display:none"><div class="field "><a name="alpha"></a><h3 class="anchor"><code><span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><a href="#alpha"><span class="identifier">alpha</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the alpha transparency value of the object specified. Valid
+values are 0 (fully transparent) to 1 (fully opaque). The default value is 1.
+Display objects with <code>alpha</code> set to 0 <em>are</em> active, even though they are invisible.</p></div></div><div class="field "><a name="blendMode"></a><h3 class="anchor"><code><a href="#blendMode"><span class="identifier">blendMode</span></a>:<a class="type" title="openfl.display.BlendMode - A class that provides constant values for visual blend mode effects." href="../../openfl/display/BlendMode.html">BlendMode</a></code></h3><div class="doc"><p>A value from the BlendMode class that specifies which blend mode to use. A
+bitmap can be drawn internally in two ways. If you have a blend mode
+enabled or an external clipping mask, the bitmap is drawn by adding a
+bitmap-filled square shape to the vector render. If you attempt to set
+this property to an invalid value, Flash runtimes set the value to
+<code><a href="../../openfl/display/BlendMode.html#NORMAL">BlendMode.NORMAL</a></code>.</p>
+<p>The <code>blendMode</code> property affects each pixel of the display
+object. Each pixel is composed of three constituent colors(red, green,
+and blue), and each constituent color has a value between 0x00 and 0xFF.
+Flash Player or Adobe AIR compares each constituent color of one pixel in
+the movie clip with the corresponding color of the pixel in the
+background. For example, if <code>blendMode</code> is set to
+<code><a href="../../openfl/display/BlendMode.html#LIGHTEN">BlendMode.LIGHTEN</a></code>, Flash Player or Adobe AIR compares the red
+value of the display object with the red value of the background, and uses
+the lighter of the two as the value for the red component of the displayed
+color.</p>
+<p>The following table describes the <code>blendMode</code> settings. The
+BlendMode class defines string values you can use. The illustrations in
+the table show <code>blendMode</code> values applied to a circular display
+object(2) superimposed on another display object(1).</p>
+<p><img src="/images/blendMode-0a.jpg" alt="Square Number 1" />  <img src="/images/blendMode-0b.jpg" alt="Circle Number 2" /></p><table><thead><th>BlendMode Constant</th><th>Illustration</th><th>Description</th></thead><tbody><tr><td><code><a href="../../openfl/display/BlendMode.html#NORMAL">BlendMode.NORMAL</a></code></td><td><img src="/images/blendMode-1.jpg" alt="blend mode NORMAL" /></td><td>The display object appears in front of the background. Pixel values of the display object override those of the background. Where the display object is transparent, the background is visible.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#LAYER">BlendMode.LAYER</a></code></td><td><img src="/images/blendMode-2.jpg" alt="blend mode LAYER" /></td><td>Forces the creation of a transparency group for the display object. This means that the display object is pre-composed in a temporary buffer before it is processed further. This is done automatically if the display object is pre-cached using bitmap caching or if the display object is a display object container with at least one child object with a <code>blendMode</code> setting other than <code><a href="../../openfl/display/BlendMode.html#NORMAL">BlendMode.NORMAL</a></code>. Not supported under GPU rendering.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#MULTIPLY">BlendMode.MULTIPLY</a></code></td><td><img src="/images/blendMode-3.jpg" alt="blend mode MULTIPLY" /></td><td>Multiplies the values of the display object constituent colors by the colors of the background color, and then normalizes by dividing by 0xFF, resulting in darker colors. This setting is commonly used for shadows and depth effects.<br>For example, if a constituent color (such as red) of one pixel in the display object and the corresponding color of the pixel in the background both have the value 0x88, the multiplied result is 0x4840. Dividing by 0xFF yields a value of 0x48 for that constituent color, which is a darker shade than the color of the display object or the color of the background.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#SCREEN">BlendMode.SCREEN</a></code></td><td><img src="/images/blendMode-4.jpg" alt="blend mode SCREEN" /></td><td>Multiplies the complement (inverse) of the display object color by the complement of the background color, resulting in a bleaching effect. This setting is commonly used for highlights or to remove black areas of the display object.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#LIGHTEN">BlendMode.LIGHTEN</a></code></td><td><img src="/images/blendMode-5.jpg" alt="blend mode LIGHTEN" /></td><td>Selects the lighter of the constituent colors of the display object and the color of the background (the colors with the larger values). This setting is commonly used for superimposing type.<br>For example, if the display object has a pixel with an RGB value of 0xFFCC33, and the background pixel has an RGB value of 0xDDF800, the resulting RGB value for the displayed pixel is 0xFFF833 (because 0xFF > 0xDD, 0xCC &lt; 0xF8, and 0x33 > 0x00 = 33). Not supported under GPU rendering.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#DARKEN">BlendMode.DARKEN</a></code></td><td><img src="/images/blendMode-6.jpg" alt="blend mode DARKEN" /></td><td>Selects the darker of the constituent colors of the display object and the colors of the background (the colors with the smaller values). This setting is commonly used for superimposing type.<br>For example, if the display object has a pixel with an RGB value of 0xFFCC33, and the background pixel has an RGB value of 0xDDF800, the resulting RGB value for the displayed pixel is 0xDDCC00 (because 0xFF > 0xDD, 0xCC &lt; 0xF8, and 0x33 > 0x00 = 33). Not supported under GPU rendering.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#DIFFERENCE">BlendMode.DIFFERENCE</a></code></td><td><img src="/images/blendMode-7.jpg" alt="blend mode DIFFERENCE" /></td><td>Compares the constituent colors of the display object with the colors of its background, and subtracts the darker of the values of the two constituent colors from the lighter value. This setting is commonly used for more vibrant colors.<br>For example, if the display object has a pixel with an RGB value of 0xFFCC33, and the background pixel has an RGB value of 0xDDF800, the resulting RGB value for the displayed pixel is 0x222C33 (because 0xFF - 0xDD = 0x22, 0xF8 - 0xCC = 0x2C, and 0x33 - 0x00 = 0x33).</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#ADD">BlendMode.ADD</a></code></td><td><img src="/images/blendMode-8.jpg" alt="blend mode ADD" /></td><td>Adds the values of the constituent colors of the display object to the colors of its background, applying a ceiling of 0xFF. This setting is commonly used for animating a lightening dissolve between two objects.<br>For example, if the display object has a pixel with an RGB value of 0xAAA633, and the background pixel has an RGB value of 0xDD2200, the resulting RGB value for the displayed pixel is 0xFFC833 (because 0xAA + 0xDD > 0xFF, 0xA6 + 0x22 = 0xC8, and 0x33 + 0x00 = 0x33).</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#SUBTRACT">BlendMode.SUBTRACT</a></code></td><td><img src="/images/blendMode-9.jpg" alt="blend mode SUBTRACT" /></td><td>Subtracts the values of the constituent colors in the display object from the values of the background color, applying a floor of 0. This setting is commonly used for animating a darkening dissolve between two objects.<br>For example, if the display object has a pixel with an RGB value of 0xAA2233, and the background pixel has an RGB value of 0xDDA600, the resulting RGB value for the displayed pixel is 0x338400 (because 0xDD - 0xAA = 0x33, 0xA6 - 0x22 = 0x84, and 0x00 - 0x33 &lt; 0x00).</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#INVERT">BlendMode.INVERT</a></code></td><td><img src="/images/blendMode-10.jpg" alt="blend mode INVERT" /></td><td>Inverts the background.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#ALPHA">BlendMode.ALPHA</a></code></td><td><img src="/images/blendMode-11.jpg" alt="blend mode ALPHA" /></td><td>Applies the alpha value of each pixel of the display object to the background. This requires the <code>blendMode</code> setting of the parent display object to be set to <code><a href="../../openfl/display/BlendMode.html#LAYER">BlendMode.LAYER</a></code>. For example, in the illustration, the parent display object, which is a white background, has <code>blendMode = <a href="../../openfl/display/BlendMode.html#LAYER">BlendMode.LAYER</a></code>. Not supported under GPU rendering.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#ERASE">BlendMode.ERASE</a></code></td><td><img src="/images/blendMode-12.jpg" alt="blend mode ERASE" /></td><td>Erases the background based on the alpha value of the display object. This requires the <code>blendMode</code> of the parent display object to be set to <code><a href="../../openfl/display/BlendMode.html#LAYER">BlendMode.LAYER</a></code>. For example, in the illustration, the parent display object, which is a white background, has <code>blendMode = <a href="../../openfl/display/BlendMode.html#LAYER">BlendMode.LAYER</a></code>. Not supported under GPU rendering.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#OVERLAY">BlendMode.OVERLAY</a></code></td><td><img src="/images/blendMode-13.jpg" alt="blend mode OVERLAY" /></td><td>Adjusts the color of each pixel based on the darkness of the background. If the background is lighter than 50% gray, the display object and background colors are screened, which results in a lighter color. If the background is darker than 50% gray, the colors are multiplied, which results in a darker color. This setting is commonly used for shading effects. Not supported under GPU rendering.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#HARDLIGHT">BlendMode.HARDLIGHT</a></code></td><td><img src="/images/blendMode-14.jpg" alt="blend mode HARDLIGHT" /></td><td>Adjusts the color of each pixel based on the darkness of the display object. If the display object is lighter than 50% gray, the display object and background colors are screened, which results in a lighter color. If the display object is darker than 50% gray, the colors are multiplied, which results in a darker color. This setting is commonly used for shading effects. Not supported under GPU rendering.</td></tr><tr><td><code><a href="../../openfl/display/BlendMode.html#SHADER">BlendMode.SHADER</a></code></td><td>N/A</td><td>Adjusts the color using a custom shader routine. The shader that is used is specified as the Shader instance assigned to the blendShader property. Setting the blendShader property of a display object to a Shader instance automatically sets the display object's <code>blendMode</code> property to <code><a href="../../openfl/display/BlendMode.html#SHADER">BlendMode.SHADER</a></code>. If the <code>blendMode</code> property is set to <code><a href="../../openfl/display/BlendMode.html#SHADER">BlendMode.SHADER</a></code> without first setting the <code>blendShader</code> property, the <code>blendMode</code> property is set to <code><a href="../../openfl/display/BlendMode.html#NORMAL">BlendMode.NORMAL</a></code>. Not supported under GPU rendering.</td></tr></tbody></table></div></div><div class="field "><a name="cacheAsBitmap"></a><h3 class="anchor"><code><a href="#cacheAsBitmap"><span class="identifier">cacheAsBitmap</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>All vector data for a display object that has a cached bitmap is drawn
+to the bitmap instead of the main display. If
+<code>cacheAsBitmapMatrix</code> is null or unsupported, the bitmap is
+then copied to the main display as unstretched, unrotated pixels snapped
+to the nearest pixel boundaries. Pixels are mapped 1 to 1 with the parent
+object. If the bounds of the bitmap change, the bitmap is recreated
+instead of being stretched.</p>
+<p>If <code>cacheAsBitmapMatrix</code> is non-null and supported, the
+object is drawn to the off-screen bitmap using that matrix and the
+stretched and/or rotated results of that rendering are used to draw the
+object to the main display.</p>
+<p>No internal bitmap is created unless the <code>cacheAsBitmap</code>
+property is set to <code><a href="../../Bool.html">true</a></code>.</p>
+<p>After you set the <code>cacheAsBitmap</code> property to
+<code><a href="../../Bool.html">true</a></code>, the rendering does not change, however the display
+object performs pixel snapping automatically. The animation speed can be
+significantly faster depending on the complexity of the vector content.</p>
+<p>The <code>cacheAsBitmap</code> property is automatically set to
+<code><a href="../../Bool.html">true</a></code> whenever you apply a filter to a display object(when
+its <code>filter</code> array is not empty), and if a display object has a
+filter applied to it, <code>cacheAsBitmap</code> is reported as
+<code><a href="../../Bool.html">true</a></code> for that display object, even if you set the property to
+<code><a href="../../Bool.html">false</a></code>. If you clear all filters for a display object, the
+<code>cacheAsBitmap</code> setting changes to what it was last set to.</p>
+<p>A display object does not use a bitmap even if the
+<code>cacheAsBitmap</code> property is set to <code><a href="../../Bool.html">true</a></code> and
+instead renders from vector data in the following cases:</p><ul><li>The bitmap is too large. In AIR 1.5 and Flash Player 10, the maximum
+size for a bitmap image is 8,191 pixels in width or height, and the total
+number of pixels cannot exceed 16,777,215 pixels.(So, if a bitmap image
+is 8,191 pixels wide, it can only be 2,048 pixels high.) In Flash Player 9
+and earlier, the limitation is is 2880 pixels in height and 2,880 pixels
+in width.</li><li>The bitmap fails to allocate(out of memory error).</li></ul>
+<p>The <code>cacheAsBitmap</code> property is best used with movie clips
+that have mostly static content and that do not scale and rotate
+frequently. With such movie clips, <code>cacheAsBitmap</code> can lead to
+performance increases when the movie clip is translated(when its <em>x</em>
+and <em>y</em> position is changed).</p></div></div><div class="field "><a name="cacheAsBitmapMatrix"></a><h3 class="anchor"><code><a href="#cacheAsBitmapMatrix"><span class="identifier">cacheAsBitmapMatrix</span></a>:<a class="type" title="openfl.geom.Matrix - The Matrix class represents a transformation matrix that determines how to map points from one coordinate space to another." href="../../openfl/geom/Matrix.html">Matrix</a></code></h3><div class="doc"><p>If non-null, this Matrix object defines how a display object is rendered when <code>cacheAsBitmap</code> is set to
+<code><a href="../../Bool.html">true</a></code>. The application uses this matrix as a transformation matrix that is applied when rendering the
+bitmap version of the display object.</p>
+<p><em>AIR profile support:</em> This feature is supported on mobile devices, but it is not supported on desktop
+operating systems. It also has limited support on AIR for TV devices. Specifically, on AIR for TV devices,
+supported transformations include scaling and translation, but not rotation and skewing. See AIR Profile
+Support for more information regarding API support across multiple profiles.</p>
+<p>With <code>cacheAsBitmapMatrix</code> set, the application retains a cached bitmap image across various 2D
+transformations, including translation, rotation, and scaling. If the application uses hardware acceleration,
+the object will be stored in video memory as a texture. This allows the GPU to apply the supported
+transformations to the object. The GPU can perform these transformations faster than the CPU.</p>
+<p>To use the hardware acceleration, set Rendering to GPU in the General tab of the iPhone Settings dialog box
+in Flash Professional CS5. Or set the <code>renderMode</code> property to gpu in the application descriptor file. Note
+that AIR for TV devices automatically use hardware acceleration if it is available.</p>
+<p>For example, the following code sends an untransformed bitmap representation of the display object to the GPU:</p>
+<pre><code class="prettyprint haxe">var matrix:Matrix = new Matrix(); // creates an identity matrix
+mySprite.cacheAsBitmapMatrix = matrix;
+mySprite.cacheAsBitmap = true;</code></pre>
+<p>Usually, the identity matrix (<code>new <a href="../../openfl/geom/Matrix.html#Matrix">Matrix</a>()</code>) suffices. However, you can use another matrix, such as a
+scaled-down matrix, to upload a different bitmap to the GPU. For example, the following example applies a
+<code>cacheAsBitmapMatrix</code> matrix that is scaled by 0.5 on the x and y axes. The bitmap object that the GPU uses
+is smaller, however the GPU adjusts its size to match the <code>transform.matrix</code> property of the display object:</p>
+<pre><code class="prettyprint haxe">var matrix:Matrix = new Matrix(); // creates an identity matrix
+matrix.scale(0.5, 0.5); // scales the matrix
+mySprite.cacheAsBitmapMatrix = matrix;
+mySprite.cacheAsBitmap = true;</code></pre>
+<p>Generally, you should choose to use a matrix that transforms the display object to the size that it will
+appear in the application. For example, if your application displays the bitmap version of the sprite scaled
+down by a half, use a matrix that scales down by a half. If you application will display the sprite larger
+than its current dimensions, use a matrix that scales up by that factor.</p>
+<p><strong>Note:</strong> The <code>cacheAsBitmapMatrix</code> property is suitable for 2D transformations. If you need to apply
+transformations in 3D, you may do so by setting a 3D property of the object and manipulating its
+<code>transform.matrix3D</code> property. If the application is packaged using GPU mode, this allows the 3D transforms
+to be applied to the object by the GPU. The <code>cacheAsBitmapMatrix</code> is ignored for 3D objects.</p></div></div><div class="field "><a name="filters"></a><h3 class="anchor"><code><a href="#filters"><span class="identifier">filters</span></a>:<a class="type" title="Array" href="../../Array.html">Array</a>&lt;<a class="type" title="openfl.filters.BitmapFilter - The BitmapFilter class is the base class for all image filter effects." href="../../openfl/filters/BitmapFilter.html">BitmapFilter</a>&gt;</code></h3><div class="doc"><p>An indexed array that contains each filter object currently associated
+with the display object. The openfl.filters package contains several
+classes that define specific filters you can use.</p>
+<p>Filters can be applied in Flash Professional at design time, or at run
+time by using ActionScript code. To apply a filter by using ActionScript,
+you must make a temporary copy of the entire <code>filters</code> array,
+modify the temporary array, then assign the value of the temporary array
+back to the <code>filters</code> array. You cannot directly add a new
+filter object to the <code>filters</code> array.</p>
+<p>To add a filter by using ActionScript, perform the following steps
+(assume that the target display object is named
+<code>myDisplayObject</code>):</p><ol><li>Create a new filter object by using the constructor method of your
+chosen filter class.</li><li>Assign the value of the <code>myDisplayObject.filters</code> array
+to a temporary array, such as one named <code>myFilters</code>.</li><li>Add the new filter object to the <code>myFilters</code> temporary
+array.</li><li>Assign the value of the temporary array to the
+<code>myDisplayObject.filters</code> array.</li></ol>
+<p>If the <code>filters</code> array is undefined, you do not need to use
+a temporary array. Instead, you can directly assign an array literal that
+contains one or more filter objects that you create. The first example in
+the Examples section adds a drop shadow filter by using code that handles
+both defined and undefined <code>filters</code> arrays.</p>
+<p>To modify an existing filter object, you must use the technique of
+modifying a copy of the <code>filters</code> array:</p><ol><li>Assign the value of the <code>filters</code> array to a temporary
+array, such as one named <code>myFilters</code>.</li><li>Modify the property by using the temporary array,
+<code>myFilters</code>. For example, to set the quality property of the
+first filter in the array, you could use the following code:
+<code>myFilters[0].quality = 1;</code></li><li>Assign the value of the temporary array to the <code>filters</code>
+array.</li></ol>
+<p>At load time, if a display object has an associated filter, it is
+marked to cache itself as a transparent bitmap. From this point forward,
+as long as the display object has a valid filter list, the player caches
+the display object as a bitmap. This source bitmap is used as a source
+image for the filter effects. Each display object usually has two bitmaps:
+one with the original unfiltered source display object and another for the
+final image after filtering. The final image is used when rendering. As
+long as the display object does not change, the final image does not need
+updating.</p>
+<p>The openfl.filters package includes classes for filters. For example, to
+create a DropShadow filter, you would write:</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>When <code>filters</code> includes a ShaderFilter
+and the shader output type is not compatible with
+this operation(the shader must specify a
+<code>pixel4</code> output).</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>When <code>filters</code> includes a ShaderFilter
+and the shader doesn't specify any image input or
+the first input is not an <code>image4</code> input.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>When <code>filters</code> includes a ShaderFilter
+and the shader specifies an image input that isn't
+provided.</p></td></tr><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>When <code>filters</code> includes a ShaderFilter, a
+ByteArray or Vector.<Number> instance as a shader
+input, and the <code>width</code> and
+<code>height</code> properties aren't specified for
+the ShaderInput object, or the specified values
+don't match the amount of data in the input data.
+See the <code><a href="../../openfl/display/ShaderInput.html#input">ShaderInput.input</a></code> property for
+more information.</p></td></tr></table></div></div><div class="field "><a name="height"></a><h3 class="anchor"><code><span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><a href="#height"><span class="identifier">height</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the height of the display object, in pixels. The height is
+calculated based on the bounds of the content of the display object. When
+you set the <code>height</code> property, the <code>scaleY</code> property
+is adjusted accordingly, as shown in the following code:</p>
+<p>Except for TextField and Video objects, a display object with no
+content(such as an empty sprite) has a height of 0, even if you try to
+set <code>height</code> to a different value.</p></div></div><div class="field "><a name="loaderInfo"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#loaderInfo"><span class="identifier">loaderInfo</span></a>:<a class="type" title="openfl.display.LoaderInfo - The LoaderInfo class provides information about a loaded SWF file or a loaded image file(JPEG, GIF, or PNG)." href="../../openfl/display/LoaderInfo.html">LoaderInfo</a></code></h3><div class="doc"><p>Returns a LoaderInfo object containing information about loading the file
+to which this display object belongs. The <code>loaderInfo</code> property
+is defined only for the root display object of a SWF file or for a loaded
+Bitmap(not for a Bitmap that is drawn with ActionScript). To find the
+<code>loaderInfo</code> object associated with the SWF file that contains
+a display object named <code>myDisplayObject</code>, use
+<code>myDisplayObject.root.loaderInfo</code>.</p>
+<p>A large SWF file can monitor its download by calling
+<code>this.<a href="#root">root</a>.loaderInfo.addEventListener(<a href="../../lime/app/Event.html#COMPLETE">Event.COMPLETE</a>,
+func)</code>.</p></div></div><div class="field "><a name="mask"></a><h3 class="anchor"><code><a href="#mask"><span class="identifier">mask</span></a>:<a class="type" title="openfl.display.DisplayObject - The DisplayObject class is the base class for all objects that can be placed on the display list." href="../../openfl/display/DisplayObject.html">DisplayObject</a></code></h3><div class="doc"><p>The calling display object is masked by the specified <code>mask</code>
+object. To ensure that masking works when the Stage is scaled, the
+<code>mask</code> display object must be in an active part of the display
+list. The <code>mask</code> object itself is not drawn. Set
+<code>mask</code> to <code>null</code> to remove the mask.</p>
+<p>To be able to scale a mask object, it must be on the display list. To
+be able to drag a mask Sprite object(by calling its
+<code>startDrag()</code> method), it must be on the display list. To call
+the <code>startDrag()</code> method for a mask sprite based on a
+<code>mouseDown</code> event being dispatched by the sprite, set the
+sprite's <code>buttonMode</code> property to <code><a href="../../Bool.html">true</a></code>.</p>
+<p>When display objects are cached by setting the
+<code>cacheAsBitmap</code> property to <code><a href="../../Bool.html">true</a></code> an the
+<code>cacheAsBitmapMatrix</code> property to a Matrix object, both the
+mask and the display object being masked must be part of the same cached
+bitmap. Thus, if the display object is cached, then the mask must be a
+child of the display object. If an ancestor of the display object on the
+display list is cached, then the mask must be a child of that ancestor or
+one of its descendents. If more than one ancestor of the masked object is
+cached, then the mask must be a descendent of the cached container closest
+to the masked object in the display list.</p>
+<p><strong>Note:</strong> A single <code>mask</code> object cannot be used to mask
+more than one calling display object. When the <code>mask</code> is
+assigned to a second display object, it is removed as the mask of the
+first object, and that object's <code>mask</code> property becomes
+<code>null</code>.</p></div></div><div class="field "><a name="mouseX"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#mouseX"><span class="identifier">mouseX</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the x coordinate of the mouse or user input device position, in
+pixels.</p>
+<p><strong>Note</strong>: For a DisplayObject that has been rotated, the returned x
+coordinate will reflect the non-rotated object.</p></div></div><div class="field "><a name="mouseY"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#mouseY"><span class="identifier">mouseY</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the y coordinate of the mouse or user input device position, in
+pixels.</p>
+<p><strong>Note</strong>: For a DisplayObject that has been rotated, the returned y
+coordinate will reflect the non-rotated object.</p></div></div><div class="field "><a name="name"></a><h3 class="anchor"><code><a href="#name"><span class="identifier">name</span></a>:<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p>Indicates the instance name of the DisplayObject. The object can be
+identified in the child list of its parent display object container by
+calling the <code>getChildByName()</code> method of the display object
+container.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>IllegalOperationError</code></th><td><p>If you are attempting to set this property
+on an object that was placed on the timeline
+in the Flash authoring tool.</p></td></tr></table></div></div><div class="field "><a name="opaqueBackground"></a><h3 class="anchor"><code><a href="#opaqueBackground"><span class="identifier">opaqueBackground</span></a>:<a class="type" title="Null - Null&amp;lt;T&amp;gt; is a wrapper that can be used to make the basic types Int, Float and Bool nullable on static targets." href="../../Null.html">Null</a>&lt;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>&gt;</code></h3><div class="doc"><p>Specifies whether the display object is opaque with a certain background
+color. A transparent bitmap contains alpha channel data and is drawn
+transparently. An opaque bitmap has no alpha channel(and renders faster
+than a transparent bitmap). If the bitmap is opaque, you specify its own
+background color to use.</p>
+<p>If set to a number value, the surface is opaque(not transparent) with
+the RGB background color that the number specifies. If set to
+<code>null</code>(the default value), the display object has a
+transparent background.</p>
+<p>The <code>opaqueBackground</code> property is intended mainly for use
+with the <code>cacheAsBitmap</code> property, for rendering optimization.
+For display objects in which the <code>cacheAsBitmap</code> property is
+set to true, setting <code>opaqueBackground</code> can improve rendering
+performance.</p>
+<p>The opaque background region is <em>not</em> matched when calling the
+<code>hitTestPoint()</code> method with the <code>shapeFlag</code>
+parameter set to <code><a href="../../Bool.html">true</a></code>.</p>
+<p>The opaque background region does not respond to mouse events.</p></div></div><div class="field "><a name="parent"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#parent"><span class="identifier">parent</span></a>:<a class="type" title="openfl.display.DisplayObjectContainer - The DisplayObjectContainer class is the base class for all objects that can serve as display object containers on the display list." href="../../openfl/display/DisplayObjectContainer.html">DisplayObjectContainer</a></code></h3><div class="doc"><p>Indicates the DisplayObjectContainer object that contains this display
+object. Use the <code>parent</code> property to specify a relative path to
+display objects that are above the current display object in the display
+list hierarchy.</p>
+<p>You can use <code>parent</code> to move up multiple levels in the
+display list as in the following:</p>
+<pre><code class="prettyprint haxe">this.parent.parent.alpha = 20;</code></pre><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>SecurityError</code></th><td><p>The parent display object belongs to a security
+sandbox to which you do not have access. You can
+avoid this situation by having the parent movie call
+the <code>Security.allowDomain()</code> method.</p></td></tr></table></div></div><div class="field "><a name="root"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#root"><span class="identifier">root</span></a>:<a class="type" title="openfl.display.DisplayObject - The DisplayObject class is the base class for all objects that can be placed on the display list." href="../../openfl/display/DisplayObject.html">DisplayObject</a></code></h3><div class="doc"><p>For a display object in a loaded SWF file, the <code>root</code> property
+is the top-most display object in the portion of the display list's tree
+structure represented by that SWF file. For a Bitmap object representing a
+loaded image file, the <code>root</code> property is the Bitmap object
+itself. For the instance of the main class of the first SWF file loaded,
+the <code>root</code> property is the display object itself. The
+<code>root</code> property of the Stage object is the Stage object itself.
+The <code>root</code> property is set to <code>null</code> for any display
+object that has not been added to the display list, unless it has been
+added to a display object container that is off the display list but that
+is a child of the top-most display object in a loaded SWF file.</p>
+<p>For example, if you create a new Sprite object by calling the
+<code><a href="../../openfl/display/Sprite.html#Sprite">Sprite</a>()</code> constructor method, its <code>root</code> property
+is <code>null</code> until you add it to the display list(or to a display
+object container that is off the display list but that is a child of the
+top-most display object in a SWF file).</p>
+<p>For a loaded SWF file, even though the Loader object used to load the
+file may not be on the display list, the top-most display object in the
+SWF file has its <code>root</code> property set to itself. The Loader
+object does not have its <code>root</code> property set until it is added
+as a child of a display object for which the <code>root</code> property is
+set.</p></div></div><div class="field "><a name="rotation"></a><h3 class="anchor"><code><span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><a href="#rotation"><span class="identifier">rotation</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the rotation of the DisplayObject instance, in degrees, from its
+original orientation. Values from 0 to 180 represent clockwise rotation;
+values from 0 to -180 represent counterclockwise rotation. Values outside
+this range are added to or subtracted from 360 to obtain a value within
+the range. For example, the statement <code>my_video.rotation = 450</code>
+is the same as <code> my_video.rotation = 90</code>.</p></div></div><div class="field "><a name="scale9Grid"></a><h3 class="anchor"><code><a href="#scale9Grid"><span class="identifier">scale9Grid</span></a>:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></code></h3><div class="doc"><p>The current scaling grid that is in effect. If set to <code>null</code>,
+the entire display object is scaled normally when any scale transformation
+is applied.</p>
+<p>When you define the <code>scale9Grid</code> property, the display
+object is divided into a grid with nine regions based on the
+<code>scale9Grid</code> rectangle, which defines the center region of the
+grid. The eight other regions of the grid are the following areas:</p><ul><li>The upper-left corner outside of the rectangle</li><li>The area above the rectangle</li><li>The upper-right corner outside of the rectangle</li><li>The area to the left of the rectangle</li><li>The area to the right of the rectangle</li><li>The lower-left corner outside of the rectangle</li><li>The area below the rectangle</li><li>The lower-right corner outside of the rectangle</li></ul>
+<p>You can think of the eight regions outside of the center (defined by
+the rectangle) as being like a picture frame that has special rules
+applied to it when scaled.</p>
+<p><strong>Note:</strong> Content that is not rendered through the <code>graphics</code> interface
+of a display object will not be affected by the <code>scale9Grid</code> property.</p>
+<p>When the <code>scale9Grid</code> property is set and a display object
+is scaled, all text and gradients are scaled normally; however, for other
+types of objects the following rules apply:</p><ul><li>Content in the center region is scaled normally.</li><li>Content in the corners is not scaled.</li><li>Content in the top and bottom regions is scaled horizontally only.</li><li>Content in the left and right regions is scaled vertically only.</li><li>All fills (including bitmaps, video, and gradients) are stretched to
+fit their shapes.</li></ul>
+<p>If a display object is rotated, all subsequent scaling is normal(and
+the <code>scale9Grid</code> property is ignored).</p>
+<p>For example, consider the following display object and a rectangle that
+is applied as the display object's <code>scale9Grid</code>:</p><table><thead><th></th><th></th></thead><tbody><tr><td><img src="/images/scale9Grid-a.jpg" alt="display object image" /><br>The display object.</td><td><img src="/images/scale9Grid-b.jpg" alt="display object scale 9 region" /><br>The red rectangle shows the scale9Grid.</td></tr></tbody></table>
+<p>When the display object is scaled or stretched, the objects within the rectangle scale normally, but the
+objects outside of the rectangle scale according to the <code>scale9Grid</code> rules:</p><table><thead><th></th><th></th></thead><tbody><tr><td>Scaled to 75%:</td><td><img src="/images/scale9Grid-c.jpg" alt="display object at 75%" /></td></tr><tr><td>Scaled to 50%:</td><td><img src="/images/scale9Grid-d.jpg" alt="display object at 50%" /></td></tr><tr><td>Scaled to 25%:</td><td><img src="/images/scale9Grid-e.jpg" alt="display object at 25%" /></td></tr><tr><td>Stretched horizontally 150%:</td><td><img src="/images/scale9Grid-f.jpg" alt="display stretched 150%" /></td></tr></tbody></table>
+<p>A common use for setting <code>scale9Grid</code> is to set up a display
+object to be used as a component, in which edge regions retain the same
+width when the component is scaled.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>If you pass an invalid argument to the method.</p></td></tr></table></div></div><div class="field "><a name="scaleX"></a><h3 class="anchor"><code><span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><a href="#scaleX"><span class="identifier">scaleX</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the horizontal scale (percentage) of the object as applied from
+the registration point. The default registration point is (0,0). 1.0
+equals 100% scale.</p>
+<p>Scaling the local coordinate system changes the <code>x</code> and
+<code>y</code> property values, which are defined in whole pixels.</p></div></div><div class="field "><a name="scaleY"></a><h3 class="anchor"><code><span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><a href="#scaleY"><span class="identifier">scaleY</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the vertical scale (percentage) of an object as applied from the
+registration point of the object. The default registration point is (0,0).
+1.0 is 100% scale.</p>
+<p>Scaling the local coordinate system changes the <code>x</code> and
+<code>y</code> property values, which are defined in whole pixels.</p></div></div><div class="field "><a name="scrollRect"></a><h3 class="anchor"><code><a href="#scrollRect"><span class="identifier">scrollRect</span></a>:<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></code></h3><div class="doc"><p>The scroll rectangle bounds of the display object. The display object is
+cropped to the size defined by the rectangle, and it scrolls within the
+rectangle when you change the <code>x</code> and <code>y</code> properties
+of the <code>scrollRect</code> object.</p>
+<p>The properties of the <code>scrollRect</code> Rectangle object use the
+display object's coordinate space and are scaled just like the overall
+display object. The corner bounds of the cropped window on the scrolling
+display object are the origin of the display object(0,0) and the point
+defined by the width and height of the rectangle. They are not centered
+around the origin, but use the origin to define the upper-left corner of
+the area. A scrolled display object always scrolls in whole pixel
+increments.</p>
+<p>You can scroll an object left and right by setting the <code>x</code>
+property of the <code>scrollRect</code> Rectangle object. You can scroll
+an object up and down by setting the <code>y</code> property of the
+<code>scrollRect</code> Rectangle object. If the display object is rotated
+90� and you scroll it left and right, the display object actually scrolls
+up and down.</p></div></div><div class="field "><a name="shader"></a><h3 class="anchor"><code><span class="label label-meta label-meta-beta" title="">@:beta</span><a href="#shader"><span class="identifier">shader</span></a>:<a class="type" title="openfl.display.Shader - // TODO: Document GLSL Shaders A Shader instance represents a Pixel Bender shader kernel in ActionScript." href="../../openfl/display/Shader.html">Shader</a></code></h3><div class="doc"><p>BETA**</p>
+<p>Applies a custom Shader object to use when rendering this display object (or its children) when using
+hardware rendering. This occurs as a single-pass render on this object only, if visible. In order to
+apply a post-process effect to multiple display objects at once, enable <code>cacheAsBitmap</code> or use the
+<code>filters</code> property with a ShaderFilter</p></div></div><div class="field "><a name="stage"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#stage"><span class="identifier">stage</span></a>:<a class="type" title="openfl.display.Stage - The Stage class represents the main drawing area." href="../../openfl/display/Stage.html">Stage</a></code></h3><div class="doc"><p>The Stage of the display object. A Flash runtime application has only one
+Stage object. For example, you can create and load multiple display
+objects into the display list, and the <code>stage</code> property of each
+display object refers to the same Stage object(even if the display object
+belongs to a loaded SWF file).</p>
+<p>If a display object is not added to the display list, its
+<code>stage</code> property is set to <code>null</code>.</p></div></div><div class="field "><a name="transform"></a><h3 class="anchor"><code><span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><a href="#transform"><span class="identifier">transform</span></a>:<a class="type" title="openfl.geom.Transform - The Transform class provides access to color adjustment properties and two- or three-dimensional transformation objects that can be applied to a display object." href="../../openfl/geom/Transform.html">Transform</a></code></h3><div class="doc"><p>An object with properties pertaining to a display object's matrix, color
+transform, and pixel bounds. The specific properties  -  matrix,
+colorTransform, and three read-only properties
+(<code>concatenatedMatrix</code>, <code>concatenatedColorTransform</code>,
+and <code>pixelBounds</code>)  -  are described in the entry for the
+Transform class.</p>
+<p>Each of the transform object's properties is itself an object. This
+concept is important because the only way to set new values for the matrix
+or colorTransform objects is to create a new object and copy that object
+into the transform.matrix or transform.colorTransform property.</p>
+<p>For example, to increase the <code>tx</code> value of a display
+object's matrix, you must make a copy of the entire matrix object, then
+copy the new object into the matrix property of the transform object:
+<code> var myMatrix:<a href="../../openfl/geom/Matrix.html#Matrix">Matrix</a> =
+myDisplayObject.transform.matrix; myMatrix.tx += 10;
+myDisplayObject.transform.matrix = myMatrix; </code></p>
+<p>You cannot directly set the <code>tx</code> property. The following
+code has no effect on <code>myDisplayObject</code>:
+<code> myDisplayObject.transform.matrix.tx +=
+10; </code></p>
+<p>You can also copy an entire transform object and assign it to another
+display object's transform property. For example, the following code
+copies the entire transform object from <code>myOldDisplayObj</code> to
+<code>myNewDisplayObj</code>:
+<code>myNewDisplayObj.transform = myOldDisplayObj.transform;</code></p>
+<p>The resulting display object, <code>myNewDisplayObj</code>, now has the
+same values for its matrix, color transform, and pixel bounds as the old
+display object, <code>myOldDisplayObj</code>.</p>
+<p>Note that AIR for TV devices use hardware acceleration, if it is
+available, for color transforms.</p></div></div><div class="field "><a name="visible"></a><h3 class="anchor"><code><a href="#visible"><span class="identifier">visible</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Whether or not the display object is visible. Display objects that are not
+visible are disabled. For example, if <code>visible=<a href="../../Bool.html">false</a></code> for an
+InteractiveObject instance, it cannot be clicked.</p></div></div><div class="field "><a name="width"></a><h3 class="anchor"><code><span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><a href="#width"><span class="identifier">width</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the width of the display object, in pixels. The width is
+calculated based on the bounds of the content of the display object. When
+you set the <code>width</code> property, the <code>scaleX</code> property
+is adjusted accordingly, as shown in the following code:</p>
+<p>Except for TextField and Video objects, a display object with no
+content(such as an empty sprite) has a width of 0, even if you try to set
+<code>width</code> to a different value.</p></div></div><div class="field "><a name="x"></a><h3 class="anchor"><code><span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><a href="#x"><span class="identifier">x</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the <em>x</em> coordinate of the DisplayObject instance relative
+to the local coordinates of the parent DisplayObjectContainer. If the
+object is inside a DisplayObjectContainer that has transformations, it is
+in the local coordinate system of the enclosing DisplayObjectContainer.
+Thus, for a DisplayObjectContainer rotated 90� counterclockwise, the
+DisplayObjectContainer's children inherit a coordinate system that is
+rotated 90� counterclockwise. The object's coordinates refer to the
+registration point position.</p></div></div><div class="field "><a name="y"></a><h3 class="anchor"><code><span class="label label-meta label-meta-keep" title="Causes a field or type to be kept by DCE.">@:keep</span><a href="#y"><span class="identifier">y</span></a>:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a></code></h3><div class="doc"><p>Indicates the <em>y</em> coordinate of the DisplayObject instance relative
+to the local coordinates of the parent DisplayObjectContainer. If the
+object is inside a DisplayObjectContainer that has transformations, it is
+in the local coordinate system of the enclosing DisplayObjectContainer.
+Thus, for a DisplayObjectContainer rotated 90� counterclockwise, the
+DisplayObjectContainer's children inherit a coordinate system that is
+rotated 90� counterclockwise. The object's coordinates refer to the
+registration point position.</p></div></div></div><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.display.DisplayObject - The DisplayObject class is the base class for all objects that can be placed on the display list." href="../../openfl/display/DisplayObject.html">DisplayObject</a></h4><div style="display:none"><div class="field "><a name="getBounds"></a><h3 class="anchor"><code><a href="#getBounds"><span class="identifier">getBounds</span></a>(<span style="white-space:nowrap">targetCoordinateSpace:<a class="type" title="openfl.display.DisplayObject - The DisplayObject class is the base class for all objects that can be placed on the display list." href="../../openfl/display/DisplayObject.html">DisplayObject</a></span>):<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></code></h3><div class="doc"><p>Returns a rectangle that defines the area of the display object relative
+to the coordinate system of the <code>targetCoordinateSpace</code> object.
+Consider the following code, which shows how the rectangle returned can
+vary depending on the <code>targetCoordinateSpace</code> parameter that
+you pass to the method:</p>
+<p><strong>Note:</strong> Use the <code>localToGlobal()</code> and
+<code>globalToLocal()</code> methods to convert the display object's local
+coordinates to display coordinates, or display coordinates to local
+coordinates, respectively.</p>
+<p>The <code>getBounds()</code> method is similar to the
+<code>getRect()</code> method; however, the Rectangle returned by the
+<code>getBounds()</code> method includes any strokes on shapes, whereas
+the Rectangle returned by the <code>getRect()</code> method does not. For
+an example, see the description of the <code>getRect()</code> method.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>targetCoordinateSpace</code></th><td><p>The display object that defines the
+coordinate system to use.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>The rectangle that defines the area of the display object relative
+to the <code>targetCoordinateSpace</code> object's coordinate
+system.</p></div></div></div><div class="field "><a name="getRect"></a><h3 class="anchor"><code><a href="#getRect"><span class="identifier">getRect</span></a>(<span style="white-space:nowrap">targetCoordinateSpace:<a class="type" title="openfl.display.DisplayObject - The DisplayObject class is the base class for all objects that can be placed on the display list." href="../../openfl/display/DisplayObject.html">DisplayObject</a></span>):<a class="type" title="openfl.geom.Rectangle - A Rectangle object is an area defined by its position, as indicated by its top-left corner point(x, y) and by its width and its height." href="../../openfl/geom/Rectangle.html">Rectangle</a></code></h3><div class="doc"><p>Returns a rectangle that defines the boundary of the display object, based
+on the coordinate system defined by the <code>targetCoordinateSpace</code>
+parameter, excluding any strokes on shapes. The values that the
+<code>getRect()</code> method returns are the same or smaller than those
+returned by the <code>getBounds()</code> method.</p>
+<p><strong>Note:</strong> Use <code>localToGlobal()</code> and
+<code>globalToLocal()</code> methods to convert the display object's local
+coordinates to Stage coordinates, or Stage coordinates to local
+coordinates, respectively.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>targetCoordinateSpace</code></th><td><p>The display object that defines the
+coordinate system to use.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>The rectangle that defines the area of the display object relative
+to the <code>targetCoordinateSpace</code> object's coordinate
+system.</p></div></div></div><div class="field "><a name="globalToLocal"></a><h3 class="anchor"><code><a href="#globalToLocal"><span class="identifier">globalToLocal</span></a>(<span style="white-space:nowrap">pos:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a></span>):<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a></code></h3><div class="doc"><p>Converts the <code>point</code> object from the Stage(global) coordinates
+to the display object's(local) coordinates.</p>
+<p>To use this method, first create an instance of the Point class. The
+<em>x</em> and <em>y</em> values that you assign represent global coordinates
+because they relate to the origin(0,0) of the main display area. Then
+pass the Point instance as the parameter to the
+<code>globalToLocal()</code> method. The method returns a new Point object
+with <em>x</em> and <em>y</em> values that relate to the origin of the display
+object instead of the origin of the Stage.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>point</code></th><td><p>An object created with the Point class. The Point object
+specifies the <em>x</em> and <em>y</em> coordinates as
+properties.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A Point object with coordinates relative to the display object.</p></div></div></div><div class="field "><a name="hitTestObject"></a><h3 class="anchor"><code><a href="#hitTestObject"><span class="identifier">hitTestObject</span></a>(<span style="white-space:nowrap">obj:<a class="type" title="openfl.display.DisplayObject - The DisplayObject class is the base class for all objects that can be placed on the display list." href="../../openfl/display/DisplayObject.html">DisplayObject</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Evaluates the bounding box of the display object to see if it overlaps or
+intersects with the bounding box of the <code>obj</code> display object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>obj</code></th><td><p>The display object to test against.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p><code><a href="../../Bool.html">true</a></code> if the bounding boxes of the display objects
+intersect; <code><a href="../../Bool.html">false</a></code> if not.</p></div></div></div><div class="field "><a name="hitTestPoint"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ shapeFlag : false })</span><a href="#hitTestPoint"><span class="identifier">hitTestPoint</span></a>(<span style="white-space:nowrap">x:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">y:<a class="type" title="Float - The standard Float type, this is a double-precision IEEE 64bit float." href="../../Float.html">Float</a>,</span> <span style="white-space:nowrap">shapeFlag:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Evaluates the display object to see if it overlaps or intersects with the
+point specified by the <code>x</code> and <code>y</code> parameters. The
+<code>x</code> and <code>y</code> parameters specify a point in the
+coordinate space of the Stage, not the display object container that
+contains the display object(unless that display object container is the
+Stage).</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>x</code></th><td><p>The <em>x</em> coordinate to test against this object.</p></td></tr><tr><th style="width:25%;"><code>y</code></th><td><p>The <em>y</em> coordinate to test against this object.</p></td></tr><tr><th style="width:25%;"><code>shapeFlag</code></th><td><p>Whether to check against the actual pixels of the object
+(<code><a href="../../Bool.html">true</a></code>) or the bounding box
+(<code><a href="../../Bool.html">false</a></code>).</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p><code><a href="../../Bool.html">true</a></code> if the display object overlaps or intersects
+with the specified point; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="invalidate"></a><h3 class="anchor"><code><a href="#invalidate"><span class="identifier">invalidate</span></a>():<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Calling the <code>invalidate()</code> method signals to have the current object
+redrawn the next time the object is eligible to be rendered.</p></div></div><div class="field "><a name="localToGlobal"></a><h3 class="anchor"><code><a href="#localToGlobal"><span class="identifier">localToGlobal</span></a>(<span style="white-space:nowrap">point:<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a></span>):<a class="type" title="openfl.geom.Point - The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis." href="../../openfl/geom/Point.html">Point</a></code></h3><div class="doc"><p>Converts the <code>point</code> object from the display object's(local)
+coordinates to the Stage(global) coordinates.</p>
+<p>This method allows you to convert any given <em>x</em> and <em>y</em>
+coordinates from values that are relative to the origin(0,0) of a
+specific display object(local coordinates) to values that are relative to
+the origin of the Stage(global coordinates).</p>
+<p>To use this method, first create an instance of the Point class. The
+<em>x</em> and <em>y</em> values that you assign represent local coordinates
+because they relate to the origin of the display object.</p>
+<p>You then pass the Point instance that you created as the parameter to
+the <code>localToGlobal()</code> method. The method returns a new Point
+object with <em>x</em> and <em>y</em> values that relate to the origin of the
+Stage instead of the origin of the display object.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>point</code></th><td><p>The name or identifier of a point created with the Point
+class, specifying the <em>x</em> and <em>y</em> coordinates as
+properties.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A Point object with coordinates relative to the Stage.</p></div></div></div></div><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></h4><div style="display:none"><div class="field "><a name="hasEventListener"></a><h3 class="anchor"><code><a href="#hasEventListener"><span class="identifier">hasEventListener</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the EventDispatcher object has any listeners registered for
+a specific type of event. This allows you to determine where an
+EventDispatcher object has altered handling of an event type in the event
+flow hierarchy. To determine whether a specific event type actually
+triggers an event listener, use <code>willTrigger()</code>.</p>
+<p>The difference between <code>hasEventListener()</code> and
+<code>willTrigger()</code> is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas
+<code>willTrigger()</code> examines the entire event flow for the event
+specified by the <code>type</code> parameter.</p>
+<p>When <code>hasEventListener()</code> is called from a LoaderInfo
+object, only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+is registered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="toString"></a><h3 class="anchor"><code><a href="#toString"><span class="identifier">toString</span></a>():<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="willTrigger"></a><h3 class="anchor"><code><a href="#willTrigger"><span class="identifier">willTrigger</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether an event listener is registered with this EventDispatcher
+object or any of its ancestors for the specified event type. This method
+returns <code><a href="../../Bool.html">true</a></code> if an event listener is triggered during any
+phase of the event flow when an event of the specified type is dispatched
+to this EventDispatcher object or any of its descendants.</p>
+<p>The difference between the <code>hasEventListener()</code> and the
+<code>willTrigger()</code> methods is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas the
+<code>willTrigger()</code> method examines the entire event flow for the
+event specified by the <code>type</code> parameter.</p>
+<p>When <code>willTrigger()</code> is called from a LoaderInfo object,
+only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+will be triggered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><link href="../../dark-mode.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>js.html.TreeWalker</title><meta name="description" content="The &lt;code&gt;&lt;a href=&quot;../../js/html/TreeWalker.html#TreeWalker&quot;&gt;TreeWalker&lt;/a&gt;&lt;/code&gt; object represents the nodes of a document subtree and a position within them."/></head><body><script>/* Here to prevent flash of unstyled content */let systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;if ((!localStorage.theme && systemDarkMode) || localStorage.theme == "dark") {document.body.style.backgroundColor = "#111";document.body.style.opacity = "0";document.addEventListener("DOMContentLoaded", function(event) {toggleTheme();document.body.style.backgroundColor = "";document.body.style.opacity = "";});}</script><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+}
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a><a href="#" id="theme-toggle" class="brand" style="color:#000000" onclick="toggleTheme()" title="Toggle Dark Mode"><i class="fa fa-moon-o"></i></a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="fa fa-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> TreeWalker</h1><h4><small>package <a href="../../js/html/index.html">js.html</a></small></h4>    <span class="label label-meta label-meta-native" title="Rewrites the path of a type or class field during generation.">@:native(&quot;TreeWalker&quot;)</span></div><div class="body"><div class="doc doc-main"><p>The <code><a href="../../js/html/TreeWalker.html#TreeWalker">TreeWalker</a></code> object represents the nodes of a document subtree and a position within them.</p>
+<p>Documentation <a href="https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker">TreeWalker</a> by <a href="https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker$history">Mozilla Contributors</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/2.5/">CC-BY-SA 2.5</a>.</p><p class="javadoc">See also:</p><ul><li><div class="inline-content"><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker">https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker</a></p></div></li></ul></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="currentNode"></a><h3 class="anchor"><code><a href="#currentNode"><span class="identifier">currentNode</span></a>:<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Is the <code><a href="../../js/html/Node.html#Node">Node</a></code> on which the <code><a href="../../js/html/TreeWalker.html#TreeWalker">TreeWalker</a></code> is currently pointing at.</p></div></div><div class="field "><a name="filter"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#filter"><span class="identifier">filter</span></a>:<a class="type" title="haxe.extern.EitherType - An abstract type allowing values to be either of T1 or T2 type." href="../../haxe/extern/EitherType.html">EitherType</a>&lt;<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a>, <a class="type" title="js.html.NodeFilter - A NodeFilter interface represents an object used to filter the nodes in a NodeIterator or TreeWalker." href="../../js/html/NodeFilter.html">NodeFilter</a>&gt;</code></h3><div class="doc"><p>Returns a <code><a href="../../js/html/NodeFilter.html#NodeFilter">NodeFilter</a></code> used to select the relevant nodes.</p></div></div><div class="field "><a name="root"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#root"><span class="identifier">root</span></a>:<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Returns a <code><a href="../../js/html/Node.html#Node">Node</a></code> representing the root node as specified when the <code><a href="../../js/html/TreeWalker.html#TreeWalker">TreeWalker</a></code> was created.</p></div></div><div class="field "><a name="whatToShow"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#whatToShow"><span class="identifier">whatToShow</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>Returns an <code>unsigned long</code> being a bitmask made of constants describing the types of <code>Node</code> that must be presented. Non-matching nodes are skipped, but their children may be included, if relevant. The possible values are:
+<table class="standard-table"></p>
+<p><tr>
+<td class="header">Constant</td>
+<td class="header">Numerical value</td>
+<td class="header">Description</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_ALL</code></td>
+<td><code>-1</code> (that is the max value of <code>unsigned long</code>)</td>
+<td>Shows all nodes.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_ATTRIBUTE</code> {{deprecated_inline}}</td>
+<td><code>2</code></td>
+<td>Shows attribute <code>Attr</code> nodes. This is meaningful only when creating a <code>TreeWalker</code> with an <code>Attr</code> node as its root. In this case, it means that the attribute node will appear in the first position of the iteration or traversal. Since attributes are never children of other nodes, they do not appear when traversing over the document tree.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_CDATA_SECTION</code> {{deprecated_inline}}</td>
+<td><code>8</code></td>
+<td>Shows <code>CDATASection</code> nodes.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_COMMENT</code></td>
+<td><code>128</code></td>
+<td>Shows <code>Comment</code> nodes.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_DOCUMENT</code></td>
+<td><code>256</code></td>
+<td>Shows <code>Document</code> nodes.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_DOCUMENT_FRAGMENT</code></td>
+<td><code>1024</code></td>
+<td>Shows <code>DocumentFragment</code> nodes.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_DOCUMENT_TYPE</code></td>
+<td><code>512</code></td>
+<td>Shows <code>DocumentType</code> nodes.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_ELEMENT</code></td>
+<td><code>1</code></td>
+<td>Shows <code>Element</code> nodes.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_ENTITY</code> {{deprecated_inline}}</td>
+<td><code>32</code></td>
+<td>Shows <code>Entity</code> nodes. This is meaningful only when creating a <code>TreeWalker</code> with an <code>Entity</code> node as its root; in this case, it means that the <code>Entity</code> node will appear in the first position of the traversal. Since entities are not part of the document tree, they do not appear when traversing over the document tree.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_ENTITY_REFERENCE</code> {{deprecated_inline}}</td>
+<td><code>16</code></td>
+<td>Shows <code>EntityReference</code> nodes.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_NOTATION</code> {{deprecated_inline}}</td>
+<td><code>2048</code></td>
+<td>Shows <code>Notation</code> nodes. This is meaningful only when creating a <code>TreeWalker</code> with a <code>Notation</code> node as its root; in this case, it means that the <code>Notation</code> node will appear in the first position of the traversal. Since entities are not part of the document tree, they do not appear when traversing over the document tree.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_PROCESSING_INSTRUCTION</code></td>
+<td><code>64</code></td>
+<td>Shows <code>ProcessingInstruction</code> nodes.</td>
+</tr>
+<tr>
+<td><code>NodeFilter.SHOW_TEXT</code></td>
+<td><code>4</code></td>
+<td>Shows <code>Text</code> nodes.</td>
+</tr></p>
+<p></table></p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="firstChild"></a><h3 class="anchor"><code><a href="#firstChild"><span class="identifier">firstChild</span></a>():<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Moves the current <code><a href="../../js/html/Node.html#Node">Node</a></code> to the first visible child of the current node, and returns the found child. It also moves the current node to this child. If no such child exists, returns <code>null</code> and the current node is not changed.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>null</code></th><td><p>DOMError</p></td></tr></table></div></div><div class="field "><a name="lastChild"></a><h3 class="anchor"><code><a href="#lastChild"><span class="identifier">lastChild</span></a>():<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Moves the current <code><a href="../../js/html/Node.html#Node">Node</a></code> to the last visible child of the current node, and returns the found child. It also moves the current node to this child. If no such child exists, <code>null</code> is returned and the current node is not changed.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>null</code></th><td><p>DOMError</p></td></tr></table></div></div><div class="field "><a name="nextNode"></a><h3 class="anchor"><code><a href="#nextNode"><span class="identifier">nextNode</span></a>():<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Moves the current <code><a href="../../js/html/Node.html#Node">Node</a></code> to the next visible node in the document order, and returns the found node. It also moves the current node to this one. If no such node exists, returns <code>null</code> and the current node is not changed.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>null</code></th><td><p>DOMError</p></td></tr></table></div></div><div class="field "><a name="nextSibling"></a><h3 class="anchor"><code><a href="#nextSibling"><span class="identifier">nextSibling</span></a>():<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Moves the current <code><a href="../../js/html/Node.html#Node">Node</a></code> to its next sibling, if any, and returns the found sibling. If there is no such node, <code>null</code> is returned and the current node is not changed.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>null</code></th><td><p>DOMError</p></td></tr></table></div></div><div class="field "><a name="parentNode"></a><h3 class="anchor"><code><a href="#parentNode"><span class="identifier">parentNode</span></a>():<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Moves the current <code><a href="../../js/html/Node.html#Node">Node</a></code> to the first visible ancestor node in the document order, and returns the found node. It also moves the current node to this one. If no such node exists, or if it is before that the root node defined at the object construction, returns <code>null</code> and the current node is not changed.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>null</code></th><td><p>DOMError</p></td></tr></table></div></div><div class="field "><a name="previousNode"></a><h3 class="anchor"><code><a href="#previousNode"><span class="identifier">previousNode</span></a>():<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Moves the current <code><a href="../../js/html/Node.html#Node">Node</a></code> to the previous visible node in the document order, and returns the found node. It also moves the current node to this one. If no such node exists, or if it is before that the root node defined at the object construction, returns <code>null</code> and the current node is not changed.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>null</code></th><td><p>DOMError</p></td></tr></table></div></div><div class="field "><a name="previousSibling"></a><h3 class="anchor"><code><a href="#previousSibling"><span class="identifier">previousSibling</span></a>():<a class="type" title="js.html.Node - Node is an interface from which a number of DOM API object types inherit." href="../../js/html/Node.html">Node</a></code></h3><div class="doc"><p>Moves the current <code><a href="../../js/html/Node.html#Node">Node</a></code> to its previous sibling, if any, and returns the found sibling. If there is no such node, return <code>null</code> and the current node is not changed.</p><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>null</code></th><td><p>DOMError</p></td></tr></table></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>
