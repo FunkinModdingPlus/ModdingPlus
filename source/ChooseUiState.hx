@@ -24,7 +24,7 @@ import lime.system.System;
 import lime.app.Event;
 import haxe.Json;
 import tjson.TJSON;
-import flixel.UI;
+import flixel.addons.UI;
 using StringTools;
 
 
