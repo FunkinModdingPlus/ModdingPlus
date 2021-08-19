@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><link href="../../dark-mode.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.ui.Multitouch</title><meta name="description" content="The Multitouch class manages and provides information about the current
+environment&#039;s support for handling contact from user input devices,
+including contact that has two or more touch points(such as a user&#039;s
+fingers on a touch screen). When a user interacts with a device such as a
+mobile phone or tablet with a touch screen, the user typically touches the
+screen with his or her fingers or a pointing device. While there is a broad
+range of pointing devices, such as a mouse or a stylus, many of these
+devices only have a single point of contact with an application. For
+pointing devices with a single point of contact, user interaction events
+can be handled as a mouse event, or using a basic set of touch events
+(called &quot;touch point&quot; events). However, for pointing devices that have
+several points of contact and perform complex movement, such as the human
+hand, Flash runtimes support an additional set of event handling API called
+gesture events. The API for handling user interaction with these gesture
+events includes the following classes:"/></head><body><script>/* Here to prevent flash of unstyled content */let systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;if ((!localStorage.theme && systemDarkMode) || localStorage.theme == "dark") {document.body.style.backgroundColor = "#111";document.body.style.opacity = "0";document.addEventListener("DOMContentLoaded", function(event) {toggleTheme();document.body.style.backgroundColor = "";document.body.style.opacity = "";});}</script><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+}
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a><a href="#" id="theme-toggle" class="brand" style="color:#000000" onclick="toggleTheme()" title="Toggle Dark Mode"><i class="fa fa-moon-o"></i></a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="fa fa-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>final class</small> Multitouch</h1><h4><small>package <a href="../../openfl/ui/index.html">openfl.ui</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span><span class="label label-meta label-meta-final" title="Prevents a class or interface from being extended or a method from being overridden. Deprecated by the keyword `final`.">@:final</span></div><div class="body"><div class="doc doc-main"><p>The Multitouch class manages and provides information about the current
+environment's support for handling contact from user input devices,
+including contact that has two or more touch points(such as a user's
+fingers on a touch screen). When a user interacts with a device such as a
+mobile phone or tablet with a touch screen, the user typically touches the
+screen with his or her fingers or a pointing device. While there is a broad
+range of pointing devices, such as a mouse or a stylus, many of these
+devices only have a single point of contact with an application. For
+pointing devices with a single point of contact, user interaction events
+can be handled as a mouse event, or using a basic set of touch events
+(called "touch point" events). However, for pointing devices that have
+several points of contact and perform complex movement, such as the human
+hand, Flash runtimes support an additional set of event handling API called
+gesture events. The API for handling user interaction with these gesture
+events includes the following classes:</p><ul><li>openfl.events.TouchEvent</li><li>openfl.events.GestureEvent</li><li>openfl.events.GesturePhase</li><li>openfl.events.TransformGestureEvent</li><li>openfl.events.PressAndTapGestureEvent</li></ul>
+<p>Use the listed classes to write code that handles touch events. Use the
+Multitouch class to determine the current environment's support for touch
+interaction, and to manage the support of touch interaction if the current
+environment supports touch input.</p>
+<p>You cannot create a Multitouch object directly from ActionScript code.
+If you call <code>new <a href="../../openfl/ui/Multitouch.html#Multitouch">Multitouch</a>()</code>, an exception is thrown.</p>
+<p><strong>Note:</strong> The Multitouch feature is not supported for SWF files
+embedded in HTML running on Mac OS.</p></div><h3 class="section">Static variables</h3><div class="fields"><div class="field "><a name="inputMode"></a><h3 class="anchor"><code><span class="label label-static">static</span><a href="#inputMode"><span class="identifier">inputMode</span></a>:<a class="type" title="openfl.ui.MultitouchInputMode - The MultitouchInputMode class provides values for the inputMode property in the openfl." href="../../openfl/ui/MultitouchInputMode.html">MultitouchInputMode</a></code></h3><div class="doc"><p>Identifies the multi-touch mode for touch and gesture event handling. Use
+this property to manage whether or not events are dispatched as touch
+events with multiple points of contact and specific events for different
+gestures(such as rotation and pan), or only a single point of contact
+(such as tap), or none at all(contact is handled as a mouse event). To
+set this property, use values from the openfl.ui.MultitouchInputMode class.</p></div></div><div class="field "><a name="maxTouchPoints"></a><h3 class="anchor"><code><span class="label label-static">static</span><span class="label">read only</span><a href="#maxTouchPoints"><span class="identifier">maxTouchPoints</span></a>:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></code></h3><div class="doc"><p>The maximum number of concurrent touch points supported by the current
+environment.</p></div></div><div class="field "><a name="supportedGestures"></a><h3 class="anchor"><code><span class="label label-static">static</span><span class="label">read only</span><a href="#supportedGestures"><span class="identifier">supportedGestures</span></a>:<a class="type" title="openfl.Vector - The Vector class lets you access and manipulate a vector — an array whose elements all have the same data type." href="../../openfl/Vector.html">Vector</a>&lt;<a class="type" title="String - The basic String class." href="../../String.html">String</a>&gt;</code></h3><div class="doc"><p>A Vector array(a typed array of string values) of multi-touch contact
+types supported in the current environment. The array of strings can be
+used as event types to register event listeners. Possible values are
+constants from the GestureEvent, PressAndTapGestureEvent, and
+TransformGestureEvent classes(such as <code>GESTURE_PAN</code>).</p>
+<p>If the Flash runtime is in an environment that does not support any
+multi-touch gestures, the value is <code>null</code>.</p>
+<p><strong>Note:</strong> For Mac OS 10.5.3 and later,
+<code><a href="../../openfl/ui/Multitouch.html#supportedGestures">Multitouch.supportedGestures</a></code> returns non-null values
+(possibly indicating incorrectly that gesture events are supported) even
+if the current hardware does not support gesture input.</p>
+<p>Use this property to test for multi-touch gesture support. Then, use
+event handlers for the available multi-touch gestures. For those gestures
+that are not supported in the current evironment, you'll need to create
+alternative event handling.</p></div></div><div class="field "><a name="supportsGestureEvents"></a><h3 class="anchor"><code><span class="label label-static">static</span><span class="label">read only</span><a href="#supportsGestureEvents"><span class="identifier">supportsGestureEvents</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Indicates whether the current environment supports gesture input, such as
+rotating two fingers around a touch screen. Gesture events are listed in
+the TransformGestureEvent, PressAndTapGestureEvent, and GestureEvent
+classes.</p>
+<p><strong>Note:</strong> For Mac OS 10.5.3 and later, this value is always
+<code><a href="../../Bool.html">true</a></code>. <code><a href="../../openfl/ui/Multitouch.html#supportsGestureEvent">Multitouch.supportsGestureEvent</a></code> returns
+<code><a href="../../Bool.html">true</a></code> even if the hardware does not support gesture
+events.</p></div></div><div class="field "><a name="supportsTouchEvents"></a><h3 class="anchor"><code><span class="label label-static">static</span><span class="label">read only</span><a href="#supportsTouchEvents"><span class="identifier">supportsTouchEvents</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Indicates whether the current environment supports basic touch input, such
+as a single finger tap. Touch events are listed in the TouchEvent class.</p></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

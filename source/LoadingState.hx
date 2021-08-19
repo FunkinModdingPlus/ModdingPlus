@@ -7,7 +7,7 @@ class LoadingState extends FlxState {
     public static function loadAndSwitchState(target:FlxState, ?allowDjkf:Bool) {
 
 		PlayerSettings.player1.controls.setKeyboardScheme(Solo(false));
-        if (target is ChartingState) {
+        if ((target is ChartingState)) {
             FlxG.switchState(new LoadingState());
         } else {
 			FlxG.switchState(target);

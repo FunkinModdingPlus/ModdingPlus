@@ -18,7 +18,7 @@ take down mods that don't follow this rule.
 
 - Get the cutting edge build: https://dev.azure.com/benharless820/FNF%20Modding%20Plus/_build
 - Play the Original Game: https://github.com/ninjamuffin99/Funkin
-- Need Help? FNF Modding Plus Discord: https://discord.gg/96nV4Q5HMr
+- Need Help? FNF Modding Plus Discord: https://discord.gg/xeC748FR
 - Trello Page (todo list): https://trello.com/b/cFjJJIjF/fnf-modding-plus
 ## Credits for the Original Game
 

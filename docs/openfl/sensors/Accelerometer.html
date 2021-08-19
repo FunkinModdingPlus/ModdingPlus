@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><script src="../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../styles.css" rel="stylesheet"/><link href="../../extra-styles.css" rel="stylesheet"/><link href="../../haxe-nav.css" rel="stylesheet"/><link href="../../dark-mode.css" rel="stylesheet"/><script>var dox = {rootPath: "../../",platforms: ["types"]};</script><script src="../../nav.js"></script><script src="../../index.js"></script><link rel="icon" href="../../favicon.ico" type="image/x-icon"/><title>openfl.sensors.Accelerometer</title><meta name="description" content="The Accelerometer class dispatches events based on activity detected by the
+device&#039;s motion sensor. This data represents the device&#039;s location or
+movement along a 3-dimensional axis. When the device moves, the sensor
+detects this movement and returns acceleration data. The Accelerometer
+class provides methods to query whether or not accelerometer is supported,
+and also to set the rate at which acceleration events are dispatched."/></head><body><script>/* Here to prevent flash of unstyled content */let systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;if ((!localStorage.theme && systemDarkMode) || localStorage.theme == "dark") {document.body.style.backgroundColor = "#111";document.body.style.opacity = "0";document.addEventListener("DOMContentLoaded", function(event) {toggleTheme();document.body.style.backgroundColor = "";document.body.style.opacity = "";});}</script><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+}
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../">API Documentation</a><a href="#" id="theme-toggle" class="brand" style="color:#000000" onclick="toggleTheme()" title="Toggle Dark Mode"><i class="fa fa-moon-o"></i></a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="fa fa-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><h1><small>class</small> Accelerometer</h1><h4><small>package <a href="../../openfl/sensors/index.html">openfl.sensors</a></small></h4><h4><small>extends <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></small></h4>    <span class="label label-meta label-meta-directlyUsed" title="Marks types that are directly referenced by non-extern code.">@:directlyUsed</span><span class="label label-meta label-meta-fileXml" title="Include a given XML attribute snippet in the `Build.xml` entry for the file.">@:fileXml(&quot;tags=\&quot;haxe,release\&quot;&quot;)</span><span class="label label-meta label-meta-noDebug" title="Does not generate debug information even if `--debug` is set.">@:noDebug</span></div><div class="body"><div class="doc doc-main"><p>The Accelerometer class dispatches events based on activity detected by the
+device's motion sensor. This data represents the device's location or
+movement along a 3-dimensional axis. When the device moves, the sensor
+detects this movement and returns acceleration data. The Accelerometer
+class provides methods to query whether or not accelerometer is supported,
+and also to set the rate at which acceleration events are dispatched.</p>
+<p><strong>Note:</strong> Use the <code><a href="../../openfl/sensors/Accelerometer.html#isSupported">Accelerometer.isSupported</a></code> property to
+test the runtime environment for the ability to use this feature. While the
+Accelerometer class and its members are accessible to the Runtime Versions
+listed for each API entry, the current environment for the runtime
+determines the availability of this feature. For example, you can compile
+code using the Accelerometer class properties for Flash Player 10.1, but
+you need to use the <code><a href="../../openfl/sensors/Accelerometer.html#isSupported">Accelerometer.isSupported</a></code> property to test
+for the availability of the Accelerometer feature in the current deployment
+environment for the Flash Player runtime. If
+<code><a href="../../openfl/sensors/Accelerometer.html#isSupported">Accelerometer.isSupported</a></code> is <code><a href="../../Bool.html">true</a></code> at runtime,
+then Accelerometer support currently exists.</p>
+<p><em>AIR profile support:</em> This feature is supported only on mobile
+devices. It is not supported on desktop or AIR for TV devices. See
+<a href="http://help.adobe.com/en_US/air/build/WS144092a96ffef7cc16ddeea2126bb46b82f-8000.html">AIR Profile Support</a>
+for more information regarding API support across
+multiple profiles.</p><p class="javadoc">Events:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>status</code></th><td><p>Dispatched when an accelerometer changes its status.
+<strong>Note:</strong> On some devices, the accelerometer is always</p>
+<pre><code>		  available. On such devices, an Accelerometer object never
+		  dispatches a `status` event.
+</code></pre></td></tr><tr class="indent"><th style="width:25%;"><code>update</code></th><td><p>The <code>update</code> event is dispatched in response to
+updates from the accelerometer sensor. The event is
+dispatched in the following circumstances:</p><ul><li>When a new listener function is attached through
+<code>addEventListener()</code>, this event is delivered once
+to all the registered listeners for providing the current
+value of the accelerometer.</li><li>Whenever accelerometer updates are obtained from the
+platform at device determined intervals.</li><li>Whenever the application misses a change in the
+accelerometer(for example, the runtime is resuming after
+being idle).</li></ul></td></tr></table></div><h3 class="section">Static variables</h3><div class="fields"><div class="field "><a name="isSupported"></a><h3 class="anchor"><code><span class="label label-static">static</span><span class="label">read only</span><a href="#isSupported"><span class="identifier">isSupported</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>The <code>isSupported</code> property is set to <code><a href="../../Bool.html">true</a></code> if the
+accelerometer sensor is available on the device, otherwise it is set to
+<code><a href="../../Bool.html">false</a></code>.</p></div></div></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><a href="#new"><span class="identifier">new</span></a>()</code></h3><div class="doc"><p>Creates a new Accelerometer instance.</p></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="muted"></a><h3 class="anchor"><code><a href="#muted"><span class="identifier">muted</span></a>:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Specifies whether the user has denied access to the accelerometer
+(<code><a href="../../Bool.html">true</a></code>) or allowed access(<code><a href="../../Bool.html">false</a></code>). When this
+value changes, a <code>status</code> event is dispatched.</p></div></div></div><h3 class="section">Methods</h3><div class="fields"><div class="field "><a name="setRequestedUpdateInterval"></a><h3 class="anchor"><code><a href="#setRequestedUpdateInterval"><span class="identifier">setRequestedUpdateInterval</span></a>(<span style="white-space:nowrap">interval:<a class="type" title="Int - The standard Int type." href="../../Int.html">Int</a></span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>The <code>setRequestedUpdateInterval</code> method is used to set the
+desired time interval for updates. The time interval is measured in
+milliseconds. The update interval is only used as a hint to conserve the
+battery power. The actual time between acceleration updates may be greater
+or lesser than this value. Any change in the update interval affects all
+registered listeners. You can use the Accelerometer class without calling
+the <code>setRequestedUpdateInterval()</code> method. In this case, the
+application receives updates based on the device's default interval.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>interval</code></th><td><p>The requested update interval. If <code>interval</code> is
+set to 0, then the minimum supported update interval is
+used.</p></td></tr></table><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>ArgumentError</code></th><td><p>The specified <code>interval</code> is less than
+zero.</p></td></tr></table></div></div></div>  <div class="inherited-fields well"><h3 class="section">Inherited Variables</h3><div class="fields"><div style="display:none"></div></div><h3 class="section">Inherited Methods</h3><div class="fields"><h4><a href="#" class="expand-button"><i class="fa fa-arrow-circle-o-right"></i></a> Defined by <a class="type" title="openfl.events.EventDispatcher - The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a></h4><div style="display:none"><div class="field "><a name="dispatchEvent"></a><h3 class="anchor"><code><a href="#dispatchEvent"><span class="identifier">dispatchEvent</span></a>(<span style="white-space:nowrap">event:<a class="type" title="openfl.events.Event - The Event class is used as the base class for the creation of Event objects, which are passed as parameters to event listeners when an event occurs." href="../../openfl/events/Event.html">Event</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Dispatches an event into the event flow. The event target is the
+EventDispatcher object upon which the <code>dispatchEvent()</code> method
+is called.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>event</code></th><td><p>The Event object that is dispatched into the event flow. If
+the event is being redispatched, a clone of the event is
+created automatically. After an event is dispatched, its
+<code>target</code> property cannot be changed, so you must
+create a new copy of the event for redispatching to work.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if the event was successfully
+dispatched. A value of <code><a href="../../Bool.html">false</a></code> indicates failure or
+that <code>preventDefault()</code> was called on the event.</p></div><p class="javadoc">Throws:</p><table class="table table-bordered params"><tr class="indent"><th style="width:25%;"><code>Error</code></th><td><p>The event dispatch recursion limit has been reached.</p></td></tr></table></div></div><div class="field "><a name="hasEventListener"></a><h3 class="anchor"><code><a href="#hasEventListener"><span class="identifier">hasEventListener</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether the EventDispatcher object has any listeners registered for
+a specific type of event. This allows you to determine where an
+EventDispatcher object has altered handling of an event type in the event
+flow hierarchy. To determine whether a specific event type actually
+triggers an event listener, use <code>willTrigger()</code>.</p>
+<p>The difference between <code>hasEventListener()</code> and
+<code>willTrigger()</code> is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas
+<code>willTrigger()</code> examines the entire event flow for the event
+specified by the <code>type</code> parameter.</p>
+<p>When <code>hasEventListener()</code> is called from a LoaderInfo
+object, only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+is registered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div><div class="field "><a name="removeEventListener"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value({ useCapture : false })</span><a href="#removeEventListener"><span class="identifier">removeEventListener</span></a>&lt;<span class="type">T</span>&gt;(<span style="white-space:nowrap">type:<a class="type" title="openfl.events.EventType - The EventType abstract type provides type safety when matching dispatch events with the correct type of listener For example, the following code has the wrong type in the event listener, it should be a MouseEvent: addEventListener(MouseEvent." href="../../openfl/events/EventType.html">EventType</a>&lt;<span class="type">T</span>&gt;,</span> <span style="white-space:nowrap">listener:<span class="type">T</span>&nbsp;&#8209;&gt;&nbsp;<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a>,</span> <span style="white-space:nowrap">useCapture:<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a> = false</span>):<a class="type" title="Void - The standard Void type." href="../../Void.html">Void</a></code></h3><div class="doc"><p>Removes a listener from the EventDispatcher object. If there is no
+matching listener registered with the EventDispatcher object, a call to
+this method has no effect.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr><tr><th style="width:25%;"><code>useCapture</code></th><td><p>Specifies whether the listener was registered for the
+capture phase or the target and bubbling phases. If the
+listener was registered for both the capture phase and
+the target and bubbling phases, two calls to
+<code>removeEventListener()</code> are required to
+remove both, one call with <code>useCapture()</code> set
+to <code><a href="../../Bool.html">true</a></code>, and another call with
+<code>useCapture()</code> set to <code><a href="../../Bool.html">false</a></code>.</p></td></tr></table></div></div><div class="field "><a name="toString"></a><h3 class="anchor"><code><a href="#toString"><span class="identifier">toString</span></a>():<a class="type" title="String - The basic String class." href="../../String.html">String</a></code></h3><div class="doc"><p></p></div></div><div class="field "><a name="willTrigger"></a><h3 class="anchor"><code><a href="#willTrigger"><span class="identifier">willTrigger</span></a>(<span style="white-space:nowrap">type:<a class="type" title="String - The basic String class." href="../../String.html">String</a></span>):<a class="type" title="Bool - The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a></code></h3><div class="doc"><p>Checks whether an event listener is registered with this EventDispatcher
+object or any of its ancestors for the specified event type. This method
+returns <code><a href="../../Bool.html">true</a></code> if an event listener is triggered during any
+phase of the event flow when an event of the specified type is dispatched
+to this EventDispatcher object or any of its descendants.</p>
+<p>The difference between the <code>hasEventListener()</code> and the
+<code>willTrigger()</code> methods is that <code>hasEventListener()</code>
+examines only the object to which it belongs, whereas the
+<code>willTrigger()</code> method examines the entire event flow for the
+event specified by the <code>type</code> parameter.</p>
+<p>When <code>willTrigger()</code> is called from a LoaderInfo object,
+only the listeners that the caller can access are considered.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>type</code></th><td><p>The type of event.</p></td></tr></table><p class="javadoc">Returns:</p><div class="indent inline-content"><p>A value of <code><a href="../../Bool.html">true</a></code> if a listener of the specified type
+will be triggered; <code><a href="../../Bool.html">false</a></code> otherwise.</p></div></div></div></div></div></div></div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">&copy; 2021 &nbsp;</p></div></div></footer><script src="../..//highlighter.js"></script><link href="../../highlighter.css" rel="stylesheet"/></body></html>

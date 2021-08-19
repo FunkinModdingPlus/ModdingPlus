@@ -423,17 +423,14 @@ class PlayState extends MusicBeatState
 		interp.variables.set("swapChar", function (charState:String, charTo:String) {
 			switch(charState) {
 				case 'boyfriend':
-					remove(boyfriend);
-					remove(iconP1);
-					remove(camHUD);
-					boyfriend = new Character(770, 450, charTo, true);
+					var sussyBoyfriend = new Character(770, 450, charTo, true);
 					var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
-					camPos.x += boyfriend.camOffsetX;
-					camPos.y += boyfriend.camOffsetY;
-					boyfriend.x += boyfriend.playerOffsetX;
-					boyfriend.y += boyfriend.playerOffsetY;
-					if (boyfriend.likeGf) {
-						boyfriend.setPosition(gf.x, gf.y);
+					camPos.x += sussyBoyfriend.camOffsetX;
+					camPos.y += sussyBoyfriend.camOffsetY;
+					sussyBoyfriend.x += sussyBoyfriend.playerOffsetX;
+					sussyBoyfriend.y += sussyBoyfriend.playerOffsetY;
+					if (sussyBoyfriend.likeGf) {
+						sussyBoyfriend.setPosition(gf.x, gf.y);
 						gf.visible = false;
 						if (isStoryMode)
 						{
@@ -443,28 +440,22 @@ class PlayState extends MusicBeatState
 					} else if (!dad.likeGf) {
 						gf.visible = true;
 					}
-					boyfriend.x += bfoffset[0];
-					boyfriend.y += bfoffset[1];
-					iconP1 = new HealthIcon(charTo, true);
-					iconP1.y = healthBar.y - (iconP1.height / 2);
-					iconP1.cameras = [camHUD];
-	
-					// Layering nonsense
-					add(boyfriend);
-					add(camHUD);
-					add(iconP1);
+					sussyBoyfriend.x += bfoffset[0];
+					sussyBoyfriend.y += bfoffset[1];
+					iconP1.switchAnim(charTo);
+					replace(boyfriend,sussyBoyfriend);
+					boyfriend = sussyBoyfriend;
+					
 				case 'dad':
-					remove(dad);
-					remove(iconP2);
-					remove(camHUD);
-					dad = new Character(100, 100, charTo);
-					var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
-					dad.x += dad.enemyOffsetX;
-					dad.y += dad.enemyOffsetY;
-					camPos.x += dad.camOffsetX;
-					camPos.y += dad.camOffsetY;
-					if (dad.likeGf) {
-						dad.setPosition(gf.x, gf.y);
+					
+					var susdad = new Character(100, 100, charTo);
+					var camPos = new FlxPoint(susdad.getGraphicMidpoint().x, susdad.getGraphicMidpoint().y);
+					susdad.x += susdad.enemyOffsetX;
+					susdad.y += susdad.enemyOffsetY;
+					camPos.x += susdad.camOffsetX;
+					camPos.y += susdad.camOffsetY;
+					if (susdad.likeGf) {
+						susdad.setPosition(gf.x, gf.y);
 						gf.visible = false;
 						if (isStoryMode)
 						{
@@ -474,26 +465,20 @@ class PlayState extends MusicBeatState
 					} else if (!boyfriend.likeGf) {
 						gf.visible = true;
 					}
-					dad.x += dadoffset[0];
-							dad.y += dadoffset[1];
-					iconP2 = new HealthIcon(charTo, false);
-					iconP2.y = healthBar.y - (iconP2.height / 2);
-					iconP2.cameras = [camHUD];
-	
+					susdad.x += dadoffset[0];
+					susdad.y += dadoffset[1];
+					iconP2.switchAnim(charTo);
+					replace(dad, susdad);
+					dad = susdad;
 					// Layering nonsense
-					add(dad);
-					add(camHUD);
-					add(iconP2);
 				case 'gf':
-					remove(gf);
-					remove(camHUD);
-					gf = new Character(400, 130, charTo);
-					gf.scrollFactor.set(0.95, 0.95);
-					gf.x += gfoffset[0];
-					gf.y += gfoffset[1];
-					
-					add(gf);
-					add(camHUD);
+
+					var sussygf = new Character(400, 130, charTo);
+					sussygf.scrollFactor.set(0.95, 0.95);
+					sussygf.x += gfoffset[0];
+					sussygf.y += gfoffset[1];
+					replace(gf, sussygf);
+					gf = sussygf;
 			}
 		});
 
