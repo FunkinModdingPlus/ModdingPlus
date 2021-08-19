@@ -30,7 +30,7 @@ using StringTools;
 class ChooseUiState extends MusicBeatState
 {
     public static var uis:Array<String>;
-    var ui:Ui;
+    var ui:UI;
     var grpAlphabet:FlxTypedGroup<Alphabet>;
 
     var curSelected:Int = 0;
