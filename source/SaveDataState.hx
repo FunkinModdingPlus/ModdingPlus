@@ -98,6 +98,7 @@ class SaveDataState extends MusicBeatState
 							{name: "Credits", value: false, intName:'credits', desc: "Show the credits!", ignore: true},
 							{name: "Sound Test...", value: false, intName: 'soundtest', desc: "Listen to the soundtrack", ignore: true,},
 							{name: "Controls...", value: false, intName:'controls', desc:"Edit bindings!", ignore: true,},
+							{name: "Hit Sounds", value: false, intName:"hitSounds", desc: "Play a sound when hitting a note"},
 							{name: "Fps Cap", value: false, intName: "fpsCap", desc: "What should the max fps be.", amount: 60, defAmount: 60, max: 240, min: 20, precision: 10,},
 							{name: "Allow Story Mode", value: false, intName:"allowStoryMode", desc: "Show story mode from the main menu."},
 							{name: "Allow Freeplay", value: false, intName:"allowFreeplay", desc: "Show freeplay from the main menu."},
