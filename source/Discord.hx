@@ -9,10 +9,13 @@ class DiscordClient
 {
 	public function new()
 	{
+		var richPresenceShit:Array<String> = FNFAssets.getText('assets/data/rich_presence.txt').split('\n');
+		var presenceName:String = richPresenceShit[0];
+		var presenceId:String = richPresenceShit[1];
         #if cpp
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: FNFAssets.getText('assets/data/rich_presence_id.txt'),
+			clientID: presenceId,
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
@@ -44,7 +47,7 @@ class DiscordClient
 			details: "In the Menus",
 			state: null,
 			largeImageKey: 'icon',
-			largeImageText: FNFAssets.getText('assets/data/rich_presence_name.txt')
+			largeImageText: presenceName
 		});
         #end
 	}
@@ -84,7 +87,7 @@ class DiscordClient
 			smallImageKey = "icon";
 		}
 		if (smallImageString == null) {
-			smallImageString = 	FNFAssets.getText('assets/data/rich_presence_name.txt');
+			smallImageString = presenceName;
 		}
 		DiscordRpc.presence({
 			details: details,
