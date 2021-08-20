@@ -26,6 +26,5 @@
     "allowStoryMode": true,
     "allowFreeplay": true,
     "allowDonate": true,
-    "fpsCap": 60,
-    "hitSounds": false
+    "fpsCap": 60
 }
