@@ -47,7 +47,7 @@ class DiscordClient
 			details: "In the Menus",
 			state: null,
 			largeImageKey: 'icon',
-			largeImageText: presenceName[0]
+			largeImageText: presenceName
 		});
         #end
 	}
@@ -87,7 +87,7 @@ class DiscordClient
 			smallImageKey = "icon";
 		}
 		if (smallImageString == null) {
-			smallImageString = presenceName[0];
+			smallImageString = presenceName;
 		}
 		DiscordRpc.presence({
 			details: details,
