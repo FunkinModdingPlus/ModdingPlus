@@ -1084,9 +1084,8 @@ class ChartingState extends MusicBeatState
 			}
 		 */
 
-		var yummyPng = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/normal/NOTE_assets.png');
-		var yummyXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/normal/NOTE_assets.xml');
-		PlayState.SONG.uiType = 'normal';
+		var yummyPng = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' && PlayState.SONG.uiType && '/NOTE_assets.png');
+		var yummyXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' && PlayState.SONG.uiType && '/NOTE_assets.xml');
 		for (i in sectionInfo)
 		{
 			var daNoteInfo = i[1];
