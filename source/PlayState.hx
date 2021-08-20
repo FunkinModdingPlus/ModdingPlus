@@ -676,13 +676,13 @@ class PlayState extends MusicBeatState
 			function playerOneSing()
 			{
 			  if (!ModifierState.oppnt)
-				FlxG.sound.play('assets/sounds/notehit.ogg');
-			};
+				FlxG.sound.play('assets/sounds/notehit.ogg')
+			}
 			function playerTwoSing()
 			{
 			  if (ModifierState.oppnt || ModifierState.duo)
-				FlxG.sound.play('assets/sounds/notehit.ogg');
-			};
+				FlxG.sound.play('assets/sounds/notehit.ogg')
+			}
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
