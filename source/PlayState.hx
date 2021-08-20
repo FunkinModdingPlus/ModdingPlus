@@ -672,6 +672,17 @@ class PlayState extends MusicBeatState
 		} else {
 			controlsPlayerTwo.setKeyboardScheme(Duo(false));
 		}
+		if (OptionsHandler.options.hitSounds)
+			function playerOneSing()
+			{
+			  if (!ModifierState.oppnt)
+				FlxG.sound.play('assets/sounds/notehit.ogg')
+			}
+			function playerTwoSing()
+			{
+			  if (ModifierState.oppnt || ModifierState.duo)
+				FlxG.sound.play('assets/sounds/notehit.ogg')
+			}
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
