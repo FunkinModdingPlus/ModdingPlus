@@ -675,12 +675,12 @@ class PlayState extends MusicBeatState
 		if (OptionsHandler.options.hitSounds)
 			function playerOneSing()
 			{
-			  if (!ModifierState.oppnt)
+			  if (!opponentPlayer)
 				FlxG.sound.play('assets/sounds/notehit.ogg');
 			};
 			function playerTwoSing()
 			{
-			  if (ModifierState.oppnt || ModifierState.duo)
+			  if (opponentPlayer || duoMode)
 				FlxG.sound.play('assets/sounds/notehit.ogg');
 			};
 		if (SONG == null)
