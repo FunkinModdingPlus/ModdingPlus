@@ -8,8 +8,16 @@ class NoteSplash extends FlxSprite {
         if (c == null) c = 0;
         super(xPos,yPos);
 		var curUiType:TUI = Reflect.field(Judgement.uiJson, PlayState.SONG.uiType);
-		frames = DynamicAtlasFrames.fromSparrow('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes.png',
-			'assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes.xml');
+        if (player == 1 || !FNFAssets.exists('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes_enemy.png'))
+            {
+                frames = DynamicAtlasFrames.fromSparrow('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes.png',
+                'assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes.xml');
+            }
+        if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes_enemy.png')
+            {
+                frames = DynamicAtlasFrames.fromSparrow('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes_enemy.png',
+                'assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes_enemy.xml');
+            }
         animation.addByPrefix("note1-0", "note impact 1  blue", 24, false);
 		animation.addByPrefix("note2-0", "note impact 1 green", 24, false);
 		animation.addByPrefix("note0-0", "note impact 1 purple", 24, false);
