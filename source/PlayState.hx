@@ -1481,32 +1481,13 @@ class PlayState extends MusicBeatState
 		var customImage:Null<BitmapData> = null;
 		var customXml:Null<String> = null;
 		var arrowEndsImage:Null<BitmapData> = null;
-		var customImage2:Null<BitmapData> = null;
-		var customXml2:Null<String> = null;
-		var arrowEndsImage2:Null<BitmapData> = null;
 		if (!pixelUI) {
 			trace("has this been reached");
-			if (player == 1 || !FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png"))
-			{
-				customXml2 = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.xml");
-				customImage2 = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.png");
-			}
-			if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png")
-			{
-				customXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.xml");
-				customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png");
-			}
+			customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/NOTE_assets.png');
+			customXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/NOTE_assets.xml');
 		} else {
-			if (player == 1 || !FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png"))
-			{
-				customImage2 = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels.png");
-				arrowEndsImage2 = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrowEnds.png");
-			}
-				if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png")
-			{
-				customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png");
-				arrowEndsImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrowsEnds_enemy.png");
-			}
+			customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/arrows-pixels.png');
+			arrowEndsImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/arrowEnds.png');
 		}
 		
 
