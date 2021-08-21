@@ -57,6 +57,21 @@ class TitleState extends MusicBeatState
 	var name_1:Array<String> = [];
 	var name_2:Array<String> = [];
 	var name_3:Array<String> = [];
+
+	// doing this shit again because it broke in the last build :grief: (start)
+	var curName:Array<String> = [];
+	var curX:Array<Float> = [];
+	var curY:Array<Float> = [];
+	var curFPS:Array<Float> = [];
+	var isPixel:Array<Bool> = [];
+	var shouldScale:Array<Bool> = [];
+	var curScale:Array<Float> = [];
+	// doing this shit again because it broke in the last build :grief: (end)
+
+	// defining these variables now so i dont gotta do them later (start)
+	var gfTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/gfTitle"));
+	// defining these variables now so i dont gotta do them later (end)
+
 	var customMenuConfirm: Array<Array<String>>;
 	var customMenuScroll: Array<Array<String>>;
 	override public function create():Void
@@ -158,12 +173,14 @@ class TitleState extends MusicBeatState
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
 
-		
-		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
+		gfDance = new FlxSprite(gfTitle.curX, gfTitle.curY);
 		gfDance.frames = FlxAtlasFrames.fromSparrow('assets/images/gfDanceTitle.png', 'assets/images/gfDanceTitle.xml');
-		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-		gfDance.antialiasing = true;
+		gfDance.animation.addByIndices('danceLeft', gfTitle.curName, [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", gfTitle.curFPS, false);
+		gfDance.animation.addByIndices('danceRight', gfTitle.curName, [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", gfTitle.curFPS, false);
+		gfDance.antialiasing = !gfTitle.isPixel;
+		if (gfTitle.shouldScale == true){
+			gfDance.setGraphicSize(Std.int(gfDance.width * gfTitle.curScale));
+		}
 		add(gfDance);
 		add(logoBl);
 
