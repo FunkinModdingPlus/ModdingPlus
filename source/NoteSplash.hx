@@ -13,7 +13,7 @@ class NoteSplash extends FlxSprite {
                 frames = DynamicAtlasFrames.fromSparrow('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes.png',
                 'assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes.xml');
             }
-        if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes_enemy.png'))
+        if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes_enemy.png')
             {
                 frames = DynamicAtlasFrames.fromSparrow('assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes_enemy.png',
                 'assets/images/custom_ui/ui_packs/${curUiType.uses}/noteSplashes_enemy.xml');
