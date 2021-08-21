@@ -12,8 +12,15 @@
     // what to scale it by, only works if shouldScale is true (float, converted to int, rounded by 0)
     "curScale": 1,
     // if it should have anti-aliasing (bool)
-    "isPixel": false
+    "isPixel": false,
     // by the way, the values are flipped for isPixel
     // so if you set it to true, it would turn off anti-aliasing
     // if you set it to false, it would turn on anti-aliasing
+    
+    // what animation type it is (string)
+    // so, let me explain this one:
+    // if you set it to "gfIdle", it plays like a regular gf idle animation
+    // if you set it to "bfIdle", it plays like a regular bf idle animation
+    // if you set it to "loopIdle", it plays like a regular bf idle animation, but looped
+    "animationType": "gfIdle"
 }
