@@ -1483,27 +1483,11 @@ class PlayState extends MusicBeatState
 		var arrowEndsImage:Null<BitmapData> = null;
 		if (!pixelUI) {
 			trace("has this been reached");
-			if (player == 1 || !FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png"))
-				{
-				customXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.xml");
-				customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.png");
-				}
-			if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png")
-				{
-				customXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.xml");
-				customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png");
-				}
+			customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/NOTE_assets.png');
+			customXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/NOTE_assets.xml');
 		} else {
-			if (player == 1 || !FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png"))
-				{
-					customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels.png");
-					arrowEndsImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrowEnds.png");
-				}
-				if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png")
-					{
-					customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png");
-					arrowEndsImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrowsEnds_enemy.png");
-					}
+			customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/arrows-pixels.png');
+			arrowEndsImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses+'/arrowEnds.png');
 		}
 		
 
@@ -1712,17 +1696,8 @@ class PlayState extends MusicBeatState
 			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
 			if (!uiSmelly.isPixel)
 			{
-				if (player == 1 || !FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png"))
-					{
-					noteXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.xml");
-					notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.png");
-					}
-				if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png")
-					{
-					noteXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.xml");
-					notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png");
-					}
-
+				var noteXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.xml");
+				var notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.png");
 				babyArrow.frames = FlxAtlasFrames.fromSparrow(notePic, noteXml);
 				babyArrow.animation.addByPrefix('green', 'arrowUP');
 				babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
@@ -1788,14 +1763,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				if (player == 1 || !FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png"))
-					{
-					var notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels.png");
-					}
-				if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png")
-					{
-					notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png");
-					}
+				var notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels.png");
 				babyArrow.loadGraphic(notePic, true, 17, 17);
 				babyArrow.animation.add('green', [6]);
 				babyArrow.animation.add('red', [7]);
