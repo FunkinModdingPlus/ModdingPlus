@@ -66,6 +66,7 @@ class TitleState extends MusicBeatState
 	var isPixel:Array<Bool> = [];
 	var shouldScale:Array<Bool> = [];
 	var curScale:Array<Float> = [];
+	var animationType:Array<String> = [];
 	// doing this shit again because it broke in the last build :grief: (end)
 
 	// defining these variables now so i dont gotta do them later (start)
@@ -175,8 +176,16 @@ class TitleState extends MusicBeatState
 
 		gfDance = new FlxSprite(gfTitle.curX, gfTitle.curY);
 		gfDance.frames = FlxAtlasFrames.fromSparrow('assets/images/gfDanceTitle.png', 'assets/images/gfDanceTitle.xml');
-		gfDance.animation.addByIndices('danceLeft', gfTitle.curName, [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", gfTitle.curFPS, false);
-		gfDance.animation.addByIndices('danceRight', gfTitle.curName, [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", gfTitle.curFPS, false);
+		if (gfTitle.animationType == "gfIdle"){
+			gfDance.animation.addByIndices('danceLeft', gfTitle.curName, [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", gfTitle.curFPS, false);
+			gfDance.animation.addByIndices('danceRight', gfTitle.curName, [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", gfTitle.curFPS, false);
+		}
+		if (gfTitle.animationType == "bfIdle"){
+			gfDance.animation.addByPrefix('dance', gfTitle.curName, gfTitle.curFPS, false);
+		}
+		if (gfTitle.animationType == "loopIdle"){
+			gfDance.animation.addByPrefix('loopyFunny', gfTitle.curName, gfTitle.curFPS, true);
+		}
 		gfDance.antialiasing = !gfTitle.isPixel;
 		if (gfTitle.shouldScale == true){
 			gfDance.setGraphicSize(Std.int(gfDance.width * gfTitle.curScale));
@@ -347,10 +356,20 @@ class TitleState extends MusicBeatState
 		logoBl.animation.play('bump');
 		danceLeft = !danceLeft;
 
-		if (danceLeft)
-			gfDance.animation.play('danceRight');
-		else
-			gfDance.animation.play('danceLeft');
+		if (gfTitle.animationType == "gfIdle"){
+			if (danceLeft){
+				gfDance.animation.play('danceRight');
+			}
+			else{
+				gfDance.animation.play('danceLeft');
+			}
+		}
+		if (gfTitle.animationType == "bfIdle"){
+			gfDance.animation.play('dance');
+		}
+		if (gfTitle.animationType == "loopIdle"){
+			gfDance.animation.play('loopyFunny');
+		}
 
 		FlxG.log.add(curBeat);
 
