@@ -1,0 +1,12 @@
+{
+    // animation name of the shit (string)
+    "curName": "logo bumpin",
+    // x offset (float)
+    "curX": -150,
+    // y offset (float)
+    "curY": -100,
+    // animation fps (float)
+    "curFPS": 24,
+    // is pixel, blah blah blah, true = false and false = true (boolean)
+    "isPixel": false
+}

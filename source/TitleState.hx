@@ -71,6 +71,7 @@ class TitleState extends MusicBeatState
 
 	// defining these variables now so i dont gotta do them later (start)
 	var gfTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/gfTitle"));
+	var logoTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/logoTitle"));
 	// defining these variables now so i dont gotta do them later (end)
 
 	var customMenuConfirm: Array<Array<String>>;
@@ -165,10 +166,10 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
-		logoBl = new FlxSprite(-150, -100);
+		logoBl = new FlxSprite(logoTitle.curX, logoTitle.curY);
 		logoBl.frames = FlxAtlasFrames.fromSparrow('assets/images/logoBumpin.png', 'assets/images/logoBumpin.xml');
-		logoBl.antialiasing = true;
-		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
+		logoBl.antialiasing = !logoTitle.isPixel;
+		logoBl.animation.addByPrefix('bump', logoTitle.curName, logoTitle.curFPS);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
 		// logoBl.screenCenter();
