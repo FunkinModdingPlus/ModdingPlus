@@ -394,11 +394,13 @@ class PlayState extends MusicBeatState
 		interp.variables.set("add", add);
 		interp.variables.set("remove", remove);
 		interp.variables.set("insert", insert);
-		interp.variables.set("setDefaultZoom", function(zoom) {defaultCamZoom = zoom;});
+		interp.variables.set("setDefaultZoom", function(zoom:Float){
+			defaultCamZoom = zoom;
+			FlxG.camera.zoom = zoom;
+		});
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
 		});
-		
 		interp.variables.set("getHaxeActor", getHaxeActor);
 		interp.variables.set("instancePluginClass", instanceExClass);
 		interp.variables.set("scaleChar", function (char:String, amount:Float) {
