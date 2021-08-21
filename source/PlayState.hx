@@ -1488,7 +1488,7 @@ class PlayState extends MusicBeatState
 				customXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.xml");
 				customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.png");
 				}
-			if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png"))
+			if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png")
 				{
 				customXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.xml");
 				customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png");
@@ -1499,11 +1499,11 @@ class PlayState extends MusicBeatState
 					customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels.png");
 					arrowEndsImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrowEnds.png");
 				}
-				if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png"))
-				{
+				if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png")
+					{
 					customImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png");
 					arrowEndsImage = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrowsEnds_enemy.png");
-				}
+					}
 		}
 		
 
@@ -1717,7 +1717,7 @@ class PlayState extends MusicBeatState
 					noteXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.xml");
 					notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets.png");
 					}
-				if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png"))
+				if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png")
 					{
 					noteXml = FNFAssets.getText('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.xml");
 					notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/NOTE_assets_enemy.png");
@@ -1792,7 +1792,7 @@ class PlayState extends MusicBeatState
 					{
 					var notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels.png");
 					}
-				if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png"))
+				if (player == 0 && FNFAssets.exists('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png")
 					{
 					notePic = FNFAssets.getBitmapData('assets/images/custom_ui/ui_packs/' + uiSmelly.uses + "/arrows-pixels_enemy.png");
 					}
