@@ -90,7 +90,7 @@ class DiscordClient
         #if cpp
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: PlayState.getFile("assets/data/discordShit", "json").curID,
+			clientID: CoolUtil.parseJson(FNFAssets.getJson("assets/data/discordShit")).curID,
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
@@ -122,7 +122,7 @@ class DiscordClient
 			details: "In the Menus",
 			state: null,
 			largeImageKey: 'icon',
-			largeImageText: PlayState.getFile("assets/data/discordShit", "json").curName;
+			largeImageText: CoolUtil.parseJson(FNFAssets.getJson("assets/data/discordShit")).curName;
 		});
         #end
 	}
@@ -162,7 +162,7 @@ class DiscordClient
 			smallImageKey = "icon";
 		}
 		if (smallImageString == null) {
-			smallImageString = 	PlayState.getFile("assets/data/discordShit", "json").curName;
+			smallImageString = 	CoolUtil.parseJson(FNFAssets.getJson("assets/data/discordShit")).curName;
 		}
 		DiscordRpc.presence({
 			details: details,
