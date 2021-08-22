@@ -103,7 +103,6 @@ class OptionsHandler {
             lastOptions.allowFreeplay = true;
             lastOptions.allowDonate = false;
             lastOptions.hitSounds = false;
-            lastOptions.hitSounds = true;
             lastOptions.fpsCap = 60;
 
         }
