@@ -4081,7 +4081,7 @@ class PlayState extends MusicBeatState
 		setAllHaxeVar('curBeat', curBeat);
 		callAllHScript('beatHit', [curBeat]);
 	}
-	public static function updatePrecence() {
+	function updatePrecence() {
 		#if windows
 		// Updating Discord Rich Presence.
 		DiscordClient.changePresence(customPrecence
