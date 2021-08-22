@@ -3,16 +3,94 @@ package;
 import Sys.sleep;
 import discord_rpc.DiscordRpc;
 #end
+import openfl.Lib;
+import flixel.util.typeLimit.OneOfTwo;
+import Character.EpicLevel;
+import FNFAssets.HScriptAssets;
+import flixel.ui.FlxButton.FlxTypedButton;
+import Section.SwagSection;
+import Song.SwagSong;
+import WiggleEffect.WiggleEffectType;
+import flixel.FlxBasic;
+import flixel.FlxCamera;
+import flixel.FlxG;
+import openfl.geom.Matrix;
+import flixel.FlxGame;
+import flixel.FlxObject;
+#if desktop
+import Sys;
+import sys.FileSystem;
+#end
+#if cpp
+import Discord.DiscordClient;
+#end
+import DifficultyIcons;
+import flixel.FlxSprite;
+import flixel.FlxBasic;
+import flixel.FlxState;
+import flixel.FlxSubState;
+import flash.display.BitmapData;
+import flixel.addons.display.FlxGridOverlay;
+import flixel.addons.effects.FlxTrail;
+import flixel.addons.effects.FlxTrailArea;
+import flixel.addons.effects.chainable.FlxEffectSprite;
+import flixel.addons.effects.chainable.FlxWaveEffect;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.graphics.atlas.FlxAtlas;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.math.FlxMath;
+import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
+import flixel.system.FlxSound;
+import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.ui.FlxBar;
+import flixel.util.FlxCollision;
+import flixel.util.FlxColor;
+import flixel.util.FlxSort;
+import flixel.util.FlxStringUtil;
+import flixel.util.FlxTimer;
+import flixel.math.FlxAngle;
+import flixel.math.FlxMath;
+import haxe.Json;
+import lime.utils.Assets;
+import openfl.display.BlendMode;
+import openfl.display.StageQuality;
+import openfl.filters.ShaderFilter;
+import lime.system.System;
+import openfl.media.Sound;
+import flixel.group.FlxGroup;
+import hscript.Interp;
+import hscript.Parser;
+import hscript.ParserEx;
+import hscript.InterpEx;
+import hscript.ClassDeclEx;
+#if sys
+import sys.io.File;
+import sys.FileSystem;
+import haxe.io.Path;
+import openfl.utils.ByteArray;
+import lime.media.AudioBuffer;
+
+#end
+import tjson.TJSON;
+import Judgement.TUI;
+using StringTools;
+using CoolUtil.FlxTools;
 using StringTools;
 
 class DiscordClient
 {
 	public function new()
 	{
+		var curID:Array<String> = [];
+		var curName:Array<String> = [];
         #if cpp
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: FNFAssets.getText('assets/data/rich_presence_id.txt'),
+			clientID: PlayState.getFile("assets/data/discordShit", "json").curID,
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
@@ -44,7 +122,7 @@ class DiscordClient
 			details: "In the Menus",
 			state: null,
 			largeImageKey: 'icon',
-			largeImageText: FNFAssets.getText('assets/data/rich_presence_name.txt')
+			largeImageText: PlayState.getFile("assets/data/discordShit", "json").curName;
 		});
         #end
 	}
@@ -84,7 +162,7 @@ class DiscordClient
 			smallImageKey = "icon";
 		}
 		if (smallImageString == null) {
-			smallImageString = 	FNFAssets.getText('assets/data/rich_presence_name.txt');
+			smallImageString = 	PlayState.getFile("assets/data/discordShit", "json").curName;
 		}
 		DiscordRpc.presence({
 			details: details,
