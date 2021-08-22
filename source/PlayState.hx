@@ -398,6 +398,20 @@ class PlayState extends MusicBeatState
 			defaultCamZoom = zoom;
 			FlxG.camera.zoom = zoom;
 		});
+		interp.variables.set("getFile", function(location:String, fileType:String){
+			if (fileType == "json"){
+				CoolUtil.parseJson(FNFAssets.getJson(location));
+			}
+			if (fileType == "hscript"){
+				CoolUtil.parseJson(FNFAssets.getHscript(location));
+			}
+			if (fileType == "txt"){
+				FNFAssets.getText(location + ".txt");
+			}
+			if (fileType == "bitmap"){
+				FNFAssets.getBitmapData(location + ".png");
+			}
+		});
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
 		});
