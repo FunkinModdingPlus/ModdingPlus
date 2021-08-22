@@ -585,8 +585,20 @@ class PlayState extends MusicBeatState
 		detailsPausedText = "Paused - " + detailsText;
 
 		// Updating Discord Rich Presence.
-		var customPrecence = FNFAssets.getText("assets/discord/presence/play.txt");
-		DiscordClient.changePresence(customPrecence + SONG.song);
+		var customPrecence = FNFAssets.getText("assets/discord/presence/.txt");
+		DiscordClient.changePresence(customPrecence
+			+ " "
+			+ SONG.song
+			+ " ("
+			+ storyDifficultyText
+			+ ") "
+			+ Ratings.GenerateLetterRank(accuracy),
+			"\nAcc: "
+			+ HelperFunctions.truncateFloat(accuracy, 2)
+			+ "% | Score: "
+			+ songScore
+			+ " | Misses: "
+			+ misses, iconRPC);
 		#end
 		
 		// var gameCam:FlxCamera = FlxG.camera;
@@ -1965,7 +1977,8 @@ class PlayState extends MusicBeatState
 			}
 			controls.setKeyboardScheme(Solo(false));
 			#if windows
-			DiscordClient.changePresence("PAUSED on "
+			var ae = FNFAssets.getText("assets/discord/presence/playpause.txt");
+			DiscordClient.changePresence(ae
 				+ SONG.song
 				+ " ("
 				+ storyDifficultyText
@@ -2037,7 +2050,7 @@ class PlayState extends MusicBeatState
 			#if windows
 			if (startTimer.finished)
 			{
-				DiscordClient.changePresence(detailsText
+				DiscordClient.changePresence(customPrecence
 					+ " "
 					+ SONG.song
 					+ " ("
@@ -2055,7 +2068,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				DiscordClient.changePresence(detailsText, SONG.song
+				DiscordClient.changePresence(customPrecence, SONG.song
 					+ " ("
 					+ storyDifficultyText
 					+ ") "
@@ -2548,10 +2561,19 @@ class PlayState extends MusicBeatState
 					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				#if windows
 				// Game Over doesn't get his own variable because it's only used here
-
-				// Updating Discord Rich Presence.
-				var customPrecence = FNFAssets.getText("assets/discord/presence/playdead.txt");
-				DiscordClient.changePresence(customPrecence + SONG.song);
+				DiscordClient.changePresence("GAME OVER -- "
+					+ SONG.song
+					+ " ("
+					+ storyDifficultyText
+					+ ") "
+					+ Ratings.GenerateLetterRank(accuracy),
+					"\nAcc: "
+					+ HelperFunctions.truncateFloat(accuracy, 2)
+					+ "% | Score: "
+					+ songScore
+					+ " | Misses: "
+					+ misses, iconRPC, null, null,
+					playingAsRpc);
 				#end
 
 			}
