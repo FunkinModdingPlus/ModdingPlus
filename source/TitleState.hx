@@ -69,6 +69,9 @@ class TitleState extends MusicBeatState
 		{
 			DiscordClient.shutdown();
 		});
+		// Updating Discord Rich Presence
+		var customPrecence = FNFAssets.getText("assets/discord/presence/intro.txt");
+		Discord.DiscordClient.changePresence(customPrecence, null);
 		#end
 		
 		

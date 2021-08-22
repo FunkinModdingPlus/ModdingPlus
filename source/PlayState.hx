@@ -585,19 +585,8 @@ class PlayState extends MusicBeatState
 		detailsPausedText = "Paused - " + detailsText;
 
 		// Updating Discord Rich Presence.
-		DiscordClient.changePresence(detailsText
-			+ " "
-			+ SONG.song
-			+ " ("
-			+ storyDifficultyText
-			+ ") "
-			+ Ratings.GenerateLetterRank(accuracy),
-			"\nAcc: "
-			+ HelperFunctions.truncateFloat(accuracy, 2)
-			+ "% | Score: "
-			+ songScore
-			+ " | Misses: "
-			+ misses, iconRPC);
+		var customPrecence = FNFAssets.getText("assets/discord/presence/play.txt");
+		DiscordClient.changePresence(customPrecence + SONG.song);
 		#end
 		
 		// var gameCam:FlxCamera = FlxG.camera;
@@ -2559,19 +2548,10 @@ class PlayState extends MusicBeatState
 					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				#if windows
 				// Game Over doesn't get his own variable because it's only used here
-				DiscordClient.changePresence("GAME OVER -- "
-					+ SONG.song
-					+ " ("
-					+ storyDifficultyText
-					+ ") "
-					+ Ratings.GenerateLetterRank(accuracy),
-					"\nAcc: "
-					+ HelperFunctions.truncateFloat(accuracy, 2)
-					+ "% | Score: "
-					+ songScore
-					+ " | Misses: "
-					+ misses, iconRPC, null, null,
-					playingAsRpc);
+
+				// Updating Discord Rich Presence.
+				var customPrecence = FNFAssets.getText("assets/discord/presence/playdead.txt");
+				DiscordClient.changePresence(customPrecence + SONG.song);
 				#end
 
 			}
