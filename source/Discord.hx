@@ -12,7 +12,7 @@ class DiscordClient
         #if cpp
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: FNFAssets.getText('assets/data/rich_presence.txt'),
+			clientID: 840632338949210114,
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
