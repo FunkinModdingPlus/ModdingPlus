@@ -168,7 +168,9 @@ class TitleState extends MusicBeatState
 		titleBg.animation.addByPrefix('thefunny', bgTitle.curName, bgTitle.curFPS, true);
 		titleBg.animation.play('thefunny');
 
-		add(titleBg);
+		if (OptionsHandler.options.titleToggle){
+			add(titleBg);
+		}
 
 		logoBl = new FlxSprite(logoTitle.curX, logoTitle.curY);
 		logoBl.frames = FlxAtlasFrames.fromSparrow('assets/images/logoBumpin.png', 'assets/images/logoBumpin.xml');

@@ -104,6 +104,7 @@ class SaveDataState extends MusicBeatState
 							{name: "Allow Freeplay", value: false, intName:"allowFreeplay", desc: "Show freeplay from the main menu."},
 							{name: "Allow Donate Button", value: false, intName:"allowDonate", desc: "Show the donate button from the main menu."},
 							#if sys
+							{name: "Toggle Title Background", value: true, intName:'titleToggle', desc:"Turn on/off the title screen background.", ignore: true,},
 							{name:"New Character...", value: false, intName:'newchar', desc: "Make a new character!", ignore: true,},
 							{name:"New Stage...", value:false, intName:'newstage', desc: "Make a new stage!", ignore: true, },
 							{name: "New Song...", value: false, intName:'newsong', desc: "Make a new song!", ignore: true, },
