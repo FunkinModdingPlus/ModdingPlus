@@ -72,6 +72,7 @@ class TitleState extends MusicBeatState
 	// defining these variables now so i dont gotta do them later (start)
 	var gfTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/gfTitle"));
 	var logoTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/logoTitle"));
+	var bgTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/bgTitle"));
 	// defining these variables now so i dont gotta do them later (end)
 
 	var customMenuConfirm: Array<Array<String>>;
@@ -130,6 +131,7 @@ class TitleState extends MusicBeatState
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
+	var titleBg:FlxSprite;
 	function startIntro()
 	{
 		if (!initialized)
@@ -163,11 +165,15 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(102);
 		persistentUpdate = true;
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		// bg.antialiasing = true;
-		// bg.setGraphicSize(Std.int(bg.width * 0.6));
-		// bg.updateHitbox();
-		add(bg);
+		titleBg = new FlxSprite();
+		titleBg.frames = FlxAtlasFrames.fromSparrow('assets/images/titleBG.png', 'assets/images/titleBG.xml');
+		titleBg.antialiasing = !bgTitle.isPixel;
+		titleBg.animation.addByPrefix('thefunny', bgTitle.curName, bgTitle.curFPS, true);
+		titleBg.animation.play('thefunny');
+
+		if (OptionsHandler.options.titleToggle){
+			add(titleBg);
+		}
 
 		logoBl = new FlxSprite(logoTitle.curX, logoTitle.curY);
 		logoBl.frames = FlxAtlasFrames.fromSparrow('assets/images/logoBumpin.png', 'assets/images/logoBumpin.xml');
@@ -302,6 +308,8 @@ class TitleState extends MusicBeatState
 		{
 
 			titleText.animation.play('press');
+			titleBg.animation.addByPrefix('selected', bgTitle.curName + " selected", bgTitle.curFPS, false);
+			titleBg.animation.play('selected');
 
 			FlxG.camera.flash(FlxColor.WHITE, 1);
 			FlxG.sound.play('assets/sounds/custom_menu_sounds/'
@@ -396,9 +404,9 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
 				case 5:
-					createCoolText(['In association', 'with']);
+					createCoolText(['Not in association', 'with']);
 				case 7:
-					addMoreText('newgrounds');
+					addMoreText('these guys');
 					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 8:
