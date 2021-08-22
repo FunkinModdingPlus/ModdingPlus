@@ -12,7 +12,7 @@ class DiscordClient
         #if cpp
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: FNFAssets.getText('assets/data/rich_presence_id.txt'),
+			clientID: FNFAssets.getText('assets/data/rich_presence.txt'),
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
@@ -44,7 +44,7 @@ class DiscordClient
 			details: "In the Menus",
 			state: null,
 			largeImageKey: 'icon',
-			largeImageText: FNFAssets.getText('assets/data/rich_presence_name.txt')
+			largeImageText: "Friday Night Funkin' Modding Plus"
 		});
         #end
 	}
@@ -84,7 +84,7 @@ class DiscordClient
 			smallImageKey = "icon";
 		}
 		if (smallImageString == null) {
-			smallImageString = 	FNFAssets.getText('assets/data/rich_presence_name.txt');
+			smallImageString = "Friday Night Funkin' Modding Plus");
 		}
 		DiscordRpc.presence({
 			details: details,
