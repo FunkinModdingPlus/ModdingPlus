@@ -399,11 +399,27 @@ class PlayState extends MusicBeatState
 		interp.variables.set("add", add);
 		interp.variables.set("remove", remove);
 		interp.variables.set("insert", insert);
-		interp.variables.set("setDefaultZoom", function(zoom) {defaultCamZoom = zoom;});
+		interp.variables.set("setDefaultZoom", function(zoom:Float){
+			defaultCamZoom = zoom;
+			FlxG.camera.zoom = zoom;
+		});
+		interp.variables.set("getFile", function(location:String, fileType:String){
+			if (fileType == "json"){
+				CoolUtil.parseJson(FNFAssets.getJson(location));
+			}
+			if (fileType == "hscript"){
+				CoolUtil.parseJson(FNFAssets.getHscript(location));
+			}
+			if (fileType == "txt"){
+				FNFAssets.getText(location + ".txt");
+			}
+			if (fileType == "bitmap"){
+				FNFAssets.getBitmapData(location + ".png");
+			}
+		});
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
 		});
-		
 		interp.variables.set("getHaxeActor", getHaxeActor);
 		interp.variables.set("instancePluginClass", instanceExClass);
 		interp.variables.set("scaleChar", function (char:String, amount:Float) {
@@ -3899,10 +3915,15 @@ class PlayState extends MusicBeatState
 			else
 				health += 0.005 * healthGainMultiplier;
 			*/
+			var goodhit = note.wasGoodHit;
 			if (note.shouldBeSung) {
 				actingOn.sing(note.noteData, false, actingOn.altNum);
 				if (playerOne)
 					callAllHScript("playerOneSing", []);
+					callAllHScript("noteHit", [playerOne, note, goodhit]);
+					if (OptionsHandler.options.hitSounds){
+						FlxG.sound.play(FNFAssets.getSound("assets/sounds/hitSound.ogg"));
+					}
 				else
 					callAllHScript("playerTwoSing", []);
 				var strums = playerOne ? playerStrums : enemyStrums;
