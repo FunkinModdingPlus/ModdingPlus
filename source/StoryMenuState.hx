@@ -507,7 +507,9 @@ class StoryMenuState extends MusicBeatState
 			{
 				FlxG.sound.play('assets/sounds/confirmMenu' + TitleState.soundExt);
 
+				weekCharactersArray.members[curWeek].members[0].animation.play('dadConfirm');
 				weekCharactersArray.members[curWeek].members[1].animation.play('bfConfirm');
+				weekCharactersArray.members[curWeek].members[2].animation.play('gfConfirm');
 				stopspamming = true;
 			}
 			StoryMenuState.storySongPlaylist = weekData[curWeek];
