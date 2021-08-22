@@ -1,0 +1,8 @@
+{
+    // animation name, when enter is pressed it will add " selected", example: animation name is "bg", when selected it uses "bg selected" (string)
+    "curName": "bg",
+    // animation fps (float)
+    "curFPS": 24,
+    // if it should turn off anti aliasing (bool)
+    "isPixel": false
+}

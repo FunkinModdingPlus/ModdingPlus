@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="titleBG.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="bg0000" x="0" y="0" width="1280" height="720"/>
+	<SubTexture name="bg confirm0000" x="1280" y="0" width="1280" height="720"/>
+	<SubTexture name="bg confirm0001" x="2560" y="0" width="1280" height="720"/>
+	<SubTexture name="bg confirm0002" x="3840" y="0" width="1280" height="720"/>
+	<SubTexture name="bg confirm0003" x="5120" y="0" width="1280" height="720"/>
+	<SubTexture name="bg confirm0004" x="6400" y="0" width="1280" height="720"/>
+	<SubTexture name="bg confirm0005" x="0" y="720" width="1280" height="720"/>
+	<SubTexture name="bg confirm0006" x="1280" y="720" width="1280" height="720"/>
+	<SubTexture name="bg confirm0007" x="2560" y="720" width="1280" height="720"/>
+	<SubTexture name="bg confirm0008" x="3840" y="720" width="1280" height="720"/>
+	<SubTexture name="bg confirm0009" x="5120" y="720" width="1280" height="720"/>
+	<SubTexture name="bg confirm0010" x="6400" y="720" width="1280" height="720"/>
+	<SubTexture name="bg confirm0011" x="0" y="1440" width="1280" height="720"/>
+	<SubTexture name="bg confirm0012" x="1280" y="1440" width="1280" height="720"/>
+	<SubTexture name="bg confirm0013" x="2560" y="1440" width="1280" height="720"/>
+	<SubTexture name="bg confirm0014" x="3840" y="1440" width="1280" height="720"/>
+	<SubTexture name="bg confirm0015" x="5120" y="1440" width="1280" height="720"/>
+	<SubTexture name="bg confirm0016" x="6400" y="1440" width="1280" height="720"/>
+	<SubTexture name="bg confirm0017" x="0" y="2160" width="1280" height="720"/>
+	<SubTexture name="bg confirm0018" x="1280" y="2160" width="1280" height="720"/>
+	<SubTexture name="bg confirm0019" x="2560" y="2160" width="1280" height="720"/>
+	<SubTexture name="bg confirm0020" x="3840" y="2160" width="1280" height="720"/>
+	<SubTexture name="bg confirm0021" x="5120" y="2160" width="1280" height="720"/>
+	<SubTexture name="bg confirm0022" x="6400" y="2160" width="1280" height="720"/>
+	<SubTexture name="bg confirm0023" x="0" y="2880" width="1280" height="720"/>
+	<SubTexture name="bg confirm0024" x="1280" y="2880" width="1280" height="720"/>
+	<SubTexture name="bg confirm0025" x="2560" y="2880" width="1280" height="720"/>
+	<SubTexture name="bg confirm0026" x="3840" y="2880" width="1280" height="720"/>
+	<SubTexture name="bg confirm0027" x="5120" y="2880" width="1280" height="720"/>
+	<SubTexture name="bg confirm0028" x="6400" y="2880" width="1280" height="720"/>
+	<SubTexture name="bg confirm0029" x="0" y="3600" width="1280" height="720"/>
+	<SubTexture name="bg confirm0030" x="1280" y="3600" width="1280" height="720"/>
+	<SubTexture name="bg confirm0031" x="2560" y="3600" width="1280" height="720"/>
+	<SubTexture name="bg confirm0032" x="3840" y="3600" width="1280" height="720"/>
+	<SubTexture name="bg confirm0033" x="5120" y="3600" width="1280" height="720"/>
+	<SubTexture name="bg confirm0034" x="6400" y="3600" width="1280" height="720"/>
+	<SubTexture name="bg confirm0035" x="0" y="4320" width="1280" height="720"/>
+	<SubTexture name="bg confirm0036" x="1280" y="4320" width="1280" height="720"/>
+	<SubTexture name="bg confirm0037" x="2560" y="4320" width="1280" height="720"/>
+	<SubTexture name="bg confirm0038" x="3840" y="4320" width="1280" height="720"/>
+	<SubTexture name="bg confirm0039" x="5120" y="4320" width="1280" height="720"/>
+	<SubTexture name="bg confirm0040" x="6400" y="4320" width="1280" height="720"/>
+	<SubTexture name="bg confirm0041" x="0" y="5040" width="1280" height="720"/>
+	<SubTexture name="bg confirm0042" x="1280" y="5040" width="1280" height="720"/>
+	<SubTexture name="bg confirm0043" x="2560" y="5040" width="1280" height="720"/>
+	<SubTexture name="bg confirm0044" x="2560" y="5040" width="1280" height="720"/>
+	<SubTexture name="bg confirm0045" x="0" y="0" width="1280" height="720"/>
+	<SubTexture name="bg confirm0046" x="0" y="0" width="1280" height="720"/>
+	<SubTexture name="bg confirm0047" x="0" y="0" width="1280" height="720"/>
+</TextureAtlas>
