@@ -172,6 +172,9 @@ class TitleState extends MusicBeatState
 		logoBl.animation.addByPrefix('bump', logoTitle.curName, logoTitle.curFPS);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
+		if (!!logoTitle.shouldScale){
+			logoBl.setGraphicSize(Std.int(logoBl.width * logoTitle.curScale));
+		}
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
 

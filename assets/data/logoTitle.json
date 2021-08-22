@@ -8,5 +8,9 @@
     // animation fps (float)
     "curFPS": 24,
     // is pixel, blah blah blah, true = false and false = true (boolean)
-    "isPixel": false
+    "isPixel": false,
+    // scale blah blah blah you know this fuckin shit (bool)
+    "shouldScale": false,
+    // you know what this is (float)
+    "curScale": 1
 }
