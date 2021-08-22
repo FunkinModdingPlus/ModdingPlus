@@ -56,7 +56,8 @@ class MainMenuState extends MusicBeatState
 	{
 		#if windows
 		// Updating Discord Rich Presence
-		Discord.DiscordClient.changePresence("In Menus", null);
+		var customPrecence = FNFAssets.getText("assets/discord/presence/mainmenu.txt");
+		Discord.DiscordClient.changePresence(customPrecence, null);
 		#end
 		menuSoundJson = CoolUtil.parseJson(FNFAssets.getText("assets/sounds/custom_menu_sounds/custom_menu_sounds.json"));
 		scrollSound = menuSoundJson.customMenuScroll;

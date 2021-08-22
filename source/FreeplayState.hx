@@ -146,7 +146,8 @@ class FreeplayState extends MusicBeatState
 		}
 		#if windows
 		// Updating Discord Rich Presence
-		Discord.DiscordClient.changePresence("In the Freeplay Menu", null);
+		var customPrecence = FNFAssets.getText("assets/discord/presence/freeplay.txt");
+		Discord.DiscordClient.changePresence(customPrecence, null);
 		#end
 		var isDebug:Bool = false;
 		charJson = CoolUtil.parseJson(FNFAssets.getJson('assets/images/custom_chars/custom_chars'));
