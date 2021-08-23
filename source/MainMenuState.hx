@@ -43,9 +43,9 @@ class MainMenuState extends MusicBeatState
 	var parsedcustomMenuConfirmJson:Array<Array<String>>;
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	#if !switch
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'donate', 'options'];
+	var optionShit:Array<String> = FNFAssets.getText("assets/data.menuitems.txt").split("\n");
 	#else
-	var optionShit:Array<String> = ['story mode', 'freeplay'];
+	var optionShit:Array<String> = FNFAssets.getText("assets/data.menuitems.txt").split("\n");
 	#end
 	var menuSoundJson:Dynamic;
 	var scrollSound:String;
@@ -116,11 +116,9 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.x = 450;
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
-			FlxTween.tween(menuItem, { x: menuItem.x , y: 60 + (i * 160) }, 2, { ease: FlxEase.quadOut });
 		}
 
 		FlxG.camera.follow(camFollow, null, 0.06);
