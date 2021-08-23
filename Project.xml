@@ -51,6 +51,7 @@
 	<!-- <library name="noPreload"/> -->
 	<assets path="assets/music"/>
 	<assets path="assets/sounds"/>
+	<assets path="assets/discord"/>
 
 	<assets path="CHANGELOG.md"/>
 	<assets path="USER-README.txt"/>
