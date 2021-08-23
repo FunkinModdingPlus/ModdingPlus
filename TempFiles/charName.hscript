@@ -42,3 +42,4 @@ function dance(char) {
     trace(": )");
     char.playAnim('idle');
 }
+trace("done");

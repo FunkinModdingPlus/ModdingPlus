@@ -1,5 +1,4 @@
 
-
 function start(song) {
 
 }
@@ -45,3 +44,4 @@ function playerOneMiss()
 
 function playerOneSing()
 {
+}
