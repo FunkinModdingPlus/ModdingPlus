@@ -1,6 +1,7 @@
 
-function start(song) {
-
+function start(song)
+{
+   setDefaultZoom(1.0);
 }
 
 
@@ -26,7 +27,7 @@ function stepHit(step)
 
 function playerTwoTurn()
 {
-   setDefaultZoom(1.4);
+    tweenCamIn();
 }
 
 function playerTwoMiss()
@@ -39,7 +40,6 @@ function playerTwoSing()
 
 function playerOneTurn()
 {
-   setDefaultZoom(1.0);
 }
 
 function playerOneMiss()
