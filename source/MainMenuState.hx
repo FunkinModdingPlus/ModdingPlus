@@ -43,9 +43,9 @@ class MainMenuState extends MusicBeatState
 	var parsedcustomMenuConfirmJson:Array<Array<String>>;
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	#if !switch
-	var optionShit:Array<String> = FNFAssets.getText("assets/data.menuitems.txt").split("\n");
+	var optionShit:Array<String> = FNFAssets.getText("assets/data/menuitems.txt").split("\n");
 	#else
-	var optionShit:Array<String> = FNFAssets.getText("assets/data.menuitems.txt").split("\n");
+	var optionShit:Array<String> = FNFAssets.getText("assets/data/menuitems.txt").split("\n");
 	#end
 	var menuSoundJson:Dynamic;
 	var scrollSound:String;
