@@ -52,6 +52,7 @@
 	<assets path="assets/music"/>
 	<assets path="assets/sounds"/>
 	<assets path="assets/discord"/>
+	<assets path='TempFiles' rename='Templates' embed='false'/>
 
 	<assets path="CHANGELOG.md"/>
 	<assets path="USER-README.txt"/>
