@@ -34,6 +34,7 @@ typedef VersionJson = {
 	var name_3: String;
 
 }
+
 	
 class MainMenuState extends MusicBeatState
 {
@@ -43,20 +44,21 @@ class MainMenuState extends MusicBeatState
 	var parsedcustomMenuConfirmJson:Array<Array<String>>;
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	#if !switch
-	var optionShit:Array<String> = FNFAssets.getText("assets/data/menuitems.txt").split("\n");
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'donate', 'options'];
 	#else
-	var optionShit:Array<String> = FNFAssets.getText("assets/data/menuitems.txt").split("\n");
+	var optionShit:Array<String> = ['story mode', 'freeplay'];
 	#end
 	var menuSoundJson:Dynamic;
 	var scrollSound:String;
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
+	static var discordStuff = CoolUtil.parseJson(FNFAssets.getJson("assets/discord/presence/discord"));
 	public static var version:String = "";
 	override function create()
 	{
 		#if windows
 		// Updating Discord Rich Presence
-		var customPrecence = FNFAssets.getText("assets/discord/presence/mainmenu.txt");
+		var customPrecence = discordStuff.mainmenu;
 		Discord.DiscordClient.changePresence(customPrecence, null);
 		#end
 		menuSoundJson = CoolUtil.parseJson(FNFAssets.getText("assets/sounds/custom_menu_sounds/custom_menu_sounds.json"));

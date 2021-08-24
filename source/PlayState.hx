@@ -119,6 +119,7 @@ class PlayState extends MusicBeatState
 	public var camFollow:FlxObject;
 	private var player1Icon:String;
 	private var player2Icon:String;
+	static var discordStuff = CoolUtil.parseJson(FNFAssets.getJson("assets/discord/presence/discord"));
 	public static var prevCamFollow:FlxObject;
 	public static var misses:Int = 0;
 	public static var shits:Int = 0;
