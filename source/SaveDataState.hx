@@ -67,6 +67,7 @@ class SaveDataState extends MusicBeatState
 							{name: "Skip Victory Screen", value: false, intName : "skipVictoryScreen", desc: "Skip the victory screen at the end of songs."},
 							{name: "Skip Debug Screen", value: false, intName : "skipDebugScreen", desc: "Skip the warning screen that happens when you enter charting mode."},
 							{name: "Downscroll", value: false, intName: "downscroll", desc: "Put da arrows on the bottom and have em scroll down"},
+							{name: "Disable Cam Instant Zoom", value: true, intName: "camZoomShit", desc: "Sort of a fix to the whole instant camera zoom situation, but it probably also breaks other things in stages. Set to On By Default."},
 							{name: "Don't mute on miss", intName: "dontMuteMiss", value: false, desc: "When missing notes, don't mute vocals"},
 							{name: "Judge", value: false, intName: "judge", desc: "The Judge to use.", amount: cast Judge.Jury.Classic, defAmount: cast Judge.Jury.Classic, max: 10},
 							{name: "Ghost Tapping", value: false, intName: "useCustomInput", desc: "Whether to allow spamming"},
@@ -104,7 +105,7 @@ class SaveDataState extends MusicBeatState
 							{name: "Allow Freeplay", value: false, intName:"allowFreeplay", desc: "Show freeplay from the main menu."},
 							{name: "Allow Donate Button", value: false, intName:"allowDonate", desc: "Show the donate button from the main menu."},
 							#if sys
-							{name: "Toggle Title Background", value: true, intName:'titleToggle', desc:"Turn on/off the title screen background.", ignore: true,},
+							{name: "Toggle Title Background", value: false, intName:'titleToggle', desc:"Turn on/off the title screen background.", ignore: true,},
 							{name:"New Character...", value: false, intName:'newchar', desc: "Make a new character!", ignore: true,},
 							{name:"New Stage...", value:false, intName:'newstage', desc: "Make a new stage!", ignore: true, },
 							{name: "New Song...", value: false, intName:'newsong', desc: "Make a new song!", ignore: true, },
