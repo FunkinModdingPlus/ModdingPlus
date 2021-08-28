@@ -27,5 +27,6 @@
     "allowFreeplay": true,
     "allowDonate": true,
     "fpsCap": 60,
-    "titleToggle": true
+    "titleToggle": false,
+    "camZoomShit": true
 }
