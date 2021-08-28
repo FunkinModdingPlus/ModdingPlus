@@ -401,7 +401,9 @@ class PlayState extends MusicBeatState
 		interp.variables.set("insert", insert);
 		interp.variables.set("setDefaultZoom", function(zoom:Float){
 			defaultCamZoom = zoom;
-			FlxG.camera.zoom = zoom;
+			if (!OptionsHandler.options.camZoomShit){
+				FlxG.camera.zoom = zoom;
+			}
 		});
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
