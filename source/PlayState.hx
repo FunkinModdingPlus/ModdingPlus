@@ -3919,12 +3919,12 @@ class PlayState extends MusicBeatState
 			var goodhit = note.wasGoodHit;
 			if (note.shouldBeSung) {
 				actingOn.sing(note.noteData, false, actingOn.altNum);
+				callAllHScript("noteHit", [playerOne, note, goodhit]);
+				if (OptionsHandler.options.hitSounds){
+					FlxG.sound.play(FNFAssets.getSound("assets/sounds/hitSound.ogg"));
+				}
 				if (playerOne)
 					callAllHScript("playerOneSing", []);
-					callAllHScript("noteHit", [playerOne, note, goodhit]);
-					if (OptionsHandler.options.hitSounds){
-						FlxG.sound.play(FNFAssets.getSound("assets/sounds/hitSound.ogg"));
-					}
 				else
 					callAllHScript("playerTwoSing", []);
 				var strums = playerOne ? playerStrums : enemyStrums;
