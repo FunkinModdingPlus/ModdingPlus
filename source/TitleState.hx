@@ -37,7 +37,11 @@ import Song.SwagSong;
 import tjson.TJSON;
 import flixel.input.keyboard.FlxKey;
 using StringTools;
-
+typedef DiscordJson = {
+	var intro:String;
+	var freeplay:String;
+	var mainmenu:String;
+};
 class TitleState extends MusicBeatState
 {
 	static var initialized:Bool = false;
@@ -73,7 +77,7 @@ class TitleState extends MusicBeatState
 	var gfTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/gfTitle"));
 	var logoTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/logoTitle"));
 	var bgTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/bgTitle"));
-	static var discordStuff = CoolUtil.parseJson(FNFAssets.getJson("assets/discord/presence/discord"));
+	public static var discordStuff:DiscordJson = CoolUtil.parseJson(FNFAssets.getJson("assets/discord/presence/discord"));
 	// defining these variables now so i dont gotta do them later (end)
 
 	var customMenuConfirm: Array<Array<String>>;

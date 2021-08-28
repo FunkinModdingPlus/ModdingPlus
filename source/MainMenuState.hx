@@ -52,13 +52,12 @@ class MainMenuState extends MusicBeatState
 	var scrollSound:String;
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
-	static var discordStuff = CoolUtil.parseJson(FNFAssets.getJson("assets/discord/presence/discord"));
 	public static var version:String = "";
 	override function create()
 	{
 		#if windows
 		// Updating Discord Rich Presence
-		var customPrecence = discordStuff.mainmenu;
+		var customPrecence = TitleState.discordStuff.mainmenu;
 		Discord.DiscordClient.changePresence(customPrecence, null);
 		#end
 		menuSoundJson = CoolUtil.parseJson(FNFAssets.getText("assets/sounds/custom_menu_sounds/custom_menu_sounds.json"));
