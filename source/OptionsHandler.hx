@@ -49,6 +49,7 @@ typedef TOptions = {
     var titleToggle:Bool;
     var fpsCap:Int;
     var ignoreVile:Bool;
+    var camZoomShit:Bool;
 }
 /**
  * OptionsHandler Handles options : )
@@ -103,8 +104,9 @@ class OptionsHandler {
             lastOptions.allowFreeplay = true;
             lastOptions.allowDonate = false;
             lastOptions.hitSounds = false;
-            lastOptions.titleToggle = true;
+            lastOptions.titleToggle = false;
             lastOptions.fpsCap = 60;
+            lastOptions.camZoomShit = true;
 
         }
 		return lastOptions;
