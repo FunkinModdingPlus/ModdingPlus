@@ -20,7 +20,6 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
 import flixel.addons.effects.FlxTrail;
 import plugins.tools.MetroSprite;
-import FNFAssets.HScriptAssets;
 import hscript.InterpEx;
 import hscript.Interp;
 import flixel.FlxG;
@@ -61,7 +60,7 @@ class PluginManager {
 		interp.variables.set("FlxMath", flixel.math.FlxMath);
 		interp.variables.set("TitleState", TitleState);
 		interp.variables.set("makeRangeArray", CoolUtil.numberArray);
-		interp.variables.set("FNFAssets", HScriptAssets);
+		interp.variables.set("FNFAssets", FNFAssets);
 		// : )
 		interp.variables.set("FlxG", HscriptGlobals);
 		interp.variables.set("FlxTimer", flixel.util.FlxTimer);

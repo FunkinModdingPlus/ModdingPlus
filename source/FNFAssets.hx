@@ -17,12 +17,15 @@ import flash.events.Event;
 import openfl.events.IOErrorEvent;
 import haxe.io.Bytes;
 import openfl.utils.AssetType;
-
+using StringTools;
 enum Extensions {
 	None;
 	Json;
 	Hscript;
 }
+/**
+ * Assets reader and writer
+ */
 class FNFAssets {
     public static var _file:FileReference;
     /**
@@ -34,6 +37,8 @@ class FNFAssets {
         #if sys
             // if there a library strip it out..
             // future proofing ftw
+			if (!isInScope(id))
+				throw "Tried to access a file that is out of scope.";
 			var path = Assets.exists(id) ? Assets.getPath(id) : null;
             if (path == null)
                 path = id;
@@ -132,6 +137,8 @@ class FNFAssets {
 		#if sys
 		// if there a library strip it out..
 		// future proofing ftw
+			if (!isInScope(id))
+				throw "Tried to access a file that is out of scope.";
 			var path = Assets.exists(id) ? Assets.getPath(id) : null;
 			if (path == null)
 				path = id;
@@ -162,6 +169,8 @@ class FNFAssets {
 			case Hscript: 
 				return existsAmbig([id], CoolUtil.HSCRIPT_EXT) != '';
 			default: 
+				if (!isInScope(id))
+					return false;
 				#if sys
 				var path = Assets.exists(id) ? Assets.getPath(id) : null;
 				if (path == null)
@@ -175,6 +184,20 @@ class FNFAssets {
 				#end
 		}
     }
+	/**
+	 * Check if a file is in the cwd. Used to prevent sussy bakas from being sussy
+	 * @param id 
+	 */
+	public static function isInScope(id:String) {
+		#if sys
+		if (Assets.exists(id))
+			return true;
+		// If path isn't within cwd return false
+		if (!Path.normalize(FileSystem.absolutePath(id)).contains(Path.normalize(Main.cwd)))
+			return false;
+		#end
+		return true;
+	}
     /**
      * Get bitmap data of a file.
      * @param id Path of file
@@ -183,6 +206,8 @@ class FNFAssets {
      */
     public static function getBitmapData(id:String, ?useCache:Bool=true):BitmapData {
         #if sys
+			if (!isInScope(id))
+				throw "Tried to access a file that is out of scope.";
             // idk if this works lol
 			var path = Assets.exists(id) ? Assets.getPath(id) : null;
             if (path == null)
@@ -206,6 +231,8 @@ class FNFAssets {
      */
     public static function getSound(id:String, ?useCache:Bool=true):Sound {
         #if sys
+			if (!isInScope(id))
+				throw "Tried to access a file that is out of scope.";
 			var path = Assets.exists(id) ? Assets.getPath(id) : null;
             if (path == null)
                 path = id;
@@ -231,6 +258,8 @@ class FNFAssets {
      */
     public static function saveContent(id:String, data:String):Void {
         #if sys
+			if (!isInScope(id))
+				throw "Tried to access a file that is out of scope.";
 			try {
 				File.saveContent(id, data);
 			}	catch(e:Any) {
@@ -249,6 +278,8 @@ class FNFAssets {
 	public static function saveBytes(id:String, data:Bytes)
 	{
 		#if sys
+		if (!isInScope(id))
+			throw "Tried to access a file that is out of scope.";
 		try
 		{
 			File.saveBytes(id, data);
@@ -298,27 +329,5 @@ class FNFAssets {
 		_file.removeEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 		_file = null;
 		FlxG.log.error("Problem saving Level data");
-	}
-}
-
-/**
- * This is what is passed to hscript. This only supports checking files for existance
- * and loading files, no writing. : ) 
- */
-class HScriptAssets {
-	public static function getText(id:String):String {
-		return FNFAssets.getText(id);
-	}
-	public static function getBytes(id:String):Bytes {
-		return FNFAssets.getBytes(id);
-	}
-	public static function exists(id:String):Bool {
-		return FNFAssets.exists(id);
-	}
-	public static function getBitmapData(id:String):BitmapData {
-		return FNFAssets.getBitmapData(id);
-	}
-	public static function getSound(id:String):Sound {
-		return FNFAssets.getSound(id);
 	}
 }

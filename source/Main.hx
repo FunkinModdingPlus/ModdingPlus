@@ -9,6 +9,9 @@ import plugins.ExamplePlugin.ExampleCharPlugin;
 #end
 class Main extends Sprite
 {
+	#if sys
+	public static var cwd:String;
+	#end
 	public function new()
 	{
 		#if typebuild
@@ -17,6 +20,9 @@ class Main extends Sprite
 			ExampleCharPlugin;
 		#end
 		super();
+		#if sys
+		cwd = Sys.getCwd();
+		#end
 		addChild(new FlxGame(0, 0, TitleState, 1, OptionsHandler.options.fpsCap, OptionsHandler.options.fpsCap, true));
 		#if !mobile
 		addChild(new FPS(10, 3, 0xFFFFFF));
