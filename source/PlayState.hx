@@ -3,7 +3,6 @@ package;
 import openfl.Lib;
 import flixel.util.typeLimit.OneOfTwo;
 import Character.EpicLevel;
-import FNFAssets.HScriptAssets;
 import flixel.ui.FlxButton.FlxTypedButton;
 import Section.SwagSection;
 import Song.SwagSong;
