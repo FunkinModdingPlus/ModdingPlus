@@ -91,7 +91,6 @@ enum abstract DisplayLayer(Int) from Int to Int {
 }
 class PlayState extends MusicBeatState
 {
-	public static var customPrecence = FNFAssets.getText("assets/discord/presence/play.txt");
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
