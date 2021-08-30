@@ -3,7 +3,6 @@ package;
 import openfl.Lib;
 import flixel.util.typeLimit.OneOfTwo;
 import Character.EpicLevel;
-import FNFAssets.HScriptAssets;
 import flixel.ui.FlxButton.FlxTypedButton;
 import Section.SwagSection;
 import Song.SwagSong;
@@ -119,7 +118,6 @@ class PlayState extends MusicBeatState
 	public var camFollow:FlxObject;
 	private var player1Icon:String;
 	private var player2Icon:String;
-	static var discordStuff = CoolUtil.parseJson(FNFAssets.getJson("assets/discord/presence/discord"));
 	public static var prevCamFollow:FlxObject;
 	public static var misses:Int = 0;
 	public static var shits:Int = 0;
@@ -403,20 +401,6 @@ class PlayState extends MusicBeatState
 		interp.variables.set("setDefaultZoom", function(zoom:Float){
 			defaultCamZoom = zoom;
 			FlxG.camera.zoom = zoom;
-		});
-		interp.variables.set("getFile", function(location:String, fileType:String){
-			if (fileType == "json"){
-				CoolUtil.parseJson(FNFAssets.getJson(location));
-			}
-			if (fileType == "hscript"){
-				CoolUtil.parseJson(FNFAssets.getHscript(location));
-			}
-			if (fileType == "txt"){
-				FNFAssets.getText(location + ".txt");
-			}
-			if (fileType == "bitmap"){
-				FNFAssets.getBitmapData(location + ".png");
-			}
 		});
 		interp.variables.set("removeSprite", function(sprite) {
 			remove(sprite);
@@ -3919,12 +3903,12 @@ class PlayState extends MusicBeatState
 			var goodhit = note.wasGoodHit;
 			if (note.shouldBeSung) {
 				actingOn.sing(note.noteData, false, actingOn.altNum);
+				callAllHScript("noteHit", [playerOne, note, goodhit]);
+				if (OptionsHandler.options.hitSounds){
+					FlxG.sound.play(FNFAssets.getSound("assets/sounds/hitSound.ogg"));
+				}
 				if (playerOne)
 					callAllHScript("playerOneSing", []);
-					callAllHScript("noteHit", [playerOne, note, goodhit]);
-					if (OptionsHandler.options.hitSounds){
-						FlxG.sound.play(FNFAssets.getSound("assets/sounds/hitSound.ogg"));
-					}
 				else
 					callAllHScript("playerTwoSing", []);
 				var strums = playerOne ? playerStrums : enemyStrums;

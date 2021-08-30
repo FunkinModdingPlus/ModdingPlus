@@ -67,7 +67,6 @@ class FreeplayState extends MusicBeatState
 	var recordPixel:Record;
 	var curOverlay:FlxSprite;
 	var infoPanel:SongInfoPanel;
-	static var discordStuff = CoolUtil.parseJson(FNFAssets.getJson("assets/discord/presence/discord"));
 	override function create()
 	{
 		for (songSnippet in currentSongList) {
@@ -147,7 +146,7 @@ class FreeplayState extends MusicBeatState
 		}
 		#if windows
 		// Updating Discord Rich Presence
-		var customPrecence = discordStuff.freeplay;
+		var customPrecence = TitleState.discordStuff.freeplay;
 		Discord.DiscordClient.changePresence(customPrecence, null);
 		#end
 		var isDebug:Bool = false;

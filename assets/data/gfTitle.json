@@ -2,9 +2,9 @@
     // animation name of the little shit (string)
     "curName": "gfDance",
     // the x offset (float)
-    "curX": 50,
+    "curX": 500,
     // the y offset (float)
-    "curY": 500,
+    "curY": 50,
     // the FPS of the animation (float)
     "curFPS": 24,
     // if it should scale the little shit (boolean)
@@ -16,7 +16,7 @@
     // by the way, the values are flipped for isPixel
     // so if you set it to true, it would turn off anti-aliasing
     // if you set it to false, it would turn on anti-aliasing
-    
+
     // what animation type it is (string)
     // so, let me explain this one:
     // if you set it to "gfIdle", it plays like a regular gf idle animation

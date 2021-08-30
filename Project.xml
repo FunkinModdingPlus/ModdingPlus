@@ -81,7 +81,6 @@
 	<haxelib name="hscript"/>
 	<!-- git https://github.com/ianharrigan/hscript-ex-->
 	<haxelib name="hscript-ex"/>
-	<haxelib name="hxcpp-debug-server"/>
 	<!--haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc -->
 	<haxelib name="discord_rpc"/>
 	<!--haxelib name="actuate" -->
