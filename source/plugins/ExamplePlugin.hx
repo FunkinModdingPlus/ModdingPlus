@@ -156,23 +156,68 @@ class ExamplePlugin {
      * P2's Icon
      */
     public var iconP2:HealthIcon;
+    /**
+     * The current playstate
+     */
     public var currentPlayState:PlayState;
+    /**
+     * The window. Can be moved around. Probably breaks on web : (
+     */
     public var window:Window;
     public function scaleChar(char:String,amount:Float):Void {}
+    /**
+     * Swaps char out for char to. Handles creating it for you. 
+     * @param char 
+     * @param charTo 
+     */
     public function swapChar(char:String, charTo:String):Void {}
+    /**
+     * Called at the start of the song.
+     * @param song Name of the song
+     */
     dynamic public function start(song:String):Void {}
+    /**
+     * Called when a beat is hit
+     * @param beat Current Beat
+     */
     dynamic public function beatHit(beat:Int):Void {}
+    /**
+     * Called every frame
+     * @param elapsed Time since last frame, used for correcting animation. Multiplying a number by this will make the thing "per second".
+     */
     dynamic public function update(elapsed:Float):Void {}
+    /**
+     * Called when a step is hit, which is 1/4 of a beat. 
+     * @param step Current Step
+     */
     dynamic public function stepHit(step:Int):Void {}
+    /**
+     * Called when the section switches to player 2. 
+     */
     dynamic public function playerTwoTurn():Void {}
+    /**
+     * Called when player 2 misses a note. 
+     */
     dynamic public function playerTwoMiss():Void {}
+    /**
+     * Called when player 2 hits a note. 
+     */
     dynamic public function playerTwoSing():Void {}
+    /**
+     * Called when the section switches to player 1.
+     */
     dynamic public function playerOneTurn():Void {}
+    /**
+     * Called when player 1 misses a note.
+     */
     dynamic public function playerOneMiss():Void {}
+    /**
+     * Called when player 1 hits a note
+     */
     dynamic public function playerOneSing():Void {}
     /**
      * Called when a note is hit
-     * @param player1 Whether player 1 hit the note or not
+     * @param player1 Whether player 1 hit the note
      * @param note the note
      * @param goodHit whether the note was hit well
      */
