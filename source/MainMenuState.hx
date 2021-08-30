@@ -8,8 +8,6 @@ import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 import lime.app.Application;
@@ -117,7 +115,14 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
+			menuItem.x = 1280 / 3;
+			menuItem.y += 720 / 2;
+			var screencenter = new FlxObject();
+			screencenter.screenCenter();
+			camFollow.setPosition(screencenter.x, screencenter.y);
+			FlxTween.tween(menuItem, {x: menuItem.x, y: screencenter.y}, 2.0, { ease: FlxEase.quadInOut});
 			menuItems.add(menuItem);
+			menuItem.scrollFactor.set(0.3, 0.3);
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
 		}
