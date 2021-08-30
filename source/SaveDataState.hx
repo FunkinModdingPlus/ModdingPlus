@@ -52,13 +52,16 @@ class SaveDataState extends MusicBeatState
 	var optionsSelected:Int = 0;
 	var checkmarks:FlxTypedSpriteGroup<FlxSprite>;
 	var numberDisplays:Array<NumberDisplay> = [];
+	var sfxJson:Dynamic = CoolUtil.parseJson(FNFAssets.getText("assets/sounds/custom_menu_sounds/custom_menu_sounds.json"));
+	var musicJson:Dynamic = CoolUtil.parseJson(FNFAssets.getText("assets/music/custom_menu_music/custom_menu_music.json"));
 	var preferredSave:Int = 0;
 	var description:FlxText;
+	var forbiddenIndexes:Array<Int> = [];
 	override function create()
 	{
 		FlxG.sound.music.stop();
 		var goodSound = FNFAssets.getSound('assets/music/custom_menu_music/'
-			+ CoolUtil.parseJson(FNFAssets.getText("assets/music/custom_menu_music/custom_menu_music.json")).Options
+			+ musicJson.Options
 			+ '/options'
 			+ TitleState.soundExt);
 		optionMask = CoolUtil.parseJson(FNFAssets.getJson('assets/data/optionsMask'));
@@ -115,6 +118,14 @@ class SaveDataState extends MusicBeatState
 							{name: "Sort...", value: false, intName: 'sort', desc: "Sort some of your current songs/weeks!", ignore : true,}
 							#end
 						];
+		var kidsToKill:Array<TOption> = [];
+		for (option in optionList) {
+			if (Reflect.field(optionMask, option.intName) != null && !Reflect.field(optionMask, option.intName))
+				kidsToKill.push(option);
+		}
+		for (kid in kidsToKill) {
+			optionList.remove(kid);
+		}
 		// amount of things that aren't options
 		var curOptions:TOptions = OptionsHandler.options;
 		for (i in 0...optionList.length) {
@@ -163,9 +174,9 @@ class SaveDataState extends MusicBeatState
 			if (Reflect.field(optionMask, optionList[j].intName) != null && !Reflect.field(optionMask, optionList[j].intName))
 			{
 				// skip display if it is masked out
-				numberDisplays.push(null);
 				continue;
 			}
+			forbiddenIndexes.push(j);
 			trace("l53");
 			var swagOption = new Alphabet(0,0,optionList[j].name,true,false, false);
 			swagOption.isMenuItem = true;
@@ -181,11 +192,11 @@ class SaveDataState extends MusicBeatState
 				switch (cast(Std.int(optionList[j].amount) : Judge.Jury))
 				{
 					case Judge.Jury.Classic:
-						numberDisplays[j].text = "Classic";
+						numDisplay.text = "Classic";
 					case Judge.Jury.Hard:
-						numberDisplays[j].text = "Hard";
+						numDisplay.text = "Hard";
 					default:
-						numberDisplays[j].text = optionList[j].amount + 1 + "";
+						numDisplay.text = optionList[j].amount + 1 + "";
 				}
 			}
 			numDisplay.size = 40;
@@ -298,7 +309,7 @@ class SaveDataState extends MusicBeatState
 				}
 			} else if (!inOptionsMenu) {
 				FlxG.sound.play('assets/sounds/custom_menu_sounds/'
-					+ CoolUtil.parseJson(FNFAssets.getText("assets/sounds/custom_menu_sounds/custom_menu_sounds.json")).customMenuScroll+'/scrollMenu' + TitleState.soundExt);
+					+ sfxJson.customMenuScroll+'/scrollMenu' + TitleState.soundExt);
 				saves.members[curSelected].beSelected(true);
 			} else {
 				switch (optionList[optionsSelected].name) {
