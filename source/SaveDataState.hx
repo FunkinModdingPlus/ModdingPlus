@@ -1,5 +1,6 @@
 package;
 
+import OptionsHandler.FullOptions;
 import haxe.ds.Option;
 import OptionsHandler.TOptions;
 import Controls.Control;
@@ -44,6 +45,7 @@ class SaveDataState extends MusicBeatState
 	var optionMenu:FlxTypedSpriteGroup<FlxSprite>;
 	// this will need to be initialized in title state!!!
 	public static var optionList:Array<TOption>;
+	var optionMask:Mask<FullOptions>;
 	var curSelected:Int = 0;
 	var mappedOptions:Dynamic = {};
 	var inOptionsMenu:Bool = false;
@@ -59,6 +61,7 @@ class SaveDataState extends MusicBeatState
 			+ CoolUtil.parseJson(FNFAssets.getText("assets/music/custom_menu_music/custom_menu_music.json")).Options
 			+ '/options'
 			+ TitleState.soundExt);
+		optionMask = CoolUtil.parseJson(FNFAssets.getJson('assets/data/optionsMask'));
 		FlxG.sound.playMusic(goodSound);
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuDesat.png');
 			optionList = [
@@ -157,6 +160,12 @@ class SaveDataState extends MusicBeatState
 		trace("hmmm");
 		var curNum = 0;
 		for (j in 0...optionList.length) {
+			if (Reflect.field(optionMask, optionList[j].intName) != null && !Reflect.field(optionMask, optionList[j].intName))
+			{
+				// skip display if it is masked out
+				numberDisplays.push(null);
+				continue;
+			}
 			trace("l53");
 			var swagOption = new Alphabet(0,0,optionList[j].name,true,false, false);
 			swagOption.isMenuItem = true;
@@ -181,6 +190,7 @@ class SaveDataState extends MusicBeatState
 			}
 			numDisplay.size = 40;
 			numDisplay.x += numDisplay.width + swagOption.width;
+			
 			checkmarks.add(coolCheckmark);
 			swagOption.add(coolCheckmark);
 			swagOption.add(numDisplay);

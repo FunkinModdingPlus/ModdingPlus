@@ -51,6 +51,18 @@ typedef TOptions = {
     var ignoreVile:Bool;
 }
 /**
+ * All options that can display on the savedatamenu. Used with mask
+ * for some shenanangins : ))
+ */
+typedef FullOptions = {
+    > TOptions,
+    var newChar:Bool;
+    var newstage:Bool;
+    var newsong:Bool;
+    var newweek:Bool;
+    var sort:Bool;
+}
+/**
  * OptionsHandler Handles options : )
  */
 class OptionsHandler {
