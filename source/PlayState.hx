@@ -257,6 +257,8 @@ class PlayState extends MusicBeatState
 	var loveMultiplier:Float = 0;
 	var poisonMultiplier:Float = 0;
 	var goodCombo:Bool = false;
+	public var player1GoodHitSignal:Signal<Note>;
+	public var player2GoodHitSignal:Signal<Note>;
 	private var judgementList:Array<String> = [];
 	private var preferredJudgement:String = '';
 	/**
@@ -669,6 +671,8 @@ class PlayState extends MusicBeatState
 		} else {
 			ModifierState.scoreMultiplier = 1;
 		}
+		player1GoodHitSignal = new Signal<Note>();
+		player2GoodHitSignal = new Signal<Note>();
 		// rebind always, to support djkf
 		if (!opponentPlayer && !duoMode) {
 			controls.setKeyboardScheme(Solo(false));
@@ -3900,10 +3904,10 @@ class PlayState extends MusicBeatState
 			else
 				health += 0.005 * healthGainMultiplier;
 			*/
-			var goodhit = note.wasGoodHit;
 			if (note.shouldBeSung) {
 				actingOn.sing(note.noteData, false, actingOn.altNum);
-				callAllHScript("noteHit", [playerOne, note, goodhit]);
+				// callAllHScript("noteHit", [playerOne, note, goodhit]);
+				
 				if (OptionsHandler.options.hitSounds){
 					FlxG.sound.play(FNFAssets.getSound("assets/sounds/hitSound.ogg"));
 				}
@@ -3927,12 +3931,15 @@ class PlayState extends MusicBeatState
 			note.wasGoodHit = true;
 			var goodhit = note.wasGoodHit;
 			vocals.volume = 1;
-
+			if (playerOne)
+				player1GoodHitSignal.trigger(note);
+			else
+				player2GoodHitSignal.trigger(note);
+			callAllHScript("noteHit", [playerOne, note, goodhit]);
 			note.kill();
 			notes.remove(note, true);
 			note.destroy();
-
-			callAllHScript("noteHit", [playerOne, note, goodhit]);
+			
 			
 				
 			
