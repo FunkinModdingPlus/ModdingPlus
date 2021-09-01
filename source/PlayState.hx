@@ -1907,6 +1907,8 @@ class PlayState extends MusicBeatState
 			case 'boyfriend':
 			    remove(boyfriend);
 				remove(iconP1);
+				add(boyfriend);
+				add(iconP1);
 				boyfriend = new Character(770, 450, charTo, true);
 				var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 				camPos.x += boyfriend.camOffsetX;
@@ -1931,11 +1933,11 @@ class PlayState extends MusicBeatState
 				iconP1.cameras = [camHUD];
 
 				// Layering nonsense
-				add(boyfriend);
-				add(iconP1);
 			case 'dad':
 				remove(dad);
 				remove(iconP2);
+				add(dad);
+				add(iconP2);
 				dad = new Character(100, 100, charTo);
 				var camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 				dad.x += dad.enemyOffsetX;
@@ -1960,17 +1962,15 @@ class PlayState extends MusicBeatState
 				iconP2.cameras = [camHUD];
 
 				// Layering nonsense
-				add(dad);
-				add(iconP2);
 			case 'gf':
 				remove(gf);
+				add(gf);
 				gf = new Character(400, 130, charTo);
 				gf.scrollFactor.set(0.95, 0.95);
 				gf.x += gfoffset[0];
 				gf.y += gfoffset[1];
 
 				// Layering nonsense
-				add(gf);
 
 		}
     }
