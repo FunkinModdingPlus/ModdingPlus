@@ -1,0 +1,93 @@
+var yourstagelayer;
+function start(song) {
+    // if you want your stage layer to do cool things with cursteps or functions delete the "var" before the name of your stage layer and put it above just like you see there.
+    var yourstagelayer = new FlxSprite(x, y).loadGraphic(hscriptPath + 'YOURIMAGE.png');
+    yourstagelayer.antialiasing = true;
+    //if you want your stagelayer to eppear on top of the arrows and healthbar
+    yourstagelayer.cameras = [camHUD];
+    //if you want to change the proportions of the sprite
+    yourstagelayer.scale.set(x, y);
+    //if you want to change how your stage interacts with the camera angle
+    //this makes that if the camera points somewhere the stagelayer will move with the sumbers you gave the scrollfactor
+    yourstagelayer.scrollFactor.set(x, y);
+    //this value affects the object visibility, if you set it lower than 1 you will start to see thrue the sprite 
+    yourstagelayer.alpha = 0;
+    //this makes your stage layer not visible if you set it to false
+    yourstagelayer.visible = false or true;
+    //if you want your stage layer to appear on top of the character replace the BEHIND_ALL with BEHIND_NONE
+    addSprite(yourstagelayer, BEHIND_ALL);
+    var youranimatedstage = new FlxSprite(x, y);
+    //its important that if you want an animated background you have to put the xml as well
+    youranimatedstage.frames = FlxAtlasFrames.fromSparrow(hscriptPath + 'YOURIMAGE.png', hscriptPath + 'YOURIMAGE.xml');
+    //you can name the idle animation whatever you want but it has to be the same one as the .animation.play
+    youranimatedstage.animation.addByPrefix('idle', 'YOURANiMATIONFRAMES', 24);
+    //you can add as many anims as you want, but this will only be played if they are triggered by a curstep, beat hit, haxeactor etc
+    youranimatedstage.animation.addByPrefix('YOURANIMATION', 'YOURANIMATIONFRAMES1', 24);
+    youranimatedstage.animation.play('idle');
+    youranimatedstage.antialiasing = true;
+    addSprite(youranimatedstage, BEHIND_ALL);
+    setDefaultZoom(zoom);
+    //with this you can set your character position
+    dad.x += 0;
+    dad.y += 0;
+    boyfriend.x += 0;
+    boyfriend.y += 0;
+    gf.x += 0;
+    gf.y += 0;
+}
+
+
+function beatHit(beat)
+{
+
+}
+
+function update(elapsed)
+{
+    //if you want your sprite to appear or dissapear
+    if (curStep == yourcurstep)
+        //makes it appear
+		yourstagelayer.alpha = 1;
+   if (curStep == yourcurstep)
+        //makes it dissapear
+		yourstagelayer.alpha = 0; 
+    if (curStep == yourcurstep)
+        //makes it appear
+		yourstagelayer.visible = true;
+   if (curStep == yourcurstep)
+        //makes it dissapear
+		yourstagelayer.visible = false;    
+     if (curStep == yourcurstep)
+        //this code makes an animation of a certain stagelayer play instead of the idle
+		youranimatedstage.animation.play('YOURANIMATION');
+}
+
+
+function stepHit(step)
+{
+}
+
+function playerTwoTurn()
+{
+}
+
+function playerTwoMiss()
+{
+}
+
+function playerTwoSing()
+{
+}
+
+function playerOneTurn()
+{
+}
+
+function playerOneMiss()
+{
+}
+
+function playerOneSing()
+{
+}
+
