@@ -45,6 +45,7 @@
 	<assets path="VERSION" />
 	<assets path='example_mods' rename='mods' embed='false'/>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
+	<assets path='warning.txt' rename='WARNING NOTICE.txt' />
 	<!-- <template path='mods' /> -->
 
 	<!-- <library name="noPreload" preload='false'/> -->
