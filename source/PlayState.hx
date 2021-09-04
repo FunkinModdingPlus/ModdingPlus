@@ -1,6 +1,8 @@
 package;
 
+#if web
 import js.lib.intl.RelativeTimeFormat.RelativeTimeUnit;
+#end
 import openfl.Lib;
 import flixel.util.typeLimit.OneOfTwo;
 import Character.EpicLevel;
