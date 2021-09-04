@@ -1,5 +1,6 @@
 package;
 
+import js.lib.intl.RelativeTimeFormat.RelativeTimeUnit;
 import openfl.Lib;
 import flixel.util.typeLimit.OneOfTwo;
 import Character.EpicLevel;
@@ -187,7 +188,6 @@ class PlayState extends MusicBeatState
 	public var doof:DialogueBox;
 
 
-	var wiggleShit:WiggleEffect = new WiggleEffect();
 
 	var talking:Bool = true;
 	var songScore:Int = 0;
@@ -345,6 +345,9 @@ class PlayState extends MusicBeatState
 		interp.variables.set("mustHit", false);
 		interp.variables.set("strumLineY", strumLine.y);
 		interp.variables.set("hscriptPath", path);
+		interp.variables.set("startShader", function (shader:String) { 
+			return (new ShaderHandler(shader)); // wigglestuff
+		});
 		interp.variables.set("boyfriend", boyfriend);
 		interp.variables.set("gf", gf);
 		interp.variables.set("dad", dad);
@@ -4048,7 +4051,6 @@ class PlayState extends MusicBeatState
 				boyfriend.dance();
 		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
-		wiggleShit.update(Conductor.crochet);
 		
 		if (!endingSong && camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
 		{
