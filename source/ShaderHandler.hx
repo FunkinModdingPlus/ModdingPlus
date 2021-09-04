@@ -7,7 +7,7 @@ import hscript.ParserEx;
 import hscript.InterpEx;
 
 
-class WiggleEffect
+class ShaderHandler
 {
 	// stuff
 	var hscriptStates:Map<String, Interp> = [];
@@ -59,10 +59,9 @@ class WiggleEffect
 	}
 
 
-	public function new():Void
+	public function new(shader:String):Void
 	{
-		var shaders = CoolUtil.parseJson(FNFAssets.getJson("assets/shaders/shaders"));
-		makeHaxeState("shader", "assets/shaders/" + shaders.wiggleshit + "/", "shader");
+		makeHaxeState("shader", "assets/shaders/" + shader + "/", "shader");
 		callAllHScript("create", []);
 	}
 
