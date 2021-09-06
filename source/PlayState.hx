@@ -272,6 +272,12 @@ class PlayState extends MusicBeatState
 	 */
 	 @:deprecated("REPLACED BY MODIFIER NUMBERS")
 	public var drainBy:Float = 0.005;
+	/**
+	 * Auto update note x pos to be under their correct strumline pos. 
+	 * 
+	 */
+	public var snapToStrumline:Bool = false;
+	var oldStrumlineX:Float = 0;
 	// this is just so i can collapse it lol
 	#if true
 	var hscriptStates:Map<String, Interp> = [];
@@ -1216,11 +1222,13 @@ class PlayState extends MusicBeatState
 		if (FNFAssets.exists("assets/data/" + SONG.song.toLowerCase() + "/modchart", Hscript))
 		{
 			makeHaxeState("modchart", "assets/data/" + SONG.song.toLowerCase() + "/", "modchart");
+			
 		}
 		if (duoMode)
 		{
 			controls.setKeyboardScheme(Duo(true));
 		}
+
 		talking = false;
 		startedCountdown = true;
 		Conductor.songPosition = 0;
@@ -1692,11 +1700,12 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
+		
 		unspawnNotes.sort(sortByShit);
-
+		defaultNoteWidth = unspawnNotes[0].width;
 		generatedMusic = true;
 	}
-
+	var defaultNoteWidth:Float;
 	function sortByShit(Obj1:Note, Obj2:Note):Int
 	{
 		return FlxSort.byValues(FlxSort.ASCENDING, Obj1.strumTime, Obj2.strumTime);
@@ -2130,6 +2139,7 @@ class PlayState extends MusicBeatState
 		#if !debug
 		perfectModeOld = false;
 		#end
+		oldStrumlineX = strumLine.x;
 		setAllHaxeVar('camZooming', camZooming);
 		setAllHaxeVar('gfSpeed', gfSpeed);
 		setAllHaxeVar('health', health);
@@ -2172,6 +2182,23 @@ class PlayState extends MusicBeatState
 		else
 			currentFrames++;
 		super.update(elapsed);
+		if (snapToStrumline) {
+			notes.forEachAlive(function (daNote) {
+				var noteData = daNote.noteData;
+				if (daNote.mustPress)
+					noteData += 4; 
+				daNote.x = strumLineNotes.members[noteData].x;
+				if (daNote.isSustainNote)
+					daNote.x += defaultNoteWidth / 2 - daNote.width / 2; 
+			});
+			for (i in 0...playerStrums.members.length)
+			{
+				playerComboBreak.members[i].x = playerStrums.members[i].x;
+			}
+			for (i in 0...enemyStrums.members.length) {
+				enemyComboBreak.members[i].x = enemyStrums.members[i].x;
+			}
+		}
 		var properHealth = opponentPlayer ? 100 - Math.round(health*50) : Math.round(health*50);
 		healthTxt.text = "Health:" + properHealth + "%";
 		/*

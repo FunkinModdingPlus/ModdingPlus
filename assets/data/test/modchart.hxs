@@ -1,0 +1,53 @@
+
+function start(song) {
+    if (debug) {
+        currentPlayState.snapToStrumline = true; 
+    for (strum in enemyStrums) {
+        strum.x = -1000;
+        strum.visible = false;
+    }
+    for (strum in playerStrums) {
+        strum.x -= 300;
+    }
+    }
+    
+}
+
+
+function beatHit(beat)
+{
+}
+
+function update(elapsed)
+{
+}
+
+function stepHit(step)
+{
+}
+
+function playerTwoTurn()
+{
+
+}
+
+function playerTwoMiss()
+{
+}
+
+function playerTwoSing()
+{
+}
+
+function playerOneTurn()
+{
+}
+
+function playerOneMiss()
+{
+}
+
+function playerOneSing()
+{
+}
+trace("finish <3");
