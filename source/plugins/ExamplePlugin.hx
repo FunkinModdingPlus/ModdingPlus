@@ -17,23 +17,23 @@ import PlayState.DisplayLayer;
 @:publicFields
 class ExamplePlugin {
     /**
-     * Component of layer, behind GF. Can be binary OR'd (|) with other layers to combine them
+     * Component of layer, behind GF. Can be binary OR'd `|` with other layers to combine them
      */
     public final BEHIND_GF:Int = DisplayLayer.BEHIND_GF;
 	/**
-	 * Component of layer, behind BF. Can be binary OR'd (|) with other layers to combine them
+	 * Component of layer, behind BF. Can be binary OR'd `|` with other layers to combine them
 	 */
     public final BEHIND_BF:Int = DisplayLayer.BEHIND_BF;
 	/**
-	 * Component of layer, behind Enemy. Can be binary OR'd (|) with other layers to combine them
+	 * Component of layer, behind Enemy. Can be binary OR'd `|` with other layers to combine them
 	 */
     public final BEHIND_DAD:Int = DisplayLayer.BEHIND_DAD;
 	/**
-	 * Component of layer, behind ALl. Can be binary OR'd (|) with other layers to combine them
+	 * Component of layer, behind ALl. Can be binary OR'd `|` with other layers to combine them
 	 */
     public final BEHIND_ALL:Int = DisplayLayer.BEHIND_ALL;
 	/**
-	 * Component of layer, behind None. Can be binary OR'd (|) with other layers to combine them
+	 * Component of layer, behind None. Can be binary OR'd `|` with other layers to combine them
 	 */
     public final BEHIND_NONE:Int = 0;
     /**
