@@ -1,0 +1,46 @@
+function start(song) {
+
+    var garcutscene = new MetroSprite(0, 0,true);
+    garcutscene.frames = FlxAtlasFrames.fromSparrow('assets/images/custom_stages/custom-stage/cutscene.png', 'assets/images/custom_stages/custom-stage/cutscene.xml');
+    garcutscene.setGraphicSize(Std.int(garcutscene.width * 1.4));
+    garcutscene.animation.addByPrefix("cutscene", "FrameName", fps, false);
+    addSprite(garcutscene, BEHIND_NONE);
+
+    FlxG.camera.visible = true;
+    camHUD.visible = false;
+
+    new FlxTimer().start(0.1, function(tmr)
+    {
+        garcutscene.animation.play("cutscene");
+        FlxG.sound.play(FNFAssets.getSound('assets/images/custom_stages/custom-stage/cutscene.ogg'));
+
+    if (currentPlayState.doof != null) {
+        new FlxTimer().start(10, function(tmr) {
+            currentPlayState.camHUD.visible = true;
+
+            removeSprite(garcutscene);
+
+            dad.playAnim('idle');
+
+            FlxTween.tween(FlxG.camera, {zoom: currentPlayState.defaultCamZoom}, 2.5, {
+                ease: FlxEase.quadInOut,
+                onComplete: function(twn) {
+                    new FlxTimer().start(0.1, function(timer2) {
+                        white.alpha -= 0.15;
+                        if (white.alpha > 0)
+                        {
+                            timer2.reset();
+                        }});
+                        new FlxTimer().start(1.0, function(tmr) {
+                            add(currentPlayState.doof);
+                        });
+                }
+            });
+        });
+    }
+    else
+    {
+        startCountdown();
+    };
+    });
+}
