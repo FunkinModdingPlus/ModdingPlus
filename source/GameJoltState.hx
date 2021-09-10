@@ -51,7 +51,7 @@ class GameJoltState
         gUser = gjUser.text;
         gToken = gjToken.text;
         FlxGameJolt.authUser(gUser, gToken, callbackWorked());
-    }
+    });
     add(gjUser);
     add(gjToken);
     add(loginButton);
