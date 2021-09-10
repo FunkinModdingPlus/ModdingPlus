@@ -46,10 +46,6 @@ class GameJoltState
     var gjToken = new FlxUIInputText(100,10,70,"token");
     public var gUser:String;
     public var gToken:String;
-    switch (gUser){
-        default:
-            gUser = "null (you arent logged in yet, go to options to log in)";
-    }
     var loginButton = new FlxButton(100, -30, "login", function():Void
     {
         gUser = gjUser.text;
