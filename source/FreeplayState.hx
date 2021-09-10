@@ -146,7 +146,7 @@ class FreeplayState extends MusicBeatState
 		}
 		#if windows
 		// Updating Discord Rich Presence
-		var customPrecence = TitleState.discordStuff.freeplay;
+		var customPrecence = 'urine';
 		Discord.DiscordClient.changePresence(customPrecence, null);
 		#end
 		var isDebug:Bool = false;

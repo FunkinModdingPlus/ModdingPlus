@@ -77,7 +77,6 @@ class TitleState extends MusicBeatState
 	var gfTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/gfTitle"));
 	var logoTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/logoTitle"));
 	var bgTitle = CoolUtil.parseJson(FNFAssets.getJson("assets/data/bgTitle"));
-	public static var discordStuff:DiscordJson = CoolUtil.parseJson(FNFAssets.getJson("assets/discord/presence/discord"));
 	// defining these variables now so i dont gotta do them later (end)
 
 	var customMenuConfirm: Array<Array<String>>;
@@ -93,7 +92,7 @@ class TitleState extends MusicBeatState
 			DiscordClient.shutdown();
 		});
 		// Updating Discord Rich Presence
-		var customPrecence = discordStuff.intro;
+		var customPrecence = 'urine';
 		Discord.DiscordClient.changePresence(customPrecence, null);
 		#end
 		

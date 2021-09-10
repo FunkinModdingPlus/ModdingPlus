@@ -92,7 +92,6 @@ enum abstract DisplayLayer(Int) from Int to Int {
 }
 class PlayState extends MusicBeatState
 {
-	public static var customPrecence = FNFAssets.getText("assets/discord/presence/play.txt");
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
@@ -343,10 +342,6 @@ class PlayState extends MusicBeatState
 		interp.variables.set("curStep", 0);
 		interp.variables.set("curBeat", 0);
 		interp.variables.set("camHUD", camHUD);
-		interp.variables.set("setPresence", function (to:String) {
-			customPrecence = to;
-			updatePrecence();
-		});
 		interp.variables.set("showOnlyStrums", false);
 		interp.variables.set("playerStrums", playerStrums);
 		interp.variables.set("enemyStrums", enemyStrums);
@@ -603,7 +598,7 @@ class PlayState extends MusicBeatState
 		detailsPausedText = "Paused - " + detailsText;
 		
 		// Updating Discord Rich Presence.
-		DiscordClient.changePresence(customPrecence
+		DiscordClient.changePresence('urine'
 			+ " "
 			+ SONG.song
 			+ " ("
@@ -1999,8 +1994,8 @@ class PlayState extends MusicBeatState
 			}
 			controls.setKeyboardScheme(Solo(false));
 			#if windows
-			var ae = FNFAssets.getText("assets/discord/presence/playpause.txt");
-			DiscordClient.changePresence(ae
+			var ae = 'urine';
+			DiscordClient.changePresence('urine'
 				+ SONG.song
 				+ " ("
 				+ storyDifficultyText
@@ -2072,7 +2067,7 @@ class PlayState extends MusicBeatState
 			#if windows
 			if (startTimer.finished)
 			{
-				DiscordClient.changePresence(customPrecence
+				DiscordClient.changePresence('urine'
 					+ " "
 					+ SONG.song
 					+ " ("
@@ -2090,7 +2085,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				DiscordClient.changePresence(customPrecence, SONG.song
+				DiscordClient.changePresence('urine', SONG.song
 					+ " ("
 					+ storyDifficultyText
 					+ ") "
@@ -4127,7 +4122,7 @@ class PlayState extends MusicBeatState
 	function updatePrecence() {
 		#if windows
 		// Updating Discord Rich Presence.
-		DiscordClient.changePresence(customPrecence
+		DiscordClient.changePresence('urine'
 			+ " "
 			+ SONG.song
 			+ " ("
