@@ -42,23 +42,23 @@ using StringTools;
 
 class GameJoltState
 {
+    var loginButton = new FlxButton(100, -30, "login", function()
+    {
+            gUser = gjUser.text;
+            gToken = gjToken.text;
+            FlxGameJolt.authUser(gUser, gToken, callbackWorked());
+    });
     var gjUser = new FlxUIInputText(100,50,70,"username");
     var gjToken = new FlxUIInputText(100,10,70,"token");
     public var gUser:String;
     public var gToken:String;
-    var loginButton = new FlxButton(100, -30, "login", function()
-    {
-        gUser = gjUser.text;
-        gToken = gjToken.text;
-        FlxGameJolt.authUser(gUser, gToken, callbackWorked());
-    });
-    add(gjUser);
-    add(gjToken);
-    add(loginButton);
     public var curAcc:FlxText = new FlxText(5, FlxG.height - 16, 0, "Logged in as" + GameJoltState.gUser, 12);
 	curAcc.scrollFactor.set();
 	curAcc.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	add(curAcc);
+    add(gjUser);
+    add(gjToken);
+    add(loginButton);
     function callbackWorked()
     {
         LoadingState.loadAndSwitchState(new SaveDataState());
