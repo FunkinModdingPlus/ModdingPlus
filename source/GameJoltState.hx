@@ -46,7 +46,7 @@ class GameJoltState
     var gjToken = new FlxUIInputText(100,10,70,"token");
     public var gUser:String;
     public var gToken:String;
-    var loginButton = new FlxButton(100, -30, "login", function():Void
+    var loginButton = new FlxButton(100, -30, "login", function()
     {
         gUser = gjUser.text;
         gToken = gjToken.text;
