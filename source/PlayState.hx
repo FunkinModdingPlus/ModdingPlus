@@ -100,7 +100,6 @@ enum abstract DisplayLayer(Int) from Int to Int {
 class PlayState extends MusicBeatState
 {
 	public var windowName:Array<String> = [];
-	Window.title = CoolUtil.parseJson(FNFAssets.getJson("assets/data/windowShit")).windowName;
 	public static var customPrecence = FNFAssets.getText("assets/discord/presence/play.txt");
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
@@ -511,6 +510,8 @@ class PlayState extends MusicBeatState
 					gf = sussygf;
 			}
 		});
+
+		Window.title = CoolUtil.parseJson(FNFAssets.getJson("assets/data/windowShit")).windowName;
 
 		trace("set stuff");
 		interp.execute(program);
