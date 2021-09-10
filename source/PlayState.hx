@@ -1,5 +1,12 @@
 package;
 
+import GameJoltState;
+import lime.tools.WindowData;
+import lime.ui.Window;
+import lime.ui.MouseCursor;
+import lime.ui.WindowAttributes;
+import lime.tools.WindowData;
+import flixel.addons.api.FlxGameJolt;
 #if web
 import js.lib.intl.RelativeTimeFormat.RelativeTimeUnit;
 #end
@@ -92,6 +99,8 @@ enum abstract DisplayLayer(Int) from Int to Int {
 }
 class PlayState extends MusicBeatState
 {
+	public var windowName:Array<String> = [];
+	Window.title = CoolUtil.parseJson(FNFAssets.getJson("assets/data/windowShit")).windowName;
 	public static var customPrecence = FNFAssets.getText("assets/discord/presence/play.txt");
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
@@ -366,6 +375,9 @@ class PlayState extends MusicBeatState
 		interp.variables.set("iconP1", iconP1);
 		interp.variables.set("iconP2", iconP2);
 		interp.variables.set("currentPlayState", this);
+		interp.variables.set("curWindow", Window);
+		interp.variables.set("GameJoltFlx", FlxGameJolt);
+		interp.variables.set("GameJolt", GameJoltState);
 		interp.variables.set("PlayState", PlayState);
 		interp.variables.set("window", Lib.application.window);
 		// give them access to save data, everything will be fine ;)

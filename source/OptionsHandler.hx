@@ -4,6 +4,7 @@ import lime.utils.Assets;
 import sys.io.File;
 #end
 import flixel.FlxG;
+import flixel.addons.api.FlxGameJolt;
 enum abstract AccuracyMode(Int) from Int to Int {
     var None = -1;
     var Simple;

@@ -115,7 +115,14 @@ class SaveDataState extends MusicBeatState
 							{name:"New Stage...", value:false, intName:'newstage', desc: "Make a new stage!", ignore: true, },
 							{name: "New Song...", value: false, intName:'newsong', desc: "Make a new song!", ignore: true, },
 							{name: "New Week...", value: false, intName: 'newweek', desc: "Make a new week!", ignore: true,},
-							{name: "Sort...", value: false, intName: 'sort', desc: "Sort some of your current songs/weeks!", ignore : true,}
+							{name: "Sort...", value: false, intName: 'sort', desc: "Sort some of your current songs/weeks!", ignore : true,},
+							{
+								name: "Game Jolt Login",
+								value: false,
+								intName: 'gjlogin',
+								desc: "Login with your GJ Account using your Username and Token.",
+								ignore: true,
+							}
 							#end
 						];
 		var kidsToKill:Array<TOption> = [];
@@ -349,6 +356,9 @@ class SaveDataState extends MusicBeatState
 					case "Credits": 
 						saveOptions();
 						LoadingState.loadAndSwitchState(new CreditsState());
+					case "Game Jolt Login":
+						saveOptions();
+						LoadingState.loadAndSwitchState(new GameJoltState());
 					default:
 						if (OptionsHandler.options.allowEditOptions){
 							checkmarks.members[optionsSelected].visible = !checkmarks.members[optionsSelected].visible;
