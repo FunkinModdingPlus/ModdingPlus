@@ -15,6 +15,10 @@ function start(song) {
     getHaxeActor('bf').followCamX -= 100;
     getHaxeActor('bf').followCamY -= 100;
     addSprite(bg, BEHIND_ALL);
+    bruh = new FlxSprite().loadGraphic(hscriptPath + 'Scanlines.png');
+    bruh.antialiasing = true;
+    bruh.cameras = [camHUD];
+    addSprite(bruh, BEHIND_NONE);
 }
 
 function beatHit(beat)

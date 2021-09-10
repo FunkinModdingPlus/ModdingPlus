@@ -35,6 +35,10 @@ function start(song) {
     trees.updateHitbox();
     trees.scrollFactor.set(0.85, 0.85);
     addSprite(trees, BEHIND_ALL);
+    bruh = new FlxSprite().loadGraphic(hscriptPath + 'Scanlines.png');
+    bruh.antialiasing = true;
+    bruh.cameras = [camHUD];
+    addSprite(bruh, BEHIND_NONE);
     trace(":)");
     var petals = new FlxSprite(-200, -40);
     var petaltex = FlxAtlasFrames.fromSparrow(hscriptPath + 'petals.png', hscriptPath + 'petals.xml');
@@ -65,6 +69,7 @@ function start(song) {
     getHaxeActor('gf').y += 300;
     getHaxeActor('bf').followCamX -= 100;
     getHaxeActor('bf').followCamY -= 100;
+ 
    
 }
 var danceDir = false;
