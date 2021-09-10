@@ -42,12 +42,6 @@ using StringTools;
 
 class GameJoltState
 {
-    var menuBG = new FlxSprite().loadGraphic('assets/images/menuDesat.png');
-    menuBG.color = 0xFF7194fc;
-    menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
-    menuBG.updateHitbox();
-    menuBG.screenCenter();
-    menuBG.antialiasing = true;
     var gjUser = new FlxUIInputText(100,50,70,"username");
     var gjToken = new FlxUIInputText(100,10,70,"token");
     public var gUser:String;
@@ -62,7 +56,6 @@ class GameJoltState
         gToken = gjToken.text;
         FlxGameJolt.authUser(gUser, gToken, callbackWorked());
     }
-    add(menuBG);
     add(gjUser);
     add(gjToken);
     add(loginButton);
