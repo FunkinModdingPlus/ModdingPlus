@@ -166,7 +166,7 @@ class PlayState extends MusicBeatState
 	// private var bfColor:FlxColor = 0xFF149DFF;
 	private var barShowingPoison:Bool = false;
 	private var pixelUI:Bool = false;
-	#if windows
+	#if (windows && cpp)
 	// Discord RPC variables
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -347,7 +347,7 @@ class PlayState extends MusicBeatState
 		interp.variables.set("camHUD", camHUD);
 		
 		interp.variables.set("setPresence", function (to:String) {
-			#if windows
+			#if (windows && cpp)
 			customPrecence = to;
 			updatePrecence();
 			#else 
