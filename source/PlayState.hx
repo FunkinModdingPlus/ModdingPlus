@@ -92,7 +92,9 @@ enum abstract DisplayLayer(Int) from Int to Int {
 }
 class PlayState extends MusicBeatState
 {
+	#if windows
 	public static var customPrecence = FNFAssets.getText("assets/discord/presence/play.txt");
+	#end
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
@@ -164,7 +166,7 @@ class PlayState extends MusicBeatState
 	// private var bfColor:FlxColor = 0xFF149DFF;
 	private var barShowingPoison:Bool = false;
 	private var pixelUI:Bool = false;
-	#if windows
+	#if (windows && cpp)
 	// Discord RPC variables
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -343,10 +345,16 @@ class PlayState extends MusicBeatState
 		interp.variables.set("curStep", 0);
 		interp.variables.set("curBeat", 0);
 		interp.variables.set("camHUD", camHUD);
+		
 		interp.variables.set("setPresence", function (to:String) {
+			#if (windows && cpp)
 			customPrecence = to;
 			updatePrecence();
+			#else 
+			FlxG.log.warn("Ignoring hscript setPresence as we aren't on windows");
+			#end
 		});
+		
 		interp.variables.set("showOnlyStrums", false);
 		interp.variables.set("playerStrums", playerStrums);
 		interp.variables.set("enemyStrums", enemyStrums);
