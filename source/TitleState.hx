@@ -1,6 +1,6 @@
 package;
 
-#if windows
+#if cpp
 import Discord.DiscordClient;
 #end
 import flixel.FlxG;
@@ -85,7 +85,7 @@ class TitleState extends MusicBeatState
 	override public function create():Void
 	{
 
-		#if windows
+		#if cpp
 		DiscordClient.initialize();
 
 		Application.current.onExit.add(function(exitCode)
