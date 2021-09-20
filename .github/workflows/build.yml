@@ -128,20 +128,6 @@ jobs:
         with:
           name: windowsWeek7Build
           path: export/release/windows/bin
-      - name: Compile 32 bit
-        run: haxelib run lime build windows -D32bit -32
-      - name: Publish 32bit
-        uses: actions/upload-artifact@v2
-        with:
-          name: windows32Build
-          path: export/32bit/windows/bin
-      - name: Copy Week 7 Files
-        run: Copy-Item -Force -Recurse ./Week7Assets/* -Destination ./export/32bit/windows/bin/assets
-      - name: Publish Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: windowsWeek732bitBuild
-          path: export/32bit/windows/bin
   buildMac:
     runs-on: macos-latest
 
