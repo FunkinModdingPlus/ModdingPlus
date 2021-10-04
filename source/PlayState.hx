@@ -24,6 +24,9 @@ import Discord.DiscordClient;
 #end
 import DifficultyIcons;
 import flixel.FlxSprite;
+import flixel.util.FlxDestroyUtil;
+import flixel.graphics.frames.FlxAtlasFrames;
+import animateatlas.AtlasFrameMaker;
 import flixel.FlxBasic;
 import flixel.FlxState;
 import flixel.FlxSubState;
@@ -362,6 +365,7 @@ class PlayState extends MusicBeatState
 		interp.variables.set("iconP2", iconP2);
 		interp.variables.set("currentPlayState", this);
 		interp.variables.set("PlayState", PlayState);
+		interp.variables.set("AtlasFrameMaker", AtlasFrameMaker);
 		interp.variables.set("window", Lib.application.window);
 		// give them access to save data, everything will be fine ;)
 		interp.variables.set("isInCutscene", function () return inCutscene);
