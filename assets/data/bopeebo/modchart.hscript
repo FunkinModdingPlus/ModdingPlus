@@ -1,6 +1,13 @@
 
-function start(song) {
-
+function start(song)
+{
+    var sprite = new FlxSprite(0, 0);
+    sprite.scrollFactor.set(0, 0);
+    sprite.screenCenter();
+    sprite.frames = AtlasFrameMaker.construct('assets/data/bopeebo/textureatlas/char');
+    sprite.animation.addByPrefix('idle', 'Idle', 24, true);
+    addSprite(sprite, BEHIND_NONE);
+    sprite.animation.play('idle');
 }
 
 
