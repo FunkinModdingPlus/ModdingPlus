@@ -4095,12 +4095,21 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
-		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
-		iconP2.setGraphicSize(Std.int(iconP2.width + 30));
-		practiceDieIcon.setGraphicSize(Std.int(practiceDieIcon.width + 30));
+		iconP1.scale.x = 1;
+		iconP1.scale.y = 1;
+		iconP2.scale.x = 1;
+		iconP2.scale.y = 1;
+		practiceDieIcon.scale.x = 1;
+		practiceDieIcon.scale.y = 1;
+
+		FlxTween.tween(iconP1.scale, {x: 1.15, y: 1.15}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+		FlxTween.tween(iconP2.scale, {x: 1.15, y: 1.15}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+		FlxTween.tween(practiceDieIcon.scale, {x: 1.15, y: 1.15}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+		
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
 		practiceDieIcon.updateHitbox();
+		
 		if (curBeat % gfSpeed == 0)
 		{
 			gf.dance();
