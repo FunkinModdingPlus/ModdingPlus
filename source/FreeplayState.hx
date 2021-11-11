@@ -144,7 +144,7 @@ class FreeplayState extends MusicBeatState
 				+ '/freakyMenu'
 				+ TitleState.soundExt));
 		}
-		#if windows
+		#if cpp
 		// Updating Discord Rich Presence
 		var customPrecence = TitleState.discordStuff.freeplay;
 		Discord.DiscordClient.changePresence(customPrecence, null);

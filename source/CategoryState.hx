@@ -39,7 +39,7 @@ class CategoryState extends MusicBeatState
 	override function create()
 	{
 		// it's a js file to make syntax highlighting acceptable
-		#if windows
+		#if cpp
 		// Updating Discord Rich Presence
 		Discord.DiscordClient.changePresence("In the Freeplay Menu", null);
 		#end

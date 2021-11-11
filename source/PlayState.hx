@@ -92,7 +92,7 @@ enum abstract DisplayLayer(Int) from Int to Int {
 }
 class PlayState extends MusicBeatState
 {
-	#if windows
+	#if cpp
 	public static var customPrecence = FNFAssets.getText("assets/discord/presence/play.txt");
 	#end
 	public static var curStage:String = '';
@@ -166,7 +166,7 @@ class PlayState extends MusicBeatState
 	// private var bfColor:FlxColor = 0xFF149DFF;
 	private var barShowingPoison:Bool = false;
 	private var pixelUI:Bool = false;
-	#if (windows && cpp)
+	#if cpp
 	// Discord RPC variables
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -569,7 +569,7 @@ class PlayState extends MusicBeatState
 			if (Reflect.hasField(Judgement.uiJson, preferredJudgement) && Reflect.field(Judgement.uiJson, preferredJudgement).uses != preferredJudgement)
 				preferredJudgement = Reflect.field(Judgement.uiJson, preferredJudgement).uses;
 		}
-		#if windows
+		#if cpp
 		// Making difficulty text for Discord Rich Presence.
 		// I JUST REALIZED THIS IS NOT VERY COMPATIBILE
 		/*
@@ -2006,7 +2006,7 @@ class PlayState extends MusicBeatState
 				vocals.pause();
 			}
 			controls.setKeyboardScheme(Solo(false));
-			#if windows
+			#if cpp
 			var ae = FNFAssets.getText("assets/discord/presence/playpause.txt");
 			DiscordClient.changePresence(ae
 				+ SONG.song
@@ -2077,7 +2077,7 @@ class PlayState extends MusicBeatState
 					currentIconState = "Being Posioned";
 				}
 			}
-			#if windows
+			#if cpp
 			if (startTimer.finished)
 			{
 				DiscordClient.changePresence(customPrecence
@@ -2120,7 +2120,7 @@ class PlayState extends MusicBeatState
 		vocals.time = Conductor.songPosition;
 		vocals.play();
 		
-		#if windows
+		#if cpp
 		DiscordClient.changePresence(detailsText
 			+ " "
 			+ SONG.song
@@ -2251,7 +2251,7 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.justPressed.SEVEN && !OptionsHandler.options.danceMode)
 		{
-			#if windows
+			#if cpp
 			DiscordClient.changePresence("Chart Editor", null, null, true);
 			#end
 			LoadingState.loadAndSwitchState(new ChartingState());
@@ -2324,21 +2324,21 @@ class PlayState extends MusicBeatState
 		{
 			iconP1.iconState = Dying;
 			iconP2.iconState = Winning;
-			#if windows
+			#if cpp
 			iconRPC = player1Icon + "-dead";
 			#end
 		}
 		else
 		{
 			iconP1.iconState = Normal;
-			#if windows
+			#if cpp
 			iconRPC = player1Icon;
 			#end
 		}
 		if (!opponentPlayer && poisonTimes != 0)
 		{
 			iconP1.iconState = Poisoned;
-			#if windows
+			#if cpp
 			iconRPC = player1Icon + "-dazed";
 			#end
 		}	
@@ -2379,14 +2379,14 @@ class PlayState extends MusicBeatState
 			if (iconP1.iconState != Poisoned) {
 				iconP1.iconState = Winning;
 			}
-			#if windows
+			#if cpp
 			if (opponentPlayer)
 				iconRPC = player2Icon + "-dead";
 			#end
 		}
 		else {
 			iconP2.iconState = Normal;
-			#if windows
+			#if cpp
 			if (opponentPlayer)
 				iconRPC = player2Icon;
 			#end
@@ -2396,7 +2396,7 @@ class PlayState extends MusicBeatState
 		}
 		if (poisonTimes != 0 && opponentPlayer) {
 			iconP2.iconState = Poisoned;
-			#if windows
+			#if cpp
 			if (opponentPlayer)
 				iconRPC = player2Icon + "-dazed";
 			#end
@@ -2607,7 +2607,7 @@ class PlayState extends MusicBeatState
 				}
 				else
 					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-				#if windows
+				#if cpp
 				// Game Over doesn't get his own variable because it's only used here
 				DiscordClient.changePresence("GAME OVER -- "
 					+ SONG.song
@@ -3098,7 +3098,7 @@ class PlayState extends MusicBeatState
 				campaignAccuracy = campaignAccuracy / defaultPlaylistLength;
 				if (useVictoryScreen)
 				{
-					#if windows
+					#if cpp
 					DiscordClient.changePresence("Reviewing Score -- "
 						+ SONG.song
 						+ " ("
@@ -3165,7 +3165,7 @@ class PlayState extends MusicBeatState
 			trace('WENT BACK TO FREEPLAY??');
 			if (useVictoryScreen)
 			{
-				#if windows
+				#if cpp
 				DiscordClient.changePresence("Reviewing Score -- "
 					+ SONG.song
 					+ " ("
@@ -4038,7 +4038,7 @@ class PlayState extends MusicBeatState
 			songName.cameras = [camHUD];
 			
 		}
-		#if windows
+		#if cpp
 		// Song duration in a float, useful for the time left feature
 		
 
@@ -4133,7 +4133,7 @@ class PlayState extends MusicBeatState
 		callAllHScript('beatHit', [curBeat]);
 	}
 	function updatePrecence() {
-		#if windows
+		#if cpp
 		// Updating Discord Rich Presence.
 		DiscordClient.changePresence(customPrecence
 			+ " "

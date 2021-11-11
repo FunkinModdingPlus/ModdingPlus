@@ -55,7 +55,7 @@ class MainMenuState extends MusicBeatState
 	public static var version:String = "";
 	override function create()
 	{
-		#if windows
+		#if cpp
 		// Updating Discord Rich Presence
 		var customPrecence = TitleState.discordStuff.mainmenu;
 		Discord.DiscordClient.changePresence(customPrecence, null);
