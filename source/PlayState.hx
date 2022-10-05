@@ -92,6 +92,7 @@ enum abstract DisplayLayer(Int) from Int to Int {
 }
 class PlayState extends MusicBeatState
 {
+	// the unknown powers of the nightmare dimensions
 	#if windows
 	public static var customPrecence = FNFAssets.getText("assets/discord/presence/play.txt");
 	#end
